@@ -1,0 +1,36 @@
+@font-face {
+    font-family: "Braggadocio-W01";
+    src: url("//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/f305266f-adfb-4e4f-9055-1d7328de8ce6.eot?#iefix");
+    src: url("//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/f305266f-adfb-4e4f-9055-1d7328de8ce6.eot?#iefix") format("eot"),url("//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/518e4577-eecc-4ecd-adb4-2ee21df35b20.woff") format("woff"),url("//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/f46241ad-1f5d-4935-ad69-b0a78c2e191d.ttf") format("truetype"),url("//static.parastorage.com/services/third-party/fonts/user-site-fonts/fonts/b2a0a25d-e054-4c65-bffa-e5760b48dec3.svg#b2a0a25d-e054-4c65-bffa-e5760b48dec3") format("svg");
+}
+
+@font-face {
+  font-family: "Hanna";
+  font-style: normal;
+  font-weight: 400;
+  src: url(//fonts.gstatic.com/ea/hanna/v3/BM-HANNA.eot);
+  src: url(//fonts.gstatic.com/ea/hanna/v3/BM-HANNA.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/hanna/v3/BM-HANNA.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/hanna/v3/BM-HANNA.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/hanna/v3/BM-HANNA.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Jeju Hallasan';
+  font-style: normal;
+  font-weight: 400;
+  src: url(//fonts.gstatic.com/ea/jejuhallasan/v3/JejuHallasan-Regular.eot);
+  src: url(//fonts.gstatic.com/ea/jejuhallasan/v3/JejuHallasan-Regular.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/jejuhallasan/v3/JejuHallasan-Regular.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/jejuhallasan/v3/JejuHallasan-Regular.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/jejuhallasan/v3/JejuHallasan-Regular.ttf) format('truetype');
+}
+
+.title-font {
+	font-size: 35px;
+	letter-spacing: 0.02;
+	font-family: Braggadocio-W01, cursive;
+	text-shadow: rgba(10, 189, 240, 0.298039) 3px 3px 0px, rgba(254, 1, 1, 0.298039) -3px -3px 0px;
+}
+
+a{}

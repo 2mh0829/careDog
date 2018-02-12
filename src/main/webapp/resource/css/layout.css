@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+/* header */
+.header {
+    width: 100%;
+    text-align: left;
+    background: white;
+    background-color: rgba( 255, 255, 255, 0 );
+    /* position: static; */
+}
+
+.header-top {
+	position: relative;
+    margin: 0px auto;
+    width: 90%;
+    height: 70px;
+    clear: both;
+    z-index: 2;
+}
+
+.header-left {
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.header-right {
+    width: 50%;
+    height: 100%;
+    float: right;
+}
+
+.header-bottom {
+	position: relative;
+	margin: 0px auto;
+    width: 100%;
+    height: 60px;
+    z-index: 3;
+}
+
+
+/* footer */
+.footer {
+    width:100%;
+    /* height:50px; */
+    margin:5px auto;
+    /* text-align:center; */
+    background-color: #ffffff;
+    /* line-height: 50px; */
+    /* border-top:1px solid #cccccc; */
+}
+
+
+.container {
+    clear:both;
+    width:100%;
+    min-height: 600px;
+    text-align:left;
+}
+
+.body-container {
+    /* clear:both; */
+    box-sizing: border-box;  /* padding과 border는 크기에 포함되지 않음 */
+    margin: 0px auto 15px;
+    padding-top: 100px;
+    width: 70%;
+}
+
+
+/* menu */
+.menu-container {
+	position: relative;
+	margin: 0px auto;
+    width: 80%;
+    height: 60px;
+}
+
+.menu {
+	position: absolute;
+	margin:0px auto;
+    /*  min-height: 60px; 
+    clear: both;
+    border-radius: 4px;*/
+    /* box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 5px rgba(0,0,0,.075);
+    background-color: #f8f8f8;
+    border: 1px solid #e7e7e7; 
+	box-sizing: border-box;*/
+}
+
+/* ul.navi {
+  width:100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+} */
+
+ul.navi li { 
+  display: inline;
+}
+
+ul.navi li a {
+  /* float: inherit; */
+  line-height: 60px;
+  text-decoration: none;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+ul.navi .current a, ul.navi li:hover > a {
+  color: #333;
+  font-weight : 900;
+  text-decoration: none;
+}
+
+ul.navi ul {
+  display: none;
+}
+
+ul.navi li:hover > ul {
+  position: absolute;
+  display: block;
+  width: 960px;
+  height: 40px;
+  margin: 40px 0 0 -1px;
+  z-index: 101;
+}
+
+
+.left {
+	width: 15%;
+    height: 100%;
+    float: left;
+    padding-top: 100px;
+    padding-right: 10px;
+    margin: 0px auto 15px;
+}
+
+
+
+.chatbot {
+	position: fixed;
+	width:150px;
+	height: 150px;
+	top: 60%;
+	left: 90%;
+    margin:0px auto;
+}
+
