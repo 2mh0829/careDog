@@ -6,7 +6,7 @@
 
 <tiles-definitions>
 
-	<definition name=".main4Layout" template="/WEB-INF/view/layout/store/layout.jsp">
+	<definition name=".main4Layout" template="/WEB-INF/view/layout/layout4.jsp">
 	    <put-attribute name="title" value="spring" />
 	  	<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
 		<put-attribute name="left" value="/WEB-INF/view/store/left.jsp" />
