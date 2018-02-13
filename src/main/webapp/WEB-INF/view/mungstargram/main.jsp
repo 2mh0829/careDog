@@ -15,23 +15,41 @@
 .totImg {
 	position: relative;
 	width: 100%;
-	height: 550px;
-	margin: 0px auto;
-	border: 1px solid red;
+	min-height: 450px;
+	margin: 20px auto;
 }
 
 .leftImg {
 	border: 1px solid #ccc;
-	width: 75%;
+	width:65%;
+	height: 450px;
+	line-height: 450px;
+	vertical-align: middle;
 	float: left;
 	display: inline-block;
+	padding: 0 40px;
+}
+
+div.leftImg img {
+	width: 100%;
+	height: auto;
+	vertical-align: middle;
 }
 
 .rightDes {
 	border: 1px solid #ccc;
-	width: 25%;
-	float: left;
+	width: 35%;
+	height: 250px;
+	float: right;
 	display: inline-block;
+	padding: 0 40px;
+}
+
+.rightDet {
+	border: 1px solid #ccc;
+	width: 35%;
+	height: 200px;
+	float: right;
 }
 
 div.gallery {
@@ -69,8 +87,6 @@ div.desc {
 	}
 	
 	.leftImg {
-		border: 1px solid #ccc;
-		background: blue;
 		width: 100%;
 	}
 	
@@ -158,9 +174,9 @@ $(document).ready(function(){
 	</div>
 
 	<div class="clearfix"></div>
+	
 
-
-	<button class="btn" onclick="location.href='<%=cp%>/mungstargram/insert'">insert</button>
+	<button class="btn" onclick="location.href='<%=cp%>/mungstargram/created'">insert</button>
 
 
 	<!-- Modal -->
@@ -173,13 +189,27 @@ $(document).ready(function(){
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">mungstargram</h4>
 				</div>
-				<div class="modal-body" style="min-height: 700px;">
+				<div class="modal-body">
 					<div class="totImg">
-						<div class="leftImg gallery">
-							<img alt="Forest" src="<%=cp %>/resource/img/dog1.jpg">
+						<div class="leftImg">
+							<img src="<%=cp %>/resource/img/dog1.jpg">
 						</div>
 						<div class="rightDes">
-							사용자 : 내용
+							사용자 : abcdefg
+							<br><br>
+							내용 : test 이미지 입니다.
+							
+						</div>
+						<div class="rightDet">
+							댓글입니다.
+						</div>
+						
+						
+						<div style=" position: absolute; top: 50%; left: 1%;">
+							<a><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
+						</div>
+						<div style="position: absolute; top: 50%; right: 1%;">
+							<a><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
 						</div>
 					</div>
 				</div>

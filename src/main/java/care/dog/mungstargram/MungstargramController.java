@@ -11,9 +11,9 @@ public class MungstargramController {
 		return ".mungstargram.main";
 	}
 	
-	@RequestMapping(value="mungstargram/insert")
+	@RequestMapping(value="mungstargram/created")
 	public String insertForm() {
-		return ".mungstargram.insert";
+		return ".mungstargram.created";
 	}
 
 }
