@@ -10,5 +10,10 @@ public class MungstargramController {
 	public String main() {
 		return ".mungstargram.main";
 	}
+	
+	@RequestMapping(value="mungstargram/insert")
+	public String insertForm() {
+		return ".mungstargram.insert";
+	}
 
 }

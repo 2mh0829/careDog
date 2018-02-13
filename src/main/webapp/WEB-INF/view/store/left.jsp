@@ -8,27 +8,25 @@
 
 <script>
 $(function() {
-	$("#img1").click(function() {
+	$("#idx1").click(function() {
 		var img = document.getElementById("img");
 		img.src = "<%=cp %>/resource/img/gif/11.gif";
 	});
-	$("#img2").click(function() {
+	$("#idx2").click(function() {
 		var img = document.getElementById("img");
 		img.src = "<%=cp %>/resource/img/gif/12.gif";
 	});
-	$("#img3").click(function() {
+	$("#idx3").click(function() {
 		var img = document.getElementById("img");
 		img.src = "<%=cp %>/resource/img/gif/13.gif";
 	});
 });
 </script>
 
-<div>
-	<div style="position: fixed; width: 14%;">
-		<ul class="nav">
-			<li><a id="img1">1</a></li>
-			<li><a id="img2">2</a></li>
-			<li><a id="img3">3</a></li>
-		</ul>
-	</div>
+<div style="position: fixed; width: 14%;">
+	<ul class="nav">
+		<li><a id="idx1">1</a></li>
+		<li><a id="idx2">2</a></li>
+		<li><a id="idx3">3</a></li>
+	</ul>
 </div>

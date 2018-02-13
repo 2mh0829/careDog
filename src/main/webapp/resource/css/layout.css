@@ -55,6 +55,7 @@
     clear:both;
     width:100%;
     min-height: 600px;
+    padding-top: 100px;    
     text-align:left;
 }
 
@@ -62,7 +63,6 @@
     /* clear:both; */
     box-sizing: border-box;  /* padding과 border는 크기에 포함되지 않음 */
     margin: 0px auto 15px;
-    padding-top: 100px;
     width: 70%;
 }
 
@@ -127,12 +127,16 @@ ul.navi li:hover > ul {
 
 
 .left {
-	width: 15%;
+	/* width: 15%;
     height: 100%;
     float: left;
     padding-top: 100px;
     padding-right: 10px;
-    margin: 0px auto 15px;
+    margin: 0px auto 15px; */
+    
+    width: 50%;
+    height: 100%;
+    float: left;
 }
 
 
