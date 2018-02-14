@@ -9,51 +9,35 @@
 <style>
 
 .modal-size {
-	width: 75%;
+	background: white;
+	width: 60%;
+	top: 100px;
+	/* height: 90vh; */
+	line-height: 30vh;
 }
 
-.totImg {
-	position: relative;
+.modal-center {
 	width: 100%;
-	min-height: 450px;
-	margin: 20px auto;
+	line-height: 30vh;
 }
 
-.leftImg {
-	border: 1px solid #ccc;
-	width:65%;
-	height: 450px;
-	line-height: 450px;
+.modal-center img {
 	vertical-align: middle;
-	float: left;
-	display: inline-block;
-	padding: 0 40px;
+	width: 65%; 
 }
 
-div.leftImg img {
-	width: 100%;
-	height: auto;
-	vertical-align: middle;
+/* .imageSize {
+	width: 65%;
 }
+ */
 
-.rightDes {
-	border: 1px solid #ccc;
-	width: 35%;
-	height: 250px;
-	float: right;
-	display: inline-block;
-	padding: 0 40px;
-}
 
-.rightDet {
-	border: 1px solid #ccc;
-	width: 35%;
-	height: 200px;
-	float: right;
-}
+/* ---------------- */
+
 
 div.gallery {
 	border: 1px solid #ccc;
+	height: 20vw;
 }
 
 div.gallery:hover {
@@ -62,8 +46,13 @@ div.gallery:hover {
 
 div.gallery img {
 	width: 100%;
-	height: auto;
+	height: 100%;
 }
+
+/* div.gallery img:hover {
+	border: 1px solid #777;
+	background: red;
+} */
 
 div.desc {
 	padding: 15px;
@@ -75,24 +64,25 @@ div.desc {
 }
 
 .responsive {
-	padding: 6px 6px;
+	padding: 15px 15px;
 	float: left;
-	width: 24.99999%;
+	/* width: 24.99999%; */
+	width: 33.33333%;
 }
 
 @media only screen and (max-width: 800px) {
+	div.gallery {
+		height: 30vw;
+	}
+	
+	div.gallery img {
+		height: 110%;
+	}
+
 	.responsive {
+		padding: 20px 15px;
 		width: 49.99999%;
 		margin: 6px 0;
-	}
-	
-	.leftImg {
-		width: 100%;
-	}
-	
-	.rightDes {
-		width: 100%;
-		display: block;
 	}
 	
 	.modal-size {
@@ -102,7 +92,16 @@ div.desc {
 }
 
 @media only screen and (max-width: 500px) {
+	div.gallery {
+		height: 40vw;
+	}
+	
+	div.gallery img {
+		height: 120%;
+	}
+	
 	.responsive {
+		padding: 30px 15px;
 		width: 100%;
 	}
 }
@@ -117,7 +116,18 @@ div.desc {
 <script>
 $(document).ready(function(){
     $("#myBtn").click(function(){
-        $("#myModal").modal();
+    	var imgName = "<%=cp%>/resource/img/test1.jpg";
+    	var imgId = "myimg";
+
+    	$(".modal-img-area").html("<img class='imageSize' src='"+imgName +"' id='"+imgId+"'/>"); 
+
+    	$("#myModal").modal();
+    	
+    	$("#"+imgId).load(function() {
+    		var w = $(this).width();
+    		alert(w);
+    	});
+    	
     });
 });
 </script>
@@ -130,19 +140,17 @@ $(document).ready(function(){
 	<div class="responsive">
 		<div class="gallery">
 			<a href="#" id="myBtn">
-				<img src="<%=cp%>/resource/img/dog1.jpg" alt="Trolltunga Norway" width="300" height="200">
+				<img src="<%=cp%>/resource/img/test1.jpg" alt="Trolltunga Norway">
 			</a>
-			<div class="desc">Add a description of the image here</div>
 		</div>
 	</div>
 
 
 	<div class="responsive">
 		<div class="gallery">
-			<a href="#"> <img src="<%=cp%>/resource/img/dog2.jpg"
+			<a href="#"> <img src="<%=cp%>/resource/img/test2.jpg"
 				alt="Forest" width="600" height="400">
 			</a>
-			<div class="desc">Add a description of the image here</div>
 		</div>
 	</div>
 
@@ -151,25 +159,6 @@ $(document).ready(function(){
 			<a href="#"> <img src="<%=cp%>/resource/img/dog3.jpg"
 				alt="Northern Lights" width="600" height="400">
 			</a>
-			<div class="desc">Add a description of the image here</div>
-		</div>
-	</div>
-
-	<div class="responsive">
-		<div class="gallery">
-			<a href="#"> <img src="<%=cp%>/resource/img/dog4.jpg"
-				alt="Mountains" width="600" height="400">
-			</a>
-			<div class="desc">Add a description of the image here</div>
-		</div>
-	</div>
-
-	<div class="responsive">
-		<div class="gallery">
-			<a href="#"> <img src="<%=cp%>/resource/img/dog4.jpg"
-				alt="Mountains" width="600" height="400">
-			</a>
-			<div class="desc">Add a description of the image here</div>
 		</div>
 	</div>
 
@@ -178,46 +167,20 @@ $(document).ready(function(){
 
 	<button class="btn" onclick="location.href='<%=cp%>/mungstargram/created'">insert</button>
 
-
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" role="dialog">
 		<div class="modal-dialog modal-size">
 
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">mungstargram</h4>
-				</div>
-				<div class="modal-body">
-					<div class="totImg">
-						<div class="leftImg">
-							<img src="<%=cp %>/resource/img/dog1.jpg">
-						</div>
-						<div class="rightDes">
-							사용자 : abcdefg
-							<br><br>
-							내용 : test 이미지 입니다.
-							
-						</div>
-						<div class="rightDet">
-							댓글입니다.
-						</div>
-						
-						
-						<div style=" position: absolute; top: 50%; left: 1%;">
-							<a><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
-						</div>
-						<div style="position: absolute; top: 50%; right: 1%;">
-							<a><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
+			<div class="modal-body modal-center">
+				<div class="modal-img-area"></div>
 			</div>
 
+		</div>
+		<div style=" position: absolute; top: 50%; left: 7%;">
+			<a class="btn-lg"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="color: white;"></span></a>
+		</div>
+		<div style="position: absolute; top: 50%; right: 7%;">
+			<a class="btn-lg"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: white;"></span></a>
 		</div>
 	</div>
 

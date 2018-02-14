@@ -46,7 +46,7 @@ $(window).scroll(function() {
 </div>
 
 <div class="header-bottom">
-	<div class="menu-container" align="center">
+	<div class="menu-container hidden-xs hidden-sm" align="center">
 		<div class="menu">
 			<ul class="navi">
 				<li><a href="<%=cp %>/intro">Abt.careDog</a></li>
@@ -58,6 +58,11 @@ $(window).scroll(function() {
 				<li><a href="<%=cp %>/store">펫스토어</a></li>
 				<li><a href="<%=cp %>/center">고객센터</a></li>
 			</ul>
+		</div>
+	</div>
+	<div class="menu-container hidden-md hidden-lg" align="center">
+		<div style="float: right;">
+			<a>▤ </a>
 		</div>
 	</div>
 </div>
