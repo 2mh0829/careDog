@@ -7,5 +7,8 @@
 %>
 
 <div class="body-container">
+	<div class="alert alert-info">
+		<i class="glyphicon glyphicon-info-sign"></i> 궁금한 문의 사항을 확인 해 보세요.
+	</div>
 	Service Center.
 </div>

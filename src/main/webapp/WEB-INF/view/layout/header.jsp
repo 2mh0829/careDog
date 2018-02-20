@@ -38,8 +38,8 @@ $(window).scroll(function() {
 		</span>
 	</div>
 	<div class="header-right" align="right" style="line-height: 70px;">
-		<a href="<%=cp %>/login">sign in</a> &nbsp;&nbsp;
-		<a href="<%=cp %>/join">sign up</a>
+		<a href="<%=cp %>/login"><span class="glyphicon glyphicon-log-in">&nbsp;</span>sign in</a> &nbsp;&nbsp;
+		<a href="<%=cp %>/join"><span class="glyphicon glyphicon-user">&nbsp;</span>sign up</a>
 	</div>
 	
 	

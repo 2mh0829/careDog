@@ -12,8 +12,8 @@ public class MungstargramController {
 	}
 	
 	@RequestMapping(value="mungstargram/created")
-	public String insertForm() {
-		return ".mungstargram.created";
+	public String createForm() {
+		return "mungstargram/created";
 	}
-
+	
 }

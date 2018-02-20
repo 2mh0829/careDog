@@ -22,10 +22,11 @@ div.modal-in {
 div.modal-centered {
 	position: relative;
 	display: inline-block;
-	/* height: 400px; */
+	height: 400px;
 }
 
 div.modal-left {
+	background: black;
 	float: left;
 	height: 100%;
 }
@@ -67,30 +68,6 @@ div.modal-context table {
 
 div.modal-context table td {
 	border-top: 1px solid #ddd;
-}
-
-.xbtn, .directionBtn {
-	background-color: rgba(255, 255, 255, 0);
-	color: rgba(255, 255, 255, 0.8); border : none;
-	outline: none;
-	border: none;
-}
-
-.xbtn {
-	transform: rotate(45deg);
-}
-
-.xbtn:hover, .xbtn:active {
-	border: 0;
-	outline: 0;
-}
-
-.modal-left .imgVigible {
-	visibility: hidden;
-}
-
-.modal-left:hover .imgVigible {
-	visibility: visible;
 }
 
 /* -------------------------------------------- */
@@ -164,9 +141,12 @@ div.desc {
 	}
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 700px) {
 	div.gallery {
-		height: 50vw;
+		height: 40vw;
+	}
+	div.gallery img {
+		height: 120%;
 	}
 	.responsive {
 		padding: 30px 15px;
@@ -189,13 +169,65 @@ $(document).ready(function(){
     	var imgName = $(this).find("img").attr("src");
     	var imgId = "myimg";
     	
-    	$(".modal-left-img").html("<img src='"+ imgName +"' id='"+imgId+"'>");
+    	$(".modal-left").html("<img src='"+ imgName +"' id='"+imgId+"'>");
     	
     	$(window).resize(function() {
     		modalSize(imgName, imgId);
+    		/* if($(window).width() < 1000){
+    			$(".modal-right").css("height", "500px");
+    			$(".modal-context table").css("height", "420px");
+    			$(".modal-left").css("width", $(window).width()+"px");
+    			$("#"+imgId).css("width", "100%");
+    			$("#"+imgId).css("margin-top", "0");
+    			$(".modal-left").css("height", $("#"+imgId).height()+"px");
+				$(".modal-title a").css("margin-left","5vw");
+    		}else{
+    			$(".modal-left").css("height", "100%");
+    			$(".modal-title a").css("margin-left","20px");
+    			if("#"+imgId.naturalWidth >= "#"+imgId.naturalHeight){
+        			$("#"+imgId).css("width", "600px");
+        			$(".modal-left").css("width", "600px");
+        			if($("#"+imgId).height() >= 400){
+    	    			$(".modal-right").css("height", $("#"+imgId).height()+"px");
+    	    			$(".modal-centered").css("height", $("#"+imgId).height()+"px");
+    	    			$(".modal-context table").css("height", $("#"+imgId).height() - 80 +"px");
+        			}else {
+        				$("#"+imgId).css("margin-top", (400 - $("#"+imgId).height()) / 2 + "px");
+        				$(".modal-right").css("height", "400px");
+        				$(".modal-centered").css("height", "400px");
+        				$(".modal-context table").css("height", "320px");
+        			}
+        		}else {
+        			$("#"+imgId).css("height", "600px");
+        			$(".modal-left").css("width", $("#"+imgId).width()-1);
+        			$(".modal-right").css("height", "600px");
+        			$(".modal-centered").css("height", "600px");
+        			$(".modal-context table").css("height", "520px");
+        		}
+    		} */
     	});
     	
     	$("#"+imgId).load(function() {
+    		/* if(this.naturalWidth >= this.naturalHeight){
+    			$(this).css("width", "600px");
+    			$(".modal-left").css("width", "600px");
+    			if($(this).height() >= 400){
+	    			$(".modal-right").css("height", $(this).height()+"px");
+	    			$(".modal-centered").css("height", $(this).height()+"px");
+	    			$(".modal-context table").css("height", $(this).height() - 80 +"px");
+    			}else {
+    				$(this).css("margin-top", (400 - $(this).height()) / 2 + "px");
+    				$(".modal-right").css("height", "400px");
+    				$(".modal-centered").css("height", "400px");
+    				$(".modal-context table").css("height", "320px");
+    			}
+    		}else {
+    			$(this).css("height", "600px");
+    			$(".modal-left").css("width", $(this).width()-1);
+    			$(".modal-right").css("height", "600px");
+    			$(".modal-centered").css("height", "600px");
+    			$(".modal-context table").css("height", "520px");
+    		} */
     		modalSize(imgName, imgId);
     	});
     	
@@ -206,24 +238,21 @@ $(document).ready(function(){
     $('html').click(function(e) {
     	if($(e.target).hasClass("modal-in")) {
 	    	$("#myModal").modal('hide');
-    	}
-    	if($(e.target).hasClass("xbtn")) {
-	    	$("#myModal").modal('hide');
-    	}
+	    	
+    	} 
     }); 
 
 });
 
 function modalSize(imgName, imgId) {
 	if($(window).width() < 1000){
-		$(".modal-right").css("height", "600px");
-		$(".modal-context table").css("height", "520px");
+		$(".modal-right").css("height", "500px");
+		$(".modal-context table").css("height", "420px");
 		$(".modal-left").css("width", $(window).width()+"px");
 		$("#"+imgId).css("width", "100%");
 		$("#"+imgId).css("margin-top", "0");
 		$(".modal-left").css("height", $("#"+imgId).height()+"px");
 		$(".modal-title a").css("margin-left","5vw");
-		$(".modal-centered").css("height", "");
 	}else{
 		$(".modal-left").css("height", "100%");
 		$(".modal-title a").css("margin-left","20px");
@@ -248,10 +277,6 @@ function modalSize(imgName, imgId) {
 			$(".modal-context table").css("height", "520px");
 		}
 	}
-}
-
-function openWin(){  
-    window.open("<%=cp%>/mungstargram/created", "이미지 편집", "width=800, height=600, left=200, top=20, toolbar=no, menubar=no, scrollbars=no, location=no, status=no, resizable=no" );
 }
 
 </script>
@@ -300,30 +325,17 @@ function openWin(){
 	<div class="clearfix"></div>
 	
 
-	<%-- <button class="btn" onclick="location.href='<%=cp%>/mungstargram/created'">insert</button> --%>
-	<button class="btn" onclick="openWin();">insert</button>
+	<button class="btn" onclick="location.href='<%=cp%>/mungstargram/created'">insert</button>
 
 	<!-- Modal -->
-	<div class="modal" id="myModal" role="dialog" style="background: rgba(0,0,0,0.5);">
+	<div class="modal" id="myModal" role="dialog">
 		<div class="modal-out">
-			<div style="position: absolute; top: 1vw; right: 1vw; z-index: 1;">
-				<button class="glyphicon glyphicon-plus btn-lg xbtn"></button>
-			</div>
 			<div class="modal-in">
 				<div class="modal-centered">
-					<div class="modal-left" style="background: black;">
-						<div class="modal-left-img"></div>
-						<div class="modal-left imgVigible" style="position: absolute; top: 0; display:table;">
-							<div style='position: relative; display: table-cell; vertical-align: middle;'>
-								<div align="left" style="width:50%; float:left;">
-									<button class='glyphicon glyphicon-circle-arrow-left btn-lg directionBtn'></button>
-								</div>
-								<div align="right" style="width:50%; float:left;">
-									<button class='glyphicon glyphicon-circle-arrow-right btn-lg directionBtn'></button>
-								</div>
-							</div>
-						</div>
-					</div>
+					<div class="modal-left"></div>
+					<!-- <div>
+						<span class="glyphicon glyphicon-circle-arrow-right"></span>
+					</div> -->
 					<div class="modal-right">
 						<div class="modal-title">
 							<a href="<%=cp%>/myPage/user_id">
@@ -336,7 +348,7 @@ function openWin(){
 								<tr><td>
 									<div style="overflow:auto; height: 100%;">
 										<div>
-											#test#test<br><br><br><br><br><br><br><br><br><br><br><br>test<br><br><br>test
+											test<br><br><br><br><br><br><br><br><br><br><br><br>test<br><br><br>test
 										</div>
 									</div>
 								</td></tr>

@@ -7,67 +7,92 @@
 %>
 
 <style>
-
-.modal-size {
-	width: 75%;
-}
-
-.totImg {
-	position: relative;
-	width: 100%;
-	min-height: 450px;
-	margin: 20px auto;
-}
-
-.leftImg {
-	border: 1px solid #ccc;
-	width:65%;
-	height: 450px;
-	line-height: 450px;
-	vertical-align: middle;
-	float: left;
-	display: inline-block;
-	padding: 0 40px;
-}
-
-div.leftImg img {
-	width: 100%;
-	height: auto;
-	vertical-align: middle;
-}
-
-.rightDes {
-	border: 1px solid #ccc;
-	width: 35%;
-	height: 250px;
-	float: right;
-	display: inline-block;
-	padding: 0 40px;
-}
-
-.rightDet {
-	border: 1px solid #ccc;
-	width: 35%;
-	height: 200px;
-	float: right;
-}
-
-/* ---------------- */
-
-.modal-center {
+div.modal-out {
+	display: table;
 	margin: 0 auto;
+	height: 100%;
+}
+
+div.modal-in {
+	display: table-cell;
 	vertical-align: middle;
+	text-align: center;
 }
 
-/* ---------------- */
+div.modal-centered {
+	position: relative;
+	display: inline-block;
+	height: 400px;
+}
 
+div.modal-left {
+	background: black;
+	float: left;
+	width: 100px;
+	height: 100%;
+}
 
+div.modal-right {
+	background: white;
+	width: 350px;
+	height: 100%;
+	float: left;
+	text-align: left;
+}
+
+div.modal-title {
+	display: table-cell;
+	margin: 0 auto;
+	height: 80px;
+	vertical-align: middle;
+	text-align: left;
+}
+
+div.modal-title a {
+	margin-left: 20px;
+}
+
+div.modal-title a:hover {
+	color: black;
+	text-decoration: none;
+}
+
+div.div.modal-context {
+	margin: 0 auto;
+}
+
+div.modal-context table {
+	margin: 0 auto;
+	width: 90%;
+	height: 320px;
+}
+
+div.modal-context table td {
+	border-top: 1px solid #ddd;
+}
+
+/* ------------------------- */
 div.gallery {
-	border: 1px solid #ccc;
+	position: relative;
+	height: 20vw;
+	background: black;
 }
 
-div.gallery:hover {
-	border: 1px solid #777;
+div.gallery:hover .gallery-text {
+	opacity: 1;
+}
+
+div.gallery-text {
+	position: absolute;
+	width: 100%;
+	top: 50%;
+	left: 50%;
+	text-align: center;
+	color: white;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	text-align: center;
+	opacity: 0;
 }
 
 div.gallery img {
@@ -75,10 +100,9 @@ div.gallery img {
 	height: 100%;
 }
 
-/* div.gallery img:hover {
-	border: 1px solid #777;
-	background: red;
-} */
+div.gallery img:hover {
+	opacity: 0.8;
+}
 
 div.desc {
 	padding: 15px;
@@ -90,35 +114,35 @@ div.desc {
 }
 
 .responsive {
-	padding: 6px 6px;
+	padding: 15px 15px;
 	float: left;
 	/* width: 24.99999%; */
 	width: 33.33333%;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1000px) {
+	div.gallery {
+		height: 30vw;
+	}
 	.responsive {
+		padding: 20px 15px;
 		width: 49.99999%;
 		margin: 6px 0;
 	}
-	
-	.leftImg {
-		width: 100%;
-	}
-	
-	.rightDes {
-		width: 100%;
-		display: block;
-	}
-	
 	.modal-size {
 		width: 99%;
 	}
-	
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 700px) {
+	div.gallery {
+		height: 40vw;
+	}
+	div.gallery img {
+		height: 120%;
+	}
 	.responsive {
+		padding: 30px 15px;
 		width: 100%;
 	}
 }
@@ -132,10 +156,41 @@ div.desc {
 
 <script>
 $(document).ready(function(){
-    $("#myBtn").click(function(){
-        $("#myModal").modal();
+    $("#myImg").click(function(){
+    	
+    	var imgName = "<%=cp%>/resource/img/test1.jpg";
+    	var imgId = "myimg";
+    	
+    	$(".modal-left").html("<img src='"+ imgName +"' id='"+imgId+"'>");
+    	
+    	$("#"+imgId).load(function() {
+    		if(this.naturalWidth >= this.naturalHeight){
+    			$(this).css("width", "600px");
+    			$(".modal-left").css("width", "600px");
+    			if($(this).height() >= 400){
+	    			$(".modal-right").css("height", $(this).height()+"px");
+	    			$(".modal-centered").css("height", $(this).height()+"px");
+	    			$(".modal-context table").css("height", $(this).height() - 80 +"px");
+    			}else {
+    				$(this).css("margin-top", (400 - $(this).height()) / 2 + "px");
+    			}
+    		}else {
+    			$(this).css("height", "600px");
+    			$(".modal-left").css("width", $(this).width()-1);
+    			$(".modal-right").css("height", "600px");
+    			$(".modal-centered").css("height", "600px");
+    			$(".modal-context table").css("height", "520px");
+    		}
+    	});
+    	
+    	$("#myModal").modal();
+    	
     });
+    
+    
+
 });
+
 </script>
 
 <div class="body-container">
@@ -145,38 +200,29 @@ $(document).ready(function(){
 
 	<div class="responsive">
 		<div class="gallery">
-			<a href="#" id="myBtn">
-				<img src="<%=cp%>/resource/img/test.jpg" alt="Trolltunga Norway" width="300" height="200">
-			</a>
-			<div class="desc">Add a description of the image here</div>
+			<img id="myImg" src="<%=cp%>/resource/img/test1.jpg" alt="Trolltunga Norway">
+			<div class="gallery-text">
+				<b>좋아요 : 2134개 &nbsp;&nbsp;&nbsp; 댓글 : 83개</b>
+			</div>
 		</div>
 	</div>
 
 
 	<div class="responsive">
 		<div class="gallery">
-			<a href="#"> <img src="<%=cp%>/resource/img/dog2.jpg"
-				alt="Forest" width="600" height="400">
-			</a>
-			<div class="desc">Add a description of the image here</div>
+			<img src="<%=cp%>/resource/img/test2.jpg" alt="Forest" width="600" height="400">
+			<div class="gallery-text" align="center">
+				<b>좋아요 : 2134개 &nbsp;&nbsp;&nbsp; 댓글 : 83개</b>
+			</div>
 		</div>
 	</div>
 
 	<div class="responsive">
 		<div class="gallery">
-			<a href="#"> <img src="<%=cp%>/resource/img/dog3.jpg"
-				alt="Northern Lights" width="600" height="400">
-			</a>
-			<div class="desc">Add a description of the image here</div>
-		</div>
-	</div>
-
-	<div class="responsive">
-		<div class="gallery">
-			<a href="#"> <img src="<%=cp%>/resource/img/dog4.jpg"
-				alt="Mountains" width="600" height="400">
-			</a>
-			<div class="desc">Add a description of the image here</div>
+			<img src="<%=cp%>/resource/img/dog3.jpg" alt="Northern Lights" width="600" height="400">
+			<div class="gallery-text" align="center">
+				<b>좋아요 : 2134개 &nbsp;&nbsp;&nbsp; 댓글 : 83개</b>
+			</div>
 		</div>
 	</div>
 
@@ -185,57 +231,34 @@ $(document).ready(function(){
 
 	<button class="btn" onclick="location.href='<%=cp%>/mungstargram/created'">insert</button>
 
-
 	<!-- Modal -->
-	<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog modal-size">
-
-			<div class="modal-body modal-center">
-				<img src="<%=cp %>/resource/img/dog1.jpg" width="50%">
-			</div>
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">mungstargram</h4>
-				</div>
-				<div class="modal-body">
-					<div class="totImg">
-						<div class="leftImg">
-							<img src="<%=cp %>/resource/img/dog1.jpg">
+	<div class="modal" id="myModal" role="dialog">
+		<div class="modal-out">
+			<div class="modal-in">
+				<div class="modal-centered">
+					<div class="modal-left"></div>
+					<div class="modal-right">
+						<div class="modal-title">
+							<a href="<%=cp%>/myPage/user_id">
+								<img src="<%=cp%>/resource/img/dog3.jpg" class="img-circle" alt="Cinque Terre" width="40" height="40">&nbsp;
+								<b>user_id</b>
+							</a>
 						</div>
-						<div class="rightDes">
-							사용자 : abcdefg
-							<br><br>
-							내용 : test 이미지 입니다.
-							
-						</div>
-						<div class="rightDet">
-							댓글입니다.
-						</div>
-						
-						
-						<div style=" position: absolute; top: 50%; left: 1%;">
-							<a><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span></a>
-						</div>
-						<div style="position: absolute; top: 50%; right: 1%;">
-							<a><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+						<div class="modal-context">
+							<table>
+								<tr><td>
+									<div style="overflow:auto; height: 100%;">
+										test<br><br><br><br><br><br><br><br><br><br><br><br>test<br><br><br>test
+									</div>
+								</td></tr>
+								<tr height="100px;"><td>조회수</td></tr>
+								<tr height="50px;"><td><input class="boxTF" type="text" style="width: 100%; border: none;" placeholder="로그인 후 가능"></td></tr>
+							</table>
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
 			</div>
-
 		</div>
-			<div style=" position: absolute; top: 50%; left: 7%;">
-				<a class="btn-lg"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="color: white;"></span></a>
-			</div>
-			<div style="position: absolute; top: 50%; right: 7%;">
-				<a class="btn-lg"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: white;"></span></a>
-			</div>
 	</div>
 
 </div>

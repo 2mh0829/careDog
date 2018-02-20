@@ -30,4 +30,5 @@ setInterval(function() {
 </div>
 
 <div class="body-container" style="width: 70%;">
+
 </div>

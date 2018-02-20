@@ -50,9 +50,10 @@ function sendLogin() {
         return;
     }
 
-    f.action = "<%=cp%>/";
+    f.action = "<%=cp%>/login";
     f.submit();
 }
+
 </script>
 
 <div class="body-container">
