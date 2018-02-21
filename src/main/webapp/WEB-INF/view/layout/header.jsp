@@ -52,7 +52,9 @@ $(window).scroll(function() {
 				<li><a href="<%=cp %>/intro">Abt.careDog</a></li>
 				<li><a href="<%=cp %>/service">Service</a></li>
 				<li><a href="<%=cp %>/mungstargram">mungstargram</a></li>
-				<li><a href="<%=cp %>/strayDog">유기견</a></li>
+				<li>
+					<a href="<%=cp %>/strayDog">유기견</a>
+				</li>
 				<li><a href="<%=cp %>/dog119">애견119</a></li>
 				<li><a href="<%=cp %>/info">정보</a></li>
 				<li><a href="<%=cp %>/store">펫스토어</a></li>
