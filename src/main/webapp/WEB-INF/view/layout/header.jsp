@@ -54,11 +54,6 @@ $(window).scroll(function() {
 				<li><a href="<%=cp %>/mungstargram">mungstargram</a></li>
 				<li>
 					<a href="<%=cp %>/strayDog">유기견</a>
-					<ul>
-						<li><a href="<%=cp %>/strayDog">유기견</a></li>
-						<li><a href="#">유기견 보호단체 후원</a></li>
-						<li><a href="#">봉사하기</a></li>
-					</ul>
 				</li>
 				<li><a href="<%=cp %>/dog119">애견119</a></li>
 				<li><a href="<%=cp %>/info">정보</a></li>
