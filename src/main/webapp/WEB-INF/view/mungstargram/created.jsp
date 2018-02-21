@@ -26,8 +26,8 @@ div.image-drop-area {
 div.image-area-out {
 	display: table;
 	background: black;
-	width: 50%;
-	height: 75%;
+	width: 60%;
+	height: 80%;
 }
 
 div.image-area-in {
@@ -39,18 +39,17 @@ div.image-area-in {
 div.image-preview-area {
 	position: relative;
 	width: 100%;
-	height: 25%;
+	height: 20%;
 	float: left;
-	background: yellow;
+	background: gray;
 }
 
 div.imagefile {
 	position: relative;
 	float: left;
-	margin-left: 10px;
-	margin-top: 25px;
-	margin-bottom: 10px;
-	margin-right: 10px;
+	margin-left: 15px;
+	margin-top: 15px;
+	margin-right: 5px;
 	width: 14vw;
 	height:14vw;
 	background: white;
@@ -62,21 +61,49 @@ div.imagefile img {
 }
 
 div.imagefile img:hover {
-	opacity: 0.5;
+	opacity: 0.8;
 }
 
 div.text-area {
 	position: absolute;
-	width: 50%; 
-	height: 75%;
+	width: 40%; 
+	height: 80%;
 	top: 0;
 	right: 0;
 }
 
 div.delete-image {
 	position: absolute;
-	top: -5;
-	right: -5;
+	top: -10;
+	right: -10;
+}
+
+.button {
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+	background: black;
+	color: white;
+	visibility: hidden;
+}
+
+.button:hover {
+	border-color: black;
+}
+
+div.imagefile:hover .button {
+	visibility: visible;
+}
+
+textarea {
+	width: 90%;
+	height: 80%;
+	border-radius: 5px;
+	resize: none;
+}
+
+textarea:focus {
+	outline: none;
 }
 
 </style>
@@ -115,10 +142,9 @@ $(function() {
 	};
 	
 	function filePreviewUpload(file, num) {
-		console.log(file);
 		var fileName = file.name;
 		var t = "<img id='img"+num+"' src='<%=cp %>/resource/img/"+fileName+"' onclick='preview(\"" + fileName + "\"," + num + ");'>";
-		var d = "<div class='delete-image'><button onclick='deleteImg("+num+");'> x </button></div>";
+		var d = "<div class='delete-image'><button class='button' onclick='deleteImg("+num+");'>X</button></div>";
 		var s = "<div class='imagefile'>"+ t + d +"</div>";
 		$(".image-preview-area").append(s);
 		
@@ -145,8 +171,14 @@ function resize(num) {
 	if($("#img"+num)[0].naturalWidth >= $("#img"+num)[0].naturalHeight){
 		$(".image-area-in img").css("width", "100%");
 	}else{
-		$(".image-area-in img").css("height", "100%");
+		$(".image-area-in img").css("height", "70vh");
 	}
+}
+
+function insertImage() {
+	var a = $("#tb textarea").val();
+	alert(a);
+	/* window.close(); */
 }
 
 </script>
@@ -158,7 +190,16 @@ function resize(num) {
 			<div class="image-area-in"></div>
 		</div>
 		<div class="text-area">
-			<table border="1"><tr><td>a</td></tr><tr><td><input type="text"></td></tr></table>
+			<table id="tb" border="1" style="width: 100%; height: 100%;">
+				<tr height="100px"><td>a</td></tr>
+				<tr><td align="center" bgcolor="black">
+					<textarea placeholder="&nbsp;내용을 입력하세요."></textarea>
+				</td></tr>
+				<tr height="50px;"><td align="right">
+					<button onclick="insertImage();">등록</button>
+					<button onclick="window.close();">취소</button>
+				</td></tr>
+			</table>
 		</div>
 		<div class="image-preview-area"></div>
 	</div>

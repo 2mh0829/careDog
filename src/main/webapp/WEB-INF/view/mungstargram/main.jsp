@@ -251,7 +251,7 @@ function modalSize(imgName, imgId) {
 }
 
 function openWin(){  
-    window.open("<%=cp%>/mungstargram/created", "이미지 편집", "width=800, height=600, left=200, top=20, toolbar=no, menubar=no, scrollbars=no, location=no, status=no, resizable=no" );
+    window.open("<%=cp%>/mungstargram/created", "이미지 편집", "width=800, height=700, left=200, top=20, toolbar=no, menubar=no, scrollbars=no, location=no, status=no, resizable=no" );
 }
 
 </script>
