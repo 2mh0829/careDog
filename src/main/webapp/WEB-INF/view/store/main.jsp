@@ -103,7 +103,7 @@
 			<hr>
 		</div>
 		<div class="container">
-			<!-- 내용 -->
+			<!-- 내용. -->
 		</div>
 		<div class="btn-area" align="center">
 			<a href="#" class="">
