@@ -6,6 +6,11 @@
 	String cp = request.getContextPath();
 %>
 
+<style>
+
+
+</style>
+
 
 <div class="body-container">
 
@@ -63,9 +68,48 @@
 	
 	<br>
 	
-	<div>
-		<h3 align="center">펫# BEST ITEM</h3>
-		<hr>
+	<div class="content section01">
+		<div class="sub-title">
+			<h3 align="center">NEW</h3>
+			<hr>
+		</div>
+		<div class="container">
+			<!-- 내용 -->
+		</div>
+		<div class="btn-area" align="center">
+			<a href="#" class="">
+				<button type="button" class="btn btn-default">더보기</button>
+			</a>
+		</div>
+	</div>
+	
+	<br><br><br>
+	
+	<div class="content section02">
+		<div class="sub-title">
+			<h3 align="center">EVENT ZONE</h3>
+			<hr>
+		</div>
+		<div class="container">
+			<!-- 내용 -->
+		</div>
+	</div>
+	
+	<br><br><br>
+	
+	<div class="content section03">
+		<div class="sub-title">
+			<h3 align="center">BEST SELLER</h3>
+			<hr>
+		</div>
+		<div class="container">
+			<!-- 내용 -->
+		</div>
+		<div class="btn-area" align="center">
+			<a href="#" class="">
+				<button type="button" class="btn btn-default">더보기</button>
+			</a>
+		</div>
 	</div>
 
 </div>
