@@ -18,11 +18,14 @@ public class MungstargramServiceImpl implements MungstargramService {
 	public int insertPhoto(MungstarPVO pvo, String pathname) {
 		int result = 0;
 		try {
-			result = dao.insertData("ID", pvo);
+			result = dao.insertData("mungstar.insertContext", pvo);
+			pvo.setNum(dao.selectOne("mungstar.selectMungstarNum"));
 			for(int i=0; i<pvo.getFiles().size(); i++) {
 				String filename = fileManager.doFileUpload(pvo.getFiles().get(i), pathname);
-				if(filename != null)
-					System.out.println(filename);
+				if(filename != null) {
+					pvo.setFilename(filename);
+					dao.insertData("mungstar.insertPhoto", pvo);
+				}
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());

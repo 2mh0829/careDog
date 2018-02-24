@@ -49,15 +49,13 @@
 	float: left;
 	width: 150px;
 	height: 150px;
-	background: green;
 }
 
 .eventBox {
 	position: relative;
-	top: -150;
+	top: -150; 
 	width: 150px;
 	height: 150px;
-	border-radius: 5px;
 }
 
 .blackBox {
@@ -66,7 +64,8 @@
 	height: 150px;
 	background: black;
 	border-radius: 5px;
-	opacity: 0;
+	opacity: 0.5;
+	visibility: hidden;
 }
 
 .xbtn {
@@ -82,7 +81,7 @@
 }
 
 .eventBox:hover .blackBox {
-	opacity: 0.5;
+	visibility: visible;
 }
 
 .eventBox:hover .xbtn {
