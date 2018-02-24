@@ -1,5 +1,12 @@
 package care.dog.mungstargram.vo;
 
-public class MungstarPVO extends MungstarDVO {
+import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import lombok.Getter;
+
+public class MungstarPVO extends MungstarDVO {
+	@Getter
+	private List<MultipartFile> files;
 }

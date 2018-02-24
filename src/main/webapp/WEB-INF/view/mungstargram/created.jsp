@@ -128,8 +128,9 @@ function insertImage() {
 	var file = new FormData();
 	
 	$("li").each(function() {
-		file.append('file', tempFile.getAll('file')[$(this).attr("id")]);
+		file.append('files', tempFile.getAll('file')[$(this).attr("id")]);
 	});
+	file.append('context', $("textarea[name=context]").val());
 	
 	 $.ajax({
         url: url,
@@ -156,7 +157,7 @@ function insertImage() {
 		<table id="tb" style="width: 100%; height: 100%;">
 			<tr height="100px"><td>a</td></tr>
 			<tr><td align="center">
-				<textarea placeholder="&nbsp;내용을 입력하세요."></textarea>
+				<textarea name="context" placeholder="&nbsp;내용을 입력하세요."></textarea>
 			</td></tr>
 			<tr height="50px;"><td align="right">
 				<button onclick="insertImage();">등록</button>
