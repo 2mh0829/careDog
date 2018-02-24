@@ -132,6 +132,7 @@ function insertImage() {
 	});
 	file.append('context', $("textarea[name=context]").val());
 	
+	
 	 $.ajax({
         url: url,
         data: file,
