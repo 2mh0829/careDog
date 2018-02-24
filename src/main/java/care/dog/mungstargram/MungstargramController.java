@@ -38,5 +38,4 @@ public class MungstargramController {
 		
 		System.out.println(path);
 	}
-	
 }
