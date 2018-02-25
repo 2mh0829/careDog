@@ -1,98 +1,105 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
-   String cp = request.getContextPath();
+	String cp=request.getContextPath();
 %>
 
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-ui.min.js"></script>
 
 <style>
 * {
-    margin:0; padding:0;
+	margin: 0;
+	padding: 0;
 }
 
-div.window-size {
+.newWindow {
 	width: 100%;
 	height: 100%;
-	overflow: hidden;
 }
 
-div.image-drop-area {
-	
+#holder {
+	margin-left: 50px;
+	margin-right: 30px;
+	width: 600px;
+	height: 400px;
+	border: 10px dashed #ccc;
+	float: left;
+	margin-top: 50px;
 }
 
-div.image-area-out {
-	display: table;
+#holder.hover {
+	border: 10px dashed #0c0;
+}
+
+#holder img {
+	width: 150px;
+	height: 150px;
+	border-radius: 5px;
+}
+
+#sortable {
+	list-style-type: none;
+}
+
+#sortable li {
+	margin: 35px 15px 5px 30px;
+	float: left;
+	width: 150px;
+	height: 150px;
+}
+
+.eventBox {
+	position: relative;
+	top: -150; 
+	width: 150px;
+	height: 150px;
+}
+
+.blackBox {
+	position: relative;
+	width: 150px;
+	height: 150px;
 	background: black;
-	width: 60%;
-	height: 80%;
+	border-radius: 5px;
+	opacity: 0.5;
+	visibility: hidden;
 }
 
-div.image-area-in {
-	display: table-cell;
-	vertical-align: middle;
-	text-align: center;
-}
-
-div.image-preview-area {
-	position: relative;
-	width: 100%;
-	height: 20%;
-	float: left;
-	background: gray;
-}
-
-div.imagefile {
-	position: relative;
-	float: left;
-	margin-left: 15px;
-	margin-top: 15px;
-	margin-right: 5px;
-	width: 14vw;
-	height:14vw;
-	background: white;
-}
-
-div.imagefile img {
-	width: 14vw;
-	height:14vw;
-}
-
-div.imagefile img:hover {
-	opacity: 0.8;
-}
-
-div.text-area {
+.xbtn {
 	position: absolute;
-	width: 40%; 
-	height: 80%;
-	top: 0;
-	right: 0;
-}
-
-div.delete-image {
-	position: absolute;
-	top: -10;
-	right: -10;
-}
-
-.button {
-	width: 30px;
-	height: 30px;
-	border-radius: 15px;
+	top: -15;
+	right: -15;
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
 	background: black;
 	color: white;
 	visibility: hidden;
 }
 
-.button:hover {
-	border-color: black;
+.eventBox:hover .blackBox {
+	visibility: visible;
 }
 
-div.imagefile:hover .button {
+.eventBox:hover .xbtn {
 	visibility: visible;
+}
+
+
+
+/* ---------------------------- */
+
+.textarea {
+	border: 10px solid #ccc;
+	top: 0;
+	margin-top: 50px;
+	margin-left: 20px;
+	width: 300px;
+	height: 400px;
+	float: left;
 }
 
 textarea {
@@ -109,98 +116,118 @@ textarea:focus {
 </style>
 
 <script>
-var cnt = 0;
 $(function() {
-	
-	var drop = document.getElementById("dropfile");
-	var imgData = null;
-	var num = 0;
-	drop.ondragover = function(e) {
-		e.preventDefault();
-	};
-	drop.ondrop = function(e) {
-		e.preventDefault();
-		imgData = e.dataTransfer;
-		if (imgData.items) { // DataTransferItemList 객체 사용
-			for (var i = 0; i < imgData.items.length; i++) { // DataTransferItem 객체 사용
-				if (imgData.items[i].kind == "file") { // 아이템 종류가 파일이면
-					if(cnt > 5){
-						alert("사진은 6개까지");
-						break;
-					}
-					cnt++;
-					var file = imgData.items[i].getAsFile(); // File API 사용
-					filePreviewUpload(file, num);
-					num++;
-				}
-			}
-		} else { // File API 사용
-			for (var i = 0; i < data.files.length; i++) {
-				alert(imgData.files[i].name);
-			}
-		}
-	};
-	
-	function filePreviewUpload(file, num) {
-		var fileName = file.name;
-		var t = "<img id='img"+num+"' src='<%=cp %>/resource/img/"+fileName+"' onclick='preview(\"" + fileName + "\"," + num + ");'>";
-		var d = "<div class='delete-image'><button class='button' onclick='deleteImg("+num+");'>X</button></div>";
-		var s = "<div class='imagefile'>"+ t + d +"</div>";
-		$(".image-preview-area").append(s);
-		
-		preview(fileName, num);
-	}
-	
+	$("#sortable").sortable();
+	$("#sortable").disableSelection();
 });
 
-function deleteImg(num) {
-	$("#img"+num).parent().remove();
-	cnt--;
-}
-
-function preview(fileName, num) {
-	var t = "<img src='<%=cp %>/resource/img/"+fileName+"'>";
-	var s = "<div class='img-file'>"+ t +"</div>";
-	
-	$(".image-area-in").html(s);
-	
-	resize(num);
-}
-
-function resize(num) {
-	if($("#img"+num)[0].naturalWidth >= $("#img"+num)[0].naturalHeight){
-		$(".image-area-in img").css("width", "100%");
-	}else{
-		$(".image-area-in img").css("height", "70vh");
-	}
-}
 
 function insertImage() {
-	var a = $("#tb textarea").val();
-	alert(a);
-	/* window.close(); */
+	var url = "<%=cp %>/mungstargram/created";
+	var file = new FormData();
+	
+	$("li").each(function() {
+		file.append('files', tempFile.getAll('file')[$(this).attr("id")]);
+	});
+	file.append('context', $("textarea[name=context]").val());
+	
+	
+	 $.ajax({
+        url: url,
+        data: file,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function() {
+            opener.parent.location.reload();
+            window.close();
+        }
+    });
+	
 }
 
 </script>
 
-<div class="window-size">
-	<div id="dropfile" class="image-drop-area">
-		<div class="image-area-out">
-			<div style="position: absolute; top: 0; color: white;">Drap and Drop here.</div>
-			<div class="image-area-in"></div>
-		</div>
-		<div class="text-area">
-			<table id="tb" border="1" style="width: 100%; height: 100%;">
-				<tr height="100px"><td>a</td></tr>
-				<tr><td align="center" bgcolor="black">
-					<textarea placeholder="&nbsp;내용을 입력하세요."></textarea>
-				</td></tr>
-				<tr height="50px;"><td align="right">
-					<button onclick="insertImage();">등록</button>
-					<button onclick="window.close();">취소</button>
-				</td></tr>
-			</table>
-		</div>
-		<div class="image-preview-area"></div>
+
+<div class="newWindow">
+	<div id='holder'>
+		<ul id="sortable"></ul>
+	</div>
+	<div class="textarea">
+		<table id="tb" style="width: 100%; height: 100%;">
+			<tr height="100px"><td>a</td></tr>
+			<tr><td align="center">
+				<textarea name="context" placeholder="&nbsp;내용을 입력하세요."></textarea>
+			</td></tr>
+			<tr height="50px;"><td align="right">
+				<button onclick="insertImage();">등록</button>
+				<button onclick="window.close();">취소</button>
+			</td></tr>
+		</table>
 	</div>
 </div>
+
+
+<script>
+var holder = document.getElementById('holder');
+var tempFile = new FormData();
+var num = 0;
+var cnt = 0;
+
+holder.ondragover = function() {
+	this.className = 'hover';
+	return false;
+};
+holder.ondragend = function() {
+	this.className = '';
+	return false;
+};
+holder.ondrop = function(e) {
+	this.className = '';
+	e.preventDefault();
+	data = e.dataTransfer;
+	if(data.items){
+		for(var i=0; i<data.items.length; i++){
+			if(data.items[i].type == "image/jpeg"){
+				if(cnt > 5){
+					alert("업로드는 6장까지 가능");
+					break;
+				}
+				cnt++;
+				previewfile(data.files[i]);
+			}else {
+				alert("이미지 파일만 업로드 가능");
+			}
+		}
+	}
+}
+
+function previewfile(file) {
+	var reader = new FileReader();
+	reader.onload = function(event) {
+		var image = new Image();
+		image.src = event.target.result;
+		
+		tempFile.append("file", file);
+
+		$("#sortable").append("<li id='"+num+"'></li>");
+		$("#"+num).append(image);
+		$("#"+num).append("<div id='event"+num+"' class='eventBox'></div>")
+		$("#event"+num).append("<div class='blackBox'></div>");
+		$("#event"+num).append("<button class='xbtn' onclick='deleteImg("+num+")'>X</button>");
+		
+		num++;
+	};
+
+	reader.readAsDataURL(file);
+}
+
+function deleteImg(num) {
+	$("#"+num).hide('fade', 300, function() {
+		$("#"+num).remove();
+	});
+	cnt--;
+}
+
+</script>
+

@@ -181,7 +181,43 @@ div.desc {
 }
 </style>
 
-<script>
+<script type="text/javascript">
+
+var pageNo = 1;
+var totalPage = 1;
+
+$(function() {
+	listPage(1);
+	
+	if ($("body").height() < $(window).height()) {
+		alert("스크롤바 없음.");
+	}
+	
+	$(window).scroll(function() {
+		if($(window).scrollTop() == $(document).height() - $(window).height()) {
+			if(pageNo < totalPage)
+				listPage(++pageNo);
+			else
+				alert("끝");
+		}
+	});
+});
+
+function listPage(page) {
+	var url = "<%=cp %>/mungstargram/list";
+	var data = {pageNo:page};
+	$.get(url, data, function(data) {
+		alert("ok");
+		printList(data);
+	}, "json");
+}
+
+function printList(data) {
+	alert("print");
+}
+
+
+/* ---------------------------------------------------------- */
 
 $(document).ready(function(){
 	
@@ -250,8 +286,8 @@ function modalSize(imgName, imgId) {
 	}
 }
 
-function openWin(){  
-    window.open("<%=cp%>/mungstargram/created", "이미지 편집", "width=800, height=700, left=200, top=20, toolbar=no, menubar=no, scrollbars=no, location=no, status=no, resizable=no" );
+function openWin(){
+    window.open("<%=cp%>/mungstargram/created", "이미지 편집", "width=1085, height=550, left=100, top=20, toolbar=no, menubar=no, scrollbars=no, location=no, status=no, resizable=no" );
 }
 
 </script>

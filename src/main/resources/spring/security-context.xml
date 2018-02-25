@@ -68,6 +68,7 @@
 				<concurrency-control max-sessions="1" expired-url="/member/expired"/>
 			</session-management>	        
 	</http>
+	
 
 	<beans:bean id="loginSuccessHandler"
                class="care.dog.security.LoginSuccessHandler"/>
