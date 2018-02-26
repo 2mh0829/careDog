@@ -5,9 +5,18 @@
 <%
 	String cp = request.getContextPath();
 %>
+<style>
+<!--
+
+-->
+ table.space{
+ 	border-spacing:13;
+ 	padding: 100px;
+ }
+</style>
 
 <div>
-	<table width="150" border="0" cellpadding="0" cellspacing="0" >
+	<table class="space">
 		<tbody>
 			<tr>
 				<td>
@@ -38,8 +47,8 @@
 								 	<span>
 								 	 <a href="javascript:na_open_window('win', 'petfind_view_skin_1.html?no=19470', 200, 100, 695, 900, 0, 0, 0, 1, 1)">지역: 경남<br> 종류 : 고양이
 										</a><br> 
-									<a href="petfind_view_skin_1.html?no=19470" target="_blank"> <b><font color="#CC0000">사례금 : 300,000원</font></b>
-										</a></span>
+									 <a href="petfind_view_skin_1.html?no=19470" target="_blank"> <b><font color="#CC0000">사례금 : 300,000원</font></b></a>
+									</span>
 								 </p>
 								</td>
 							</tr>
@@ -52,6 +61,8 @@
 							</tr>
 						</tbody>
 					</table>
+					
+					<button type="button" onclick="javascript:location.href='<%=cp%>/dog119/created'">등록하기</button>
 				</td>
 			</tr>
 		</tbody>

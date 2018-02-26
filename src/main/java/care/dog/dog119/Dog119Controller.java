@@ -10,5 +10,10 @@ public class Dog119Controller {
 	public String main() {
 		return ".dog119.main";
 	}
+	
+	@RequestMapping(value="/dog119/created")
+	public String createdSubmit() {
+		return ".dog119.created";
+	}
 
 }
