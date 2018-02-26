@@ -250,7 +250,6 @@ function article(num) {
 	$.get(url, data, function(data) {
 		openModal(data);
 	}, "json");
-	
 }
 
 var photoList = [];
@@ -259,22 +258,25 @@ var photoNum = 0;
 function openModal(data) {
 	photoList = data.list;
 	photoNum = 0;
-	var photoSrc = "<%=cp %>/uploads/mungstargram/" + photoList[photoNum].filename;
 	
-	$(".modal-left-img").html("<img src='" + photoSrc +"' id='mungstarPhoto'>");
+	setPhoto(photoNum);
 	
 	$(window).resize(function() {
-		modalSize(photoSrc);
+		modalSize();
 	});
 	
-	$("#mungstarPhoto").load(function() {
-		modalSize(photoSrc);
-	});
-	
+	$("#bottomBtn").html("");
+	$("#leftBtn").css("visibility", "hidden");
 	if(photoList.length > 1){
 		$(".imgVigible").css("visibility", "visible");
+		$("#rightBtn").css("visibility", "visible");
+		$("#bottomBtn").css("visibility", "visible");
+		for(var i=0; i<photoList.length; i++){
+			$("#bottomBtn").append("<button onclick='setPhoto(" + i + ");'>o</button>&nbsp;");
+		}
 	}else{
 		$(".imgVigible").css("visibility", "hidden");
+		$("#bottomBtn").css("visibility", "hidden");
 	}
 	
 	$("#myModal").modal();
@@ -285,9 +287,22 @@ function setPhoto(num) {
 	$(".modal-left-img").html("<img src='" + photoSrc +"' id='mungstarPhoto'>");
 	
 	$("#mungstarPhoto").load(function() {
-		modalSize(photoSrc);
+		modalSize();
 	});
-} 
+	
+	photoNum = num;
+	
+	if(photoNum == photoList.length - 1){
+		$("#rightBtn").css("visibility", "hidden");
+		$("#leftBtn").css("visibility", "visible");
+	}else if(photoNum == 0){
+		$("#rightBtn").css("visibility", "visible");
+		$("#leftBtn").css("visibility", "hidden");
+	}else{
+		$("#rightBtn").css("visibility", "visible");
+		$("#leftBtn").css("visibility", "visible");
+	}
+}
 
 $(document).ready(function(){
 	
@@ -300,22 +315,18 @@ $(document).ready(function(){
     	}
     });
     
-    $("#leftBtn button").click(function() {
-    	alert("c");
-    });
-    
-    $("#rightBtn button").click(function() {
-    	if(photoNum < photoList.length - 1){
-    		alert(photoNum);
-    		setPhoto(photoNum);
-    	}else{
-    		
+    $(".imgVigible button").click(function() {
+    	if($(this).parent()[0].id == "rightBtn"){
+    		photoNum++;
+    	}else if($(this).parent()[0].id == "leftBtn"){
+			photoNum--;
     	}
+    	setPhoto(photoNum);
     });
     
 });
 
-function modalSize(imgName) {
+function modalSize() {
 	if($(window).width() < 1000){
 		$(".modal-right").css("height", "600px");
 		$(".modal-context table").css("height", "520px");
@@ -428,6 +439,9 @@ function openWin(){
 								<div id='rightBtn' align="right" style="width:50%; float:left;">
 									<button class='glyphicon glyphicon-circle-arrow-right btn-lg directionBtn'></button>
 								</div>
+							</div>
+							<div style="position: absolute; width: 100%; bottom: 15px; right: 0;">
+								<div id='bottomBtn' align="center"></div>
 							</div>
 						</div>
 					</div>
