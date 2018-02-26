@@ -1,11 +1,15 @@
 package care.dog.mungstargram;
 
-import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+import java.util.Map;
 
 import care.dog.mungstargram.vo.MungstarPVO;
+import care.dog.mungstargram.vo.MungstarRVO;
 
-@Transactional
 public interface MungstargramService {
-	@Transactional
 	public int insertPhoto(MungstarPVO pvo, String pathname);
+	public int mungstarCount();
+	public List<Integer> mungstarPhotoCount(Map<String, Object> map);
+	public List<MungstarRVO> mungstarList(Map<String, Object> map);
+	public List<MungstarRVO> mungstarPhotoList(int num);
 }
