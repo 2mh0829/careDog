@@ -90,13 +90,42 @@
 
 <div class="body-container">	
 	
-	<div class="content section01">
-		<div class="sub-title" style="margin-top: 100px;">
-			<h2 align="center">NEW</h3>
-			<hr>
+	<div class="containerWrap">
+	
+	<div class="sub-title" style="margin-top: 100px;">
+		<h2 align="center">NEW</h2>
+		<hr>
+	</div>
+	
+	<div class="container">
+			
+		<div class="content section01">
+	
+			<!-- 상품 이미지 -->
+			<div class="product-image">
+				<a href="#">
+					<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
+				</a>
+			</div>
+				
+			<!-- 상품 제목 -->
+			<div class="product-title">
+				<a href="#">개껌 30개입</a>
+			</div>
+				
+			<!-- 상품 가격 -->
+			<div class="product-price">
+				<strong>40000</strong>원
+			</div>
+				
+			<!-- new / best / sale 구분 이미지 -->
+			<div class="product-icon">
+				<img src="<%=cp%>/resource/img/store/new.gif">
+			</div>
+				
 		</div>
-		<div class="container">
-			<!-- 내용 -->
+			
+			
 		</div>
 		<div class="btn-area" align="center">
 			<a href="#" class="">

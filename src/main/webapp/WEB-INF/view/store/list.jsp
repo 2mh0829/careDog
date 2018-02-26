@@ -68,24 +68,20 @@
 	
 	<div class="content section02">
 	
-		<!-- 상품 이미지 -->
 		<div class="product-image">
 			<a href="#">
 				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 			</a>
 		</div>
 		
-		<!-- 상품 제목 -->
 		<div class="product-title">
 			<a href="#">개껌 30개입</a>
 		</div>
 		
-		<!-- 상품 가격 -->
 		<div class="product-price">
 			<strong>40000</strong>원
 		</div>
 		
-		<!-- new / best / sale 구분 이미지 -->
 		<div class="product-icon">
 			<img src="<%=cp%>/resource/img/store/new.gif">
 		</div>
@@ -94,24 +90,20 @@
 	
 	<div class="content section03">
 	
-		<!-- 상품 이미지 -->
 		<div class="product-image">
 			<a href="#">
 				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 			</a>
 		</div>
 		
-		<!-- 상품 제목 -->
 		<div class="product-title">
 			<a href="#">개껌 30개입</a>
 		</div>
 		
-		<!-- 상품 가격 -->
 		<div class="product-price">
 			<strong>40000</strong>원
 		</div>
 		
-		<!-- new / best / sale 구분 이미지 -->
 		<div class="product-icon">
 			<img src="<%=cp%>/resource/img/store/new.gif">
 		</div>
@@ -120,24 +112,20 @@
 	
 	<div class="content section04">
 	
-		<!-- 상품 이미지 -->
 		<div class="product-image">
 			<a href="#">
 				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 			</a>
 		</div>
 		
-		<!-- 상품 제목 -->
 		<div class="product-title">
 			<a href="#">개껌 30개입</a>
 		</div>
 		
-		<!-- 상품 가격 -->
 		<div class="product-price">
 			<strong>40000</strong>원
 		</div>
 		
-		<!-- new / best / sale 구분 이미지 -->
 		<div class="product-icon">
 			<img src="<%=cp%>/resource/img/store/new.gif">
 		</div>
@@ -146,24 +134,20 @@
 	
 	<div class="content section05">
 	
-		<!-- 상품 이미지 -->
 		<div class="product-image">
 			<a href="#">
 				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 			</a>
 		</div>
 		
-		<!-- 상품 제목 -->
 		<div class="product-title">
 			<a href="#">개껌 30개입</a>
 		</div>
 		
-		<!-- 상품 가격 -->
 		<div class="product-price">
 			<strong>40000</strong>원
 		</div>
 		
-		<!-- new / best / sale 구분 이미지 -->
 		<div class="product-icon">
 			<img src="<%=cp%>/resource/img/store/new.gif">
 		</div>
