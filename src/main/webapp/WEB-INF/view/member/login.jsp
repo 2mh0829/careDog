@@ -49,8 +49,7 @@ function sendLogin() {
         f.userPwd.focus();
         return;
     }
-
-    f.action = "<%=cp%>/login";
+    f.action = "<%=cp%>/member/login_check";
     f.submit();
 }
 
