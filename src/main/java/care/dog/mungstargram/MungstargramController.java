@@ -59,9 +59,12 @@ public class MungstargramController {
 //		}
 		
 		List<Integer> photoCountList = service.mungstarPhotoCount(map);
-
+		
+		
 		for(int i=0; i<list.size(); i++)
 			list.get(i).setPhotoCount(photoCountList.get(i));
+
+		System.out.println(list.toString());
 		
 		Map<String, Object> model = new HashMap<>();
 		model.put("total_page", total_page);

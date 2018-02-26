@@ -86,11 +86,11 @@ div.modal-context table td {
 }
 
 .modal-left .imgVigible {
-	visibility: hidden;
+	opacity: 0;
 }
 
 .modal-left:hover .imgVigible {
-	visibility: visible;
+	opacity: 1;
 }
 
 /* -------------------------------------------- */
@@ -253,25 +253,44 @@ function article(num) {
 	
 }
 
+var photoList = [];
+var photoNum = 0;
+
 function openModal(data) {
-	var photoSrc = "<%=cp %>/uploads/mungstargram/" + data.list[0].filename;
-	var imgId = "mungstarPhoto";
-	var photoCount = $("#photoCount" + num).val();
+	photoList = data.list;
+	photoNum = 0;
+	var photoSrc = "<%=cp %>/uploads/mungstargram/" + photoList[photoNum].filename;
 	
-	$(".modal-left-img").html("<img src='" + photoSrc +" ' id='" + imgId + "'>");
+	$(".modal-left-img").html("<img src='" + photoSrc +"' id='mungstarPhoto'>");
 	
 	$(window).resize(function() {
-		modalSize(photoSrc, imgId);
+		modalSize(photoSrc);
 	});
 	
-	$("#"+imgId).load(function() {
-		modalSize(photoSrc, imgId);
+	$("#mungstarPhoto").load(function() {
+		modalSize(photoSrc);
 	});
+	
+	if(photoList.length > 1){
+		$(".imgVigible").css("visibility", "visible");
+	}else{
+		$(".imgVigible").css("visibility", "hidden");
+	}
 	
 	$("#myModal").modal();
 }
 
+function setPhoto(num) {
+	var photoSrc = "<%=cp %>/uploads/mungstargram/" + photoList[num].filename;
+	$(".modal-left-img").html("<img src='" + photoSrc +"' id='mungstarPhoto'>");
+	
+	$("#mungstarPhoto").load(function() {
+		modalSize(photoSrc);
+	});
+} 
+
 $(document).ready(function(){
+	
     $('html').click(function(e) {
     	if($(e.target).hasClass("modal-in")) {
 	    	$("#myModal").modal('hide');
@@ -280,43 +299,60 @@ $(document).ready(function(){
 	    	$("#myModal").modal('hide');
     	}
     });
+    
+    $("#leftBtn button").click(function() {
+    	alert("c");
+    });
+    
+    $("#rightBtn button").click(function() {
+    	if(photoNum < photoList.length - 1){
+    		alert(photoNum);
+    		setPhoto(photoNum);
+    	}else{
+    		
+    	}
+    });
+    
 });
 
-function modalSize(imgName, imgId) {
+function modalSize(imgName) {
 	if($(window).width() < 1000){
 		$(".modal-right").css("height", "600px");
 		$(".modal-context table").css("height", "520px");
 		$(".modal-left").css("width", $(window).width()+"px");
-		$("#"+imgId).css("width", "100%");
-		$("#"+imgId).css("margin-top", "0");
-		$(".modal-left").css("height", $("#"+imgId).height()+"px");
+		$("#mungstarPhoto").css("width", "100%");
+		$("#mungstarPhoto").css("margin-top", "0");
+		$(".modal-left").css("height", $("#mungstarPhoto").height()+"px");
 		$(".modal-title a").css("margin-left","5vw");
 		$(".modal-centered").css("height", "");
 	}else{
 		$(".modal-left").css("height", "100%");
 		$(".modal-title a").css("margin-left","20px");
-		if($("#"+imgId)[0].naturalWidth >= $("#"+imgId)[0].naturalHeight){
-			$("#"+imgId).css("width", "600px");
+		if($("#mungstarPhoto")[0].naturalWidth >= $("#mungstarPhoto")[0].naturalHeight){
+			$("#mungstarPhoto").css("width", "600px");
 			$(".modal-left").css("width", "600px");
-			if($("#"+imgId).height() >= 400){
-    			$(".modal-right").css("height", $("#"+imgId).height()+"px");
-    			$(".modal-centered").css("height", $("#"+imgId).height()+"px");
-    			$(".modal-context table").css("height", $("#"+imgId).height() - 80 +"px");
+			if($("#mungstarPhoto").height() >= 400){
+    			$(".modal-right").css("height", $("#mungstarPhoto").height()+"px");
+    			$(".modal-centered").css("height", $("#mungstarPhoto").height()+"px");
+    			$(".modal-context table").css("height", $("#mungstarPhoto").height() - 80 +"px");
 			}else {
-				$("#"+imgId).css("margin-top", (400 - $("#"+imgId).height()) / 2 + "px");
+				$("#mungstarPhoto").css("margin-top", (400 - $("#mungstarPhoto").height()) / 2 + "px");
 				$(".modal-right").css("height", "400px");
 				$(".modal-centered").css("height", "400px");
 				$(".modal-context table").css("height", "320px");
 			}
 		}else {
-			$("#"+imgId).css("height", "600px");
-			$(".modal-left").css("width", $("#"+imgId).width()-1);
+			$("#mungstarPhoto").css("height", "600px");
+			$(".modal-left").css("width", $("#mungstarPhoto").width()-1);
 			$(".modal-right").css("height", "600px");
 			$(".modal-centered").css("height", "600px");
 			$(".modal-context table").css("height", "520px");
 		}
-	} 
+	}
 }
+
+
+/* ------------------------------------------------------------------------------ */
 
 function openWin(){
     window.open("<%=cp%>/mungstargram/created", "이미지 편집", "width=1085, height=550, left=100, top=20, toolbar=no, menubar=no, scrollbars=no, location=no, status=no, resizable=no" );
@@ -386,10 +422,10 @@ function openWin(){
 						<div class="modal-left-img"></div>
 						<div class="modal-left imgVigible" style="position: absolute; top: 0; display:table;">
 							<div style='position: relative; display: table-cell; vertical-align: middle;'>
-								<div align="left" style="width:50%; float:left;">
+								<div id='leftBtn' align="left" style="width:50%; float:left;">
 									<button class='glyphicon glyphicon-circle-arrow-left btn-lg directionBtn'></button>
 								</div>
-								<div align="right" style="width:50%; float:left;">
+								<div id='rightBtn' align="right" style="width:50%; float:left;">
 									<button class='glyphicon glyphicon-circle-arrow-right btn-lg directionBtn'></button>
 								</div>
 							</div>
