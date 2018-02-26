@@ -38,8 +38,21 @@ $(window).scroll(function() {
 		</span>
 	</div>
 	<div class="header-right" align="right" style="line-height: 70px;">
-		<a href="<%=cp %>/login"><span class="glyphicon glyphicon-log-in">&nbsp;</span>sign in</a> &nbsp;&nbsp;
-		<a href="<%=cp %>/join"><span class="glyphicon glyphicon-user">&nbsp;</span>sign up</a>
+	<c:if test="${empty sessionScope.member }">
+		<a href="<%=cp %>/member/login"><span class="glyphicon glyphicon-log-in">&nbsp;</span>sign in</a> &nbsp;&nbsp;
+		<a href="<%=cp %>/member/join"><span class="glyphicon glyphicon-user">&nbsp;</span>sign up</a>
+	</c:if>
+	<c:if test="${not empty sessionScope.member }">
+	  <span style="color:blue;">${sessionScope.member.userName}</span>님
+                &nbsp;|&nbsp;
+      <a href="<%=cp%>/member/logout">로그아웃</a>
+                &nbsp;|&nbsp;
+                <a href="<%=cp%>/member/pwd">마이페이지</a>
+                <c:if test="${sessionScope.member.userId=='admin'}">
+                    &nbsp;|&nbsp;
+                    <a href="<%=cp%>/admin">관리자</a>
+                </c:if>
+            </c:if>
 	</div>
 	
 	

@@ -1,3 +1,4 @@
+
 package care.dog.common;
 
 import java.io.BufferedInputStream;

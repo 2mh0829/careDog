@@ -1,5 +1,4 @@
-﻿package care.dog.common;
-
+package care.dog.common;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;

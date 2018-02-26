@@ -181,28 +181,97 @@ div.desc {
 }
 </style>
 
-<script>
+<script type="text/javascript">
+
+var pageNo = 1;
+var totalPage = 1;
+
+$(function() {
+	listPage(1);
+	
+	/* if ($("body").height() < $(window).height()) {
+		alert("스크롤바 없음.");
+	} */
+	
+	$(window).scroll(function() {
+		if($(window).scrollTop() + 50 >= $(document).height() - $(window).height()) {
+			if(pageNo < totalPage)
+				listPage(++pageNo);
+		}
+	});
+});
+
+function listPage(page) {
+	var url = "<%=cp %>/mungstargram/list";
+	var data = {pageNo:page};
+	$.get(url, data, function(data) {
+		printList(data);
+	}, "json");
+}
+
+function printList(data) {
+	// var uid = "";
+	var dataCount = data.dataCount;
+	var page = data.pageNo;
+	totalPage = data.total_page;
+	
+	var out = "";
+	if(dataCount != 0){
+		for(var i=0; i<data.list.length; i++){
+			var num = data.list[i].num;
+			var hitCount = data.list[i].hitCount;
+			var filename = data.list[i].filename;
+			var photoCount = data.list[i].photoCount;
+			
+			out += "<div class='responsive'>";
+			out += "<div style='background: black;'>";
+			out += "<div id='article" + num + "' class='gallery' onclick='article(" + num + ");'>";
+			out += "<input id='photoCount" + num + "' type='hidden' value='" + photoCount + "'>"
+			out += "<img src='<%=cp%>/uploads/mungstargram/" + filename + "'>";
+			out += "<div class='gallery-text'>";
+			out += "<span class='glyphicon glyphicon-heart'></span> : " + hitCount + "개 &nbsp;&nbsp;&nbsp;"; 
+			out += "<span class='glyphicon glyphicon-comment'></span> : 83개";
+			out += "</div></div></div></div>";
+		}
+		
+		$("#printPhoto").append(out);
+		
+	}	
+}
+
+
+/* ---------------------------------------------------------- */
+
+
+function article(num) {
+	var url = "<%=cp %>/mungstargram/article";
+	var data = {num:num};
+	
+	$.get(url, data, function(data) {
+		openModal(data);
+	}, "json");
+	
+}
+
+function openModal(data) {
+	var photoSrc = "<%=cp %>/uploads/mungstargram/" + data.list[0].filename;
+	var imgId = "mungstarPhoto";
+	var photoCount = $("#photoCount" + num).val();
+	
+	$(".modal-left-img").html("<img src='" + photoSrc +" ' id='" + imgId + "'>");
+	
+	$(window).resize(function() {
+		modalSize(photoSrc, imgId);
+	});
+	
+	$("#"+imgId).load(function() {
+		modalSize(photoSrc, imgId);
+	});
+	
+	$("#myModal").modal();
+}
 
 $(document).ready(function(){
-	
-	$(".gallery").click(function(){
-    	var imgName = $(this).find("img").attr("src");
-    	var imgId = "myimg";
-    	
-    	$(".modal-left-img").html("<img src='"+ imgName +"' id='"+imgId+"'>");
-    	
-    	$(window).resize(function() {
-    		modalSize(imgName, imgId);
-    	});
-    	
-    	$("#"+imgId).load(function() {
-    		modalSize(imgName, imgId);
-    	});
-    	
-    	$("#myModal").modal();
-    	
-    });
-    
     $('html').click(function(e) {
     	if($(e.target).hasClass("modal-in")) {
 	    	$("#myModal").modal('hide');
@@ -210,8 +279,7 @@ $(document).ready(function(){
     	if($(e.target).hasClass("xbtn")) {
 	    	$("#myModal").modal('hide');
     	}
-    }); 
-
+    });
 });
 
 function modalSize(imgName, imgId) {
@@ -227,7 +295,7 @@ function modalSize(imgName, imgId) {
 	}else{
 		$(".modal-left").css("height", "100%");
 		$(".modal-title a").css("margin-left","20px");
-		if("#"+imgId.naturalWidth >= "#"+imgId.naturalHeight){
+		if($("#"+imgId)[0].naturalWidth >= $("#"+imgId)[0].naturalHeight){
 			$("#"+imgId).css("width", "600px");
 			$(".modal-left").css("width", "600px");
 			if($("#"+imgId).height() >= 400){
@@ -247,7 +315,7 @@ function modalSize(imgName, imgId) {
 			$(".modal-centered").css("height", "600px");
 			$(".modal-context table").css("height", "520px");
 		}
-	}
+	} 
 }
 
 function openWin(){
@@ -257,10 +325,12 @@ function openWin(){
 </script>
 
 <div class="body-container">
-
 	<h2>mungstargram.</h2>
 	<h4>Resize the browser window to see the effect.</h4>
+	
+	<div id="printPhoto"></div>
 
+<%-- 
 	<div class="responsive">
 		<div style="background: black;">
 			<div class="gallery">
@@ -296,9 +366,10 @@ function openWin(){
 			</div>
 		</div>
 	</div>
-
+ --%>
+ 
 	<div class="clearfix"></div>
-	
+
 
 	<%-- <button class="btn" onclick="location.href='<%=cp%>/mungstargram/created'">insert</button> --%>
 	<button class="btn" onclick="openWin();">insert</button>

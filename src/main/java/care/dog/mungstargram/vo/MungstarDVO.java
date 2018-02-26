@@ -7,12 +7,15 @@ import lombok.Data;
 @Data
 public class MungstarDVO {
 	// mungstar 
-	private int num;
+	private int num;			// pk
 	private String context;
+	private int hitCount;
 	private Date created;
-	private int userNum;
+	private int userNum;		// fk_member1
 	
-	// mungstarImage
-	private int imageNum;
+	// mungstarPhoto
+	private int photoNum;		// pk
 	private String filename;
+//	private int num				// fk_mungstar
+	
 }

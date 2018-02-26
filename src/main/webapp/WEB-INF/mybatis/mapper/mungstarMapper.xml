@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mungstar">
+
+	<insert id="insertContext" parameterType="care.dog.mungstargram.vo.MungstarPVO">
+		INSERT INTO mungstar (num, context)
+		VALUES (mungstar_seq.NEXTVAL, #{context})
+	</insert>
+
+	<insert id="insertPhoto" parameterType="care.dog.mungstargram.vo.MungstarPVO">
+		INSERT INTO mungstarPhoto (photoNum, filename, num)
+		VALUES (mungstarPhoto_seq.NEXTVAL, #{filename}, #{num})
+	</insert>
+
+	<select id="selectMungstarNum" resultType="Integer">
+		SELECT MAX(num) from mungstar
+	</select>
+	
+	<select id="mungstarCount" resultType="Integer">
+		SELECT NVL(COUNT(*), 0) FROM mungstar
+	</select>
+	
+	<select id="mungstarPhotoCount" parameterType="map" resultType="Integer">
+		SELECT photoCount FROM (
+			SELECT ROWNUM rnum, tb.* FROM (
+				SELECT COUNT(photoNum) photoCount
+				FROM mungstarPhoto
+				GROUP BY num
+				ORDER BY num DESC
+			<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+		]]>
+	</select>
+	
+	<select id="mungstarList" parameterType="map" resultType="care.dog.mungstargram.vo.MungstarRVO">
+		SELECT * FROM (
+			SELECT ROWNUM rnum, tb.* FROM (
+				SELECT m.num, hitCount, filename
+				FROM mungstar m
+				JOIN mungstarPhoto p ON m.num = p.num
+				WHERE photoNum IN (
+					SELECT MIN(photoNum)
+					FROM mungstarPhoto
+					GROUP BY num
+				)
+				ORDER BY m.num DESC
+		<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+		]]>
+	</select>
+	
+	<select id="mungstarPhotoList" parameterType="Integer" resultType="care.dog.mungstargram.vo.MungstarRVO">
+		SELECT filename
+		FROM mungstarPhoto
+		WHERE num = #{num}
+		ORDER by photoNum
+	</select>
+	
+</mapper>
