@@ -12,4 +12,9 @@ public class StoreController {
 		return ".store.main";
 	}
 	
+	@RequestMapping(value="/store/list")
+	public String productList() {
+		return ".store.list";
+	}
+	
 }

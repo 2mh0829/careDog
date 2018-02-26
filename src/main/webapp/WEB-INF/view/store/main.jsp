@@ -7,15 +7,35 @@
 %>
 
 <style>
+.bener {
+	width: 100%;
+	left: 0;
+}
 
+.resize {
+	position: relative;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	left: 0;
+}
+
+
+.roundBtn {
+	border-radius: 30px;
+	width: 150px;
+	height: 60px;
+	font-size: 20px;
+	font-weight: bold;
+}
 
 </style>
 
 
-<div class="body-container">
 
+<div class="bener">
 
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	<div id="myCarousel" class="carousel slide resize" data-ride="carousel">
 	
 		<!-- Indicators -->
 		<ol class="carousel-indicators">
@@ -66,11 +86,13 @@
 		
 	</div>
 	
-	<br>
+</div>
+
+<div class="body-container">	
 	
 	<div class="content section01">
-		<div class="sub-title">
-			<h3 align="center">NEW</h3>
+		<div class="sub-title" style="margin-top: 100px;">
+			<h2 align="center">NEW</h3>
 			<hr>
 		</div>
 		<div class="container">
@@ -78,7 +100,7 @@
 		</div>
 		<div class="btn-area" align="center">
 			<a href="#" class="">
-				<button type="button" class="btn btn-default">더보기</button>
+				<button type="button" class="btn btn-default roundBtn">더보기</button>
 			</a>
 		</div>
 	</div>
@@ -87,7 +109,7 @@
 	
 	<div class="content section02">
 		<div class="sub-title">
-			<h3 align="center">EVENT ZONE</h3>
+			<h2 align="center">EVENT ZONE</h3>
 			<hr>
 		</div>
 		<div class="container">
@@ -99,7 +121,7 @@
 	
 	<div class="content section03">
 		<div class="sub-title">
-			<h3 align="center">BEST SELLER</h3>
+			<h2 align="center">BEST SELLER</h3>
 			<hr>
 		</div>
 		<div class="container">
@@ -107,7 +129,7 @@
 		</div>
 		<div class="btn-area" align="center">
 			<a href="#" class="">
-				<button type="button" class="btn btn-default">더보기</button>
+				<button type="button" class="btn btn-default roundBtn">더보기</button>
 			</a>
 		</div>
 	</div>

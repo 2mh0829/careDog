@@ -14,17 +14,6 @@
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
 		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
 	</definition>
-	
-	<definition name=".store.*.*.*" extends=".main4Layout">
-		<put-attribute name="body" value="/WEB-INF/view/store/{1}/{2}/{3}.jsp"/>
-	</definition>
-	<definition name=".store.*.*" extends=".main4Layout">
-		<put-attribute name="body" value="/WEB-INF/view/store/{1}/{2}.jsp"/>
-	</definition>
-	<definition name=".store.*" extends=".main4Layout">
-    	<put-attribute name="body" value="/WEB-INF/view/store/{1}.jsp" />
-	</definition>
-	
 
 	<definition name=".mainLayout" template="/WEB-INF/view/layout/layout.jsp">
 	    <put-attribute name="title" value="spring" />
