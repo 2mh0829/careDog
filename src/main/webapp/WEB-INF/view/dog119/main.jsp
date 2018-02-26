@@ -15,13 +15,12 @@
  }
 </style>
 
-<div>
+<div class="body-container">
 	<table class="space">
 		<tbody>
 			<tr>
 				<td>
 					<table width="150" align="left" background="" border="0" cellspacing="0" cellpadding="0" height="220">
-						<tbody>
 							<tr>
 								<td height="15" align="center" valign="top"><img src="<%=cp%>/resource/img/test2.jpg" width="150" height="15"></td>
 							</tr>
@@ -59,7 +58,6 @@
 								  </p>
 								</td>
 							</tr>
-						</tbody>
 					</table>
 					
 					<button type="button" onclick="javascript:location.href='<%=cp%>/dog119/created'">등록하기</button>

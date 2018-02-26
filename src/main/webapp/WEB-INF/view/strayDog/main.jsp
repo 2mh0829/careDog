@@ -5,6 +5,11 @@
 <%
 	String cp = request.getContextPath();
 %>
+<!-- <style>
+	.pagenation{
+		align-items: center;
+	}
+</style> -->
 
 <div class="body-container">
  <div class="wrap_sub">
@@ -76,8 +81,8 @@
 
 
 
-	<%--
-			<div id="pagingNav" class="pagenation">
+
+			<div id="pagingNav" class="pagenation" align="center">
 				<span class='select'>1</span> <a
 					href='?act=list&bid=animal&page=2&keyfield1=&keyfield2=&city=&country=&sch1=&sch2=&sch3=&bid=animal'>2</a>
 				<a
@@ -102,7 +107,7 @@
 					alt='다음 목록 보기' /></a>
 			</div>
 			<!--E:pagenation-->
-
+	<%--
 			<!--게시판 리스트 끝-->
 			<!--게시판 검색-->
 			<div class="search_area">

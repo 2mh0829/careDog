@@ -5,6 +5,13 @@
 <%
 	String cp = request.getContextPath();
 %>
+<style>
+<!--
+
+-->
+	#bodycontent .content {float:left;margin:0px;padding:0 0 32px 0;width:920px;color: black;}
+</style>
+
 <script type="text/javascript">
 function mapReset() {
 document.formID.posx.value = "";
@@ -32,55 +39,53 @@ function apply(sel) {
 	}
 }
 </script>
-<div>
+<div class="body-container">
 	<div class="content">
 
 		<h3>
-			동물보호센터 <span class="ico_cirle"></span> 개
-			<p>Missing & Found Dog Register Database</p>
+			강아지 실종신고
 		</h3>
 		<p class="postform_alim">
-			<strong>( 개, 실종신고 )</strong> 개가 아닌 경우는 등록할 수 없습니다.<br>1~6 단계에따라
-			입력하시고, 에러발생시 <a href="contact.php?gubun=suggest"
-				onclick="window.open(this.href);return false;" class="tooltip"
-				title="운영자에게">운영자에게</a> 알려주시면 조치해드리겠습니다. <br>
-			<span class="stress">전화번호와 이메일주소는 로그인 사용자에 한해 볼 수 있으며, 이에 동의한
-				것으로 간주합니다.</span>
+			<strong>( 개, 실종신고 )</strong> 개가 아닌 경우는 등록할 수 없습니다.<br>
+			1~6 단계에 따라 입력하시고, 에러발생시 
+			<a href="contact.php?gubun=suggest" onclick="window.open(this.href);return false;" class="tooltip" title="운영자에게">운영자에게</a> 알려주시면 조치해드리겠습니다. <br>
+			<span class="stress">전화번호와 이메일주소는 로그인 사용자에 한해 볼 수 있으며, 이에 동의한 것으로 간주합니다.</span>
 		</p>
 		<div class="postform">
-			<form id="formID" name="formID" method="post"
-				ENCTYPE="multipart/form-data" action="post.php"
-				accept-charset="UTF-8">
+			<form id="formID" name="formID" method="post" ENCTYPE="multipart/form-data" action="post" accept-charset="UTF-8">
 				<div class="post_l">
 					<p class="post_title">
 						1. 등록자정보(<em>*</em>표 필수)
 					</p>
-					<label> <span><em>*</em>닉네임 : </span> <input type="text"
-						value="하하하하하컄" class="text-input readonly"
-						onClick="javascript:alim_readonly()" readonly />
-					</label> <label> <span><em>*</em>이메일주소 : </span> <input type="text"
-						value="chlgptmd123@gmail.com" class="text-input readonly"
-						onClick="javascript:alim_readonly()" readonly />
-					</label> <label> <span><em>*</em>(주)전화번호(예:010-1234-1234) :
-					</span> <input type="text" value="" name="phone1" id="phone1"
-						maxlength="13" class="validate[required,custom[phone]] text-input" />
-					</label> <label> <span>(부)전화번호 : </span> <input type="text"
-						value="" name="phone2" id="phone2" maxlength="13"
-						class="validate[custom[phone]] text-input" />
+					<label> 
+						<span><em>*</em>닉네임 : </span> 
+						<input type="text" value="하하하하하컄" class="text-input readonly" onClick="javascript:alim_readonly()" readonly />
+					</label> 
+					<label> 
+						<span><em>*</em>이메일주소 : </span> 
+						<input type="text" value="chlgptmd123@gmail.com" class="text-input readonly" onClick="javascript:alim_readonly()" readonly />
+					</label> 
+					<label> 
+						<span><em>*</em>(주)전화번호(예:010-1234-1234) :</span> 
+						<input type="text" value="" name="phone1" id="phone1" maxlength="13" class="validate[required,custom[phone]] text-input" />
+					</label> 
+					<label> 
+						<span>(부)전화번호 : </span> 
+						<input type="text" value="" name="phone2" id="phone2" maxlength="13" class="validate[custom[phone]] text-input" />
 					</label>
 				</div>
 				<div class="post_c">
 					<p class="post_title">
 						2. 실종동물정보(<em>*</em>표 필수)
 					</p>
-					<label> <span>동물이름(한글) : </span> <input type="text"
-						value="" name="petname" id="petname" maxlength="10"
-						class="validate[custom[hangul]] text-input" />
-					</label> <label> <span><em>*</em>동물종류(<a
-							href="javascript:na_open_window('notice_dog', './info/notice_dog.php', 100, 0, 630, 500, 0, 0, 0, 1, 0)">동물선택
-								주의사항</a>) : </span> <select name="kind" id="kind"
-						class="validate[required]"
-						onChange="mix(this.options[this.selectedIndex].value);">
+					<label> 
+						<span>동물이름(한글) : </span> 
+						<input type="text" value="" name="petname" id="petname" maxlength="10" class="validate[custom[hangul]] text-input" />
+					</label> 
+					<label> 
+						<span><em>*</em>동물종류(
+							<a href="javascript:na_open_window('notice_dog', './info/notice_dog.php', 100, 0, 630, 500, 0, 0, 0, 1, 0)">동물선택 주의사항</a>) : </span> 
+							<select name="kind" id="kind" class="validate[required]" onChange="mix(this.options[this.selectedIndex].value);">
 							<option value="">세로로 가나다순</option>
 							<option value="">-------------------------------</option>
 							<option value="1">골든 리트리버</option>
@@ -202,19 +207,22 @@ function apply(sel) {
 					</select>
 					</label>
 					
-					<label id="show1" style="display: none;"> <span>믹스/기타견종
-							설명 : </span> <input type="text" value="" name="kind_more" id="kind_more"
-						maxlength="20" class="text-input" /> 믹스견- 시츄혼혈, 시츄와 말티즈 혼혈,
-						발바리...<br> 기타견종- 기타견종을 적어주세요.<br> 모르는경우 - 공란으로 두세요.
-					</label> <label> <span><em>*</em>암수구분 : </span> <select name="sex"
-						id="sex" class="validate[required] select">
+					<label id="show1" style="display: none;"> 
+						<span>믹스/기타견종 설명 : </span> 
+						<input type="text" value="" name="kind_more" id="kind_more" maxlength="20" class="text-input" /> 믹스견- 시츄혼혈, 시츄와 말티즈 혼혈, 발바리...<br> 기타견종- 기타견종을 적어주세요.<br> 모르는경우 - 공란으로 두세요.
+					</label> 
+					<label> 
+						<span><em>*</em>암수구분 : </span> 
+						<select name="sex" id="sex" class="validate[required] select">
 							<option value="">선택</option>
 							<option value="F">암컷</option>
 							<option value="M">수컷</option>
 							<option value="N">잘모름</option>
 					</select>
-					</label> <label> <span><em>*</em>나이 : </span> <select name="age"
-						id="age" class="validate[required] select">
+					</label> 
+					<label> 
+						<span><em>*</em>나이 : </span> 
+						<select name="age" id="age" class="validate[required] select">
 							<option value="">선택</option>
 							<option value="0">1년미만</option>
 							<option value="1">1 년생</option>
@@ -249,13 +257,15 @@ function apply(sel) {
 							<option value="30">30 년생</option>
 							<option value="1000">잘모름</option>
 					</select>
-					</label> <label> <span><em>*</em>실종날짜(예: 2012-8-15) :</span> <input
-						type="text" value="" name="whenis" id="whenis" maxlength="10"
-						class="validate[required,custom[date],past[now]] text-input" />
-					</label> <label> <span><em>*</em>실종지역(시도) : </span> <script
-							type="text/javascript" src="./js/addr.js"></script> <select
-						name="city" id="city" class="validate[required]"
-						onchange="change(this.selectedIndex);">
+					</label> 
+					<label> 
+						<span><em>*</em>실종날짜(예: 2012-8-15) :</span> 
+						<input type="text" value="" name="whenis" id="whenis" maxlength="10" class="validate[required,custom[date],past[now]] text-input" />
+					</label> 
+					<label> 
+						<span><em>*</em>실종지역(시도) : </span> 
+						<script type="text/javascript" src="./js/addr.js"></script> 
+						<select name="city" id="city" class="validate[required]" onchange="change(this.selectedIndex);">
 							<option value="">시(도)선택</option>
 							<option value="서울특별시">서울특별시</option>
 							<option value="부산광역시">부산광역시</option>
@@ -275,80 +285,81 @@ function apply(sel) {
 							<option value="세종특별자치시">세종특별자치시</option>
 							<option value="제주특별자치도">제주특별자치도</option>
 					</select>
-					</label> <label> <span><em>*</em>실종지역(구군) : </span> <select
-						name="county" id="county" class="validate[required]"
-						OnClick="setAddr()">
+					</label> 
+					<label> 
+						<span><em>*</em>실종지역(구군) : </span> 
+						<select name="county" id="county" class="validate[required]" OnClick="setAddr()">
 							<option value="">구(군)선택</option>
 					</select>
-					</label> <label> <span><em>*</em>구체적인 실종장소,(예)인사동 한국미술관 부근 :</span>
-						<input type="text" value="" name="whereis" id="whereis"
-						maxlength="50" class="validate[required] text-input" />
-					</label> <label> <span><em>*</em>동물특징 :</span> <textarea
-							name="mark" id="mark" class="validate[required] text-textarea"></textarea>
+					</label> 
+					<label> 
+						<span><em>*</em>구체적인 실종장소,(예)인사동 한국미술관 부근 :</span>
+						<input type="text" value="" name="whereis" id="whereis" maxlength="50" class="validate[required] text-input" />
+					</label> 
+					<label> 
+						<span><em>*</em>동물특징 :</span> 
+						<textarea name="mark" id="mark" class="validate[required] text-textarea"></textarea>
 					</label>
 				</div>
 				<div class="post_r">
 					<p class="post_title">
 						3. 추가정보(<em>*</em>표 필수)
 					</p>
-					<label> <span>실종지점 지도(<a href="#" class="tooltip"
+					<label> 
+					<span>실종지점 지도(<a href="#" class="tooltip"
 							title="* 아래의 지도는 선택사항이며, 필요한 분들은 실종지점 표시로 사용하세요.<br><br>* 지도를 확대/축소/이동 하면서 지도위에 한번 클릭하면 해당 좌표가 자동으로 입력되며, 다시 클릭하면 새로운 지점이 선택됩니다.<br><br>* 실종지점을 잘 모르는경우 대략적인 위치라도 선택하는것이 좋습니다.<br><br>* 지도 아래의 취소를 누르면 해당 좌표가 적용되지 않습니다."
 							onClick="return false;">지도사용법</a>) :
 					</span>
-						<div id="map_canvas" class="map_postbox"></div> <input type="text"
-						class="text-map" id="posx" name="posx" readonly value="">:X
-						<input type="text" class="text-map" id="posy" name="posy" readonly
-						value="">:Y <a href="javascript:mapReset()" title="취소">취소</a>
-					</label> <label> <span>사연(신고경위) : </span> <textarea name="story"
-							id="story" class="validate[] text-textarea"></textarea>
-					</label> <label> <span>사례금: </span> <input type="text" value=""
-						name="reward" id="reward" maxlength="4"
-						class="validate[custom[integer],max[9999]] text-input-short" />
+						<div id="map_canvas" class="map_postbox"></div> 
+						<input type="text" class="text-map" id="posx" name="posx" readonly value="">:X
+						<input type="text" class="text-map" id="posy" name="posy" readonly value="">:Y 
+						<a href="javascript:mapReset()" title="취소">취소</a>
+					</label> 
+					<label> 
+						<span>사연(신고경위) : </span> 
+						<textarea name="story" id="story" class="validate[] text-textarea"></textarea>
+					</label> 
+					<label> 
+						<span>사례금: </span> 
+						<input type="text" value="" name="reward" id="reward" maxlength="4" class="validate[custom[integer],max[9999]] text-input-short" />
 						만원<br>
-					</label> <label><a href="#" onClick="return false;" id="attach">사진첨부하기</a>
+					</label> 
+					<label>
+						<a href="#" onClick="return false;" id="attach">사진첨부하기</a>
 						(클릭하면 하단에 나타남, <a href="#" class="tooltip"
 						title="1. 첫번째(두세번째는 무관) 사진에, 전단파일이나 복잡하게 합성한 사진을 첨부하는 경우 편집됩니다(편집된 파일은 수정안됨)&lt;br&gt;&lt;br&gt;2. 사진첨부가 되지않을 경우, 사진없이 등록하시고 사진은 운영자에게 보내주시면 올려드립니다.&lt;br&gt;&lt;br&gt;3. 첨부가능한 파일형식 : 이미지파일(jpg, gif, png), 10M"
-						onClick="return false;"><span class="stress">주의사항</span></a>) :</span> </label>
+						onClick="return false;">
+						<span class="stress">주의사항</span></a>) :</span> 
+					</label>
 					<div id="attachfile">
 						<div class="file_box">
-							<input type="text" id="fileName1"
-								class="file_input_textbox_report" readonly="readonly" />
+							<input type="text" id="fileName1" class="file_input_textbox_report" readonly="readonly" />
 							<div class="file_input_div">
-								<input type="button" value="파일1" class="file_input_button" /> <input
-									type="file" name="userfile1" class="file_input_hidden"
-									onchange="javascript: document.getElementById('fileName1').value = this.value" />
+								<input type="button" value="파일1" class="file_input_button" /> 
+								<input type="file" name="userfile1" class="file_input_hidden" onchange="javascript: document.getElementById('fileName1').value = this.value" />
 							</div>
-							<input type="button" value="취소" class="file_cancel"
-								onclick="javascript:document.getElementById('fileName1').value = ''" />
+							<input type="button" value="취소" class="file_cancel" onclick="javascript:document.getElementById('fileName1').value = ''" />
 						</div>
 						<div class="file_box">
-							<input type="text" id="fileName2"
-								class="file_input_textbox_report" readonly="readonly" />
+							<input type="text" id="fileName2" class="file_input_textbox_report" readonly="readonly" />
 							<div class="file_input_div">
-								<input type="button" value="파일2" class="file_input_button" /> <input
-									type="file" name="userfile2" class="file_input_hidden"
-									onchange="javascript: document.getElementById('fileName2').value = this.value" />
+								<input type="button" value="파일2" class="file_input_button" /> 
+								<input type="file" name="userfile2" class="file_input_hidden" onchange="javascript: document.getElementById('fileName2').value = this.value" />
 							</div>
-							<input type="button" value="취소" class="file_cancel"
-								onclick="javascript:document.getElementById('fileName2').value = ''" />
+							<input type="button" value="취소" class="file_cancel" onclick="javascript:document.getElementById('fileName2').value = ''" />
 						</div>
 						<div class="file_box">
-							<input type="text" id="fileName3"
-								class="file_input_textbox_report" readonly="readonly" />
+							<input type="text" id="fileName3" class="file_input_textbox_report" readonly="readonly" />
 							<div class="file_input_div">
-								<input type="button" value="파일3" class="file_input_button" /> <input
-									type="file" name="userfile3" class="file_input_hidden"
-									onchange="javascript: document.getElementById('fileName3').value = this.value" />
+								<input type="button" value="파일3" class="file_input_button" /> 
+								<input type="file" name="userfile3" class="file_input_hidden" onchange="javascript: document.getElementById('fileName3').value = this.value" />
 							</div>
-							<input type="button" value="취소" class="file_cancel"
-								onclick="javascript:document.getElementById('fileName3').value = ''" />
+							<input type="button" value="취소" class="file_cancel" onclick="javascript:document.getElementById('fileName3').value = ''" />
 						</div>
 					</div>
-					<label> <span>유튜브 동영상 올리기(<a
-							href="./images/video_guide.jpg"
-							onclick="window.open(this.href);return false;">올리는 방법</a>) :
-					</span> <input type="text" name="video" id="video" maxlength="100"
-						class="validate[custom[url]] text-input" />
+					<label> 
+						<span>유튜브 동영상 올리기(<a href="./images/video_guide.jpg" onclick="window.open(this.href);return false;">올리는 방법</a>) : </span> 
+						<input type="text" name="video" id="video" maxlength="100" class="validate[custom[url]] text-input" />
 					</label>
 				</div>
 				<!-- line break -->
@@ -356,55 +367,57 @@ function apply(sel) {
 				<div class="post_l">
 					<p class="post_title">4. 긴급알림신청</p>
 					
-					<label> <span> <a
-							href="service/index.php?code=how#go_ads1"
-							onclick="window.open(this.href);return false;"><em><strong>긴급알림이란?(신청하실
-										분은 필독)</strong></em></a></span>
-					</label> <label> <span>긴급알림은 선택사항입니다.<br>꼭 하실 분만 신청해주시기
-							바랍니다.
-					</span> <select name="apply_ads" id="apply_ads" class="validate[required]"
-						onChange="alert('운영자의 사정으로, 지금은 신청할 수 없습니다!');">
+					<label> 
+						<span> 
+							<a href="service/index.php?code=how#go_ads1" onclick="window.open(this.href);return false;"><em>
+							<strong>긴급알림이란?(신청하실 분은 필독)</strong></em></a>
+						</span>
+					</label> 
+					<label> 
+						<span>긴급알림은 선택사항입니다.<br>꼭 하실 분만 신청해주시기바랍니다.</span> 
+						<select name="apply_ads" id="apply_ads" class="validate[required]" onChange="alert('운영자의 사정으로, 지금은 신청할 수 없습니다!');">
 							<option value="N">긴급알림 신청안함</option>
 							<option value="N">긴급알림 신청합니다</option>
 					</select>
-					</label> <label id="id_name" style="display: none;"> <span><em>*</em>신청하실
-							분은 입금자 이름을 적어주세요 :</span> <input type="text" name="apply_name" value=""
-						maxlength="16" class="validate[required] text-input">
+					</label> 
+					<label id="id_name" style="display: none;"> 
+						<span><em>*</em>신청하실 분은 입금자 이름을 적어주세요 :</span> 
+						<input type="text" name="apply_name" value="" maxlength="16" class="validate[required] text-input">
 					</label>
 
 					<div id="id_sns" style="display: none;">
-						<span><em>*</em>신고내용을 페이스북/트위터/네이버카페/다음카페/네이버블로그/다음블로그에도
-							올려주세요(개인정보는 올리지않습니다) :<br></span> <span>올려주세요:</span><input
-							class="validate[required] radio" type="radio" name="apply_sns"
-							id="radio1" value="Y"> <span>올리지않음:</span><input
-							class="validate[required] radio" type="radio" name="apply_sns"
-							id="radio2" value="N"><br>
+						<span><em>*</em>신고내용을 페이스북/트위터/네이버카페/다음카페/네이버블로그/다음블로그에도 올려주세요(개인정보는 올리지않습니다) :<br></span> 
+						<span>올려주세요:</span>
+						<input class="validate[required] radio" type="radio" name="apply_sns" id="radio1" value="Y"> 
+						<span>올리지않음:</span>
+						<input class="validate[required] radio" type="radio" name="apply_sns" id="radio2" value="N"><br>
 						<br>
 					</div>
 
 				</div>
 				<div class="post_c">
 					<p class="post_title">5. 참고사항</p>
-					<label> <span> 1. 정보가 잘못 입력된 경우, 수정될 수 있습니다.<br>
+					<label> 
+						<span> 1. 정보가 잘못 입력된 경우, 수정될 수 있습니다.<br>
 							2. 재등록 허용기간은 5일 입니다.<br> 3. 다른 이메일로 중복등록하는(된) 경우 삭제됨<br>
-							4. 실종동물을 찾은경우 신고종료처리해주십시요.<br> 5. 에러발생시 <a
-							href="contact.php?gubun=suggest"
-							onclick="window.open(this.href);return false;" class="tooltip"
-							title="운영자에게">운영자에게</a> 알려주세요.
+							4. 실종동물을 찾은경우 신고종료처리해주십시요.<br> 5. 에러발생시 
+							<a href="contact.php?gubun=suggest" onclick="window.open(this.href);return false;" class="tooltip" title="운영자에게">운영자에게</a>
+							 알려주세요.
 					</span>
 					</label>
 				</div>
 				<div class="post_r">
 					<p class="post_title">6. 등록완료</p>
-					<label> <span> '등록하기'는 한번만 클릭하세요. </span>
-					</label> <input type="submit" value="등록하기" class="mybtn blue"> <input
-						type="reset" value="다시작성" class="mybtn gray"> <input
-						type="button" onClick="javascript:history.back();return false;"
-						value="취소" class="mybtn gray">
+					<label> 
+						<span> '등록하기'는 한번만 클릭하세요. </span>
+					</label> 
+					<input type="submit" value="등록하기" class="mybtn blue"> 
+					<input type="reset" value="다시작성" class="mybtn gray"> 
+					<input type="button" onClick="javascript:history.back();return false;" value="취소" class="mybtn gray">
 				</div>
-				<input type="hidden" name="gubun" value="L"> <input
-					type="hidden" name="code" value="dog"> <input type="hidden"
-					name="phone_open" value="N">
+				<input type="hidden" name="gubun" value="L"> 
+				<input type="hidden" name="code" value="dog"> 
+				<input type="hidden" name="phone_open" value="N">
 			</form>
 		</div>
 	</div>
