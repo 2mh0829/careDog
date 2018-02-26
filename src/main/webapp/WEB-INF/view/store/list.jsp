@@ -8,16 +8,47 @@
 
 <style>
 
-	.content {
-		padding: 20px 20px;
-		float: left;
-		width: 25%;
-	}
+.sort {
+	margin: 30px auto;
+	font-size: 20px;
+}
+
+.content {
+	float: left;
+	width: 320px;
+	height: 400px;
+	/* width: 25%; */
+}
+
+.product-image {
+	position: relative;
+	width: 100%;
+	height: 70%;
+}
+
+.product-image img {
+	width: 100%;
+	height: 100%;
+}
+
+.product-title {
+	margin: 5px auto;
+	font-size: 20px;
+}
+
+.product-price {
+	margin: 5px auto;
+	font-size: 18px;
+}
+ 
+.content div {
+	text-align: center;
+}
 	
-	.paging {
-		clear: both;
-		font-size: 20px;
-	}
+.paging {
+	clear: both;
+	font-size: 23px;
+}
 	
 </style>
 
@@ -31,11 +62,11 @@
 		</div>
 	
 		<div class="sort">
-			<a href="#"> 최근등록순 |</a>
-			<a href="#"> 판매수량순 |</a>
-			<a href="#"> 높은가격순 |</a>
-			<a href="#"> 낮은가격순 |</a>
-			<a href="#"> 상품평순</a>
+			<a href="#"> 최근 등록 순  |</a>
+			<a href="#">  판매 수량 순  |</a>
+			<a href="#">  높은 가격 순  |</a>
+			<a href="#">  낮은 가격 순  |</a>
+			<a href="#">  상품평 순</a>
 		</div>
 
 	</div>
