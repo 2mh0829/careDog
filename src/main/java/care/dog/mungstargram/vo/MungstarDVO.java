@@ -2,9 +2,6 @@ package care.dog.mungstargram.vo;
 
 import java.util.Date;
 
-import lombok.Data;
-
-@Data
 public class MungstarDVO {
 	// mungstar 
 	private int num;			// pk
@@ -17,5 +14,50 @@ public class MungstarDVO {
 	private int photoNum;		// pk
 	private String filename;
 //	private int num				// fk_mungstar
+
+	
+	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public String getContext() {
+		return context;
+	}
+	public void setContext(String context) {
+		this.context = context;
+	}
+	public int getHitCount() {
+		return hitCount;
+	}
+	public void setHitCount(int hitCount) {
+		this.hitCount = hitCount;
+	}
+	public Date getCreated() {
+		return created;
+	}
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+	public int getUserNum() {
+		return userNum;
+	}
+	public void setUserNum(int userNum) {
+		this.userNum = userNum;
+	}
+	public int getPhotoNum() {
+		return photoNum;
+	}
+	public void setPhotoNum(int photoNum) {
+		this.photoNum = photoNum;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 	
 }
