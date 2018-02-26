@@ -268,6 +268,8 @@ function openModal(data) {
 		modalSize(photoSrc, imgId);
 	});
 	
+	
+	
 	$("#myModal").modal();
 }
 
