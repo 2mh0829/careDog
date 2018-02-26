@@ -47,7 +47,7 @@ $(window).scroll(function() {
                 &nbsp;|&nbsp;
       <a href="<%=cp%>/member/logout">로그아웃</a>
                 &nbsp;|&nbsp;
-                <a href="<%=cp%>/member/pwd">정보수정</a>
+                <a href="<%=cp%>/member/pwd">마이페이지</a>
                 <c:if test="${sessionScope.member.userId=='admin'}">
                     &nbsp;|&nbsp;
                     <a href="<%=cp%>/admin">관리자</a>
