@@ -13,16 +13,17 @@
 <title>Dog Mate</title>
 
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-ui.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <link rel="shortcut icon" href="<%=cp %>/resource/img/icon/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="<%=cp %>/resource/img/icon/favicon.ico" type="image/x-icon" />
 
+<link rel="stylesheet" href="<%=cp%>/resource/jquery/jquery-ui.min.css" type="text/css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=cp %>/resource/css/font.css?ver=1.2" type="text/css">
 <link rel="stylesheet" href="<%=cp %>/resource/css/style.css?ver=1" type="text/css">
 <link rel="stylesheet" href="<%=cp %>/resource/css/layout.css?ver=2.3" type="text/css">
-<link rel="stylesheet" href="<%=cp%>/resource/jquery/jquery-ui.min.css" type="text/css">
 
 
 

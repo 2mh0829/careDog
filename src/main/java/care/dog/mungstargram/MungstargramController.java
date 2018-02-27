@@ -35,7 +35,7 @@ public class MungstargramController {
 	public Map<String, Object> printList(
 			@RequestParam(value="pageNo", defaultValue="1") int current_page) {
 
-		int rows = 6;
+		int rows = 9;
 		int dataCount = service.mungstarCount();
 		int total_page = myUtil.pageCount(rows, dataCount);
 		

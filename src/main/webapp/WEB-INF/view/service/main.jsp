@@ -6,6 +6,13 @@
    String cp = request.getContextPath();
 %>
 
+<script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
+
 <div class="body-container">
 	Care Service.
+	<p>Date: <input type="text" id="datepicker"></p>
 </div>

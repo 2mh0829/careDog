@@ -194,7 +194,7 @@ $(function() {
 	} */
 	
 	$(window).scroll(function() {
-		if($(window).scrollTop() + 50 >= $(document).height() - $(window).height()) {
+		if($(window).scrollTop() >= $(document).height() - $(window).height()) {
 			if(pageNo < totalPage)
 				listPage(++pageNo);
 		}
@@ -209,6 +209,7 @@ function listPage(page) {
 	}, "json");
 }
 
+// 멍스타그램 게시글 리스트 셋팅
 function printList(data) {
 	// var uid = "";
 	var dataCount = data.dataCount;
@@ -255,6 +256,7 @@ function article(num) {
 var photoList = [];
 var photoNum = 0;
 
+// 모달 열기
 function openModal(data) {
 	photoList = data.list;
 	photoNum = 0;
@@ -282,6 +284,7 @@ function openModal(data) {
 	$("#myModal").modal();
 }
 
+// 모달에 사진 세팅
 function setPhoto(num) {
 	var photoSrc = "<%=cp %>/uploads/mungstargram/" + photoList[num].filename;
 	$(".modal-left-img").html("<img src='" + photoSrc +"' id='mungstarPhoto'>");
@@ -326,6 +329,7 @@ $(document).ready(function(){
     
 });
 
+// 모달 사이즈 변경
 function modalSize() {
 	if($(window).width() < 1000){
 		$(".modal-right").css("height", "600px");
