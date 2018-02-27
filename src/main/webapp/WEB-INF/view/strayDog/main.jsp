@@ -88,6 +88,18 @@
 	}
 </style>
 
+<script>
+	/* $.ajax({
+		url: "/strayDog/dogList",
+		type: 'post',
+		dataType:'json',
+		success: function(msg){
+			console.log(msg.response.body.items.item);
+			
+		}
+	}); */
+</script>
+
 <div class="body-container">
 	<div class="strayDog">
 			<a title="확대 이미지 보기" href="<%=cp%>/resource/img/dog1.jpg" class="lytebox" data-lyte-options="slide:false" data-title="(사)한국동물구조관리협회">

@@ -10,5 +10,5 @@ public class StrayDogController {
 	public String main() {
 		return ".strayDog.main";
 	}
-
+	
 }
