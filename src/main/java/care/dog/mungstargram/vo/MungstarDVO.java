@@ -60,4 +60,10 @@ public class MungstarDVO {
 		this.filename = filename;
 	}
 	
+	@Override
+	public String toString() {
+		return "MungstarDVO [num=" + num + ", context=" + context + ", hitCount=" + hitCount + ", created=" + created
+				+ ", userNum=" + userNum + ", photoNum=" + photoNum + ", filename=" + filename + "]";
+	}
+	
 }

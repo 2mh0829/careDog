@@ -37,7 +37,7 @@
 	<select id="mungstarList" parameterType="map" resultType="care.dog.mungstargram.vo.MungstarRVO">
 		SELECT * FROM (
 			SELECT ROWNUM rnum, tb.* FROM (
-				SELECT m.num, hitCount, filename
+				SELECT m.num, filename
 				FROM mungstar m
 				JOIN mungstarPhoto p ON m.num = p.num
 				WHERE photoNum IN (
@@ -58,5 +58,17 @@
 		WHERE num = #{num}
 		ORDER by photoNum
 	</select>
+	
+	<update id="updateHitCount" parameterType="Integer">
+		UPDATE mungstar
+		SET hitCount = hitCount + 1 
+		WHERE num = #{num}
+	</update>
+
+	<select id="mungstarContent" parameterType="Integer" resultType="care.dog.mungstargram.vo.MungstarRVO">
+		SELECT context, hitCount
+		FROM mungstar
+		WHERE num = #{num}
+	</select>	
 	
 </mapper>

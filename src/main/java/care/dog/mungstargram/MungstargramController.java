@@ -35,7 +35,7 @@ public class MungstargramController {
 	public Map<String, Object> printList(
 			@RequestParam(value="pageNo", defaultValue="1") int current_page) {
 
-		int rows = 6;
+		int rows = 9;
 		int dataCount = service.mungstarCount();
 		int total_page = myUtil.pageCount(rows, dataCount);
 		
@@ -49,14 +49,7 @@ public class MungstargramController {
 		map.put("start", start);
 		map.put("end", end);
 		
-//		int listNum = 0;
-//		int n = 0;
 		List<MungstarRVO> list = service.mungstarList(map);
-//		Iterator<MungstarRVO> it = list.iterator();
-//		while(it.hasNext()) {
-//			MungstarRVO rvo = it.next();
-//			rvo.setContext(rvo.getContext().replaceAll("\n", "<br>"));
-//		}
 		
 		List<Integer> photoCountList = service.mungstarPhotoCount(map);
 		
@@ -79,10 +72,19 @@ public class MungstargramController {
 	@ResponseBody
 	public Map<String, Object> articleList(int num){
 		
-		List<MungstarRVO> list = service.mungstarPhotoList(num);
+		MungstarRVO rvo = service.selectContent(num);
+		System.out.println(rvo.toString());
+		if(rvo.getContext() != null) {
+			rvo.setContext(rvo.getContext().replaceAll("\n", "<br>"));
+			rvo.setContext(rvo.getContext().replaceAll("#", "<a>#"));
+			rvo.setContext(rvo.getContext().replaceAll("\\s", "</a> "));
+		}
+		
+		List<MungstarRVO> photoList = service.mungstarPhotoList(num);
 		
 		Map<String, Object> model = new HashMap<>();
-		model.put("list", list);
+		model.put("content", rvo);
+		model.put("photoList", photoList);
 		
 		return model;
 	}

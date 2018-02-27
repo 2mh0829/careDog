@@ -6,63 +6,147 @@
 	String cp = request.getContextPath();
 %>
 <style>
-<!--
-
--->
- table.space{
- 	border-spacing:13;
- 	padding: 100px;
- }
+	.dog119{
+		width: 150px;
+	    height: 200px;
+	    float: left;
+	    margin: 40px 14px 60px 14px;
+	    background: #fff;
+	    border: 1px solid #ccc;
+	    border-radius: 5px;
+	    font-family: 'NanumGothic', '나눔고딕', 'NanumGothicWeb';
+	    text-align: -webkit-center;
+    	vertical-align: top;
+	}
+	
+	.dog119_img {
+		padding: 1px;
+	    padding-top: 10px;
+	    padding-right: 1px;
+	    padding-bottom: 1px;
+	    padding-left: 1px;
+	    width: 132px;
+    	height: 100px;
+    	text-align: -webkit-center;
+    	vertical-align: middle;
+	}
+	
+	strong, b {
+	    font-weight: bold;
+	}
+	
+	.dog119_title p span a {
+		font-size: 13px;
+	}
+	
+	.dog119_title p b {
+		font-size: 15px;
+	}
+	
+	p {
+	    display: block;
+	    -webkit-margin-before: 1em;
+	    -webkit-margin-after: 1em;
+	    -webkit-margin-start: 0px;
+	    -webkit-margin-end: 0px;
+	}
 </style>
 
 <div class="body-container">
-	<table class="space">
-		<tbody>
-			<tr>
-				<td>
-					<table width="150" align="left" background="" border="0" cellspacing="0" cellpadding="0" height="220">
-							<tr>
-								<td height="15" align="center" valign="top"><img src="<%=cp%>/resource/img/test2.jpg" width="150" height="15"></td>
-							</tr>
-							<tr>
-								<td width="150" height="120" align="center" valign="top">
-									<table width="136" style="outline: rgb(202, 202, 202) solid 1px; margin-top: 8px;" bgcolor="white" border="0" 
-											cellspacing="0" cellpadding="0">
-										<tbody>
-											<tr>
-												<td width="132" height="100" align="center" valign="middle" style="padding: 2px;" bgcolor="white"><p>
-														<a href="javascript:na_open_window('win', 'petfind_view_skin_1.html?no=19470', 200, 100, 695, 900, 0, 0, 0, 1, 1)">
-														<img src="<%=cp%>/resource/img/test1.jpg" width="132" height="100" border="0"></a>
-												</p></td>
-											</tr>
-										</tbody>
-									 </table>
-								 </td>
-							</tr>
-							<tr>
-								<td height="46" align="center" style="padding-top: 1px;">
-								 <p style="line-height: 13pt;">
-								 	<b>오서방 찾아요</b><br> 
-								 	<span>
-								 	 <a href="javascript:na_open_window('win', 'petfind_view_skin_1.html?no=19470', 200, 100, 695, 900, 0, 0, 0, 1, 1)">지역: 경남<br> 종류 : 고양이
-										</a><br> 
-									 <a href="petfind_view_skin_1.html?no=19470" target="_blank"> <b><font color="#CC0000">사례금 : 300,000원</font></b></a>
-									</span>
-								 </p>
-								</td>
-							</tr>
-							<tr>
-								<td width="150" height="13" align="center" style="padding-top: 1px;">
-								  <p style="line-height: 13pt;">
-									<img src="<%=cp%>/resource/img/test3.jpg" width="150" height="13">
-								  </p>
-								</td>
-							</tr>
-					</table>
-					
-					<button type="button" onclick="javascript:location.href='<%=cp%>/dog119/created'">등록하기</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="dog119">
+		<div class="dog119_img">
+			<a href="javascript:na_open_window('win', 'petfind_view_skin_1.html?no=19470', 200, 100, 695, 900, 0, 0, 0, 1, 1)">
+				<img src="<%=cp%>/resource/img/test1.jpg" width="132" height="100" border="0"></a>
+		</div>
+		<div class="dog119_title">
+			<p style="line-height: 13pt;">
+				<b>오서방 찾아요</b><br> 
+				<span>
+				<a href="javascript:na_open_window('win', 'petfind_view_skin_1.html?no=19470', 200, 100, 695, 900, 0, 0, 0, 1, 1)">지역: 경남<br> 종류 : 고양이</a><br> 
+				<a href="petfind_view_skin_1.html?no=19470" target="_blank"> <b><font color="#CC0000">사례금 : 300,000원</font></b></a>
+				</span>
+			</p>
+		</div>
+	</div>
+	
+	<div class="dog119">
+		<div class="dog119_img">
+			<a href="javascript:na_open_window('win', 'petfind_view_skin_1.html?no=19470', 200, 100, 695, 900, 0, 0, 0, 1, 1)">
+				<img src="<%=cp%>/resource/img/test1.jpg" width="132" height="100" border="0"></a>
+		</div>
+		<div class="dog119_title">
+			<p style="line-height: 13pt;">
+				<b>오서방 찾아요</b><br> 
+				<span>
+				<a href="javascript:na_open_window('win', 'petfind_view_skin_1.html?no=19470', 200, 100, 695, 900, 0, 0, 0, 1, 1)">지역: 경남<br> 종류 : 고양이</a><br> 
+				<a href="petfind_view_skin_1.html?no=19470" target="_blank"> <b><font color="#CC0000">사례금 : 300,000원</font></b></a>
+				</span>
+			</p>
+		</div>
+	</div>
+	
+	<div class="dog119">
+		<div class="dog119_img">
+			<a href="javascript:na_open_window('win', 'petfind_view_skin_1.html?no=19470', 200, 100, 695, 900, 0, 0, 0, 1, 1)">
+				<img src="<%=cp%>/resource/img/test1.jpg" width="132" height="100" border="0"></a>
+		</div>
+		<div class="dog119_title">
+			<p style="line-height: 13pt;">
+				<b>오서방 찾아요</b><br> 
+				<span>
+				<a href="javascript:na_open_window('win', 'petfind_view_skin_1.html?no=19470', 200, 100, 695, 900, 0, 0, 0, 1, 1)">지역: 경남<br> 종류 : 고양이</a><br> 
+				<a href="petfind_view_skin_1.html?no=19470" target="_blank"> <b><font color="#CC0000">사례금 : 300,000원</font></b></a>
+				</span>
+			</p>
+		</div>
+	</div>
+	
+	<div class="dog119">
+		<div class="dog119_img">
+			<a href="javascript:na_open_window('win', 'petfind_view_skin_1.html?no=19470', 200, 100, 695, 900, 0, 0, 0, 1, 1)">
+				<img src="<%=cp%>/resource/img/test1.jpg" width="132" height="100" border="0"></a>
+		</div>
+		<div class="dog119_title">
+			<p style="line-height: 13pt;">
+				<b>오서방 찾아요</b><br> 
+				<span>
+				<a href="javascript:na_open_window('win', 'petfind_view_skin_1.html?no=19470', 200, 100, 695, 900, 0, 0, 0, 1, 1)">지역: 경남<br> 종류 : 고양이</a><br> 
+				<a href="petfind_view_skin_1.html?no=19470" target="_blank"> <b><font color="#CC0000">사례금 : 300,000원</font></b></a>
+				</span>
+			</p>
+		</div>
+	</div>
+	
+	<div class="dog119">
+		<div class="dog119_img">
+			<a href="javascript:na_open_window('win', 'petfind_view_skin_1.html?no=19470', 200, 100, 695, 900, 0, 0, 0, 1, 1)">
+				<img src="<%=cp%>/resource/img/test1.jpg" width="132" height="100" border="0"></a>
+		</div>
+		<div class="dog119_title">
+			<p style="line-height: 13pt;">
+				<b>오서방 찾아요</b><br> 
+				<span>
+				<a href="javascript:na_open_window('win', 'petfind_view_skin_1.html?no=19470', 200, 100, 695, 900, 0, 0, 0, 1, 1)">지역: 경남<br> 종류 : 고양이</a><br> 
+				<a href="petfind_view_skin_1.html?no=19470" target="_blank"> <b><font color="#CC0000">사례금 : 300,000원</font></b></a>
+				</span>
+			</p>
+		</div>
+	</div>
+	
+	<div class="dog119">
+		<div class="dog119_img">
+			<a href="javascript:na_open_window('win', 'petfind_view_skin_1.html?no=19470', 200, 100, 695, 900, 0, 0, 0, 1, 1)">
+				<img src="<%=cp%>/resource/img/test1.jpg" width="132" height="100" border="0"></a>
+		</div>
+		<div class="dog119_title">
+			<p style="line-height: 13pt;">
+				<b>오서방 찾아요</b><br> 
+				<span>
+				<a href="javascript:na_open_window('win', 'petfind_view_skin_1.html?no=19470', 200, 100, 695, 900, 0, 0, 0, 1, 1)">지역: 경남<br> 종류 : 고양이</a><br> 
+				<a href="petfind_view_skin_1.html?no=19470" target="_blank"> <b><font color="#CC0000">사례금 : 300,000원</font></b></a>
+				</span>
+			</p>
+		</div>
+	</div>
+		<button type="button" onclick="javascript:location.href='<%=cp%>/dog119/created'">등록하기</button>
 </div>

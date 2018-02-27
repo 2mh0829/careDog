@@ -5,143 +5,245 @@
 <%
 	String cp = request.getContextPath();
 %>
-<!-- <style>
-	.pagenation{
-		align-items: center;
+<style>
+	.strayDog{
+		width: 348px;
+	    height: 743px;
+	    float: left;
+	    margin: 40px 14px 60px 14px;
+	    background: #fff;
+	    border: 1px solid #ccc;
 	}
-</style> -->
+	
+	/* .body-container {
+		width: 1100px;
+    	height: auto;
+   	 	margin: 0 auto 50px auto;
+	} */
+	
+	li.full {
+		clear: both;
+	}
+	
+	li.half{
+		width: 50%;
+    	float: left;
+	}
+	
+	li {
+		list-style: none;
+    	margin: 0;
+    	padding: 0;
+    	display: list-item;
+    	text-align: -webkit-match-parent;
+    	line-height: 30px;
+    	color: #666;
+    	letter-spacing: -0.5px;
+    	font-size: 14px
+	}
+	
+	* {
+		font-family: 'NanumGothicWeb','NanumGothicWebBold','Dotum','돋움',Helvetica,AppleGothic,Sans-serif;
+    	color: #444;
+	}
+	
+	div {
+		display: block;
+	}
+	
+	.pagenation {
+	    width: 1100px;
+	    height: auto;
+	    margin: 0 auto 50px auto;
+	    text-align: center;
+	    clear: both;
+	}
+	
+	.pagenation a {
+	    display: inline-block;
+	    width: 40px;
+	    height: 40px;
+	    line-height: 40px;
+	    font-size: 16px;
+	    color: #444;
+	    margin-right: 10px;
+	    text-align: center;
+	    background: #f3f3f3;
+	    border: 1px solid #ccc;
+	}
+	
+	.pagenation .select {
+	    background: #2e5fa4;
+	    display: inline-block;
+	    width: 40px;
+	    height: 40px;
+	    line-height: 40px;
+	    font-size: 16px;
+	    color: #fff;
+	    font-family: 'NanumGothicWebBold'!important;
+	    font-weight: normal;
+	    margin-right: 10px;
+	    text-align: center;
+	    border: 1px solid #2e5fa4;
+	}
+</style>
+
+<script>
+	/* $.ajax({
+		url: "/strayDog/dogList",
+		type: 'post',
+		dataType:'json',
+		success: function(msg){
+			console.log(msg.response.body.items.item);
+			
+		}
+	}); */
+</script>
 
 <div class="body-container">
- <div class="wrap_sub">
-		<div class="rescue">
-
-
-			<div class="list">
-				<form name=animal27175 action='' method=post ENCTYPE="multipart/form-data">
-					<input type=hidden name=bid value="animal"> 
-					<input type=hidden name=fid value="27175"> 
-					<input type=hidden name=thread value="AAAA"> 
-					<input type=hidden name=act value=""> 
-					<input type=hidden name=key value="keyfield1=&keyfield2=&city=&country=&sch1=&sch2=&sch3=&bid=animal">
-					<input type=hidden name=page value="1"> 
-					<input type=hidden name=url value=""> 
-					<a href='#' img class='tx-animal-image' src=''><img src='<%=cp%>/resource/img/test1.jpg' width=348 height=261 border=0 align=center/></a>
-					<ul>
-						<li class="full"><strong>구조일</strong> <i>
-								2018-02-21&nbsp;&nbsp;(SN: 180221-017 <span class="red">종로-2018-00017</span>)
-						</i></li>
-						<li class="full"><strong>구조장소</strong></li>
-						<li class="full">서울특별시 종로구 지봉로 4길 20 토성빌딩</li>
-						<li class="half"><strong>축종</strong> 기타 / 토끼</li>
-						<li class="half"><strong>성별</strong> 암컷</li>
-						<li class="half"><strong>연령</strong> 01개월(추정)</li>
-						<li class="half"><strong>모색</strong> 검/흰/갈</li>
-						<li class="half"><strong>중성화수술</strong> 확인불가</li>
-						<li class="half"><strong>성격</strong> 친화적</li>
-						<li class="half"><strong>체중</strong> 0.3 Kg</li>
-						<li class="half"><strong>건강상태</strong> 양호</li>
-						<li class="full"><strong>특징</strong></li>
-						<li class="full"><span>
-								코분홍.&nbsp;겁있음.&nbsp;털상태&nbsp;양호 </span></li>
-					</ul>
-					<button type='button' onclick="">입양신청</button>
-			</div>
-			<!--E:list-->
-
-			<div class="tmp_class27175" style="display: none;">
-				<table width="100%" border="0" cellspacing="0">
-					<caption>■ 구조정보</caption>
-					<col width="80" />
-					<col width="150" />
-					<col width="80" />
-					<col width="*" />
-					<tr>
-						<th>신고자</th>
-						<td>이정임</td>
-						<th>연락처</th>
-						<td>010 - 8633 - 1202</td>
-					</tr>
-					<tr>
-						<th>주소</th>
-						<td colspan="3">지봉로 4길 20 토성빌딩</td>
-					</tr>
-					<tr>
-						<th>인계장소</th>
-						<td colspan="3">지봉로 4길 20 토성빌딩</td>
-					</tr>
-				</table>
-
-				<div>
-					<a onclick="View_re('27175');return false;" class="pointer">
-					<img src="<%=cp%>/resource/img/test1.jpg"><br/>CLOSE</a>
-				</div>
-			</div>
-
-			</form>
-
-
-
-
-			<div id="pagingNav" class="pagenation" align="center">
-				<span class='select'>1</span> <a
-					href='?act=list&bid=animal&page=2&keyfield1=&keyfield2=&city=&country=&sch1=&sch2=&sch3=&bid=animal'>2</a>
-				<a
-					href='?act=list&bid=animal&page=3&keyfield1=&keyfield2=&city=&country=&sch1=&sch2=&sch3=&bid=animal'>3</a>
-				<a
-					href='?act=list&bid=animal&page=4&keyfield1=&keyfield2=&city=&country=&sch1=&sch2=&sch3=&bid=animal'>4</a>
-				<a
-					href='?act=list&bid=animal&page=5&keyfield1=&keyfield2=&city=&country=&sch1=&sch2=&sch3=&bid=animal'>5</a>
-				<a
-					href='?act=list&bid=animal&page=6&keyfield1=&keyfield2=&city=&country=&sch1=&sch2=&sch3=&bid=animal'>6</a>
-				<a
-					href='?act=list&bid=animal&page=7&keyfield1=&keyfield2=&city=&country=&sch1=&sch2=&sch3=&bid=animal'>7</a>
-				<a
-					href='?act=list&bid=animal&page=8&keyfield1=&keyfield2=&city=&country=&sch1=&sch2=&sch3=&bid=animal'>8</a>
-				<a
-					href='?act=list&bid=animal&page=9&keyfield1=&keyfield2=&city=&country=&sch1=&sch2=&sch3=&bid=animal'>9</a>
-				<a
-					href='?act=list&bid=animal&page=10&keyfield1=&keyfield2=&city=&country=&sch1=&sch2=&sch3=&bid=animal'>10</a>
-				<a
-					href='?act=list&bid=animal&page=11&keyfield1=&keyfield2=&city=&country=&sch1=&sch2=&sch3=&bid=animal'
-					class='img'><img src='../images_new/board/btn_nxt.png'
-					alt='다음 목록 보기' /></a>
-			</div>
-			<!--E:pagenation-->
-	<%--
-			<!--게시판 리스트 끝-->
-			<!--게시판 검색-->
-			<div class="search_area">
-				<form name=search_form method='post' action='?act=list&bid=animal'>
-					<select name='keyfield1' onchange="change_serch(this.value);"
-						id='select' class='wd100' />
-					<option value="0" selected>축종</option>
-					<option value="1">개</option>
-					<option value="2">고양이</option>
-					<option value="3">기타</option>
-					</select>&nbsp;<select name='keyfield2' id=serch1 class='wd165' /></select> <select
-						id='city' name='city' onchange="changeCity(this.value);"
-						class="wd120" />
-					<option value="0" selected>지역전체</option>
-					<option value="1">서울특별시</option>
-					<option value="2">경기도</option>
-					<option value="3">인천광역시</option>
-					</select> <select name='country' id='selcont' class="wd120" /> </select> <br /> <label
-						for="sch1">공고번호</label> <input type="text" name="sch1" id="sch1"
-						value="" style="ime-mode: active;" /> <label for="sch2">연번</label>
-					<input type="text" id="sch2" name="sch2" value=""
-						style="ime-mode: active;" /> <label for="sch3">특징</label> <input
-						type="text" id="sch3" name="sch3" value=""
-						style="ime-mode: active;" />
-					<button>검색</button>
-				</form>
-			</div>
-			<!--E:search_area-->
- --%>
-			<!--게시판 검색 끝-->
-		</div>
-		<!--E:rescue-->
+	<div class="strayDog">
+			<a title="확대 이미지 보기" href="<%=cp%>/resource/img/dog1.jpg" class="lytebox" data-lyte-options="slide:false" data-title="(사)한국동물구조관리협회">
+			<a href="#" img="" class="tx-animal-image" src="<%=cp%>/resource/img/dog1.jpg">
+				<img src="<%=cp%>/resource/img/dog1.jpg" width="348" height="261" border="0" align="center">
+			</a></a>
+		<ul>
+			<li class="full"><strong>구조일</strong> <i>
+					2018-02-26&nbsp;&nbsp;(SN: 180226-022 <span class="red"></span>)
+			</i></li>
+			<li class="full"><strong>구조장소</strong></li>
+			<li class="full">경기도 양주시 삼숭동 산 104-4 광숭초교...</li>
+			<li class="half"><strong>축종</strong> 개 / Mix</li>
+			<li class="half"><strong>성별</strong> 암컷</li>
+			<li class="half"><strong>연령</strong> 03개월(추정)</li>
+			<li class="half"><strong>모색</strong> 흰</li>
+			<li class="half"><strong>중성화수술</strong> 확인불가</li>
+			<li class="half"><strong>성격</strong> 친화적</li>
+			<li class="half"><strong>체중</strong> 2.6 Kg</li>
+			<li class="half"><strong>건강상태</strong> 양호</li>
+			<li class="full"><strong>특징</strong></li>
+			<li class="full"><span>
+					하늘색&nbsp;바탕/호피무늬&nbsp;목걸이&nbsp;착용.&nbsp;피부질환.&nbsp;양&nbsp;귀&nbsp;반&nbsp;접힘.&nbsp;코&nbsp;검정색.&nbsp;사람&nbsp;따름.&nbsp;얌전함.&nbsp;단미&nbsp;안됨.&nbsp;털&nbsp;상태&nbsp;때탐.&nbsp;
+			</span></li>
+		</ul>
 	</div>
-	<!--E:sub_wrap-->
-
-
+	
+	<div class="strayDog">
+			<a title="확대 이미지 보기" href="<%=cp%>/resource/img/dog1.jpg" class="lytebox" data-lyte-options="slide:false" data-title="(사)한국동물구조관리협회">
+			<a href="#" img="" class="tx-animal-image" src="<%=cp%>/resource/img/dog1.jpg">
+				<img src="<%=cp%>/resource/img/dog1.jpg" width="348" height="261" border="0" align="center">
+			</a></a>
+		<ul>
+			<li class="full"><strong>구조일</strong> <i>
+					2018-02-26&nbsp;&nbsp;(SN: 180226-022 <span class="red"></span>)
+			</i></li>
+			<li class="full"><strong>구조장소</strong></li>
+			<li class="full">경기도 양주시 삼숭동 산 104-4 광숭초교...</li>
+			<li class="half"><strong>축종</strong> 개 / Mix</li>
+			<li class="half"><strong>성별</strong> 암컷</li>
+			<li class="half"><strong>연령</strong> 03개월(추정)</li>
+			<li class="half"><strong>모색</strong> 흰</li>
+			<li class="half"><strong>중성화수술</strong> 확인불가</li>
+			<li class="half"><strong>성격</strong> 친화적</li>
+			<li class="half"><strong>체중</strong> 2.6 Kg</li>
+			<li class="half"><strong>건강상태</strong> 양호</li>
+			<li class="full"><strong>특징</strong></li>
+			<li class="full"><span>
+					하늘색&nbsp;바탕/호피무늬&nbsp;목걸이&nbsp;착용.&nbsp;피부질환.&nbsp;양&nbsp;귀&nbsp;반&nbsp;접힘.&nbsp;코&nbsp;검정색.&nbsp;사람&nbsp;따름.&nbsp;얌전함.&nbsp;단미&nbsp;안됨.&nbsp;털&nbsp;상태&nbsp;때탐.&nbsp;
+			</span></li>
+		</ul>
+	</div>
+	
+	
+	<div class="strayDog">
+			<a title="확대 이미지 보기" href="<%=cp%>/resource/img/dog1.jpg" class="lytebox" data-lyte-options="slide:false" data-title="(사)한국동물구조관리협회">
+			<a href="#" img="" class="tx-animal-image" src="<%=cp%>/resource/img/dog1.jpg">
+				<img src="<%=cp%>/resource/img/dog1.jpg" width="348" height="261" border="0" align="center">
+			</a></a>
+		<ul>
+			<li class="full"><strong>구조일</strong> <i>
+					2018-02-26&nbsp;&nbsp;(SN: 180226-022 <span class="red"></span>)
+			</i></li>
+			<li class="full"><strong>구조장소</strong></li>
+			<li class="full">경기도 양주시 삼숭동 산 104-4 광숭초교...</li>
+			<li class="half"><strong>축종</strong> 개 / Mix</li>
+			<li class="half"><strong>성별</strong> 암컷</li>
+			<li class="half"><strong>연령</strong> 03개월(추정)</li>
+			<li class="half"><strong>모색</strong> 흰</li>
+			<li class="half"><strong>중성화수술</strong> 확인불가</li>
+			<li class="half"><strong>성격</strong> 친화적</li>
+			<li class="half"><strong>체중</strong> 2.6 Kg</li>
+			<li class="half"><strong>건강상태</strong> 양호</li>
+			<li class="full"><strong>특징</strong></li>
+			<li class="full"><span>
+					하늘색&nbsp;바탕/호피무늬&nbsp;목걸이&nbsp;착용.&nbsp;피부질환.&nbsp;양&nbsp;귀&nbsp;반&nbsp;접힘.&nbsp;코&nbsp;검정색.&nbsp;사람&nbsp;따름.&nbsp;얌전함.&nbsp;단미&nbsp;안됨.&nbsp;털&nbsp;상태&nbsp;때탐.&nbsp;
+			</span></li>
+		</ul>
+	</div>
+	
+	<div class="strayDog">
+			<a title="확대 이미지 보기" href="<%=cp%>/resource/img/dog1.jpg" class="lytebox" data-lyte-options="slide:false" data-title="(사)한국동물구조관리협회">
+			<a href="#" img="" class="tx-animal-image" src="<%=cp%>/resource/img/dog1.jpg">
+				<img src="<%=cp%>/resource/img/dog1.jpg" width="348" height="261" border="0" align="center">
+			</a></a>
+		<ul>
+			<li class="full"><strong>구조일</strong> <i>
+					2018-02-26&nbsp;&nbsp;(SN: 180226-022 <span class="red"></span>)
+			</i></li>
+			<li class="full"><strong>구조장소</strong></li>
+			<li class="full">경기도 양주시 삼숭동 산 104-4 광숭초교...</li>
+			<li class="half"><strong>축종</strong> 개 / Mix</li>
+			<li class="half"><strong>성별</strong> 암컷</li>
+			<li class="half"><strong>연령</strong> 03개월(추정)</li>
+			<li class="half"><strong>모색</strong> 흰</li>
+			<li class="half"><strong>중성화수술</strong> 확인불가</li>
+			<li class="half"><strong>성격</strong> 친화적</li>
+			<li class="half"><strong>체중</strong> 2.6 Kg</li>
+			<li class="half"><strong>건강상태</strong> 양호</li>
+			<li class="full"><strong>특징</strong></li>
+			<li class="full"><span>
+					하늘색&nbsp;바탕/호피무늬&nbsp;목걸이&nbsp;착용.&nbsp;피부질환.&nbsp;양&nbsp;귀&nbsp;반&nbsp;접힘.&nbsp;코&nbsp;검정색.&nbsp;사람&nbsp;따름.&nbsp;얌전함.&nbsp;단미&nbsp;안됨.&nbsp;털&nbsp;상태&nbsp;때탐.&nbsp;
+			</span></li>
+		</ul>
+	</div>
+	
+	<div class="strayDog">
+			<a title="확대 이미지 보기" href="<%=cp%>/resource/img/dog1.jpg" class="lytebox" data-lyte-options="slide:false" data-title="(사)한국동물구조관리협회">
+			<a href="#" img="" class="tx-animal-image" src="<%=cp%>/resource/img/dog1.jpg">
+				<img src="<%=cp%>/resource/img/dog1.jpg" width="348" height="261" border="0" align="center">
+			</a></a>
+		<ul>
+			<li class="full"><strong>구조일</strong> <i>
+					2018-02-26&nbsp;&nbsp;(SN: 180226-022 <span class="red"></span>)
+			</i></li>
+			<li class="full"><strong>구조장소</strong></li>
+			<li class="full">경기도 양주시 삼숭동 산 104-4 광숭초교...</li>
+			<li class="half"><strong>축종</strong> 개 / Mix</li>
+			<li class="half"><strong>성별</strong> 암컷</li>
+			<li class="half"><strong>연령</strong> 03개월(추정)</li>
+			<li class="half"><strong>모색</strong> 흰</li>
+			<li class="half"><strong>중성화수술</strong> 확인불가</li>
+			<li class="half"><strong>성격</strong> 친화적</li>
+			<li class="half"><strong>체중</strong> 2.6 Kg</li>
+			<li class="half"><strong>건강상태</strong> 양호</li>
+			<li class="full"><strong>특징</strong></li>
+			<li class="full"><span>
+					하늘색&nbsp;바탕/호피무늬&nbsp;목걸이&nbsp;착용.&nbsp;피부질환.&nbsp;양&nbsp;귀&nbsp;반&nbsp;접힘.&nbsp;코&nbsp;검정색.&nbsp;사람&nbsp;따름.&nbsp;얌전함.&nbsp;단미&nbsp;안됨.&nbsp;털&nbsp;상태&nbsp;때탐.&nbsp;
+			</span></li>
+		</ul>
+	</div>
+	
+	<div id="pagingNav" class="pagenation">
+		<span class="select">1</span> 
+		<a href="?act=list&amp;bid=animal&amp;page=2&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">2</a>
+		<a href="?act=list&amp;bid=animal&amp;page=3&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">3</a>
+		<a href="?act=list&amp;bid=animal&amp;page=4&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">4</a>
+		<a href="?act=list&amp;bid=animal&amp;page=5&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">5</a>
+		<a href="?act=list&amp;bid=animal&amp;page=6&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">6</a>
+		<a href="?act=list&amp;bid=animal&amp;page=7&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">7</a>
+		<a href="?act=list&amp;bid=animal&amp;page=8&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">8</a>
+		<a href="?act=list&amp;bid=animal&amp;page=9&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">9</a>
+		<a href="?act=list&amp;bid=animal&amp;page=10&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">10</a>
+		<a href="?act=list&amp;bid=animal&amp;page=11&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal" class="img">
+		<img src="<%=cp%>/resource/img/btn_nxt.png" alt="다음 목록 보기"></a>
+	</div>
 </div>

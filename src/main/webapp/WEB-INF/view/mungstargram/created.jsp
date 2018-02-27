@@ -126,23 +126,28 @@ function insertImage() {
 	var url = "<%=cp %>/mungstargram/created";
 	var file = new FormData();
 	
+	if($("li").length < 1){
+		alert("하나 이상의 사진 또는 동영상을 올려야합니다.");
+		return;
+	}
+	
 	$("li").each(function() {
 		file.append('files', tempFile.getAll('file')[$(this).attr("id")]);
 	});
 	file.append('context', $("textarea[name=context]").val());
 	
 	
-	 $.ajax({
-        url: url,
-        data: file,
-        processData: false,
-        contentType: false,
-        type: 'POST',
-        success: function() {
-            opener.parent.location.reload();
-            window.close();
-        }
-    });
+	$.ajax({
+		url: url,
+		data: file,
+		processData: false,
+		contentType: false,
+		type: 'POST',
+		success: function() {
+			opener.parent.location.reload();
+			window.close();
+		}
+	});
 	
 }
 

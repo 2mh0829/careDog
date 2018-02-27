@@ -6,10 +6,214 @@
 	String cp = request.getContextPath();
 %>
 <style>
-<!--
+	div {
+	    display: block;
+	}
+	
+	.postform em {
+ 	   font-size: 15px;
+    	color: #147ebb;
+	}
+	
+	em, address {
+	    font-style: normal;
+	}
+	
+	strong, b {
+ 	   font-weight: bold;
+	}
+	
+	a:-webkit-any-link {
+	    color: -webkit-link;
+	    cursor: pointer;
+	    text-decoration: underline;
+	}
+		
+	body {
+	    font-family: 'NanumGothic', '나눔고딕', 'NanumGothicWeb', '맑은 고딕', 'Malgun Gothic', Dotum;
+	    font-size: 13px;
+	    color: #666;
+	}
 
--->
-	#bodycontent .content {float:left;margin:0px;padding:0 0 32px 0;width:920px;color: black;}
+	#bodycontent .content {
+		float:left;
+		margin:0px;
+		padding:0 0 32px 0;
+		width:920px;
+		color: black;
+		font-family: 'NanumGothic', '나눔고딕', 'NanumGothicWeb';
+	    font-size: 18px;
+	    font-weight: bold;
+	    border-bottom: 1px solid #c0c0c2;
+	}
+	
+	.postform label a {
+	    color: #147ebb;
+	    text-decoration: none;
+	}
+	
+	#attachfile {
+	    clear: both;
+	    display: none;
+	    margin-left: 0;
+	}
+	
+	.file_box {
+	    clear: both;
+	    float: left;
+	    width: 290px;
+	    margin-bottom: 15px;
+	}
+	
+	.postform_alim {
+	    float: left;
+	    margin-top: 15px;
+	    padding: 0;
+	    line-height: 150%;
+	}
+	
+	.postform {
+	    clear: both;
+	    width: 910x;
+	    margin: 0;
+	    padding: 0;
+	}
+	
+	.postform .post_title {
+	    float: left;
+	    width: 290px;
+	    margin: 30px 0;
+	    padding: 7px 0;
+	    font-family: 'NanumGothic', '나눔고딕', 'NanumGothicWeb';
+	    font-size: 14px;
+	    font-weight: bold;
+	    color: #0e0f17;
+	    border-bottom: 1px solid #c0c0c2;
+	}
+	
+	.postform .post_l {
+	    float: left;
+	    width: 290px;
+	    margin: 0;
+	    padding: 0;
+	    overflow: hidden;
+	}
+	
+	.postform .post_c {
+	    float: left;
+	    width: 320px;
+	    margin: 0;
+	    	margin-top: 0px;
+	    	margin-right: 0px;
+	    	margin-bottom: 0px;
+	    	margin-left: 0px;
+	    padding: 0 20px;
+	        padding-top: 0px;
+		    padding-right: 20px;
+		    padding-bottom: 0px;
+		    padding-left: 20px;
+	    overflow: hidden;
+	    	overflow-x: hidden;
+    		overflow-y: hidden;
+	}
+	
+	.postform .post_r {
+	    float: left;
+	    width: 290px;
+	    margin: 0;
+	    	margin-top: 0px;
+	    	margin-right: 0px;
+	    	margin-bottom: 0px;
+	    	margin-left: 0px;
+	    padding: 0 20px;
+	        padding-top: 0px;
+		    padding-right: 0px;
+		    padding-bottom: 0px;
+		    padding-left: 0px;
+	    overflow: hidden;
+	    	overflow-x: hidden;
+    		overflow-y: hidden;
+	}
+	
+	.postform label {
+	    float: none;
+	    display: block;
+	    width: auto;
+	    margin: 15px 0;
+	    	margin-top: 15px;
+		    margin-right: 0px;
+		    margin-bottom: 15px;
+		    margin-left: 0px;
+	    padding: 0;
+	    	padding-top: 0px;
+		    padding-right: 0px;
+		    padding-bottom: 0px;
+		    padding-left: 0px;
+	}
+	
+	.postform .post_r {
+	    float: left;
+	    width: 290px;
+	    margin: 0;
+	    padding: 0;
+	    overflow: hidden;
+	}
+	
+	.postform select {
+	    padding: 4px;
+	    margin-top: 5px;
+	    border: 1px solid #b5b8c8;
+	    font-family: 'NanumGothic', '나눔고딕', 'NanumGothicWeb';
+	    color: #000;
+	    font-size: 13px;
+	}
+	
+	.postform textarea {
+	    width: 278px;
+	    height: 100px;
+	    font-family: 'NanumGothic', '나눔고딕', 'NanumGothicWeb';
+	    color: #000;
+	    padding: 5px;
+	    	padding-top: 5px;
+    		padding-right: 5px;
+    		padding-bottom: 5px;
+    		padding-left: 5px;
+	    margin-top: 4px;
+	    border: 1px solid #B5B8C8;
+	    background: #fff repeat-x;
+	}
+	
+	select {
+	    -webkit-appearance: menulist;
+	    box-sizing: border-box;
+	    align-items: center;
+	    white-space: pre;
+	    -webkit-rtl-ordering: logical;
+	    color: black;
+	    background-color: white;
+	    cursor: default;
+	    border-width: 1px;
+	    border-style: solid;
+	    border-color: initial;
+	    border-image: initial;
+	    border-radius: 5px;
+	}
+	
+	p {
+	    display: block;
+	    -webkit-margin-before: 1em;
+	    -webkit-margin-after: 1em;
+	    -webkit-margin-start: 0px;
+	    -webkit-margin-end: 0px;
+	}
+	
+	label {
+	    cursor: default;
+	}
+	
+	input, textarea, select, button, meter, progress {
+	    -webkit-writing-mode: horizontal-tb;
+	}
 </style>
 
 <script type="text/javascript">
