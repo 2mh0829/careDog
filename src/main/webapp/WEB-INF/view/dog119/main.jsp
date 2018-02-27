@@ -7,9 +7,48 @@
 %>
 <style>
 	.dog119{
-		float: left;
-		width: 20%;
-		height: 20vw;
+		width: 150px;
+	    height: 200px;
+	    float: left;
+	    margin: 40px 14px 60px 14px;
+	    background: #fff;
+	    border: 1px solid #ccc;
+	    border-radius: 5px;
+	    font-family: 'NanumGothic', '나눔고딕', 'NanumGothicWeb';
+	    text-align: -webkit-center;
+    	vertical-align: top;
+	}
+	
+	.dog119_img {
+		padding: 1px;
+	    padding-top: 10px;
+	    padding-right: 1px;
+	    padding-bottom: 1px;
+	    padding-left: 1px;
+	    width: 132px;
+    	height: 100px;
+    	text-align: -webkit-center;
+    	vertical-align: middle;
+	}
+	
+	strong, b {
+	    font-weight: bold;
+	}
+	
+	.dog119_title p span a {
+		font-size: 13px;
+	}
+	
+	.dog119_title p b {
+		font-size: 15px;
+	}
+	
+	p {
+	    display: block;
+	    -webkit-margin-before: 1em;
+	    -webkit-margin-after: 1em;
+	    -webkit-margin-start: 0px;
+	    -webkit-margin-end: 0px;
 	}
 </style>
 
