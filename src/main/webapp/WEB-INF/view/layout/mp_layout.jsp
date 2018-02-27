@@ -24,9 +24,21 @@
 <link rel="stylesheet" href="<%=cp %>/resource/css/layout.css?ver=2.3" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/jquery/jquery-ui.min.css" type="text/css">
 
+<style>
+
+.left-container {
+width:20%;
+background-color:yellow;
+text-align:center;
+float:left;}   
+
+.main-container {b
+width:80%;
+background-color:pink;
+float:left;}
+</style>
 
 </head>
-
 <body>
 
 <div class="header">
@@ -38,7 +50,7 @@
 		<tiles:insertAttribute name="left" />
 	</div>
 	
-	<div class="">
+	<div class="main-container">
 		<tiles:insertAttribute name="body" />
 	</div>
 </div>

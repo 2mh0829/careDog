@@ -6,6 +6,9 @@
    String cp = request.getContextPath();
 %>
 
-<div class="body-container">
-	
-</div>
+마이페이지 메인입니다.
+<script>
+$(function(){
+	$("#")
+})
+</script>
