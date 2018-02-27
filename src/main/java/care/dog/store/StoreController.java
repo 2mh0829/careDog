@@ -17,4 +17,9 @@ public class StoreController {
 		return ".store.list";
 	}
 	
+	@RequestMapping(value="/store/article")
+	public String productDetail() {
+		return ".store.article";
+	}
+	
 }
