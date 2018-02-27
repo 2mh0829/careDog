@@ -129,6 +129,12 @@ div.gallery img {
 	height: 100%;
 }
 
+.myIcon {
+	color: white;
+	font-size: 20px;
+	text-shadow: 2px 2px 4px black;
+}
+
 div.desc {
 	padding: 15px;
 	text-align: left;
@@ -179,6 +185,19 @@ div.desc {
 	display: table;
 	clear: both;
 }
+
+.contents {
+	font-size: 15px;
+}
+
+#context a {
+	color: #2659ad;
+}
+
+#context a:hover {
+	text-decoration: none;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -194,7 +213,7 @@ $(function() {
 	} */
 	
 	$(window).scroll(function() {
-		if($(window).scrollTop() >= $(document).height() - $(window).height()) {
+		if($(window).scrollTop() + 500 >= $(document).height() - $(window).height()) {
 			if(pageNo < totalPage)
 				listPage(++pageNo);
 		}
@@ -220,7 +239,8 @@ function printList(data) {
 	if(dataCount != 0){
 		for(var i=0; i<data.list.length; i++){
 			var num = data.list[i].num;
-			var hitCount = data.list[i].hitCount;
+			var likeCount = 0;
+			var replyCount = 0;
 			var filename = data.list[i].filename;
 			var photoCount = data.list[i].photoCount;
 			
@@ -229,9 +249,15 @@ function printList(data) {
 			out += "<div id='article" + num + "' class='gallery' onclick='article(" + num + ");'>";
 			out += "<input id='photoCount" + num + "' type='hidden' value='" + photoCount + "'>"
 			out += "<img src='<%=cp%>/uploads/mungstargram/" + filename + "'>";
+			
+			if(photoCount > 1){
+				out += "<div style='position: absolute; top: 10px; right: 10px;'>";
+				out += "<span class='glyphicon glyphicon-th-large myIcon'></span></div>";
+			}
+			
 			out += "<div class='gallery-text'>";
-			out += "<span class='glyphicon glyphicon-heart'></span> : " + hitCount + "개 &nbsp;&nbsp;&nbsp;"; 
-			out += "<span class='glyphicon glyphicon-comment'></span> : 83개";
+			out += "<span class='glyphicon glyphicon-heart'></span> : " + likeCount + "개 &nbsp;&nbsp;&nbsp;"; 
+			out += "<span class='glyphicon glyphicon-comment'></span> : " + replyCount + "개";
 			out += "</div></div></div></div>";
 		}
 		
@@ -241,8 +267,8 @@ function printList(data) {
 }
 
 
-/* ---------------------------------------------------------- */
-
+/* ---------------------------------------------------------------------------------------------- */
+// 상세 리스트
 
 function article(num) {
 	var url = "<%=cp %>/mungstargram/article";
@@ -258,7 +284,9 @@ var photoNum = 0;
 
 // 모달 열기
 function openModal(data) {
-	photoList = data.list;
+	var context = data.content.context;
+	var hitCount = data.content.hitCount;
+	photoList = data.photoList;
 	photoNum = 0;
 	
 	setPhoto(photoNum);
@@ -266,6 +294,9 @@ function openModal(data) {
 	$(window).resize(function() {
 		modalSize();
 	});
+	
+	$("#context").html(context);
+	$("#hitCount span").html(hitCount);
 	
 	$("#bottomBtn").html("");
 	$("#leftBtn").css("visibility", "hidden");
@@ -367,6 +398,17 @@ function modalSize() {
 }
 
 
+/* ------------------------------------------------------------------------------------------------------------------------ */
+// 검색
+
+$(function() {
+	$("body").on("click", "#context a", function() {
+		alert($(this).text());
+	});
+});
+
+
+
 /* ------------------------------------------------------------------------------ */
 
 function openWin(){
@@ -381,11 +423,14 @@ function openWin(){
 	
 	<div id="printPhoto"></div>
 
-<%-- 
+
 	<div class="responsive">
 		<div style="background: black;">
 			<div class="gallery">
 				<img src="<%=cp%>/resource/img/test1.jpg">
+				<div style="position: absolute; top: 10px; right: 10px;">
+					<span class='glyphicon glyphicon-th-large myIcon'></span>
+				</div>
 				<div class="gallery-text">
 					<span class="glyphicon glyphicon-heart"></span> : 2134개 &nbsp;&nbsp;&nbsp; 
 					<span class="glyphicon glyphicon-comment"></span> : 83개
@@ -398,6 +443,9 @@ function openWin(){
 		<div style="background: black;">
 			<div class="gallery">
 				<img src="<%=cp%>/resource/img/test2.jpg">
+				<div style="position: absolute; top: 10px; right: 10px;">
+					<span class='glyphicon glyphicon-th-large myIcon'></span>
+				</div>
 				<div class="gallery-text" align="center">
 					<span class="glyphicon glyphicon-heart"></span> : 2134개 &nbsp;&nbsp;&nbsp; 
 					<span class="glyphicon glyphicon-comment"></span> : 83개
@@ -417,7 +465,7 @@ function openWin(){
 			</div>
 		</div>
 	</div>
- --%>
+
  
 	<div class="clearfix"></div>
 
@@ -460,12 +508,13 @@ function openWin(){
 							<table>
 								<tr><td>
 									<div style="overflow:auto; height: 100%;">
-										<div>
-											#test#test<br><br><br><br><br><br><br><br><br><br><br><br>test<br><br><br>test
+										<div class='contents'>
+											<div id='context'></div>
+											<div id='reply'></div>
 										</div>
 									</div>
 								</td></tr>
-								<tr height="100px;"><td>조회수</td></tr>
+								<tr height="100px;"><td id='hitCount'>조회수 : <span></span></td></tr>
 								<tr height="50px;"><td><input class="boxTF" type="text" style="width: 100%; border: none;" placeholder="로그인 후 가능"></td></tr>
 							</table>
 						</div>
@@ -476,3 +525,6 @@ function openWin(){
 	</div>
 
 </div>
+
+
+
