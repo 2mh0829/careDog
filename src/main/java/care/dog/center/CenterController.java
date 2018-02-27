@@ -10,5 +10,10 @@ public class CenterController {
 	public String main() {
 		return ".center.main";
 	}
+	
+	@RequestMapping(value="/gongji")
+	public String gongjiMain() {
+		return ".center.gongji";
+	}
 
 }
