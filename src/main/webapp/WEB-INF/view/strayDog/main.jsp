@@ -15,11 +15,11 @@
 	    border: 1px solid #ccc;
 	}
 	
-	.body-container {
+	/* .body-container {
 		width: 1100px;
-    height: auto;
-    margin: 0 auto 50px auto;
-	}
+    	height: auto;
+   	 	margin: 0 auto 50px auto;
+	} */
 	
 	li.full {
 		clear: both;
