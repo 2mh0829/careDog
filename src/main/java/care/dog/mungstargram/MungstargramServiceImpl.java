@@ -19,7 +19,7 @@ public class MungstargramServiceImpl implements MungstargramService {
 	private FileManager fileManager;
 	
 	@Override
-	public int insertPhoto(MungstarPVO pvo, String pathname) {
+	public int insertPhoto(MungstarPVO pvo, String pathname) throws Exception {
 		int result = 0;
 		try {
 			result = dao.insertData("mungstar.insertContext", pvo);
@@ -33,6 +33,7 @@ public class MungstargramServiceImpl implements MungstargramService {
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
+			throw e;
 		}
 		return result;
 	}
@@ -63,6 +64,7 @@ public class MungstargramServiceImpl implements MungstargramService {
 	public List<MungstarRVO> mungstarPhotoList(int num) {
 		List<MungstarRVO> list = null;
 		try {
+			dao.updateData("mungstar.updateHitCount", num);
 			list = dao.selectList("mungstar.mungstarPhotoList", num);
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -79,6 +81,17 @@ public class MungstargramServiceImpl implements MungstargramService {
 			System.out.println(e.toString());
 		}
 		return list;
+	}
+
+	@Override
+	public MungstarRVO selectContent(int num) {
+		MungstarRVO rvo = null;
+		try {
+			rvo = dao.selectOne("mungstar.mungstarContent", num);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return rvo;
 	}
 
 }
