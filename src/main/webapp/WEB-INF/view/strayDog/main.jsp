@@ -10,7 +10,7 @@
 		width: 348px;
 	    height: 743px;
 	    float: left;
-	    margin: 40px 8px 60px 8px;
+	    margin: 40px 14px 60px 14px;
 	    background: #fff;
 	    border: 1px solid #ccc;
 	}
