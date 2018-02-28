@@ -107,11 +107,14 @@ line-height: 0;
 padding: 28px 30px 25px 62px;
 }
 
+i{
+padding-left: 598px;
+color: #888;
+}
+
 </style>
 <div id="gongji_Container">
 	<div id="gongji_Contents">
-		<div class="sub_title_area customer">
-		</div>
 		<ul class="gongji_Tabs">
 			<li id="gongji_alert"><a>공지사항</a></li>
 			<li id="gongji_event"><a>이벤트</a></li>
@@ -124,9 +127,12 @@ padding: 28px 30px 25px 62px;
 							<p class="title">
 							<strong>[공지/이벤트]</strong>
 							제목입니다1.
+							<i>2018/01/01</i>
 							</p>
 							<ul class="gongji_conts">
 								<li class="gongji_question">
+									<i class="gongji_date">
+									</i>
 									<p class="gongji_text">
 									</p>
 								</li>

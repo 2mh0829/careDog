@@ -15,6 +15,20 @@ public class StrayDogVo {
 	String officetel;
 	String noticeComment;
 	int numOfRows;
+	int pageNo;
+	int totalCount;
+	int resultCode;
+	String resultMsg;
+	int desertionNo;
+	String filename;
+	String happenDt;
+	String happenPlace;
+	String kindCd;
+	String colorCd;
+	String age;
+	String weight;
+	String noticeNo;
+	String noticeSdt;
 	
 
 }

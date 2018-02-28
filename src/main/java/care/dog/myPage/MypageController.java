@@ -1,5 +1,7 @@
 package care.dog.myPage;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,10 +13,14 @@ public class MypageController {
 	public String main() {
 		return ".mypage.main";
 	}
-//	@RequestMapping(value="/mypage/left", method=RequestMethod.GET)
-//	public String left() {
-//		System.out.println("wefwefewfewf");
-//		return ".mypage.left";
-//	}
-	
+	@RequestMapping(value="/mypage/member", method=RequestMethod.GET)
+	public String member() {
+		return ".mypageEdit";
+	}
+	@RequestMapping(value="/mypage/blog", method=RequestMethod.GET)
+	public String blog(HttpServletRequest req) {
+		String cp = req.getContextPath();
+		return cp+"/nblog";
+	}
+
 }

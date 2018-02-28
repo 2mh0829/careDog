@@ -22,4 +22,9 @@ public class StoreController {
 		return ".store.article";
 	}
 	
+	@RequestMapping(value="/store/order")
+	public String productOrder() {
+		return ".store.order";
+	}
+	
 }
