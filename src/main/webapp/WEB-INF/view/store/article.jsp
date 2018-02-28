@@ -125,18 +125,17 @@
 
 <script type="text/javascript">
 
+$('#dropul li a').on('click', function(){
+
+	alert($(this).attr('value'));
+	$('#dropdownMenu1').text($(this).text());
+
+});
+
 $('#myTab a').click(function (e) {
 	  e.preventDefault()
 	  $(this).tab('show')
 })
-
-$(".dropdown-menu li a").click(function(){
-
-	alert($(this).text());
-  $(this).parents(".dropdown").find('.txt_option').text($(this).text());
-  $(this).parents(".dropdown").find('.txt_option').val($(this).text());
-
-});
 
   
 </script>
@@ -190,15 +189,15 @@ $(".dropdown-menu li a").click(function(){
 				
 				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" 
 				  data-toggle="dropdown" aria-expanded="true">
-				    	<span class="txt_option">옵션을 선택해주세요</span>
+				    	옵션을 선택해주세요
 				    	<span class="caret"></span>
 				  </button>
 				  
-				  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">옵션1</a></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">옵션2</a></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">옵션3</a></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">옵션4</a></li>
+				  <ul id="dropul" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="옵션1">옵션1</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="옵션2">옵션2</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="옵션3">옵션3</a></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="옵션4">옵션4</a></li>
 				  </ul>
 				  
 				</div>	

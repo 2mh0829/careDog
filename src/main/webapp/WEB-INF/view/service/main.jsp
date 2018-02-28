@@ -7,5 +7,5 @@
 %>
 
 <div class="body-container">
-	Care Service.
+	
 </div>
