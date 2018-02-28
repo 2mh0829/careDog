@@ -60,6 +60,14 @@
 		<put-attribute name="bot" value="" />
 		<put-attribute name="menu2" value="" />
 	</definition>
+		<definition name=".mypageEdit" template="/WEB-INF/view/layout/layout.jsp">
+	    <put-attribute name="title" value="spring" />
+	  	<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/member/join.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
+		<put-attribute name="bot" value="" />
+		<put-attribute name="menu2" value="/WEB-INF/view/mypage/menu2.jsp" />
+	</definition>
 	
 	<definition name=".member.*" extends=".mainLayout">
 		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp"/>
@@ -80,6 +88,7 @@
     	<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
 		<put-attribute name="menu2" value="/WEB-INF/view/{1}/menu2.jsp" />
 	</definition>
+
 	
 	
 	<definition name=".adminLayout" template="/WEB-INF/view/admin/layout/layout.jsp">

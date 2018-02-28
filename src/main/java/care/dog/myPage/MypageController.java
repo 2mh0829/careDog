@@ -11,10 +11,13 @@ public class MypageController {
 	public String main() {
 		return ".mypage.main";
 	}
-//	@RequestMapping(value="/mypage/left", method=RequestMethod.GET)
-//	public String left() {
-//		System.out.println("wefwefewfewf");
-//		return ".mypage.left";
-//	}
-	
+	@RequestMapping(value="/mypage/member", method=RequestMethod.GET)
+	public String member() {
+		return ".mypageEdit";
+	}
+	@RequestMapping(value="/mypage/blog", method=RequestMethod.GET)
+	public String blog() {
+		return ".mypageEdit";
+	}
+
 }
