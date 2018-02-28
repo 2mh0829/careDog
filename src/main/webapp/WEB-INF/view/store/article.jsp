@@ -60,18 +60,10 @@
 	box-sizing: border-box;
 }
 
-.dropdown-menu {
+#sel1 {
 	width: 400px;
-	font-size: 20px;
-}
-
-#dropdownMenu1 {
-	width: 400px;
-}
-
-.txt_option {
-	font-size: 20px;
-	float: left;
+	height: 40px;
+	font-size: 18px;
 }
 
 .caret {
@@ -125,9 +117,9 @@
 
 <script type="text/javascript">
 
-$('#dropul li a').on('click', function(){
+$('#dropul li').on('click', function(){
 
-	alert($(this).attr('value'));
+	//alert($(this).attr('value'));
 	$('#dropdownMenu1').text($(this).text());
 
 });
@@ -184,7 +176,7 @@ $('#myTab a').click(function (e) {
 			
 			<!-- 옵션 박스 -->
 			<div class="product_option_box">
-			
+			<!-- 
 				<div class="dropdown">
 				
 				  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" 
@@ -193,15 +185,32 @@ $('#myTab a').click(function (e) {
 				    	<span class="caret"></span>
 				  </button>
 				  
-				  <ul id="dropul" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="옵션1">옵션1</a></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="옵션2">옵션2</a></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="옵션3">옵션3</a></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="옵션4">옵션4</a></li>
+				  <ul id="dropul" class="dropdown-menu" role="menu" aria-labelledby="searchType">
+				    <li role="presentation">
+				    	<a role="menuitem" tabindex="-1" href="#" value="옵션1">옵션1</a>
+				    </li>
+				    <li role="presentation">
+				    	<a role="menuitem" tabindex="-1" href="#" value="옵션2">옵션2</a>
+				    </li>
+				    <li role="presentation">
+				    	<a role="menuitem" tabindex="-1" href="#" value="옵션3">옵션3</a>
+				    </li>
+				    <li role="presentation">
+				    	<a role="menuitem" tabindex="-1" href="#" value="옵션4">옵션4</a>
+				    </li>
 				  </ul>
 				  
 				</div>	
-			
+			 -->
+			 
+			 <select class="form-control" id="sel1">
+        		<option selected="selected">옵션을 선택해주세요.</option>
+        		<option>1</option>
+        		<option>2</option>
+        		<option>3</option>
+        		<option>4</option>
+      		</select>
+			 
 			</div>
 			
 			<!-- 상품 금액 합계 -->
