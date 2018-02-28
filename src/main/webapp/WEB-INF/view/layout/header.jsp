@@ -6,10 +6,17 @@
    String cp = request.getContextPath();
 %>
 
+<style>
+.menu2 {
+    animation-name: example;
+    animation-duration: 1s;
+}
+</style>
+
 <script>
 
 $(window).scroll(function() {
-	if($(this).scrollTop() >= 50){
+	if($(this).scrollTop() >= 70){
 		$(".header-bottom").css("position","fixed");
 		$(".header-bottom").css("top","0px");
 		$(".header-bottom").css("background","#d26ea5");

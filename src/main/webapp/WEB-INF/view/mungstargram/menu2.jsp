@@ -52,7 +52,11 @@
 
 <script type="text/javascript">
 $(window).scroll(function() {
+<<<<<<< HEAD
 	if($(this).scrollTop() >= 50){
+=======
+	if($(this).scrollTop() >= 70){
+>>>>>>> 4deb1919aa207da5aaf391a0dc3081b9cd9efa3c
 		$(".search-container").css("height","65px");
 		$(".menu2").css("line-height","normal");
 	}else{
