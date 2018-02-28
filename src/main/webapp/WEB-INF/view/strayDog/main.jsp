@@ -13,8 +13,6 @@
 	    margin: 40px 14px 60px 14px;
 	    background: #fff;
 	    border: 1px solid #ccc;
-	    font-family: 'NanumGothicWeb','NanumGothicWebBold','Dotum','돋움',Helvetica,AppleGothic,Sans-serif;
-    	color: #444;
 	}
 	
 	/* .body-container {
@@ -41,7 +39,12 @@
     	line-height: 30px;
     	color: #666;
     	letter-spacing: -0.5px;
-    	font-size: 14px;
+    	font-size: 14px
+	}
+	
+	* {
+		font-family: 'NanumGothicWeb','NanumGothicWebBold','Dotum','돋움',Helvetica,AppleGothic,Sans-serif;
+    	color: #444;
 	}
 	
 	div {
@@ -54,8 +57,6 @@
 	    margin: 0 auto 50px auto;
 	    text-align: center;
 	    clear: both;
-	    font-family: 'NanumGothicWeb','NanumGothicWebBold','Dotum','돋움',Helvetica,AppleGothic,Sans-serif;
-    	color: #444;
 	}
 	
 	.pagenation a {

@@ -8,13 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MypageController {
 
 	@RequestMapping(value="/mypage", method=RequestMethod.GET)
-	public String main() {
-		return ".mp.mypage.main";
+	public String mypageMain() {
+		return ".mypage";
 	}
-//	@RequestMapping(value="/mypage/left", method=RequestMethod.GET)
-//	public String left() {
-//		System.out.println("wefwefewfewf");
-//		return ".mypage.left";
-//	}
-	
 }
