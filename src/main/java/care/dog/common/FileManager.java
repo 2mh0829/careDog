@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-@Service("fileManager")
+@Service("caredog.fileManager")
 public class FileManager {
 
 	// pathname : 파일을 저장할 경로

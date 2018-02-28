@@ -1,9 +1,13 @@
 package care.dog.strayDog;
 
-import java.util.List;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-import care.dog.strayDog.vo.StrayDogVo;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 public interface StrayDogService {
-	public List<StrayDogVo> StrayDog();
+	public ArrayList<HashMap<String, Object>> StrayDog() throws IOException, ParserConfigurationException, SAXException;
 }
