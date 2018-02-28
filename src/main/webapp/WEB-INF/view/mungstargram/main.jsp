@@ -7,6 +7,15 @@
 %>
 
 <style>
+
+body {
+	background: #eee;
+}
+
+.header {
+	background: white;
+}
+
 div.modal-out {
 	display: table;
 	margin: 0 auto;
@@ -132,6 +141,7 @@ div.gallery img {
 .myIcon {
 	color: white;
 	font-size: 20px;
+	cursor: pointer;
 	text-shadow: 2px 2px 4px black;
 }
 
