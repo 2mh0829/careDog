@@ -10,7 +10,7 @@
 <style>
 .main-image{
 	position: absolute;
-	top: 0px;
+	top: 70px;
 	left: 0px;
 }
 </style>

@@ -23,11 +23,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=cp %>/resource/css/font.css?ver=1.2" type="text/css">
 <link rel="stylesheet" href="<%=cp %>/resource/css/style.css?ver=1" type="text/css">
-<link rel="stylesheet" href="<%=cp %>/resource/css/layout.css?ver=2.3" type="text/css">
-
+<link rel="stylesheet" href="<%=cp %>/resource/css/layout.css?ver=2.5" type="text/css">
 
 
 </head>
+
 <body>
 
 <div class="header">

@@ -1,2 +1,8 @@
+<<<<<<< Updated upstream
 pom.properties
 MANIFEST.MF
+target/
+=======
+.target/
+target/
+>>>>>>> Stashed changes

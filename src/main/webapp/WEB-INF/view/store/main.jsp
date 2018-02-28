@@ -25,8 +25,8 @@
 
 .content {
 	float: left;
-	width: 320px;
-	height: 400px;
+	width: 25%;
+	height: 23vw;
 	/* width: 25%; */
 }
 
@@ -243,7 +243,7 @@
 		</div>
 		<div class="container">
 			<a href="#">
-				<img src="<%=cp%>/resource/img/store/main_bener.jpg">
+				<img src="<%=cp%>/resource/img/store/main_bener.jpg" width="100%">
 			</a>
 		</div>
 	</div>

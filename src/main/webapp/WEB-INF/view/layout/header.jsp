@@ -3,26 +3,35 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-   String cp = request.getContextPath();
+	String cp = request.getContextPath();
 %>
+
+<style>
+.menu2 {
+    animation-name: example;
+    animation-duration: 1s;
+}
+</style>
 
 <script>
 
 $(window).scroll(function() {
-	if($(this).scrollTop() >= 50){
+	if($(this).scrollTop() >= 70){
 		$(".header-bottom").css("position","fixed");
 		$(".header-bottom").css("top","0px");
-		$(".header-bottom").css("background","#d26ea5");
-		$(".menu").css("position","fixed");
-		$(".menu").css("top","0px");
-		$("ul.navi li a").css("color","white");
+		$(".menu2").css("position","fixed");
+		$(".menu2").css("top","0px");
+		$(".menu2").css("height","65px");
+		$(".menu2").css("line-height","65px");
 	}else{
-		$(".menu").css("position","absolute");
 		$(".header-bottom").css("position","relative");
 		$(".header-bottom").css("background","");
-		$("ul.navi li a").css("color","black");
+		$(".menu2").css("position","absolute");
+		$(".menu2").css("height","90px");
+		$(".menu2").css("line-height","90px");
 	}
 });
+
 
 </script>
 
@@ -33,10 +42,26 @@ $(window).scroll(function() {
 		</div>
 		<span class="title-font" style="line-height: 70px; margin-left: 10px;">
 			<a href="<%=cp %>/">
-				CareDog
+				cD
 			</a>
 		</span>
 	</div>
+	
+	<div class="menu-container hidden-xs hidden-sm" align="center">
+		<div class="menu">
+			<ul id="mainMenu" class="navi">
+				<li value="1"><a href="<%=cp %>/intro">Abt.careDog</a></li>
+				<li value="2"><a href="<%=cp %>/service">Service</a></li>
+				<li value="3"><a href="<%=cp %>/mungstargram">mungstargram</a></li>
+				<li value="4"><a href="<%=cp %>/strayDog">유기견</a></li>
+				<li value="5"><a href="<%=cp %>/dog119">애견119</a></li>
+				<li value="6"><a href="<%=cp %>/info">정보</a></li>
+				<li value="7"><a href="<%=cp %>/store">펫스토어</a></li>
+				<li value="8"><a href="<%=cp %>/center">고객센터</a></li>
+			</ul>
+		</div>
+	</div>
+	
 	<div class="header-right" align="right" style="line-height: 70px;">
 	<c:if test="${empty sessionScope.member }">
 		<a href="<%=cp %>/member/login"><span class="glyphicon glyphicon-log-in">&nbsp;</span>sign in</a> &nbsp;&nbsp;
@@ -47,7 +72,7 @@ $(window).scroll(function() {
                 &nbsp;|&nbsp;
       <a href="<%=cp%>/member/logout">로그아웃</a>
                 &nbsp;|&nbsp;
-                <a href="<%=cp%>/member/pwd">마이페이지</a>
+                <a href="<%=cp%>/mypage">마이페이지</a>
                 <c:if test="${sessionScope.member.userId=='admin'}">
                     &nbsp;|&nbsp;
                     <a href="<%=cp%>/admin">관리자</a>
@@ -58,26 +83,14 @@ $(window).scroll(function() {
 	
 </div>
 
+
+<%-- 
 <div class="header-bottom">
-	<div class="menu-container hidden-xs hidden-sm" align="center">
-		<div class="menu">
-			<ul class="navi">
-				<li><a href="<%=cp %>/intro">Abt.careDog</a></li>
-				<li><a href="<%=cp %>/service">Service</a></li>
-				<li><a href="<%=cp %>/mungstargram">mungstargram</a></li>
-				<li>
-					<a href="<%=cp %>/strayDog">유기견</a>
-				</li>
-				<li><a href="<%=cp %>/dog119">애견119</a></li>
-				<li><a href="<%=cp %>/info">정보</a></li>
-				<li><a href="<%=cp %>/store">펫스토어</a></li>
-				<li><a href="<%=cp %>/center">고객센터</a></li>
-			</ul>
-		</div>
-	</div>
 	<div class="menu-container hidden-md hidden-lg" align="center">
 		<div style="float: right;">
 			<a>▤ </a>
 		</div>
 	</div>
 </div>
+--%>
+ 
