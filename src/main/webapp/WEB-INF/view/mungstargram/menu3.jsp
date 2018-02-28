@@ -53,10 +53,6 @@
 	line-height: 30px;
 }
 
-#loading {
-	visibility: hidden;
-}
-
 </style>
 
 <script type="text/javascript">
@@ -82,21 +78,11 @@ $(function() {
 		$("#searchBar input").focus();
 	});
 	
-	$("body").on("keyup", "#inpTx", function() { 
-		if($(this).val().length > 1){
-			$("#loading").css("visibility", "visible");
-			$( "#inpTx" ).autocomplete({
-				source: availableTags
-			});
-		}else{
-			$("#loading").css("visibility", "hidden");
-		}
-		console.log($(this).val());
+	$("body").on("keyup change click", "#inpTx", function() {
+		//alert("b");
 	});
 	
-	/* $("body").on("autocompletechange","#inpTx",function(event, ui){}); */
-	
-	$("body").on("focusout", "#inpTx", function() {
+	/* $("body").on("focusout", "#inpTx", function() {
 		searchKey = $("#inpTx").val();
 		var inFoc = "<div id='inpDiv' align='center'><span class='glyphicon glyphicon-search icon-size'></span>&nbsp;검색</div>";
 		if(searchKey != ''){
@@ -105,15 +91,18 @@ $(function() {
 		$("#searchBar").css("background", "#eee");
 		$("#searchBar").css("color", "#aaa");
 		$("#searchBar").html(inFoc);
-	});
+	}); */
 	
 	var availableTags = [
-	      "#멍스타그램",
-	      "#careDog",
-	      "#하이",
+	      "ActionScript",
+	      "AppleScript",
+	      "Asp",
 	      "BASIC",
-	      "멍멍멍"
+	      "C"
 	    ];
+	$( "#inpTx" ).autocomplete({
+		source: availableTags
+	});
 	
 });
 
@@ -121,6 +110,7 @@ $(function() {
 
 
 <div class="header-bottom">
+<input id="tags">
 	<div class="menu2" align="center">
 		<div class="search-container">
 			<div id="searchBar">
