@@ -1,5 +1,7 @@
 package care.dog.myPage;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +18,9 @@ public class MypageController {
 		return ".mypageEdit";
 	}
 	@RequestMapping(value="/mypage/blog", method=RequestMethod.GET)
-	public String blog() {
-		return ".mypageEdit";
+	public String blog(HttpServletRequest req) {
+		String cp = req.getContextPath();
+		return cp+"/nblog";
 	}
 
 }

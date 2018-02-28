@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Service;
 
-@Service("myUtil")
+@Service("caredog.myUtil")
 public class MyUtil {
     //********************************************
 	// 총페이지 수 구하기

@@ -39,7 +39,7 @@ public class BlogController {
 			HttpServletRequest req,
 			Model model) throws Exception {
 		// 블로그 메인, 블로그 리스트
-		
+		System.out.println("blog 진입");
 		String cp = req.getContextPath();
 
 		int rows = 10;

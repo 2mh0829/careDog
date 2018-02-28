@@ -2,7 +2,7 @@ package care.dog.common;
 
 import org.springframework.stereotype.Service;
 
-@Service("myUtil")
+@Service("caredog.myUtilBoostrap")
 public class MyUtilBootstrap extends MyUtil {
     //********************************************
 	// 페이징(paging) 처리(GET 방식) : 부트스트랩
