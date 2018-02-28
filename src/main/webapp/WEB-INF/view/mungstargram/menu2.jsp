@@ -52,7 +52,7 @@
 
 <script type="text/javascript">
 $(window).scroll(function() {
-	if($(this).scrollTop() >= 50){
+	if($(this).scrollTop() >= 70){
 		$(".search-container").css("height","65px");
 		$(".menu2").css("line-height","normal");
 	}else{
