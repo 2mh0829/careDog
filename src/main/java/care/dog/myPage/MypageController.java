@@ -9,7 +9,7 @@ public class MypageController {
 
 	@RequestMapping(value="/mypage", method=RequestMethod.GET)
 	public String main() {
-		return ".mp.mypage.main";
+		return ".mypage.main";
 	}
 //	@RequestMapping(value="/mypage/left", method=RequestMethod.GET)
 //	public String left() {
