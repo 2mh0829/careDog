@@ -129,6 +129,15 @@ $('#myTab a').click(function (e) {
 	  e.preventDefault()
 	  $(this).tab('show')
 })
+
+$(".dropdown-menu li a").click(function(){
+
+	alert($(this).text());
+  $(this).parents(".dropdown").find('.txt_option').text($(this).text());
+  $(this).parents(".dropdown").find('.txt_option').val($(this).text());
+
+});
+
   
 </script>
 
