@@ -22,7 +22,7 @@ import care.dog.common.MyUtilGeneral;
 import care.dog.member.SessionInfo;
 
 
-@Controller("blog.blogController")
+@Controller("caredog.blogController")
 public class BlogController {
 	@Autowired
 	private BlogService blogService;

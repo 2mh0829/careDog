@@ -2,7 +2,7 @@ package care.dog.common;
 
 import org.springframework.stereotype.Service;
 
-@Service("myUtilGeneral")
+@Service("caredog.myUtilGeneral")
 public class MyUtilGeneral extends MyUtil {
     //********************************************
 	// 페이징(paging) 처리(GET 방식)

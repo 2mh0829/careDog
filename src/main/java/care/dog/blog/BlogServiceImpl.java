@@ -11,7 +11,7 @@ import care.dog.common.FileManager;
 import care.dog.common.dao.CommonDAO;
 
 
-@Service("blog.blogService")
+@Service("caredog.blogService")
 public class BlogServiceImpl implements BlogService{
 	@Autowired
 	private CommonDAO dao;
