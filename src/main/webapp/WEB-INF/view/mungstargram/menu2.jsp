@@ -64,7 +64,7 @@ $(window).scroll(function() {
 $(function() {
 	var searchKey = "";
 
-	$("body").on("click", "#inpDiv", function() {
+	$("body").on("click", "#inpDiv", function() { 
 		var inFoc = "<span class='glyphicon glyphicon-search icon-size'></span><input id='inpTx' type='text' placeholder='검색' value='"+searchKey+"'>";
 		$("#searchBar").html(inFoc);
 		$("#searchBar").css("background", "white");
