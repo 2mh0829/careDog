@@ -86,17 +86,21 @@
 	    border: 1px solid #2e5fa4;
 	}
 </style>
-
-<script>
-	/* $.ajax({
-		url: "/strayDog/dogList",
-		type: 'post',
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$.ajax({
+		url:'<%=cp%>/strayDog/dogList',
+		type:'post',
 		dataType:'json',
 		success: function(msg){
 			console.log(msg.response.body.items.item);
-			
+		},
+		error:function(e){
+			console.log(e.responseText);
 		}
-	}); */
+	});
+});
 </script>
 
 <div class="body-container">
