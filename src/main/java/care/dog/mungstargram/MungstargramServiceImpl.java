@@ -24,12 +24,19 @@ public class MungstargramServiceImpl implements MungstargramService {
 		try {
 			result = dao.insertData("mungstar.insertContext", pvo);
 			pvo.setNum(dao.selectOne("mungstar.selectMungstarNum"));
+			
 			for(int i=0; i<pvo.getFiles().size(); i++) {
 				String filename = fileManager.doFileUpload(pvo.getFiles().get(i), pathname);
 				if(filename != null) {
 					pvo.setFilename(filename); 
 					dao.insertData("mungstar.insertPhoto", pvo);
 				}
+			}
+			
+			for(int i=0; i<pvo.getTags().size(); i++) {
+				String tag = pvo.getTags().get(i);
+				pvo.setTag(tag);
+				dao.insertData("mungstar.insertTag", pvo);
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -92,6 +99,17 @@ public class MungstargramServiceImpl implements MungstargramService {
 			System.out.println(e.toString());
 		}
 		return rvo;
+	}
+
+	@Override
+	public List<String> selectTag(String tag) {
+		List<String> list = null;
+		try {
+			list = dao.selectList("mungstar.selectTag", tag);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
 	}
 
 }

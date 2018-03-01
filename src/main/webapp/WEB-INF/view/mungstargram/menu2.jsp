@@ -30,10 +30,15 @@
 	font-weight: normal;
 }
 
+#inpDiv {
+	border-radius: 3px;
+}
+
 #searchBar input {
 	width: 200px;
 	height: 30px;
 	border: none;
+	color: black;
 	background: white;
 	vertical-align: middle;
 }
@@ -49,8 +54,11 @@
 }
 
 #inpDiv {
+	position: relative;
+	top: -30px;
 	height: 30px;
 	line-height: 30px;
+	background: #eee;
 }
 
 #loading {
@@ -74,37 +82,22 @@ $(function() {
 	var searchKey = "";
 
 	$("body").on("click", "#inpDiv", function() {
-		var inFoc = "<span class='glyphicon glyphicon-search icon-size'></span>&nbsp;<input id='inpTx' type='text' placeholder='검색' value='"+searchKey+"'>";
-		inFoc += "<span id='loading'><img src='<%=cp %>/resource/img/gif/ajax-loader.gif'></span>";
-		$("#searchBar").html(inFoc);
+		$("#inpDiv").css("visibility", "hidden");
+		$("#inpTx").focus();
 		$("#searchBar").css("background", "white");
-		$("#searchBar").css("color", "black");
-		$("#searchBar input").focus();
+		
 	});
-	
-	$("body").on("keyup", "#inpTx", function() { 
-		if($(this).val().length > 1){
-			$("#loading").css("visibility", "visible");
-			$( "#inpTx" ).autocomplete({
-				source: availableTags
-			});
-		}else{
-			$("#loading").css("visibility", "hidden");
-		}
-		console.log($(this).val());
-	});
-	
-	/* $("body").on("autocompletechange","#inpTx",function(event, ui){}); */
 	
 	$("body").on("focusout", "#inpTx", function() {
 		searchKey = $("#inpTx").val();
-		var inFoc = "<div id='inpDiv' align='center'><span class='glyphicon glyphicon-search icon-size'></span>&nbsp;검색</div>";
-		if(searchKey != ''){
-			inFoc = "<div id='inpDiv' align='center'><span class='glyphicon glyphicon-search icon-size'></span>&nbsp;" + searchKey + "</div>";
-		}
+		if(searchKey != '')
+			$("#inpSp").html(" " + searchKey);
+		else
+			$("#inpSp").html(" 검색");
+		
+		$("#inpDiv").css("visibility", "visible");
 		$("#searchBar").css("background", "#eee");
-		$("#searchBar").css("color", "#aaa");
-		$("#searchBar").html(inFoc);
+		
 	});
 	
 	var availableTags = [
@@ -115,6 +108,36 @@ $(function() {
 	      "멍멍멍"
 	    ];
 	
+	var url = "<%=cp %>/mungstargram/autocomplete";
+	$("#inpTx").autocomplete({
+		//source: availableTags
+		source: function( request, response ) {
+			$.ajax( {
+				url: url,
+				dataType: "json",
+				data: {
+					term: request.term
+				},beforeSend: function() {
+					$("#loading").css("visibility", "visible");
+				},
+				success: function(data) {
+					$("#loading").css("visibility", "hidden");
+					response(
+						data
+					);
+				},
+				error: function(e) {
+					console.log(e);
+				}
+			});
+		}
+		,minLength: 3
+		,select: function( event, ui ) {
+			log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+		}
+	});
+
+	
 });
 
 </script>
@@ -124,8 +147,12 @@ $(function() {
 	<div class="menu2" align="center">
 		<div class="search-container">
 			<div id="searchBar">
+				<span class='glyphicon glyphicon-search icon-size'></span>
+				<input id='inpTx' type='text' placeholder='검색'>
+				<span id='loading'><img src='<%=cp %>/resource/img/gif/ajax-loader.gif'></span>
+				
 				<div id='inpDiv' align='center'>
-					<span class='glyphicon glyphicon-search icon-size'></span>&nbsp;검색
+					<span class='glyphicon glyphicon-search icon-size'></span><span id='inpSp'>&nbsp;검색</span>
 				</div>
 			</div>	
 		</div>	

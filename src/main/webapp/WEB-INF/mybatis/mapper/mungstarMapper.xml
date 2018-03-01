@@ -12,6 +12,11 @@
 		INSERT INTO mungstarPhoto (photoNum, filename, num)
 		VALUES (mungstarPhoto_seq.NEXTVAL, #{filename}, #{num})
 	</insert>
+	
+	<insert id="insertTag" parameterType="care.dog.mungstargram.vo.MungstarPVO">
+		INSERT INTO mungstarTag (tag, num)
+		VALUES (#{tag}, #{num})
+	</insert>
 
 	<select id="selectMungstarNum" resultType="Integer">
 		SELECT MAX(num) from mungstar
@@ -69,6 +74,12 @@
 		SELECT context, hitCount
 		FROM mungstar
 		WHERE num = #{num}
-	</select>	
+	</select>
+	
+	<select id="selectTag" parameterType="String" resultType="String">
+		SELECT DISTINCT(tag)
+		FROM mungstarTag
+		WHERE upper(tag) like '%' || upper(#{tag}) || '%'
+	</select>
 	
 </mapper>

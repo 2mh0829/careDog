@@ -76,8 +76,6 @@ public class MungstargramController {
 		System.out.println(rvo.toString());
 		if(rvo.getContext() != null) {
 			rvo.setContext(rvo.getContext().replaceAll("\n", "<br>"));
-			rvo.setContext(rvo.getContext().replaceAll("#", "<a>#"));
-			rvo.setContext(rvo.getContext().replaceAll("\\s", "</a> "));
 		}
 		
 		List<MungstarRVO> photoList = service.mungstarPhotoList(num);
@@ -107,4 +105,16 @@ public class MungstargramController {
 		
 		System.out.println(path);
 	}
+	
+	@RequestMapping(value="mungstargram/autocomplete")
+	@ResponseBody
+	public List<String> auticomplete(String term){
+		
+		List<String> list = service.selectTag(term);
+		
+		return list;
+	}
+
+	
+	
 }

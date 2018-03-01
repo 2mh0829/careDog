@@ -13,8 +13,12 @@ public class MungstarDVO {
 	// mungstarPhoto
 	private int photoNum;		// pk
 	private String filename;
-//	private int num				// fk_mungstar
-
+//	private int num;				// fk_mungstar
+	
+	//mungstarTag
+	private String tag;
+//	private int num;
+	
 	
 	
 	public int getNum() {
@@ -58,6 +62,12 @@ public class MungstarDVO {
 	}
 	public void setFilename(String filename) {
 		this.filename = filename;
+	}
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 	
 	@Override
