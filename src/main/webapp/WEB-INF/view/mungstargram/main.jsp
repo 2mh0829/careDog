@@ -105,7 +105,7 @@ div.modal-context table td {
 /* -------------------------------------------- */
 div.gallery {
 	position: relative;
-	height: 20vw;
+	height: 300px;
 }
 
 div.gallery:hover img {
@@ -163,7 +163,7 @@ div.desc {
 
 @media only screen and (max-width: 1000px) {
 	div.gallery {
-		height: 30vw;
+		height: 40vw;
 	}
 	.responsive {
 		padding: 20px 15px;
@@ -182,7 +182,7 @@ div.desc {
 
 @media only screen and (max-width: 800px) {
 	div.gallery {
-		height: 50vw;
+		height: 70vw;
 	}
 	.responsive {
 		padding: 30px 15px;
