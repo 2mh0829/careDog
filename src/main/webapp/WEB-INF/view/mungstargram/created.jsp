@@ -134,8 +134,18 @@ function insertImage() {
 	$("li").each(function() {
 		file.append('files', tempFile.getAll('file')[$(this).attr("id")]);
 	});
-	file.append('context', $("textarea[name=context]").val());
 	
+	var context = $("textarea[name=context]").val();
+	var tags = [];
+	
+	context = context.replace(/#[^#\s,;]+/gm, function(tag) {
+		tags.push(tag);
+		<%-- return "<a href='<%=cp %>/mungstargram?search=" + tag + "'>" + tag + "</a>"; --%>
+		return "<a>" + tag + "</a>";
+	});
+
+	file.append('context', context);
+	file.append('tags', tags);
 	
 	$.ajax({
 		url: url,

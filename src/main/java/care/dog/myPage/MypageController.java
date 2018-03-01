@@ -13,14 +13,14 @@ public class MypageController {
 	public String main() {
 		return ".mypage.main";
 	}
-	@RequestMapping(value="/mypage/member", method=RequestMethod.GET)
+	@RequestMapping(value="/mypage/editMember", method=RequestMethod.GET)
 	public String member() {
-		return ".mypageEdit";
+		return ".mypageMemberEdit.join";
 	}
 	@RequestMapping(value="/mypage/blog", method=RequestMethod.GET)
 	public String blog(HttpServletRequest req) {
 		String cp = req.getContextPath();
-		return cp+"/nblog";
+		return ".blog.main.blogList";
 	}
 
 }

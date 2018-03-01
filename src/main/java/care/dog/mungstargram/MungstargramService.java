@@ -13,4 +13,5 @@ public interface MungstargramService {
 	public List<MungstarRVO> mungstarList(Map<String, Object> map);
 	public List<MungstarRVO> mungstarPhotoList(int num);
 	public MungstarRVO selectContent(int num);
+	public List<String> selectTag(String tag);
 }
