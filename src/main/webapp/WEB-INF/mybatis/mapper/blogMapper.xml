@@ -16,5 +16,29 @@
 	<select id="readBlogInfo" parameterType="String" resultType="care.dog.blog.BlogInfo">
 	    SELECT blogId, memberId, title, introduce, visitorCount, created, closed from blogInfo
 	</select>
+		<insert id="insertBlogProfile" parameterType="care.dog.blog.BlogInfo">
+	    INSERT INTO blogProfile(blogId, userName, isUserName, 
+	                  photoFilename, city, isCity, gender, isGender, hobby, isHobby)
+	      VALUES (#{blogId}, #{userName}, #{isUserName},
+	                 #{photoFilename, jdbcType=VARCHAR}, 
+	                 #{city}, #{isCity}, #{gender}, #{isGender},
+	                 #{hobby, jdbcType=VARCHAR}, #{isHobby})
+	</insert>
+		<!-- 개인 블로그의 메인 화면에 출력할 정보 -->
+	<select id="readBlogInfoHome" parameterType="Integer" resultType="care.dog.blog.BlogInfo">
+	    SELECT b.blogId, memberId,title, introduce, visitorCount, created, photoFilename
+	           FROM blogInfo b
+	           join blogProfile p on b.blogId=p.blogId
+	           WHERE b.blogId=#{value}
+	</select>
 	
+	<!-- 개인 블로그의 프로필에 출력할 정보 -->
+<!-- 	<select id="readBlogInfoProfile" parameterType="Long" resultType="care.dog.blog.BlogInfo">
+	    SELECT b.blogSeq, userId, nickName, introduce  
+	              ,userName, isUserName, photoFilename, city
+	              ,isCity, gender, isGender, hobby, isHobby
+	           FROM blogInfo b
+	           JOIN blogProfile p ON b.blogSeq = p.blogSeq
+	           WHERE b.blogSeq=#{blogSeq}
+	</select> -->
 </mapper>

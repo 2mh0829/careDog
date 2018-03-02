@@ -113,29 +113,29 @@ public class BlogServiceImpl implements BlogService{
 	}
 
 	@Override
-	public int deleteImage(long blogSeq, String pathname, String filename) {
+	public int deleteImage(int blogId, String pathname, String filename) {
 		int result=0;
 		try {
 			fileManager.doFileDelete(filename, pathname);
 			
-			result=dao.updateData("blog.deleteBlogProfileImage", blogSeq);
+			result=dao.updateData("blog.deleteBlogProfileImage", blogId);
 		} catch (Exception e) {
 		}
 		return result;
 	}
 	
 	@Override
-	public int deleteBlog(long blogSeq, String pathname) {
+	public int deleteBlog(int blogId, String pathname) {
 		int result=0;
 		try {
 			// 개인 블로그 파일 폴더 및 파일 삭제  
 			fileManager.removePathname(pathname);
 			
-			dao.deleteData("blog.deleteBlogProfile", blogSeq);
-			dao.deleteData("blog.deleteBlogInfo", blogSeq);
+			dao.deleteData("blog.deleteBlogProfile", blogId);
+			dao.deleteData("blog.deleteBlogInfo", blogId);
 			
 			// 테이블 지우기
-			dropBlogTable(blogSeq);
+			dropBlogTable(blogId);
 			
 			result=1;
 			
@@ -179,10 +179,10 @@ public class BlogServiceImpl implements BlogService{
 	}
 
 	@Override
-	public BlogInfo readBlogInfoHome(long blogSeq) {
+	public BlogInfo readBlogInfoHome(int blogId) {
 		BlogInfo dto=null;
 		try {
-			dto=dao.selectOne("blog.readBlogInfoHome", blogSeq);
+			dto=dao.selectOne("blog.readBlogInfoHome", blogId);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -190,10 +190,10 @@ public class BlogServiceImpl implements BlogService{
 	}
 
 	@Override
-	public BlogInfo readBlogInfoProfile(long blogSeq) {
+	public BlogInfo readBlogInfoProfile(int blogId) {
 		BlogInfo dto=null;
 		try {
-			dto=dao.selectOne("blog.readBlogInfoProfile", blogSeq);
+			dto=dao.selectOne("blog.readBlogInfoProfile", blogId);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -201,10 +201,10 @@ public class BlogServiceImpl implements BlogService{
 	}
 
 	@Override
-	public int updateBlogVisitorCount(long blogSeq) {
+	public int updateBlogVisitorCount(int blogId) {
 		int result=0;
 		try {
-			result=dao.updateData("blog.updateBlogVisitorCount", blogSeq);
+			result=dao.updateData("blog.updateBlogVisitorCount", blogId);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -212,23 +212,23 @@ public class BlogServiceImpl implements BlogService{
 	}
 
 	@Override
-	public int createBlogTable(long blogSeq) {
+	public int createBlogTable(int blogId) {
 		int result=0;
 		try {
-			dao.updateData("blog.createBoardCategoryTable", blogSeq);
-			dao.updateData("blog.createBoardTable", blogSeq);
-			dao.updateData("blog.createBoardLikeTable", blogSeq);
-			dao.updateData("blog.createBoardFileTable", blogSeq);
-			dao.updateData("blog.createBoardReplyTable", blogSeq);
-			dao.updateData("blog.createBoardReplyLikeTable", blogSeq);
-			dao.updateData("blog.createGuestTable", blogSeq);
-			dao.updateData("blog.createPhotoTable", blogSeq);
+			dao.updateData("blog.createBoardCategoryTable", blogId);
+			dao.updateData("blog.createBoardTable", blogId);
+			dao.updateData("blog.createBoardLikeTable", blogId);
+			dao.updateData("blog.createBoardFileTable", blogId);
+			dao.updateData("blog.createBoardReplyTable", blogId);
+			dao.updateData("blog.createBoardReplyLikeTable", blogId);
+			dao.updateData("blog.createGuestTable", blogId);
+			dao.updateData("blog.createPhotoTable", blogId);
 			
 			// 공지 테이블 추가
 			Category dto=new Category();
 			dto.setCategoryNum(1);
 			dto.setClassify("공지");
-			dto.setTableName("b_"+blogSeq);
+			dto.setTableName("b_"+blogId);
 			dao.insertData("boardCategory.insertCategory", dto);
 			
 			result=1;
@@ -239,17 +239,17 @@ public class BlogServiceImpl implements BlogService{
 	}
 
 	@Override
-	public int dropBlogTable(long blogSeq) {
+	public int dropBlogTable(int blogId) {
 		int result=0;
 		try {
-			dao.updateData("blog.dropBoardReplyLikeTable", blogSeq);
-			dao.updateData("blog.dropBoardReplyTable", blogSeq);
-			dao.updateData("blog.dropBoardFileTable", blogSeq);
-			dao.updateData("blog.dropBoardLikeTable", blogSeq);
-			dao.updateData("blog.dropBoardTable", blogSeq);
-			dao.updateData("blog.dropBoardCategoryTable", blogSeq);
-			dao.updateData("blog.dropGuestTable", blogSeq);
-			dao.updateData("blog.dropPhotoTable", blogSeq);
+			dao.updateData("blog.dropBoardReplyLikeTable", blogId);
+			dao.updateData("blog.dropBoardReplyTable", blogId);
+			dao.updateData("blog.dropBoardFileTable", blogId);
+			dao.updateData("blog.dropBoardLikeTable", blogId);
+			dao.updateData("blog.dropBoardTable", blogId);
+			dao.updateData("blog.dropBoardCategoryTable", blogId);
+			dao.updateData("blog.dropGuestTable", blogId);
+			dao.updateData("blog.dropPhotoTable", blogId);
 			result=1;
 		} catch (Exception e) {
 			System.out.println(e.toString());

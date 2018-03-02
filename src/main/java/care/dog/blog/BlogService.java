@@ -12,19 +12,19 @@ public interface BlogService {
 	public List<BlogTheme> listBlogThemeAll();
 	
 	public int updateBlog(BlogInfo dto, String pathname);
-	public int deleteImage(long blogSeq, String pathname, String filename);
+	public int deleteImage(int blogId, String pathname, String filename);
 	
-	public int deleteBlog(long blogSeq, String pathname);
+	public int deleteBlog(int blogId, String pathname);
 	
 	public int dataCountBlog(Map<String, Object> map);
 	public List<BlogInfo> listBlog(Map<String, Object> map);
 
 	public BlogInfo readBlogInfo(String memberId);
-	public BlogInfo readBlogInfoHome(long blogSeq);
-	public BlogInfo readBlogInfoProfile(long blogSeq);
+	public BlogInfo readBlogInfoHome(int blogId);
+	public BlogInfo readBlogInfoProfile(int blogId);
 	
-	public int updateBlogVisitorCount(long blogSeq);
+	public int updateBlogVisitorCount(int blogId);
 
-	public int createBlogTable(long blogSeq);
-	public int dropBlogTable(long blogSeq);
+	public int createBlogTable(int blogId);
+	public int dropBlogTable(int blogId);
 }

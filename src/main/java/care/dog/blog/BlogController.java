@@ -39,11 +39,11 @@ public class BlogController {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		BlogInfo blogInfo=blogService.readBlogInfo(info.getMemberId());
 		if(blogInfo==null) {
-			System.out.println("111@@");
-			return blogCreatedForm(session, model);
+			
+			return "redirect:/nblog/created";
 		}
-		System.out.println("2222@@");
-		return ".blog.main.main";
+		
+		return "redirect:/blog/"+blogInfo.getBlogId();
 	}
 
 	@RequestMapping(value="/nblog/created", method = RequestMethod.GET)
@@ -83,42 +83,6 @@ public class BlogController {
 		
 		return ".blog.manage.blogCreated";
 	}
-
-	@RequestMapping(value="/nblog/themeList", method = RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> themeList(@RequestParam int groupNum) throws Exception {
-		// AJAX(JSON)-블로그 생성 및 수정할 때 그룹별 주제(중분류)
-		
-		List<BlogTheme> listTheme = blogService.listBlogTheme(groupNum);
-
-		Map<String, Object> model = new HashMap<>();
-		model.put("listTheme", listTheme);
-
-		return model;
-	}
-
-	@RequestMapping(value="/nblog/me")
-	public String blogMe(
-			HttpSession session) throws Exception {
-		// 내블로그
-		
-		SessionInfo info = (SessionInfo) session.getAttribute("member");
-		if (info == null) {
-			return "redirect:/member/login";
-		}
-
-		//Map<String, Object> map=new HashMap<>();
-	//	map.put("field", "b.userId");
-	//	map.put("field_value", info.getMemberId());
-		BlogInfo blogInfo=blogService.readBlogInfo(info.getMemberId());
-		
-		// 블로그가 없으면 생성
-		if(blogInfo==null)
-			return "redirect:/nblog/created";
-		
-		// 내 블로그로 이동
-		return "redirect:/blog/"+blogInfo.getBlogId();
-	}
 	
 	@RequestMapping(value="/nblog/created", method = RequestMethod.POST)
 	public String blogCreatedSubmit(
@@ -145,4 +109,42 @@ public class BlogController {
 
 		return "redirect:/blog/"+dto.getBlogId();
 	}
+
+//	@RequestMapping(value="/nblog/themeList", method = RequestMethod.POST)
+//	@ResponseBody
+//	public Map<String, Object> themeList(@RequestParam int groupNum) throws Exception {
+//		// AJAX(JSON)-블로그 생성 및 수정할 때 그룹별 주제(중분류)
+//		
+//		List<BlogTheme> listTheme = blogService.listBlogTheme(groupNum);
+//
+//		Map<String, Object> model = new HashMap<>();
+//		model.put("listTheme", listTheme);
+//
+//		return model;
+//	}
+
+//	@RequestMapping(value="/nblog/me")
+//	public String blogMe(
+//			HttpSession session) throws Exception {
+//		// 내블로그
+//		
+//		SessionInfo info = (SessionInfo) session.getAttribute("member");
+//		if (info == null) {
+//			return "redirect:/member/login";
+//		}
+//
+//		//Map<String, Object> map=new HashMap<>();
+//	//	map.put("field", "b.userId");
+//	//	map.put("field_value", info.getMemberId());
+//		BlogInfo blogInfo=blogService.readBlogInfo(info.getMemberId());
+//		
+//		// 블로그가 없으면 생성
+//		if(blogInfo==null)
+//			return "redirect:/nblog/created";
+//		
+//		// 내 블로그로 이동
+//		return "redirect:/blog/"+blogInfo.getBlogId();
+//	}
+	
+
 }

@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class BlogInfo {
 	private int blogId,visitorCount,closed;
-	private String memberId, title, introduce,created;
+	private String memberId,userName, title, introduce,created;
 	private int groupNum, themeNum;
 	private String gender, city, hobby;
 	private String groupSubject, subject;
@@ -171,6 +171,14 @@ public class BlogInfo {
 
 	public void setIsHobby(int isHobby) {
 		this.isHobby = isHobby;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }
