@@ -3,47 +3,70 @@ package care.dog.blog;
 import org.springframework.web.multipart.MultipartFile;
 
 public class BlogInfo {
-	private long blogSeq;
-	private String userId, nickName, userName;
+	private int blogId,visitorCount,closed;
+	private String memberId, title, introduce,created;
 	private int groupNum, themeNum;
-	private String introduce, title, prologue, gender, city, hobby, created;
+	private String gender, city, hobby;
 	private String groupSubject, subject;
-	private int visitorCount, closed;
 	private MultipartFile upload;
 	private String photoFilename;
 	
 	private int isUserName, isCity, isGender, isHobby;
 
-	public long getBlogSeq() {
-		return blogSeq;
+	public int getBlogId() {
+		return blogId;
 	}
 
-	public void setBlogSeq(long blogSeq) {
-		this.blogSeq = blogSeq;
+	public void setBlogId(int blogId) {
+		this.blogId = blogId;
 	}
 
-	public String getUserId() {
-		return userId;
+	public int getVisitorCount() {
+		return visitorCount;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setVisitorCount(int visitorCount) {
+		this.visitorCount = visitorCount;
 	}
 
-	public String getNickName() {
-		return nickName;
+	public int getClosed() {
+		return closed;
 	}
 
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
+	public void setClosed(int closed) {
+		this.closed = closed;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getMemberId() {
+		return memberId;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getIntroduce() {
+		return introduce;
+	}
+
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
+
+	public String getCreated() {
+		return created;
+	}
+
+	public void setCreated(String created) {
+		this.created = created;
 	}
 
 	public int getGroupNum() {
@@ -60,30 +83,6 @@ public class BlogInfo {
 
 	public void setThemeNum(int themeNum) {
 		this.themeNum = themeNum;
-	}
-
-	public String getIntroduce() {
-		return introduce;
-	}
-
-	public void setIntroduce(String introduce) {
-		this.introduce = introduce;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getPrologue() {
-		return prologue;
-	}
-
-	public void setPrologue(String prologue) {
-		this.prologue = prologue;
 	}
 
 	public String getGender() {
@@ -110,14 +109,6 @@ public class BlogInfo {
 		this.hobby = hobby;
 	}
 
-	public String getCreated() {
-		return created;
-	}
-
-	public void setCreated(String created) {
-		this.created = created;
-	}
-
 	public String getGroupSubject() {
 		return groupSubject;
 	}
@@ -132,22 +123,6 @@ public class BlogInfo {
 
 	public void setSubject(String subject) {
 		this.subject = subject;
-	}
-
-	public int getVisitorCount() {
-		return visitorCount;
-	}
-
-	public void setVisitorCount(int visitorCount) {
-		this.visitorCount = visitorCount;
-	}
-
-	public int getClosed() {
-		return closed;
-	}
-
-	public void setClosed(int closed) {
-		this.closed = closed;
 	}
 
 	public MultipartFile getUpload() {
@@ -197,4 +172,5 @@ public class BlogInfo {
 	public void setIsHobby(int isHobby) {
 		this.isHobby = isHobby;
 	}
+
 }

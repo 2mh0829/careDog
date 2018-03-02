@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface BlogService {
-	public long maxBlogSeq();
+	public int maxBlogId();
 	public int insertBlog(BlogInfo dto, String pathname);
 	
 	public List<BlogTheme> listBlogThemeGroup();

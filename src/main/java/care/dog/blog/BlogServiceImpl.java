@@ -20,10 +20,10 @@ public class BlogServiceImpl implements BlogService{
 	private FileManager fileManager;
 	
 	@Override
-	public long maxBlogSeq() {
-		long result=0;
+	public int maxBlogId() {
+		int result=0;
 		try {
-			result=(Long)dao.selectOne("blog.maxBlogSeq");
+			result=dao.selectOne("blog.maxBlogId");
 			if(result<10000)
 				result=10000;
 		} catch (Exception e) {
@@ -42,12 +42,12 @@ public class BlogServiceImpl implements BlogService{
 				dto.setPhotoFilename(filename);
 			}
 			
-			long seq=maxBlogSeq()+1;
-			dto.setBlogSeq(seq);
+			int blogId=maxBlogId()+1;
+			dto.setBlogId(blogId);
 			dao.insertData("blog.insertBlogInfo", dto);
 			dao.insertData("blog.insertBlogProfile", dto);
 			
-			createBlogTable(seq);
+			createBlogTable(blogId);
 			
 			result=1;
 		} catch (Exception e) {

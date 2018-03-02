@@ -103,7 +103,7 @@ public class BlogController {
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("field", "b.userId");
-		map.put("field_value", info.getUserId());
+		map.put("field_value", info.getMemberId());
 		BlogInfo blogInfo=blogService.readBlogInfo(map);
 		if(blogInfo!=null) {
 			model.addAttribute("message", "블로그는 계정당 하나만 만들수 있습니다.");
@@ -152,7 +152,7 @@ public class BlogController {
 
 		Map<String, Object> map=new HashMap<>();
 		map.put("field", "b.userId");
-		map.put("field_value", info.getUserId());
+		map.put("field_value", info.getMemberId());
 		BlogInfo blogInfo=blogService.readBlogInfo(map);
 		
 		// 블로그가 없으면 생성
@@ -160,7 +160,7 @@ public class BlogController {
 			return "redirect:/nblog/created";
 		
 		// 내 블로그로 이동
-		return "redirect:/blog/"+blogInfo.getBlogSeq();
+		return "redirect:/blog/"+blogInfo.getBlogId();
 	}
 	
 	@RequestMapping(value="/nblog/created", method = RequestMethod.POST)
@@ -177,15 +177,15 @@ public class BlogController {
 		
 		String root=session.getServletContext().getRealPath("/");
 		String pathname=root+File.separator+"uploads"+File.separator+"blog"+
-				File.separator+info.getUserId();
+				File.separator+info.getMemberId();
 
-		dto.setUserId(info.getUserId());
+		dto.setMemberId(info.getMemberId());
 		int result=blogService.insertBlog(dto, pathname);
 		if(result==0) {
 			model.addAttribute("message", "블로그를 생성하지 못했습니다. 다시 시도 하시기 바랍니다.");
 			return ".blog.manage.message";
 		}
 
-		return "redirect:/blog/"+dto.getBlogSeq();
+		return "redirect:/blog/"+dto.getBlogId();
 	}
 }

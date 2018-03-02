@@ -94,7 +94,7 @@ public class PhotoController {
 		if(info==null) {
 			model.addAttribute("state", "loginFail");
 			return "blog/photo/error";
-		} else if(! info.getUserId().equals(bid)) {
+		} else if(! info.getMemberId().equals(bid)) {
 			model.addAttribute("state", "blogFail");
 			return "blog/photo/error";
 		}
@@ -121,15 +121,15 @@ public class PhotoController {
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("field", "b.userId");
-		map.put("field_value", info.getUserId());
+		map.put("field_value", info.getMemberId());
 		BlogInfo blogInfo=blogService.readBlogInfo(map);
-		if(blogInfo==null || ! info.getUserId().equals(blogInfo.getUserId())) {
+		if(blogInfo==null || ! info.getMemberId().equals(blogInfo.getMemberId())) {
 			model.put("state", "blogFail");
 			return model;
 		}
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getUserId();
+		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getMemberId();
 
 		dto.setBlogSeq(blogSeq);
 		dto.setTableName("b_"+blogSeq);
@@ -192,7 +192,7 @@ public class PhotoController {
 		if(info==null) {
 			model.addAttribute("state", "loginFail");
 			return "blog/photo/error";
-		} else if(! info.getUserId().equals(bid)) {
+		} else if(! info.getMemberId().equals(bid)) {
 			model.addAttribute("state", "blogFail");
 			return "blog/photo/error";
 		}
@@ -230,15 +230,15 @@ public class PhotoController {
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("field", "b.userId");
-		map.put("field_value", info.getUserId());
+		map.put("field_value", info.getMemberId());
 		BlogInfo blogInfo=blogService.readBlogInfo(map);
-		if(blogInfo==null || ! info.getUserId().equals(blogInfo.getUserId())) {
+		if(blogInfo==null || ! info.getMemberId().equals(blogInfo.getMemberId())) {
 			model.put("state", "blogFail");
 			return model;
 		}
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getUserId();
+		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getMemberId();
 
 		dto.setBlogSeq(blogSeq);
 		dto.setTableName("b_"+blogSeq);
@@ -266,15 +266,15 @@ public class PhotoController {
 		
 		Map<String, Object> map1=new HashMap<>();
 		map1.put("field", "b.userId");
-		map1.put("field_value", info.getUserId());
+		map1.put("field_value", info.getMemberId());
 		BlogInfo blogInfo=blogService.readBlogInfo(map1);
-		if(blogInfo==null || ! info.getUserId().equals(blogInfo.getUserId())) {
+		if(blogInfo==null || ! info.getMemberId().equals(blogInfo.getMemberId())) {
 			model.put("state", "blogFail");
 			return model;
 		}
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getUserId();
+		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getMemberId();
 
 		Map<String, Object> map2=new HashMap<>();
 		map2.put("tableName", "b_"+blogSeq);

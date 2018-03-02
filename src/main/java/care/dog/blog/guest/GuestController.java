@@ -50,7 +50,7 @@ public class GuestController {
 		BlogInfo blogInfo=blogService.readBlogInfoHome(blogSeq);
 		
 		int owner=0;
-		if(info!=null && info.getUserId().equals(blogInfo.getUserId()))
+		if(info!=null && info.getMemberId().equals(blogInfo.getMemberId()))
 			owner=1;
 		
 		String tableName="b_"+blogSeq;
@@ -117,7 +117,7 @@ public class GuestController {
 		dto.setTableName(tableName);
 		dto.setBlogSeq(blogSeq);
 		// 글을 쓴사람
-		dto.setUserId(info.getUserId());
+		dto.setUserId(info.getMemberId());
 		
 		service.insertGuest(dto);
 		

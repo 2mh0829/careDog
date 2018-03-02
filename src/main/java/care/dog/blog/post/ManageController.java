@@ -48,7 +48,7 @@ public class ManageController {
 
 		Map<String, Object> map=new HashMap<>();
 		map.put("field", "b.userId");
-		map.put("field_value", info.getUserId());
+		map.put("field_value", info.getMemberId());
 		BlogInfo blogInfo=blogService.readBlogInfo(map);
 		if(blogInfo==null) {
 			return "redirect:/nblog";
@@ -76,7 +76,7 @@ public class ManageController {
 
 		Map<String, Object> map=new HashMap<>();
 		map.put("field", "b.userId");
-		map.put("field_value", info.getUserId());
+		map.put("field_value", info.getMemberId());
 		BlogInfo blogInfo=blogService.readBlogInfo(map);
 		if(blogInfo==null) {
 			model.addAttribute("state", "blogFail");
@@ -104,7 +104,7 @@ public class ManageController {
 		}
 
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getUserId();
+		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getMemberId();
 		
 		blogService.updateBlog(dto, pathname);
 
@@ -124,11 +124,11 @@ public class ManageController {
 		String state="false";
 		if (info == null) {
 			state="loginFail";
-		} else if(! info.getUserId().equals(userId)) {
+		} else if(! info.getMemberId().equals(userId)) {
 			state="noBlog";
 		} else {
 			String root=session.getServletContext().getRealPath("/");
-			String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getUserId();
+			String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getMemberId();
 			blogService.deleteImage(blogSeq, pathname, filename);
 			state="true";
 		}
@@ -154,15 +154,15 @@ public class ManageController {
 		map.put("field", "b.blogSeq");
 		map.put("field_value", blogSeq);
 		BlogInfo dto=blogService.readBlogInfo(map);
-		if(dto==null || ! dto.getUserId().equals(info.getUserId())) {
+		if(dto==null || ! dto.getMemberId().equals(info.getMemberId())) {
 			return "redirect:/nblog";
 		}		
-		if(dto==null|| ! dto.getUserId().equals(info.getUserId())) {
+		if(dto==null|| ! dto.getMemberId().equals(info.getMemberId())) {
 			return "redirect:/nblog";
 		}
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getUserId();
+		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getMemberId();
 		
 		blogService.deleteBlog(blogSeq, pathname);
 
@@ -185,7 +185,7 @@ public class ManageController {
 
 		Map<String, Object> map=new HashMap<>();
 		map.put("field", "b.userId");
-		map.put("field_value", info.getUserId());
+		map.put("field_value", info.getMemberId());
 		BlogInfo blogInfo=blogService.readBlogInfo(map);
 		if(blogInfo==null) {
 			model.addAttribute("state", "blogFail");
@@ -211,7 +211,7 @@ public class ManageController {
 
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		int owner=1;
-		if(info==null|| ! info.getUserId().equals(blogId))
+		if(info==null|| ! info.getMemberId().equals(blogId))
 			owner=0;
 		System.out.println(owner);
 		String tableName="b_"+blogSeq;
@@ -242,7 +242,7 @@ public class ManageController {
 		} else {
 			Map<String, Object> map=new HashMap<>();
 			map.put("field", "b.userId");
-			map.put("field_value", info.getUserId());
+			map.put("field_value", info.getMemberId());
 			BlogInfo blogInfo=blogService.readBlogInfo(map);
 			if(blogInfo==null) {
 				state="addFail";

@@ -68,7 +68,7 @@ public class PostController {
 		}
 		
 		int owner=1;
-		if(info==null|| ! info.getUserId().equals(blogInfo.getUserId()))
+		if(info==null|| ! info.getMemberId().equals(blogInfo.getMemberId()))
 			owner=0;
 		
 		Map<String, Object> map=new HashMap<>();
@@ -216,7 +216,7 @@ public class PostController {
 
 		Map<String, Object> map1=new HashMap<>();
 		map1.put("field", "b.userId");
-		map1.put("field_value", info.getUserId());
+		map1.put("field_value", info.getMemberId());
 		BlogInfo blogInfo=blogService.readBlogInfo(map1);
 		if(blogInfo==null) {
 			model.addAttribute("state", "blogFail");
@@ -275,14 +275,14 @@ public class PostController {
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("field", "b.userId");
-		map.put("field_value", info.getUserId());
+		map.put("field_value", info.getMemberId());
 		BlogInfo blogInfo=blogService.readBlogInfo(map);
 		if(blogInfo==null) {
 			return "redirect:/blog/"+blogSeq;
 		}
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getUserId();
+		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getMemberId();
 		
 		String tableName="b_"+blogSeq;
 		dto.setTableName(tableName);
@@ -310,7 +310,7 @@ public class PostController {
 
 		Map<String, Object> map1=new HashMap<>();
 		map1.put("field", "b.userId");
-		map1.put("field_value", info.getUserId());
+		map1.put("field_value", info.getMemberId());
 		BlogInfo blogInfo=blogService.readBlogInfo(map1);
 		if(blogInfo==null) {
 			model.addAttribute("state", "blogFail");
@@ -362,14 +362,14 @@ public class PostController {
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("field", "b.userId");
-		map.put("field_value", info.getUserId());
+		map.put("field_value", info.getMemberId());
 		BlogInfo blogInfo=blogService.readBlogInfo(map);
 		if(blogInfo==null) {
 			return "redirect:/blog/"+blogSeq+"&categoryNum="+categoryNum;
 		}
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getUserId();
+		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getMemberId();
 		
 		String tableName="b_"+blogSeq;
 		dto.setTableName(tableName);
@@ -395,14 +395,14 @@ public class PostController {
 		
 		Map<String, Object> map1=new HashMap<>();
 		map1.put("field", "b.userId");
-		map1.put("field_value", info.getUserId());
+		map1.put("field_value", info.getMemberId());
 		BlogInfo blogInfo=blogService.readBlogInfo(map1);
 		if(blogInfo==null) {
 			return "redirect:/blog/"+blogSeq+"&categoryNum="+categoryNum;
 		}
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getUserId();
+		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getMemberId();
 		
 		String tableName="b_"+blogSeq;
 		Map<String, Object> map2=new HashMap<>();
@@ -431,7 +431,7 @@ public class PostController {
 		} else {
 		
 			String root=session.getServletContext().getRealPath("/");
-			String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getUserId();
+			String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getMemberId();
 			
 			String tableName="b_"+blogSeq;
 			Map<String, Object> map=new HashMap<>();
@@ -465,7 +465,7 @@ public class PostController {
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getUserId();
+		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getMemberId();
 		
 		boolean b=false;
 		if(info!=null) {
@@ -642,7 +642,7 @@ public class PostController {
    	   } else {
    		   	String tableName="b_"+blogSeq;
    		   	dto.setTableName(tableName);
-   		   	dto.setUserId(info.getUserId());
+   		   	dto.setUserId(info.getMemberId());
    		   	int result=boardService.insertReply(dto);
    		   	if(result==0)
    		   		state="false";
@@ -707,7 +707,7 @@ public class PostController {
 		} else {
 			String tableName="b_"+blogSeq;
 			dto.setTableName(tableName);
-			dto.setUserId(info.getUserId());
+			dto.setUserId(info.getMemberId());
 			int result=boardService.insertReplyLike(dto);
 			if(result==0)
 				state="false";
