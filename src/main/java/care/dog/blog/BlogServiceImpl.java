@@ -168,10 +168,10 @@ public class BlogServiceImpl implements BlogService{
 	}
 
 	@Override
-	public BlogInfo readBlogInfo(Map<String, Object> map) {
+	public BlogInfo readBlogInfo(String memberId) {
 		BlogInfo dto=null;
 		try {
-			dto=dao.selectOne("blog.readBlogInfo", map);
+			dto=dao.selectOne("blog.readBlogInfo", memberId);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}

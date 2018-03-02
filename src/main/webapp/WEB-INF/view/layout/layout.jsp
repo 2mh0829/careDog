@@ -17,6 +17,10 @@
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-ui.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<link rel="stylesheet" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.min.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/resource/bootstrap/css/bootstrap.min.css" type="text/css"/>
+<link rel="stylesheet" href="<%=cp%>/resource/bootstrap/css/bootstrap-theme.min.css" type="text/css"/>
+
 <link rel="shortcut icon" href="<%=cp %>/resource/img/icon/favicon.ico" type="image/x-icon" />
 <link rel="icon" href="<%=cp %>/resource/img/icon/favicon.ico" type="image/x-icon" />
 

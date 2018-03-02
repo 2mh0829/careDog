@@ -12,4 +12,9 @@
 	      VALUES (#{blogId}, #{memberId}, #{title}, #{introduce}, 
 	                #{closed})
 	</insert>
+		<!-- 내 블로그의 전체 정보 -->
+	<select id="readBlogInfo" parameterType="String" resultType="care.dog.blog.BlogInfo">
+	    SELECT blogId, memberId, title, introduce, visitorCount, created, closed from blogInfo
+	</select>
+	
 </mapper>

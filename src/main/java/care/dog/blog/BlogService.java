@@ -19,7 +19,7 @@ public interface BlogService {
 	public int dataCountBlog(Map<String, Object> map);
 	public List<BlogInfo> listBlog(Map<String, Object> map);
 
-	public BlogInfo readBlogInfo(Map<String, Object> map);
+	public BlogInfo readBlogInfo(String memberId);
 	public BlogInfo readBlogInfoHome(long blogSeq);
 	public BlogInfo readBlogInfoProfile(long blogSeq);
 	
