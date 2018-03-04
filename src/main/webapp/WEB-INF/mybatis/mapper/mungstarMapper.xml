@@ -4,8 +4,8 @@
 <mapper namespace="mungstar">
 
 	<insert id="insertContext" parameterType="care.dog.mungstargram.vo.MungstarPVO">
-		INSERT INTO mungstar (num, context)
-		VALUES (mungstar_seq.NEXTVAL, #{context})
+		INSERT INTO mungstar (num, memberId, context)
+		VALUES (mungstar_seq.NEXTVAL, #{memberId}, #{context})
 	</insert>
 
 	<insert id="insertPhoto" parameterType="care.dog.mungstargram.vo.MungstarPVO">

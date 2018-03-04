@@ -1,7 +1,6 @@
 package care.dog.mungstargram;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,12 +9,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import care.dog.common.MyUtil;
+import care.dog.member.SessionInfo;
 import care.dog.mungstargram.vo.MungstarPVO;
 import care.dog.mungstargram.vo.MungstarRVO;
 
@@ -90,40 +91,38 @@ public class MungstargramController {
 		
 	
 	@RequestMapping(value="mungstargram/created", method=RequestMethod.GET)
-	public String createForm() {
-		return "mungstargram/created";
+	public String createForm(HttpSession session, Model model) {
+		
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		if (info != null) {
+			model.addAttribute("memberId", info.getMemberId());
+		}
+		
+		return "/mungstargram/created";
 	}
 
 	@RequestMapping(value="mungstargram/created", method=RequestMethod.POST)
-	public void createSubmit(MungstarPVO pvo, HttpSession session) throws Exception {
+	public String createSubmit(MungstarPVO pvo, HttpSession session) throws Exception {
 
 		String root = session.getServletContext().getRealPath("/");
 		String path = root+"uploads" + File.separator + "mungstargram";
 		
-//		pvo.setUserNum(userNum);
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		if (info == null) {
+			return "member/login";
+		}
+		
+		pvo.setMemberId(info.getMemberId());
 		
 		service.insertPhoto(pvo, path);
 		
 		System.out.println(path);
+		return null;
 	}
 	
 	@RequestMapping(value="mungstargram/autocomplete")
 	@ResponseBody
 	public List<MungstarRVO> auticomplete(String term){
-		/*Map<String, Object> map = new HashMap<>();
-		List<String> tag = new ArrayList<>();
-		List<Integer> tagCount = new ArrayList<>();
-		
-		List<MungstarRVO> list = service.selectTag(term);
-		for(int i=0; i<list.size(); i++) {
-			tag.add(list.get(i).getTag());
-			tagCount.add(list.get(i).getTagCount());
-		}
-		
-		map.put("tag", tag);
-		map.put("tagCount", tagCount);
-		
-		return map;*/
 		
 		List<MungstarRVO> list = service.selectTag(term);
 		

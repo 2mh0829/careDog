@@ -179,7 +179,9 @@ function insertImage() {
 	</div>
 	<div class="textarea">
 		<table id="tb" style="width: 100%; height: 100%;">
-			<tr height="100px"><td>a</td></tr>
+			<tr height="100px"><td>
+				<span>${memberId }</span>
+			</td></tr>
 			<tr><td align="center">
 				<textarea name="context" placeholder="&nbsp;내용을 입력하세요."></textarea>
 			</td></tr>

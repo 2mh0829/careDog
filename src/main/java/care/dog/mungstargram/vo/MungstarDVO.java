@@ -8,7 +8,7 @@ public class MungstarDVO {
 	private String context;
 	private int hitCount;
 	private Date created;
-	private int userNum;		// fk_member1
+	private String memberId;		// fk_member1
 	
 	// mungstarPhoto
 	private int photoNum;		// pk
@@ -44,11 +44,11 @@ public class MungstarDVO {
 	public void setCreated(Date created) {
 		this.created = created;
 	}
-	public int getUserNum() {
-		return userNum;
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setUserNum(int userNum) {
-		this.userNum = userNum;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public int getPhotoNum() {
 		return photoNum;
@@ -72,7 +72,8 @@ public class MungstarDVO {
 	@Override
 	public String toString() {
 		return "MungstarDVO [num=" + num + ", context=" + context + ", hitCount=" + hitCount + ", created=" + created
-				+ ", userNum=" + userNum + ", photoNum=" + photoNum + ", filename=" + filename + "]";
+				+ ", userNum=" + memberId + ", photoNum=" + photoNum + ", filename=" + filename + "]";
 	}
+	
 	
 }

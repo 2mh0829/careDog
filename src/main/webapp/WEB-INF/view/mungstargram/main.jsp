@@ -440,7 +440,7 @@ function openWin(){
 	
 	<div id="printPhoto"></div>
 
-
+<%-- 
 	<div class="responsive">
 		<div style="background: black;">
 			<div class="gallery">
@@ -455,35 +455,7 @@ function openWin(){
 			</div>
 		</div>
 	</div>
-
-	<div class="responsive">
-		<div style="background: black;">
-			<div class="gallery">
-				<img src="<%=cp%>/resource/img/test2.jpg">
-				<div style="position: absolute; top: 10px; right: 10px;">
-					<span class='glyphicon glyphicon-th-large myIcon'></span>
-				</div>
-				<div class="gallery-text" align="center">
-					<span class="glyphicon glyphicon-heart"></span> : 2134개 &nbsp;&nbsp;&nbsp; 
-					<span class="glyphicon glyphicon-comment"></span> : 83개
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="responsive">
-		<div style="background: black;">
-			<div class="gallery">
-				<img src="<%=cp%>/resource/img/dog3.jpg">
-				<div class="gallery-text" align="center">
-					<span class="glyphicon glyphicon-heart"></span> : 2134개 &nbsp;&nbsp;&nbsp; 
-					<span class="glyphicon glyphicon-comment"></span> : 83개
-				</div>
-			</div>
-		</div>
-	</div>
-
- 
+--%>
 	<div class="clearfix"></div>
 
 
