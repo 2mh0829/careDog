@@ -259,32 +259,41 @@ function apply(sel) {
 }
 
 var map;
-var idx=0;
+var markers[];
 
 function initMap() {
 	map = new google.maps.Map(document.getElementById('map_canvas'), {
     zoom: 15,
     center: {lat: 37.566673, lng: 126.978393}
   });
-	if(idx==1){
-		  marker.clear();
-			idx=0;
-		}
 	
-  map.addListener('click', function(e) {
-	  
-  		placeMarkerAndPanTo(e.latLng, map);
-        getAddress(e.latLng, map);
-        map.setCenter(map.getPosition());
-  });
+	 map.addListener('click', function(event) {
+	      addMarker(event.latLng);
+	 });
+	 
+	 addMarker(center)
 }
+
+function addMarker(location){
+	var marker = new google.maps.Marker({
+	      position: location,
+	      map: map
+	    });
+	    markers.push(marker);
+	  }
+}
+
+function setMapOnAll(map) {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+  }
 
 function placeMarkerAndPanTo(latLng, map) {
     var marker = new google.maps.Marker({
       position: latLng,
       map: map
     });
-    idx++;
   }
 
 function getAddress(latlng, map) {
@@ -304,6 +313,21 @@ function getAddress(latlng, map) {
 			document.getElementById('posx').value=latlng;
 		});
 	}
+	
+function clearMarkers(){
+	setMapOnAll(null);
+}
+	
+function showMarkers() {
+    setMapOnAll(map);
+}
+
+function deleteMarkers() {
+	clearMarkers();
+	markers = [];
+}
+	
+	
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb7DDKFrw7KNX2RnVNw1iGdUahxBWuwmE&language=ko&callback=initMap" async defer>
@@ -580,7 +604,7 @@ function getAddress(latlng, map) {
 					* 실종지점을 잘 모르는경우 대략적인 위치라도 선택하는것이 좋습니다.<br><br>* 지도 아래의 취소를 누르면 해당 좌표가 적용되지 않습니다." 
 					onclick="return false;">지도사용법</a>) : </span>
 						<div id="map_canvas" class="map_postbox"></div> 
-						위치 : <input type="text" class="text-map" id="posx" name="posx" readonly value="">
+						위도, 경도: <input type="text" class="text-map" id="posx" name="posx" readonly value="">
 						<a href="javascript:mapReset()" title="취소">취소</a>
 					</label> 
 					<label> 

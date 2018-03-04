@@ -1,15 +1,15 @@
 package care.dog.member;
 
 public class SessionInfo {
-	private String userId;
+	private String memberId;
 	private String userName;
 	private int memberLevel;
 	
-	public String getUserId() {
-		return userId;
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public String getUserName() {
 		return userName;
