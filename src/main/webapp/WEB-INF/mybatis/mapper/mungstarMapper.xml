@@ -84,4 +84,12 @@
 		ORDER BY tagCount DESC
 	</select>
 	
+	<select id="selectMemberId" parameterType="String" resultType="care.dog.mungstargram.vo.MungstarRVO">
+		SELECT memberId, COUNT(memberId) tagCount
+		FROM mungstar
+		WHERE upper(memberId) like '%' || upper(#{tag}) || '%'
+		GROUP BY memberId
+		ORDER BY memberId DESC
+	</select>
+	
 </mapper>

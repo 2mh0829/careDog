@@ -239,8 +239,10 @@ $(function() {
 
 function listPage(page) {
 	var url = "<%=cp %>/mungstargram/list";
-	var data = {pageNo:page};
-	$.get(url, data, function(data) {
+	var searchKey = $("input[name=searchKey]").val();
+	var searchValue = $("input[name=searchValue]").val();
+	var data = {pageNo:page, searchKey:searchKey, searchValue:searchValue};
+	$.post(url, data, function(data) {
 		printList(data);
 	}, "json");
 }
@@ -438,6 +440,8 @@ function openWin(){
 	<h2>mungstargram.</h2>
 	<h4>Resize the browser window to see the effect.</h4>
 	
+	<button class="btn" onclick="openWin();">insert</button>
+	
 	<div id="printPhoto"></div>
 
 <%-- 
@@ -458,9 +462,6 @@ function openWin(){
 --%>
 	<div class="clearfix"></div>
 
-
-	<%-- <button class="btn" onclick="location.href='<%=cp%>/mungstargram/created'">insert</button> --%>
-	<button class="btn" onclick="openWin();">insert</button>
 
 	<!-- Modal -->
 	<div class="modal" id="myModal" role="dialog" style="background: rgba(0,0,0,0.5);">
@@ -512,6 +513,11 @@ function openWin(){
 			</div>
 		</div>
 	</div>
+	
+	<div>
+		<input type="hidden" name="searchKey" value="${searchKey }">
+		<input type="hidden" name="searchValue" value="${searchValue }">
+	</div>	
 
 </div>
 

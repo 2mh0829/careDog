@@ -166,7 +166,7 @@ $(window).scroll(function() {
 });
 
 $(function() {
-	var searchKey = "";
+	var searchKeyword = "";
 	var tempTag = [];
 
 	$("body").on("click", "#inpDiv", function() {
@@ -177,9 +177,9 @@ $(function() {
 	});
 	
 	$("body").on("click",".container", function() {
-		searchKey = $("#inpTx").val();
-		if(searchKey != '')
-			$("#inpSp").html(" " + searchKey);
+		searchKeyword = $("#inpTx").val();
+		if(searchKeyword != '')
+			$("#inpSp").html(" " + searchKeyword);
 		else
 			$("#inpSp").html(" 검색");
 		
@@ -213,8 +213,13 @@ $(function() {
 						response(
 							$.map(data, function(item, i) {
 								tempTag.push(item.tag);
-								out += "<div id='box" + i + "' class='selecter' onclick='searchTag("+item.tag+")' tabindex='"+i+"'><div class='photoBox'>#</div>";
-								out += "<div class='tagBox' align='left'><div id='tag"+i+"' class='tag'>" + item.tag + "</div>"; 
+								if(item.tag != null){
+									out += "<div id='box" + i + "' class='selecter' onclick='searchTag(\""+item.tag+"\")' tabindex='"+i+"'><div class='photoBox'>#</div>";
+									out += "<div class='tagBox' align='left'><div id='tag"+i+"' class='tag' data-tag='tag'>" + item.tag + "</div>";
+								}else if(item.memberId != null){
+									out += "<div id='box" + i + "' class='selecter' onclick='searchId(\""+item.memberId+"\")' tabindex='"+i+"'><div class='photoBox'>IMG</div>";
+									out += "<div class='tagBox' align='left'><div id='tag"+i+"' class='tag' data-tag='id'>" + item.memberId + "</div>";
+								}
 								out += "<div class='tagCount'>게시물&nbsp;" + item.tagCount + "</div></div></div>";
 							})
 						);
@@ -253,7 +258,7 @@ $(function() {
 						$("#box"+target).focus();
 					}
 				}else
-					searchTag($("#tag"+target).text());
+					search(target);
 				break;
 			}
 			
@@ -276,8 +281,52 @@ $(function() {
 	
 });
 
+function search(target){
+	if($("#tag"+target).data("tag") == "tag")
+		searchTag($("#tag"+target).text());
+	else if($("#tag"+target).data("tag") == "id")
+		searchId($("#tag"+target).text());
+}
+
+var searchKey = "";
+var searchValue = "";
+
 function searchTag(tag) {
+	searchKey = "tag";
+	searchValue = tag;
+	searchSubmit();
+	<%-- var data = {"searchKey":searchKey, "searchValue":searchValue}
+	data.action = "<%=cp %>/mungstargram";
+	data.method = "post";
+	data.submit(); --%>
+}
+
+function searchId(id) {
+	searchKey = "id";
+	searchValue = id;
+	searchSubmit();
+}
+
+function searchSubmit() {
+	var form = document.createElement("form");
+	var url = "<%=cp %>/mungstargram";
+	form.setAttribute("action", url);
+	form.setAttribute("method", "get");
 	
+	var key = document.createElement("input");
+	key.setAttribute("type", "hidden");
+	key.setAttribute("name", "searchKey");
+	key.setAttribute("value", searchKey);
+	form.appendChild(key);
+	
+	var val = document.createElement("input");
+	val.setAttribute("type", "hidden");
+	val.setAttribute("name", "searchValue");
+	val.setAttribute("value", searchValue);
+	form.appendChild(val);
+	
+	document.body.appendChild(form);
+	form.submit();
 }
 
 </script>
