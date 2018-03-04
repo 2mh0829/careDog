@@ -9,25 +9,24 @@ public class Dog119Controller {
 	
 	@RequestMapping(value="/dog119")
 	public String main() {
-		return ".dog119.main";
+		return ".dog119.dog119Main";
 	}
 	
 	@RequestMapping(value="/dog119/created")
 	public String createdSubmit() {
-		return ".dog119.created";
-	}
-	
-	@RequestMapping(value="/dog119/created", method=RequestMethod.POST)
-	public String created() {
-		
-		
-		return ".dog119.created";
+		return ".dog119.dog119Created";
 	}
 	
 	@RequestMapping(value="/dog119/dogHealth")
-	public String healthSubmit() {
+	public String dogHealth() {
 		
 		return ".dog119.dogHealth";
 	}
-
+	
+	@RequestMapping(value="/dog119/dhcreate")
+	public String healthCreate() {
+		
+		return ".dog119.dogHealthCreate";
+	}
+	
 }
