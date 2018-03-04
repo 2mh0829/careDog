@@ -76,10 +76,12 @@
 		WHERE num = #{num}
 	</select>
 	
-	<select id="selectTag" parameterType="String" resultType="String">
-		SELECT DISTINCT(tag)
+	<select id="selectTag" parameterType="String" resultType="care.dog.mungstargram.vo.MungstarRVO">
+		SELECT tag, COUNT(tag) tagCount
 		FROM mungstarTag
 		WHERE upper(tag) like '%' || upper(#{tag}) || '%'
+		GROUP BY tag
+		ORDER BY tagCount DESC
 	</select>
 	
 </mapper>

@@ -142,6 +142,7 @@ div.gallery img {
 	color: white;
 	font-size: 20px;
 	cursor: pointer;
+	opacity: 0.8;
 	text-shadow: 2px 2px 4px black;
 }
 
@@ -163,6 +164,12 @@ div.desc {
 
 @media only screen and (max-width: 1000px) {
 	div.gallery {
+		height: 25vw;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	div.gallery {
 		height: 40vw;
 	}
 	.responsive {
@@ -180,7 +187,7 @@ div.desc {
 	}
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 500px) {
 	div.gallery {
 		height: 70vw;
 	}

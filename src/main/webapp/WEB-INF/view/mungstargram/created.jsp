@@ -80,6 +80,10 @@
 	visibility: hidden;
 }
 
+.xbtn:hover {
+	border-color: black;
+}
+
 .eventBox:hover .blackBox {
 	visibility: visible;
 }
@@ -137,13 +141,18 @@ function insertImage() {
 	
 	var context = $("textarea[name=context]").val();
 	var tags = [];
+	var tempTags = [];
 	
 	context = context.replace(/#[^#\s,;]+/gm, function(tag) {
-		tags.push(tag);
+		tempTags.push(tag);
 		<%-- return "<a href='<%=cp %>/mungstargram?search=" + tag + "'>" + tag + "</a>"; --%>
 		return "<a>" + tag + "</a>";
 	});
-
+	
+	$.each(tempTags, function(i, el){
+	    if($.inArray(el, tags) === -1) tags.push(el);
+	});
+	
 	file.append('context', context);
 	file.append('tags', tags);
 	

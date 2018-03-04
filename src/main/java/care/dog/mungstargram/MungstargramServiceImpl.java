@@ -102,8 +102,8 @@ public class MungstargramServiceImpl implements MungstargramService {
 	}
 
 	@Override
-	public List<String> selectTag(String tag) {
-		List<String> list = null;
+	public List<MungstarRVO> selectTag(String tag) {
+		List<MungstarRVO> list = null;
 		try {
 			list = dao.selectList("mungstar.selectTag", tag);
 		} catch (Exception e) {

@@ -1,6 +1,7 @@
 package care.dog.mungstargram;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,9 +109,23 @@ public class MungstargramController {
 	
 	@RequestMapping(value="mungstargram/autocomplete")
 	@ResponseBody
-	public List<String> auticomplete(String term){
+	public List<MungstarRVO> auticomplete(String term){
+		/*Map<String, Object> map = new HashMap<>();
+		List<String> tag = new ArrayList<>();
+		List<Integer> tagCount = new ArrayList<>();
 		
-		List<String> list = service.selectTag(term);
+		List<MungstarRVO> list = service.selectTag(term);
+		for(int i=0; i<list.size(); i++) {
+			tag.add(list.get(i).getTag());
+			tagCount.add(list.get(i).getTagCount());
+		}
+		
+		map.put("tag", tag);
+		map.put("tagCount", tagCount);
+		
+		return map;*/
+		
+		List<MungstarRVO> list = service.selectTag(term);
 		
 		return list;
 	}

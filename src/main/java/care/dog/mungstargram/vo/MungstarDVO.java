@@ -13,12 +13,11 @@ public class MungstarDVO {
 	// mungstarPhoto
 	private int photoNum;		// pk
 	private String filename;
-//	private int num;				// fk_mungstar
+//	private int num;			// fk_mungstar
 	
 	//mungstarTag
 	private String tag;
 //	private int num;
-	
 	
 	
 	public int getNum() {
