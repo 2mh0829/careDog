@@ -29,10 +29,11 @@ import care.dog.member.SessionInfo;
 
 @Controller("center.centerController")
 public class CenterController {
+	
 	@Autowired
 	private GongjiService service;
-	@Autowired
-	private MyUtil myutil;
+	/*@Autowired
+	private MyUtil myutil;*/
 	@Autowired
 	private FileManager fileManager;
 	
@@ -63,7 +64,7 @@ public class CenterController {
 		
 		dataCount = service.dataCount(map);
 		if(dataCount!=0)
-			total_page = myutil.pageCount(rows, dataCount);
+			//total_page = myutil.pageCount(rows, dataCount);
 		
 		if(total_page<current_page)
 			current_page=total_page;
@@ -95,13 +96,13 @@ public class CenterController {
 			n++;
 		}
 		
-		String paging = myutil.paging(current_page, total_page);
+		//String paging = myutil.paging(current_page, total_page);
 		
 		model.addAttribute("list",list);
 		model.addAttribute("pageNo",current_page);
 		model.addAttribute("dataCount",dataCount);
 		model.addAttribute("total_page",total_page);
-		model.addAttribute("paging",paging);
+		//model.addAttribute("paging",paging);
 		
 		return ".center.gongji";
 	}
@@ -152,7 +153,7 @@ public class CenterController {
 			) throws Exception{
 		model.addAttribute("pageNo","1");
 		model.addAttribute("mode","created");
-		return ".center.gongji_created";
+		return ".center.gongji_create";
 	}
 	
 	@RequestMapping(value="/gongji/created", method=RequestMethod.POST)
