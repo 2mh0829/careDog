@@ -166,6 +166,11 @@ div.desc {
 	div.gallery {
 		height: 25vw;
 	}
+	div.modal-right {
+		background: white;
+		width: 100%;
+		text-align: left;
+	}
 }
 
 @media only screen and (max-width: 800px) {
@@ -239,10 +244,10 @@ $(function() {
 
 function listPage(page) {
 	var url = "<%=cp %>/mungstargram/list";
-	var searchKey = $("input[name=searchKey]").val();
-	var searchValue = $("input[name=searchValue]").val();
+	var searchKey = "${searchKey}";
+	var searchValue = "${searchValue}";
 	var data = {pageNo:page, searchKey:searchKey, searchValue:searchValue};
-	$.post(url, data, function(data) {
+	$.get(url, data, function(data) {
 		printList(data);
 	}, "json");
 }
@@ -419,13 +424,13 @@ function modalSize() {
 
 /* ------------------------------------------------------------------------------------------------------------------------ */
 // 검색
-/* 
+
 $(function() {
 	$("body").on("click", "#context a", function() {
-		alert($(this).text());
+		searchTag($(this).text());
 	});
 });
-*/
+
 
 
 /* ------------------------------------------------------------------------------ */
@@ -513,12 +518,12 @@ function openWin(){
 			</div>
 		</div>
 	</div>
-	
+<%-- 	
 	<div>
 		<input type="hidden" name="searchKey" value="${searchKey }">
 		<input type="hidden" name="searchValue" value="${searchValue }">
 	</div>	
-
+ --%>
 </div>
 
 

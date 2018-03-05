@@ -46,7 +46,7 @@ public class MungstargramServiceImpl implements MungstargramService {
 	}
 
 	@Override
-	public int mungstarCount() {
+	public int mungstarCount(Map<String, Object> map) {
 		int result = 0;
 		try {
 			result = dao.selectOne("mungstar.mungstarCount");
@@ -102,10 +102,11 @@ public class MungstargramServiceImpl implements MungstargramService {
 	}
 
 	@Override
-	public List<MungstarRVO> selectTag(String tag) {
+	public List<MungstarRVO> searchList(String tag) {
 		List<MungstarRVO> list = null;
 		try {
 			list = dao.selectList("mungstar.selectTag", tag);
+			list.addAll(dao.selectList("mungstar.selectMemberId", tag));
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}

@@ -23,7 +23,21 @@
 	</select>
 	
 	<select id="mungstarCount" resultType="Integer">
-		SELECT NVL(COUNT(*), 0) FROM mungstar
+		<if test="searchValue==null or searchValue=='' ">
+			SELECT NVL(COUNT(*), 0) FROM mungstar
+		</if>
+		<if test="searchValue!=null and searchValue!='' ">
+			<if test="searchKey=='tag'">
+				SELECT COUNT(tag) tagCount
+				FROM mungstarTag
+				WHERE upper(tag) = upper(#{searchValue})
+				GROUP BY tag
+			</if>
+			<if test="searchKey=='id'">
+				SELECT NVL(COUNT(*), 0) FROM mungstar
+				WHERE upper(memberId) = upper(#{searchValue})
+			</if>
+		</if>
 	</select>
 	
 	<select id="mungstarPhotoCount" parameterType="map" resultType="Integer">

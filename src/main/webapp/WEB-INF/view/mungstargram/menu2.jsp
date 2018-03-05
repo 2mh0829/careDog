@@ -295,10 +295,6 @@ function searchTag(tag) {
 	searchKey = "tag";
 	searchValue = tag;
 	searchSubmit();
-	<%-- var data = {"searchKey":searchKey, "searchValue":searchValue}
-	data.action = "<%=cp %>/mungstargram";
-	data.method = "post";
-	data.submit(); --%>
 }
 
 function searchId(id) {
