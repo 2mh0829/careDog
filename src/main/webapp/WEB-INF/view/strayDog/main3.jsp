@@ -7,15 +7,22 @@
 %>
 <style>
 	.strayDog{
-		width: 32%;
-	    height: 743px;
+		width: 310px;
+	    height: 550px;
 	    float: left;
+	    margin: 40px 2px 60px 2px;
 	    background: #fff;
 	    border: 1px solid #ccc;
 	    font-family: 'NanumGothicWeb','NanumGothicWebBold','Dotum','돋움',Helvetica,AppleGothic,Sans-serif;
 	    color: #444;
 	    overflow: hidden;
 	    box-sizing: border-box;
+	}
+	
+	.allStrayDog {
+	    width: 1000px;
+	    height: auto;
+	    margin: 0 auto 50px auto;
 	}
 	.strayDog + .strayDog {margin-left: 2%}
 	
@@ -197,30 +204,37 @@ $(document).ready(function(){
 				var neuterYn = $(this).find("neuterYn").text(); /* 중성화여부 */
 				var noticeEdt = $(this).find("noticeEdt").text(); /* 공고종료일 */
 				var noticeNo = $(this).find("noticeNo").text(); /* 공고번호 */
-				var noticeSdt = $(this).find("noticeSdt").text(); /* 공고종료일 */
+				var noticeSdt = $(this).find("noticeSdt").text(); /* 공고시작일 */
 				var officetel = $(this).find("officetel").text(); /* 담당자연락처 */
 				var orgNm = $(this).find("orgNm").text(); /* 관할기관 */
 				var popfile = $(this).find("popfile").text(); /* 이미지 */
 				var processState = $(this).find("processState").text(); /* 상태 */
 				var sexCd = $(this).find("sexCd").text(); /* 성별 */
-				var specialMark = $(this).find("specialMark").text();
+				var specialMark = $(this).find("specialMark").text(); /* 특징 */
 				var weight = $(this).find("weight").text();
 				
-				var view_text=age+careAddr+careNm+colorCd+desertionNo+
-				filename+happenDt;
+				var content;
 				
+				content="<div class='strayDog'><a title='확대 이미지 보기' href="+popfile+" class='lytebox' data-lyte-options='slide:false' data-title='CareDog'>";
+				content+="<a href='#' img='' class='tx-animal-image' src="+filename+">";
+				content+="<img src="+filename+" width='348' height='261' border='0' align='center'></a></a><ul>";
+				content+="<li class='full'><strong>접수일</strong> <i> "+happenDt+"&nbsp;&nbsp;(공고번호: "+noticeNo+" <span class='red'></span>)";
+				content+="</i></li><li class='full'><strong>발견장소</strong></li><li class='full'>"+happenPlace+"</li>";
+				content+="<li class='half'><strong>품종</strong> "+kindCd+"</li>";
+				content+="<li class='half'><strong>성별</strong> "+sexCd+"</li>";
+				content+="<li class='half'><strong>연령</strong> "+age+"</li>";
+				content+="<li class='half'><strong>색상</strong> "+colorCd+"</li>";
+				content+="<li class='half'><strong>중성화수술</strong> "+neuterYn+"</li>";
+				content+="<li class='half'><strong>체중</strong> "+weight+"</li>";
+				content+="<li class='half'><strong>건강상태</strong> "+processState+"</li>";
+				content+="<li class='half'><strong>특징</strong></li>";
+				content+="<li class='full'><span>"+specialMark+"</span></li></ul></div>";
 				
+				$(".allStrayDog").append(content);
 			});
 		}
 	});
 	
-	$.ajax({
-		url: 'http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/sido?ServiceKey=2tZYhOcrXJBIeeVzX9bylvmtsaHiaSrBkh13F9DlyGL0KfQZKGuRtuM3xcc%2Bz55Nblf0iaPOfUwRqeKu2IZ7rQ%3D%3D'
-		,dataType:'xml'
-		,success:function(response){
-			console.log(response.body.items);
-		}
-	});
 })
 
 </script>
@@ -246,137 +260,8 @@ $(document).ready(function(){
 			<button>검색</button>
 		</form>
 	</div>
-	<div class="strayDog">
-			<a title="확대 이미지 보기" href="<%=cp%>/resource/img/dog1.jpg" class="lytebox" data-lyte-options="slide:false" data-title="(사)한국동물구조관리협회">
-			<a href="#" img="" class="tx-animal-image" src="<%=cp%>/resource/img/dog1.jpg">
-				<img src="<%=cp%>/resource/img/dog1.jpg" width="348" height="261" border="0" align="center">
-			</a></a>
-		<ul>
-			<li class="full"><strong>구조일</strong> <i>
-					2018-02-26&nbsp;&nbsp;(SN: 180226-022 <span class="red"></span>)
-			</i></li>
-			<li class="full"><strong>구조장소</strong></li>
-			<li class="full">경기도 양주시 삼숭동 산 104-4 광숭초교...</li>
-			<li class="half"><strong>축종</strong> 개 / Mix</li>
-			<li class="half"><strong>성별</strong> 암컷</li>
-			<li class="half"><strong>연령</strong> 03개월(추정)</li>
-			<li class="half"><strong>모색</strong> 흰</li>
-			<li class="half"><strong>중성화수술</strong> 확인불가</li>
-			<li class="half"><strong>성격</strong> 친화적</li>
-			<li class="half"><strong>체중</strong> 2.6 Kg</li>
-			<li class="half"><strong>건강상태</strong> 양호</li>
-			<li class="full"><strong>특징</strong></li>
-			<li class="full"><span>
-					하늘색&nbsp;바탕/호피무늬&nbsp;목걸이&nbsp;착용.&nbsp;피부질환.&nbsp;양&nbsp;귀&nbsp;반&nbsp;접힘.&nbsp;코&nbsp;검정색.&nbsp;사람&nbsp;따름.&nbsp;얌전함.&nbsp;단미&nbsp;안됨.&nbsp;털&nbsp;상태&nbsp;때탐.&nbsp;
-			</span></li>
-		</ul>
-	</div>
-	
-	<div class="strayDog">
-			<a title="확대 이미지 보기" href="<%=cp%>/resource/img/dog1.jpg" class="lytebox" data-lyte-options="slide:false" data-title="(사)한국동물구조관리협회">
-			<a href="#" img="" class="tx-animal-image" src="<%=cp%>/resource/img/dog1.jpg">
-				<img src="<%=cp%>/resource/img/dog1.jpg" width="348" height="261" border="0" align="center">
-			</a></a>
-		<ul>
-			<li class="full"><strong>구조일</strong> <i>
-					2018-02-26&nbsp;&nbsp;(SN: 180226-022 <span class="red"></span>)
-			</i></li>
-			<li class="full"><strong>구조장소</strong></li>
-			<li class="full">경기도 양주시 삼숭동 산 104-4 광숭초교...</li>
-			<li class="half"><strong>축종</strong> 개 / Mix</li>
-			<li class="half"><strong>성별</strong> 암컷</li>
-			<li class="half"><strong>연령</strong> 03개월(추정)</li>
-			<li class="half"><strong>모색</strong> 흰</li>
-			<li class="half"><strong>중성화수술</strong> 확인불가</li>
-			<li class="half"><strong>성격</strong> 친화적</li>
-			<li class="half"><strong>체중</strong> 2.6 Kg</li>
-			<li class="half"><strong>건강상태</strong> 양호</li>
-			<li class="full"><strong>특징</strong></li>
-			<li class="full"><span>
-					하늘색&nbsp;바탕/호피무늬&nbsp;목걸이&nbsp;착용.&nbsp;피부질환.&nbsp;양&nbsp;귀&nbsp;반&nbsp;접힘.&nbsp;코&nbsp;검정색.&nbsp;사람&nbsp;따름.&nbsp;얌전함.&nbsp;단미&nbsp;안됨.&nbsp;털&nbsp;상태&nbsp;때탐.&nbsp;
-			</span></li>
-		</ul>
-	</div>
-	
-	
-	<div class="strayDog">
-			<a title="확대 이미지 보기" href="<%=cp%>/resource/img/dog1.jpg" class="lytebox" data-lyte-options="slide:false" data-title="(사)한국동물구조관리협회">
-			<a href="#" img="" class="tx-animal-image" src="<%=cp%>/resource/img/dog1.jpg">
-				<img src="<%=cp%>/resource/img/dog1.jpg" width="348" height="261" border="0" align="center">
-			</a></a>
-		<ul>
-			<li class="full"><strong>구조일</strong> <i>
-					2018-02-26&nbsp;&nbsp;(SN: 180226-022 <span class="red"></span>)
-			</i></li>
-			<li class="full"><strong>구조장소</strong></li>
-			<li class="full">경기도 양주시 삼숭동 산 104-4 광숭초교...</li>
-			<li class="half"><strong>축종</strong> 개 / Mix</li>
-			<li class="half"><strong>성별</strong> 암컷</li>
-			<li class="half"><strong>연령</strong> 03개월(추정)</li>
-			<li class="half"><strong>모색</strong> 흰</li>
-			<li class="half"><strong>중성화수술</strong> 확인불가</li>
-			<li class="half"><strong>성격</strong> 친화적</li>
-			<li class="half"><strong>체중</strong> 2.6 Kg</li>
-			<li class="half"><strong>건강상태</strong> 양호</li>
-			<li class="full"><strong>특징</strong></li>
-			<li class="full"><span>
-					하늘색&nbsp;바탕/호피무늬&nbsp;목걸이&nbsp;착용.&nbsp;피부질환.&nbsp;양&nbsp;귀&nbsp;반&nbsp;접힘.&nbsp;코&nbsp;검정색.&nbsp;사람&nbsp;따름.&nbsp;얌전함.&nbsp;단미&nbsp;안됨.&nbsp;털&nbsp;상태&nbsp;때탐.&nbsp;
-			</span></li>
-		</ul>
-	</div>
-	
-	<div class="strayDog">
-			<a title="확대 이미지 보기" href="<%=cp%>/resource/img/dog1.jpg" class="lytebox" data-lyte-options="slide:false" data-title="(사)한국동물구조관리협회">
-			<a href="#" img="" class="tx-animal-image" src="<%=cp%>/resource/img/dog1.jpg">
-				<img src="<%=cp%>/resource/img/dog1.jpg" width="348" height="261" border="0" align="center">
-			</a></a>
-		<ul>
-			<li class="full"><strong>구조일</strong> <i>
-					2018-02-26&nbsp;&nbsp;(SN: 180226-022 <span class="red"></span>)
-			</i></li>
-			<li class="full"><strong>구조장소</strong></li>
-			<li class="full">경기도 양주시 삼숭동 산 104-4 광숭초교...</li>
-			<li class="half"><strong>축종</strong> 개 / Mix</li>
-			<li class="half"><strong>성별</strong> 암컷</li>
-			<li class="half"><strong>연령</strong> 03개월(추정)</li>
-			<li class="half"><strong>모색</strong> 흰</li>
-			<li class="half"><strong>중성화수술</strong> 확인불가</li>
-			<li class="half"><strong>성격</strong> 친화적</li>
-			<li class="half"><strong>체중</strong> 2.6 Kg</li>
-			<li class="half"><strong>건강상태</strong> 양호</li>
-			<li class="full"><strong>특징</strong></li>
-			<li class="full"><span>
-					하늘색&nbsp;바탕/호피무늬&nbsp;목걸이&nbsp;착용.&nbsp;피부질환.&nbsp;양&nbsp;귀&nbsp;반&nbsp;접힘.&nbsp;코&nbsp;검정색.&nbsp;사람&nbsp;따름.&nbsp;얌전함.&nbsp;단미&nbsp;안됨.&nbsp;털&nbsp;상태&nbsp;때탐.&nbsp;
-			</span></li>
-		</ul>
-	</div>
-	
-	<div class="strayDog">
-			<a title="확대 이미지 보기" href="<%=cp%>/resource/img/dog1.jpg" class="lytebox" data-lyte-options="slide:false" data-title="(사)한국동물구조관리협회">
-			<a href="#" img="" class="tx-animal-image" src="<%=cp%>/resource/img/dog1.jpg">
-				<img src="<%=cp%>/resource/img/dog1.jpg" width="348" height="261" border="0" align="center">
-			</a></a>
-		<ul>
-			<li class="full"><strong>구조일</strong> <i>
-					2018-02-26&nbsp;&nbsp;(SN: 180226-022 <span class="red"></span>)
-			</i></li>
-			<li class="full"><strong>구조장소</strong></li>
-			<li class="full">경기도 양주시 삼숭동 산 104-4 광숭초교...</li>
-			<li class="half"><strong>축종</strong> 개 / Mix</li>
-			<li class="half"><strong>성별</strong> 암컷</li>
-			<li class="half"><strong>연령</strong> 03개월(추정)</li>
-			<li class="half"><strong>모색</strong> 흰</li>
-			<li class="half"><strong>중성화수술</strong> 확인불가</li>
-			<li class="half"><strong>성격</strong> 친화적</li>
-			<li class="half"><strong>체중</strong> 2.6 Kg</li>
-			<li class="half"><strong>건강상태</strong> 양호</li>
-			<li class="full"><strong>특징</strong></li>
-			<li class="full"><span>
-					하늘색&nbsp;바탕/호피무늬&nbsp;목걸이&nbsp;착용.&nbsp;피부질환.&nbsp;양&nbsp;귀&nbsp;반&nbsp;접힘.&nbsp;코&nbsp;검정색.&nbsp;사람&nbsp;따름.&nbsp;얌전함.&nbsp;단미&nbsp;안됨.&nbsp;털&nbsp;상태&nbsp;때탐.&nbsp;
-			</span></li>
-		</ul>
-	</div>
-	
+	<div class="allStrayDog"></div>
+
 	<div id="pagingNav" class="pagenation">
 		<span class="select">1</span> 
 		<a href="?act=list&amp;bid=animal&amp;page=2&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">2</a>
