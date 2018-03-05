@@ -4,30 +4,68 @@
 <mapper namespace="mungstar">
 
 	<insert id="insertContext" parameterType="care.dog.mungstargram.vo.MungstarPVO">
-		INSERT INTO mungstar (num, context)
-		VALUES (mungstar_seq.NEXTVAL, #{context})
+		INSERT INTO mungstar (num, memberId, context)
+		VALUES (mungstar_seq.NEXTVAL, #{memberId}, #{context})
 	</insert>
 
 	<insert id="insertPhoto" parameterType="care.dog.mungstargram.vo.MungstarPVO">
 		INSERT INTO mungstarPhoto (photoNum, filename, num)
 		VALUES (mungstarPhoto_seq.NEXTVAL, #{filename}, #{num})
 	</insert>
+	
+	<insert id="insertTag" parameterType="care.dog.mungstargram.vo.MungstarPVO">
+		INSERT INTO mungstarTag (tag, num)
+		VALUES (#{tag}, #{num})
+	</insert>
 
 	<select id="selectMungstarNum" resultType="Integer">
 		SELECT MAX(num) from mungstar
 	</select>
 	
-	<select id="mungstarCount" resultType="Integer">
-		SELECT NVL(COUNT(*), 0) FROM mungstar
+	<select id="mungstarCount" parameterType="map" resultType="Integer">
+		<if test="searchValue==null or searchValue=='' ">
+			SELECT NVL(COUNT(*), 0) FROM mungstar
+		</if>
+		<if test="searchValue!=null and searchValue!='' ">
+			<if test="searchKey=='tag'">
+				SELECT COUNT(tag) tagCount
+				FROM mungstarTag
+				WHERE upper(tag) = upper(#{searchValue})
+				GROUP BY tag
+			</if>
+			<if test="searchKey=='id'">
+				SELECT NVL(COUNT(*), 0) FROM mungstar
+				WHERE upper(memberId) = upper(#{searchValue})
+			</if>
+		</if>
 	</select>
+
+	<sql id="where-list">
+		<if test="searchKey=='tag'">
+			tag = #{searchValue}
+		</if>
+		<if test="searchKey=='id'">
+			memberId = #{searchValue}
+		</if>
+	</sql>
 	
 	<select id="mungstarPhotoCount" parameterType="map" resultType="Integer">
 		SELECT photoCount FROM (
 			SELECT ROWNUM rnum, tb.* FROM (
 				SELECT COUNT(photoNum) photoCount
-				FROM mungstarPhoto
-				GROUP BY num
-				ORDER BY num DESC
+				FROM mungstarPhoto p
+				<if test="searchValue != null and searchValue != '' ">
+					<if test="searchKey=='tag'">
+						LEFT OUTER JOIN mungstarTag t ON p.num = t.num
+						WHERE tag = #{searchValue}
+					</if>
+					<if test="searchKey=='id'">
+						JOIN mungstar m ON p.num = m.num
+						WHERE memberId = #{searchValue}
+					</if>
+				</if>
+				GROUP BY p.num
+				ORDER BY p.num DESC
 			<![CDATA[
 			) tb WHERE ROWNUM <= #{end}
 		) WHERE rnum >= #{start}
@@ -37,14 +75,20 @@
 	<select id="mungstarList" parameterType="map" resultType="care.dog.mungstargram.vo.MungstarRVO">
 		SELECT * FROM (
 			SELECT ROWNUM rnum, tb.* FROM (
-				SELECT m.num, filename
+				SELECT DISTINCT(m.num), filename
 				FROM mungstar m
 				JOIN mungstarPhoto p ON m.num = p.num
-				WHERE photoNum IN (
-					SELECT MIN(photoNum)
-					FROM mungstarPhoto
-					GROUP BY num
-				)
+				LEFT OUTER JOIN mungstarTag t ON m.num = t.num
+				<where>
+					<if test="searchValue != null and searchValue != '' ">
+						<include refid="where-list"/>
+					</if>
+					AND photoNum IN (
+						SELECT MIN(photoNum)
+						FROM mungstarPhoto
+						GROUP BY num
+					)
+				</where>
 				ORDER BY m.num DESC
 		<![CDATA[
 			) tb WHERE ROWNUM <= #{end}
@@ -69,6 +113,22 @@
 		SELECT context, hitCount
 		FROM mungstar
 		WHERE num = #{num}
-	</select>	
+	</select>
+	
+	<select id="selectTag" parameterType="String" resultType="care.dog.mungstargram.vo.MungstarRVO">
+		SELECT tag, COUNT(tag) tagCount
+		FROM mungstarTag
+		WHERE upper(tag) like '%' || upper(#{tag}) || '%'
+		GROUP BY tag
+		ORDER BY tagCount DESC
+	</select>
+	
+	<select id="selectMemberId" parameterType="String" resultType="care.dog.mungstargram.vo.MungstarRVO">
+		SELECT memberId, COUNT(memberId) tagCount
+		FROM mungstar
+		WHERE upper(memberId) like '%' || upper(#{tag}) || '%'
+		GROUP BY memberId
+		ORDER BY memberId DESC
+	</select>
 	
 </mapper>
