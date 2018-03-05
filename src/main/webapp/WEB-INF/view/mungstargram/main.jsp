@@ -166,6 +166,11 @@ div.desc {
 	div.gallery {
 		height: 25vw;
 	}
+	div.modal-right {
+		background: white;
+		width: 100%;
+		text-align: left;
+	}
 }
 
 @media only screen and (max-width: 800px) {
@@ -239,7 +244,9 @@ $(function() {
 
 function listPage(page) {
 	var url = "<%=cp %>/mungstargram/list";
-	var data = {pageNo:page};
+	var searchKey = "${searchKey}";
+	var searchValue = "${searchValue}";
+	var data = {pageNo:page, searchKey:searchKey, searchValue:searchValue};
 	$.get(url, data, function(data) {
 		printList(data);
 	}, "json");
@@ -417,13 +424,13 @@ function modalSize() {
 
 /* ------------------------------------------------------------------------------------------------------------------------ */
 // 검색
-/* 
+
 $(function() {
 	$("body").on("click", "#context a", function() {
-		alert($(this).text());
+		searchTag($(this).text());
 	});
 });
-*/
+
 
 
 /* ------------------------------------------------------------------------------ */
@@ -437,6 +444,8 @@ function openWin(){
 <div class="body-container">
 	<h2>mungstargram.</h2>
 	<h4>Resize the browser window to see the effect.</h4>
+	
+	<button class="btn" onclick="openWin();">insert</button>
 	
 	<div id="printPhoto"></div>
 
@@ -458,9 +467,6 @@ function openWin(){
 --%>
 	<div class="clearfix"></div>
 
-
-	<%-- <button class="btn" onclick="location.href='<%=cp%>/mungstargram/created'">insert</button> --%>
-	<button class="btn" onclick="openWin();">insert</button>
 
 	<!-- Modal -->
 	<div class="modal" id="myModal" role="dialog" style="background: rgba(0,0,0,0.5);">
@@ -512,7 +518,12 @@ function openWin(){
 			</div>
 		</div>
 	</div>
-
+<%-- 	
+	<div>
+		<input type="hidden" name="searchKey" value="${searchKey }">
+		<input type="hidden" name="searchValue" value="${searchValue }">
+	</div>	
+ --%>
 </div>
 
 

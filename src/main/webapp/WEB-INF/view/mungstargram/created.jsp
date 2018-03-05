@@ -163,7 +163,7 @@ function insertImage() {
 		contentType: false,
 		type: 'POST',
 		success: function() {
-			opener.parent.location.reload();
+			opener.parent.location.replace("<%=cp %>/mungstargram");
 			window.close();
 		}
 	});

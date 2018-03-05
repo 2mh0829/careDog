@@ -28,33 +28,43 @@ public class MungstargramController {
 	private MyUtil myUtil;
 	
 	@RequestMapping(value="/mungstargram")
-	public String main() {
+	public String main(String searchKey, String searchValue, Model model) {
+		
+		model.addAttribute("searchKey", searchKey);
+		model.addAttribute("searchValue", searchValue);
+		
 		return ".mungstargram.main";
 	}
 	
 	@RequestMapping(value="/mungstargram/list")
 	@ResponseBody
 	public Map<String, Object> printList(
-			@RequestParam(value="pageNo", defaultValue="1") int current_page) {
+			@RequestParam(value="pageNo", defaultValue="1") int current_page,
+			@RequestParam(value="searchKey", defaultValue="") String searchKey, 
+			@RequestParam(value="searchValue", defaultValue="") String searchValue) {
 
 		int rows = 9;
-		int dataCount = service.mungstarCount();
-		int total_page = myUtil.pageCount(rows, dataCount);
+		int dataCount = 0;
+		int total_page = 0;
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("searchKey", searchKey);
+		map.put("searchValue", searchValue);
+		
+		dataCount = service.mungstarCount(map);
+		if(dataCount != 0)
+            total_page = myUtil.pageCount(rows, dataCount) ;
 		
 		if(current_page > total_page)
 			current_page = total_page;
 		
 		int start = (current_page - 1) * rows + 1;
 		int end = (current_page) * rows;
-		
-		Map<String, Object> map = new HashMap<>();
 		map.put("start", start);
 		map.put("end", end);
 		
 		List<MungstarRVO> list = service.mungstarList(map);
-		
 		List<Integer> photoCountList = service.mungstarPhotoCount(map);
-		
 		
 		for(int i=0; i<list.size(); i++)
 			list.get(i).setPhotoCount(photoCountList.get(i));
@@ -124,7 +134,7 @@ public class MungstargramController {
 	@ResponseBody
 	public List<MungstarRVO> auticomplete(String term){
 		
-		List<MungstarRVO> list = service.selectTag(term);
+		List<MungstarRVO> list = service.searchList(term);
 		
 		return list;
 	}
