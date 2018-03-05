@@ -45,30 +45,26 @@ public class MungstargramController {
 
 		int rows = 9;
 		int dataCount = 0;
+		int total_page = 0;
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("searchKey", searchKey);
 		map.put("searchValue", searchValue);
 		
 		dataCount = service.mungstarCount(map);
-		
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+dataCount);
-		
-		int total_page = myUtil.pageCount(rows, dataCount);
+		if(dataCount != 0)
+            total_page = myUtil.pageCount(rows, dataCount) ;
 		
 		if(current_page > total_page)
 			current_page = total_page;
 		
 		int start = (current_page - 1) * rows + 1;
 		int end = (current_page) * rows;
-		
 		map.put("start", start);
 		map.put("end", end);
 		
 		List<MungstarRVO> list = service.mungstarList(map);
-		
 		List<Integer> photoCountList = service.mungstarPhotoCount(map);
-		
 		
 		for(int i=0; i<list.size(); i++)
 			list.get(i).setPhotoCount(photoCountList.get(i));

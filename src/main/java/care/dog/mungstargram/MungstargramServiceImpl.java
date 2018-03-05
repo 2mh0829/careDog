@@ -49,7 +49,7 @@ public class MungstargramServiceImpl implements MungstargramService {
 	public int mungstarCount(Map<String, Object> map) {
 		int result = 0;
 		try {
-			result = dao.selectOne("mungstar.mungstarCount");
+			result = dao.selectOne("mungstar.mungstarCount", map);
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
