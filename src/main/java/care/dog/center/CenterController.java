@@ -1,5 +1,6 @@
 package care.dog.center;
 import java.io.File;
+import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,12 +10,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 //hihi
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -161,11 +164,11 @@ public class CenterController {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		String state = "true";
 		
-		if(info.getUserId().equals("admin")) {
+		if(info.getMemberId().equals("admin")) {
 			String root = session.getServletContext().getRealPath("/");
 			String pathname = root + File.separator + "uploads" + File.separator + "gongji";
 			
-			dto.setUserId(info.getUserId());
+			dto.setUserId(info.getMemberId());
 			service.insertGongji(dto, pathname);
 		} else {
 			state = "false";
@@ -189,14 +192,117 @@ public class CenterController {
 		if(dto==null) {
 			return ".center.main";
 		}
-		if(! info.getUserId().equals(dto.getUserId())) {
+		if(! info.getMemberId().equals(dto.getUserId())) {
 			return ".center.main";
 		}
 		
 		List<Gongji> listFile = service.listFile(num);
 		
 		model.addAttribute("mode","update");
+		model.addAttribute("pageNo", page);
+		model.addAttribute("dto",dto);
+		model.addAttribute("listFile",listFile);
 		
-		return "";
+		return ".gongji.created";
+	}
+	
+	@RequestMapping(value="/gongji/update", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> updateSubmit(
+			Gongji dto,
+			HttpSession session
+			) throws Exception{
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		String state = "true";
+		
+		if(info.getMemberId().equals("admin")) {
+			String root = session.getServletContext().getRealPath("/");
+			String pathname = root + File.separator + "uploads" + File.separator + "gongji";
+			
+			dto.setUserId(info.getMemberId());
+			service.updateGongji(dto, pathname);
+		} else {
+			state = "false";
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		
+		return model;
+	}
+	
+	@RequestMapping(value="/gongji/delete", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> delete(
+			@RequestParam int num,
+			HttpSession session
+			) throws Exception{
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		String state = "true";
+		
+		if(info.getMemberId().equals("admin")) {
+			String root = session.getServletContext().getRealPath("/");
+			String pathname = root + File.separator + "uploads" + File.separator + "gongji";
+			service.deleteGongji(num, pathname);
+		} else {
+			state="false";
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		return model;
+	}
+	
+	@RequestMapping(value="/gongji/download")
+	public void download(
+			@RequestParam int fileNum,
+			HttpServletResponse resp,
+			HttpSession session
+			)throws Exception {
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + File.separator + "uploads" + File.separator + "gongji";
+		
+		boolean b = false;
+		
+		Gongji dto = service.readGongji(fileNum);
+		if(dto!=null) {
+			String saveFilename = dto.getSaveFilename();
+			String originalFilename = dto.getOriginalFilename();
+			
+			b = fileManager.doFileDownload(saveFilename, originalFilename, pathname, resp);
+		}
+		
+		if(!b) {
+			try {
+				resp.setContentType("text/html; charset=utf-8");
+				PrintWriter out = resp.getWriter();
+				out.println("<script> alert('파일 다운로드가 불가능합니다.'); history.back();</script>");
+			} catch (Exception e) {
+			}
+		}
+	}
+	
+	@RequestMapping(value="/gongji/deleteFile", method=RequestMethod.POST)
+	public Map<String, Object> deleteFile(
+			@RequestParam int fileNum,
+			HttpServletResponse resp,
+			HttpSession session
+			) throws Exception {
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + File.separator + "uploads" + File.separator + "gongji";
+		
+		Gongji dto = service.readFile(fileNum);
+		if(dto!=null) {
+			fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("field", "fileNum");
+		map.put("num", fileNum);
+		service.deleteFile(map);
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", "true");
+		return model;
 	}
 }
