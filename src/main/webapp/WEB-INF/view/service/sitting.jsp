@@ -6,8 +6,9 @@
    String cp = request.getContextPath();
 %>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="http://slidesjs.com/js/jquery.slides.min.js"></script>
 <script>
 
 $(function(){
@@ -56,20 +57,40 @@ $(function(){
 	$('#careChoice').text($(this).text());
 }); */
 
+$(function(){
+    $("#slides").slidesjs({
+    	width: 800,
+		height: 500,
+      	navigation: {
+	      active: false,
+	      effect: "slide"
+	    }    	
+    });
+});
+
 </script>
 
 <style>
+
+#slides {
+      display:none;
+    }
 
 li{
 	list-style-type: none;
 }
 
-ul{
-	list-style: disc;
-}
+
 
 dt {
 	font-weight: normal;
+}
+
+.checkbox {
+    position: relative;
+    display: inline;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .sitter-header{
@@ -82,6 +103,11 @@ dt {
 	float:left;
 	/* list-style-type: none; */
 	margin: 15px;
+}
+
+.sitter-header ul {
+    margin-left: 30px;
+    margin-top: 20px;
 }
 
 .sitter-search{
@@ -211,14 +237,15 @@ li>a>span{
 	float: right;
 } */
 
-.dropdown-menu input.checkbox[type=checkbox]+label{
+.dropdown-menu input[type="checkbox"]+label{
 	position: relative;
 	display: inline-block;
 	width: 105px;
 	margin-right: 0 !important;
-	padding: 10px 0 10px 25px;
+	padding: 0 5px 25px;
 	color: #696969;
 	font-weight: normal;
+	cursor:pointer;
 }
 
 .filters>ul>li {
@@ -295,15 +322,15 @@ li>a>span{
 	color:#ffffff;
 	font-family:Arial;
 	font-size:17px;
-	padding:16px 31px;
+	padding:4px 35px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2f6627;
 	float: right;
 }
-.myButton:hover {
+.btnSearch:hover {
 	background-color:#5cbf2a;
 }
-.myButton:active {
+.btnSearch:active {
 	position:relative;
 	top:1px;
 }
@@ -317,6 +344,107 @@ li>a>span{
 ::placeholder {
 	color: black;
 }
+
+#col-btn {
+	float: right;
+}
+
+.col-tag {
+	width: 100%;
+}
+
+/* .col-tag dd {
+	margin: 15px -5px 0;
+} */
+
+/* input[type="checkbox"] {
+    
+    border: none;
+    font-weight: normal;
+}
+ */
+.col-tag label {
+	/* font-weight: normal; */
+    padding: 7px 6px;
+    background-color: #dcbf6c;
+    color: #fff;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+}
+
+/* hr {
+	width: 100%; 
+	text-align: center; 
+	border: 0.5px solid gray;
+} */
+
+.col-tot {
+    padding: 0 18px;
+    color: #696969;
+    line-height: 39px;
+    font-size: 13px;
+    /* border-bottom: 0.5px solid #696969; */
+}
+
+.sitter-body {
+	width: 100%;
+    padding: 0;
+    margin: 0 auto;
+    clear: both;
+    position: relative;
+    /* border: 1px solid black; */
+}
+
+.sitter-list {
+	border: 1px solid #ccc;
+	position: relative;
+}
+
+.sitter-room-photo {
+	width: 35%;
+	height: 245px;
+    margin: 0;
+    padding: 0;
+    border-right: solid 1px #ccc;
+    overflow: hidden;
+    /* background-image:url("http://cfile6.uf.tistory.com/image/2544613F51CF074D104D69") */
+}
+
+.sitter-room-photo img {
+	position: absolute;
+	top: 0;
+	left: 0;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#slides-btn-left {
+	position: relative; 
+	top:-20px; 
+	z-index:100;
+}
+
+#slides-btn-right {
+	position: relative; 
+	top:-20px; 
+	z-index:100;
+}
+
+#slides a {
+	height: 200px;
+	text-decoration:none;
+}
+
+.sitter-room-photo {
+	display: inline-block;
+	float: left;
+}
+
+.sitter-room-content {
+	color: black;
+}
+
 
 </style>
 
@@ -484,7 +612,8 @@ li>a>span{
 				<!-- <button type="button" class="btn-close" aria-label="Close">
 					<span aria-hidden="true">x</span>
 				</button> -->
-			</div>
+				</div>
+			
 		</li>
 		<li class="dropdown">
 			<a href="#" data-toggle="dropdown">경기 <span class="city-num">87</span>
@@ -708,13 +837,92 @@ li>a>span{
 			</dd>
 			</dl>
 		</li>
-		<li class="col-btn">
+		<li class="col-btn" id="col-btn">
 			<dl>
+				<dt>&nbsp;</dt>
 				<dd>
 					<button type="button" class="btnSearch">검색</button>
 				</dd>
 			</dl>
 		</li>
+		<li class="col-tag">
+			<dl>
+				<dt>원하는 태그를 모두 선택해주세요!</dt>
+				<dd>
+					<div class="btn-group" data-toggle="buttons">
+					<label for="apt" class="btn">
+						<input type="checkbox" id="apt" class="checkbox">아파트
+					</label>
+					<label for="yard" class="btn">
+						<input type="checkbox" id="yard" class="checkbox">마당
+					</label>
+					<label for="oldDogCare" class="btn">
+						<input type="checkbox" id="oldDogCare" class="checkbox">노령견케어
+					</label>
+					<label for="sickDogCare" class="btn">
+						<input type="checkbox" id="sickDogCare">환자견케어
+					</label>
+					<label for="license" class="btn">
+						<input type="checkbox" id="license">자격증보유
+					</label>
+					<label for="outdoor" class="btn">
+						<input type="checkbox" id="outdoor">실외배변
+					</label>
+					<label for="pickUp" class="btn">
+						<input type="checkbox" id="pickUp">픽업가능
+					</label>
+					<label for="handmade" class="btn">
+						<input type="checkbox" id="handmade">수제간식
+					</label>
+					<label for="noDog" class="btn">
+						<input type="checkbox" id="noDog">반려견없는곳
+					</label>
+					<label for="emergency" class="btn">
+						<input type="checkbox" id="emergency">응급처치
+					</label>
+					<label for="pillAble" class="btn">
+						<input type="checkbox" id="pillAble">투약가능
+					</label>
+					<label for="bigDog" class="btn">
+						<input type="checkbox" id="bigDog">대형견
+					</label>
+					</div>
+				</dd>
+			</dl>
+		</li>
 	</div>
+	<!-- <hr> -->
+	<div class="col-tot">
+		<string>###명</string>
+		의 펫시터가 검색되었습니다!
+		<a href="#" style="float: right; text-decoration: underline">검색 설정 초기화</a>
+	</div>
+	<ul class="sitter-body">
+		<li class="sitter-list">
+			<div class="sitter-room-photo">
+				<div id="slides">
+					<img src="http://cfile6.uf.tistory.com/image/2544613F51CF074D104D69">
+					<img src="http://cfile4.uf.tistory.com/image/0148133F51CF074F0EE545">
+					<img src="http://cfile26.uf.tistory.com/image/2162173F51CF0752036923">
+				<a href="#" id="slides-btn-left" class="slidesjs-previous slidesjs-navigation">
+					<i class="glyphicon glyphicon-chevron-left"></i>
+				</a>
+				<a href="#" id="slides-btn-right" class="slidesjs-next slidesjs-navigation">
+					<i class="glyphicon glyphicon-chevron-right"></i>
+				</a>
+				</div>
+			</div>
+			<div class="sitter-room-content">
+				<dl>
+					<dt>
+						<a href="#">당신의 강아지... 이제 더이상 외롭지 않아...</a>
+						<label class="name">
+							<span class="sitter-face" style="background-image:url(/upload/member/17040720094786370814/d4b2728db654472c68d8404f94b737c6.jpg)"></span>
+						</label>
+					</dt>
+				</dl>
+			</div>
+		</li>
+	</ul>
+	
 </div>
-<!-- test -->
