@@ -42,13 +42,6 @@ $(function(){
 function check() {
         var f = document.boardForm;
 
-    	var str = f.categoryNum.value;
-        if(!str) {
-            alert("카테고리를 선택 하세요. ");
-            f.categoryNum.focus();
-            return false;
-        }
-        
     	var str = f.subject.value;
         if(!str) {
             alert("제목을 입력하세요. ");
@@ -65,16 +58,16 @@ function check() {
 
         var mode="${mode}";
         if(mode=="created")
-            f.action = "<%=cp%>/blog/${blogSeq}/postInsert";
+            f.action = "<%=cp%>/blog/${blogId}/postInsert";
         else if(mode=="update")
-            f.action = "<%=cp%>/blog/${blogSeq}/postUpdate";
+            f.action = "<%=cp%>/blog/${blogId}/postUpdate";
             
         return true;
 }
   
 <c:if test="${mode=='update'}">
   function deleteFile(fileNum) {
-		var url="<%=cp%>/blog/${blogSeq}/postDeleteFile";
+		var url="<%=cp%>/blog/${blogId}/postDeleteFile";
 		$.post(url, {fileNum:fileNum}, function(data){
 			if(data.state=="loginFail") {
 				location.href="<%=cp%>/member/login";
@@ -102,18 +95,7 @@ function check() {
 		 </thead>
 		  
 		 <tbody id="tb"> 
-		    <tr height="40"> 
-			      <td width="90" style="text-align: left;">카테고리</td>
-			      <td> 
-			          <select name="categoryNum" class="selectField" style="width: 210px;">
-			              <option value="">:: 카테고리 선택 ::</option>
-			              <c:forEach var="vo" items="${listCategory}">
-			                  <option value="${vo.categoryNum}" ${dto.categoryNum==vo.categoryNum?"selected='selected'":""}>${vo.parent!=0?"&nbsp;&nbsp;&nbsp;":""} ${vo.classify}</option>
-			              </c:forEach>
-			          </select>
-			      </td>
-			  </tr>
-            
+		
 		      <tr height="40"> 
 			      <td width="90" style="text-align: left;">제&nbsp;&nbsp;&nbsp;&nbsp;목</td>
 			      <td> 
@@ -152,12 +134,11 @@ function check() {
              <tr align="center" height="50" >
                  <td colspan="2">
 					   <button type="submit" class="btn1"> ${mode=="created"?"등록완료":"수정완료"} </button>
-                       <button type="button" class="btn1" onclick="javascript:location.href='<%=cp%>/blog/${blogSeq}';"> ${mode=="created"?"등록취소":"수정취소"} </button>
+                       <button type="button" class="btn1" onclick="javascript:location.href='<%=cp%>/blog/${blogId}';"> ${mode=="created"?"등록취소":"수정취소"} </button>
                  
-                       <input type="hidden" name="blogSeq" value="${blogSeq}">
+                       <input type="hidden" name="blogId" value="${blogId}">
  			         <c:if test="${mode=='update' }">
 			            <input type="hidden" name="num" value="${dto.num}">
-			            <input type="hidden" name="category" value="${categoryNum}">
 			            <input type="hidden" name="page" value="${page}">
 			            <input type="hidden" name="menu" value="${menu}">
 			        </c:if>
