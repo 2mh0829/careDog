@@ -27,4 +27,9 @@ public class StoreController {
 		return ".store.order";
 	}
 	
+	@RequestMapping(value="/store/cart")
+	public String productCart() {
+		return ".store.cart";
+	}
+	
 }

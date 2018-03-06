@@ -172,13 +172,13 @@
 
 <script type="text/javascript">
 	var commonurl='http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/';
-	var serviceKey = '?' + encodeURIComponent('ServiceKey') + '='+'2tZYhOcrXJBIeeVzX9bylvmtsaHiaSrBkh13F9DlyGL0KfQZKGuRtuM3xcc%2Bz55Nblf0iaPOfUwRqeKu2IZ7rQ%3D%3D';
+	var serviceKey = '?' + encodeURIComponent('ServiceKey') + '='+'9pUaOiX4C%2BiH1Rt21Bq0dLJbh2Edo6TOS4JFKHcsNK69ezsQ2p1uHBJUWTcAF4Pzybzv5RkKh7gDMY6TL2YvlQ%3D%3D';
 	var city,gu, center, kind, total
 	var pageNum=1;
 	var startPage, endPage;
 $(document).ready(function(){
 	findDog('');
-	page(1);
+	
 	  $.ajax({
 		url:commonurl+'sido'+serviceKey
 		,dataType:'xml'
@@ -205,8 +205,7 @@ $(document).ready(function(){
 			content="<option value=''>종 선택</option>";
 			$(response).find('item').each(function(){
 				var kindCd = $(this).find('kindCd').text(); /* 품종코드 */
-				var kNm = $(this).find('kNm').text(); /* 품종명 */
-				console.log(kNm);
+				var kNm = $(this).find('KNm').text(); /* 품종명 */
 				var content;
 				content+="<option value="+kindCd+">"+kNm+"</option>";
 				
@@ -275,13 +274,14 @@ function findDog(value){
 	queryParams += '&' + encodeURIComponent('org_cd') + '=' + encodeURIComponent(gu==null?value:gu); /*시군구코드 (시군구 조회 OPEN API 참조) */
 	queryParams += '&' + encodeURIComponent('care_reg_no') + '=' + encodeURIComponent(center==null?value:center); /*보호소번호 (보호소 조회 OPEN API 참조) */
 	queryParams += '&' + encodeURIComponent('state') + '=' + encodeURIComponent('null'); /*상태 - 전체 : null(빈값) - 공고중 : notice - 보호중 : protect */
-	queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent(pageNum==1?'1':pageNum); /*페이지 번호*/
+	queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /*페이지 번호*/
 	queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('9'); /*페이지당 보여줄 개수*/
 	$.ajax({
 		url:allurl+queryParams
 		,dataType:'xml'
 		,success:function(response){
-			$(".allStrayDog").find(".strayDog").remove();
+			console.log(response)
+			//$(".allStrayDog").find(".strayDog").remove();
 			$(response).find('item').each(function(){
 				var age = $(this).find("age").text();
 				var careAddr = $(this).find("careAddr").text(); /* 보호장소 */
@@ -306,12 +306,12 @@ function findDog(value){
 				var specialMark = $(this).find("specialMark").text(); /* 특징 */
 				var weight = $(this).find("weight").text();
 				total=$(this).find("totalCount").text();
-				startPage=((pageNum-1)/10*10)+1;
+				/* startPage=((pageNum-1)/10*10)+1;
 				endPage=((pageNum-1)/10*10)+10
-				
+				//page(pageNum);
 				if(endPage>(total/9)){
 					endPage=total/9+1;
-				}
+				} */
 				
 				content="<div class='strayDog'><a title='확대 이미지 보기' href="+popfile+" class='lytebox' data-lyte-options='slide:false' data-title='CareDog'>";
 				content+="<a href='#' img='' class='tx-animal-image' src="+filename+">";
@@ -344,20 +344,20 @@ function changeKind(value){
 	findDog('');
 }
 
-function page(num){
+<%-- function page(num){
 	pageNum=num;
-	findDog('');
-	
-	var content="<c:forEach var='i' begin="+startPage+" end="+endPage+">";
-	content+="<a href='javascript:page(i)' onclick='changePage();'>i</a>";
-	content+="<a href='javascript:page(i+1)' onclick='changePage();' class='img'>"
+	//findDog('');
+	var a;
+	var content="<c:forEach var='i' begin='1' end='10'>";
+	content+="<a href='javascript:page(${i})' onclick='changePage();'>${i}</a>";
+	content+="<a href='javascript:page(${i+1})' onclick='changePage();' class='img'>"
 	content+="</c:forEach>";
 	content+="<img src='<%=cp%>/resource/img/btn_nxt.png' alt='다음 목록 보기'></a>";
 	/* <span class="select">1</span>  */
 	
 	$(".pagenation").append(content);
 	
-}
+} --%>
  
 </script>
 
@@ -388,6 +388,17 @@ function page(num){
 	<div class="allStrayDog"></div>
 
 	<div id="pagingNav" class="pagenation">
-	
+		<span class="select">1</span> 
+		<a href="?act=list&amp;bid=animal&amp;page=2&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">2</a>
+		<a href="?act=list&amp;bid=animal&amp;page=3&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">3</a>
+		<a href="?act=list&amp;bid=animal&amp;page=4&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">4</a>
+		<a href="?act=list&amp;bid=animal&amp;page=5&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">5</a>
+		<a href="?act=list&amp;bid=animal&amp;page=6&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">6</a>
+		<a href="?act=list&amp;bid=animal&amp;page=7&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">7</a>
+		<a href="?act=list&amp;bid=animal&amp;page=8&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">8</a>
+		<a href="?act=list&amp;bid=animal&amp;page=9&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">9</a>
+		<a href="?act=list&amp;bid=animal&amp;page=10&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">10</a>
+		<a href="?act=list&amp;bid=animal&amp;page=11&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal" class="img">
+		<img src="<%=cp%>/resource/img/btn_nxt.png" alt="다음 목록 보기"></a>
 	</div>
 </div>

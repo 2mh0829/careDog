@@ -86,10 +86,9 @@ function selectListRead(num) {
 // 포스트 수정 폼
 function updateBoard(num) {
 		var url="${blogUrl}/postUpdate";
-		var categoryNum="${categoryNum}";
 		var menu="${menu}";
 		var page="${page}";
-		$.get(url, {num:num, categoryNum:categoryNum, menu:menu, page:page}, function(data){
+		$.get(url, {num:num, menu:menu, page:page}, function(data){
 			$("#blog-content").html(data);
 		});
 }
@@ -301,7 +300,7 @@ function deleteReply(replyNum, page) {
 <c:forEach var="vo" items="${list}">          
             <tr height="33">
                 <td style="padding-left: 10px;">
-                      <c:if test="${vo.categoryNum==1}"><span style="display: inline-block;width: 28px;height:18px;line-height:18px; background: #ED4C00;color: #FFFFFF">공지</span>&nbsp;</c:if>
+                     
                       <a href="javascript:selectListRead('${vo.num}');">${vo.subject}</a>
                 </td>
                 <td align="center">
@@ -323,7 +322,6 @@ function deleteReply(replyNum, page) {
                           <option value="20" ${rows=="20"?"selected='selected'":"" }>20줄 보기</option>
                           <option value="30" ${rows=="30"?"selected='selected'":"" }>30줄 보기</option>
                       </select>
-                      <input type="hidden" name="categoryNum" value="${categoryNum}">
                       <input type="hidden" name="menu" value="${menu}">
                       <input type="hidden" name="num" value="0">
                       <input type="hidden" name="page" value="${page}">
@@ -391,9 +389,9 @@ function deleteReply(replyNum, page) {
             
              <tr height="30">
                 <td width="50%">
-                     <c:if test="${dto.categoryNum!=1}">
+              
                               <span class="item-click" id="reply-open-close">댓글 ▼</span>&nbsp;<span id="postReplyCountView" class="item-title" style="color:#424951">(${replyCount})</span>
-                     </c:if>
+                 
                 </td>
                 <td width="50%" align="right">
                        <c:if test="${dto.blogId==sessionScope.member.memberId}">

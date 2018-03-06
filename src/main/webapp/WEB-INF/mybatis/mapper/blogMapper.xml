@@ -16,23 +16,27 @@
 	<select id="readBlogInfo" parameterType="String" resultType="care.dog.blog.BlogInfo">
 	    SELECT blogId, memberId, title, introduce, visitorCount, created, closed from blogInfo
 	</select>
-		<insert id="insertBlogProfile" parameterType="care.dog.blog.BlogInfo">
+	<insert id="insertBlogProfile" parameterType="care.dog.blog.BlogInfo">
 	    INSERT INTO blogProfile(blogId, userName, isUserName, 
-	                  photoFilename, city, isCity, gender, isGender, hobby, isHobby)
+	                  city, isCity, gender, isGender, hobby, isHobby)
 	      VALUES (#{blogId}, #{userName}, #{isUserName},
-	                 #{photoFilename, jdbcType=VARCHAR}, 
 	                 #{city}, #{isCity}, #{gender}, #{isGender},
 	                 #{hobby, jdbcType=VARCHAR}, #{isHobby})
 	</insert>
+	<update id="updateProfilePhoto" parameterType="care.dog.blog.BlogInfo">
+		update member2 set profilePhoto=#{profilePhoto, jdbcType=VARCHAR}
+			where memberId=#{memberId}
+	</update>
 		<!-- 개인 블로그의 메인 화면에 출력할 정보 -->
 	<select id="readBlogInfoHome" parameterType="Integer" resultType="care.dog.blog.BlogInfo">
-	    SELECT b.blogId, memberId,title, introduce, visitorCount, created, photoFilename
+	    SELECT b.blogId, b.memberId,title, introduce, visitorCount, created, profilePhoto
 	           FROM blogInfo b
 	           join blogProfile p on b.blogId=p.blogId
+	           join member2 m on b.memberId=m.memberId
 	           WHERE b.blogId=#{value}
 	</select>
 		<update id="updateBlogVisitorCount" parameterType="Integer" >
-	    UPDATE blogInfo SET  visitorCount=visitorCount+1 WHERE blogId=#{blogId}
+	    UPDATE blogInfo SET visitorCount=visitorCount+1 WHERE blogId=#{blogId}
 	</update>
 	<!-- 개인 블로그의 프로필에 출력할 정보 -->
 <!-- 	<select id="readBlogInfoProfile" parameterType="Long" resultType="care.dog.blog.BlogInfo">

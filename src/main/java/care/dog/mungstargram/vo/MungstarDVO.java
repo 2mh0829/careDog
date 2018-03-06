@@ -1,6 +1,6 @@
 package care.dog.mungstargram.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class MungstarDVO {
 	// mungstar 
@@ -15,9 +15,19 @@ public class MungstarDVO {
 	private String filename;
 //	private int num;			// fk_mungstar
 	
-	//mungstarTag
+	// mungstarTag
 	private String tag;
 //	private int num;
+	
+	// mungstarLike
+//	private int num;
+//	private String memberId;
+	
+	// mungstarReply
+	private int replyNum;
+	private String reply;
+//	private int num;
+//	private String memberId;
 	
 	
 	public int getNum() {
@@ -68,12 +78,17 @@ public class MungstarDVO {
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
-	
-	@Override
-	public String toString() {
-		return "MungstarDVO [num=" + num + ", context=" + context + ", hitCount=" + hitCount + ", created=" + created
-				+ ", userNum=" + memberId + ", photoNum=" + photoNum + ", filename=" + filename + "]";
+	public int getReplyNum() {
+		return replyNum;
 	}
-	
-	
+	public void setReplyNum(int replyNum) {
+		this.replyNum = replyNum;
+	}
+	public String getReply() {
+		return reply;
+	}
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
+
 }

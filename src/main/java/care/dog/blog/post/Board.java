@@ -8,10 +8,6 @@ public class Board {
 	private String tableName;
 	private int blogId;
 	private String blogName;
-	private int groupNum, categoryNum;
-	private String groupClassify, classify;
-	private int themeNum;
-	private String themeSubject;
 	
 	private int num;
 	private String subject;
@@ -20,7 +16,7 @@ public class Board {
 	
 	private int fileNum;
 	private String originalFilename, saveFilename;
-	private long fileSize;
+	private int fileSize;
 	
 	// 스프링에서 파일 받기
 	private List<MultipartFile> upload; // <input type="file" name="upload"
@@ -31,53 +27,6 @@ public class Board {
 
 	public void setTableName(String tableName) {
 		this.tableName = tableName;
-	}
-	public int getGroupNum() {
-		return groupNum;
-	}
-
-	public void setGroupNum(int groupNum) {
-		this.groupNum = groupNum;
-	}
-
-	public int getCategoryNum() {
-		return categoryNum;
-	}
-
-	public void setCategoryNum(int categoryNum) {
-		this.categoryNum = categoryNum;
-	}
-
-	public String getGroupClassify() {
-		return groupClassify;
-	}
-
-	public void setGroupClassify(String groupClassify) {
-		this.groupClassify = groupClassify;
-	}
-
-	public String getClassify() {
-		return classify;
-	}
-
-	public void setClassify(String classify) {
-		this.classify = classify;
-	}
-
-	public int getThemeNum() {
-		return themeNum;
-	}
-
-	public void setThemeNum(int themeNum) {
-		this.themeNum = themeNum;
-	}
-
-	public String getThemeSubject() {
-		return themeSubject;
-	}
-
-	public void setThemeSubject(String themeSubject) {
-		this.themeSubject = themeSubject;
 	}
 
 	public int getNum() {
@@ -144,11 +93,11 @@ public class Board {
 		this.saveFilename = saveFilename;
 	}
 
-	public long getFileSize() {
+	public int getFileSize() {
 		return fileSize;
 	}
 
-	public void setFileSize(long fileSize) {
+	public void setFileSize(int fileSize) {
 		this.fileSize = fileSize;
 	}
 
@@ -175,4 +124,13 @@ public class Board {
 	public void setBlogId(int blogId) {
 		this.blogId = blogId;
 	}
+
+	@Override
+	public String toString() {
+		return "Board [tableName=" + tableName + ", blogId=" + blogId + ", blogName=" + blogName + ", num=" + num
+				+ ", subject=" + subject + ", content=" + content + ", created=" + created + ", hitCount=" + hitCount
+				+ ", fileNum=" + fileNum + ", originalFilename=" + originalFilename + ", saveFilename=" + saveFilename
+				+ ", fileSize=" + fileSize + ", upload=" + upload + "]";
+	}
+	
 }

@@ -30,7 +30,7 @@
 	font-weight: normal;
 }
 
-#searchBar input {
+#inpTx {
 	width: 200px;
 	height: 30px;
 	border: none;
@@ -39,7 +39,7 @@
 	vertical-align: middle;
 }
 
-#searchBar input:focus {
+#inpTx:focus {
 	outline: none;
 }
 
@@ -234,12 +234,11 @@ $(function() {
 		,minLength: 1
 		,delay: 500
 	});
-
+	
+	
 	var target = 0;
 	$(document).keyup(function(e) {
-		if(e.target.nodeName == "INPUT"){
-			
-		}
+		if(e.target.id == "inpTx" || e.target.className == "selecter"){
 		
 			var key = e.keyCode;
 			switch (key) {
@@ -270,6 +269,8 @@ $(function() {
 			}
 			
 			$("#box"+target).focus();
+
+		}
 		
 	});
 	

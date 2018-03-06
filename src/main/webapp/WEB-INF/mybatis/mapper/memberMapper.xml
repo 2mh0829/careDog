@@ -76,5 +76,5 @@
 	     UPDATE memberAuthority SET authority=#{authority}
 	         WHERE memberId=#{memberId} AND authority=#{oldAuthority}
 	</update>
-	
+
 </mapper>
