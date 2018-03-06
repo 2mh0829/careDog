@@ -8,7 +8,7 @@ public class Gongji {
 	private int listnum, num;
 	
 	private String userId, subject, content, created;
-	private int isNotice;
+	private int isGongji;
 	private String imageFilename;
 	private String saveFilename, originalFilename;
 	private long fileSize;
@@ -53,11 +53,11 @@ public class Gongji {
 	public void setCreated(String created) {
 		this.created = created;
 	}
-	public int getIsNotice() {
-		return isNotice;
+	public int getIsGongji() {
+		return isGongji;
 	}
-	public void setIsNotice(int isNotice) {
-		this.isNotice = isNotice;
+	public void setIsGongji(int isGongji) {
+		this.isGongji = isGongji;
 	}
 	public String getImageFilename() {
 		return imageFilename;
