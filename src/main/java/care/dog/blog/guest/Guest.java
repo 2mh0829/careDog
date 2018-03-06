@@ -2,8 +2,8 @@ package care.dog.blog.guest;
 
 public class Guest {
 	private int num;
-	private String userId, userName, content, created;
-	private long blogSeq;
+	private String memberId, userName, content, created;
+	private int blogId;
 	
 	private String tableName;
 
@@ -15,12 +15,12 @@ public class Guest {
 		this.num = num;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getmemberId() {
+		return memberId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	public String getUserName() {
@@ -47,12 +47,12 @@ public class Guest {
 		this.created = created;
 	}
 
-	public long getBlogSeq() {
-		return blogSeq;
+	public long getblogId() {
+		return blogId;
 	}
 
-	public void setBlogSeq(long blogSeq) {
-		this.blogSeq = blogSeq;
+	public void setblogId(int blogId) {
+		this.blogId = blogId;
 	}
 
 	public String getTableName() {

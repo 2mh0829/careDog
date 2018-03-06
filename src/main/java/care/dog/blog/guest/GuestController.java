@@ -31,29 +31,29 @@ public class GuestController {
 	@Autowired
 	private MyUtilGeneral util;
 	
-	@RequestMapping(value="/blog/{blogSeq}/guest")
+	@RequestMapping(value="/blog/{blogId}/guest")
 	public String guest(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			Model model) throws Exception {
 
-		model.addAttribute("blogSeq",blogSeq);
+		model.addAttribute("blogId",blogId);
 		return "blog/guest/guest";
 	}
 	
-	@RequestMapping(value="/blog/{blogSeq}/guestList")
+	@RequestMapping(value="/blog/{blogId}/guestList")
 	@ResponseBody
 	public Map<String, Object> list(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 		    @RequestParam(value="pageNo", defaultValue="1") int current_page,
 		    HttpSession session) throws Exception {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		BlogInfo blogInfo=blogService.readBlogInfoHome(blogSeq);
+		BlogInfo blogInfo=blogService.readBlogInfoHome(blogId);
 		
 		int owner=0;
-		if(info!=null && info.getUserId().equals(blogInfo.getUserId()))
+		if(info!=null && info.getMemberId().equals(blogInfo.getMemberId()))
 			owner=1;
 		
-		String tableName="b_"+blogSeq;
+		String tableName="b_"+blogId;
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("tableName", tableName);
 		
@@ -86,7 +86,7 @@ public class GuestController {
 		else
 			model.put("isLogin", "true");
 	
-		model.put("blogSeq", blogSeq);
+		model.put("blogId", blogId);
 		model.put("total_page", total_page);
 		model.put("dataCount", dataCount);
 		model.put("pageNo", current_page);
@@ -99,10 +99,10 @@ public class GuestController {
 		return model;
 	}
 	
-	@RequestMapping(value="/blog/{blogSeq}/guestCreated", method=RequestMethod.POST)
+	@RequestMapping(value="/blog/{blogId}/guestCreated", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> createdSubmit(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			Guest dto,
 			HttpSession session) throws Exception {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
@@ -113,22 +113,22 @@ public class GuestController {
 			return model;
 		}
 		
-		String tableName="b_"+blogSeq;
+		String tableName="b_"+blogId;
 		dto.setTableName(tableName);
-		dto.setBlogSeq(blogSeq);
+		dto.setblogId(blogId);
 		// 글을 쓴사람
-		dto.setUserId(info.getUserId());
+		dto.setMemberId(info.getMemberId());
 		
 		service.insertGuest(dto);
 		
-		return list(blogSeq, 1, session);
+		return list(blogId, 1, session);
 	}
 	
-	@RequestMapping(value="/blog/{blogSeq}/guestDelete",
+	@RequestMapping(value="/blog/{blogId}/guestDelete",
 			method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> guestDelete(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			@RequestParam(value="num") int num,
 			@RequestParam(value="pageNo") int pageNo,
 			HttpSession session) throws Exception {
@@ -140,13 +140,13 @@ public class GuestController {
 			return model;
 		}
 		
-		String tableName="b_"+blogSeq;
+		String tableName="b_"+blogId;
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("tableName", tableName);
 		map.put("num", num);
 		
 		service.deleteGuest(map);
 		
-		return list(blogSeq, 1, session);
+		return list(blogId, 1, session);
 	}
 }

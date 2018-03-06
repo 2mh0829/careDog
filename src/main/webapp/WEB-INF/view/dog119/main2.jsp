@@ -22,6 +22,10 @@
 	strong, b {
  	   font-weight: bold;
 	}
+
+	a {
+	    outline: none;
+	}
 	
 	a:-webkit-any-link {
 	    color: -webkit-link;
@@ -50,6 +54,17 @@
 	.postform label a {
 	    color: #147ebb;
 	    text-decoration: none;
+	}
+	
+	.postform label a:hover {
+	    text-decoration: underline;
+	}
+	
+	.map_postbox {
+	    width: 290px;
+	    height: 290px;
+	    margin: 4px 0 0 0;
+	    margin: 4px 0\9;
 	}
 	
 	#attachfile {
@@ -242,6 +257,80 @@ function apply(sel) {
 		document.formID.apply_name.value = "";
 	}
 }
+
+var map;
+var markers[];
+
+function initMap() {
+	map = new google.maps.Map(document.getElementById('map_canvas'), {
+    zoom: 15,
+    center: {lat: 37.566673, lng: 126.978393}
+  });
+	
+	 map.addListener('click', function(event) {
+	      addMarker(event.latLng);
+	 });
+	 
+	 addMarker(center)
+}
+
+function addMarker(location){
+	var marker = new google.maps.Marker({
+	      position: location,
+	      map: map
+	    });
+	    markers.push(marker);
+	  }
+}
+
+function setMapOnAll(map) {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+  }
+
+function placeMarkerAndPanTo(latLng, map) {
+    var marker = new google.maps.Marker({
+      position: latLng,
+      map: map
+    });
+  }
+
+function getAddress(latlng, map) {
+	  var geocoder = new google.maps.Geocoder();
+	  geocoder.geocode({
+        latLng: latlng
+    }, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+				var address = results[0].formatted_address;
+				new google.maps.InfoWindow({
+					content : address + "<br />(Lat, Lng) = " + latlng
+				}).open(map, new google.maps.Marker({
+					position : latlng,
+					map : map
+				}));
+			}
+			document.getElementById('posx').value=latlng;
+		});
+	}
+	
+function clearMarkers(){
+	setMapOnAll(null);
+}
+	
+function showMarkers() {
+    setMapOnAll(map);
+}
+
+function deleteMarkers() {
+	clearMarkers();
+	markers = [];
+}
+	
+	
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb7DDKFrw7KNX2RnVNw1iGdUahxBWuwmE&language=ko&callback=initMap" async defer>
 </script>
 <div class="body-container">
 	<div class="content">
@@ -510,13 +599,12 @@ function apply(sel) {
 						3. 추가정보(<em>*</em>표 필수)
 					</p>
 					<label> 
-					<span>실종지점 지도(<a href="#" class="tooltip"
-							title="* 아래의 지도는 선택사항이며, 필요한 분들은 실종지점 표시로 사용하세요.<br><br>* 지도를 확대/축소/이동 하면서 지도위에 한번 클릭하면 해당 좌표가 자동으로 입력되며, 다시 클릭하면 새로운 지점이 선택됩니다.<br><br>* 실종지점을 잘 모르는경우 대략적인 위치라도 선택하는것이 좋습니다.<br><br>* 지도 아래의 취소를 누르면 해당 좌표가 적용되지 않습니다."
-							onClick="return false;">지도사용법</a>) :
-					</span>
+					<span>실종지점 지도(<a href="#" class="tooltip" title="* 아래의 지도는 선택사항이며, 필요한 분들은 실종지점 표시로 사용하세요.<br><br>
+					* 지도를 확대/축소/이동 하면서 지도위에 한번 클릭하면 해당 좌표가 자동으로 입력되며, 다시 클릭하면 새로운 지점이 선택됩니다.<br><br>
+					* 실종지점을 잘 모르는경우 대략적인 위치라도 선택하는것이 좋습니다.<br><br>* 지도 아래의 취소를 누르면 해당 좌표가 적용되지 않습니다." 
+					onclick="return false;">지도사용법</a>) : </span>
 						<div id="map_canvas" class="map_postbox"></div> 
-						<input type="text" class="text-map" id="posx" name="posx" readonly value="">:X
-						<input type="text" class="text-map" id="posy" name="posy" readonly value="">:Y 
+						위도, 경도: <input type="text" class="text-map" id="posx" name="posx" readonly value="">
 						<a href="javascript:mapReset()" title="취소">취소</a>
 					</label> 
 					<label> 

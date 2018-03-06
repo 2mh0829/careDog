@@ -58,19 +58,6 @@ function themeList() {
   function sendBlog() {
         var f = document.blogForm;
 
-    	var str = f.groupNum.value;
-        if(!str) {
-            alert("블로그 주제를 선택 하세요. ");
-            f.groupNum.focus();
-            return;
-        }
-        
-    	str = f.themeNum.value;
-        if(!str) {
-            alert("블로그 주제를 선택 하세요. ");
-            f.themeNum.focus();
-            return;
-        }
 
     	str = f.title.value;
         if(!str || str.length>50) {
@@ -86,13 +73,6 @@ function themeList() {
             return;
         }
         
-    	str = f.nickName.value;
-        if(!str || str.length>10) {
-            alert("10자 이내의 닉네임을 입력 하세요. ");
-            f.nickName.focus();
-            return;
-        }
-
     	str = f.city.value;
         if(!str) {
             alert("지역를 선택 하세요. ");
@@ -107,12 +87,6 @@ function themeList() {
     			return false;
     		}
     	}        
-    	str = f.prologue.value;
-        if(!str) {
-            alert("프롤로그를 입력하세요. ");
-            f.prologue.focus();
-            return false;
-        }
 
         var mode="${mode}";
         if(mode=="created")
@@ -127,14 +101,14 @@ function themeList() {
 <div class="bodyFrame3">
     <div style="width:700px; padding-top:35px; clear: both; margin: 0px auto;">
         <div class="body-title">
-              <h3> <span style="font-family: Webdings">2</span> 블로그 ${mode=="created"?"생성":"수정" }</h3>
+              <h3> <span style="font-family: Webdings">2</span> 블로그 ${mode=="created"?"생성하기":"수정하기" }</h3>
         </div>
      </div>
     		
     <div style="width:700px; padding-top:25px; clear: both; margin: 0px auto;">
     		<form name="blogForm" method="post" enctype="multipart/form-data">
 			  <table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
-
+<%-- 
 			  <tr height="40"> 
 			      <td width="100" style="text-align: left;">블로그주제</td>
 			      <td colspan="2"> 
@@ -149,7 +123,7 @@ function themeList() {
 			               <option value="">:: 중분류 ::</option>
 			          </select>
 			      </td>
-			  </tr>
+			  </tr> --%>
 			
 			  <tr height="40">
 			      <td width="100" style="text-align: left;">제목</td>
@@ -176,12 +150,12 @@ function themeList() {
 			      </td>
 			  </tr>
 
-			  <tr height="40">
+		<%-- 	  <tr height="40">
 			      <td width="100" style="text-align: left;">닉네임</td>
 			      <td colspan="2"> 
 						<input type="text" name="nickName" style="width: 210px;" maxlength="10" class="boxTF" value="${dto.nickName}">
 			      </td>
-			  </tr>
+			  </tr> --%>
 			
 			  <tr height="40">
 			      <td width="100" style="text-align: left;">성별</td>
@@ -250,12 +224,12 @@ function themeList() {
 			      </td>
 			  </tr>
 
-			  <tr> 
+			<%--   <tr> 
 			      <td width="100" style="text-align: left; padding-top:5px;" valign="top">프롤로그</td>
 			      <td colspan="2" valign="top" style="padding:5px 0px 5px 0px;">
 			        <textarea name="prologue" cols="75" rows="7" class="boxTA" style="width:98%; height: 100px;">${dto.prologue}</textarea>
 			      </td>
-			  </tr>
+			  </tr> --%>
 			  </table>
 			
 			  <table style="width: 100%; margin: 0px auto; border-spacing: 0px;">

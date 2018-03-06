@@ -147,7 +147,7 @@ function listPage(page) {
 
 // 댓글 추가
 function sendReply() {
-	var uid="${sessionScope.member.userId}";
+	var uid="${sessionScope.member.memberId}";
 	if(! uid) {
 		login();
 		return;
@@ -215,7 +215,7 @@ function countLike(replyNum) {
 
 //좋아요/싫어요 추가
 function sendLike(replyNum, replyLike) {
-	var uid="${sessionScope.member.userId}";
+	var uid="${sessionScope.member.memberId}";
 	if(! uid) {
 		login();
 		return false;
@@ -254,7 +254,7 @@ function sendLike(replyNum, replyLike) {
 
 //댓글 삭제
 function deleteReply(replyNum, page) {
-	var uid="${sessionScope.member.userId}";
+	var uid="${sessionScope.member.memberId}";
 	if(! uid) {
 		login();
 		return false;
@@ -396,7 +396,7 @@ function deleteReply(replyNum, page) {
                      </c:if>
                 </td>
                 <td width="50%" align="right">
-                       <c:if test="${dto.blogId==sessionScope.member.userId}">
+                       <c:if test="${dto.blogId==sessionScope.member.memberId}">
                           <span class="item-click"
                                       onclick="updateBoard('${dto.num}');">수정</span>&nbsp;
                            <span class="item-click"

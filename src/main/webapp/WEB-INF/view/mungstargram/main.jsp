@@ -142,6 +142,7 @@ div.gallery img {
 	color: white;
 	font-size: 20px;
 	cursor: pointer;
+	opacity: 0.8;
 	text-shadow: 2px 2px 4px black;
 }
 
@@ -163,6 +164,17 @@ div.desc {
 
 @media only screen and (max-width: 1000px) {
 	div.gallery {
+		height: 25vw;
+	}
+	div.modal-right {
+		background: white;
+		width: 100%;
+		text-align: left;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	div.gallery {
 		height: 40vw;
 	}
 	.responsive {
@@ -180,7 +192,7 @@ div.desc {
 	}
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 500px) {
 	div.gallery {
 		height: 70vw;
 	}
@@ -232,7 +244,9 @@ $(function() {
 
 function listPage(page) {
 	var url = "<%=cp %>/mungstargram/list";
-	var data = {pageNo:page};
+	var searchKey = "${searchKey}";
+	var searchValue = "${searchValue}";
+	var data = {pageNo:page, searchKey:searchKey, searchValue:searchValue};
 	$.get(url, data, function(data) {
 		printList(data);
 	}, "json");
@@ -410,13 +424,13 @@ function modalSize() {
 
 /* ------------------------------------------------------------------------------------------------------------------------ */
 // 검색
-/* 
+
 $(function() {
 	$("body").on("click", "#context a", function() {
-		alert($(this).text());
+		searchTag($(this).text());
 	});
 });
-*/
+
 
 
 /* ------------------------------------------------------------------------------ */
@@ -431,9 +445,11 @@ function openWin(){
 	<h2>mungstargram.</h2>
 	<h4>Resize the browser window to see the effect.</h4>
 	
+	<button class="btn" onclick="openWin();">insert</button>
+	
 	<div id="printPhoto"></div>
 
-
+<%-- 
 	<div class="responsive">
 		<div style="background: black;">
 			<div class="gallery">
@@ -448,40 +464,9 @@ function openWin(){
 			</div>
 		</div>
 	</div>
-
-	<div class="responsive">
-		<div style="background: black;">
-			<div class="gallery">
-				<img src="<%=cp%>/resource/img/test2.jpg">
-				<div style="position: absolute; top: 10px; right: 10px;">
-					<span class='glyphicon glyphicon-th-large myIcon'></span>
-				</div>
-				<div class="gallery-text" align="center">
-					<span class="glyphicon glyphicon-heart"></span> : 2134개 &nbsp;&nbsp;&nbsp; 
-					<span class="glyphicon glyphicon-comment"></span> : 83개
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="responsive">
-		<div style="background: black;">
-			<div class="gallery">
-				<img src="<%=cp%>/resource/img/dog3.jpg">
-				<div class="gallery-text" align="center">
-					<span class="glyphicon glyphicon-heart"></span> : 2134개 &nbsp;&nbsp;&nbsp; 
-					<span class="glyphicon glyphicon-comment"></span> : 83개
-				</div>
-			</div>
-		</div>
-	</div>
-
- 
+--%>
 	<div class="clearfix"></div>
 
-
-	<%-- <button class="btn" onclick="location.href='<%=cp%>/mungstargram/created'">insert</button> --%>
-	<button class="btn" onclick="openWin();">insert</button>
 
 	<!-- Modal -->
 	<div class="modal" id="myModal" role="dialog" style="background: rgba(0,0,0,0.5);">
@@ -533,7 +518,12 @@ function openWin(){
 			</div>
 		</div>
 	</div>
-
+<%-- 	
+	<div>
+		<input type="hidden" name="searchKey" value="${searchKey }">
+		<input type="hidden" name="searchValue" value="${searchValue }">
+	</div>	
+ --%>
 </div>
 
 

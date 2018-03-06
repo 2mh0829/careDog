@@ -38,6 +38,8 @@ public class GuestServiceImpl implements GuestService {
 			list=dao.selectList("blogGuest.listGuest", map);
 		} catch (Exception e) {
 			System.out.println(e.toString());
+			
+			
 		}
 		return list;
 	}

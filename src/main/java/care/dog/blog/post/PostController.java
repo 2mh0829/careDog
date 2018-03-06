@@ -42,9 +42,9 @@ public class PostController {
 	@Autowired
 	private FileManager fileManager;
 	
-	@RequestMapping(value="/blog/{blogSeq}")
+	@RequestMapping(value="/blog/{blogId}")
 	public String main(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			@RequestParam(value="num", defaultValue="0") int num,
 			@RequestParam(value="categoryNum", defaultValue="0") int categoryNum,
 			@RequestParam(value="page", defaultValue="1") int current_page,
@@ -62,41 +62,22 @@ public class PostController {
 		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
-		BlogInfo blogInfo=blogService.readBlogInfoHome(blogSeq);
+		BlogInfo blogInfo=blogService.readBlogInfoHome(blogId);
 		if(blogInfo==null) {
 			return "redirect:/nblog";
 		}
 		
 		int owner=1;
-		if(info==null|| ! info.getUserId().equals(blogInfo.getUserId()))
+		if(info==null|| ! info.getMemberId().equals(blogInfo.getMemberId()))
 			owner=0;
 		
 		Map<String, Object> map=new HashMap<>();
-		String tableName="b_"+blogSeq;
+		String tableName="b_"+blogId;
 		map.put("tableName", tableName);
-		map.put("categoryNum", categoryNum);
 		map.put("owner", owner);
 		
-		// ---------------------------------------------------------
-		// 선택한 카테고리
-		Category category=categoryService.readCategory(map);
-		
-		// 비공개 게시판인 경우
-		if(category!=null && category.getClosed()==1 && owner==0) {
-			model.addAttribute("menu", menu);
-			model.addAttribute("blogInfo", blogInfo);
-			model.addAttribute("blogUrl", cp+"/blog/"+blogSeq);
-			model.addAttribute("categoryNum", categoryNum);
-			model.addAttribute("rows", rows);
-			model.addAttribute("listClosed", listClosed);
-			model.addAttribute("owner", owner);
-			model.addAttribute("dataCount", 0);
-			return ".blogPostLayout";
-		}
-		
 		String classify="전체보기";
-		if(category!=null)
-			classify=category.getClassify();
+	
 		
 		// ---------------------------------------------------------
 		// 리스트
@@ -116,10 +97,13 @@ public class PostController {
         
 		// ---------------------------------------------------------
         // 게시글 보기
-        if(list.size()>0 && num==0) {
-        	num=list.get(0).getNum();
+        if(list!=null) {
+        	 if(list.size()>0 && num==0) {
+             	num=list.get(0).getNum();
+             }
+     		map.put("num", num);
         }
-		map.put("num", num);
+       
 		
         // 블로그 방문자 수 및 포스트 조회수 증가
 		try {
@@ -132,16 +116,16 @@ public class PostController {
 					if(num==n) {
 						bBoard=true;
 					}
-				} else if(c.getName().startsWith("blogSeq")) {
+				} else if(c.getName().startsWith("blogId")) {
 					bBlog=true;
 				}
 			}
 			
 			if(! bBlog) {
 				// 블로그 방문자 수 증가
-				blogService.updateBlogVisitorCount(blogSeq);
+				blogService.updateBlogVisitorCount(blogId);
 				
-				Cookie ck=new Cookie("blogSeq", Long.toString(blogSeq));
+				Cookie ck=new Cookie("blogId", Integer.toString(blogId));
 				ck.setMaxAge(-1);
 				resp.addCookie(ck);
 			}
@@ -172,13 +156,13 @@ public class PostController {
 		
 		// ---------------------------------------------------------		
         String query = "categoryNum="+categoryNum+"&rows="+rows+"&menu="+menu;
-        String listUrl = cp+"/blog/"+blogSeq+"?"+query;
+        String listUrl = cp+"/blog/"+blogId+"?"+query;
 		
         String paging = util.paging(current_page, total_page, listUrl);
 		// ---------------------------------------------------------        
 		model.addAttribute("menu", menu);
 		model.addAttribute("blogInfo", blogInfo);
-		model.addAttribute("blogUrl", cp+"/blog/"+blogSeq);
+		model.addAttribute("blogUrl", cp+"/blog/"+blogId);
 		model.addAttribute("classify", classify);
 		model.addAttribute("categoryNum", categoryNum);
 		model.addAttribute("rows", rows);
@@ -201,9 +185,9 @@ public class PostController {
 		return ".blogPostLayout";
 	}
 	
-	@RequestMapping(value="/blog/{blogSeq}/postInsert", method=RequestMethod.GET)
+	@RequestMapping(value="/blog/{blogId}/postInsert", method=RequestMethod.GET)
 	public String postInsertForm(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			Model model,
 			HttpSession session) throws Exception {
 		// AJAX(TEXT)-포스트 글쓰기 폼
@@ -214,56 +198,51 @@ public class PostController {
 			return "blog/post/error";
 		}
 
-		Map<String, Object> map1=new HashMap<>();
-		map1.put("field", "b.userId");
-		map1.put("field_value", info.getUserId());
-		BlogInfo blogInfo=blogService.readBlogInfo(map1);
+		BlogInfo blogInfo=blogService.readBlogInfo(info.getMemberId());
 		if(blogInfo==null) {
 			model.addAttribute("state", "blogFail");
 			return "blog/post/error";
 		}
 		
-		String tableName="b_"+blogSeq;
+		String tableName="b_"+blogId;
 		Map<String, Object> map2=new HashMap<>();
 		map2.put("tableName", tableName);
 		List<Category> listCategory=categoryService.listCategoryAll(map2);
 		
 		model.addAttribute("mode", "created");
-		model.addAttribute("blogSeq", blogSeq);
+		model.addAttribute("blogId", blogId);
 		model.addAttribute("listCategory",listCategory);
 		
 		return "blog/post/postCreated";
 	}
 	
-	@RequestMapping(value="/blog/{blogSeq}/profile")
+	@RequestMapping(value="/blog/{blogId}/profile")
 	public String profile(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			Model model) throws Exception {
 		// AJAX(TEXT) - 프로필
-		BlogInfo blogInfo=blogService.readBlogInfoProfile(blogSeq);
+		BlogInfo blogInfo=blogService.readBlogInfoProfile(blogId);
 
 		model.addAttribute("blogInfo", blogInfo);
 		return "blog/post/profile";
 	}
 
-	@RequestMapping(value="/blog/{blogSeq}/prologue")
+	@RequestMapping(value="/blog/{blogId}/prologue")
 	public String prologue(
-			@PathVariable long blogSeq,
+			HttpSession session,
+			@PathVariable int blogId,
 			Model model) throws Exception {
 		// AJAX(TEXT) - 프롤로그
-		Map<String, Object> map=new HashMap<>();
-		map.put("field", "b.blogSeq");
-		map.put("field_value", blogSeq);
-		
-		BlogInfo blogInfo=blogService.readBlogInfo(map);
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		BlogInfo blogInfo=blogService.readBlogInfo(info.getMemberId());
 
 		model.addAttribute("blogInfo", blogInfo);
 		return "blog/post/prologue";
 	}
 	
-	@RequestMapping(value="/blog/{blogSeq}/postInsert", method=RequestMethod.POST)
+	@RequestMapping(value="/blog/{blogId}/postInsert", method=RequestMethod.POST)
 	public String postInsertSubmit(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			Board dto,
 			HttpSession session) throws Exception {
 		// 포스트 글 저장
@@ -275,25 +254,25 @@ public class PostController {
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("field", "b.userId");
-		map.put("field_value", info.getUserId());
-		BlogInfo blogInfo=blogService.readBlogInfo(map);
+		map.put("field_value", info.getMemberId());
+		BlogInfo blogInfo=blogService.readBlogInfo(info.getMemberId());
 		if(blogInfo==null) {
-			return "redirect:/blog/"+blogSeq;
+			return "redirect:/blog/"+blogId;
 		}
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getUserId();
+		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getMemberId();
 		
-		String tableName="b_"+blogSeq;
+		String tableName="b_"+blogId;
 		dto.setTableName(tableName);
 		boardService.insertBoard(dto, pathname);
 		
-		return "redirect:/blog/"+blogSeq;
+		return "redirect:/blog/"+blogId;
 	}
 	
-	@RequestMapping(value="/blog/{blogSeq}/postUpdate", method=RequestMethod.GET)
+	@RequestMapping(value="/blog/{blogId}/postUpdate", method=RequestMethod.GET)
 	public String postUpdateForm(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			@RequestParam(value="num") int num,
 			@RequestParam(value="categoryNum") int categoryNum,
 			@RequestParam(value="page") String page,
@@ -308,16 +287,14 @@ public class PostController {
 			return "blog/post/error";
 		}
 
-		Map<String, Object> map1=new HashMap<>();
-		map1.put("field", "b.userId");
-		map1.put("field_value", info.getUserId());
-		BlogInfo blogInfo=blogService.readBlogInfo(map1);
+		
+		BlogInfo blogInfo=blogService.readBlogInfo(info.getMemberId());
 		if(blogInfo==null) {
 			model.addAttribute("state", "blogFail");
 			return "blog/post/error";
 		}
 		
-		String tableName="b_"+blogSeq;
+		String tableName="b_"+blogId;
 		Map<String, Object> map2=new HashMap<>();
 		map2.put("tableName", tableName);
 		List<Category> listCategory=categoryService.listCategoryAll(map2);
@@ -331,7 +308,7 @@ public class PostController {
 		
 		List<Board> listFile=boardService.listFile(map2);
 		
-		model.addAttribute("blogSeq", blogSeq);
+		model.addAttribute("blogId", blogId);
 		model.addAttribute("listCategory",listCategory);
 		
 		model.addAttribute("mode", "update");
@@ -345,9 +322,9 @@ public class PostController {
 		return "blog/post/postCreated";
 	}
 	
-	@RequestMapping(value="/blog/{blogSeq}/postUpdate", method=RequestMethod.POST)
+	@RequestMapping(value="/blog/{blogId}/postUpdate", method=RequestMethod.POST)
 	public String postUpdateSubmit(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			Board dto,
 			@RequestParam(value="category") int categoryNum,
 			@RequestParam(value="page") String page,
@@ -360,27 +337,25 @@ public class PostController {
 			return "redirect:/member/login";
 		}
 		
-		Map<String, Object> map=new HashMap<>();
-		map.put("field", "b.userId");
-		map.put("field_value", info.getUserId());
-		BlogInfo blogInfo=blogService.readBlogInfo(map);
+		
+		BlogInfo blogInfo=blogService.readBlogInfo(info.getMemberId());
 		if(blogInfo==null) {
-			return "redirect:/blog/"+blogSeq+"&categoryNum="+categoryNum;
+			return "redirect:/blog/"+blogId+"&categoryNum="+categoryNum;
 		}
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getUserId();
+		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getMemberId();
 		
-		String tableName="b_"+blogSeq;
+		String tableName="b_"+blogId;
 		dto.setTableName(tableName);
 		boardService.updateBoard(dto, pathname);
 		
-		return "redirect:/blog/"+blogSeq+"?num="+dto.getNum()+"&categoryNum="+categoryNum+"&menu="+menu+"&page="+page;
+		return "redirect:/blog/"+blogId+"?num="+dto.getNum()+"&categoryNum="+categoryNum+"&menu="+menu+"&page="+page;
 	}
 	
-	@RequestMapping(value="/blog/{blogSeq}/postDelete")
+	@RequestMapping(value="/blog/{blogId}/postDelete")
 	public String postDelete(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			@RequestParam(value="num") int num,
 			@RequestParam(value="categoryNum") int categoryNum,
 			@RequestParam(value="page") String page,
@@ -393,18 +368,16 @@ public class PostController {
 			return "redirect:/member/login";
 		}
 		
-		Map<String, Object> map1=new HashMap<>();
-		map1.put("field", "b.userId");
-		map1.put("field_value", info.getUserId());
-		BlogInfo blogInfo=blogService.readBlogInfo(map1);
+		
+		BlogInfo blogInfo=blogService.readBlogInfo(info.getMemberId());
 		if(blogInfo==null) {
-			return "redirect:/blog/"+blogSeq+"&categoryNum="+categoryNum;
+			return "redirect:/blog/"+blogId+"&categoryNum="+categoryNum;
 		}
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getUserId();
+		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getMemberId();
 		
-		String tableName="b_"+blogSeq;
+		String tableName="b_"+blogId;
 		Map<String, Object> map2=new HashMap<>();
 		map2.put("tableName", tableName);
 		map2.put("field", "num");
@@ -412,13 +385,13 @@ public class PostController {
 		
 		boardService.deleteBoard(map2, pathname);
 		
-		return "redirect:/blog/"+blogSeq+"?categoryNum="+categoryNum+"&menu="+menu+"&page="+page;
+		return "redirect:/blog/"+blogId+"?categoryNum="+categoryNum+"&menu="+menu+"&page="+page;
 	}
 	
-	@RequestMapping(value="/blog/{blogSeq}/postDeleteFile", method=RequestMethod.POST)
+	@RequestMapping(value="/blog/{blogId}/postDeleteFile", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> deleteFile(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			@RequestParam int fileNum,
 			HttpSession session) throws Exception {
 		// AJAX(JSON) - 포스트 수정에서 파일 삭제
@@ -431,9 +404,9 @@ public class PostController {
 		} else {
 		
 			String root=session.getServletContext().getRealPath("/");
-			String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getUserId();
+			String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getMemberId();
 			
-			String tableName="b_"+blogSeq;
+			String tableName="b_"+blogId;
 			Map<String, Object> map=new HashMap<>();
 			map.put("tableName", tableName);
 			map.put("fileNum", fileNum);
@@ -454,9 +427,9 @@ public class PostController {
 		return model;
 	}
 	
-	@RequestMapping(value="/blog/{blogSeq}/download")
+	@RequestMapping(value="/blog/{blogId}/download")
 	public void download(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			@RequestParam int fileNum,
 			HttpServletResponse resp,
 			HttpSession session) throws Exception {
@@ -465,11 +438,11 @@ public class PostController {
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getUserId();
+		String pathname=root+File.separator+"uploads"+File.separator+"blog"+File.separator+info.getMemberId();
 		
 		boolean b=false;
 		if(info!=null) {
-			String tableName="b_"+blogSeq;
+			String tableName="b_"+blogId;
 			Map<String, Object> map=new HashMap<>();
 			map.put("tableName", tableName);
 			map.put("fileNum", fileNum);
@@ -494,9 +467,9 @@ public class PostController {
 	}
 	
 	// 댓글 처리 ----------------------------------------------
-	@RequestMapping(value="/blog/{blogSeq}/postListReply")
+	@RequestMapping(value="/blog/{blogId}/postListReply")
 	public String listReply(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			@RequestParam(value="num") int num,
 			@RequestParam(value="pageNo", defaultValue="1") int current_page,
 			Model model) throws Exception {
@@ -506,7 +479,7 @@ public class PostController {
 		int total_page=0;
 		int replyCount=0;
 		
-		String tableName="b_"+blogSeq;
+		String tableName="b_"+blogId;
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("tableName", tableName);
 		map.put("num", num);
@@ -539,7 +512,7 @@ public class PostController {
 		
 		// jsp로 넘길 데이터
 		model.addAttribute("listReply", listReply);
-		model.addAttribute("blogSeq", blogSeq);
+		model.addAttribute("blogId", blogId);
 		model.addAttribute("pageNo", current_page);
 		model.addAttribute("replyCount", replyCount);
 		model.addAttribute("total_page", total_page);
@@ -548,14 +521,14 @@ public class PostController {
 		return "blog/post/postListReply";
 	}
 
-	@RequestMapping(value="/blog/{blogSeq}/postListReplyAnswer")
+	@RequestMapping(value="/blog/{blogId}/postListReplyAnswer")
 	public String listReplyAnswer(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			@RequestParam(value="answer") int answer,
 			Model model) throws Exception {
 		// AJAX(TEXT) - 댓글별 답글 리스트
 
-   	    String tableName="b_"+blogSeq;
+   	    String tableName="b_"+blogId;
    	    Map<String, Object> map=new HashMap<String, Object>();
 		map.put("tableName", tableName);
 		map.put("answer", answer);
@@ -575,18 +548,18 @@ public class PostController {
 		return "blog/post/postListReplyAnswer";
 	}
 	
-	@RequestMapping(value="/blog/{blogSeq}/postReplyCount",
+	@RequestMapping(value="/blog/{blogId}/postReplyCount",
 			method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> postReplyCount(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			@RequestParam(value="num") int num) throws Exception {
 		// AJAX(JSON) - 댓글별 개수
 
 		String state="true";
 		int count=0;
 
-		String tableName="b_"+blogSeq;
+		String tableName="b_"+blogId;
         Map<String, Object> map=new HashMap<String, Object>();
  		map.put("tableName", tableName);
    		map.put("num", num);
@@ -600,18 +573,18 @@ public class PostController {
 		return model;
 	}
 
-	@RequestMapping(value="/blog/{blogSeq}/postReplyCountAnswer",
+	@RequestMapping(value="/blog/{blogId}/postReplyCountAnswer",
 			method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> replyCountAnswer(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			@RequestParam(value="answer") int answer) throws Exception {
 		// AJAX(JSON) - 댓글별 답글 개수
 
 		String state="true";
 		int count=0;
 
-		String tableName="b_"+blogSeq;
+		String tableName="b_"+blogId;
         Map<String, Object> map=new HashMap<String, Object>();
  		map.put("tableName", tableName);
    		map.put("answer", answer);
@@ -625,11 +598,11 @@ public class PostController {
 		return model;
 	}
 	
-	@RequestMapping(value="/blog/{blogSeq}/postCreatedReply",
+	@RequestMapping(value="/blog/{blogId}/postCreatedReply",
 			method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> createdReply(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			Reply dto,
 			HttpSession session) throws Exception {
 		// AJAX(JSON) - 댓글 및 리플별 답글 추가
@@ -640,9 +613,9 @@ public class PostController {
 		if(info==null) { // 로그인이 되지 않는 경우
 			state="loginFail";
    	   } else {
-   		   	String tableName="b_"+blogSeq;
+   		   	String tableName="b_"+blogId;
    		   	dto.setTableName(tableName);
-   		   	dto.setUserId(info.getUserId());
+   		   	dto.setUserId(info.getMemberId());
    		   	int result=boardService.insertReply(dto);
    		   	if(result==0)
    		   		state="false";
@@ -653,11 +626,11 @@ public class PostController {
    	   return model;
 	}
 	
-	@RequestMapping(value="/blog/{blogSeq}/postDeleteReply",
+	@RequestMapping(value="/blog/{blogId}/postDeleteReply",
 			method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> deleteReply(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			@RequestParam int replyNum,
 			@RequestParam String mode,
 			HttpSession session) throws Exception {
@@ -669,7 +642,7 @@ public class PostController {
 		if(info==null) { // 로그인이 되지 않는 경우
 			state="loginFail";
 		} else {
-			String tableName="b_"+blogSeq;
+			String tableName="b_"+blogId;
 			Map<String, Object> map=new HashMap<String, Object>();
 			map.put("tableName", tableName);
 			map.put("mode", mode);
@@ -690,11 +663,11 @@ public class PostController {
 		return model;
 	}
 	
-	@RequestMapping(value="/blog/{blogSeq}/postReplyLike",
+	@RequestMapping(value="/blog/{blogId}/postReplyLike",
 			method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> replyLike(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			Reply dto,
 			HttpSession session) throws Exception {
 		// AJAX(JSON) - 좋아요/싫어요 추가
@@ -705,9 +678,9 @@ public class PostController {
 		if(info==null) { // 로그인이 되지 않는 경우
 			state="loginFail";
 		} else {
-			String tableName="b_"+blogSeq;
+			String tableName="b_"+blogId;
 			dto.setTableName(tableName);
-			dto.setUserId(info.getUserId());
+			dto.setUserId(info.getMemberId());
 			int result=boardService.insertReplyLike(dto);
 			if(result==0)
 				state="false";
@@ -718,18 +691,18 @@ public class PostController {
 		return model;
 	}
 	
-	@RequestMapping(value="/blog/{blogSeq}/postCountLike",
+	@RequestMapping(value="/blog/{blogId}/postCountLike",
 			method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> countLike(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			@RequestParam int replyNum) throws Exception {
 		// AJAX(JSON) - 좋아요/싫어요 개수
 		
 		String state="true";
 		int likeCount=0, disLikeCount=0;
 		
-		String tableName="b_"+blogSeq;
+		String tableName="b_"+blogId;
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("tableName", tableName);
 		map.put("replyNum", replyNum);
