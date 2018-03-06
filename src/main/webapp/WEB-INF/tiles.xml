@@ -28,21 +28,38 @@
 		<put-attribute name="left" value="/WEB-INF/view/{1}/left.jsp" />
 	</definition>
 	
-<!-- 블로그 3단 -->
+	<!-- 개인 블로그 3단 -->
+	<definition name=".blogPostLayout" template="/WEB-INF/view/blog/layout/postLayout.jsp">
+		<put-attribute name="title" value="spring" />
+		<put-attribute name="header"
+			value="/WEB-INF/view/blog/layout/postHeader.jsp" />
+		<put-attribute name="left"
+			value="/WEB-INF/view/blog/layout/postLeft.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/blog/post/post.jsp" />
+	</definition>
+	<definition name=".blogPost.*.*.*" extends=".blogPostLayout">
+		<put-attribute name="left"
+			value="/WEB-INF/view/blog/layout/{1}Left.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/blog/{2}/{3}.jsp" />
+	</definition>
+	
+	<!-- 블로그 3단 -->
 	<definition name=".blogLayout" template="/WEB-INF/view/blog/layout/blogLayout.jsp">
-	    <put-attribute name="title" value="spring" />
-	  	<put-attribute name="header" value="/WEB-INF/view/blog/layout/blogHeader.jsp" />
+		<put-attribute name="title" value="spring" />
+		<put-attribute name="header"
+			value="/WEB-INF/view/blog/layout/blogHeader.jsp" />
 		<put-attribute name="body" value="/WEB-INF/view/blog/main/main.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/view/blog/layout/blogFooter.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/view/blog/layout/blogFooter.jsp" />
 	</definition>
 	<definition name=".blog.*.*.*" extends=".blogLayout">
-		<put-attribute name="body" value="/WEB-INF/view/blog/{1}/{2}/{3}.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/view/blog/{1}/{2}/{3}.jsp" />
 	</definition>
 	<definition name=".blog.*.*" extends=".blogLayout">
-		<put-attribute name="body" value="/WEB-INF/view/blog/{1}/{2}.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/view/blog/{1}/{2}.jsp" />
 	</definition>
-		<definition name=".blog.*" extends=".blogLayout">
-		<put-attribute name="body" value="/WEB-INF/view/blog/{1}.jsp"/>
+	<definition name=".blog.*" extends=".blogLayout">
+		<put-attribute name="body" value="/WEB-INF/view/blog/{1}.jsp" />
 	</definition>
 
 	<definition name=".mainLayout" template="/WEB-INF/view/layout/layout.jsp">
@@ -65,12 +82,12 @@
 	<definition name=".mypageMemberEdit.*" extends=".mypage">
 		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp" />
 	</definition>
-	
+
 	<definition name=".member.*" extends=".mainLayout">
 		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp" />
 		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
 	</definition>
-		<definition name=".adminLayout" template="/WEB-INF/view/admin/layout/layout.jsp">
+	<definition name=".adminLayout" template="/WEB-INF/view/admin/layout/layout.jsp">
 		<put-attribute name="title" value="spring" />
 		<put-attribute name="header"
 			value="/WEB-INF/view/admin/layout/header.jsp" />
@@ -88,7 +105,7 @@
 	<definition name=".admin.*" extends=".adminLayout">
 		<put-attribute name="body" value="/WEB-INF/view/admin/{1}.jsp" />
 	</definition>
-	
+
 	<definition name=".*.*.*" extends=".mainLayout">
 		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}/{3}.jsp" />
 		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />

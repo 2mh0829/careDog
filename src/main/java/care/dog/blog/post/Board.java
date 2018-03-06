@@ -6,8 +6,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Board {
 	private String tableName;
-	private long blogSeq;
-	private String blogId;
+	private int blogId;
+	private String blogName;
 	private int groupNum, categoryNum;
 	private String groupClassify, classify;
 	private int themeNum;
@@ -32,23 +32,6 @@ public class Board {
 	public void setTableName(String tableName) {
 		this.tableName = tableName;
 	}
-
-	public long getBlogSeq() {
-		return blogSeq;
-	}
-
-	public void setBlogSeq(long blogSeq) {
-		this.blogSeq = blogSeq;
-	}
-
-	public String getBlogId() {
-		return blogId;
-	}
-
-	public void setBlogId(String blogId) {
-		this.blogId = blogId;
-	}
-
 	public int getGroupNum() {
 		return groupNum;
 	}
@@ -175,5 +158,21 @@ public class Board {
 
 	public void setUpload(List<MultipartFile> upload) {
 		this.upload = upload;
+	}
+
+	public String getBlogName() {
+		return blogName;
+	}
+
+	public void setBlogName(String blogName) {
+		this.blogName = blogName;
+	}
+
+	public int getBlogId() {
+		return blogId;
+	}
+
+	public void setBlogId(int blogId) {
+		this.blogId = blogId;
 	}
 }
