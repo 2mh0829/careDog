@@ -39,14 +39,14 @@ public class BlogServiceImpl implements BlogService{
 			if(dto.getUpload()!=null && !dto.getUpload().isEmpty()) {
 				String filename=fileManager.doFileUpload(
 						dto.getUpload(), pathname);
-				dto.setPhotoFilename(filename);
+				dto.setProfilePhoto(filename);
 			}
 			
 			int blogId=maxBlogId()+1;
 			dto.setBlogId(blogId);
 			dao.insertData("blog.insertBlogInfo", dto);
 			dao.insertData("blog.insertBlogProfile", dto);
-			
+			dao.updateData("blog.updateProfilePhoto", dto);
 			createBlogTable(blogId);
 			
 			result=1;
@@ -94,16 +94,17 @@ public class BlogServiceImpl implements BlogService{
 		int result=0;
 		try {
 			if(dto.getUpload()!=null && !dto.getUpload().isEmpty()) {
-				if(dto.getPhotoFilename().length()!=0) {
-					fileManager.doFileDelete(dto.getPhotoFilename(), pathname);
+				if(dto.getProfilePhoto().length()!=0) {
+					fileManager.doFileDelete(dto.getProfilePhoto(), pathname);
 				}
 				
 				String filename=fileManager.doFileUpload(dto.getUpload(), pathname);
-				dto.setPhotoFilename(filename);
+				dto.setProfilePhoto(filename);
 			}			
 			
 			dao.updateData("blog.updateBlogInfo", dto);
 			dao.updateData("blog.updateBlogProfile", dto);
+			dao.updateData("blog.updateProfilePhoto", dto);
 			result=1;
 			
 		} catch (Exception e) {

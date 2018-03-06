@@ -266,6 +266,7 @@ $('#myTab a').click(function (e) {
 			
 				<div role="tabpanel" class="tab-pane active" id="product_detail">
 					상세정보
+					<img src="<%=cp%>/resource/img/store/dog_snack1_detail.jpg">
 				</div>
 				<div role="tabpanel" class="tab-pane" id="buy_detail">
 					구매정보
