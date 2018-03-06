@@ -72,6 +72,30 @@
 		]]>
 	</select>
 	
+	<select id="likeCount" parameterType="map" resultType="Integer">
+		SELECT likeCount FROM (
+			SELECT ROWNUM rnum, tb.* FROM (
+				SELECT COUNT(l.num) likeCount
+				FROM mungstar m
+				LEFT OUTER JOIN mungstarLike l ON m.num = l.num
+				<if test="searchValue != null and searchValue != '' ">
+					<if test="searchKey=='tag'">
+						LEFT OUTER JOIN mungstarTag t ON p.num = t.num
+						WHERE tag = #{searchValue}
+					</if>
+					<if test="searchKey=='id'">
+						JOIN mungstar m ON p.num = m.num
+						WHERE memberId = #{searchValue}
+					</if>
+				</if>
+				GROUP BY m.num
+				ORDER BY m.num DESC
+			<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+		]]>
+	</select>
+	
 	<select id="mungstarList" parameterType="map" resultType="care.dog.mungstargram.vo.MungstarRVO">
 		SELECT * FROM (
 			SELECT ROWNUM rnum, tb.* FROM (
@@ -109,8 +133,8 @@
 		WHERE num = #{num}
 	</update>
 
-	<select id="mungstarContent" parameterType="Integer" resultType="care.dog.mungstargram.vo.MungstarRVO">
-		SELECT context, hitCount
+	<select id="mungstarContent" parameterType="care.dog.mungstargram.vo.MungstarPVO" resultType="care.dog.mungstargram.vo.MungstarRVO">
+		SELECT memberId, context, hitCount, created
 		FROM mungstar
 		WHERE num = #{num}
 	</select>
@@ -130,5 +154,32 @@
 		GROUP BY memberId
 		ORDER BY memberId DESC
 	</select>
+	
+	<select id="selectMungstarLike" parameterType="care.dog.mungstargram.vo.MungstarPVO" resultType="Integer">
+		SELECT COUNT(*)
+		FROM mungstarLike
+		WHERE num = #{num} and memberId = #{memberId}
+	</select>
+	
+	<select id="mungstarLikeCount" parameterType="care.dog.mungstargram.vo.MungstarPVO" resultType="Integer">
+		SELECT COUNT(*)
+		FROM mungstarLike
+		WHERE num = #{num}
+	</select>
+	
+	<insert id="insertMungstarLike" parameterType="care.dog.mungstargram.vo.MungstarPVO">
+		INSERT INTO mungstarLike (num, memberId)
+		VALUES (#{num}, #{memberId})
+	</insert>
+	
+	<delete id="deleteMungstarLike" parameterType="care.dog.mungstargram.vo.MungstarPVO">
+		DELETE FROM mungstarLike
+		WHERE num = #{num} and memberId = #{memberId}
+	</delete>
+	
+	<insert id="insertMungstarReply" parameterType="care.dog.mungstargram.vo.MungstarPVO">
+		INSERT INTO mungstarReply (replyNum, num, memberId, reply)
+		VALUES (mungstarReply_seq.NEXTVAL, #{num}, #{memberId}, #{reply})
+	</insert>
 	
 </mapper>
