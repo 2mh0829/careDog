@@ -9,33 +9,11 @@
 	
 	<insert id="insertBoard" 
 	      parameterType="care.dog.blog.post.Board">
-       INSERT INTO ${tableName}_board(num, blogSeq, categoryNum, subject, content)
+       INSERT INTO ${tableName}_board(num, blogId, subject, content)
                VALUES
-               (#{num}, #{blogSeq}, #{categoryNum}, #{subject}, #{content})
+               (#{num}, #{blogId}, #{subject}, #{content})
     </insert>
 
-	<sql id="where-list">
-		<if test="categoryNum==1 ">
-			b.categoryNum = #{categoryNum}
-		</if>
-		<if test="categoryNum!=1 ">
-			(
-			     <if test="owner==1">
-			        b.categoryNum = #{categoryNum} OR 
-			             b.categoryNum IN (SELECT categoryNum FROM ${tableName}_category
-			                   WHERE parent=#{categoryNum})
-			     </if>
-			     <if test="owner==0">
-			          (
-			            b.categoryNum = #{categoryNum} OR 
-			                 b.categoryNum IN (SELECT categoryNum FROM ${tableName}_category
-			                     WHERE parent=#{categoryNum} AND closed=0)
-			           )
-			           AND c.closed=0
-			     </if>
-			 ) 
-		</if>
-	</sql>
 	
 	<!--  데이터개수  -->
 	<select id="dataCount" parameterType="map" 
@@ -49,8 +27,8 @@
 	       resultType="care.dog.blog.post.Board">
 		SELECT * FROM (
 		    SELECT ROWNUM rnum, tb.* FROM (
-			     SELECT num, b.blogId, i.memberId blogName, b.categoryNum, b.subject, b.hitCount, 
-			           TO_CHAR(b.created, 'YYYY-MM-DD') created, c.closed
+			     SELECT num, b.blogId, i.memberId blogName, b.subject, b.hitCount, 
+			           TO_CHAR(b.created, 'YYYY-MM-DD') created
 			        FROM ${tableName}_board b
 	                JOIN blogInfo i ON b.blogId = i.blogId
 	           
@@ -65,7 +43,6 @@
     <select id="readBoard" resultType="care.dog.blog.post.Board" 
             parameterType="map">
         SELECT b.num, b.blogId, i.memberId blogId,
-                NVL(c.parent, 0) parent , g.classify groupClassify,
                 b.subject, b.content, b.created, b.hitCount
            FROM ${tableName}_board b
            JOIN blogInfo i ON b.blogId = i.blogId
@@ -92,7 +69,7 @@
             parameterType="map">
         SELECT tb.* FROM (
             SELECT num, subject FROM ${tableName}_board b
-		    JOIN blogInfo i ON b.blogIq = i.blogIq
+		    JOIN blogInfo i ON b.blogId = i.blogId
                 ORDER BY num DESC
             ) tb WHERE ROWNUM=1
     </select>
