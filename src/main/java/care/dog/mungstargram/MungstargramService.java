@@ -18,4 +18,5 @@ public interface MungstargramService {
 	public int deleteMungstarLike(MungstarPVO pvo) throws Exception;
 	public List<Integer> mungsterLikeCount(Map<String, Object> map);
 	public int insertMungstarReply(MungstarPVO pvo);
+	public List<Integer> mungstarReplyCount(Map<String, Object> map);
 }
