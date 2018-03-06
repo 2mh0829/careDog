@@ -56,7 +56,7 @@ $(function(){
 // 카테고리 리스트
 function listCategory() {
 	var url="${blogUrl}/categoryAllList";
-	var bid="${blogInfo.userId}";
+	var bid="${blogInfo.memberId}";
 	
 	$.post(url, {bid:bid, tmp:new Date().getTime()}, function(data){
         var count=data.count;
@@ -114,21 +114,21 @@ function profile() {
               <img src="<%=cp%>/resource/images/noimage.png" width="164" height="164">
           </c:if>
           <c:if test="${not empty  blogInfo.photoFilename}">
-              <img src="<%=cp%>/uploads/blog/${blogInfo.userId}/${blogInfo.photoFilename}" width="164" height="164">
+              <img src="<%=cp%>/uploads/blog/${blogInfo.memberId}/${blogInfo.photoFilename}" width="164" height="164">
           </c:if>
      </div>
      <div style="padding: 10px 2px 5px; white-space:pre;">${blogInfo.introduce}</div>
-     <c:if test="${blogInfo.userId==sessionScope.member.userId}">
+     <c:if test="${blogInfo.memberId==sessionScope.member.memberId}">
          <div style="padding: 5px 2px; text-align: center;">
              [<a href="javascript:postInsert();"><b>포스트 글쓰기</b></a>]
          </div>
      </c:if>
      <div style="padding: 5px 2px; text-align: center;">
              <a href="javascript:profile()">프로필</a>
-             <c:if test="${blogInfo.userId!=sessionScope.member.userId}">
+             <c:if test="${blogInfo.memberId!=sessionScope.member.memberId}">
                  | <a href="">이웃추가</a>
              </c:if>
-             <c:if test="${blogInfo.userId==sessionScope.member.userId}">
+             <c:if test="${blogInfo.memberId==sessionScope.member.memberId}">
                   | <a href="${blogUrl}/manage">관리</a>
              </c:if>
              | <a href="">쪽지</a>

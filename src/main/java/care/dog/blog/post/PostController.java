@@ -74,29 +74,10 @@ public class PostController {
 		Map<String, Object> map=new HashMap<>();
 		String tableName="b_"+blogId;
 		map.put("tableName", tableName);
-		map.put("categoryNum", categoryNum);
 		map.put("owner", owner);
 		
-		// ---------------------------------------------------------
-		// 선택한 카테고리
-		Category category=categoryService.readCategory(map);
-		
-		// 비공개 게시판인 경우
-		if(category!=null && category.getClosed()==1 && owner==0) {
-			model.addAttribute("menu", menu);
-			model.addAttribute("blogInfo", blogInfo);
-			model.addAttribute("blogUrl", cp+"/blog/"+blogId);
-			model.addAttribute("categoryNum", categoryNum);
-			model.addAttribute("rows", rows);
-			model.addAttribute("listClosed", listClosed);
-			model.addAttribute("owner", owner);
-			model.addAttribute("dataCount", 0);
-			return ".blogPostLayout";
-		}
-		
 		String classify="전체보기";
-		if(category!=null)
-			classify=category.getClassify();
+	
 		
 		// ---------------------------------------------------------
 		// 리스트
@@ -116,10 +97,13 @@ public class PostController {
         
 		// ---------------------------------------------------------
         // 게시글 보기
-        if(list.size()>0 && num==0) {
-        	num=list.get(0).getNum();
+        if(list!=null) {
+        	 if(list.size()>0 && num==0) {
+             	num=list.get(0).getNum();
+             }
+     		map.put("num", num);
         }
-		map.put("num", num);
+       
 		
         // 블로그 방문자 수 및 포스트 조회수 증가
 		try {
