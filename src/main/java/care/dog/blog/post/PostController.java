@@ -34,8 +34,6 @@ public class PostController {
 	@Autowired
 	private BlogService blogService;
 	@Autowired
-	private CategoryService categoryService;
-	@Autowired
 	private BoardService boardService;
 	@Autowired
 	private MyUtilGeneral util;
@@ -46,7 +44,6 @@ public class PostController {
 	public String main(
 			@PathVariable int blogId,
 			@RequestParam(value="num", defaultValue="0") int num,
-			@RequestParam(value="categoryNum", defaultValue="0") int categoryNum,
 			@RequestParam(value="page", defaultValue="1") int current_page,
 			@RequestParam(value="rows", defaultValue="5") int rows,
 			@RequestParam(value="menu", defaultValue="0") int menu,
@@ -74,29 +71,7 @@ public class PostController {
 		Map<String, Object> map=new HashMap<>();
 		String tableName="b_"+blogId;
 		map.put("tableName", tableName);
-		map.put("categoryNum", categoryNum);
 		map.put("owner", owner);
-		
-		// ---------------------------------------------------------
-		// 선택한 카테고리
-		Category category=categoryService.readCategory(map);
-		
-		// 비공개 게시판인 경우
-		if(category!=null && category.getClosed()==1 && owner==0) {
-			model.addAttribute("menu", menu);
-			model.addAttribute("blogInfo", blogInfo);
-			model.addAttribute("blogUrl", cp+"/blog/"+blogId);
-			model.addAttribute("categoryNum", categoryNum);
-			model.addAttribute("rows", rows);
-			model.addAttribute("listClosed", listClosed);
-			model.addAttribute("owner", owner);
-			model.addAttribute("dataCount", 0);
-			return ".blogPostLayout";
-		}
-		
-		String classify="전체보기";
-		if(category!=null)
-			classify=category.getClassify();
 		
 		// ---------------------------------------------------------
 		// 리스트
@@ -116,10 +91,13 @@ public class PostController {
         
 		// ---------------------------------------------------------
         // 게시글 보기
-        if(list.size()>0 && num==0) {
-        	num=list.get(0).getNum();
+        if(list!=null) {
+        	 if(list.size()>0 && num==0) {
+             	num=list.get(0).getNum();
+             }
+     		map.put("num", num);
         }
-		map.put("num", num);
+       
 		
         // 블로그 방문자 수 및 포스트 조회수 증가
 		try {
@@ -171,7 +149,7 @@ public class PostController {
 		int replyCount=boardService.replyDataCount(map);
 		
 		// ---------------------------------------------------------		
-        String query = "categoryNum="+categoryNum+"&rows="+rows+"&menu="+menu;
+        String query = "rows="+rows+"&menu="+menu;
         String listUrl = cp+"/blog/"+blogId+"?"+query;
 		
         String paging = util.paging(current_page, total_page, listUrl);
@@ -179,8 +157,6 @@ public class PostController {
 		model.addAttribute("menu", menu);
 		model.addAttribute("blogInfo", blogInfo);
 		model.addAttribute("blogUrl", cp+"/blog/"+blogId);
-		model.addAttribute("classify", classify);
-		model.addAttribute("categoryNum", categoryNum);
 		model.addAttribute("rows", rows);
 		model.addAttribute("listClosed", listClosed);
 		model.addAttribute("owner", owner);
@@ -207,7 +183,7 @@ public class PostController {
 			Model model,
 			HttpSession session) throws Exception {
 		// AJAX(TEXT)-포스트 글쓰기 폼
-		
+		System.out.println("@@postinsert.get");
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		if (info == null) {
 			model.addAttribute("state", "loginFail");
@@ -223,11 +199,9 @@ public class PostController {
 		String tableName="b_"+blogId;
 		Map<String, Object> map2=new HashMap<>();
 		map2.put("tableName", tableName);
-		List<Category> listCategory=categoryService.listCategoryAll(map2);
 		
 		model.addAttribute("mode", "created");
 		model.addAttribute("blogId", blogId);
-		model.addAttribute("listCategory",listCategory);
 		
 		return "blog/post/postCreated";
 	}
@@ -262,7 +236,8 @@ public class PostController {
 			Board dto,
 			HttpSession session) throws Exception {
 		// 포스트 글 저장
-		
+		System.out.println("@@@@"+dto.toString());
+		System.out.println("@@postinsert.POSTT");
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		if (info == null) {
 			return "redirect:/member/login";
@@ -290,7 +265,6 @@ public class PostController {
 	public String postUpdateForm(
 			@PathVariable int blogId,
 			@RequestParam(value="num") int num,
-			@RequestParam(value="categoryNum") int categoryNum,
 			@RequestParam(value="page") String page,
 			@RequestParam(value="menu") int menu,
 			Model model,
@@ -313,7 +287,6 @@ public class PostController {
 		String tableName="b_"+blogId;
 		Map<String, Object> map2=new HashMap<>();
 		map2.put("tableName", tableName);
-		List<Category> listCategory=categoryService.listCategoryAll(map2);
 		
 		map2.put("num", num);
 		Board dto = boardService.readBoard(map2);
@@ -325,13 +298,10 @@ public class PostController {
 		List<Board> listFile=boardService.listFile(map2);
 		
 		model.addAttribute("blogId", blogId);
-		model.addAttribute("listCategory",listCategory);
-		
 		model.addAttribute("mode", "update");
 		model.addAttribute("dto", dto);
 		model.addAttribute("listFile", listFile);
 		
-		model.addAttribute("categoryNum", categoryNum);
 		model.addAttribute("page", page);		
 		model.addAttribute("menu", menu);
 		
@@ -342,7 +312,6 @@ public class PostController {
 	public String postUpdateSubmit(
 			@PathVariable int blogId,
 			Board dto,
-			@RequestParam(value="category") int categoryNum,
 			@RequestParam(value="page") String page,
 			@RequestParam(value="menu") int menu,
 			HttpSession session) throws Exception {
@@ -356,7 +325,7 @@ public class PostController {
 		
 		BlogInfo blogInfo=blogService.readBlogInfo(info.getMemberId());
 		if(blogInfo==null) {
-			return "redirect:/blog/"+blogId+"&categoryNum="+categoryNum;
+			return "redirect:/blog/"+blogId;
 		}
 		
 		String root=session.getServletContext().getRealPath("/");
@@ -366,14 +335,13 @@ public class PostController {
 		dto.setTableName(tableName);
 		boardService.updateBoard(dto, pathname);
 		
-		return "redirect:/blog/"+blogId+"?num="+dto.getNum()+"&categoryNum="+categoryNum+"&menu="+menu+"&page="+page;
+		return "redirect:/blog/"+blogId+"?num="+dto.getNum()+"&menu="+menu+"&page="+page;
 	}
 	
 	@RequestMapping(value="/blog/{blogId}/postDelete")
 	public String postDelete(
 			@PathVariable int blogId,
 			@RequestParam(value="num") int num,
-			@RequestParam(value="categoryNum") int categoryNum,
 			@RequestParam(value="page") String page,
 			@RequestParam(value="menu") int menu,
 			HttpSession session) throws Exception {
@@ -387,7 +355,7 @@ public class PostController {
 		
 		BlogInfo blogInfo=blogService.readBlogInfo(info.getMemberId());
 		if(blogInfo==null) {
-			return "redirect:/blog/"+blogId+"&categoryNum="+categoryNum;
+			return "redirect:/blog/"+blogId;
 		}
 		
 		String root=session.getServletContext().getRealPath("/");
@@ -401,7 +369,7 @@ public class PostController {
 		
 		boardService.deleteBoard(map2, pathname);
 		
-		return "redirect:/blog/"+blogId+"?categoryNum="+categoryNum+"&menu="+menu+"&page="+page;
+		return "redirect:/blog/"+blogId+"?menu="+menu+"&page="+page;
 	}
 	
 	@RequestMapping(value="/blog/{blogId}/postDeleteFile", method=RequestMethod.POST)

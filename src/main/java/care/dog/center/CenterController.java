@@ -32,8 +32,9 @@ public class CenterController {
 	
 	@Autowired
 	private GongjiService service;
-	/*@Autowired
-	private MyUtil myutil;*/
+	
+	@Autowired
+	private MyUtil myUtil;
 	@Autowired
 	private FileManager fileManager;
 	
@@ -64,7 +65,7 @@ public class CenterController {
 		
 		dataCount = service.dataCount(map);
 		if(dataCount!=0)
-			//total_page = myutil.pageCount(rows, dataCount);
+			total_page = myUtil.pageCount(rows, dataCount);
 		
 		if(total_page<current_page)
 			current_page=total_page;
@@ -96,13 +97,13 @@ public class CenterController {
 			n++;
 		}
 		
-		//String paging = myutil.paging(current_page, total_page);
+		String paging = myUtil.paging(current_page, total_page);
 		
 		model.addAttribute("list",list);
 		model.addAttribute("pageNo",current_page);
 		model.addAttribute("dataCount",dataCount);
 		model.addAttribute("total_page",total_page);
-		//model.addAttribute("paging",paging);
+		model.addAttribute("paging",paging);
 		
 		return ".center.gongji";
 	}

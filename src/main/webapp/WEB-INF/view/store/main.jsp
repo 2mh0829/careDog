@@ -26,8 +26,19 @@
 .content {
 	float: left;
 	width: 25%;
-	height: 23vw;
-	/* width: 25%; */
+	padding: 10px;
+}
+
+@media only screen and (max-width: 1000px) {
+	.content {
+		width: 33.3333%;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	.content {
+		width: 49.9999%;
+	}
 }
 
 .product-image {
@@ -41,14 +52,20 @@
 	height: 100%;
 }
 
+.product-brand {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
 .product-title {
-	margin: 5px auto;
-	font-size: 20px;
+	font-size: 18px;
 }
 
 .product-price {
-	margin: 5px auto;
-	font-size: 18px;
+	margin-bottom: 5px;
+	font-size: 20px;
 }
  
 .content div {
@@ -61,14 +78,67 @@
 	height: 50px;
 	font-size: 20px;
 	font-weight: bold;
+	margin-top: 50px;
 }
 
+.product-container {
+	margin-top: 10px;
+}
+
+.btn-area {
+	clear: both;
+}
+
+.titleTxt {
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.priceTxt {
+	/* color: #f65039; */
+}
+
+.eventWrap {
+	width: 100%;
+	background-color: #e2e2e2;
+	padding-top: 15px;
+	padding-bottom: 40px;
+}
+
+.event-container {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.eventImg {
+	width: 1000px;
+}
+
+.titleTxt {
+	display: block;
+	position: relative;
+}
+
+.titleTxt:after {
+	display: block;
+	width: 44px;
+    /* border: 1px solid #333; */
+    position: absolute;
+    content: '';
+    left: 50%;
+    bottom: 0;
+    margin-left: -22px;
+    margin-top: 20px;
+    border-bottom: 2px solid #333;
+}
+ 
 </style>
 
 
 <div class="bener">
 
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	<div id="myCarousel" class="carousel slide bener-slide" data-ride="carousel">
 	
 		<!-- Indicators -->
 		<ol class="carousel-indicators">
@@ -126,29 +196,34 @@
 	<div class="containerWrap">
 	
 		<div class="sub-title" style="margin-top: 100px;">
-			<h2 align="center">NEW</h2>
-			<hr>
+			<h2 class="titleTxt">NEW</h2>
 		</div>
 	
-		<div class="container">
+		<div class="product-container">
 				
 			<div class="content section01">
 		
 				<!-- 상품 이미지 -->
 				<div class="product-image">
-					<a href="#">
+					<a href="<%=cp%>/store/article">
 						<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 					</a>
 				</div>
 					
+				<!-- 브랜드명 -->
+				<div class="product-brand">
+					<!-- <a href="#">그리니즈</a> -->
+					그리니즈
+				</div>	
+					
 				<!-- 상품 제목 -->
 				<div class="product-title">
-					<a href="#">개껌 30개입</a>
+					<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
 				</div>
 					
 				<!-- 상품 가격 -->
 				<div class="product-price">
-					<strong>40000</strong>원
+					<h3 class="priceTxt"><strong>40000</strong>원</h3>
 				</div>
 					
 				<!-- new / best / sale 구분 이미지 -->
@@ -161,17 +236,22 @@
 			<div class="content section02">
 	
 				<div class="product-image">
-					<a href="#">
+					<a href="<%=cp%>/store/article">
 						<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 					</a>
 				</div>
 				
+				<div class="product-brand">
+					<!-- <a href="#">그리니즈</a> -->
+					그리니즈
+				</div>
+				
 				<div class="product-title">
-					<a href="#">개껌 30개입</a>
+					<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
 				</div>
 				
 				<div class="product-price">
-					<strong>40000</strong>원
+					<h3 class="priceTxt"><strong>40000</strong>원</h3>
 				</div>
 				
 				<div class="product-icon">
@@ -183,17 +263,22 @@
 			<div class="content section03">
 			
 				<div class="product-image">
-					<a href="#">
+					<a href="<%=cp%>/store/article">
 						<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 					</a>
 				</div>
 				
+				<div class="product-brand">
+					<!-- <a href="#">그리니즈</a> -->
+					그리니즈
+				</div>
+				
 				<div class="product-title">
-					<a href="#">개껌 30개입</a>
+					<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
 				</div>
 				
 				<div class="product-price">
-					<strong>40000</strong>원
+					<h3 class="priceTxt"><strong>40000</strong>원</h3>
 				</div>
 				
 				<div class="product-icon">
@@ -205,17 +290,22 @@
 			<div class="content section04">
 			
 				<div class="product-image">
-					<a href="#">
+					<a href="<%=cp%>/store/article">
 						<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 					</a>
 				</div>
 				
+				<div class="product-brand">
+					<!-- <a href="#">그리니즈</a> -->
+					그리니즈
+				</div>
+				
 				<div class="product-title">
-					<a href="#">개껌 30개입</a>
+					<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
 				</div>
 				
 				<div class="product-price">
-					<strong>40000</strong>원
+					<h3 class="priceTxt"><strong>40000</strong>원</h3>
 				</div>
 				
 				<div class="product-icon">
@@ -227,56 +317,58 @@
 		</div>
 		
 		<div class="btn-area" align="center">
-			<a href="#" class="">
+			<a href="<%=cp%>/store/list" class="">
 				<button type="button" class="btn btn-default roundBtn">더보기</button>
 			</a>
 		</div>
 		
 	</div>
+</div>
 	
 	<br><br><br>
-	
-	<div class="containerWrap">
-		<div class="sub-title">
-			<h2 align="center">EVENT ZONE</h2>
-			<hr>
-		</div>
-		<div class="container">
-			<a href="#">
-				<img src="<%=cp%>/resource/img/store/main_bener.jpg" width="100%">
-			</a>
-		</div>
+
+<div class="eventWrap">
+	<div class="sub-title">
+		<h2>EVENT ZONE</h2>
 	</div>
+	<div class="event-container" style="margin-top: 40px;">
+		<!-- 공지사항의 이벤트 주소 -->
+		<a href="#">
+			<img class="eventImg" src="<%=cp%>/resource/img/store/main_bener.jpg">
+		</a>
+	</div>
+</div>
 	
 	<br><br><br>
-	
+
+<div class="body-container">	
 	<div class="containerWrap">
 		<div class="sub-title">
-			<h2 align="center">BEST SELLER</h2>
-			<hr>
+			<h2>BEST SELLER</h2>
 		</div>
-		<div class="container">
+		<div class="product-container">
 		
 			<div class="content section01">
 		
-				<!-- 상품 이미지 -->
 				<div class="product-image">
-					<a href="#">
+					<a href="<%=cp%>/store/article">
 						<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 					</a>
 				</div>
+				
+				<div class="product-brand">
+					<!-- <a href="#">그리니즈</a> -->
+					그리니즈
+				</div>
 					
-				<!-- 상품 제목 -->
 				<div class="product-title">
-					<a href="#">개껌 30개입</a>
+					<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
 				</div>
 					
-				<!-- 상품 가격 -->
 				<div class="product-price">
-					<strong>40000</strong>원
+					<h3 class="priceTxt"><strong>40000</strong>원</h3>
 				</div>
 					
-				<!-- new / best / sale 구분 이미지 -->
 				<div class="product-icon">
 					<img src="<%=cp%>/resource/img/store/new.gif">
 				</div>
@@ -286,17 +378,22 @@
 			<div class="content section02">
 	
 				<div class="product-image">
-					<a href="#">
+					<a href="<%=cp%>/store/article">
 						<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 					</a>
 				</div>
 				
+				<div class="product-brand">
+					<!-- <a href="#">그리니즈</a> -->
+					그리니즈
+				</div>
+				
 				<div class="product-title">
-					<a href="#">개껌 30개입</a>
+					<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
 				</div>
 				
 				<div class="product-price">
-					<strong>40000</strong>원
+					<h3 class="priceTxt"><strong>40000</strong>원</h3>
 				</div>
 				
 				<div class="product-icon">
@@ -308,17 +405,22 @@
 			<div class="content section03">
 			
 				<div class="product-image">
-					<a href="#">
+					<a href="<%=cp%>/store/article">
 						<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 					</a>
 				</div>
 				
+				<div class="product-brand">
+					<!-- <a href="#">그리니즈</a> -->
+					그리니즈
+				</div>
+				
 				<div class="product-title">
-					<a href="#">개껌 30개입</a>
+					<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
 				</div>
 				
 				<div class="product-price">
-					<strong>40000</strong>원
+					<h3 class="priceTxt"><strong>40000</strong>원</h3>
 				</div>
 				
 				<div class="product-icon">
@@ -330,17 +432,22 @@
 			<div class="content section04">
 			
 				<div class="product-image">
-					<a href="#">
+					<a href="<%=cp%>/store/article">
 						<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 					</a>
 				</div>
 				
+				<div class="product-brand">
+					<!-- <a href="#">그리니즈</a> -->
+					그리니즈
+				</div>
+				
 				<div class="product-title">
-					<a href="#">개껌 30개입</a>
+					<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
 				</div>
 				
 				<div class="product-price">
-					<strong>40000</strong>원
+					<h3 class="priceTxt"><strong>40000</strong>원</h3>
 				</div>
 				
 				<div class="product-icon">
@@ -350,7 +457,7 @@
 			</div>
 		</div>
 		<div class="btn-area" align="center">
-			<a href="#" class="">
+			<a href="<%=cp%>/store/list" class="">
 				<button type="button" class="btn btn-default roundBtn">더보기</button>
 			</a>
 		</div>
