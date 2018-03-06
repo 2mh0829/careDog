@@ -9,7 +9,7 @@ public class BlogInfo {
 	private String gender, city, hobby;
 	private String groupSubject, subject;
 	private MultipartFile upload;
-	private String photoFilename;
+	private String profilePhoto;
 	
 	private int isUserName, isCity, isGender, isHobby;
 
@@ -133,14 +133,6 @@ public class BlogInfo {
 		this.upload = upload;
 	}
 
-	public String getPhotoFilename() {
-		return photoFilename;
-	}
-
-	public void setPhotoFilename(String photoFilename) {
-		this.photoFilename = photoFilename;
-	}
-
 	public int getIsUserName() {
 		return isUserName;
 	}
@@ -179,6 +171,14 @@ public class BlogInfo {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getProfilePhoto() {
+		return profilePhoto;
+	}
+
+	public void setProfilePhoto(String profilePhoto) {
+		this.profilePhoto = profilePhoto;
 	}
 
 }
