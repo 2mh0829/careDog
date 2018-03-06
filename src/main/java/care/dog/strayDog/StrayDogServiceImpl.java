@@ -2,17 +2,20 @@ package care.dog.strayDog;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -78,6 +81,35 @@ public class StrayDogServiceImpl implements StrayDogService {
 		json.put("msg", xml);
 		
 		return strayDogList;
+	}
+
+	@Override
+	public Map<String, Object> listSido() {
+		Map<String, Object> model = new HashMap<>();
+	        /*String addr = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/sido"+"?ServiceKey=";
+			String serviceKey = "2tZYhOcrXJBIeeVzX9bylvmtsaHiaSrBkh13F9DlyGL0KfQZKGuRtuM3xcc%2Bz55Nblf0iaPOfUwRqeKu2IZ7rQ%3D%3D";
+			String parameter = "";
+			
+			//인증키(서비스키) url인코딩
+			serviceKey = URLEncoder.encode(serviceKey, "UTF-8");
+			
+			 parameter setting
+			 * parameter = parameter + "&" + "PARAM1=AAA";
+			 * parameter = parameter + "&" + "PARAM2=BBB";
+			 * parameter = parameter + "&" + "PARAM3=CCC";
+			 * 
+			
+			addr = addr + serviceKey + parameter;
+			
+			URL url = new URL(addr);
+			InputStream in = url.openStream(); 
+			CachedOutputStream bos = new CachedOutputStream();
+			IOUtils.copy(in, bos);
+			in.close();
+			bos.close();
+			return bos.getOut().toString();*/
+
+		return model;
 	}
 	
 }

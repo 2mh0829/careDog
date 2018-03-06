@@ -135,11 +135,15 @@ a {
     color: inherit;
     text-decoration: none;
 }
+
+a:hover .board__number {color: #292929;}
+a:hover, a:active  {color: #ddd;}
 /* a:-webkit-any-link {
     color: -webkit-link; 
     cursor: pointer;
     text-decoration: underline;
 } */
+
 .board__info {
     float: right;
     font-size: 13px;

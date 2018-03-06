@@ -42,7 +42,7 @@ public class BoardServiceImpl implements BoardService {
 					String saveFilename=fileManager.doFileUpload(mf, pathname);
 					if(saveFilename!=null) {
 						String originalFilename=mf.getOriginalFilename();
-						long fileSize=mf.getSize();
+						int fileSize=(int)mf.getSize();
 						
 						dto.setOriginalFilename(originalFilename);
 						dto.setSaveFilename(saveFilename);
@@ -151,7 +151,7 @@ public class BoardServiceImpl implements BoardService {
 					String saveFilename=fileManager.doFileUpload(mf, pathname);
 					if(saveFilename!=null) {
 						String originalFilename=mf.getOriginalFilename();
-						long fileSize=mf.getSize();
+						int fileSize=(int)mf.getSize();
 						
 						dto.setOriginalFilename(originalFilename);
 						dto.setSaveFilename(saveFilename);

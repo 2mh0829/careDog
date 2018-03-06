@@ -1,6 +1,8 @@
 package care.dog.strayDog;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -19,14 +21,26 @@ public class StrayDogController {
 	
 	@RequestMapping(value="/strayDog")
 	public String main() {
+		
 		return ".strayDog.main";
 	}
 	
-	@RequestMapping(value="/strayDog/dogList", method=RequestMethod.POST)
-	public String strayDogList() throws IOException, ParserConfigurationException, SAXException {
-		service.StrayDog();
+	@RequestMapping(value="/strayDog/support")
+	public String support() {
 		
-		return ".strayDog.main";
+		return ".strayDog.support";
+	}
+	
+	@RequestMapping(value="/strayDog/tempSupport")
+	public String tempSupport() {
+		
+		return ".strayDog.tempSupport";
+	}
+	
+	@RequestMapping(value="/strayDog/volunteer")
+	public String volunteer() {
+		
+		return ".strayDog.volunteer";
 	}
 	
 }

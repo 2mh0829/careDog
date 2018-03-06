@@ -215,7 +215,6 @@ public class BlogServiceImpl implements BlogService{
 	public int createBlogTable(int blogId) {
 		int result=0;
 		try {
-			dao.updateData("blog.createBoardCategoryTable", blogId);
 			dao.updateData("blog.createBoardTable", blogId);
 			dao.updateData("blog.createBoardLikeTable", blogId);
 			dao.updateData("blog.createBoardFileTable", blogId);
@@ -223,14 +222,6 @@ public class BlogServiceImpl implements BlogService{
 			dao.updateData("blog.createBoardReplyLikeTable", blogId);
 			dao.updateData("blog.createGuestTable", blogId);
 			dao.updateData("blog.createPhotoTable", blogId);
-			
-			// 공지 테이블 추가
-			Category dto=new Category();
-			dto.setCategoryNum(1);
-			dto.setClassify("공지");
-			dto.setTableName("b_"+blogId);
-			dao.insertData("boardCategory.insertCategory", dto);
-			
 			result=1;
 		} catch (Exception e) {
 			System.out.println(e.toString());

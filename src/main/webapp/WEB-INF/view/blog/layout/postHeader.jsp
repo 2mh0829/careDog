@@ -35,7 +35,7 @@ function photoView() {
 
 	var url="${blogUrl}/photo";
 	var owner="${owner}";
-	var bid="${blogInfo.userId}";
+	var bid="${blogInfo.memberId}";
 	$.post(url, {bid:bid, owner:owner, tmp:new Date().getTime()}, function(data){
 		$("#blog-content").html(data);
 	});
@@ -56,7 +56,7 @@ function prologue() {
                      </a>
               </div>
               <div style="float: right; text-align: right;">
-                        <c:if test="${blogInfo.userId!=sessionScope.member.userId}">
+                        <c:if test="${blogInfo.memberId!=sessionScope.member.memberId}">
 						    <a href="<%=cp%>/nblog/me">내 블로그</a>
 								&nbsp;|&nbsp;
 						</c:if>
