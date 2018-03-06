@@ -205,7 +205,7 @@ public class CenterController {
 		model.addAttribute("dto",dto);
 		model.addAttribute("listFile",listFile);
 		
-		return ".gongji.created";
+		return ".center.gongji_create";
 	}
 	
 	@RequestMapping(value="/gongji/update", method=RequestMethod.POST)

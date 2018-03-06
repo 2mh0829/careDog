@@ -20,6 +20,11 @@ ul{
 list-style: none;
 }
 
+i{
+color: #888;
+padding-right: 17px;
+}
+
 #gongji_Container {
 	overflow: hidden;
 	width: 100%;
@@ -80,7 +85,7 @@ border-bottom: 1px solid #e6e6e6;
 
 .gongji_list ul li .title{
 margin-left: 20px;
-padding: 20px 0 20px 42px;
+padding: 20px 0 20px 30px;
 color: #222;
 font-size: 14px;
 line-height: 18px;
@@ -90,6 +95,7 @@ cursor: pointer;
 .gongji_list ul li .title strong{
 display: inline-block;
 width: 140px;
+margin-left: 25px;
 margin-right: 11px;
 vertical-align: middle;
 }
@@ -107,7 +113,7 @@ line-height: 0;
 padding: 28px 30px 25px 62px;
 }
 
-i{
+#gongji_created{
 padding-left: 598px;
 color: #888;
 }
@@ -172,11 +178,13 @@ function ajaxHTML(url, type, query){
 			<div class="TabsConts">
 				<div class="gongji_list">
 					<ul>
+						<c:forEach var="dto" items="${list }">
 						<li>
 							<p class="title">
-							<strong>[공지/이벤트]</strong>
-							제목입니다1.
-							<i>2018/01/01</i>
+							<i>${dto.num }</i>
+							<strong>${dto.isGongji }</strong>
+							${dto.subject }
+							<i id="gongji_created">${dto.created }</i>
 							</p>
 							<ul class="gongji_conts">
 								<li class="gongji_question">
@@ -187,118 +195,18 @@ function ajaxHTML(url, type, query){
 								</li>
 							</ul>
 						</li>
-						<li>
-							<p class="title">
-							<strong>[공지/이벤트]</strong>
-							제목입니다2.
-							</p>
-							<ul class="gongji_conts">
-								<li class="gongji_question">
-									<p class="gongji_text">
-									</p>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<p class="title">
-							<strong>[공지/이벤트]</strong>
-							제목입니다3.
-							</p>
-							<ul class="gongji_conts">
-								<li class="gongji_question">
-									<p class="gongji_text">
-									</p>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<p class="title">
-							<strong>[공지/이벤트]</strong>
-							제목입니다4.
-							</p>
-							<ul class="gongji_conts">
-								<li class="gongji_question">
-									<p class="gongji_text">
-									</p>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<p class="title">
-							<strong>[공지/이벤트]</strong>
-							제목입니다5.
-							</p>
-							<ul class="gongji_conts">
-								<li class="gongji_question">
-									<p class="gongji_text">
-									</p>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<p class="title">
-							<strong>[공지/이벤트]</strong>
-							제목입니다6.
-							</p>
-							<ul class="gongji_conts">
-								<li class="gongji_question">
-									<p class="gongji_text">
-									</p>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<p class="title">
-							<strong>[공지/이벤트]</strong>
-							제목입니다7.
-							</p>
-							<ul class="gongji_conts">
-								<li class="gongji_question">
-									<p class="gongji_text">
-									</p>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<p class="title">
-							<strong>[공지/이벤트]</strong>
-							제목입니다8.
-							</p>
-							<ul class="gongji_conts">
-								<li class="gongji_question">
-									<p class="gongji_text">
-									</p>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<p class="title">
-							<strong>[공지/이벤트]</strong>
-							제목입니다9.
-							</p>
-							<ul class="gongji_conts">
-								<li class="gongji_question">
-									<p class="gongji_text">
-									</p>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<p class="title">
-							<strong>[공지/이벤트]</strong>
-							제목입니다10.
-							</p>
-							<ul class="gongji_conts">
-								<li class="gongji_question">
-									<p class="gongji_text">
-									</p>
-								</li>
-							</ul>
-						</li>
+						</c:forEach>	
 					</ul>
 				</div>
 			</div>
-			<div class="pageing"></div>
+			<div class="paging">
+				<c:if test="${dataCount==0} }">
+				등록된 게시물이 없습니다.
+				</c:if>
+				<c:if test="${dataCount!=0 }">
+					${paging }
+				</c:if>
+			</div>
 			<form name="gongjiSearchForm" action method="post">
 				<input type="hidden" name="searchKey" value="subject">
 				<input type="hidden" name="searchValue" value>
