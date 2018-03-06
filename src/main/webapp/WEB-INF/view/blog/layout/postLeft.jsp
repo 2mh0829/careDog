@@ -53,11 +53,11 @@ function profile() {
 
 <div class="blog-left">
      <div class="profile-photo">
-          <c:if test="${empty  blogInfo.photoFilename}">
+          <c:if test="${empty  blogInfo.profilePhoto}">
               <img src="<%=cp%>/resource/images/noimage.png" width="164" height="164">
           </c:if>
-          <c:if test="${not empty  blogInfo.photoFilename}">
-              <img src="<%=cp%>/uploads/blog/${blogInfo.memberId}/${blogInfo.photoFilename}" width="164" height="164">
+          <c:if test="${not empty  blogInfo.profilePhoto}">
+              <img src="<%=cp%>/uploads/blog/${blogInfo.memberId}/${blogInfo.profilePhoto}" width="164" height="164">
           </c:if>
      </div>
      <div style="padding: 10px 2px 5px; white-space:pre;">${blogInfo.introduce}</div>

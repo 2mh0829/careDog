@@ -91,10 +91,13 @@ public class MungstargramServiceImpl implements MungstargramService {
 	}
 
 	@Override
-	public MungstarRVO selectContent(int num) {
+	public MungstarRVO selectContent(MungstarPVO pvo) {
 		MungstarRVO rvo = null;
 		try {
-			rvo = dao.selectOne("mungstar.mungstarContent", num);
+			rvo = dao.selectOne("mungstar.mungstarContent", pvo);
+			rvo.setLikeInfo(dao.selectOne("mungstar.selectMungstarLike", pvo));
+			rvo.setLikeCount(dao.selectOne("mungstar.mungstarLikeCount", pvo));
+			rvo.setReplyList(dao.selectList("mungstar.mungstarReplyList", pvo));
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -112,5 +115,63 @@ public class MungstargramServiceImpl implements MungstargramService {
 		}
 		return list;
 	}
+
+	@Override
+	public int insertMungstarLike(MungstarPVO pvo) throws Exception {
+		int result = 0;
+		try {
+			result = dao.insertData("mungstar.insertMungstarLike", pvo);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			throw e;
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteMungstarLike(MungstarPVO pvo) throws Exception {
+		int result = 0;
+		try {
+			result = dao.deleteData("mungstar.deleteMungstarLike", pvo);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+			throw e;
+		}
+		return result;
+	}
+
+	@Override
+	public List<Integer> mungsterLikeCount(Map<String, Object> map) {
+		List<Integer> list = null;
+		try {
+			list = dao.selectList("mungstar.likeCount", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
+	@Override
+	public int insertMungstarReply(MungstarPVO pvo) {
+		int result = 0;
+		try {
+			result = dao.insertData("mungstar.insertMungstarReply", pvo);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public List<Integer> mungstarReplyCount(Map<String, Object> map) {
+		List<Integer> list = null;
+		try {
+			list = dao.selectList("mungstar.replyCount", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
 
 }
