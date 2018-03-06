@@ -1,6 +1,8 @@
 package care.dog.strayDog;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -19,6 +21,7 @@ public class StrayDogController {
 	
 	@RequestMapping(value="/strayDog")
 	public String main() {
+		
 		return ".strayDog.main";
 	}
 	
@@ -27,6 +30,12 @@ public class StrayDogController {
 		service.StrayDog();
 		
 		return ".strayDog.main";
+	}
+	
+	@RequestMapping(value="/strayDog/selectsido")
+	public Map<String, Object> selectsido() {
+		Map<String, Object> model=new HashMap<>();
+		return model;
 	}
 	
 }

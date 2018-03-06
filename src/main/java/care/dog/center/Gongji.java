@@ -1,0 +1,97 @@
+package care.dog.center;
+
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class Gongji {
+	private int listnum, num;
+	
+	private String userId, subject, content, created;
+	private int isNotice;
+	private String imageFilename;
+	private String saveFilename, originalFilename;
+	private long fileSize;
+	private long gap;
+	
+	public long getFileSize() {
+		return fileSize;
+	}
+	public void setFileSize(long fileSize) {
+		this.fileSize = fileSize;
+	}
+
+	private List<MultipartFile> upload;
+	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getCreated() {
+		return created;
+	}
+	public void setCreated(String created) {
+		this.created = created;
+	}
+	public int getIsNotice() {
+		return isNotice;
+	}
+	public void setIsNotice(int isNotice) {
+		this.isNotice = isNotice;
+	}
+	public String getImageFilename() {
+		return imageFilename;
+	}
+	public void setImageFilename(String imageFilename) {
+		this.imageFilename = imageFilename;
+	}
+	public String getSaveFilename() {
+		return saveFilename;
+	}
+	public void setSaveFilename(String saveFilename) {
+		this.saveFilename = saveFilename;
+	}
+	public String getOriginalFilename() {
+		return originalFilename;
+	}
+	public void setOriginalFilename(String originalFilename) {
+		this.originalFilename = originalFilename;
+	}
+	
+	public List<MultipartFile> getUpload(){
+		return upload;
+	}
+	public int getListnum() {
+		return listnum;
+	}
+	public void setListnum(int listnum) {
+		this.listnum = listnum;
+	}
+	public long getGap() {
+		return gap;
+	}
+	public void setGap(long gap) {
+		this.gap = gap;
+	}
+
+}

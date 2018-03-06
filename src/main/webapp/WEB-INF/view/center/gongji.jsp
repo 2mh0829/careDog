@@ -111,13 +111,62 @@ i{
 padding-left: 598px;
 color: #888;
 }
-
 </style>
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.form.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#gongji_alert").addClass("active");
+	listPage(1);
+	
+	$("ul.gongji_Tabs li").click(function(){
+		tab = $(this).attr("data-tab");
+		
+		$("ul.gongji_Tabs li").each(function(){
+			$(this).removeClass("active");
+		});
+		
+		$("#gongji_"+tab).addClass("active");
+		
+		listPage(1);
+	});
+});
+
+function listPage(page){
+	var $tab = $(".gongji_Tabs .active");
+	var tab = $tab.attr("data-tab");
+	var url = "<%=cp%>/gongji/"+tab+"/list";
+	
+	var query="pageNo="+page;
+	var search=$('form[name=gongjiSearchForm]').serialize();
+	query = query+"&"+search;
+	
+	ajaxHTML(url, "get", query);
+}
+
+function ajaxHTML(url, type, query){
+	$.ajax({
+		type:type
+		,url:url
+		,data:query
+		,success:function(data){
+			if($.trim(data)=="error"){
+				listPage(1);
+				return;
+			}
+			$("#TabsOpenArea").html(data);
+		}
+	,beforeSend : function(jqXHR){
+		jqXHR.setRequestHead
+	}
+	});
+}
+
+</script>
 <div id="gongji_Container">
 	<div id="gongji_Contents">
 		<ul class="gongji_Tabs">
-			<li id="gongji_alert"><a>공지사항</a></li>
-			<li id="gongji_event"><a>이벤트</a></li>
+			<li id="gongji_alert" data-tab="alert" class="active"><a>공지사항</a></li>
+			<li id="gongji_event" data-tab="event"><a>이벤트</a></li>
 		</ul>
 		<div id="TabsOpenArea">
 			<div class="TabsConts">
@@ -250,6 +299,10 @@ color: #888;
 				</div>
 			</div>
 			<div class="pageing"></div>
+			<form name="gongjiSearchForm" action method="post">
+				<input type="hidden" name="searchKey" value="subject">
+				<input type="hidden" name="searchValue" value>
+			</form>
 		</div>
 	</div>
 </div>
