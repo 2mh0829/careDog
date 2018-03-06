@@ -89,7 +89,7 @@
 	clear: both;
 }
 
-.titleTxt {
+h2 {
 	text-align: center;
 	font-weight: bold;
 	margin-bottom: 20px;
@@ -115,22 +115,31 @@
 	width: 1000px;
 }
 
-.titleTxt {
+.sub-title {
+	text-align: center;
+	margin-bottom: 30px;
+	font-weight: 400;
+	padding: 0 10px 20px;
 	display: block;
 	position: relative;
 }
+.sub-title strong {
+    font-size: 28px;
+    font-weight: 500;
+    margin-right: 0px;
+    display: inline-block;
+    width: 100%;
+}
 
-.titleTxt:after {
-	display: block;
+.sub-title:after {
 	width: 44px;
-    /* border: 1px solid #333; */
+	height: 2px;
+	background: #231815;
     position: absolute;
     content: '';
     left: 50%;
     bottom: 0;
     margin-left: -22px;
-    margin-top: 20px;
-    border-bottom: 2px solid #333;
 }
  
 </style>
@@ -196,7 +205,7 @@
 	<div class="containerWrap">
 	
 		<div class="sub-title" style="margin-top: 100px;">
-			<h2 class="titleTxt">NEW</h2>
+			<h2>NEW</h2>
 		</div>
 	
 		<div class="product-container">
