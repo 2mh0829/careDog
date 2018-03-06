@@ -12,6 +12,10 @@ public interface MungstargramService {
 	public List<Integer> mungstarPhotoCount(Map<String, Object> map);
 	public List<MungstarRVO> mungstarList(Map<String, Object> map);
 	public List<MungstarRVO> mungstarPhotoList(int num);
-	public MungstarRVO selectContent(int num);
+	public MungstarRVO selectContent(MungstarPVO pvo);
 	public List<MungstarRVO> searchList(String tag);
+	public int insertMungstarLike(MungstarPVO pvo) throws Exception;
+	public int deleteMungstarLike(MungstarPVO pvo) throws Exception;
+	public List<Integer> mungsterLikeCount(Map<String, Object> map);
+	public int insertMungstarReply(MungstarPVO pvo);
 }

@@ -25,17 +25,22 @@ public class StrayDogController {
 		return ".strayDog.main";
 	}
 	
-	@RequestMapping(value="/strayDog/dogList", method=RequestMethod.POST)
-	public String strayDogList() throws IOException, ParserConfigurationException, SAXException {
-		service.StrayDog();
+	@RequestMapping(value="/strayDog/support")
+	public String support() {
 		
-		return ".strayDog.main";
+		return ".strayDog.support";
 	}
 	
-	@RequestMapping(value="/strayDog/selectsido")
-	public Map<String, Object> selectsido() {
-		Map<String, Object> model=new HashMap<>();
-		return model;
+	@RequestMapping(value="/strayDog/tempSupport")
+	public String tempSupport() {
+		
+		return ".strayDog.tempSupport";
+	}
+	
+	@RequestMapping(value="/strayDog/volunteer")
+	public String volunteer() {
+		
+		return ".strayDog.volunteer";
 	}
 	
 }

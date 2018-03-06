@@ -65,12 +65,13 @@ public class MungstargramController {
 		
 		List<MungstarRVO> list = service.mungstarList(map);
 		List<Integer> photoCountList = service.mungstarPhotoCount(map);
+		List<Integer> likeCountList = service.mungsterLikeCount(map);
 		
-		for(int i=0; i<list.size(); i++)
+		for(int i=0; i<list.size(); i++) {
 			list.get(i).setPhotoCount(photoCountList.get(i));
+			list.get(i).setLikeCount(likeCountList.get(i));
+		}
 
-		System.out.println(list.toString());
-		
 		Map<String, Object> model = new HashMap<>();
 		model.put("total_page", total_page);
 		model.put("dataCount", dataCount);
@@ -80,19 +81,31 @@ public class MungstargramController {
 		return model;
 	}
 	
-	@RequestMapping(value="mungstargram/article")
+	@RequestMapping(value="/mungstargram/article")
 	@ResponseBody
-	public Map<String, Object> articleList(int num){
+	public Map<String, Object> articleList(int num, HttpSession session){
+		Map<String, Object> model = new HashMap<>();
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		String memberId = "";
+		if(info != null) {
+			memberId = info.getMemberId();
+			model.put("memberInfo", memberId);
+		}else {
+			model.put("memberInfo", "no");
+		}
 		
-		MungstarRVO rvo = service.selectContent(num);
-		System.out.println(rvo.toString());
+		MungstarPVO pvo = new MungstarPVO();
+		pvo.setMemberId(memberId);
+		pvo.setNum(num);
+		
+		MungstarRVO rvo = service.selectContent(pvo);
 		if(rvo.getContext() != null) {
 			rvo.setContext(rvo.getContext().replaceAll("\n", "<br>"));
 		}
 		
 		List<MungstarRVO> photoList = service.mungstarPhotoList(num);
 		
-		Map<String, Object> model = new HashMap<>();
+		
 		model.put("content", rvo);
 		model.put("photoList", photoList);
 		
@@ -100,7 +113,7 @@ public class MungstargramController {
 	}
 		
 	
-	@RequestMapping(value="mungstargram/created", method=RequestMethod.GET)
+	@RequestMapping(value="/mungstargram/created", method=RequestMethod.GET)
 	public String createForm(HttpSession session, Model model) {
 		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
@@ -108,10 +121,10 @@ public class MungstargramController {
 			model.addAttribute("memberId", info.getMemberId());
 		}
 		
-		return "/mungstargram/created";
+		return "mungstargram/created";
 	}
 
-	@RequestMapping(value="mungstargram/created", method=RequestMethod.POST)
+	@RequestMapping(value="/mungstargram/created", method=RequestMethod.POST)
 	public String createSubmit(MungstarPVO pvo, HttpSession session) throws Exception {
 
 		String root = session.getServletContext().getRealPath("/");
@@ -126,19 +139,51 @@ public class MungstargramController {
 		
 		service.insertPhoto(pvo, path);
 		
-		System.out.println(path);
 		return null;
 	}
 	
-	@RequestMapping(value="mungstargram/autocomplete")
+	@RequestMapping(value="/mungstargram/autocomplete")
 	@ResponseBody
 	public List<MungstarRVO> auticomplete(String term){
-		
 		List<MungstarRVO> list = service.searchList(term);
-		
 		return list;
 	}
-
 	
+	@RequestMapping(value="/mungstargram/insertLike")
+	@ResponseBody
+	public void insertLike(int num, HttpSession session) throws Exception {
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
+		MungstarPVO pvo = new MungstarPVO();
+		pvo.setNum(num);
+		pvo.setMemberId(info.getMemberId());
+		
+		service.insertMungstarLike(pvo);
+	}
+	
+	@RequestMapping(value="/mungstargram/deleteLike")
+	@ResponseBody
+	public void deleteLike(int num, HttpSession session) throws Exception {
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
+		MungstarPVO pvo = new MungstarPVO();
+		pvo.setNum(num);
+		pvo.setMemberId(info.getMemberId());
+		
+		service.deleteMungstarLike(pvo);
+	}
+
+	@RequestMapping(value="/mungstargram/reply")
+	@ResponseBody
+	public Map<String, Object> insertReply(MungstarPVO pvo, HttpSession session){
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		pvo.setMemberId(info.getMemberId());
+		
+		System.out.println(pvo.toString());
+		
+		service.insertMungstarReply(pvo);
+		
+		return null;
+	}
 	
 }

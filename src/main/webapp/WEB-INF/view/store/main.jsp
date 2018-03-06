@@ -89,13 +89,10 @@
 	clear: both;
 }
 
-hr {
-	border: 1px solid #dcdcdc;
-}
-
 h2 {
 	text-align: center;
 	font-weight: bold;
+	margin-bottom: 20px;
 }
 
 .priceTxt {
@@ -118,6 +115,33 @@ h2 {
 	width: 1000px;
 }
 
+.sub-title {
+	text-align: center;
+	margin-bottom: 30px;
+	font-weight: 400;
+	padding: 0 10px 20px;
+	display: block;
+	position: relative;
+}
+.sub-title strong {
+    font-size: 28px;
+    font-weight: 500;
+    margin-right: 0px;
+    display: inline-block;
+    width: 100%;
+}
+
+.sub-title:after {
+	width: 44px;
+	height: 2px;
+	background: #231815;
+    position: absolute;
+    content: '';
+    left: 50%;
+    bottom: 0;
+    margin-left: -22px;
+}
+ 
 </style>
 
 
@@ -182,7 +206,6 @@ h2 {
 	
 		<div class="sub-title" style="margin-top: 100px;">
 			<h2>NEW</h2>
-			<hr>
 		</div>
 	
 		<div class="product-container">
@@ -316,9 +339,8 @@ h2 {
 <div class="eventWrap">
 	<div class="sub-title">
 		<h2>EVENT ZONE</h2>
-		<hr>
 	</div>
-	<div class="event-container">
+	<div class="event-container" style="margin-top: 40px;">
 		<!-- 공지사항의 이벤트 주소 -->
 		<a href="#">
 			<img class="eventImg" src="<%=cp%>/resource/img/store/main_bener.jpg">
@@ -332,7 +354,6 @@ h2 {
 	<div class="containerWrap">
 		<div class="sub-title">
 			<h2>BEST SELLER</h2>
-			<hr>
 		</div>
 		<div class="product-container">
 		
