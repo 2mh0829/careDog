@@ -21,7 +21,7 @@ public class StrayDogController {
 	
 	@RequestMapping(value="/strayDog")
 	public String main() {
-		
+		service.strayDog();
 		return ".strayDog.main";
 	}
 	

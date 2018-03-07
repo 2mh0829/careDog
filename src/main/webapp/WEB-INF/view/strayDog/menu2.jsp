@@ -8,11 +8,9 @@
 
 <style>
 .menu2 {
-	background: white;
+	background: #1991d7;
 }
-a{
-	color: #1991d7;
-}
+
 </style>
 
 <div class="header-bottom">
