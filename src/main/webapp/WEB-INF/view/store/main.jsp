@@ -89,10 +89,14 @@
 	clear: both;
 }
 
-h2 {
+.event-title h2 {
 	text-align: center;
-	font-weight: bold;
-	margin-bottom: 20px;
+	/* font-weight: bold;
+	margin-bottom: 20px; */
+	margin-right: 0px;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .priceTxt {
@@ -118,17 +122,19 @@ h2 {
 .sub-title {
 	text-align: center;
 	margin-bottom: 30px;
-	font-weight: 400;
-	padding: 0 10px 20px;
+	/* font-weight: 400; */
+	padding: 0 10px 10px;
 	display: block;
 	position: relative;
 }
-.sub-title strong {
-    font-size: 28px;
-    font-weight: 500;
+ 
+.sub-title h2 {
+    /* font-size: 28px;
+    font-weight: 500; */
     margin-right: 0px;
     display: inline-block;
     width: 100%;
+    margin-bottom: 10px;
 }
 
 .sub-title:after {
@@ -137,7 +143,7 @@ h2 {
 	background: #231815;
     position: absolute;
     content: '';
-    left: 50%;
+    left: 49.9%;
     bottom: 0;
     margin-left: -22px;
 }
@@ -337,7 +343,7 @@ h2 {
 	<br><br><br>
 
 <div class="eventWrap">
-	<div class="sub-title">
+	<div class="event-title">
 		<h2>EVENT ZONE</h2>
 	</div>
 	<div class="event-container" style="margin-top: 40px;">

@@ -97,6 +97,7 @@ public class MungstargramServiceImpl implements MungstargramService {
 			rvo = dao.selectOne("mungstar.mungstarContent", pvo);
 			rvo.setLikeInfo(dao.selectOne("mungstar.selectMungstarLike", pvo));
 			rvo.setLikeCount(dao.selectOne("mungstar.mungstarLikeCount", pvo));
+			rvo.setReplyList(dao.selectList("mungstar.mungstarReplyList", pvo));
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -159,6 +160,17 @@ public class MungstargramServiceImpl implements MungstargramService {
 			System.out.println(e.toString());
 		}
 		return result;
+	}
+
+	@Override
+	public List<Integer> mungstarReplyCount(Map<String, Object> map) {
+		List<Integer> list = null;
+		try {
+			list = dao.selectList("mungstar.replyCount", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
 	}
 
 

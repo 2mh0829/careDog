@@ -220,6 +220,11 @@ div.desc {
 	text-decoration: none;
 }
 
+#reply {
+	margin-top: 15px;
+}
+
+
 /* ----------------------------------------------- */
 
 .like-hit-re {
@@ -294,7 +299,7 @@ function printList(data) {
 			var filename = data.list[i].filename;
 			var photoCount = data.list[i].photoCount;
 			var likeCount = data.list[i].likeCount;
-			var replyCount = 0;
+			var replyCount = data.list[i].replyCount;
 			
 			out += "<div class='responsive'>";
 			out += "<div style='background: black;'>";
@@ -342,6 +347,7 @@ function openModal(data, num) {
 	var created = data.content.created;
 	var likeInfo = data.content.likeInfo;
 	var likeCount = data.content.likeCount;
+	var replyList = data.content.replyList;
 	var memberInfo = data.memberInfo;
 	photoList = data.photoList;
 	photoNum = 0;
@@ -359,7 +365,7 @@ function openModal(data, num) {
 			$("#like button").attr("data-like", "on");
 			$('#like button').attr('class', 'glyphicon glyphicon-heart icon-size-30');
 		}
-		$("#replyTx").attr("data-info", "");
+		$("#replyTx").attr("data-info", memberInfo);
 		$("#replyTx").attr("placeholder", "댓글달기");
 		$("#replyTx").attr("data-num", num);
 	}
@@ -370,6 +376,7 @@ function openModal(data, num) {
 	$(window).resize(function() {
 		modalSize();
 	});
+	
 	
 	$("#memberId b").html(memberId);
 	$("#memberId").attr("onclick", "searchId(\"" + memberId + "\");");
@@ -393,13 +400,21 @@ function openModal(data, num) {
 		$("#bottomBtn").css("visibility", "hidden");
 	}
 	
+	$("#reply").html("");
+	for(var i=0; i<replyList.length; i++){
+		$("#reply").append("<div><a onclick='searchId(\""+memberId+"\");'><b>" + memberId + "</b></a> " + replyList[i].reply + "</div>");
+	}
+	
+
 	$("#myModal").modal();
+	
 }
 
 // 모달에 사진 세팅
 function setPhoto(num) {
 	var photoSrc = "<%=cp %>/uploads/mungstargram/" + photoList[num].filename;
-	$(".modal-left-img").html("<img src='" + photoSrc +"' id='mungstarPhoto'>");
+	$(".modal-left-img").html("<img src='" + photoSrc +"' id='mungstarPhoto' onerror='this.src=\"<%=cp %>/resource/img/noPhoto.jpg\"'>");
+	$(".modal-centered").css("visibility", "hidden");
 	
 	$("#mungstarPhoto").load(function() {
 		modalSize();
@@ -476,6 +491,7 @@ function modalSize() {
 			$(".modal-context table").css("height", "520px");
 		}
 	}
+	$(".modal-centered").css("visibility", "visible");
 }
 
 
@@ -544,14 +560,17 @@ $(function() {
 				if(e.keyCode == 13){
 					var url = "<%=cp %>/mungstargram/reply";
 					var num = $("#replyTx").attr("data-num");
+					var memberId = $("#replyTx").attr("data-info");
 					var reply = $("#replyTx").val();
-					var data = {num:num, reply:reply};
+					var data = {num:num, memberId:memberId, reply:reply};
 					$.ajax({
 						url: url
 						,data: data
 						,type: "post"
 						,success: function() {
-							alert("success");
+							$("#reply").append("<div><a><b>" + memberId + "</b></a> " + $("#replyTx").val() + "</div>");
+							$("#replyTx").val("");
+							return;
 						}
 					});
 				}
@@ -559,7 +578,7 @@ $(function() {
 		}
 	});
 });
- 
+
 
 /* ---------------------------------------------------------------------------------------------------------------------- */
 
@@ -568,6 +587,8 @@ function openWin(){
 }
 
 </script>
+
+
 
 <div class="body-container">
 	<h2>mungstargram.</h2>

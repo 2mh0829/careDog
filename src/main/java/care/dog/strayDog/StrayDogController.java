@@ -21,7 +21,7 @@ public class StrayDogController {
 	
 	@RequestMapping(value="/strayDog")
 	public String main() {
-		
+		service.strayDog();
 		return ".strayDog.main";
 	}
 	
@@ -35,6 +35,12 @@ public class StrayDogController {
 	public String tempSupport() {
 		
 		return ".strayDog.tempSupport";
+	}
+	
+	@RequestMapping(value="/strayDog/addSupport")
+	public String addSupport() {
+		
+		return ".strayDog.addSupport";
 	}
 	
 	@RequestMapping(value="/strayDog/volunteer")
