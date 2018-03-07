@@ -3,4 +3,119 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="gongji">
 
+<select id="seq" resultType="Integer">
+	SELECT gongji_seq.NEXTVAL FROM dual
+</select>
+
+<sql id="where-list">
+	<if test="searchKey=='memberId'">
+		memberId=#{searchValue}
+	</if>
+	<if test="searchKey=='subject' ">
+		INSTR(subject, #{searchValue}) &gt; 0
+	</if>
+	<if test="searchKey=='content' ">
+		DBMS_LOB.INSTR(content, #{searchValue}) &gt; 0
+	</if>
+	<if test="searchKey=='created'">
+		(TO_CHAR(created, 'YYYY-MM-DD') = #{searchValue}
+		OR TO_CHAR(created, 'YYYYMMDD') = #{searchValue})
+	</if>
+</sql>
+
+<insert id="insertGongji" parameterType="care.dog.center.Gongji">
+INSERT INTO gongji (num, memberId, isGongji, subject, content, imageFilename, created)
+VALUES (#{num}, #{memberId}, #{isGongji}, #{subject}, #{content}, #{imageFilename}, #{created})
+</insert>
+
+<select id="listGongji" parameterType="map" resultType="care.dog.center.Gongji">
+SELECT num, isGongji, subject, created FROM gongji WHERE isGongji=1 ORDER BY num DESC
+</select>
+
+<update id="updateGongji" parameterType="care.dog.center.Gongji">
+UPDATE gongji SET isGongji=#{isGongji}, subject=#{subject}, content=#{content}, imageFilename=#{imageFilename}
+WHERE num=#{num}
+</update>
+
+<delete id="deleteGongji" parameterType="Integer">
+DELETE FROM gongji WHERE num=#{num}
+</delete>
+
+<select id="readGongji" parameterType="map" resultType="Integer">
+SELECT NVL(COUNT(*), 0) FROM gongji g
+	JOIN member1 m ON g.userId=m.userId
+		<where>
+			<if test="searchValue != null and searchValue!=''  ">
+				<include refid="where-list"/>
+			</if>
+		</where>
+</select>
+
+<select id="preReadGongji" parameterType="map" resultType="care.dog.center.Gongji">
+SELECT tb.* FROM (
+	SELECT num, subject FROM gongji g
+		JOIN member1 m ON g.memberId=m.memberId
+		<where>
+			<if test="searchValue != null and searchValue !=''">
+				<include refid="where-list"/>
+			</if>
+			<![CDATA[
+				AND (num > #{num})
+			]]>
+		</where>
+		ORDER BY num ASC
+) tb WHERE ROWNUM=1
+</select>
+
+<select id="nextReadGongji" parameterType="map" resultType="care.dog.center.Gongji">
+SELECT tb.* FROM (
+	SELECT num, subject FROM gongji g
+	JOIN member1 m ON g.memberId=m.memberId
+	<where>
+		<if test="searchValue != null and searchValue != ''">
+			<include refid="where-list"/>
+		</if>
+		<![CDATA[
+			AND (num < #{num})
+		]]>
+	</where>
+	ORDER BY num DESC
+) tb WHERE ROWNUM=1
+</select>
+
+<insert id="insertFile" parameterType="care.dog.center.Gongji">
+INSERT INTO gongjiFile(fileNum, num, saveFilename, originalFilename, fileSize)
+VALUES (gongjiFile_seq.NEXTVAL, #{num}, #{saveFilename}, #{originalFilename}, #{fileSize})
+</insert>
+
+<select id="listFile" parameterType="Integer" resultType="care.dog.center.Gongji">
+SELECT fileNum, num, saveFilename, originalFilename, fileSize FROM gongjiFile WHERE num=#{num}
+</select>
+
+<select id="readFile" parameterType="Integer" resultType="care.dog.center.Gongji">
+SELECT  fileNum, num, saveFilename, originalFilename, fileSize
+FROM gongjiFile WHERE fileNum=#{fileNum}  
+</select>
+
+<delete id="deleteFile" parameterType="map">
+DELETE FROM gongjiFile WHERE num=#{num}
+</delete>
+
+<select id="dataCount" parameterType="map" resultType="care.dog.center.Gongji">
+SELECT * FROM (
+	SELECT ROWNUM rnum, tb.* FROM (
+		SELECT num, g.memberId, isGongji, subject, content, imageFilename, created
+		FROM gongji g
+		JOIN member1 m ON g.memberId=m.memberId
+		<where>
+        	<if test="searchValue != null and searchValue != ''">
+				<include refid="where-list"/>
+		    </if>
+	    </where>
+	    ORDER BY num DESC
+	    <![CDATA[
+	) tb WHERE ROWNUM <= #{end}
+) WHERE rnum >= #{start}
+]]>
+</select>
 </mapper>

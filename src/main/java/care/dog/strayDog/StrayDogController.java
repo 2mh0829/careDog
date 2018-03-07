@@ -37,6 +37,12 @@ public class StrayDogController {
 		return ".strayDog.tempSupport";
 	}
 	
+	@RequestMapping(value="/strayDog/addSupport")
+	public String addSupport() {
+		
+		return ".strayDog.addSupport";
+	}
+	
 	@RequestMapping(value="/strayDog/volunteer")
 	public String volunteer() {
 		
