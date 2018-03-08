@@ -1,5 +1,7 @@
-package care.dog.center;
+package care.dog.center.event;
+
 import java.io.File;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
@@ -12,9 +14,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//hihi
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,57 +29,55 @@ import care.dog.common.FileManager;
 import care.dog.common.MyUtil;
 import care.dog.member.SessionInfo;
 
-@Controller("center.centerController")
-public class CenterController {
-	
+@Controller("event.eventController")
+public class EventController {
+
 	@Autowired
-	private GongjiService service;
-	
+	private EventService service;
 	@Autowired
 	private MyUtil myUtil;
 	@Autowired
 	private FileManager fileManager;
 	
-	@RequestMapping(value="/center/gongji/list")
-	public String gongjiList(
-			@RequestParam(value="pageNo",defaultValue="1") int current_page,
+	@RequestMapping(value="/center/event/list")
+	public String eventList(
+			@RequestParam(value="pageNo",defaultValue="1") int cur_page,
 			@RequestParam(value="searchKey",defaultValue="subject") String searchKey,
-			@RequestParam(value="searchValue", defaultValue="") String searchValue,
+			@RequestParam(value="searchValue",defaultValue="") String searchValue,
 			HttpServletRequest req,
 			Model model
 			) throws Exception {
-		int rows = 10; 
-		int total_page = 0;
+		int rows = 10;
+		int tot_page = 0;
 		int dataCount = 0;
 		
 		if(req.getMethod().equalsIgnoreCase("GET")) {
 			searchValue = URLDecoder.decode(searchValue, "utf-8");
 		}
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchKey", searchKey);
 		map.put("searchValue", searchValue);
 		
 		dataCount = service.dataCount(map);
 		if(dataCount!=0)
-			total_page = myUtil.pageCount(rows, dataCount);
+			tot_page = myUtil.pageCount(rows, dataCount);
 		
-		if(total_page<current_page)
-			current_page=total_page;
+		if(tot_page<cur_page)
+			cur_page=tot_page;
 		
-		int start = (current_page - 1) * rows + 1;
-		int end = current_page * rows;
+		int start = (cur_page-1)* rows+1;
+		int end = cur_page*rows;
 		map.put("start", start);
 		map.put("end", end);
 		
-		List<Gongji> list = service.listGongji(map);
+		List<Event> list = service.listEvent(map);
 		
 		Date endDate = new Date();
 		long gap;
 		int listNum, n = 0;
-		Iterator<Gongji> it = list.iterator();
+		Iterator<Event> it = list.iterator();
 		while(it.hasNext()) {
-			Gongji data = (Gongji)it.next();
+			Event data = (Event)it.next();
 			listNum = dataCount - (start + n -1);
 			data.setListnum(listNum);
 			
@@ -92,47 +92,47 @@ public class CenterController {
 			n++;
 		}
 		
-		String paging = myUtil.paging(current_page, total_page);
+		String paging = myUtil.paging(cur_page, tot_page);
 		
 		model.addAttribute("list",list);
-		model.addAttribute("pageNo",current_page);
+		model.addAttribute("pageNo",cur_page);
 		model.addAttribute("dataCount",dataCount);
-		model.addAttribute("total_page",total_page);
+		model.addAttribute("total_page",tot_page);
 		model.addAttribute("paging",paging);
 		
-		return ".center.gongji";
-	}
+		return ".center.event";
+		
+}
 	
-	@RequestMapping(value="/gongji/content")
-	public String gongjiContent(
-			@RequestParam(value="num") int num,
-			@RequestParam(value="searchKey", defaultValue="subject") String SearchKey,
-			@RequestParam(value="searchValue", defaultValue="") String searchValue,
-			@RequestParam(value="pageNo") String page,
+	@RequestMapping(value="/event/content")
+	public String eventContent(
+			@RequestParam(value="num")int num,
+			@RequestParam(value="searchKey",defaultValue="subejct") String searchKey,
+			@RequestParam(value="searchValue",defaultValue="")String searchValue,
+			@RequestParam(value="pageNo")String page,
 			HttpServletRequest req,
 			Model model
-			) throws Exception{
-		
+			) throws Exception {
 		if(req.getMethod().equalsIgnoreCase("GET")) {
 			searchValue = URLDecoder.decode(searchValue,"uft-8");
 		}
 		
-		Gongji dto = service.readGongji(num);
+		Event dto = service.readEvent(num);
 		if(dto==null) {
 			return ".center.main";
 		}
 		
-		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+		dto.setContent(dto.getContent().replaceAll("\n","<br>"));
 		
 		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("searchKey", SearchKey);
+		map.put("searchKey", searchKey);
 		map.put("searchValue", searchValue);
 		map.put("num", num);
 		
-		Gongji preReadDto = service.preReadGongji(map);
-		Gongji nextReadDto = service.nextReadGongji(map);
+		Event preReadDto = service.preReadEvent(map);
+		Event nextReadDto = service.nextReadEvent(map);
 		
-		List<Gongji> listFile = service.listFile(num);
+		List<Event> listFile = service.listFile(num);
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("preReadDto",preReadDto);
@@ -140,84 +140,33 @@ public class CenterController {
 		model.addAttribute("listFile",listFile);
 		model.addAttribute("pageNo", page);
 		
-		return ".center.gongji_content";
+		return ".center.event_content";
 	}
 	
-	@RequestMapping(value="/gongji/created", method=RequestMethod.GET)
+	@RequestMapping(value="/event/created", method=RequestMethod.GET)
 	public String createdForm(
 			Model model
-			) throws Exception{
+			) throws Exception {
 		model.addAttribute("pageNo","1");
 		model.addAttribute("mode","created");
-		return ".center.gongji_create";
+		return ".center.event_create";
 	}
 	
-	@RequestMapping(value="/gongji/created", method=RequestMethod.POST)
+	@RequestMapping(value="/event/created", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> createdSubmit(
-			Gongji dto,
+			Event dto,
 			HttpSession session
-			) throws Exception{
+			) throws Exception {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		String state = "true";
 		
 		if(info.getMemberId().equals("admin")) {
 			String root = session.getServletContext().getRealPath("/");
-			String pathname = root + File.separator + "uploads" + File.separator + "gongji";
+			String pathname = root + File.separator + "uploads" + File.separator + "event";
 			
 			dto.setUserId(info.getMemberId());
-			service.insertGongji(dto, pathname);
-		} else {
-			state = "false";
-		}
-		
-		Map<String, Object> model = new HashMap<>();
-		model.put("state", state);
-		return model;
-	}
-	
-	@RequestMapping(value="/gongji/update", method=RequestMethod.GET)
-	public String updateForm(
-			@RequestParam(value="num") int num,
-			@RequestParam(value="pageNo") String page,
-			HttpSession session,
-			Model model
-			)throws Exception {
-		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		
-		Gongji dto = service.readGongji(num);
-		if(dto==null) {
-			return ".center.main";
-		}
-		if(! info.getMemberId().equals(dto.getUserId())) {
-			return ".center.main";
-		}
-		
-		List<Gongji> listFile = service.listFile(num);
-		
-		model.addAttribute("mode","update");
-		model.addAttribute("pageNo", page);
-		model.addAttribute("dto",dto);
-		model.addAttribute("listFile",listFile);
-		
-		return ".center.gongji_create";
-	}
-	
-	@RequestMapping(value="/gongji/update", method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> updateSubmit(
-			Gongji dto,
-			HttpSession session
-			) throws Exception{
-		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		String state = "true";
-		
-		if(info.getMemberId().equals("admin")) {
-			String root = session.getServletContext().getRealPath("/");
-			String pathname = root + File.separator + "uploads" + File.separator + "gongji";
-			
-			dto.setUserId(info.getMemberId());
-			service.updateGongji(dto, pathname);
+			service.insertEvent(dto, pathname);
 		} else {
 			state = "false";
 		}
@@ -228,21 +177,21 @@ public class CenterController {
 		return model;
 	}
 	
-	@RequestMapping(value="/gongji/delete", method=RequestMethod.POST)
+	@RequestMapping(value="/event/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> delete(
 			@RequestParam int num,
 			HttpSession session
-			) throws Exception{
+			) throws Exception {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		String state = "true";
 		
 		if(info.getMemberId().equals("admin")) {
 			String root = session.getServletContext().getRealPath("/");
-			String pathname = root + File.separator + "uploads" + File.separator + "gongji";
-			service.deleteGongji(num, pathname);
+			String pathname = root + File.separator + "uploads" + File.separator + "event";
+			service.deleteEvent(num, pathname);
 		} else {
-			state="false";
+			state = "false";
 		}
 		
 		Map<String, Object> model = new HashMap<>();
@@ -250,18 +199,18 @@ public class CenterController {
 		return model;
 	}
 	
-	@RequestMapping(value="/gongji/download")
+	@RequestMapping(value="/event/download")
 	public void download(
 			@RequestParam int fileNum,
 			HttpServletResponse resp,
 			HttpSession session
-			)throws Exception {
+			) throws Exception {
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + File.separator + "uploads" + File.separator + "gongji";
+		String pathname = root + File.separator + "uploads" + File.separator + "event";
 		
 		boolean b = false;
 		
-		Gongji dto = service.readGongji(fileNum);
+		Event dto = service.readEvent(fileNum);
 		if(dto!=null) {
 			String saveFilename = dto.getSaveFilename();
 			String originalFilename = dto.getOriginalFilename();
@@ -272,29 +221,30 @@ public class CenterController {
 		if(!b) {
 			try {
 				resp.setContentType("text/html; charset=utf-8");
-				PrintWriter out = resp.getWriter();
-				out.println("<script> alert('파일 다운로드가 불가능합니다.'); history.back();</script>");
+				PrintWriter pw = resp.getWriter();
+				pw.println("<script> alert('파일 다운로드가 불가능합니다.'); history.back();</script>");
 			} catch (Exception e) {
+				
 			}
 		}
 	}
 	
-	@RequestMapping(value="/gongji/deleteFile", method=RequestMethod.POST)
+	@RequestMapping(value="/event/deleteFile", method=RequestMethod.POST)
 	public Map<String, Object> deleteFile(
 			@RequestParam int fileNum,
 			HttpServletResponse resp,
 			HttpSession session
 			) throws Exception {
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + File.separator + "uploads" + File.separator + "gongji";
+		String pathname = root + File.separator + "uploads" + File.separator + "event";
 		
-		Gongji dto = service.readFile(fileNum);
+		Event dto = service.readFile(fileNum);
 		if(dto!=null) {
 			fileManager.doFileDelete(dto.getSaveFilename(), pathname);
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("field", "fileNum");
+		map.put("field","fileNum");
 		map.put("num", fileNum);
 		service.deleteFile(map);
 		
@@ -302,4 +252,5 @@ public class CenterController {
 		model.put("state", "true");
 		return model;
 	}
+	
 }

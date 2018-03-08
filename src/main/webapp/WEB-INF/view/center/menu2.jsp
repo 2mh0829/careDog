@@ -13,7 +13,15 @@
 </style>
 
 <div class="header-bottom">
-	<div class="menu2" align="center">
-		B B C
-	</div>
+	<ul class="center_list">
+				<li>
+					<a>FAQ</a>
+				</li>
+				<li>
+					<a onclick="javascript:location.href='<%=cp%>/center/gongji/list';">공지사항/이벤트</a>
+				</li>
+				<li>
+					<a>1:1문의</a>
+				</li>
+			</ul>
 </div>

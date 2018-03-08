@@ -138,12 +138,12 @@ $(function(){
 });
 
 function listPage(page){
-	var $tab = $(".gongji_Tabs .active");
+	var $tab = $("ul.gongji_Tabs .active");
 	var tab = $tab.attr("data-tab");
-	var url = "<%=cp%>/gongji/"+tab+"/list";
+	var url="<%=cp%>/center/"+tab+"/list";
 	
 	var query="pageNo="+page;
-	var search=$('form[name=gongjiSearchForm]').serialize();
+	var search=$('form[name=centerSearchForm]').serialize();
 	query = query+"&"+search;
 	
 	ajaxHTML(url, "get", query);
@@ -168,12 +168,8 @@ function ajaxHTML(url, type, query){
 }
 
 </script>
-<div id="gongji_Container">
-	<div id="gongji_Contents">
-		<ul class="gongji_Tabs">
-			<li id="gongji_alert" data-tab="alert" class="active"><a>공지사항</a></li>
-			<li id="gongji_event" data-tab="event"><a>이벤트</a></li>
-		</ul>
+
+
 		<div id="TabsOpenArea">
 			<div class="TabsConts">
 				<div class="gongji_list">
@@ -200,17 +196,11 @@ function ajaxHTML(url, type, query){
 				</div>
 			</div>
 			<div class="paging">
-				<c:if test="${dataCount==0} }">
+				<c:if test="${dataCount==0 }">
 				등록된 게시물이 없습니다.
 				</c:if>
 				<c:if test="${dataCount!=0 }">
-					${paging }
+				${paging }
 				</c:if>
 			</div>
-			<form name="gongjiSearchForm" action method="post">
-				<input type="hidden" name="searchKey" value="subject">
-				<input type="hidden" name="searchValue" value>
-			</form>
 		</div>
-	</div>
-</div>
