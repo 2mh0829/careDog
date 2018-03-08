@@ -6,8 +6,9 @@
    String cp = request.getContextPath();
 %>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="http://slidesjs.com/js/jquery.slides.min.js"></script>
 <script>
 
 $(function(){
@@ -56,20 +57,42 @@ $(function(){
 	$('#careChoice').text($(this).text());
 }); */
 
+$(function(){
+    $("#slides").slidesjs({
+    	width: 800,
+		height: 500,
+      	navigation: {
+	      active: false,
+	      effect: "slide"
+	    }    	
+    });
+});
+
 </script>
 
 <style>
+
+.ui-datepicker{ 
+	z-index: 9999 !important;
+}
+
+#slides {
+      display:none;
+}
 
 li{
 	list-style-type: none;
 }
 
-ul{
-	list-style: disc;
-}
-
 dt {
 	font-weight: normal;
+}
+
+.checkbox {
+    position: relative;
+    display: inline;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .sitter-header{
@@ -82,6 +105,11 @@ dt {
 	float:left;
 	/* list-style-type: none; */
 	margin: 15px;
+}
+
+.sitter-header ul {
+    margin-left: 30px;
+    margin-top: 20px;
 }
 
 .sitter-search{
@@ -211,14 +239,15 @@ li>a>span{
 	float: right;
 } */
 
-.dropdown-menu input.checkbox[type=checkbox]+label{
+.dropdown-menu input[type="checkbox"]+label{
 	position: relative;
 	display: inline-block;
 	width: 105px;
 	margin-right: 0 !important;
-	padding: 10px 0 10px 25px;
+	padding: 0 5px 25px;
 	color: #696969;
 	font-weight: normal;
+	cursor:pointer;
 }
 
 .filters>ul>li {
@@ -295,15 +324,15 @@ li>a>span{
 	color:#ffffff;
 	font-family:Arial;
 	font-size:17px;
-	padding:16px 31px;
+	padding:4px 35px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2f6627;
 	float: right;
 }
-.myButton:hover {
+.btnSearch:hover {
 	background-color:#5cbf2a;
 }
-.myButton:active {
+.btnSearch:active {
 	position:relative;
 	top:1px;
 }
@@ -316,6 +345,212 @@ li>a>span{
 
 ::placeholder {
 	color: black;
+}
+
+#col-btn {
+	float: right;
+}
+
+.col-tag {
+	width: 100%;
+}
+
+.col-tag label {
+	/* font-weight: normal; */
+    padding: 7px 6px;
+    background-color: #dcbf6c;
+    color: #fff;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+}
+
+/* hr {
+	width: 100%; 
+	text-align: center; 
+	border: 0.5px solid gray;
+} */
+
+.col-tot {
+    padding: 0 18px;
+    color: #696969;
+    line-height: 39px;
+    font-size: 13px;
+    /* border-bottom: 0.5px solid #696969; */
+}
+
+.sitter-body {
+	width: 100%;
+	height: 220px;
+    padding: 0;
+    margin: 0 auto;
+    clear: both;
+    position: relative;
+    border: 1px solid #bcbcbc;
+}
+
+.sitter-list {
+	/* border: 1px solid #ccc; */
+	position: relative;
+}
+
+.sitter-room-photo {
+	width: 35%;
+	height: 220px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: inline-block;
+	float: left;
+}
+
+.sitter-room-photo img {
+	position: absolute;
+	top: 0;
+	left: 0;
+    width: 100%;
+    height: 245px;
+}
+
+#slides-btn-left {
+	position: relative; 
+	top:-50px; 
+	font-size: 30px;
+	z-index:100;
+	color: white;
+}
+
+#slides-btn-right {
+	position: relative;
+    top: -50px;
+    left: 278px;
+    font-size: 30px;
+    z-index: 100;
+    color: white;
+}
+
+#slides a {
+	height: 200px;
+	text-decoration:none;
+}
+
+/* .sitter-room-photo {
+	display: inline-block;
+	float: left;
+} */
+
+.sitter-room-content {
+	color: black;
+}
+
+.sitter-room-content a {
+	display: block;
+    margin-bottom: 10px;
+    color: #3a3a3a;
+    line-height: 27px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.sitter-room-content dl {
+	float: right;
+	width: 65%;
+}
+
+.sitter-room-content dt {
+	
+    border-bottom: solid 1px #e5e5e5;
+    
+}
+
+.sitter-room-content label {
+	color: #828282;
+	font-size: 15px;
+	margin-right: 12px;
+}
+
+.sitter-face {
+	display: inline-block;
+	width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+}
+
+
+.dogIcon {
+	display: inline-block;
+	width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.dogs {
+	font-weight: normal;
+}
+
+.sitter-body dl {
+	padding-left: 15px;
+}
+
+.sitter-tag span{
+	display: inline-block;
+    width: 70px;
+    margin: 10px 5px 0 0;
+    padding: 9px 0 8px;
+    border-radius: 5px;
+    border: 1px solid #18ab29;
+    color: #18ab29;
+    line-height: 1;
+    font-size: 12px;
+    font-weight: normal;	
+}
+
+.price {
+	margin-top: 15px;
+	text-align: right;
+}
+
+.price strong {
+	margin-left: 2px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+#stay {
+    color: #fac058;
+}
+
+.evaluation {
+	height: 36px;
+    background-color: #ffe5aa;
+    /* top: 0px; */
+    /* position: relative; */
+    width: 65%;
+    float: right;
+}
+
+.inner {
+	width: 100%;
+	height: 220px;
+}
+
+.pull-right{
+	float: right;
+}
+
+.evaluation label {
+	margin-left: 12px;
+    font-weight: normal;
+    margin-top: 9px;
+}
+
+.evaluation img {
+	width: 110px;
+}
+
+.evaluation pull-left {
+	top: 100px;
 }
 
 </style>
@@ -484,7 +719,8 @@ li>a>span{
 				<!-- <button type="button" class="btn-close" aria-label="Close">
 					<span aria-hidden="true">x</span>
 				</button> -->
-			</div>
+				</div>
+			
 		</li>
 		<li class="dropdown">
 			<a href="#" data-toggle="dropdown">경기 <span class="city-num">87</span>
@@ -708,13 +944,137 @@ li>a>span{
 			</dd>
 			</dl>
 		</li>
-		<li class="col-btn">
+		<li class="col-btn" id="col-btn">
 			<dl>
+				<dt>&nbsp;</dt>
 				<dd>
 					<button type="button" class="btnSearch">검색</button>
 				</dd>
 			</dl>
 		</li>
+		<li class="col-tag">
+			<dl>
+				<dt>원하는 태그를 모두 선택해주세요!</dt>
+				<dd>
+					<div class="btn-group" data-toggle="buttons">
+					<label for="apt" class="btn">
+						<input type="checkbox" id="apt" class="checkbox">아파트
+					</label>
+					<label for="yard" class="btn">
+						<input type="checkbox" id="yard" class="checkbox">마당
+					</label>
+					<label for="oldDogCare" class="btn">
+						<input type="checkbox" id="oldDogCare" class="checkbox">노령견케어
+					</label>
+					<label for="sickDogCare" class="btn">
+						<input type="checkbox" id="sickDogCare">환자견케어
+					</label>
+					<label for="license" class="btn">
+						<input type="checkbox" id="license">자격증보유
+					</label>
+					<label for="outdoor" class="btn">
+						<input type="checkbox" id="outdoor">실외배변
+					</label>
+					<label for="pickUp" class="btn">
+						<input type="checkbox" id="pickUp">픽업가능
+					</label>
+					<label for="handmade" class="btn">
+						<input type="checkbox" id="handmade">수제간식
+					</label>
+					<label for="noDog" class="btn">
+						<input type="checkbox" id="noDog">반려견없는곳
+					</label>
+					<label for="emergency" class="btn">
+						<input type="checkbox" id="emergency">응급처치
+					</label>
+					<label for="pillAble" class="btn">
+						<input type="checkbox" id="pillAble">투약가능
+					</label>
+					<label for="bigDog" class="btn">
+						<input type="checkbox" id="bigDog">대형견
+					</label>
+					</div>
+				</dd>
+			</dl>
+		</li>
 	</div>
+	<!-- <hr> -->
+	<div class="col-tot">
+		<strong>###명</strong>
+		의 펫시터가 검색되었습니다!
+		<a href="#" style="float: right; text-decoration: underline">검색 설정 초기화</a>
+	</div>
+	<div class="sitter-body">
+	<ul class="inner">
+		<li class="sitter-list">
+			<div class="sitter-room-photo">
+				<div id="slides">
+					<img src="http://cfile6.uf.tistory.com/image/2544613F51CF074D104D69">
+					<img src="http://cfile4.uf.tistory.com/image/0148133F51CF074F0EE545">
+					<img src="http://cfile26.uf.tistory.com/image/2162173F51CF0752036923">
+					<img src="http://cfile6.uf.tistory.com/image/233B073F51CF075D14D7CA">
+				<a href="#" id="slides-btn-left" class="slidesjs-previous slidesjs-navigation">
+					<i class="glyphicon glyphicon-chevron-left"></i>
+				</a>
+				<a href="#" id="slides-btn-right" class="slidesjs-next slidesjs-navigation">
+					<i class="glyphicon glyphicon-chevron-right"></i>
+				</a>
+				</div>
+			</div>
+			<div class="sitter-room-content">
+				<dl>
+					<dt>
+						<a href="<%=cp%>/service/sitting_detail">당신의 강아지... 이제 더이상 외롭지 않아요...</a>
+						<label class="name">
+							<img class="sitter-face" 
+							src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_80%2Cw_300/MTE5NTU2MzE2MTk1NTU0ODI3/daniel-day-lewis-9268727-2-402.jpg">
+							김경애
+						</label>
+						<label class="dogs">
+							<img class="dogIcon" 
+							src="https://www.iconexperience.com/_img/o_collection_png/green_dark_grey/512x512/plain/dog.png">
+							반려견
+							<strong>
+								#
+							</strong>
+							마리							
+						</label>
+					</dt>
+					<dd class="sitter-tag">
+						<span class="label">아파트</span>
+						<span class="label">노령견케어</span>
+						<span class="label">실외배변</span>
+						<span class="label">픽업가능</span>
+						<span class="label">수제간식</span>
+						<span class="label">투약가능</span>
+					</dd>
+					<dd class="price">
+						<label class="daycare">
+							Day Care / 
+							<strong>22,000원</strong>
+						</label>
+						<label id="stay">
+							1박 / 
+							<strong>30,000원</strong>
+						</label>
+					</dd>
+				</dl>
+				<div class="evaluation">
+					<label class="pull-left">
+						<img src="<%=cp%>/resource/img/service/grade_img.png">
+						펫시터 총점</label>
+					<label class="pull-right">
+						<i class="glyphicon glyphicon-list-alt"></i>
+						고객 후기 ##개
+					</label>
+					<label class="pull-right">
+						<i class="glyphicon glyphicon-user"></i>
+						정기 고객 ##명
+					</label>
+				</div>
+			</div>
+		</li>
+	</ul>
+	</div>
+	
 </div>
-<!-- test -->

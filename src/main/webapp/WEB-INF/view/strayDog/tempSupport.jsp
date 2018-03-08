@@ -6,6 +6,421 @@
    String cp = request.getContextPath();
 %>
 
+<style>
+.content { float: left; width: 954px; /*min-height:800px;*/}
+.color1 { color: #1991d7 !important; }
+.inline-block { display: inline-block !important; }
+
+.wd40 { width: 40px !important; }
+
+.wd60 { width: 60px !important; }
+
+.wd80 { width: 80px !important; }
+
+.wd100 { width: 100px !important; }
+
+.wd120 { width: 120px !important; }
+
+.wd160 { width: 160px !important; }
+
+.wd240 { width: 240px !important; }
+
+.wd250 { width: 250px !important; }
+
+.wd320 { width: 320px !important; }
+
+.wd460 { width: 460px !important; }
+
+.wd600 { width: 600px !important; }
+
+.wd704 { width: 704px !important; }
+
+.wd100p { width: 100% !important; }
+
+.hg100 { height: 100px !important; }
+
+.hg140 { height: 140px !important; }
+
+.hg180 { height: 180px !important; }
+
+.hg550 { height: 550px !important; }
+
+.hg560 { height: 560px !important; }
+
+.hg720 { height: 720px !important; }
+
+/*폰트사이즈*/
+.fs0 { font-size: 0 !important; }
+
+.txt_c { text-align: center !important; }
+
+.left__group { text-align: left; font-size: 0; }
+
+.center__group { text-align: center; font-size: 0; }
+
+.right__group { text-align: right; font-size: 0; }
+
+.btn + .btn { margin-left: 10px; }
+
+.btn { display: inline-block; width: 120px; height: 40px; text-align: center; line-height: 38px; font-size: 14px; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+.btn1 { background-color: #1991d7; color: #fff; border: 1px solid #1991d7; }
+
+.btn2 { border: 1px solid #666666; color: #666666; }
+
+.btn3 { background-color: #f24443; color: #fff; border: 1px solid #f24443; }
+
+.btn4 { border: 1px solid #cccccc; color: #767676; background-color: #fff; }
+
+/*radio,checkbox*/
+.checkbox01 + label { display: inline-block; margin-left: 5px; margin-right: 10px; font-size: 14px; }
+
+@media only screen { .checkbox01 { overflow: hidden; position: absolute; top: auto; width: 1px; height: 1px; padding: 0; margin: -1px; border: 0; clip: rect(0, 0, 0, 0); }
+  .checkbox01 + label.solo.type-cart { float: left; width: 0px; margin-top: 15px; padding-left: 12px; }
+  .checkbox01 + label { position: relative; margin-left: 0; padding-left: 20px; cursor: pointer; }
+  .checkbox01 + label:before { position: absolute; top: 0; bottom: 0; left: 0; -webkit-box-sizing: border-box; box-sizing: border-box; width: 12px; height: 12px; margin: auto; border: 1px solid #dddddd; background-color: #fff; content: ''; cursor: pointer; }
+  .checkbox01.type-another + label:before { border: 1px solid #767676; }
+  .checkbox01:checked + label:after { position: absolute; top: -3px; left: 2px; bottom: 0; width: 6px; height: 4px; margin: auto; border-left: 2px solid #222; border-bottom: 2px solid #222; -webkit-transform: rotate(-48deg); -ms-transform: rotate(-48deg); transform: rotate(-48deg); background-repeat: no-repeat; cursor: pointer; content: ''; }
+  .checkbox01 + label { margin-right: 20px; }
+  .checkbox01:last-of-type + label { margin-right: 0; }
+  .checkbox01.disabled + label:before { position: absolute; top: 0; bottom: 0; left: 0; -webkit-box-sizing: border-box; box-sizing: border-box; width: 12px; height: 12px; margin: auto; border: 1px solid #dddddd; background-color: #ddd; content: ''; cursor: pointer; } }
+.checkbox01 + label.solo { overflow: hidden; text-indent: -9999px; min-height: 12px; width: 0px; }
+
+@media only screen { .radio01 { overflow: hidden; position: absolute; top: auto; width: 1px; height: 1px; padding: 0; margin: -1px; border: 0; clip: rect(0, 0, 0, 0); }
+  .radio01 + .label01:before { content: ""; position: absolute; top: 4px; left: 0; -webkit-box-sizing: border-box; box-sizing: border-box; width: 12px; height: 12px; margin: auto; border: 1px solid #666; border-radius: 50%; }
+  .radio01:checked + .label01:after { content: ""; position: absolute; top: 7px; left: 3px; width: 6px; height: 6px; margin: auto; border-radius: 50%; background: #767676; }
+  .radio01 + .label01 { position: relative; font-size: 14px; font-weight: 500; color: #898989; padding-left: 21px; display: inline-block; height: 20px; line-height: 20px; margin-left: 0; cursor: pointer; }
+  .radio01 + .label01.other { font-size: 12px; color: #555; line-height: 20px; }
+  .radio01 + label + .radio01 + label { margin-left: 20px; } }
+.radio01 + label + .radio01 { margin-left: 20px; }
+
+.temporary__header{display:table-cell; width:1%; height:104px; padding-left:216px; box-sizing:border-box; vertical-align:middle; background:url('<%=cp%>/resource/img/strayDog/sponsor_1.jpg') no-repeat center left; border-bottom:1px solid #dddddd;}
+.temporary__tit{margin:0;color:#222; font-size:24px;}
+.temporary__txt{margin:20px 0 0;font-size:16px;}
+.temporary__txt-small{margin:0; padding-left:13px; box-sizing: border-box; font-size:13px;}
+.temporary__box{margin-top:30px;}
+.temporary__box.type-another{margin-left:-13px; padding-bottom:20px;}
+.temporary__terms{overflow:auto; height:190px; margin-top:20px; border:1px solid #ddd; border:1px solid #ccc; padding:15px; box-sizing:border-box; font-size:13px; line-height:1.5;}
+.temporary__check{margin-top:15px; text-align:right;}
+.temporary__list { margin:0; font-size: 13px; list-style: none; padding-left: 0px;}
+.temporary__list li { text-indent: -14px; padding-left: 14px; margin: 5px 0; line-height: 1.3; letter-spacing: -0.5px; }
+
+img {border:0px; margin:0px; padding:0px; vertical-align:top;}
+fieldset {border:0;}
+fieldset legend, caption {display:none;}
+ul, ol { list-style:none; margin:0; padding:0;}
+body, table, div, input, ul, li, dl, dt, dd, ol, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend {margin:0; padding:0;}
+body {color:#222; font-family:tahoma; font-size:11px; font-weight:normal;}
+a {text-decoration:none; color:inherit;}
+table {border-collapse:collapse;}
+.table1 { width: 100%; border-spacing: 0; border-collapse: collapse; text-align: left; }
+.table1__tr { border-top: 1px solid #dedede; }
+.table1__th { padding: 22px 30px; background-color: #fafafa; border-bottom: 1px solid #dedede; font-size: 14px; color: #222; text-align:left;}
+.table1__td { padding: 22px 30px; border-bottom: 1px solid #dedede; }
+.input1 { -webkit-box-sizing: border-box; box-sizing: border-box; height: 30px; padding: 5px; border: 1px solid #dddddd; vertical-align: middle; font-size: 14px; line-height: 1; }
+.input1 + .input1 { margin-left: 5px; }
+
+.input__form { margin: -7px 0px; font-size: 0; }
+.input__form.type-another { position: relative; }
+.input__txt { font-size: 14px; vertical-align: middle; }
+.input__calender { overflow: hidden; position: relative; left: -1px; display: inline-block; text-indent: -9999px; width: 30px; height: 30px; background-image: url("../images/content/calender_icon.jpg"); vertical-align: middle; }
+
+.input1 + .input__txt { margin-left: 10px; }
+
+.input__calender + .input__txt { margin-left: 10px; }
+
+.input__wrap { display: inline-block; }
+.input__wrap + .input__wrap { margin-top: 5px; }
+
+/* SelectBoxIt container */
+.selectboxit-container {
+	width:100%;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+
+/* Styles that apply to all SelectBoxIt elements */
+.selectboxit-container * {
+  font: 14px Helvetica, Arial;
+  /* Prevents text selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  outline: none;
+  white-space: nowrap;
+}
+
+/* Button */
+.selectboxit-container .selectboxit {
+	width:100%;
+	border:1px solid #eaeaea;
+  /* width: 220px; */ /* Width of the dropdown button */
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  /* border-radius: 6px; */
+  overflow: hidden;
+  display: block;
+  position: relative;
+	background:#fff;
+}
+
+/* Height and Vertical Alignment of Text */
+.selectboxit-container > span, .selectboxit-container > span span {
+	font-size:13px; color:#767676;
+  height: 40px; /* Height of the drop down */
+  line-height: 40px; /* Vertically positions the drop down text */
+  display: block;
+  box-sizing:border-box;
+}
+span.selectboxit.select30, span.selectboxit.select30 span{
+	height: 30px !important;
+	line-height: 30px !important;
+}
+.selectboxit-container .selectboxit-options a {
+	font-size:13px; color:#767676;
+  height: 28px; /* Height of the drop down */
+  line-height: 28px; /* Vertically positions the drop down text */
+  display: block;
+}
+
+/* Focus pseudo selector */
+.selectboxit-container .selectboxit:focus {
+  outline: 0;
+}
+
+/* Disabled Mouse Interaction */
+.selectboxit.selectboxit-disabled, .selectboxit-options .selectboxit-disabled {
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  cursor: default;
+}
+
+/* Button Text */
+.selectboxit-text {
+  text-indent: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  float: left;
+}
+
+.selectboxit .selectboxit-option-icon-container {
+  margin-left: 5px;
+}
+
+/* Options List */
+.selectboxit-container .selectboxit-options {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  min-width: 100%;  /* Minimum Width of the dropdown list box options */
+  *width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: absolute;
+  overflow-x: hidden;
+  overflow-y: auto;
+  cursor: pointer;
+  display: none;
+  z-index: 9999999999999;
+  /* border-radius: 6px; */
+  text-align: left;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+/* Individual options */
+ .selectboxit-option .selectboxit-option-anchor{
+  padding: 0 2px;
+}
+
+/* Individual Option Hover Action */
+.selectboxit-option .selectboxit-option-anchor:hover {
+  text-decoration: none;
+}
+
+/* Individual Option Optgroup Header */
+.selectboxit-option, .selectboxit-optgroup-header {
+  text-indent: 5px; /* Horizontal Positioning of the select box option text */
+  margin: 0;
+  list-style-type: none;
+}
+
+/* The first Drop Down option */
+.selectboxit-option-first {
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+}
+
+/* The first Drop Down option optgroup */
+.selectboxit-optgroup-header + .selectboxit-option-first {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+/* The last Drop Down option */
+.selectboxit-option-last {
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+/* Drop Down optgroup headers */
+.selectboxit-optgroup-header {
+  font-weight: bold;
+}
+
+/* Drop Down optgroup header hover psuedo class */
+.selectboxit-optgroup-header:hover {
+  cursor: default;
+}
+
+/* Drop Down down arrow container */
+.selectboxit-arrow-container {
+  /* Positions the down arrow */
+  width: 30px;
+  position: absolute;
+  right: 0;
+}
+
+/* Drop Down down arrow */
+.selectboxit .selectboxit-arrow-container .selectboxit-arrow {
+  /* Horizontally centers the down arrow */
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+}
+
+/* Drop Down down arrow for jQueryUI and jQuery Mobile */
+.selectboxit .selectboxit-arrow-container .selectboxit-arrow.ui-icon {
+  top: 30%;
+}
+
+/* Drop Down individual option icon positioning */
+.selectboxit-option-icon-container {
+  float: left;
+}
+
+.selectboxit-container .selectboxit-option-icon {
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+}
+
+/* Drop Down individual option icon positioning */
+.selectboxit-option-icon-url {
+  width: 18px;
+  background-size: 18px 18px;
+  background-repeat: no-repeat;
+  height: 100%;
+  background-position: center;
+  float: left;
+}
+
+.selectboxit-rendering {
+  display: inline-block !important;
+  *display: inline !important;
+  zoom: 1 !important;
+  visibility: visible !important;
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+/* jQueryUI and jQuery Mobile compatability fix - Feel free to remove this style if you are not using jQuery Mobile */
+.jqueryui .ui-icon {
+  background-color: inherit;
+}
+
+/* Another jQueryUI and jQuery Mobile compatability fix - Feel free to remove this style if you are not using jQuery Mobile */
+.jqueryui .ui-icon-triangle-1-s {
+  background-position: -64px -16px;
+}
+
+/*
+  Default Theme
+  -------------
+  Note: Feel free to remove all of the CSS underneath this line if you are not using the default theme
+*/
+.selectboxit-btn {
+  background-color: #f5f5f5;
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+  background-repeat: repeat-x;
+  border: 1px solid #cccccc;
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  border-bottom-color: #b3b3b3;
+}
+
+.selectboxit-btn.selectboxit-enabled:hover,
+.selectboxit-btn.selectboxit-enabled:focus,
+.selectboxit-btn.selectboxit-enabled:active {
+  color: #333333;
+  background-color: #e6e6e6;
+}
+
+.selectboxit-btn.selectboxit-enabled:hover,
+.selectboxit-btn.selectboxit-enabled:focus {
+  color: #333333;
+  text-decoration: none;
+  background-position: 0 -15px;
+  background-color:#fff;
+}
+
+.selectboxit-default-arrow {
+  width: 0;
+  height: 0;
+  border-top: 4px solid #000000;
+  border-right: 4px solid transparent;
+  border-left: 4px solid transparent;
+}
+
+.selectboxit-list {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.selectboxit-list .selectboxit-option-anchor {
+  color: #333333;
+}
+
+.selectboxit-list > .selectboxit-focus > .selectboxit-option-anchor {
+  color: #ffffff;
+  background-color: #0081c2;
+  background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+  background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+  background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+  background-repeat: repeat-x;
+}
+
+.selectboxit-list > .selectboxit-disabled > .selectboxit-option-anchor {
+  color: #999999;
+}
+
+.center__group { text-align: center; font-size: 0; }
+.mt40 { margin-top: 40px !important; }
+</style>
+
 <div class="body-container">
    <div class="content" id="AnimalsContent">
 				<h1 class="page-tit">일시후원</h1>
@@ -246,19 +661,94 @@
 													</option><option value="70000">70,000원
 													</option><option value="100000">100,000원
 													</option><option value="200000">200,000원
-													</option><option value="300000">300,000원
-												</option></select><span id="gpriceSelectBoxItContainer" class="selectboxit-container selectboxit-container" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" aria-owns="gpriceSelectBoxItOptions"><span id="gpriceSelectBoxIt" class="selectboxit wd200 select30 selectboxit-enabled selectboxit-btn" name="gprice" tabindex="0" unselectable="on"><span class="selectboxit-option-icon-container"><i id="gpriceSelectBoxItDefaultIcon" class="selectboxit-default-icon selectboxit-option-icon selectboxit-container" unselectable="on"></i></span><span id="gpriceSelectBoxItText" class="selectboxit-text" unselectable="on" data-val="10000" aria-live="polite" style="max-width: 1250px;">10,000원
-													</span><span id="gpriceSelectBoxItArrowContainer" class="selectboxit-arrow-container" unselectable="on"><i id="gpriceSelectBoxItArrow" class="selectboxit-arrow selectboxit-default-arrow" unselectable="on"></i></span></span><ul id="gpriceSelectBoxItOptions" class="selectboxit-options selectboxit-list" tabindex="-1" role="listbox" aria-hidden="true"><li data-id="0" data-val="" data-disabled="false" class="selectboxit-option  selectboxit-option-first" role="option"><a class="selectboxit-option-anchor"><span class="selectboxit-option-icon-container"><i class="selectboxit-option-icon  selectboxit-container"></i></span>[ 후원 금액을 선택하세요. ]
-													</a></li><li data-id="1" data-val="5000" data-disabled="false" class="selectboxit-option" role="option"><a class="selectboxit-option-anchor"><span class="selectboxit-option-icon-container"><i class="selectboxit-option-icon  selectboxit-container"></i></span>5,000원
-													</a></li><li data-id="2" data-val="10000" data-disabled="false" class="selectboxit-option selectboxit-selected" role="option"><a class="selectboxit-option-anchor"><span class="selectboxit-option-icon-container"><i class="selectboxit-option-icon  selectboxit-container"></i></span>10,000원
-													</a></li><li data-id="3" data-val="20000" data-disabled="false" class="selectboxit-option" role="option"><a class="selectboxit-option-anchor"><span class="selectboxit-option-icon-container"><i class="selectboxit-option-icon  selectboxit-container"></i></span>20,000원
-													</a></li><li data-id="4" data-val="30000" data-disabled="false" class="selectboxit-option" role="option"><a class="selectboxit-option-anchor"><span class="selectboxit-option-icon-container"><i class="selectboxit-option-icon  selectboxit-container"></i></span>30,000원
-													</a></li><li data-id="5" data-val="50000" data-disabled="false" class="selectboxit-option" role="option"><a class="selectboxit-option-anchor"><span class="selectboxit-option-icon-container"><i class="selectboxit-option-icon  selectboxit-container"></i></span>50,000원
-													</a></li><li data-id="6" data-val="70000" data-disabled="false" class="selectboxit-option" role="option"><a class="selectboxit-option-anchor"><span class="selectboxit-option-icon-container"><i class="selectboxit-option-icon  selectboxit-container"></i></span>70,000원
-													</a></li><li data-id="7" data-val="100000" data-disabled="false" class="selectboxit-option" role="option"><a class="selectboxit-option-anchor"><span class="selectboxit-option-icon-container"><i class="selectboxit-option-icon  selectboxit-container"></i></span>100,000원
-													</a></li><li data-id="8" data-val="200000" data-disabled="false" class="selectboxit-option" role="option"><a class="selectboxit-option-anchor"><span class="selectboxit-option-icon-container"><i class="selectboxit-option-icon  selectboxit-container"></i></span>200,000원
-													</a></li><li data-id="9" data-val="300000" data-disabled="false" class="selectboxit-option  selectboxit-option-last" role="option"><a class="selectboxit-option-anchor"><span class="selectboxit-option-icon-container"><i class="selectboxit-option-icon  selectboxit-container"></i></span>300,000원
-												</a></li></ul></span>
+													</option><option value="300000">300,000원</option>
+												</select>
+												<span id="gpriceSelectBoxItContainer" class="selectboxit-container selectboxit-container" 
+													role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" aria-owns="gpriceSelectBoxItOptions">
+													<span id="gpriceSelectBoxIt" class="selectboxit wd200 select30 selectboxit-enabled selectboxit-btn" name="gprice" tabindex="0" unselectable="on">
+														<span class="selectboxit-option-icon-container">
+															<i id="gpriceSelectBoxItDefaultIcon" class="selectboxit-default-icon selectboxit-option-icon selectboxit-container" unselectable="on">
+															</i>
+														</span>
+														<span id="gpriceSelectBoxItText" class="selectboxit-text" unselectable="on" data-val="10000" aria-live="polite" 
+															style="max-width: 1250px;">10,000원</span>
+														<span id="gpriceSelectBoxItArrowContainer" class="selectboxit-arrow-container" unselectable="on">
+															<i id="gpriceSelectBoxItArrow" class="selectboxit-arrow selectboxit-default-arrow" unselectable="on"></i>
+														</span>
+													</span>
+													<ul id="gpriceSelectBoxItOptions" class="selectboxit-options selectboxit-list" tabindex="-1" role="listbox" aria-hidden="true">
+														<li data-id="0" data-val="" data-disabled="false" class="selectboxit-option  selectboxit-option-first" role="option">
+															<a class="selectboxit-option-anchor">
+																<span class="selectboxit-option-icon-container">
+																	<i class="selectboxit-option-icon  selectboxit-container"></i>
+																</span>[ 후원 금액을 선택하세요. ]
+															</a>
+														</li>
+														<li data-id="1" data-val="5000" data-disabled="false" class="selectboxit-option" role="option">
+															<a class="selectboxit-option-anchor">
+																<span class="selectboxit-option-icon-container">
+																	<i class="selectboxit-option-icon  selectboxit-container"></i>
+																</span>5,000원
+															</a>
+														</li>
+														<li data-id="2" data-val="10000" data-disabled="false" class="selectboxit-option selectboxit-selected" role="option">
+															<a class="selectboxit-option-anchor">
+																<span class="selectboxit-option-icon-container">
+																	<i class="selectboxit-option-icon  selectboxit-container"></i>
+																</span>10,000원
+															</a>
+														</li>
+														<li data-id="3" data-val="20000" data-disabled="false" class="selectboxit-option" role="option">
+															<a class="selectboxit-option-anchor">
+																<span class="selectboxit-option-icon-container">
+																	<i class="selectboxit-option-icon  selectboxit-container"></i>
+																</span>20,000원
+															</a>
+														</li>
+														<li data-id="4" data-val="30000" data-disabled="false" class="selectboxit-option" role="option">
+															<a class="selectboxit-option-anchor">
+																<span class="selectboxit-option-icon-container">
+																	<i class="selectboxit-option-icon  selectboxit-container"></i>
+																</span>30,000원
+															</a>
+														</li>
+														<li data-id="5" data-val="50000" data-disabled="false" class="selectboxit-option" role="option">
+															<a class="selectboxit-option-anchor">
+																<span class="selectboxit-option-icon-container">
+																	<i class="selectboxit-option-icon  selectboxit-container"></i>
+																</span>50,000원
+															</a>
+														</li>
+														<li data-id="6" data-val="70000" data-disabled="false" class="selectboxit-option" role="option">
+															<a class="selectboxit-option-anchor">
+																<span class="selectboxit-option-icon-container">
+																	<i class="selectboxit-option-icon  selectboxit-container"></i>
+																</span>70,000원
+															</a>
+														</li>
+														<li data-id="7" data-val="100000" data-disabled="false" class="selectboxit-option" role="option">
+															<a class="selectboxit-option-anchor">
+																<span class="selectboxit-option-icon-container">
+																	<i class="selectboxit-option-icon  selectboxit-container"></i>
+																</span>100,000원
+															</a>
+														</li>
+														<li data-id="8" data-val="200000" data-disabled="false" class="selectboxit-option" role="option">
+															<a class="selectboxit-option-anchor">
+																<span class="selectboxit-option-icon-container">
+																	<i class="selectboxit-option-icon  selectboxit-container"></i>
+																</span>200,000원
+															</a>
+														</li>
+														<li data-id="9" data-val="300000" data-disabled="false" class="selectboxit-option  selectboxit-option-last" role="option">
+															<a class="selectboxit-option-anchor">
+																<span class="selectboxit-option-icon-container">
+																	<i class="selectboxit-option-icon  selectboxit-container"></i>
+																</span>300,000원
+															</a>
+														</li>
+													</ul>
+												</span>
 											</div>
 										</div>
 										<!--// 20171023 수정 -->
@@ -279,5 +769,6 @@
 					</div>
 				</div>
 
-			</form></div>
+			</form>
+		</div>
 </div>

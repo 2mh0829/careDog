@@ -38,12 +38,7 @@ public class CenterController {
 	@Autowired
 	private FileManager fileManager;
 	
-	@RequestMapping(value="/center")
-	public String main() {
-		return ".center.main";
-	}
-	
-	@RequestMapping(value="/gongji")
+	@RequestMapping(value="/center/gongji/list")
 	public String gongjiList(
 			@RequestParam(value="pageNo",defaultValue="1") int current_page,
 			@RequestParam(value="searchKey",defaultValue="subject") String searchKey,
@@ -205,7 +200,7 @@ public class CenterController {
 		model.addAttribute("dto",dto);
 		model.addAttribute("listFile",listFile);
 		
-		return ".gongji.created";
+		return ".center.gongji_create";
 	}
 	
 	@RequestMapping(value="/gongji/update", method=RequestMethod.POST)

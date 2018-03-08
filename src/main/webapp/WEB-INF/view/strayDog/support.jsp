@@ -193,7 +193,7 @@ li {
 						신용카드,핸드폰,계좌이체를 통하여 후원금을 납부하시는 <br>
 						방법입니다.
 					</p>
-					<a class="sponsor__item-link" href="<%=cp%>/strayDog/tempSupport">일시후원 신청</a>
+					<a class="sponsor__item-link" href="<%=cp %>/strayDog/tempSupport">일시후원 신청</a>
 				</div>
 			</li>
 			<li class="sponsor__item h200">
@@ -203,7 +203,7 @@ li {
 						조금 더 여유를 내어주실 수 있다면,<br>
 						지금 회원님의 후원금을 증액해 주세요.
 					</p>
-					<a class="sponsor__item-link" href="cartoon01_3.asp">후원금 증액</a>
+					<a class="sponsor__item-link" href="<%=cp %>/strayDog/addSupport">후원금 증액</a>
 				</div>
 			</li>
 			<li class="sponsor__item h200">

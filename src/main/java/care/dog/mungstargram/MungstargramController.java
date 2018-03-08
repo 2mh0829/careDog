@@ -66,10 +66,12 @@ public class MungstargramController {
 		List<MungstarRVO> list = service.mungstarList(map);
 		List<Integer> photoCountList = service.mungstarPhotoCount(map);
 		List<Integer> likeCountList = service.mungsterLikeCount(map);
+		List<Integer> replyCountList = service.mungstarReplyCount(map);
 		
 		for(int i=0; i<list.size(); i++) {
 			list.get(i).setPhotoCount(photoCountList.get(i));
 			list.get(i).setLikeCount(likeCountList.get(i));
+			list.get(i).setReplyCount(replyCountList.get(i));
 		}
 
 		Map<String, Object> model = new HashMap<>();
@@ -102,6 +104,8 @@ public class MungstargramController {
 		if(rvo.getContext() != null) {
 			rvo.setContext(rvo.getContext().replaceAll("\n", "<br>"));
 		}
+		
+		System.out.println(rvo.getReplyList().toString());
 		
 		List<MungstarRVO> photoList = service.mungstarPhotoList(num);
 		
@@ -175,15 +179,9 @@ public class MungstargramController {
 
 	@RequestMapping(value="/mungstargram/reply")
 	@ResponseBody
-	public Map<String, Object> insertReply(MungstarPVO pvo, HttpSession session){
-		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		pvo.setMemberId(info.getMemberId());
-		
-		System.out.println(pvo.toString());
-		
+	public void insertReply(MungstarPVO pvo, HttpSession session){
 		service.insertMungstarReply(pvo);
-		
-		return null;
 	}
+	
 	
 }

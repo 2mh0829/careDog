@@ -20,65 +20,164 @@ ul{
 list-style: none;
 }
 
-#center_Container {
+i{
+color: #888;
+padding-right: 17px;
+}
+
+#gongji_Container {
 	overflow: hidden;
 	width: 100%;
 	min-width: 1020px;
 }
 
-.center_cont_wrap{
-width: 1200px;
-margin: 0 auto;
+#gongji_Contents {
+	width: 1020px;
+	height: 100%;
+	margin: 0 auto;
 }
 
-.center_tit_box{
-overflow: hidden;
-width: 1200px;
-height: 100px;
-margin: 0 auto;
+.gongji_Tabs {
+	overflow: hidden;
+	height: 55px;
+	margin: 30px 0 0;
+	padding-bottom: 5px;
 }
 
-.center_cont{
-width: 100%;
+.gongji_Tabs
+li:first_child{
+width: 50%;
 }
 
-.center_list{
-overflow: hidden;
-margin-top: 5px;
-}
-
-.center_list > li{
-float: left;
+.gongji_Tabs > li{
 position: relative;
-width: 340px;
-padding: 30px 5px 10px;
-border-bottom: 1px solid #e5e5e5;
+float: left;
+width: 497px;
+text-align: center;
+border: 0;
 }
 
-.center_list >li > a {
+.gongji_Tabs > li > a{
 display: block;
-height: 320px;
+height: 50px;
+padding: 0;
+line-height: 50px;
 font-size: 18px;
-text-align: center;
-font-weight: 700;
+font-weight: 400;
+}
+
+.TabsConts{
+display: block;
+}
+.gongji_list{
+width: 1020px;
+margin: 0 auto;
+}
+.gongji_list ul{
+overflow: hidden;
+width: 100%;
+border-top: 2px solid #888;
+}
+
+.gongji_list ul li{
+border-bottom: 1px solid #e6e6e6;
+}
+
+.gongji_list ul li .title{
+margin-left: 20px;
+padding: 20px 0 20px 30px;
+color: #222;
+font-size: 14px;
+line-height: 18px;
+cursor: pointer;
+}
+
+.gongji_list ul li .title strong{
+display: inline-block;
+width: 140px;
+margin-left: 25px;
+margin-right: 11px;
+vertical-align: middle;
+}
+
+.gongji_list ul li .gongji_conts{
+display: none;
+background: #fafafa;
+border: 0;
+color: #222;
+font-size: 0;
+line-height: 0;
+}
+
+.gongji_list ul li .gongji_conts li.gongji_question{
+padding: 28px 30px 25px 62px;
+}
+
+#gongji_created{
+padding-left: 598px;
+color: #888;
 }
 </style>
-<div id="center_Container">
-	<div class="center_cont_wrap">
-		<div class="center_tit_box">
-		</div>
-		<div class="center_cont">
-			<ul class="center_list">
-				<li>
-					<a>FAQ</a>
-				</li>
-				<li>
-					<a onclick="javascript:location.href='<%=cp%>/gongji';">공지사항/이벤트</a>
-				</li>
-				<li>
-					<a>1:1문의</a>
-				</li>
-			</ul>
-		</div>
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.form.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#gongji_alert").addClass("active");
+	listPage(1);
+	
+	$("ul.gongji_Tabs li").click(function(){
+		tab = $(this).attr("data-tab");
+		
+		$("ul.gongji_Tabs li").each(function(){
+			$(this).removeClass("active");
+		});
+		
+		$("#gongji_"+tab).addClass("active");
+		
+		listPage(1);
+	});
+});
+
+function listPage(page){
+	var $tab = $("ul.gongji_Tabs .active");
+	var tab = $tab.attr("data-tab");
+	var url="<%=cp%>/center/"+tab+"/list";
+	
+	var query="pageNo="+page;
+	var search=$('form[name=centerSearchForm]').serialize();
+	query = query+"&"+search;
+	
+	ajaxHTML(url, "get", query);
+}
+
+function ajaxHTML(url, type, query){
+	$.ajax({
+		type:type
+		,url:url
+		,data:query
+		,success:function(data){
+			if($.trim(data)=="error"){
+				listPage(1);
+				return;
+			}
+			$("#TabsOpenArea").html(data);
+		}
+	,beforeSend : function(jqXHR){
+		jqXHR.setRequestHead
+	}
+	});
+}
+
+</script>
+
+<div id="gongji_Container">
+	<div id="gongji_Contents">
+		<ul class="gongji_Tabs">
+			<li id="gongji_alert" data-tab="gongji" class="active"><a>공지사항</a></li>
+			<li id="gongji_event" data-tab="event"><a>이벤트</a></li>
+		</ul>
 	</div>
 </div>
+<form name="centerSearchForm" action="" method="post">
+    <input type="hidden" name="searchKey" value="subject">
+    <input type="hidden" name="searchValue" value="">
+</form>

@@ -48,6 +48,7 @@ public class GongjiServiceImpl implements GongjiService{
 			}
 			
 		} catch (Exception e) {
+			System.out.println(e.toString());
 		}
 		return result;
 	}
@@ -77,6 +78,7 @@ public class GongjiServiceImpl implements GongjiService{
 				}
 			}
 		} catch (Exception e) {
+			System.out.println(e.toString());
 		}
 		return result;
 	}
@@ -101,6 +103,7 @@ public class GongjiServiceImpl implements GongjiService{
 			
 			result = dao.deleteData("gongji.deleteGongji",num);
 		} catch (Exception e) {
+			System.out.println(e.toString());
 		}
 		return result;
 	}
@@ -111,6 +114,7 @@ public class GongjiServiceImpl implements GongjiService{
 		try {
 			list = dao.selectList("gongji.listGongji", map);
 		} catch (Exception e) {
+			System.out.println(e.toString());
 		}
 		return list;
 	}
@@ -121,6 +125,7 @@ public class GongjiServiceImpl implements GongjiService{
 		try {
 			dto = dao.selectOne("gongji.readGongji",num);
 		} catch (Exception e) {
+			System.out.println(e.toString());
 		}
 		return dto;
 	}
@@ -131,6 +136,7 @@ public class GongjiServiceImpl implements GongjiService{
 		try {
 			dto = dao.selectOne("gongji.preReadGongji",map);
 		} catch (Exception e) {
+			System.out.println(e.toString());
 		}
 		return dto;
 	}
@@ -141,6 +147,7 @@ public class GongjiServiceImpl implements GongjiService{
 		try {
 			dto = dao.selectOne("gongji.nextReadGongji", map);
 		} catch (Exception e) {
+			System.out.println(e.toString());
 		}
 		return dto;
 	}
@@ -151,6 +158,7 @@ public class GongjiServiceImpl implements GongjiService{
 		try {
 			result = dao.insertData("gongji.insertFile", dto);
 		} catch (Exception e) {
+			System.out.println(e.toString());
 		}
 		return result;
 	}
@@ -161,6 +169,7 @@ public class GongjiServiceImpl implements GongjiService{
 		try {
 			listFile = dao.selectList("gongji.listFile", num);
 		} catch (Exception e) {
+			System.out.println(e.toString());
 		}
 		return listFile;
 	}
@@ -171,6 +180,7 @@ public class GongjiServiceImpl implements GongjiService{
 		try {
 			dto = dao.selectOne("gongji.readFile", fileNum);
 		} catch (Exception e) {
+			System.out.println(e.toString());
 		}
 		return dto;
 	}
@@ -181,6 +191,7 @@ public class GongjiServiceImpl implements GongjiService{
 		try {
 			result = dao.deleteData("gongji.deleteFile", map);
 		} catch (Exception e) {
+			System.out.println(e.toString());
 		}
 		return 0;
 	}
@@ -191,6 +202,7 @@ public class GongjiServiceImpl implements GongjiService{
 		try {
 			result = dao.selectOne("gongji.dataCount", map);
 		} catch (Exception e) {
+			System.out.println(e.toString());
 		}
 		return result;
 	}

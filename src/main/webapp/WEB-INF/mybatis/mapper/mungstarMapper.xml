@@ -80,12 +80,34 @@
 				LEFT OUTER JOIN mungstarLike l ON m.num = l.num
 				<if test="searchValue != null and searchValue != '' ">
 					<if test="searchKey=='tag'">
-						LEFT OUTER JOIN mungstarTag t ON p.num = t.num
+						LEFT OUTER JOIN mungstarTag t ON m.num = t.num
 						WHERE tag = #{searchValue}
 					</if>
 					<if test="searchKey=='id'">
-						JOIN mungstar m ON p.num = m.num
-						WHERE memberId = #{searchValue}
+						WHERE m.memberId = #{searchValue}
+					</if>
+				</if>
+				GROUP BY m.num
+				ORDER BY m.num DESC
+			<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+		]]>
+	</select>
+	
+	<select id="replyCount" parameterType="map" resultType="Integer">
+		SELECT replyCount FROM (
+			SELECT ROWNUM rnum, tb.* FROM (
+				SELECT COUNT(r.num) replyCount
+				FROM mungstar m
+				LEFT OUTER JOIN mungstarReply r ON m.num = r.num
+				<if test="searchValue != null and searchValue != '' ">
+					<if test="searchKey=='tag'">
+						LEFT OUTER JOIN mungstarTag t ON m.num = t.num
+						WHERE tag = #{searchValue}
+					</if>
+					<if test="searchKey=='id'">
+						WHERE m.memberId = #{searchValue}
 					</if>
 				</if>
 				GROUP BY m.num
@@ -181,5 +203,12 @@
 		INSERT INTO mungstarReply (replyNum, num, memberId, reply)
 		VALUES (mungstarReply_seq.NEXTVAL, #{num}, #{memberId}, #{reply})
 	</insert>
+	
+	<select id="mungstarReplyList" parameterType="care.dog.mungstargram.vo.MungstarPVO" resultType="care.dog.mungstargram.vo.MungstarRVO">
+		SELECT reply
+		FROM mungstarReply
+		WHERE num = #{num}
+		ORDER BY replyNum
+	</select>
 	
 </mapper>
