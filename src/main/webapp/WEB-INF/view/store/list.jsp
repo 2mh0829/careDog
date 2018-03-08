@@ -10,14 +10,25 @@
 
 .sort {
 	margin: 30px auto;
-	font-size: 20px;
+	font-size: 15px;
 }
 
 .content {
 	float: left;
-	width: 320px;
-	height: 400px;
-	/* width: 25%; */
+	width: 25%;
+	padding: 10px;
+}
+
+@media only screen and (max-width: 1000px) {
+	.content {
+		width: 33.3333%;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	.content {
+		width: 49.9999%;
+	}
 }
 
 .product-image {
@@ -31,14 +42,21 @@
 	height: 100%;
 }
 
+.product-brand {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
 .product-title {
 	margin: 5px auto;
-	font-size: 20px;
+	font-size: 15px;
 }
 
 .product-price {
 	margin: 5px auto;
-	font-size: 18px;
+	font-size: 20px;
 }
  
 .content div {
@@ -57,7 +75,7 @@
 	<div class="header">
 
 		<div class="list-title">
-			<h2>ALL</h2>
+			<h3>ALL</h3>
 			<hr>
 		</div>
 	
@@ -75,14 +93,20 @@
 	
 		<!-- 상품 이미지 -->
 		<div class="product-image">
-			<a href="#">
+			<a href="<%=cp%>/store/article">
 				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 			</a>
 		</div>
 		
+		<!-- 브랜드명 -->
+		<div class="product-brand">
+			<!-- <a href="#">그리니즈</a> -->
+			그리니즈
+		</div>
+		
 		<!-- 상품 제목 -->
 		<div class="product-title">
-			<a href="#">개껌 30개입</a>
+			<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
 		</div>
 		
 		<!-- 상품 가격 -->
@@ -100,13 +124,18 @@
 	<div class="content section02">
 	
 		<div class="product-image">
-			<a href="#">
+			<a href="<%=cp%>/store/article">
 				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 			</a>
 		</div>
 		
+		<div class="product-brand">
+			<!-- <a href="#">그리니즈</a> -->
+			그리니즈
+		</div>
+		
 		<div class="product-title">
-			<a href="#">개껌 30개입</a>
+			<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
 		</div>
 		
 		<div class="product-price">
@@ -122,13 +151,18 @@
 	<div class="content section03">
 	
 		<div class="product-image">
-			<a href="#">
+			<a href="<%=cp%>/store/article">
 				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 			</a>
 		</div>
 		
+		<div class="product-brand">
+			<!-- <a href="#">그리니즈</a> -->
+			그리니즈
+		</div>
+		
 		<div class="product-title">
-			<a href="#">개껌 30개입</a>
+			<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
 		</div>
 		
 		<div class="product-price">
@@ -144,13 +178,18 @@
 	<div class="content section04">
 	
 		<div class="product-image">
-			<a href="#">
+			<a href="<%=cp%>/store/article">
 				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 			</a>
 		</div>
 		
+		<div class="product-brand">
+			<!-- <a href="#">그리니즈</a> -->
+			그리니즈
+		</div>
+		
 		<div class="product-title">
-			<a href="#">개껌 30개입</a>
+			<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
 		</div>
 		
 		<div class="product-price">
@@ -166,13 +205,18 @@
 	<div class="content section05">
 	
 		<div class="product-image">
-			<a href="#">
+			<a href="<%=cp%>/store/article">
 				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
 			</a>
 		</div>
 		
+		<div class="product-brand">
+			<!-- <a href="#">그리니즈</a> -->
+			그리니즈
+		</div>
+		
 		<div class="product-title">
-			<a href="#">개껌 30개입</a>
+			<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
 		</div>
 		
 		<div class="product-price">
