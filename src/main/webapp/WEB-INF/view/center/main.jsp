@@ -121,7 +121,7 @@ color: #888;
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.form.js"></script>
 <script type="text/javascript">
 $(function(){
-	$("#gongji_alert").addClass("active");
+	$("#gongji").addClass("active");
 	listPage(1);
 	
 	$("ul.gongji_Tabs li").click(function(){
@@ -131,7 +131,7 @@ $(function(){
 			$(this).removeClass("active");
 		});
 		
-		$("#gongji_"+tab).addClass("active");
+		$("#"+tab).addClass("active");
 		
 		listPage(1);
 	});
@@ -140,11 +140,12 @@ $(function(){
 function listPage(page){
 	var $tab = $("ul.gongji_Tabs .active");
 	var tab = $tab.attr("data-tab");
-	var url="<%=cp%>/center/"+tab+"/list";
+	var url="<%=cp%>/center/"+"#"+tab+"/list";
 	
 	var query="pageNo="+page;
 	var search=$('form[name=centerSearchForm]').serialize();
 	query = query+"&"+search;
+	alert(query);
 	
 	ajaxHTML(url, "get", query);
 }
@@ -162,9 +163,33 @@ function ajaxHTML(url, type, query){
 			$("#TabsOpenArea").html(data);
 		}
 	,beforeSend : function(jqXHR){
-		jqXHR.setRequestHead
+		jqXHR.setRequestHeader("AJAX", true);
+	}
+	,error : function(jqXHR){
+		if(jqXHR.status==401){
+			console.log(jqXHR);
+		} else if (jqXHR.status==403){
+			location.href="<%=cp%>/member/noAuthorized";
+		} else {
+			console.log(jqXHR.responseText);
+		}
 	}
 	});
+}
+
+function contentBoard(num, page){
+	var $tab = $(".tab .active");
+	var tab = $tab.arr("data-tab");
+	var url = "<%=cp%>/center/"+tab+"/article";
+	
+	var query;
+	if(tab=="gongji")
+		query="gongjiNum="+num;
+	else
+		query="num="num;
+	
+	var search=$('form[name=centerSearchForm]').serialize();
+	query = query+"&pageNo="+page+search;
 }
 
 </script>
@@ -172,8 +197,8 @@ function ajaxHTML(url, type, query){
 <div id="gongji_Container">
 	<div id="gongji_Contents">
 		<ul class="gongji_Tabs">
-			<li id="gongji_alert" data-tab="gongji" class="active"><a>공지사항</a></li>
-			<li id="gongji_event" data-tab="event"><a>이벤트</a></li>
+			<li id="gongji" data-tab="gongji" class="active"><a>공지사항</a></li>
+			<li id="event" data-tab="event"><a>이벤트</a></li>
 		</ul>
 	</div>
 </div>
