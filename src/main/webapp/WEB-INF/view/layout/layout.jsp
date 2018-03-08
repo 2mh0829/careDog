@@ -28,7 +28,6 @@
 <link rel="stylesheet" href="<%=cp %>/resource/css/style.css?ver=1" type="text/css">
 <link rel="stylesheet" href="<%=cp %>/resource/css/layout.css?ver=3.1" type="text/css">
 
-
 </head>
 <body>
 
