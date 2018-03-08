@@ -28,7 +28,7 @@
 
 .header-right {
 	margin: 0 auto;
-	margin-right: 20px;
+	margin-right: 40px;
 	width: 20%;
     height: 100%;
     float: right;
@@ -54,7 +54,6 @@
     /* line-height: 50px; */
     /* border-top:1px solid #cccccc; */
 }
-
 
 .container {
     clear:both;

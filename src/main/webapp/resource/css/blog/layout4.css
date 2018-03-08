@@ -1,8 +1,10 @@
 @CHARSET "UTF-8";
 
 .blog-layout {
-	width:1020px;
-	margin:0px auto;
+	width:1050px;
+	height:600px;
+	padding-top:20px;
+	margin:0 auto;
 }
 
 .blog-header {

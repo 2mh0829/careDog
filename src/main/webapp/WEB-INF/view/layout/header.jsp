@@ -72,7 +72,9 @@ $(window).scroll(function() {
                 &nbsp;|&nbsp;
       <a href="<%=cp%>/member/logout">로그아웃</a>
                 &nbsp;|&nbsp;
-                <a href="<%=cp%>/mypage">마이페이지</a>
+                <a href="<%=cp%>/nblog">마이페이지</a>
+                 &nbsp;|&nbsp;
+                <a href="<%=cp%>/messenger">메신저</a>
                 <c:if test="${sessionScope.member.memberId=='admin'}">
                     &nbsp;|&nbsp;
                     <a href="<%=cp%>/admin">관리자</a>
