@@ -363,27 +363,5 @@ function changePage(){
 	<div class="allStrayDog">
 	</div>
 	<div id="pagingNav" class="pagenation">
-	<%-- <span class="select">1</span> <a
-			href="?act=list&amp;bid=animal&amp;page=2&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">2</a>
-		<a
-			href="?act=list&amp;bid=animal&amp;page=3&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">3</a>
-		<a
-			href="?act=list&amp;bid=animal&amp;page=4&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">4</a>
-		<a
-			href="?act=list&amp;bid=animal&amp;page=5&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">5</a>
-		<a
-			href="?act=list&amp;bid=animal&amp;page=6&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">6</a>
-		<a
-			href="?act=list&amp;bid=animal&amp;page=7&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">7</a>
-		<a
-			href="?act=list&amp;bid=animal&amp;page=8&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">8</a>
-		<a
-			href="?act=list&amp;bid=animal&amp;page=9&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">9</a>
-		<a
-			href="?act=list&amp;bid=animal&amp;page=10&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal">10</a>
-		<a
-			href="?act=list&amp;bid=animal&amp;page=11&amp;keyfield1=&amp;keyfield2=&amp;city=&amp;country=&amp;sch1=&amp;sch2=&amp;sch3=&amp;bid=animal"
-			class="img"> <img src="<%=cp%>/resource/img/btn_nxt.png"
-			alt="다음 목록 보기"></a>  --%>
 	</div>
 </div>
