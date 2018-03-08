@@ -220,6 +220,40 @@ div.desc {
 	text-decoration: none;
 }
 
+#reply {
+	margin-top: 15px;
+}
+
+
+/* ----------------------------------------------- */
+
+.like-hit-re {
+	position: relative;
+	width: 80px;
+	height: 70px;
+	float: left;
+}
+
+.icon-size-30 {
+	font-size: 30px;
+}
+
+#like {
+
+}
+
+#like button {
+	background: none;
+	outline: none;
+	border: none;
+}
+
+#created {
+	width: 100px;
+	height: 30px;
+	float: right;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -254,7 +288,6 @@ function listPage(page) {
 
 // 멍스타그램 게시글 리스트 셋팅
 function printList(data) {
-	// var uid = "";
 	var dataCount = data.dataCount;
 	var page = data.pageNo;
 	totalPage = data.total_page;
@@ -263,10 +296,10 @@ function printList(data) {
 	if(dataCount != 0){
 		for(var i=0; i<data.list.length; i++){
 			var num = data.list[i].num;
-			var likeCount = 0;
-			var replyCount = 0;
 			var filename = data.list[i].filename;
 			var photoCount = data.list[i].photoCount;
+			var likeCount = data.list[i].likeCount;
+			var replyCount = data.list[i].replyCount;
 			
 			out += "<div class='responsive'>";
 			out += "<div style='background: black;'>";
@@ -299,7 +332,7 @@ function article(num) {
 	var data = {num:num};
 	
 	$.get(url, data, function(data) {
-		openModal(data);
+		openModal(data, num);
 	}, "json");
 }
 
@@ -307,11 +340,36 @@ var photoList = [];
 var photoNum = 0;
 
 // 모달 열기
-function openModal(data) {
+function openModal(data, num) {
+	var memberId = data.content.memberId;
 	var context = data.content.context;
 	var hitCount = data.content.hitCount;
+	var created = data.content.created;
+	var likeInfo = data.content.likeInfo;
+	var likeCount = data.content.likeCount;
+	var replyList = data.content.replyList;
+	var memberInfo = data.memberInfo;
 	photoList = data.photoList;
 	photoNum = 0;
+	
+	if(memberInfo == 'no'){
+		$("#like button").attr("data-like", "logout");
+		$('#like button').attr('class', 'glyphicon glyphicon-heart-empty icon-size-30');
+		$("#replyTx").attr("data-info", "no");
+		$("#replyTx").attr("placeholder", "로그인 후 이용가능");
+	}else{
+		if(likeInfo == 0){
+			$("#like button").attr("data-like", "off");
+			$('#like button').attr('class', 'glyphicon glyphicon-heart-empty icon-size-30');
+		}else if(likeInfo == 1){
+			$("#like button").attr("data-like", "on");
+			$('#like button').attr('class', 'glyphicon glyphicon-heart icon-size-30');
+		}
+		$("#replyTx").attr("data-info", memberInfo);
+		$("#replyTx").attr("placeholder", "댓글달기");
+		$("#replyTx").attr("data-num", num);
+	}
+	
 	
 	setPhoto(photoNum);
 	
@@ -319,8 +377,14 @@ function openModal(data) {
 		modalSize();
 	});
 	
+	
+	$("#memberId b").html(memberId);
+	$("#memberId").attr("onclick", "searchId(\"" + memberId + "\");");
 	$("#context").html(context);
+	$("#like button").attr("onclick", "like(" + num + ");");
 	$("#hitCount span").html(hitCount);
+	$("#created").html(created);
+	$("#like span").html(likeCount);
 	
 	$("#bottomBtn").html("");
 	$("#leftBtn").css("visibility", "hidden");
@@ -336,13 +400,21 @@ function openModal(data) {
 		$("#bottomBtn").css("visibility", "hidden");
 	}
 	
+	$("#reply").html("");
+	for(var i=0; i<replyList.length; i++){
+		$("#reply").append("<div><a onclick='searchId(\""+memberId+"\");'><b>" + memberId + "</b></a> " + replyList[i].reply + "</div>");
+	}
+	
+
 	$("#myModal").modal();
+	
 }
 
 // 모달에 사진 세팅
 function setPhoto(num) {
 	var photoSrc = "<%=cp %>/uploads/mungstargram/" + photoList[num].filename;
-	$(".modal-left-img").html("<img src='" + photoSrc +"' id='mungstarPhoto'>");
+	$(".modal-left-img").html("<img src='" + photoSrc +"' id='mungstarPhoto' onerror='this.src=\"<%=cp %>/resource/img/noPhoto.jpg\"'>");
+	$(".modal-centered").css("visibility", "hidden");
 	
 	$("#mungstarPhoto").load(function() {
 		modalSize();
@@ -419,6 +491,7 @@ function modalSize() {
 			$(".modal-context table").css("height", "520px");
 		}
 	}
+	$(".modal-centered").css("visibility", "visible");
 }
 
 
@@ -431,15 +504,91 @@ $(function() {
 	});
 });
 
+/* ---------------------------------------------------------------------------------------------------------------------- */
+// 좋아요
+
+function like(num) {
+	var likeState = $("#like button").attr("data-like");
+	var data = {num:num};
+	
+	if(likeState == 'off'){
+		var url = "<%=cp %>/mungstargram/insertLike";
+		$.ajax({
+			url: url
+			,data: data
+			,type: "post"
+			,success: function() {
+				$('#like button').attr('class', 'glyphicon glyphicon-heart icon-size-30');
+				$('#like button').attr('data-like', 'on');
+				$("#like span").html($("#like span").html() - (-1));
+			}
+			,error: function(e) {
+				console.log(e);
+			}
+		});
+	}else if(likeState == 'on'){
+		var url = "<%=cp %>/mungstargram/deleteLike";
+		$.ajax({
+			url: url
+			,data: data
+			,type: "post"
+			,success: function() {
+				$('#like button').attr('class', 'glyphicon glyphicon-heart-empty icon-size-30');
+				$('#like button').attr('data-like', 'off');
+				$("#like span").html($("#like span").html() - 1);
+			}
+			,error: function(e) {
+				console.log(e);
+			}
+		});
+	}else{
+		alert("로그인이 필요합니다.");
+	}
+	
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------- */
+// 리플
+
+$(function() {
+	$("body").on("focusin","#replyTx", function() {
+		if($("#replyTx").data("info") == 'no'){
+			alert("로그인 후 이용가능");
+			$("#replyTx").blur();
+		}else{
+			$(document).keyup(function(e) {
+				if(e.keyCode == 13){
+					var url = "<%=cp %>/mungstargram/reply";
+					var num = $("#replyTx").attr("data-num");
+					var memberId = $("#replyTx").attr("data-info");
+					var reply = $("#replyTx").val();
+					var data = {num:num, memberId:memberId, reply:reply};
+					$.ajax({
+						url: url
+						,data: data
+						,type: "post"
+						,success: function() {
+							$("#reply").append("<div><a><b>" + memberId + "</b></a> " + $("#replyTx").val() + "</div>");
+							$("#replyTx").val("");
+							return;
+						}
+					});
+				}
+			});
+		}
+	});
+});
 
 
-/* ------------------------------------------------------------------------------ */
+/* ---------------------------------------------------------------------------------------------------------------------- */
 
 function openWin(){
     window.open("<%=cp%>/mungstargram/created", "이미지 편집", "width=1085, height=550, left=100, top=20, toolbar=no, menubar=no, scrollbars=no, location=no, status=no, resizable=no" );
 }
 
 </script>
+
+
 
 <div class="body-container">
 	<h2>mungstargram.</h2>
@@ -494,9 +643,9 @@ function openWin(){
 					</div>
 					<div class="modal-right">
 						<div class="modal-title">
-							<a href="<%=cp%>/myPage/user_id">
+							<a id='memberId'>
 								<img src="<%=cp%>/resource/img/dog3.jpg" class="img-circle" alt="Cinque Terre" width="40" height="40">&nbsp;
-								<b>user_id</b>
+								<b></b>
 							</a>
 						</div>
 						<div class="modal-context">
@@ -509,8 +658,23 @@ function openWin(){
 										</div>
 									</div>
 								</td></tr>
-								<tr height="100px;"><td id='hitCount'>조회수 : <span></span></td></tr>
-								<tr height="50px;"><td><input class="boxTF" type="text" style="width: 100%; border: none;" placeholder="로그인 후 가능"></td></tr>
+								<tr height="100px;">
+									<td>
+										<div id='like' class='like-hit-re'>
+											<button class='glyphicon glyphicon-heart-empty icon-size-30' data-like='logout'></button>
+											<div><span></span></div>
+										</div>
+										<div id='hitCount' class='like-hit-re'>
+											<div class='glyphicon glyphicon-eye-open icon-size-30'></div>
+											<div><span></span></div>
+										</div>
+										<div class='like-hit-re icon-size-30'>
+											<div></div>
+										</div>
+										<div id='created'></div>
+									</td>
+								</tr>
+								<tr height="50px;"><td><input id='replyTx' class="boxTF" type="text" style="width: 100%; border: none;" placeholder="로그인 후 이용가능"></td></tr>
 							</table>
 						</div>
 					</div>
@@ -518,12 +682,7 @@ function openWin(){
 			</div>
 		</div>
 	</div>
-<%-- 	
-	<div>
-		<input type="hidden" name="searchKey" value="${searchKey }">
-		<input type="hidden" name="searchValue" value="${searchValue }">
-	</div>	
- --%>
+	
 </div>
 
 

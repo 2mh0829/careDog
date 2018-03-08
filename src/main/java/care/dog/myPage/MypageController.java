@@ -19,8 +19,10 @@ public class MypageController {
 	}
 	@RequestMapping(value="/mypage/blog", method=RequestMethod.GET)
 	public String blog(HttpServletRequest req) {
-		String cp = req.getContextPath();
 		return ".blog.main.blogList";
 	}
-
+	@RequestMapping(value="/mypage/test", method=RequestMethod.GET)
+	public String test() {
+		return "mypage/test";
+	}
 }

@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="blog">
 	<!-- 생성되는 블로그 정보 저장 -->
-	<select id="maxBlogId" resultType="int">
+	<select id="maxBlogId" resultType="Integer">
 	    SELECT NVL(MAX(blogId), 0) FROM blogInfo
 	</select>
 	
@@ -16,22 +16,28 @@
 	<select id="readBlogInfo" parameterType="String" resultType="care.dog.blog.BlogInfo">
 	    SELECT blogId, memberId, title, introduce, visitorCount, created, closed from blogInfo
 	</select>
-		<insert id="insertBlogProfile" parameterType="care.dog.blog.BlogInfo">
+	<insert id="insertBlogProfile" parameterType="care.dog.blog.BlogInfo">
 	    INSERT INTO blogProfile(blogId, userName, isUserName, 
-	                  photoFilename, city, isCity, gender, isGender, hobby, isHobby)
+	                  city, isCity, gender, isGender, hobby, isHobby)
 	      VALUES (#{blogId}, #{userName}, #{isUserName},
-	                 #{photoFilename, jdbcType=VARCHAR}, 
 	                 #{city}, #{isCity}, #{gender}, #{isGender},
 	                 #{hobby, jdbcType=VARCHAR}, #{isHobby})
 	</insert>
+	<update id="updateProfilePhoto" parameterType="care.dog.blog.BlogInfo">
+		update member2 set profilePhoto=#{profilePhoto, jdbcType=VARCHAR}
+			where memberId=#{memberId}
+	</update>
 		<!-- 개인 블로그의 메인 화면에 출력할 정보 -->
 	<select id="readBlogInfoHome" parameterType="Integer" resultType="care.dog.blog.BlogInfo">
-	    SELECT b.blogId, memberId,title, introduce, visitorCount, created, photoFilename
+	    SELECT b.blogId, b.memberId,title, introduce, visitorCount, created, profilePhoto
 	           FROM blogInfo b
 	           join blogProfile p on b.blogId=p.blogId
+	           join member2 m on b.memberId=m.memberId
 	           WHERE b.blogId=#{value}
 	</select>
-	
+		<update id="updateBlogVisitorCount" parameterType="Integer" >
+	    UPDATE blogInfo SET visitorCount=visitorCount+1 WHERE blogId=#{blogId}
+	</update>
 	<!-- 개인 블로그의 프로필에 출력할 정보 -->
 <!-- 	<select id="readBlogInfoProfile" parameterType="Long" resultType="care.dog.blog.BlogInfo">
 	    SELECT b.blogSeq, userId, nickName, introduce  
@@ -41,4 +47,134 @@
 	           JOIN blogProfile p ON b.blogSeq = p.blogSeq
 	           WHERE b.blogSeq=#{blogSeq}
 	</select> -->
+	
+		<!-- 테이블 생성 및 삭제  -->
+
+	<!-- 블로그 게시판 -->
+	<update id="createBoardTable" parameterType="Integer">
+		CREATE TABLE b_${value}_board (
+  		  num         NUMBER NOT NULL
+  		  ,blogId      NUMBER NOT NULL
+  		  ,subject     VARCHAR2(255) NOT NULL
+  		  ,content     CLOB NOT NULL
+  		  ,hitCount    NUMBER  DEFAULT 0
+  		  ,created     DATE DEFAULT SYSDATE
+  		  ,PRIMARY   KEY(num)
+ 		  ,FOREIGN    KEY(blogId) REFERENCES blogInfo(blogId)
+                     ON DELETE CASCADE
+       )
+	</update>
+
+	<update id="dropBoardTable" parameterType="Integer">
+	    DROP TABLE b_${value}_board PURGE
+	</update>
+
+	<!-- 블로그 게시판 공감 -->
+	<update id="createBoardLikeTable" parameterType="Integer">
+	CREATE TABLE b_${value}_boardLike (
+  	  num       NUMBER NOT NULL
+  	  ,MemberId   VARCHAR2(20) NOT NULL
+  	  ,PRIMARY  KEY(num, MemberId)
+  	  ,FOREIGN  KEY(num) REFERENCES b_${value}_board(num)
+	      ON DELETE CASCADE
+ 	   ,FOREIGN  KEY(MemberId) REFERENCES member1(MemberId)
+	      ON DELETE CASCADE
+	)
+	</update>
+	<update id="dropBoardLikeTable" parameterType="Integer">
+	    DROP TABLE b_${value}_boardLike PURGE
+	</update>
+
+	<!-- 블로그 게시판 파일 -->
+	<update id="createBoardFileTable" parameterType="Integer">
+	CREATE TABLE b_${value}_boardFile (
+ 	   fileNum              NUMBER NOT NULL
+ 	   ,num                  NUMBER NOT NULL
+ 	   ,saveFilename     VARCHAR2(255) NOT NULL
+ 	   ,originalFilename VARCHAR2(255) NOT NULL
+ 	   ,fileSize         NUMBER
+ 	   ,PRIMARY KEY(fileNum)
+ 	   ,FOREIGN KEY(num) REFERENCES b_${value}_board(num)
+                      ON DELETE CASCADE
+	)
+	</update>
+
+	<update id="dropBoardFileTable" parameterType="Integer">
+	    DROP TABLE b_${value}_boardFile PURGE
+	</update>
+	
+	<!-- 블로그 게시판 리플 -->
+	<update id="createBoardReplyTable" parameterType="Integer">
+	CREATE TABLE b_${value}_boardReply (
+ 	   replyNum  NUMBER NOT NULL
+  	   ,num      NUMBER NOT NULL
+  	   ,MemberId   VARCHAR2(20) NOT NULL
+  	   ,content  VARCHAR2(4000) NOT NULL
+   	   ,created  DATE DEFAULT SYSDATE
+  	   ,answer   NUMBER NOT NULL
+ 	   ,PRIMARY  KEY(replyNum)
+   	   ,FOREIGN  KEY(num) REFERENCES b_${value}_board(num)
+	         ON DELETE CASCADE
+   	   ,FOREIGN  KEY(MemberId) REFERENCES member1(MemberId)
+	         ON DELETE CASCADE
+	)
+	</update>
+	<update id="dropBoardReplyTable" parameterType="Integer">
+	    DROP TABLE b_${value}_boardReply PURGE
+	</update>
+
+ 	<!-- 블로그 게시판 리플 공감/비공감 -->
+	<update id="createBoardReplyLikeTable" parameterType="Integer">
+	CREATE TABLE b_${value}_boardReplyLike (
+ 	    replyNum  NUMBER NOT NULL
+ 	    ,MemberId   VARCHAR2(20) NOT NULL
+ 	    ,replyLike NUMBER(1) NOT NULL
+ 	    ,PRIMARY  KEY(replyNum, MemberId)
+ 	    ,FOREIGN  KEY(replyNum) REFERENCES b_${value}_boardReply(replyNum)
+	         ON DELETE CASCADE
+ 	    ,FOREIGN  KEY(MemberId) REFERENCES member1(MemberId)
+	         ON DELETE CASCADE
+	)
+	</update>    
+	<update id="dropBoardReplyLikeTable" parameterType="Integer">
+	    DROP TABLE b_${value}_boardReplyLike PURGE
+	</update>
+
+ 	<!-- 블로그 방명록 -->
+	<update id="createGuestTable" parameterType="Integer">
+	CREATE TABLE b_${value}_guest (
+ 	    num       NUMBER NOT NULL
+	    ,blogId      NUMBER NOT NULL
+	    ,MemberId   VARCHAR2(20) NOT NULL
+	    ,content  VARCHAR2(4000) NOT NULL
+	    ,created  DATE DEFAULT SYSDATE
+	    ,PRIMARY  KEY(num)
+ 	    ,FOREIGN    KEY(blogId) REFERENCES blogInfo(blogId)
+                     ON DELETE CASCADE
+        ,FOREIGN  KEY(MemberId) REFERENCES member1(MemberId)
+	      ON DELETE CASCADE
+	)
+	</update>    
+	<update id="dropGuestTable" parameterType="Integer">
+	    DROP TABLE b_${value}_guest PURGE
+	</update>
+
+ 	<!-- 블로그 포토 -->
+	<update id="createPhotoTable" parameterType="Integer">
+	CREATE TABLE b_${value}_photo (
+ 	   num       NUMBER NOT NULL
+  	   ,blogId      NUMBER NOT NULL
+ 	   ,subject  VARCHAR2(255) NOT NULL
+  	   ,content  VARCHAR2(4000) NOT NULL
+ 	   ,imageFilename VARCHAR2(255) NOT NULL
+ 	   ,created  DATE DEFAULT SYSDATE
+  	   ,PRIMARY  KEY(num)
+   	   ,FOREIGN    KEY(blogId) REFERENCES blogInfo(blogId)
+  	                   ON DELETE CASCADE
+	)
+	</update>    
+	<update id="dropPhotoTable" parameterType="Integer">
+	    DROP TABLE b_${value}_photo PURGE
+	</update>
+
 </mapper>

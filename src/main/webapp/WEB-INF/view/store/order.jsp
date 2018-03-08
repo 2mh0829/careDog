@@ -186,7 +186,7 @@ th {
 						<div class="product_info_float">
 							<div class="product_img">
 								<img src="<%=cp%>/resource/img/store/dog_snack1.jpg" 
-								style="width: 100px; height: 200;">
+								style="width: 100px;">
 							</div>
 							<div class="product_name">
 								<p class="pTxt1">서울우유</p>

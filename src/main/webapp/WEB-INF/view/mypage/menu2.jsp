@@ -18,10 +18,10 @@
 	<a href="<%=cp%>/mypage/editMember">개인정보수정</a>&nbsp&nbsp&nbsp&nbsp
 	<a href="#">마이펫</a>&nbsp&nbsp&nbsp&nbsp
 	<a href="#">서비스이용내역</a>&nbsp&nbsp&nbsp&nbsp
-	<a href="#">CD Messenger</a>&nbsp&nbsp&nbsp&nbsp
+	<a href="<%=cp%>/messenger">CD Messenger</a>&nbsp&nbsp&nbsp&nbsp
 	<a href="#">북마크</a>&nbsp&nbsp&nbsp&nbsp
 	<a href="#">장바구니</a>&nbsp&nbsp&nbsp&nbsp
-	<a href="#">구매내역</a>&nbsp&nbsp&nbsp&nbsp
+	<a href="<%=cp%>/mypage/test">구매내역</a>&nbsp&nbsp&nbsp&nbsp
 	<a href="#">봉사/후원 내역</a>
 	</div>
-</div>
+</div>                                       
