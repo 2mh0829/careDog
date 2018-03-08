@@ -105,7 +105,7 @@ li{
     border: 1px solid #cccccc;
 }
 
-.reser-date dt{
+.titleWord{
 	text-align: center;
 	margin-bottom: 10px;
 	
@@ -118,6 +118,54 @@ li{
 
 .reser-date dd {
 	margin-left: 30px;
+}
+
+.price {
+	margin-top: 10px;
+	padding-left: 12px;
+}
+
+.won {
+	font-size: 180%;
+    font-weight: bold;
+    color: orange;
+    margin-top: 15px;
+}
+
+.weight {
+    width: 100px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background: white;
+}
+
+.pet-add {
+	padding-left: 40px;
+    padding-top: 12px;
+}
+
+.add-price {
+	color: orange;
+}
+
+.price-detail dt {
+    float: left;
+    width: 60%;
+    padding: 3px 0 3px 5px;
+    border-top: 1px solid #F0F0F0;
+    line-height: 200%;
+    font-weight: normal;
+}
+
+.price-detail dd {
+    margin-right: 5px;
+    text-align: right;
+    width: 38%;
+    margin-left: 60%;
+    padding: 3px 5px 3px 0;
+    border-top: 1px solid #F0F0F0;
+    line-height: 200%;
 }
 
 
@@ -145,7 +193,7 @@ li{
 			<form class="main-detail">
 				<div class="reser-date">
 					<dl>
-						<dt>예약일을 알려주세요!</dt>
+						<dt class="titleWord">예약일을 알려주세요!</dt>
 						<dd>
 							<i class="glyphicon glyphicon-calendar"></i>
 							<input type="text" id="left-datepicker" placeholder="시작 날짜">
@@ -154,7 +202,43 @@ li{
 							<input type="text" id="right-datepicker" placeholder="마침 날짜">
 						</dd>
 						<dd class="price">
-							30,000원
+							<span class="won">30,000원</span>
+							<button type="button" class="weight" data-toggle="dropdown">
+								15kg 미만 <span class="caret"></span>
+							</button>
+						</dd>
+						<dd class="pet-add">
+							반려견 추가당 
+							<span class="add-price">20,000원</span>
+						</dd>
+					</dl>
+					<dl class="price-detail">
+						<dt>
+							1박
+						</dt>
+						<dd>
+							<span class="oneDayPrice">30,000원</span>
+						</dd>
+						<dt>
+							반려견 추가
+							<div class="btn-group">
+								<button type="button"></button>
+							</div>
+						</dt>
+						<dd>
+							<span class="pet-add-price">30,000원</span>
+						</dd>
+						<dt>
+							부가세
+						</dt>
+						<dd>
+							<span class="oneDayPrice">30,000원</span>
+						</dd>
+						<dt>
+							총 합계
+						</dt>
+						<dd>
+							<span class="oneDayPrice">30,000원</span>
 						</dd>
 					</dl>
 				</div>
