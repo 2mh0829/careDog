@@ -8,7 +8,12 @@ public class ServiceController {
 	
 	@RequestMapping(value="/service")
 	public String main() {
-		return ".service.main";
+		return ".service.sitting";
+	}
+	
+	@RequestMapping(value="/service/sitting_detail")
+	public String sitting_detail() {
+		return ".service.sitting_detail";
 	}
 
 }

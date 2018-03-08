@@ -224,6 +224,7 @@ div.desc {
 	margin-top: 15px;
 }
 
+
 /* ----------------------------------------------- */
 
 .like-hit-re {
@@ -401,7 +402,7 @@ function openModal(data, num) {
 	
 	$("#reply").html("");
 	for(var i=0; i<replyList.length; i++){
-		$("#reply").append("<div><a><b>" + memberId + "</b></a> " + replyList[i].reply + "</div>");
+		$("#reply").append("<div><a onclick='searchId(\""+memberId+"\");'><b>" + memberId + "</b></a> " + replyList[i].reply + "</div>");
 	}
 	
 
@@ -412,7 +413,8 @@ function openModal(data, num) {
 // 모달에 사진 세팅
 function setPhoto(num) {
 	var photoSrc = "<%=cp %>/uploads/mungstargram/" + photoList[num].filename;
-	$(".modal-left-img").html("<img src='" + photoSrc +"' id='mungstarPhoto'>");
+	$(".modal-left-img").html("<img src='" + photoSrc +"' id='mungstarPhoto' onerror='this.src=\"<%=cp %>/resource/img/noPhoto.jpg\"'>");
+	$(".modal-centered").css("visibility", "hidden");
 	
 	$("#mungstarPhoto").load(function() {
 		modalSize();
@@ -489,6 +491,7 @@ function modalSize() {
 			$(".modal-context table").css("height", "520px");
 		}
 	}
+	$(".modal-centered").css("visibility", "visible");
 }
 
 
@@ -548,32 +551,33 @@ function like(num) {
 // 리플
 
 $(function() {
-	$("body").on("focusin","#replyTx", function() {
+	$("body").on("focus","#replyTx", function() {
 		if($("#replyTx").data("info") == 'no'){
 			alert("로그인 후 이용가능");
 			$("#replyTx").blur();
-		}else{
-			$(document).keyup(function(e) {
-				if(e.keyCode == 13){
-					var url = "<%=cp %>/mungstargram/reply";
-					var num = $("#replyTx").attr("data-num");
-					var memberId = $("#replyTx").attr("data-info");
-					var reply = $("#replyTx").val();
-					var data = {num:num, memberId:memberId, reply:reply};
-					$.ajax({
-						url: url
-						,data: data
-						,type: "post"
-						,success: function() {
-							$("#reply").append("<div><a><b>" + memberId + "</b></a> " + $("#replyTx").val() + "</div>");
-							$("#replyTx").val("");
-							return;
-						}
-					});
+		}
+	});
+
+	$("#replyTx").keyup(function(e) {
+		if(e.keyCode == 13){
+			var url = "<%=cp %>/mungstargram/reply";
+			var num = $("#replyTx").attr("data-num");
+			var memberId = $("#replyTx").attr("data-info");
+			var reply = $("#replyTx").val();
+			var data = {num:num, memberId:memberId, reply:reply};
+			$.ajax({
+				url: url
+				,data: data
+				,type: "post"
+				,success: function() {
+					$("#reply").append("<div><a><b>" + memberId + "</b></a> " + $("#replyTx").val() + "</div>");
+					$("#replyTx").val("");
+					return;
 				}
 			});
 		}
 	});
+
 });
 
 

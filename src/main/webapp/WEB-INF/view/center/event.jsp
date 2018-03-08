@@ -1,9 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page trimDirectiveWhitespaces="true" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-   String cp = request.getContextPath();
+	String cp = request.getContextPath();
 %>
 <style>
 * {
@@ -169,15 +169,38 @@ function ajaxHTML(url, type, query){
 
 </script>
 
-<div id="gongji_Container">
-	<div id="gongji_Contents">
-		<ul class="gongji_Tabs">
-			<li id="gongji_alert" data-tab="gongji" class="active"><a>공지사항</a></li>
-			<li id="gongji_event" data-tab="event"><a>이벤트</a></li>
-		</ul>
-	</div>
-</div>
-<form name="centerSearchForm" action="" method="post">
-    <input type="hidden" name="searchKey" value="subject">
-    <input type="hidden" name="searchValue" value="">
-</form>
+
+		<div id="TabsOpenArea">
+			<div class="TabsConts">
+				<div class="gongji_list">
+					<ul>
+						<c:forEach var="dto" items="${list }">
+						<li>
+							<p class="title">
+							<i>${dto.num }</i>
+							<strong>${dto.isEvent }</strong>
+							${dto.subject }
+							<i id="gongji_created">${dto.created }</i>
+							</p>
+							<ul class="gongji_conts">
+								<li class="gongji_question">
+									<i class="gongji_date">
+									</i>
+									<p class="gongji_text">
+									</p>
+								</li>
+							</ul>
+						</li>
+						</c:forEach>	
+					</ul>
+				</div>
+			</div>
+			<div class="paging">
+				<c:if test="${dataCount==0 }">
+				등록된 게시물이 없습니다.
+				</c:if>
+				<c:if test="${dataCount!=0 }">
+				${paging }
+				</c:if>
+			</div>
+		</div>
