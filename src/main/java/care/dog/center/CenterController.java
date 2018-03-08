@@ -12,8 +12,13 @@ public class CenterController {
 	}
 	
 	@RequestMapping(value="/gongji")
-	public String gongjiMain() {
+	public String gongjiList() {
 		return ".center.gongji";
+	}
+	
+	@RequestMapping(value="/gongji/content")
+	public String gongjiContent() {
+		return ".center.gongji_content";
 	}
 
 }

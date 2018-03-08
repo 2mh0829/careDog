@@ -4,13 +4,18 @@
 <mapper namespace="mungstar">
 
 	<insert id="insertContext" parameterType="care.dog.mungstargram.vo.MungstarPVO">
-		INSERT INTO mungstar (num, context)
-		VALUES (mungstar_seq.NEXTVAL, #{context})
+		INSERT INTO mungstar (num, memberId, context)
+		VALUES (mungstar_seq.NEXTVAL, #{memberId}, #{context})
 	</insert>
 
 	<insert id="insertPhoto" parameterType="care.dog.mungstargram.vo.MungstarPVO">
 		INSERT INTO mungstarPhoto (photoNum, filename, num)
 		VALUES (mungstarPhoto_seq.NEXTVAL, #{filename}, #{num})
+	</insert>
+	
+	<insert id="insertTag" parameterType="care.dog.mungstargram.vo.MungstarPVO">
+		INSERT INTO mungstarTag (tag, num)
+		VALUES (#{tag}, #{num})
 	</insert>
 
 	<select id="selectMungstarNum" resultType="Integer">
@@ -18,7 +23,21 @@
 	</select>
 	
 	<select id="mungstarCount" resultType="Integer">
-		SELECT NVL(COUNT(*), 0) FROM mungstar
+		<if test="searchValue==null or searchValue=='' ">
+			SELECT NVL(COUNT(*), 0) FROM mungstar
+		</if>
+		<if test="searchValue!=null and searchValue!='' ">
+			<if test="searchKey=='tag'">
+				SELECT COUNT(tag) tagCount
+				FROM mungstarTag
+				WHERE upper(tag) = upper(#{searchValue})
+				GROUP BY tag
+			</if>
+			<if test="searchKey=='id'">
+				SELECT NVL(COUNT(*), 0) FROM mungstar
+				WHERE upper(memberId) = upper(#{searchValue})
+			</if>
+		</if>
 	</select>
 	
 	<select id="mungstarPhotoCount" parameterType="map" resultType="Integer">
@@ -69,6 +88,22 @@
 		SELECT context, hitCount
 		FROM mungstar
 		WHERE num = #{num}
-	</select>	
+	</select>
+	
+	<select id="selectTag" parameterType="String" resultType="care.dog.mungstargram.vo.MungstarRVO">
+		SELECT tag, COUNT(tag) tagCount
+		FROM mungstarTag
+		WHERE upper(tag) like '%' || upper(#{tag}) || '%'
+		GROUP BY tag
+		ORDER BY tagCount DESC
+	</select>
+	
+	<select id="selectMemberId" parameterType="String" resultType="care.dog.mungstargram.vo.MungstarRVO">
+		SELECT memberId, COUNT(memberId) tagCount
+		FROM mungstar
+		WHERE upper(memberId) like '%' || upper(#{tag}) || '%'
+		GROUP BY memberId
+		ORDER BY memberId DESC
+	</select>
 	
 </mapper>

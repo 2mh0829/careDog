@@ -108,7 +108,7 @@ public class MemberController {
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
-		Member dto=service.readMember(info.getUserId());
+		Member dto=service.readMember(info.getMemberId());
 		if(dto==null) {
 			session.invalidate();
 			return "redirect:/";
@@ -133,7 +133,7 @@ public class MemberController {
 			
 			// 게시판 테이블등 삭제
 			
-			// service.deleteMember2(info.getUserId());
+			// service.deleteMember2(info.getMemberId());
 			
 			session.removeAttribute("member");
 			session.invalidate();

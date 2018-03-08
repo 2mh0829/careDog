@@ -7,95 +7,105 @@
 <tiles-definitions>
 
 	<definition name=".main4Layout" template="/WEB-INF/view/layout/layout4.jsp">
-	    <put-attribute name="title" value="spring" />
-	  	<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
-		<put-attribute name="left" value="/WEB-INF/view/store/left.jsp" />
+		<put-attribute name="title" value="spring" />
+		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
+		<put-attribute name="left" value="" />
 		<put-attribute name="body" value="/WEB-INF/view/main/main.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
 		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
 	</definition>
-	
+
 	<definition name=".4.*.*.*" extends=".main4Layout">
-		<put-attribute name="body" value="/WEB-INF/view/store/{1}/{2}/{3}.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}/{3}.jsp" />
+		<put-attribute name="left" value="/WEB-INF/view/{1}/left.jsp" />
 	</definition>
 	<definition name=".4.*.*" extends=".main4Layout">
-		<put-attribute name="body" value="/WEB-INF/view/store/{1}/{2}.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}.jsp" />
+		<put-attribute name="left" value="/WEB-INF/view/{1}/left.jsp" />
 	</definition>
 	<definition name=".4.*" extends=".main4Layout">
-    	<put-attribute name="body" value="/WEB-INF/view/store/{1}.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/{1}.jsp" />
+		<put-attribute name="left" value="/WEB-INF/view/{1}/left.jsp" />
 	</definition>
 	
-	
-	<!-- mypage layout -->
-	<definition name=".mainMPLayout" template="/WEB-INF/view/layout/mp_layout.jsp">
-		<put-attribute name="title" value="mypageee" />
-		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
-		<put-attribute name="left" value="/WEB-INF/view/mypage/left.jsp" />
-		<put-attribute name="body" value="/WEB-INF/view/mypage/main.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
-		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
+<!-- 블로그 3단 -->
+	<definition name=".blogLayout" template="/WEB-INF/view/blog/layout/blogLayout.jsp">
+	    <put-attribute name="title" value="spring" />
+	  	<put-attribute name="header" value="/WEB-INF/view/blog/layout/blogHeader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/blog/main/main.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/view/blog/layout/blogFooter.jsp" />
 	</definition>
-
-	<definition name=".mp.*.*.*" extends=".mainMPLayout">
-		<put-attribute name="body"
-			value="/WEB-INF/view/mypage/{1}/{2}/{3}.jsp" />
+	<definition name=".blog.*.*.*" extends=".blogLayout">
+		<put-attribute name="body" value="/WEB-INF/view/blog/{1}/{2}/{3}.jsp"/>
 	</definition>
-	<definition name=".mp.*.*" extends=".mainMPLayout">
-		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}.jsp" />
+	<definition name=".blog.*.*" extends=".blogLayout">
+		<put-attribute name="body" value="/WEB-INF/view/blog/{1}/{2}.jsp"/>
 	</definition>
-	<definition name=".mp.*" extends=".mainMPLayout">
-		<put-attribute name="body" value="/WEB-INF/view/mypage/{1}.jsp" />
+		<definition name=".blog.*" extends=".blogLayout">
+		<put-attribute name="body" value="/WEB-INF/view/blog/{1}.jsp"/>
 	</definition>
-	<!-- until here -->
-
 
 	<definition name=".mainLayout" template="/WEB-INF/view/layout/layout.jsp">
-	    <put-attribute name="title" value="spring" />
-	  	<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
+		<put-attribute name="title" value="spring" />
+		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/view/main/main.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
 		<put-attribute name="bot" value="" />
 		<put-attribute name="menu2" value="" />
 	</definition>
+	<definition name=".mypage" template="/WEB-INF/view/layout/layout.jsp">
+		<put-attribute name="title" value="spring" />
+		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/main/main.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
+		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
+		<put-attribute name="menu2" value="/WEB-INF/view/mypage/menu2.jsp" />
+	</definition>
+
+	<definition name=".mypageMemberEdit.*" extends=".mypage">
+		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp" />
+	</definition>
 	
 	<definition name=".member.*" extends=".mainLayout">
-		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp" />
 		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
 	</definition>
+		<definition name=".adminLayout" template="/WEB-INF/view/admin/layout/layout.jsp">
+		<put-attribute name="title" value="spring" />
+		<put-attribute name="header"
+			value="/WEB-INF/view/admin/layout/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/admin/main/main.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
+	</definition>
+
+	<definition name=".admin.*.*.*" extends=".adminLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/view/admin/{1}/{2}/{3}.jsp" />
+	</definition>
+	<definition name=".admin.*.*" extends=".adminLayout">
+		<put-attribute name="body" value="/WEB-INF/view/admin/{1}/{2}.jsp" />
+	</definition>
+	<definition name=".admin.*" extends=".adminLayout">
+		<put-attribute name="body" value="/WEB-INF/view/admin/{1}.jsp" />
+	</definition>
+	
 	<definition name=".*.*.*" extends=".mainLayout">
-		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}/{3}.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}/{3}.jsp" />
 		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
 		<put-attribute name="menu2" value="/WEB-INF/view/{1}/menu2.jsp" />
 	</definition>
 	<definition name=".*.*" extends=".mainLayout">
-		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/view/{1}/{2}.jsp" />
 		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
 		<put-attribute name="menu2" value="/WEB-INF/view/{1}/menu2.jsp" />
 	</definition>
 	<definition name=".*" extends=".mainLayout">
-    	<put-attribute name="body" value="/WEB-INF/view/{1}.jsp" />
-    	<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/{1}.jsp" />
+		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
 		<put-attribute name="menu2" value="/WEB-INF/view/{1}/menu2.jsp" />
 	</definition>
-	
-	
-	<definition name=".adminLayout" template="/WEB-INF/view/admin/layout/layout.jsp">
-	    <put-attribute name="title" value="spring" />
-	  	<put-attribute name="header" value="/WEB-INF/view/admin/layout/header.jsp" />
-		<put-attribute name="body" value="/WEB-INF/view/admin/main/main.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
-		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
-		<put-attribute name="menu2" value="" />
-	</definition>
-	
-	<definition name=".admin.*.*.*" extends=".adminLayout">
-		<put-attribute name="body" value="/WEB-INF/view/admin/{1}/{2}/{3}.jsp"/>
-	</definition>
-	<definition name=".admin.*.*" extends=".adminLayout">
-		<put-attribute name="body" value="/WEB-INF/view/admin/{1}/{2}.jsp"/>
-	</definition>
-	<definition name=".admin.*" extends=".adminLayout">
-    	<put-attribute name="body" value="/WEB-INF/view/admin/{1}.jsp" />
-	</definition>
+
+
+
 
 </tiles-definitions>

@@ -72,15 +72,17 @@ $(function(){
 
 <style>
 
+.ui-datepicker{ 
+	z-index: 9999 !important;
+}
+
 #slides {
       display:none;
-    }
+}
 
 li{
 	list-style-type: none;
 }
-
-
 
 dt {
 	font-weight: normal;
@@ -353,16 +355,6 @@ li>a>span{
 	width: 100%;
 }
 
-/* .col-tag dd {
-	margin: 15px -5px 0;
-} */
-
-/* input[type="checkbox"] {
-    
-    border: none;
-    font-weight: normal;
-}
- */
 .col-tag label {
 	/* font-weight: normal; */
     padding: 7px 6px;
@@ -389,46 +381,52 @@ li>a>span{
 
 .sitter-body {
 	width: 100%;
+	height: 220px;
     padding: 0;
     margin: 0 auto;
     clear: both;
     position: relative;
-    /* border: 1px solid black; */
+    border: 1px solid #bcbcbc;
 }
 
 .sitter-list {
-	border: 1px solid #ccc;
+	/* border: 1px solid #ccc; */
 	position: relative;
 }
 
 .sitter-room-photo {
 	width: 35%;
-	height: 245px;
+	height: 220px;
     margin: 0;
     padding: 0;
-    border-right: solid 1px #ccc;
     overflow: hidden;
-    /* background-image:url("http://cfile6.uf.tistory.com/image/2544613F51CF074D104D69") */
+    display: inline-block;
+	float: left;
 }
 
 .sitter-room-photo img {
 	position: absolute;
 	top: 0;
 	left: 0;
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 245px;
 }
 
 #slides-btn-left {
 	position: relative; 
-	top:-20px; 
+	top:-50px; 
+	font-size: 30px;
 	z-index:100;
+	color: white;
 }
 
 #slides-btn-right {
-	position: relative; 
-	top:-20px; 
-	z-index:100;
+	position: relative;
+    top: -50px;
+    left: 278px;
+    font-size: 30px;
+    z-index: 100;
+    color: white;
 }
 
 #slides a {
@@ -436,15 +434,124 @@ li>a>span{
 	text-decoration:none;
 }
 
-.sitter-room-photo {
+/* .sitter-room-photo {
 	display: inline-block;
 	float: left;
-}
+} */
 
 .sitter-room-content {
 	color: black;
 }
 
+.sitter-room-content a {
+	display: block;
+    margin-bottom: 10px;
+    color: #3a3a3a;
+    line-height: 27px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.sitter-room-content dl {
+	float: right;
+	width: 65%;
+}
+
+.sitter-room-content dt {
+	
+    border-bottom: solid 1px #e5e5e5;
+    
+}
+
+.sitter-room-content label {
+	color: #828282;
+	font-size: 15px;
+	margin-right: 12px;
+}
+
+.sitter-face {
+	display: inline-block;
+	width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+}
+
+
+.dogIcon {
+	display: inline-block;
+	width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.dogs {
+	font-weight: normal;
+}
+
+.sitter-body dl {
+	padding-left: 15px;
+}
+
+.sitter-tag span{
+	display: inline-block;
+    width: 70px;
+    margin: 10px 5px 0 0;
+    padding: 9px 0 8px;
+    border-radius: 5px;
+    border: 1px solid #18ab29;
+    color: #18ab29;
+    line-height: 1;
+    font-size: 12px;
+    font-weight: normal;	
+}
+
+.price {
+	margin-top: 15px;
+	text-align: right;
+}
+
+.price strong {
+	margin-left: 2px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+#stay {
+    color: #fac058;
+}
+
+.evaluation {
+	height: 36px;
+    background-color: #ffe5aa;
+    /* top: 0px; */
+    /* position: relative; */
+    width: 65%;
+    float: right;
+}
+
+.inner {
+	width: 100%;
+	height: 220px;
+}
+
+.pull-right{
+	float: right;
+}
+
+.evaluation label {
+	margin-left: 12px;
+    font-weight: normal;
+    margin-top: 9px;
+}
+
+.evaluation img {
+	width: 110px;
+}
+
+.evaluation pull-left {
+	top: 100px;
+}
 
 </style>
 
@@ -893,17 +1000,19 @@ li>a>span{
 	</div>
 	<!-- <hr> -->
 	<div class="col-tot">
-		<string>###명</string>
+		<strong>###명</strong>
 		의 펫시터가 검색되었습니다!
 		<a href="#" style="float: right; text-decoration: underline">검색 설정 초기화</a>
 	</div>
-	<ul class="sitter-body">
+	<div class="sitter-body">
+	<ul class="inner">
 		<li class="sitter-list">
 			<div class="sitter-room-photo">
 				<div id="slides">
 					<img src="http://cfile6.uf.tistory.com/image/2544613F51CF074D104D69">
 					<img src="http://cfile4.uf.tistory.com/image/0148133F51CF074F0EE545">
 					<img src="http://cfile26.uf.tistory.com/image/2162173F51CF0752036923">
+					<img src="http://cfile6.uf.tistory.com/image/233B073F51CF075D14D7CA">
 				<a href="#" id="slides-btn-left" class="slidesjs-previous slidesjs-navigation">
 					<i class="glyphicon glyphicon-chevron-left"></i>
 				</a>
@@ -915,14 +1024,57 @@ li>a>span{
 			<div class="sitter-room-content">
 				<dl>
 					<dt>
-						<a href="#">당신의 강아지... 이제 더이상 외롭지 않아...</a>
+						<a href="<%=cp%>/service/sitting_detail">당신의 강아지... 이제 더이상 외롭지 않아요...</a>
 						<label class="name">
-							<span class="sitter-face" style="background-image:url(/upload/member/17040720094786370814/d4b2728db654472c68d8404f94b737c6.jpg)"></span>
+							<img class="sitter-face" 
+							src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_80%2Cw_300/MTE5NTU2MzE2MTk1NTU0ODI3/daniel-day-lewis-9268727-2-402.jpg">
+							김경애
+						</label>
+						<label class="dogs">
+							<img class="dogIcon" 
+							src="https://www.iconexperience.com/_img/o_collection_png/green_dark_grey/512x512/plain/dog.png">
+							반려견
+							<strong>
+								#
+							</strong>
+							마리							
 						</label>
 					</dt>
+					<dd class="sitter-tag">
+						<span class="label">아파트</span>
+						<span class="label">노령견케어</span>
+						<span class="label">실외배변</span>
+						<span class="label">픽업가능</span>
+						<span class="label">수제간식</span>
+						<span class="label">투약가능</span>
+					</dd>
+					<dd class="price">
+						<label class="daycare">
+							Day Care / 
+							<strong>22,000원</strong>
+						</label>
+						<label id="stay">
+							1박 / 
+							<strong>30,000원</strong>
+						</label>
+					</dd>
 				</dl>
+				<div class="evaluation">
+					<label class="pull-left">
+						<img src="<%=cp%>/resource/img/service/grade_img.png">
+						펫시터 총점</label>
+					<label class="pull-right">
+						<i class="glyphicon glyphicon-list-alt"></i>
+						고객 후기 ##개
+					</label>
+					<label class="pull-right">
+						<i class="glyphicon glyphicon-user"></i>
+						정기 고객 ##명
+					</label>
+				</div>
 			</div>
 		</li>
 	</ul>
+	</div>
 	
 </div>

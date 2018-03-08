@@ -80,6 +80,10 @@
 	visibility: hidden;
 }
 
+.xbtn:hover {
+	border-color: black;
+}
+
 .eventBox:hover .blackBox {
 	visibility: visible;
 }
@@ -134,8 +138,23 @@ function insertImage() {
 	$("li").each(function() {
 		file.append('files', tempFile.getAll('file')[$(this).attr("id")]);
 	});
-	file.append('context', $("textarea[name=context]").val());
 	
+	var context = $("textarea[name=context]").val();
+	var tags = [];
+	var tempTags = [];
+	
+	context = context.replace(/#[^#\s,;]+/gm, function(tag) {
+		tempTags.push(tag);
+		<%-- return "<a href='<%=cp %>/mungstargram?search=" + tag + "'>" + tag + "</a>"; --%>
+		return "<a>" + tag + "</a>";
+	});
+	
+	$.each(tempTags, function(i, el){
+	    if($.inArray(el, tags) === -1) tags.push(el);
+	});
+	
+	file.append('context', context);
+	file.append('tags', tags);
 	
 	$.ajax({
 		url: url,
@@ -144,7 +163,7 @@ function insertImage() {
 		contentType: false,
 		type: 'POST',
 		success: function() {
-			opener.parent.location.reload();
+			opener.parent.location.replace("<%=cp %>/mungstargram");
 			window.close();
 		}
 	});
@@ -160,7 +179,9 @@ function insertImage() {
 	</div>
 	<div class="textarea">
 		<table id="tb" style="width: 100%; height: 100%;">
-			<tr height="100px"><td>a</td></tr>
+			<tr height="100px"><td>
+				<span>${memberId }</span>
+			</td></tr>
 			<tr><td align="center">
 				<textarea name="context" placeholder="&nbsp;내용을 입력하세요."></textarea>
 			</td></tr>

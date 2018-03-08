@@ -6,66 +6,250 @@
 	String cp = request.getContextPath();
 %>
 <style>
-.board-container{
-margin: 0;
-padding: 0;
+* {
+	box-sizing: border-box;
 }
-.body-container .gongji_head{
-position: relative;
-margin: -53px 0 34px 0;
-}
-.body-container #gongji_main{
-width: 100%;
-height: 100%;
-}
-#gongji_board{
-border-top: 1.5px solid lightgray;
-border-bottom:1.5px solid lightgray;
 
+div {
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
-li{
+
+ul{
 list-style: none;
 }
-ul{
-margin-bottom: 27px;
-}
-</style>
 
-<div class="body-container">
-	<div class="gongji_head">
-		<h3 id="gongji_tit">테스트입니다.</h3>
-	</div>
-	<div id="gongji_main">
-		<div id="gongji_body">
-			<div id="gongji_board">
-				<div class="gongji_b_tit" style="padding: 3px 0 0 7px;">
-					<div id="gongji_b_tit_num" class="number" style="float: left; width: 10%; margin-bottom: 22px;">번호</div>
-					<div id="gongji_b_tit_sub" class="subject" style="float: left; width: 67%; margin-bottom: 22px;">제목</div>
-					<div id="gongji_b_tit_date" class="date" style="float: left; width: 13%; margin-bottom: 22px;">날짜</div>
-					<div id="gongji_b_tit_hit" class="hit" style="float: left; width: 10%; margin-bottom: 22px;">조회</div>
+#gongji_Container {
+	overflow: hidden;
+	width: 100%;
+	min-width: 1020px;
+}
+
+#gongji_Contents {
+	width: 1020px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.gongji_Tabs {
+	overflow: hidden;
+	height: 55px;
+	margin: 30px 0 0;
+	padding-bottom: 5px;
+}
+
+.gongji_Tabs
+li:first_child{
+width: 50%;
+}
+
+.gongji_Tabs > li{
+position: relative;
+float: left;
+width: 497px;
+text-align: center;
+border: 0;
+}
+
+.gongji_Tabs > li > a{
+display: block;
+height: 50px;
+padding: 0;
+line-height: 50px;
+font-size: 18px;
+font-weight: 400;
+}
+
+.TabsConts{
+display: block;
+}
+.gongji_list{
+width: 1020px;
+margin: 0 auto;
+}
+.gongji_list ul{
+overflow: hidden;
+width: 100%;
+border-top: 2px solid #888;
+}
+
+.gongji_list ul li{
+border-bottom: 1px solid #e6e6e6;
+}
+
+.gongji_list ul li .title{
+margin-left: 20px;
+padding: 20px 0 20px 42px;
+color: #222;
+font-size: 14px;
+line-height: 18px;
+cursor: pointer;
+}
+
+.gongji_list ul li .title strong{
+display: inline-block;
+width: 140px;
+margin-right: 11px;
+vertical-align: middle;
+}
+
+.gongji_list ul li .gongji_conts{
+display: none;
+background: #fafafa;
+border: 0;
+color: #222;
+font-size: 0;
+line-height: 0;
+}
+
+.gongji_list ul li .gongji_conts li.gongji_question{
+padding: 28px 30px 25px 62px;
+}
+
+i{
+padding-left: 598px;
+color: #888;
+}
+
+</style>
+<div id="gongji_Container">
+	<div id="gongji_Contents">
+		<ul class="gongji_Tabs">
+			<li id="gongji_alert"><a>공지사항</a></li>
+			<li id="gongji_event"><a>이벤트</a></li>
+		</ul>
+		<div id="TabsOpenArea">
+			<div class="TabsConts">
+				<div class="gongji_list">
+					<ul>
+						<li>
+							<p class="title">
+							<strong>[공지/이벤트]</strong>
+							제목입니다1.
+							<i>2018/01/01</i>
+							</p>
+							<ul class="gongji_conts">
+								<li class="gongji_question">
+									<i class="gongji_date">
+									</i>
+									<p class="gongji_text">
+									</p>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<p class="title">
+							<strong>[공지/이벤트]</strong>
+							제목입니다2.
+							</p>
+							<ul class="gongji_conts">
+								<li class="gongji_question">
+									<p class="gongji_text">
+									</p>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<p class="title">
+							<strong>[공지/이벤트]</strong>
+							제목입니다3.
+							</p>
+							<ul class="gongji_conts">
+								<li class="gongji_question">
+									<p class="gongji_text">
+									</p>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<p class="title">
+							<strong>[공지/이벤트]</strong>
+							제목입니다4.
+							</p>
+							<ul class="gongji_conts">
+								<li class="gongji_question">
+									<p class="gongji_text">
+									</p>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<p class="title">
+							<strong>[공지/이벤트]</strong>
+							제목입니다5.
+							</p>
+							<ul class="gongji_conts">
+								<li class="gongji_question">
+									<p class="gongji_text">
+									</p>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<p class="title">
+							<strong>[공지/이벤트]</strong>
+							제목입니다6.
+							</p>
+							<ul class="gongji_conts">
+								<li class="gongji_question">
+									<p class="gongji_text">
+									</p>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<p class="title">
+							<strong>[공지/이벤트]</strong>
+							제목입니다7.
+							</p>
+							<ul class="gongji_conts">
+								<li class="gongji_question">
+									<p class="gongji_text">
+									</p>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<p class="title">
+							<strong>[공지/이벤트]</strong>
+							제목입니다8.
+							</p>
+							<ul class="gongji_conts">
+								<li class="gongji_question">
+									<p class="gongji_text">
+									</p>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<p class="title">
+							<strong>[공지/이벤트]</strong>
+							제목입니다9.
+							</p>
+							<ul class="gongji_conts">
+								<li class="gongji_question">
+									<p class="gongji_text">
+									</p>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<p class="title">
+							<strong>[공지/이벤트]</strong>
+							제목입니다10.
+							</p>
+							<ul class="gongji_conts">
+								<li class="gongji_question">
+									<p class="gongji_text">
+									</p>
+								</li>
+							</ul>
+						</li>
+					</ul>
 				</div>
-				<ul id="gongji_content">
-					<li>
-						<em class="num" style="float: left; width: 10%; padding_bottom:13px;">123</em>
-						<div class="subject" style="float: left; width: 67%; padding_bottom:13px;">
-							<span id="gongji_subject">제목입니다</span>
-						</div> 
-						<em class="date" style="float: left; width: 13%; padding_bottom:13px;">2018.01.01</em> 
-						<em class="hit" style="float: left; width: 10%; padding_bottom:13px;">1234</em>
-					</li>
-				</ul>
 			</div>
-			<form name="gongjiForm" action="#" method="post" style="margin-top:112px;">
-				<div class="gongji_search">
-					<select name="searchKey" class="gongji_select_value">
-						<option>선택</option>
-						<option value="gongji_number">번호</option>
-						<option value="gongji_subject">제목</option>
-					</select> <input type="text" class="gongji_searchValue">
-					<button type="button" class="gongji_btn">search</button>
-				</div>
-			</form>
-			<div class="gongji_paging" style="margin-top:12px;">paging</div>
+			<div class="pageing"></div>
 		</div>
 	</div>
 </div>

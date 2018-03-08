@@ -24,12 +24,19 @@ public class MungstargramServiceImpl implements MungstargramService {
 		try {
 			result = dao.insertData("mungstar.insertContext", pvo);
 			pvo.setNum(dao.selectOne("mungstar.selectMungstarNum"));
+			
 			for(int i=0; i<pvo.getFiles().size(); i++) {
 				String filename = fileManager.doFileUpload(pvo.getFiles().get(i), pathname);
 				if(filename != null) {
 					pvo.setFilename(filename); 
 					dao.insertData("mungstar.insertPhoto", pvo);
 				}
+			}
+			
+			for(int i=0; i<pvo.getTags().size(); i++) {
+				String tag = pvo.getTags().get(i);
+				pvo.setTag(tag);
+				dao.insertData("mungstar.insertTag", pvo);
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -39,7 +46,7 @@ public class MungstargramServiceImpl implements MungstargramService {
 	}
 
 	@Override
-	public int mungstarCount() {
+	public int mungstarCount(Map<String, Object> map) {
 		int result = 0;
 		try {
 			result = dao.selectOne("mungstar.mungstarCount");
@@ -92,6 +99,18 @@ public class MungstargramServiceImpl implements MungstargramService {
 			System.out.println(e.toString());
 		}
 		return rvo;
+	}
+
+	@Override
+	public List<MungstarRVO> searchList(String tag) {
+		List<MungstarRVO> list = null;
+		try {
+			list = dao.selectList("mungstar.selectTag", tag);
+			list.addAll(dao.selectList("mungstar.selectMemberId", tag));
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
 	}
 
 }
