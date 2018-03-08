@@ -244,12 +244,14 @@ th {
 					</tr>
 					<tr>
 						<td>
-							<button type="button" class="btn btn-default cartBtn">
+							<button type="button" class="btn btn-default cartBtn"
+							onclick="location.href='<%=cp%>/store/order'">
 								주문하기
 							</button>
 						</td>
 						<td>
-							<button type="button" class="btn btn-default cartBtn">
+							<button type="button" class="btn btn-default cartBtn"
+							onclick="location.href='<%=cp%>/store/list'">
 								쇼핑계속하기
 							</button>
 						</td>
