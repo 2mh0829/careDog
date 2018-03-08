@@ -1,6 +1,7 @@
 package care.dog.strayDog;
 
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,18 +11,20 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 @Service("strayDog.strayDogServiceImpl")
 public class StrayDogServiceImpl implements StrayDogService {
+	private static String MAINURL = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/";
+	private static String KEY = "9pUaOiX4C%2BiH1Rt21Bq0dLJbh2Edo6TOS4JFKHcsNK69ezsQ2p1uHBJUWTcAF4Pzybzv5RkKh7gDMY6TL2YvlQ%3D%3D";
+	private static DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+	
 	@Override
-	public Map<String, Object> strayDog() {
-		Map<String, Object> map=new HashMap<>();
-		
-		String mainUrl = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic";
+	public ArrayList<HashMap<String, Object>> strayDog() {
+		ArrayList<HashMap<String, Object>> allList = new ArrayList<HashMap<String, Object>>();
+		String mainUrl = MAINURL+ "abandonmentPublic";
 	        try {
-	        	String serviceKey="?" + URLEncoder.encode("ServiceKey","UTF-8") + "="+"9pUaOiX4C%2BiH1Rt21Bq0dLJbh2Edo6TOS4JFKHcsNK69ezsQ2p1uHBJUWTcAF4Pzybzv5RkKh7gDMY6TL2YvlQ%3D%3D";
+	        	String serviceKey= "?" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + KEY;
 	        	String parameter="&" + URLEncoder.encode("bgnde","UTF-8") + "=" + URLEncoder.encode("20180205", "UTF-8"); /*유기날짜 (검색 시작일) (YYYYMMDD) */
 	        	parameter += "&" + URLEncoder.encode("endde","UTF-8") + "=" + URLEncoder.encode("20180305", "UTF-8"); /*유기날짜 (검색 종료일) (YYYYMMDD) */
 	        	parameter += "&" + URLEncoder.encode("upkind","UTF-8") + "=" + URLEncoder.encode("417000", "UTF-8"); /*축종코드 - 개 : 417000 - 고양이 : 422400 - 기타 : 429900 */
@@ -35,91 +38,68 @@ public class StrayDogServiceImpl implements StrayDogService {
 	        	
 	        	String url = mainUrl+serviceKey+parameter;
 	        	
-				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 				Document doc = dBuilder.parse(url);
 	
 				// root tag
-				doc.getDocumentElement().normalize();
-				System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
+				Element root = doc.getDocumentElement();
 	
-				// 파싱할 tag
-				NodeList nList = doc.getElementsByTagName("item");
-				//System.out.println("파싱할 리스트 수 : " + nList.getLength());
+				// 가져올 tag
+				NodeList nList = root.getElementsByTagName("item");
+				//System.out.println("가져올 리스트 수 : " + nList.getLength());
 				
-				for(int temp=0;temp<nList.getLength();temp++) {
-					Node n = nList.item(temp);
-					if(n.getNodeType()==Node.ELEMENT_NODE) {
-						Element e = (Element)n;
-						//System.out.println(e.getTextContent());
-						map.put("age", getTagValue("age",e));
-						map.put("careAddr", getTagValue("careAddr",e));
-						map.put("careNm", getTagValue("careNm",e));
-						map.put("careTel", getTagValue("careTel",e));
-						map.put("chargeNm", getTagValue("chargeNm",e));
-						map.put("colorCd", getTagValue("colorCd",e));
-						map.put("desertionNo", getTagValue("desertionNo",e));
-						map.put("filename", getTagValue("filename",e));
-						map.put("happenDt", getTagValue("happenDt",e));
-						map.put("happenPlace", getTagValue("happenPlace",e));
-						map.put("kindCd", getTagValue("kindCd",e));
-						map.put("neuterYn", getTagValue("neuterYn",e));
-						map.put("noticeEdt", getTagValue("noticeEdt",e));
-						map.put("noticeNo", getTagValue("noticeNo",e));
-						map.put("noticeSdt", getTagValue("noticeSdt",e));
-						map.put("officetel", getTagValue("officetel",e));
-						map.put("orgNm", getTagValue("orgNm",e));
-						map.put("popfile", getTagValue("popfile",e));
-						map.put("processState", getTagValue("processState",e));
-						map.put("sexCd", getTagValue("sexCd",e));
-						map.put("specialMark", getTagValue("specialMark",e));
-						map.put("weight", getTagValue("weight",e));
-						map.put("totalCount", getTagValue("totalCount",e));
-					}
+				for(int i=0;i<nList.getLength();i++) {
+					HashMap<String, Object> map = new HashMap<String, Object>();
+					map.put("age", root.getElementsByTagName("age").item(i).getTextContent().toString()); //나이
+					map.put("careAddr", root.getElementsByTagName("careAddr").item(i).getTextContent().toString()); //보호장소
+					map.put("careNm", root.getElementsByTagName("careNm").item(i).getTextContent().toString()); //담당자
+					map.put("careTel", root.getElementsByTagName("careTel").item(i).getTextContent().toString()); //보호소 번호
+					map.put("chargeNm", root.getElementsByTagName("chargeNm").item(i).getTextContent().toString()); //보호소 이름
+					map.put("colorCd", root.getElementsByTagName("colorCd").item(i).getTextContent().toString()); 
+					map.put("desertionNo", root.getElementsByTagName("desertionNo").item(i).getTextContent().toString()); //유기번호
+					map.put("filename", root.getElementsByTagName("filename").item(i).getTextContent().toString()); //썸네일
+					map.put("happenDt", root.getElementsByTagName("happenDt").item(i).getTextContent().toString()); //접수일
+					map.put("happenPlace", root.getElementsByTagName("happenPlace").item(i).getTextContent().toString()); //발견장소
+					map.put("kindCd", root.getElementsByTagName("kindCd").item(i).getTextContent().toString()); //품종
+					map.put("neuterYn", root.getElementsByTagName("neuterYn").item(i).getTextContent().toString()); //중성화 여부
+					map.put("noticeEdt", root.getElementsByTagName("noticeEdt").item(i).getTextContent().toString()); //공고 종료일
+					map.put("noticeNo", root.getElementsByTagName("noticeNo").item(i).getTextContent().toString()); //공고 번호
+					map.put("noticeSdt", root.getElementsByTagName("noticeSdt").item(i).getTextContent().toString()); //공고시작일
+					map.put("officetel", root.getElementsByTagName("officetel").item(i).getTextContent().toString()); //담당자 연락처
+					map.put("orgNm", root.getElementsByTagName("orgNm").item(i).getTextContent().toString()); //관할기관
+					map.put("popfile", root.getElementsByTagName("popfile").item(i).getTextContent().toString()); //이미지
+					map.put("processState", root.getElementsByTagName("processState").item(i).getTextContent().toString()); //상태
+					map.put("sexCd", root.getElementsByTagName("sexCd").item(i).getTextContent().toString()); //성별
+					map.put("specialMark", root.getElementsByTagName("specialMark").item(i).getTextContent().toString()); //특징
+					map.put("weight", root.getElementsByTagName("weight").item(i).getTextContent().toString());
+					
+					allList.add(map);
 				}
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-	        
-	        return map;
+	        return allList;
 	}
 	
-	//tag 값 가져오기
-	private static String getTagValue(String tag, Element e) {
-		NodeList nList = e.getElementsByTagName(tag).item(0).getChildNodes();
-		Node nValue = (Node) nList.item(0);
-		if(nValue==null)
-			return null;
-		return nValue.getNodeValue();
-	}
-
 	@Override
 	public Map<String, Object> listSido() {
 		Map<String, Object> model = new HashMap<>();
-	        /*String addr = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/sido"+"?ServiceKey=";
-			String serviceKey = "2tZYhOcrXJBIeeVzX9bylvmtsaHiaSrBkh13F9DlyGL0KfQZKGuRtuM3xcc%2Bz55Nblf0iaPOfUwRqeKu2IZ7rQ%3D%3D";
-			String parameter = "";
+		String allurl = MAINURL+"sido";
+		try {
+			String serviceKey= "?" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + KEY;
+			String url = allurl+serviceKey;
 			
-			//인증키(서비스키) url인코딩
-			serviceKey = URLEncoder.encode(serviceKey, "UTF-8");
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(url);
 			
-			 parameter setting
-			 * parameter = parameter + "&" + "PARAM1=AAA";
-			 * parameter = parameter + "&" + "PARAM2=BBB";
-			 * parameter = parameter + "&" + "PARAM3=CCC";
-			 * 
+			Element root = doc.getDocumentElement();
+			System.out.println(root.getTextContent());
+			NodeList nList = root.getElementsByTagName("item");
 			
-			addr = addr + serviceKey + parameter;
-			
-			URL url = new URL(addr);
-			InputStream in = url.openStream(); 
-			CachedOutputStream bos = new CachedOutputStream();
-			IOUtils.copy(in, bos);
-			in.close();
-			bos.close();
-			return bos.getOut().toString();*/
-
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return model;
 	}
 	

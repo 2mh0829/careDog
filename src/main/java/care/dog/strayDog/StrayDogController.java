@@ -1,16 +1,13 @@
 package care.dog.strayDog;
 
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.xml.sax.SAXException;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller("strayDog.strayDogController")
 public class StrayDogController {
@@ -21,8 +18,17 @@ public class StrayDogController {
 	
 	@RequestMapping(value="/strayDog")
 	public String main() {
-		service.strayDog();
+		
 		return ".strayDog.main";
+	}
+	
+	@RequestMapping(value="/strayDog/callList")
+	@ResponseBody
+	public Map<String, Object> callList(){  // 유기견 리스트 호출
+		Map<String, Object> map = new HashMap<>(); // 메인보내는 용
+		ArrayList<HashMap<String, Object>> list=service.strayDog(); // 값 가져오는용
+		map.put("list", list);
+		return map;
 	}
 	
 	@RequestMapping(value="/strayDog/support")
