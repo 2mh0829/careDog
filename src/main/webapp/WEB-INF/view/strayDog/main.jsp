@@ -296,30 +296,27 @@ function findDog(value){
 		,success:function(data){
 			console.log(data)
 			//$(".allStrayDog").find(".strayDog").remove();
-			var items=[];
-			$.each(data, function(key,val){
-				items[key]=val;
-				for(var i=0;i<9;i++){
-				console.log(key=="popfile"+i?val:'')
-						content="<div class='strayDog'><a title='확대 이미지 보기' href="+(key=="popfile"+i?val:'')+" class='lytebox' data-lyte-options='slide:false' data-title='CareDog'>";
-						content+="<a href='#' img='' class='tx-animal-image' src='"+data.filename+i+"'>";
-						content+="<img src="+data.filename+i+" width='348' height='261' border='0' align='center'></a></a><ul>";
-						content+="<li class='full'><strong>접수일</strong> <i> "+data.happenDt+i+"&nbsp;&nbsp;(공고번호: "+data.noticeNo+i+" <span class='red'></span>)";
-						content+="</i></li><li class='full'><strong>발견장소</strong></li><li class='full'>"+data.happenPlace+i+"</li>";
-						content+="<li class='half'><strong>품종</strong> "+data.kindCd+i+"</li>";
-						content+="<li class='half'><strong>성별</strong> "+data.sexCd+i+"</li>";
-						content+="<li class='half'><strong>연령</strong> "+data.age+i+"</li>";
-						content+="<li class='half'><strong>색상</strong> "+data.colorCd+i+"</li>";
-						content+="<li class='half'><strong>중성화수술</strong> "+data.neuterYn+i+"</li>";
-						content+="<li class='half'><strong>체중</strong> "+data.weight+i+"</li>";
-						content+="<li class='half'><strong>건강상태</strong> "+data.processState+i+"</li>";
-						content+="<li class='half'><strong>특징</strong></li>";
-						content+="<li class='full'><span>"+data.specialMark+i+"</span></li></ul></div>";
-						
-					}
-					
-					$(".allStrayDog").append(content);
+			var list=data.list;
+			var content="";
+			console.log(list)
+			$.each(list, function(index, item){
+				console.log(item.age);
+				content+="<div class='strayDog'><a title='확대 이미지 보기' href="+item.popfile+" class='lytebox' data-lyte-options='slide:false' data-title='CareDog'>";
+				content+="<a href='#' img='' class='tx-animal-image' src='"+item.popfile+"'>";
+				content+="<img src="+item.popfile+" width='348' height='261' border='0' align='center'></a></a><ul>";
+				content+="<li class='full'><strong>접수일</strong> <i> "+item.happenDt+"&nbsp;&nbsp;(공고번호: "+item.noticeNo+" <span class='red'></span>)";
+				content+="</i></li><li class='full'><strong>발견장소</strong></li><li class='full'>"+item.happenPlace+"</li>";
+				content+="<li class='half'><strong>품종</strong> "+item.kindCd+"</li>";
+				content+="<li class='half'><strong>성별</strong> "+item.sexCd+"</li>";
+				content+="<li class='half'><strong>연령</strong> "+item.age+"</li>";
+				content+="<li class='half'><strong>색상</strong> "+item.colorCd+"</li>";
+				content+="<li class='half'><strong>중성화수술</strong> "+item.neuterYn+"</li>";
+				content+="<li class='half'><strong>체중</strong> "+item.weight+"</li>";
+				content+="<li class='half'><strong>건강상태</strong> "+item.processState+"</li>";
+				content+="<li class='half'><strong>특징</strong></li>";
+				content+="<li class='full'><span>"+item.specialMark+"</span></li></ul></div>";
 			});
+			$(".allStrayDog").append(content);
 		}
 	});
 	
@@ -385,35 +382,6 @@ function changeKind(value){
 		</form>
 	</div>
 	<div class="allStrayDog">
-		<%-- 	<c:forEach var="i" begin="1" end="9">
-		<div class='strayDog'>
-			<a title='확대 이미지 보기' href="+popfile+" class='lytebox' data-lyte-options='slide:false' data-title='CareDog'>
-				<a href='#' img='' class='tx-animal-image' src="+filename+">
-					<img src="+filename+" width='348' height='261' border='0' align='center'>
-				</a>
-			</a>
-			<ul>
-				<li class='full'>
-					<strong>접수일</strong>
-						<i> ${happenDt+i}&nbsp;&nbsp;(공고번호: ${noticeNo+i} <span class='red'></span>)</i>
-				</li>
-				<li class='full'>
-					<strong>발견장소</strong>
-				</li>
-				<li class='full'>${happenPlace+i}</li>
-				<li class='half'>
-					<strong>품종</strong>${kindCd+i}
-				</li>
-				<li class='half'><strong>성별</strong> ${sexCd+i}</li>
-				<li class='half'><strong>연령</strong> ${age+i}</li>
-				<li class='half'><strong>색상</strong> ${colorCd+i}</li>
-				<li class='half'><strong>중성화수술</strong> ${neuterYn+i}</li>
-				<li class='half'><strong>체중</strong> ${weight+i}</li>
-				<li class='half'><strong>건강상태</strong> ${processState}</li>
-				<li class='half'><strong>특징</strong></li>
-				<li class='full'><span>${specialMark}</span></li></ul></div>
-	
-</c:forEach> --%>
 	</div>
 	<div id="pagingNav" class="pagenation">
 		<span class="select">1</span> <a

@@ -15,12 +15,16 @@ import org.w3c.dom.NodeList;
 
 @Service("strayDog.strayDogServiceImpl")
 public class StrayDogServiceImpl implements StrayDogService {
+	private static String MAINURL = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/";
+	private static String KEY = "9pUaOiX4C%2BiH1Rt21Bq0dLJbh2Edo6TOS4JFKHcsNK69ezsQ2p1uHBJUWTcAF4Pzybzv5RkKh7gDMY6TL2YvlQ%3D%3D";
+	private static DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+	
 	@Override
 	public ArrayList<HashMap<String, Object>> strayDog() {
 		ArrayList<HashMap<String, Object>> allList = new ArrayList<HashMap<String, Object>>();
-		String mainUrl = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/abandonmentPublic";
+		String mainUrl = MAINURL+ "abandonmentPublic";
 	        try {
-	        	String serviceKey="?" + URLEncoder.encode("ServiceKey","UTF-8") + "="+"9pUaOiX4C%2BiH1Rt21Bq0dLJbh2Edo6TOS4JFKHcsNK69ezsQ2p1uHBJUWTcAF4Pzybzv5RkKh7gDMY6TL2YvlQ%3D%3D";
+	        	String serviceKey= "?" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + KEY;
 	        	String parameter="&" + URLEncoder.encode("bgnde","UTF-8") + "=" + URLEncoder.encode("20180205", "UTF-8"); /*유기날짜 (검색 시작일) (YYYYMMDD) */
 	        	parameter += "&" + URLEncoder.encode("endde","UTF-8") + "=" + URLEncoder.encode("20180305", "UTF-8"); /*유기날짜 (검색 종료일) (YYYYMMDD) */
 	        	parameter += "&" + URLEncoder.encode("upkind","UTF-8") + "=" + URLEncoder.encode("417000", "UTF-8"); /*축종코드 - 개 : 417000 - 고양이 : 422400 - 기타 : 429900 */
@@ -34,7 +38,6 @@ public class StrayDogServiceImpl implements StrayDogService {
 	        	
 	        	String url = mainUrl+serviceKey+parameter;
 	        	
-				DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 				Document doc = dBuilder.parse(url);
 	
@@ -82,29 +85,21 @@ public class StrayDogServiceImpl implements StrayDogService {
 	@Override
 	public Map<String, Object> listSido() {
 		Map<String, Object> model = new HashMap<>();
-	        /*String addr = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/sido"+"?ServiceKey=";
-			String serviceKey = "2tZYhOcrXJBIeeVzX9bylvmtsaHiaSrBkh13F9DlyGL0KfQZKGuRtuM3xcc%2Bz55Nblf0iaPOfUwRqeKu2IZ7rQ%3D%3D";
-			String parameter = "";
+		String allurl = MAINURL+"sido";
+		try {
+			String serviceKey= "?" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + KEY;
+			String url = allurl+serviceKey;
 			
-			//인증키(서비스키) url인코딩
-			serviceKey = URLEncoder.encode(serviceKey, "UTF-8");
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(url);
 			
-			 parameter setting
-			 * parameter = parameter + "&" + "PARAM1=AAA";
-			 * parameter = parameter + "&" + "PARAM2=BBB";
-			 * parameter = parameter + "&" + "PARAM3=CCC";
-			 * 
+			Element root = doc.getDocumentElement();
+			System.out.println(root.getTextContent());
+			NodeList nList = root.getElementsByTagName("item");
 			
-			addr = addr + serviceKey + parameter;
-			
-			URL url = new URL(addr);
-			InputStream in = url.openStream(); 
-			CachedOutputStream bos = new CachedOutputStream();
-			IOUtils.copy(in, bos);
-			in.close();
-			bos.close();
-			return bos.getOut().toString();*/
-
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return model;
 	}
 	
