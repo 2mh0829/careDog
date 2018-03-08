@@ -7,8 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class Event {
 	private int listnum, num;
 	
-	private String userId, subject, content, created;
-	private int isGongji;
+	private String memberId, subject, content, created;
+	private int isEvent;
 	private String imageFilename;
 	private String saveFilename, originalFilename;
 	private long fileSize;
@@ -29,11 +29,11 @@ public class Event {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public String getUserId() {
-		return userId;
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public String getSubject() {
 		return subject;
@@ -53,11 +53,11 @@ public class Event {
 	public void setCreated(String created) {
 		this.created = created;
 	}
-	public int getIsGongji() {
-		return isGongji;
+	public int getIsEvent() {
+		return isEvent;
 	}
-	public void setIsGongji(int isGongji) {
-		this.isGongji = isGongji;
+	public void setIsEvent(int isEvent) {
+		this.isEvent = isEvent;
 	}
 	public String getImageFilename() {
 		return imageFilename;

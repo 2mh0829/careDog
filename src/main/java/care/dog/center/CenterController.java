@@ -100,10 +100,10 @@ public class CenterController {
 		model.addAttribute("total_page",total_page);
 		model.addAttribute("paging",paging);
 		
-		return ".center.gongji";
+		return "/center/gongji";
 	}
 	
-	@RequestMapping(value="/gongji/content")
+	@RequestMapping(value="/center/gongji/content")
 	public String gongjiContent(
 			@RequestParam(value="num") int num,
 			@RequestParam(value="searchKey", defaultValue="subject") String SearchKey,
@@ -119,7 +119,7 @@ public class CenterController {
 		
 		Gongji dto = service.readGongji(num);
 		if(dto==null) {
-			return ".center.main";
+			return "/center/main";
 		}
 		
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
@@ -140,19 +140,19 @@ public class CenterController {
 		model.addAttribute("listFile",listFile);
 		model.addAttribute("pageNo", page);
 		
-		return ".center.gongji_content";
+		return "/center/gongji_content";
 	}
 	
-	@RequestMapping(value="/gongji/created", method=RequestMethod.GET)
+	@RequestMapping(value="/center/gongji/created", method=RequestMethod.GET)
 	public String createdForm(
 			Model model
 			) throws Exception{
 		model.addAttribute("pageNo","1");
 		model.addAttribute("mode","created");
-		return ".center.gongji_create";
+		return "/center/gongji_create";
 	}
 	
-	@RequestMapping(value="/gongji/created", method=RequestMethod.POST)
+	@RequestMapping(value="/center/gongji/created", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> createdSubmit(
 			Gongji dto,
@@ -176,7 +176,7 @@ public class CenterController {
 		return model;
 	}
 	
-	@RequestMapping(value="/gongji/update", method=RequestMethod.GET)
+	@RequestMapping(value="/center/gongji/update", method=RequestMethod.GET)
 	public String updateForm(
 			@RequestParam(value="num") int num,
 			@RequestParam(value="pageNo") String page,
@@ -200,10 +200,10 @@ public class CenterController {
 		model.addAttribute("dto",dto);
 		model.addAttribute("listFile",listFile);
 		
-		return ".center.gongji_create";
+		return "/center/gongji_create";
 	}
 	
-	@RequestMapping(value="/gongji/update", method=RequestMethod.POST)
+	@RequestMapping(value="/center/gongji/update", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> updateSubmit(
 			Gongji dto,

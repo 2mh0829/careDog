@@ -1,7 +1,6 @@
 package care.dog.center.event;
 
 import java.io.File;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
@@ -14,12 +13,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -100,11 +97,11 @@ public class EventController {
 		model.addAttribute("total_page",tot_page);
 		model.addAttribute("paging",paging);
 		
-		return ".center.event";
+		return "center/event";
 		
 }
 	
-	@RequestMapping(value="/event/content")
+	@RequestMapping(value="/center/event/content")
 	public String eventContent(
 			@RequestParam(value="num")int num,
 			@RequestParam(value="searchKey",defaultValue="subejct") String searchKey,
@@ -118,8 +115,9 @@ public class EventController {
 		}
 		
 		Event dto = service.readEvent(num);
+		System.out.println(":::::"+dto+":::::");
 		if(dto==null) {
-			return ".center.main";
+			return "center/event";
 		}
 		
 		dto.setContent(dto.getContent().replaceAll("\n","<br>"));
@@ -140,19 +138,19 @@ public class EventController {
 		model.addAttribute("listFile",listFile);
 		model.addAttribute("pageNo", page);
 		
-		return ".center.event_content";
+		return "center/event_content";
 	}
 	
-	@RequestMapping(value="/event/created", method=RequestMethod.GET)
+	@RequestMapping(value="/center/event/created", method=RequestMethod.GET)
 	public String createdForm(
 			Model model
 			) throws Exception {
 		model.addAttribute("pageNo","1");
 		model.addAttribute("mode","created");
-		return ".center.event_create";
+		return "center/event_create";
 	}
 	
-	@RequestMapping(value="/event/created", method=RequestMethod.POST)
+	@RequestMapping(value="/center/event/created", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> createdSubmit(
 			Event dto,
@@ -165,7 +163,7 @@ public class EventController {
 			String root = session.getServletContext().getRealPath("/");
 			String pathname = root + File.separator + "uploads" + File.separator + "event";
 			
-			dto.setUserId(info.getMemberId());
+			dto.setMemberId(info.getMemberId());
 			service.insertEvent(dto, pathname);
 		} else {
 			state = "false";
@@ -177,7 +175,7 @@ public class EventController {
 		return model;
 	}
 	
-	@RequestMapping(value="/event/delete", method=RequestMethod.POST)
+	@RequestMapping(value="/center/event/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> delete(
 			@RequestParam int num,
@@ -199,7 +197,7 @@ public class EventController {
 		return model;
 	}
 	
-	@RequestMapping(value="/event/download")
+	@RequestMapping(value="/center/event/download")
 	public void download(
 			@RequestParam int fileNum,
 			HttpServletResponse resp,
@@ -229,7 +227,7 @@ public class EventController {
 		}
 	}
 	
-	@RequestMapping(value="/event/deleteFile", method=RequestMethod.POST)
+	@RequestMapping(value="/center/event/deleteFile", method=RequestMethod.POST)
 	public Map<String, Object> deleteFile(
 			@RequestParam int fileNum,
 			HttpServletResponse resp,

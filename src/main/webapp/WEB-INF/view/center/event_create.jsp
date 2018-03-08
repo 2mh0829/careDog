@@ -155,18 +155,15 @@ line-height: 0;
 }
 </style>
 <div id="Container">
-	<div id="Contents">
-		<ul class="gongji_Tabs">
-			<li id="gongji_alert"><a>공지사항</a></li>
-			<li id="gongji_event"><a>이벤트</a></li>
-		</ul>
-		<form name="gongjiBoardForm" method="post">
-			<table>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-			</table>
+		<form name="gongjiBoardForm" method="post" enctype="multipart/form-data">
+			<div>
+				<ul>
+					<li id=""></li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<div></div>
+			<div></div>
 		</form>
 	</div>
-</div>

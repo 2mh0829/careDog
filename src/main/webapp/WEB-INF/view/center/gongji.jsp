@@ -1,206 +1,74 @@
-<%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page trimDirectiveWhitespaces="true"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-	String cp = request.getContextPath();
+   String cp = request.getContextPath();
 %>
-<style>
-* {
-	box-sizing: border-box;
-}
 
-div {
-	margin: 0;
-	padding: 0;
-	border: 0;
-}
+<table style="width: 100%; margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
+  <tr><td height="1" colspan="5" bgcolor="#cccccc"></td></tr>
+  <tr align="center" bgcolor="#eeeeee" height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
+      <th width="60" style="color: #787878;">번호</th>
+  	  <th width="80" style="color: #787878;">분류</th>
+      <th style="color: #787878;">제목</th>
+      <th width="80" style="color: #787878;">작성일</th>
+  </tr>
+ 
+ <c:forEach var="dto" items="${gongjiList}">
+  <tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;"> 
+      <td><span style="display: inline-block;width: 28px;height:18px;line-height:18px; background: #ED4C00;color: #FFFFFF">공지</span></td>
+      <td align="left" style="padding-left: 10px;">
+           <a href="javascript:articleBoard('${dto.num}', '${pageNo}');">${dto.subject}</a>
+      </td>
+      <td>${dto.created}</td>
+  </tr>
+</c:forEach>
 
-ul{
-list-style: none;
-}
+<c:forEach var="dto" items="${list}">
+  <tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;"> 
+      <td>${dto.num}</td>
+      <td align="left" style="padding-left: 10px;">
+           <a href="javascript:contentBoard('${dto.num}', '${pageNo}');">${dto.subject}</a>
+      </td>
+      <td>${dto.isGongji }</td>
+      <td>${dto.subject }</td>
+      <td>${dto.created}</td>
+  </tr>
+  </c:forEach>
+</table>
+ 
+<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
+   <tr height="35">
+	<td align="center">
+       <c:if test="${dataCount==0 }">
+           등록된 게시물이 없습니다.
+       </c:if>
+       <c:if test="${dataCount!=0 }">
+           ${paging}
+       </c:if>
+	</td>
+   </tr>
+</table>
 
-i{
-color: #888;
-padding-right: 17px;
-}
-
-#gongji_Container {
-	overflow: hidden;
-	width: 100%;
-	min-width: 1020px;
-}
-
-#gongji_Contents {
-	width: 1020px;
-	height: 100%;
-	margin: 0 auto;
-}
-
-.gongji_Tabs {
-	overflow: hidden;
-	height: 55px;
-	margin: 30px 0 0;
-	padding-bottom: 5px;
-}
-
-.gongji_Tabs
-li:first_child{
-width: 50%;
-}
-
-.gongji_Tabs > li{
-position: relative;
-float: left;
-width: 497px;
-text-align: center;
-border: 0;
-}
-
-.gongji_Tabs > li > a{
-display: block;
-height: 50px;
-padding: 0;
-line-height: 50px;
-font-size: 18px;
-font-weight: 400;
-}
-
-.TabsConts{
-display: block;
-}
-.gongji_list{
-width: 1020px;
-margin: 0 auto;
-}
-.gongji_list ul{
-overflow: hidden;
-width: 100%;
-border-top: 2px solid #888;
-}
-
-.gongji_list ul li{
-border-bottom: 1px solid #e6e6e6;
-}
-
-.gongji_list ul li .title{
-margin-left: 20px;
-padding: 20px 0 20px 30px;
-color: #222;
-font-size: 14px;
-line-height: 18px;
-cursor: pointer;
-}
-
-.gongji_list ul li .title strong{
-display: inline-block;
-width: 140px;
-margin-left: 25px;
-margin-right: 11px;
-vertical-align: middle;
-}
-
-.gongji_list ul li .gongji_conts{
-display: none;
-background: #fafafa;
-border: 0;
-color: #222;
-font-size: 0;
-line-height: 0;
-}
-
-.gongji_list ul li .gongji_conts li.gongji_question{
-padding: 28px 30px 25px 62px;
-}
-
-#gongji_created{
-padding-left: 598px;
-color: #888;
-}
-</style>
-<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.form.js"></script>
-<script type="text/javascript">
-$(function(){
-	$("#gongji_alert").addClass("active");
-	listPage(1);
-	
-	$("ul.gongji_Tabs li").click(function(){
-		tab = $(this).attr("data-tab");
-		
-		$("ul.gongji_Tabs li").each(function(){
-			$(this).removeClass("active");
-		});
-		
-		$("#gongji_"+tab).addClass("active");
-		
-		listPage(1);
-	});
-});
-
-function listPage(page){
-	var $tab = $("ul.gongji_Tabs .active");
-	var tab = $tab.attr("data-tab");
-	var url="<%=cp%>/center/"+tab+"/list";
-	
-	var query="pageNo="+page;
-	var search=$('form[name=centerSearchForm]').serialize();
-	query = query+"&"+search;
-	
-	ajaxHTML(url, "get", query);
-}
-
-function ajaxHTML(url, type, query){
-	$.ajax({
-		type:type
-		,url:url
-		,data:query
-		,success:function(data){
-			if($.trim(data)=="error"){
-				listPage(1);
-				return;
-			}
-			$("#TabsOpenArea").html(data);
-		}
-	,beforeSend : function(jqXHR){
-		jqXHR.setRequestHead
-	}
-	});
-}
-
-</script>
-
-
-		<div id="TabsOpenArea">
-			<div class="TabsConts">
-				<div class="gongji_list">
-					<ul>
-						<c:forEach var="dto" items="${list }">
-						<li>
-							<p class="title">
-							<i>${dto.num }</i>
-							<strong>${dto.isGongji }</strong>
-							${dto.subject }
-							<i id="gongji_created">${dto.created }</i>
-							</p>
-							<ul class="gongji_conts">
-								<li class="gongji_question">
-									<i class="gongji_date">
-									</i>
-									<p class="gongji_text">
-									</p>
-								</li>
-							</ul>
-						</li>
-						</c:forEach>	
-					</ul>
-				</div>
-			</div>
-			<div class="paging">
-				<c:if test="${dataCount==0 }">
-				등록된 게시물이 없습니다.
-				</c:if>
-				<c:if test="${dataCount!=0 }">
-				${paging }
-				</c:if>
-			</div>
-		</div>
+<table style="width: 100%; margin: 10px auto; border-spacing: 0px;">
+   <tr height="40">
+      <td align="left" width="100">
+          <button type="button" class="btn" onclick="reloadBoard();">새로고침</button>
+      </td>
+      <td align="center">
+          <form name="searchForm" action="" method="post">
+              <select id="searchKey" name="searchKey" class="selectField">
+                  <option value="subject">제목</option>
+                  <option value="content">내용</option>
+                  <option value="created">등록일</option>
+            </select>
+            <input type="text" id="searchValue" name="searchValue" class="boxTF">
+            <button type="button" class="btn" onclick="searchList();">검색</button>
+        </form>
+      </td>
+      <td align="right" width="100">
+          <button type="button" class="btn" onclick="insertForm();">글올리기</button>
+      </td>
+   </tr>
+</table>

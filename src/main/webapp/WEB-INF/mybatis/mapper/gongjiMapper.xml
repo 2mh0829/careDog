@@ -43,7 +43,7 @@ DELETE FROM gongji WHERE num=#{num}
 
 <select id="readGongji" parameterType="map" resultType="Integer">
 SELECT NVL(COUNT(*), 0) FROM gongji g
-	JOIN member1 m ON g.userId=m.userId
+	JOIN member1 m ON g.memberId=m.memberId
 		<where>
 			<if test="searchValue != null and searchValue!=''  ">
 				<include refid="where-list"/>
