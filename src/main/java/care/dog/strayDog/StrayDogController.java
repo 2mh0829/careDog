@@ -29,7 +29,9 @@ public class StrayDogController {
 	public Map<String, Object> callList(@RequestParam Map<String, Object> model){
 		Map<String, Object> map = new HashMap<>(); // 메인보내는 map
 		ArrayList<HashMap<String, Object>> list=service.strayDog(model); // 값 가져옴
+		String total = service.totalCount(model);
 		map.put("list", list);
+		map.put("totalCount", total);
 		return map;
 	}
 	

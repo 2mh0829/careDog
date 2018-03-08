@@ -217,5 +217,38 @@ public class StrayDogServiceImpl implements StrayDogService {
 		}
 		return list;
 	} // listKind END
+
+	@Override
+	public String totalCount(Map<String, Object> model) {
+		String totalCount="";
+		String mainUrl = MAINURL+ "abandonmentPublic";
+	        try {
+	        	String serviceKey= "?" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + KEY;
+	        	String parameter="&" + URLEncoder.encode("bgnde","UTF-8") + "=" + URLEncoder.encode("20180205", "UTF-8"); /*유기날짜 (검색 시작일) (YYYYMMDD) */
+	        	parameter += "&" + URLEncoder.encode("endde","UTF-8") + "=" + URLEncoder.encode("20180305", "UTF-8"); /*유기날짜 (검색 종료일) (YYYYMMDD) */
+	        	parameter += "&" + URLEncoder.encode("upkind","UTF-8") + "=" + URLEncoder.encode("417000", "UTF-8"); /*축종코드 - 개 : 417000 - 고양이 : 422400 - 기타 : 429900 */
+	        	parameter += "&" + URLEncoder.encode("kind","UTF-8") + "=" + model.get("kind"); /*품종코드 (품종 조회 OPEN API 참조) */
+	        	parameter += "&" + URLEncoder.encode("upr_cd","UTF-8") + "=" + model.get("upr_cd"); /*시도코드 (시도 조회 OPEN API 참조) */
+	        	parameter += "&" + URLEncoder.encode("org_cd","UTF-8") + "=" + model.get("org_cd"); /*시군구코드 (시군구 조회 OPEN API 참조) */
+	        	parameter += "&" + URLEncoder.encode("care_reg_no","UTF-8") + "=" + model.get("care_reg_no"); /*보호소번호 (보호소 조회 OPEN API 참조) */
+	        	parameter += "&" + URLEncoder.encode("state","UTF-8") + "=" + model.get("state"); /*상태 - 전체 : null(빈값) - 공고중 : notice - 보호중 : protect */
+	        	parameter += "&" + URLEncoder.encode("pageNo","UTF-8") + "=" + model.get("pageNo"); /*페이지 번호*/
+	        	parameter += "&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + model.get("numOfRows"); /*페이지당 보여줄 개수*/
+	        	
+	        	String url = mainUrl+serviceKey+parameter;
+	        	
+				DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+				Document doc = dBuilder.parse(url);
+	
+				Element root = doc.getDocumentElement();
+	
+				totalCount = root.getElementsByTagName("totalCount").item(0).getTextContent().toString();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		return totalCount;
+	}
 	
 }

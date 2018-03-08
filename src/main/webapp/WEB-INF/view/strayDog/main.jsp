@@ -284,8 +284,8 @@ function findDog(value){
 		,success:function(data){
 			$(".allStrayDog").find(".strayDog").remove();
 			var list=data.list;
-			//console.log(list.totalCount)
 			var content="";
+			total = data.totalCount;
 			console.log(list)
 			$.each(list, function(index, item){
 				content+="<div class='strayDog'><a title='확대 이미지 보기' href="+item.popfile+" class='lytebox' data-lyte-options='slide:false' data-title='CareDog'>";
