@@ -189,10 +189,6 @@
 	    font-family: 'NanumGothic', '나눔고딕', 'NanumGothicWeb';
 	    color: #000;
 	    padding: 5px;
-	    	padding-top: 5px;
-    		padding-right: 5px;
-    		padding-bottom: 5px;
-    		padding-left: 5px;
 	    margin-top: 4px;
 	    border: 1px solid #B5B8C8;
 	    background: #fff repeat-x;
@@ -226,9 +222,7 @@
 	    cursor: default;
 	}
 	
-	input, textarea, select, button, meter, progress {
-	    -webkit-writing-mode: horizontal-tb;
-	}
+	
 </style>
 
 <script type="text/javascript">
