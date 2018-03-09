@@ -1024,7 +1024,7 @@ li>a>span{
 			<div class="sitter-room-content">
 				<dl>
 					<dt>
-						<a href="<%=cp%>/service/sitting_detail">당신의 강아지.. 이제 더이상 외롭지 않아요...</a>
+						<a href="<%=cp%>/service/sitting_detail">당신의 강아지... 이제 더이상 외롭지 않아요...</a>
 						<label class="name">
 							<img class="sitter-face" 
 							src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_80%2Cw_300/MTE5NTU2MzE2MTk1NTU0ODI3/daniel-day-lewis-9268727-2-402.jpg">
