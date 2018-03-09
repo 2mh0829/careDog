@@ -156,62 +156,43 @@ line-height: 0;
 </style>
 <div id="Container">
 	<div id="Contents">
-		<table class="cent_board_view">
-			<colgroup>
-				<col style="width:80%;">
-				<col style="width:20%;">
-			</colgroup>
-			<tbody>
-				<tr>
-					<td>
-						<strong class="cent_evt">${dto.isEvent }</strong>
-					</td>
-					<td>
-						<input type="text" id="subject">
-					</td>
-					<td class="cent_name">${sessionScope.member.memberId }</td>
-					<td class="cent_date">${dto.created }</td>
-				</tr>
-				<tr>
-					<td class="cent_textarea" colspan="2">
-						<div class="textareaEdit">
-						<textarea rows="10" cols="10"></textarea>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="file" name="upload" class="boxTF" size="53" style="width: 95%; height: 25px;">
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		
+		<div class="cont_title">
+			<ul>
+				<li id="cont_evt">이벤트</li>
+				<li id="cont_subject"><input type="text" id="subject" width="336px;"></li>
+				<li id="cont_mem">${sessionScope.member.memberId }</li>
+				<li id="cont_date">${dto.created }</li>
+			</ul>
+		</div>
+		<div>
+			<textarea cols="20" rows="20" style="width:680px;height:400px;"></textarea>
+		</div>
+		<div>
+			<ul>
+				<li><input type="file" name="upload"></li>
+			</ul>
+		</div>
+		<div>
+			<c:if test="${mode=='update' }">
+				<c:forEach var="vo" items="${listFile }">
+					<ul>
+						<li><strong>첨부된&nbsp;&nbsp;파일</strong></li>
+						<li>${vo.originalFilename } | <a href="javascript:deleteFile('${vo.fileNum }');">삭제</a></li>
+					</ul>
+				</c:forEach>
+			</c:if>		
+		</div>
+		<div class="btn_area">
+			<ul>
+				<li><button type="button" class="btn" onclick="sendOk('${mode}', '${pageNo}');">${mode=='update'?'수정완료':'등록하기'}</button></li>
+				<li><button type="reset" class="btn">다시입력</button></li>
+				<li><button type="button" class="btn" onclick="sendCancel('${pageNo}');">${mode=='update'?'수정취소':'등록취소'}</button></li>
+				<li> <c:if test="${mode=='update'}">
+         	 			<input type="hidden" name="num" value="${dto.num}">
+        	 			<input type="hidden" name="pageNo" value="${pageNo}">
+        			</c:if>
+        		</li>
+			</ul>
+		</div>
 	</div>
-	<c:if test="${mode=='update'}">
-   <c:forEach var="vo" items="${listFile}">
-		  <tr id="f${vo.fileNum}" height="40" style="border-bottom: 1px solid #cccccc;"> 
-		      <td width="100" bgcolor="#eeeeee" style="text-align: center;">첨부된파일</td>
-		      <td style="padding-left:10px;"> 
-					${vo.originalFilename}
-					| <a href="javascript:deleteFile('${vo.fileNum}');">삭제</a>	        
-		      </td>
-		  </tr>
-   </c:forEach>
-</c:if>	  
-
-  <table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
-     <tr height="45"> 
-      <td align="center" >
-        <button type="button" class="btn" onclick="sendOk('${mode}', '${pageNo}');">${mode=='update'?'수정완료':'등록하기'}</button>
-        <button type="reset" class="btn">다시입력</button>
-        <button type="button" class="btn" onclick="sendCancel('${pageNo}');">${mode=='update'?'수정취소':'등록취소'}</button>
-         <c:if test="${mode=='update'}">
-         	 <input type="hidden" name="num" value="${dto.num}">
-        	 <input type="hidden" name="pageNo" value="${pageNo}">
-        </c:if>
-      </td>
-    </tr>
-  </table>
-	
 </div>
