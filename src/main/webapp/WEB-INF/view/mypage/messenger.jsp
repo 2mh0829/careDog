@@ -10,7 +10,7 @@
 .container {
 	height: 800px;
 	/* clear:both; */
-	min-width:700px;
+	/* min-width:700px; */
 	padding-left: 0px;
 	padding-right: 0xp;
 	padding-top: 30px;
@@ -107,7 +107,6 @@
 		}
 	})
 </script>
-
 <div class="messengerHeader">
 	<div class="messengerHeaderLeft">
 		<div

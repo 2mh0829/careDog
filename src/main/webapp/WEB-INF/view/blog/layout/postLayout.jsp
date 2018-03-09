@@ -34,8 +34,7 @@
 	type="image/x-icon" />
 <link rel="icon" href="<%=cp%>/resource/img/icon/favicon.ico"
 	type="image/x-icon" />
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/js/util.js"></script>
 <script type="text/javascript"
 	src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
@@ -43,8 +42,6 @@
 .footer {
 	float: left;
 }
-
-
 </style>
 </head>
 <body>
@@ -52,27 +49,21 @@
 		<tiles:insertAttribute name="header" />
 	</div>
 	<div class="blog-header">
-			<tiles:insertAttribute name="blogHeader" />
-		</div>
-		<div class="blog-background">
-	
-		<div class="blog-HeaderBetweenBodyLine"></div>
-	<div class="blog-layout">
-		<div class="blog-body">
-		
-			<div class="blog-body-left">
-				<tiles:insertAttribute name="blogLeft" />
-			</div>
-			<div class="blog-body-right">
-				<tiles:insertAttribute name="blogBody" />
-			</div>
-		
-		</div>
+		<tiles:insertAttribute name="blogHeader" />
 	</div>
-		</div>
+	<div class="blog-background">
 
-	<div class="footer">
-		<tiles:insertAttribute name="footer" />
+		<div class="blog-HeaderBetweenBodyLine"></div>
+		<div class="blog-layout">
+			<div class="blog-body">
+				<div class="blog-body-left">
+					<tiles:insertAttribute name="blogLeft" />
+				</div>
+				<div class="blog-body-right">
+					<tiles:insertAttribute name="blogBody" />
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<script type="text/javascript"

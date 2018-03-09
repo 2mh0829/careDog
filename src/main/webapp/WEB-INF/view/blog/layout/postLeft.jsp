@@ -81,12 +81,9 @@ function profile() {
 
 <div class="blog-left">
     <div class="category-list">
-	<a href="<%=cp%>/mypage/editMember">개인정보수정</a><br>
-	<a href="#">마이펫</a><br>
 	<a href="#">펫시터 등록하기</a><br>
 	<a href="#">서비스이용내역</a><br>
 	<a href="#">북마크</a><br>
-	<a href="#">장바구니</a><br>
 	<a href="<%=cp%>/mypage/test">구매내역</a><br>
 	<a href="#">봉사/후원 내역</a><br>
 	<a href="/mypage/secession">회원탈퇴</a>
