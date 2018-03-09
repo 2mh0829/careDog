@@ -3,6 +3,8 @@ package care.dog.myPage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,5 +26,13 @@ public class MypageController {
 	@RequestMapping(value="/mypage/test", method=RequestMethod.GET)
 	public String test() {
 		return "mypage/test";
+	}
+	@RequestMapping(value="/blog/{blogId}/editMemberInfo")
+	public String editMemberInfo(
+			@PathVariable int blogId,
+			Model model) throws Exception {
+
+		model.addAttribute("blogId",blogId);
+		return "member/join";
 	}
 }

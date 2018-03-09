@@ -39,15 +39,19 @@ button:{
 font-family: 'montserrat', 'noto', 'Roboto', sans-serif;
 font-weight: 700;
 }
-
+h3:{
+font-size: 28px;
+margin-top: 25px;
+margin-bottom: 15px;
+}
 #Container {
 	overflow: hidden;
 	width: 100%;
-	min-width: 1020px;
+	min-width: 700px;
 }
 
 #Contents {
-	width: 1020px;
+	width: 700px;
 	height: 100%;
 	margin: 0 auto;
 }
@@ -98,7 +102,7 @@ border-bottom: 1px dashed #999;
 
 }
 
-.cent_evt{
+.cont_gongji{
 background: #ababab;
 display: inline-block;
 width: 89px;
@@ -153,20 +157,49 @@ line-height: 0;
 	font-size: 14px;
 	line-height: 18px;
 }
+input#subject{
+width:335px;
+}
 </style>
 <div id="Container">
 	<div id="Contents">
-		<ul class="gongji_Tabs">
-			<li id="gongji_alert"><a>공지사항</a></li>
-			<li id="gongji_event"><a>이벤트</a></li>
-		</ul>
-		<form name="gongjiBoardForm" method="post">
-			<table>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-			</table>
-		</form>
+		<div class="cont_title">
+			<ul>
+				<li id="cont_gongji">공지사항</li>
+				<li id="cont_sub" style="border-right: 10px;"><input type="text" id="subject" width="336px;"></li>
+				<li id="cont_member">${sessionScope.member.memberId }</li>
+				<li id="cont_time">${sessionScope.dto.created }</li>
+			</ul>
+		</div>
+		<div>
+			<textarea cols="20" rows="20" style="width:680px;height:400px;"></textarea>
+		</div>
+		<div>
+			<ul>
+				<li><input type="file" name="upload"></li>
+			</ul>
+		</div>
+		<div>
+			<c:if test="${mode=='update' }">
+				<c:forEach var="vo" items="${listFile }">
+					<ul>
+						<li><strong>첨부된&nbsp;&nbsp;파일</strong></li>
+						<li>${vo.originalFilename } | <a href="javascript:deleteFile('${vo.fileNum }');">삭제</a></li>
+					</ul>
+				</c:forEach>
+			</c:if>		
+		</div>
+		<div class="btn_area">
+			<ul>
+				<li><button type="button" class="btn" onclick="sendOk('${mode}', '${pageNo}');">${mode=='update'?'수정완료':'등록하기'}</button></li>
+				<li><button type="reset" class="btn">다시입력</button></li>
+				<li><button type="button" class="btn" onclick="sendCancel('${pageNo}');">${mode=='update'?'수정취소':'등록취소'}</button></li>
+				<li> <c:if test="${mode=='update'}">
+         	 			<input type="hidden" name="num" value="${dto.num}">
+        	 			<input type="hidden" name="pageNo" value="${pageNo}">
+        			</c:if>
+        		</li>
+			</ul>
+		</div>
 	</div>
 </div>

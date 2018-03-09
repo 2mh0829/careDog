@@ -43,11 +43,11 @@ font-weight: 700;
 #Container {
 	overflow: hidden;
 	width: 100%;
-	min-width: 1020px;
+	min-width: 700px;
 }
 
 #Contents {
-	width: 1020px;
+	width: 700px;
 	height: 100%;
 	margin: 0 auto;
 }
@@ -90,7 +90,7 @@ margin-top: 40px;
 }
 
 .cent_board_view>tbody>tr>td{
-padding: 30px 20px;
+padding: 20px 20px;
 color: #333;
 font-size: 16px;
 line-height: 26px;
@@ -99,7 +99,7 @@ border-bottom: 1px dashed #999;
 }
 
 .cent_evt{
-background: #ababab;
+    background: #ed95b7;
 display: inline-block;
 width: 89px;
 height: 21px;

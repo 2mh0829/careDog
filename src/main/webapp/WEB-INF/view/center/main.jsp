@@ -17,6 +17,17 @@
     margin-top: 10px;
     margin-bottom: 20px;
 }
+
+.tabs li{
+    width: 342px;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 34px;
+}
+.tabs li.active{
+background-color: #eee;
+}
 </style>
 
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.form.js"></script>
@@ -291,10 +302,6 @@ function deletePhoto() {
 </script>
 
 <div class="body-container" style="width: 700px;">
-    <div class="body-title">
-        <h3><span style="font-family: Webdings"></span> 공지사항 </h3>
-    </div>
-    
     <div>
             <div style="clear: both;">
 	           <ul class="tabs">
