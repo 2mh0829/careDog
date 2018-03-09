@@ -343,6 +343,7 @@ function page(num){
 	content+="<img src='<%=cp%>/resource/img/strayDog/btn_nxt.png' alt='다음 목록 보기'></a>";
 	/* <span class="select">1</span>  */
 	
+	
 	$(".pagenation").append(content);
 }
 
