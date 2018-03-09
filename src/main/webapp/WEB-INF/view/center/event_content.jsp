@@ -43,11 +43,11 @@ font-weight: 700;
 #Container {
 	overflow: hidden;
 	width: 100%;
-	min-width: 1020px;
+	min-width: 700px;
 }
 
 #Contents {
-	width: 1020px;
+	width: 700px;
 	height: 100%;
 	margin: 0 auto;
 }
@@ -90,7 +90,7 @@ margin-top: 40px;
 }
 
 .cent_board_view>tbody>tr>td{
-padding: 30px 20px;
+padding: 20px 20px;
 color: #333;
 font-size: 16px;
 line-height: 26px;
@@ -99,7 +99,7 @@ border-bottom: 1px dashed #999;
 }
 
 .cent_evt{
-background: #ababab;
+    background: #969937;
 display: inline-block;
 width: 89px;
 height: 21px;
@@ -152,6 +152,7 @@ line-height: 0;
 	color: #666;
 	font-size: 14px;
 	line-height: 18px;
+	
 }
 </style>
 <div id="Container">
@@ -177,11 +178,6 @@ line-height: 0;
 						</div>
 					</td>
 				</tr>
-				<tr>
-			  <td colspan="2" align="left" style="padding: 10px 5px;">
-			      <img src="<%=cp%>/center/event/content/${dto.imageFilename}" style="max-width:100%; height:auto; resize:both;">
-			   </td>
-			</tr>
 				<c:forEach var="vo" items="${listFile }">
 				<tr>
 					<td>
