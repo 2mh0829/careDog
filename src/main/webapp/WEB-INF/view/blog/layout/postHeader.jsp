@@ -97,8 +97,6 @@
 		<li class="list-menu-item"><a href="javascript:guestbook();">방명록</a></li>
 		<li class="list-menu-item"><a href="javascript:guestbook();">마이펫</a></li>
 		<li class="list-menu-item"><a href="javascript:guestbook();">장바구니</a></li>
-		<li class="list-menu-item"><a href="javascript:messenger()">메신저</a></li>
-		<li class="list-menu-item" style="float: right;"><a
-			href="javascript:prologue();">프롤로그</a></li>
+		<li class="list-menu-item"><a href="javascript:messenger();">메신저</a></li>
 	</ul>
 </div>

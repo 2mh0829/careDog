@@ -80,12 +80,6 @@
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
 		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
 	</definition>
-	<definition name=".messenger" template="/WEB-INF/view/blog/layout/postLayout_messenger.jsp">
-		<put-attribute name="title" value="spring" />
-		<put-attribute name="blogHeader" value="/WEB-INF/view/blog/layout/postHeader.jsp" />
-		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
-		<put-attribute name="messenger" value="/WEB-INF/view/mypage/messenger.jsp" />
-	</definition>
 
 	<definition name=".mypageMemberEdit.*" extends=".blogPostLayout">
 		<put-attribute name="blogBody" value="/WEB-INF/view/member/{1}.jsp" />
