@@ -180,11 +180,7 @@ function contentBoard(num, page) {
 	var tab = $tab.attr("data-tab");
 	var url="<%=cp%>/center/"+tab+"/content";
 	
-	var query;
-	if(tab=="gongji")
-		query="gongjiNum="+num;
-	else
-		query="num="+num;
+	var query = "num="+num;
 	
 	var search=$('form[name=centerSearchForm]').serialize();
 	query=query+"&pageNo="+page+"&"+search;
@@ -200,7 +196,7 @@ function updateForm(num, page) {
 	
 	var query;
 	if(tab=="gongji")
-		query="gongjiNum="+num;
+		query="num="+num;
 	else
 		query="num="+num;
 	query=query+"&pageNo="+page
@@ -216,7 +212,7 @@ function replyForm(num, page) {
 	
 	var query;
 	if(tab=="gongji")
-		query="gongjiNum="+num;
+		query="num="+num;
 	else
 		query="num="+num;
 	query=query+"&pageNo="+page
@@ -232,7 +228,7 @@ function deleteBoard(num, page) {
 	
 	var query;
 	if(tab=="gongji") {
-		query="gongjiNum="+num;
+		query="num="+num;
 	} else { 
 		query="num="+num;
 	}
@@ -263,6 +259,35 @@ function deleteBoard(num, page) {
 	});
 }
 
+function deletePhoto() {
+	<c:if test="${sessionScope.member.memberId=='admin'}">
+	  var num = "${dto.num}";
+	  var page = "${page}";
+	  var query = "num="+num+"&page="+page;
+	  var url = "<%=cp%>/center/"+tab+"/delphoto?" + query;
+
+	  if(confirm("위 자료를 삭제 하시 겠습니까 ? "))
+	  	location.href=url;
+	</c:if>    
+	<c:if test="${sessionScope.member.memberId!='admin'}">
+	  alert("게시물을 삭제할 수  없습니다.");
+	</c:if>
+	}
+
+	function updatePhoto() {
+	<c:if test="${sessionScope.member.memberId=='admin'}">
+	  var num = "${dto.num}";
+	  var page = "${page}";
+	  var query = "num="+num+"&page="+page;
+	  var url = "<%=cp%>/center/"+tab+"/updatephoto?" + query;
+
+	  location.href=url;
+	</c:if>
+
+	<c:if test="${sessionScope.member.memberId!='admin'}">
+	 alert("게시물을 수정할 수  없습니다.");
+	</c:if>
+	}
 </script>
 
 <div class="body-container" style="width: 700px;">
@@ -274,7 +299,7 @@ function deleteBoard(num, page) {
             <div style="clear: both;">
 	           <ul class="tabs">
 			       <li id="tab-gongji" data-tab="gongji" class="active">공지사항</li>
-			       <li id="tab-event" data-tab="event">1:1문의</li>
+			       <li id="tab-event" data-tab="event">이벤트</li>
 			   </ul>
 		   </div>
 		   <div id="tab-content" style="clear:both; padding: 20px 10px 0px;"></div>

@@ -18,7 +18,7 @@ display: inline-block;
 <div class="header-bottom" align="center">
 	<ul class="center_list">
 				<li>
-					<a>FAQ</a>
+					<a onclick="javascript:location.href='<%=cp%>/center/faq/list'">FAQ</a>
 				</li>
 				<li>
 					<a onclick="javascript:location.href='<%=cp%>/center';">공지사항/이벤트</a>

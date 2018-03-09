@@ -32,7 +32,6 @@ public class CenterController {
 	
 	@Autowired
 	private GongjiService service;
-	
 	@Autowired
 	private MyUtil myUtil;
 	@Autowired
@@ -100,13 +99,14 @@ public class CenterController {
 		model.addAttribute("total_page",total_page);
 		model.addAttribute("paging",paging);
 		
-		return "/center/gongji";
+		return "center/gongji";
+		
 	}
 	
 	@RequestMapping(value="/center/gongji/content")
 	public String gongjiContent(
 			@RequestParam(value="num") int num,
-			@RequestParam(value="searchKey", defaultValue="subject") String SearchKey,
+			@RequestParam(value="searchKey", defaultValue="subject") String searchKey,
 			@RequestParam(value="searchValue", defaultValue="") String searchValue,
 			@RequestParam(value="pageNo") String page,
 			HttpServletRequest req,
@@ -119,13 +119,13 @@ public class CenterController {
 		
 		Gongji dto = service.readGongji(num);
 		if(dto==null) {
-			return "/center/main";
+			return "center/gongji";
 		}
 		
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 		
 		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("searchKey", SearchKey);
+		map.put("searchKey", searchKey);
 		map.put("searchValue", searchValue);
 		map.put("num", num);
 		
@@ -140,7 +140,7 @@ public class CenterController {
 		model.addAttribute("listFile",listFile);
 		model.addAttribute("pageNo", page);
 		
-		return "/center/gongji_content";
+		return "center/gongji_content";
 	}
 	
 	@RequestMapping(value="/center/gongji/created", method=RequestMethod.GET)
@@ -149,7 +149,7 @@ public class CenterController {
 			) throws Exception{
 		model.addAttribute("pageNo","1");
 		model.addAttribute("mode","created");
-		return "/center/gongji_create";
+		return "center/gongji_create";
 	}
 	
 	@RequestMapping(value="/center/gongji/created", method=RequestMethod.POST)
@@ -165,7 +165,7 @@ public class CenterController {
 			String root = session.getServletContext().getRealPath("/");
 			String pathname = root + File.separator + "uploads" + File.separator + "gongji";
 			
-			dto.setUserId(info.getMemberId());
+			dto.setMemberId(info.getMemberId());
 			service.insertGongji(dto, pathname);
 		} else {
 			state = "false";
@@ -173,6 +173,7 @@ public class CenterController {
 		
 		Map<String, Object> model = new HashMap<>();
 		model.put("state", state);
+		
 		return model;
 	}
 	
@@ -187,10 +188,10 @@ public class CenterController {
 		
 		Gongji dto = service.readGongji(num);
 		if(dto==null) {
-			return ".center.main";
+			return ".center/gongji";
 		}
-		if(! info.getMemberId().equals(dto.getUserId())) {
-			return ".center.main";
+		if(! info.getMemberId().equals(dto.getMemberId())) {
+			return ".center/gongji";
 		}
 		
 		List<Gongji> listFile = service.listFile(num);
@@ -200,7 +201,7 @@ public class CenterController {
 		model.addAttribute("dto",dto);
 		model.addAttribute("listFile",listFile);
 		
-		return "/center/gongji_create";
+		return "center/gongji_create";
 	}
 	
 	@RequestMapping(value="/center/gongji/update", method=RequestMethod.POST)
@@ -216,7 +217,7 @@ public class CenterController {
 			String root = session.getServletContext().getRealPath("/");
 			String pathname = root + File.separator + "uploads" + File.separator + "gongji";
 			
-			dto.setUserId(info.getMemberId());
+			dto.setMemberId(info.getMemberId());
 			service.updateGongji(dto, pathname);
 		} else {
 			state = "false";
@@ -228,7 +229,7 @@ public class CenterController {
 		return model;
 	}
 	
-	@RequestMapping(value="/gongji/delete", method=RequestMethod.POST)
+	@RequestMapping(value="/center/gongji/delete", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> delete(
 			@RequestParam int num,
@@ -250,7 +251,7 @@ public class CenterController {
 		return model;
 	}
 	
-	@RequestMapping(value="/gongji/download")
+	@RequestMapping(value="/center/gongji/download")
 	public void download(
 			@RequestParam int fileNum,
 			HttpServletResponse resp,
@@ -279,7 +280,7 @@ public class CenterController {
 		}
 	}
 	
-	@RequestMapping(value="/gongji/deleteFile", method=RequestMethod.POST)
+	@RequestMapping(value="/center/gongji/deleteFile", method=RequestMethod.POST)
 	public Map<String, Object> deleteFile(
 			@RequestParam int fileNum,
 			HttpServletResponse resp,

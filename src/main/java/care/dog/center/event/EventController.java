@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import care.dog.center.Gongji;
 import care.dog.common.FileManager;
 import care.dog.common.MyUtil;
 import care.dog.member.SessionInfo;
@@ -51,6 +52,7 @@ public class EventController {
 		if(req.getMethod().equalsIgnoreCase("GET")) {
 			searchValue = URLDecoder.decode(searchValue, "utf-8");
 		}
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchKey", searchKey);
 		map.put("searchValue", searchValue);
@@ -115,7 +117,6 @@ public class EventController {
 		}
 		
 		Event dto = service.readEvent(num);
-		System.out.println(":::::"+dto+":::::");
 		if(dto==null) {
 			return "center/event";
 		}
@@ -165,6 +166,58 @@ public class EventController {
 			
 			dto.setMemberId(info.getMemberId());
 			service.insertEvent(dto, pathname);
+		} else {
+			state = "false";
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		
+		return model;
+	}
+	
+	@RequestMapping(value="/center/event/update", method=RequestMethod.GET)
+	public String updateForm(
+			@RequestParam(value="num") int num,
+			@RequestParam(value="pageNo") String page,
+			HttpSession session,
+			Model model
+			)throws Exception {
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		
+		Event dto = service.readEvent(num);
+		if(dto==null) {
+			return ".center/event";
+		}
+		if(! info.getMemberId().equals(dto.getMemberId())) {
+			return ".center/event";
+		}
+		
+		List<Event> listFile = service.listFile(num);
+		
+		model.addAttribute("mode","update");
+		model.addAttribute("pageNo", page);
+		model.addAttribute("dto",dto);
+		model.addAttribute("listFile",listFile);
+		
+		return "center/event_create";
+	}
+	
+	@RequestMapping(value="/center/event/update", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> updateSubmit(
+			Event dto,
+			HttpSession session
+			) throws Exception{
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		String state = "true";
+		
+		if(info.getMemberId().equals("admin")) {
+			String root = session.getServletContext().getRealPath("/");
+			String pathname = root + File.separator + "uploads" + File.separator + "event";
+			
+			dto.setMemberId(info.getMemberId());
+			service.updateEvent(dto, pathname);
 		} else {
 			state = "false";
 		}
