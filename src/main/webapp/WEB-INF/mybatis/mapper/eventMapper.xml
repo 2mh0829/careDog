@@ -41,14 +41,10 @@ WHERE num=#{num}
 DELETE FROM event WHERE num=#{num}
 </delete>
 
-<select id="readEvent" parameterType="map" resultType="Integer">
-SELECT NVL(COUNT(*), 0) FROM event e
-	JOIN member1 m ON e.userId=m.userId
-		<where>
-			<if test="searchValue != null and searchValue!=''  ">
-				<include refid="where-list"/>
-			</if>
-		</where>
+<select id="readEvent" parameterType="Integer" resultType="care.dog.center.event.Event">
+SELECT num, e.memberId, subject, content, created, isEvent
+FROM event e JOIN member1 m ON e.memberId=m.memberId
+WHERE num = #{num}
 </select>
 
 <select id="preReadEvent" parameterType="map" resultType="care.dog.center.event.Event">

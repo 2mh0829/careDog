@@ -53,6 +53,7 @@
 }
 
 .blog-main-body {
+	floag:left;
 	clear:both;
 	min-height: 600px;
 }

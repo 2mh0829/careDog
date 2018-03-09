@@ -4,7 +4,6 @@ public class SessionInfo {
 	private String memberId;
 	private String userName;
 	private int memberLevel;
-	
 	public String getMemberId() {
 		return memberId;
 	}

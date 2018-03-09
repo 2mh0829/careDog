@@ -322,5 +322,4 @@ function userIdCheck() {
 			  </table>
 			</form>
         </div>
-    
 </div>

@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class Gongji {
 	private int listnum, num;
 	
-	private String userId, subject, content, created;
+	private String memberId, subject, content, created;
 	private int isGongji;
 	private String imageFilename;
 	private String saveFilename, originalFilename;
@@ -29,11 +29,11 @@ public class Gongji {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public String getUserId() {
-		return userId;
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public String getSubject() {
 		return subject;

@@ -8,25 +8,38 @@
 
 <style>
 
+.container-top {
+	width: 850px;
+	height: 550px;
+}
+
+.container-bottom {
+	width: 850px;
+}
+
 .left_area {
 	float: left;
-	/* width: 400px; */
-	width: 50%;
+	width: 440px;
+	/* width: 50%; */
+	height: 500px;
 }
 
 .left_area img {
-	width: 80%;
-	padding: 10px;
+	/* width: 80%; */
+	width: 400px;
 	float: right;
-	margin-right: 20px;
+	padding-top: 50px;
+	/* margin-right: 10px; */
 }
 
 .right_area {
 	float: right;
-	/* width: 450px; */
-	width: 50%;
-	padding: 10px;
-	height: 40vh;
+	width: 410px;
+	/* width: 50%; */
+	/* height: 40vh; */
+	height: 440px;
+	/* padding: 10px; */
+	
 }
 
 .txt_title {
@@ -76,23 +89,24 @@
 }
 
 .product_info {
-	margin: 25px auto;
-	height: 40%;
+	margin: 20px auto;
+	height: 200px;
 }
 
 .product_option_box {
-	margin: 25px auto;
-	height: 20%;
+	margin: 10px auto;
+	height: 80px;
 }
 
 .product_total_price {
-	margin: 25px auto;
-	height: 20%;
+	margin: 20px auto;
+	height: 50px;
+	border-bottom: 1px solid #e2e2e2;
 }
 
 .product_btn_area {
-	padding: 25px auto;
-	height: 20%;
+	padding: 20px auto;
+	height: 100px;
 }
 
 .roundBtn {
@@ -147,9 +161,9 @@ th {
 
 .divTd {
 	display: table;
-	/* height: 100px; */
 	margin: 10px;
 	font-size: 15px;
+	/* height는 각자 태그에 맞게 */
 }
 
 .divTd p {
@@ -187,6 +201,39 @@ th {
 	margin: 10px;
 }
 
+.hiddenRow {
+	background: #fafafa;
+}
+
+.answer_mark {
+	text-align: center;
+	width: 100px;
+	font-size: 30px;
+	padding: 15px;
+	float: left;
+}
+
+.answer_container {
+	font-size: 15px;
+	padding: 15px;
+	width: 690px;
+	float: left;
+}
+
+.qnaTxt {
+	font-size: 15px;
+}
+
+/* .qna-list {
+	border-collapse: collapse;
+}
+ */
+ 
+/* qna테이블의 모든 tr  */
+/* .qna-list tbody tr {
+	cursor: pointer;
+} */
+
 </style>
 
 <script type="text/javascript">
@@ -203,13 +250,12 @@ $('#myTab a').click(function (e) {
 	  $(this).tab('show')
 })
 
-  
 </script>
 
 <div class="body-container">
 
 	<!-- 상단부 : 상품 이미지와 설명 -->
-	<div class="container top">
+	<div class="container-top">
 	
 		<!-- 왼쪽 부분 -->
 		<div class="left_area">
@@ -223,6 +269,7 @@ $('#myTab a').click(function (e) {
 			<div class="product_info">
 			
 				<p class="product_name">[그리니즈] 덴탈껌 30개입</p>
+				<br>
 			
 				<ul class="info_list">
 					<li>
@@ -287,7 +334,7 @@ $('#myTab a').click(function (e) {
 	</div>
 	
 	<!-- 하단부 : 탭 -->
-	<div class="container bottom">
+	<div class="container-bottom">
 	
 		<div role="tabpanel">
 
@@ -564,7 +611,7 @@ $('#myTab a').click(function (e) {
 					</div>
 					
 					<form name="commentForm" id="commentForm" action="">
-						<table class="table table-condensed comment-list" style="width: 850px">
+						<table class="table table-condensed comment-list" style="width: 800px">
 							<tbody>
 								<tr>
 									<td>
@@ -574,7 +621,7 @@ $('#myTab a').click(function (e) {
 										</div>
 									</td>
 									<td>
-										<div class="divTd" style="width: 550px;">
+										<div class="divTd" style="width: 500px;">
 											<p class="tdTxt">저렴하게 구매했어요</p>
 										</div>
 									</td>
@@ -627,32 +674,48 @@ $('#myTab a').click(function (e) {
 					</div>
 					
 					<form name="qnaForm" id="qnaForm" action="">
-						<table class="table table-condensed qna-list" style="width: 850px">
-							<tbody>
-								<tr>
+						<table class="table table-condensed qna-list" id="qnaTable" style="width: 800px">
+							<tbody class="pane1">
+								<tr data-toggle="collapse" data-target="#answer1" data-parent="#qnaTable">
 									<td>
 										<div class="divTd" style="width: 100px;">
-											<!-- 답변완료 여부 버튼 이미지로? -->
+											<!-- 답변완료 여부 버튼 - 이미지로? -->
 											<button type="button" class="btn btn-default qnaOkBtn" disabled="disabled">답변완료</button>
 										</div>
 									</td>
 									<td>
-										<div class="divTd" style="width: 550px;">
-											<p class="tdTxt">도대체 언제 배송하세요?</p>
+										<div class="divTd" style="width: 500px; height: 30px;">
+											<p class="qnaTxt">도대체 언제 배송하세요?</p>
 										</div>
 									</td>
 									<td>
-										<div class="divTd" style="width: 100px;">
-											<p class="tdTxt">han</p>
+										<div class="divTd" style="width: 100px; height: 30px;">
+											<p class="qnaTxt">han</p>
 										</div>
 									</td>
 									<td>
-										<div class="divTd" style="width: 100px;">
-											<p class="tdTxt">2018.03.01</p>
+										<div class="divTd" style="width: 100px; height: 30px;">
+											<p class="qnaTxt">2018.03.01</p>
 										</div>
 									</td>
 								</tr>
-								<tr>
+								<tr id="answer1" class="collapse" >
+									<td colspan="4" class="hiddenRow">
+										<div class="fold-content">
+											<div class="answer_mark">
+												<p>A</p>
+											</div>
+											<div class="answer_container">
+											반갑습니다<br>
+											올리브영 온라인몰입니다.<br><br>
+											고객님께서 주문하신 상품은 결제일 기준 3~5일 이내(주말/공휴일 제외) 배송될 예정입니다.<br><br>
+											올리브영 온라인몰 고객센터 (1522-0882 / 운영시간 : 평일 09시~18시) 및 1:1 게시판으로 문의 주시면 배송에 대한 정확한 안내 도와드리겠습니다.<br><br>
+											감사합니다.<br>
+											</div>
+										</div>
+									</td>
+								</tr>
+								<tr data-toggle="collapse" data-target="#answer2" data-parent="#qnaTable">
 									<td>
 										<div class="divTd" style="width: 100px;">
 											<!-- 답변완료 여부 버튼 이미지로? -->
@@ -660,18 +723,34 @@ $('#myTab a').click(function (e) {
 										</div>
 									</td>
 									<td>
-										<div class="divTd" style="width: 500px;">
-											<p class="tdTxt">주문했는데 언제 받을수있나요?</p>
+										<div class="divTd" style="width: 500px; height: 30px;">
+											<p class="qnaTxt">주문했는데 언제 받을수있나요?</p>
 										</div>
 									</td>
 									<td>
-										<div class="divTd" style="width: 100px;">
-											<p class="tdTxt">spring</p>
+										<div class="divTd" style="width: 100px; height: 30px;">
+											<p class="qnaTxt">spring</p>
 										</div>
 									</td>
 									<td>
-										<div class="divTd" style="width: 100px;">
-											<p class="tdTxt">2018.02.28</p>
+										<div class="divTd" style="width: 100px; height: 30px;">
+											<p class="qnaTxt">2018.02.28</p>
+										</div>
+									</td>
+								</tr>
+								<tr id="answer2" class="collapse">
+									<td colspan="4" class="hiddenRow">
+										<div class="fold-content">
+											<div class="answer_mark">
+												<p>A</p>
+											</div>
+											<div class="answer_container">
+											반갑습니다<br>
+											올리브영 온라인몰입니다.<br><br>
+											고객님께서 주문하신 상품은 결제일 기준 3~5일 이내(주말/공휴일 제외) 배송될 예정입니다.<br><br>
+											올리브영 온라인몰 고객센터 (1522-0882 / 운영시간 : 평일 09시~18시) 및 1:1 게시판으로 문의 주시면 배송에 대한 정확한 안내 도와드리겠습니다.<br><br>
+											감사합니다.<br>
+											</div>
 										</div>
 									</td>
 								</tr>

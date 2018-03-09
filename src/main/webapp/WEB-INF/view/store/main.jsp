@@ -91,6 +91,7 @@
 
 .event-title h2 {
 	text-align: center;
+	font-weight: 550; 
 	/* font-weight: bold;
 	margin-bottom: 20px; */
 	margin-right: 0px;
@@ -105,7 +106,8 @@
 
 .eventWrap {
 	width: 100%;
-	background-color: #e2e2e2;
+	/* background-color: #e2e2e2; */
+	background-color: #decfb8;
 	padding-top: 15px;
 	padding-bottom: 40px;
 }
@@ -129,8 +131,9 @@
 }
  
 .sub-title h2 {
-    /* font-size: 28px;
-    font-weight: 500; */
+    /* font-size: 28px; */
+    font-weight: 550; 
+    /* font-weight: bold; */
     margin-right: 0px;
     display: inline-block;
     width: 100%;
@@ -349,7 +352,7 @@
 	<div class="event-container" style="margin-top: 40px;">
 		<!-- 공지사항의 이벤트 주소 -->
 		<a href="#">
-			<img class="eventImg" src="<%=cp%>/resource/img/store/main_bener.jpg">
+			<img class="eventImg" src="<%=cp%>/resource/img/store/dog_bener.jpg">
 		</a>
 	</div>
 </div>

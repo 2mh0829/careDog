@@ -10,15 +10,18 @@
 .menu2 {
 	background: silver;
 }
+li{
+display: inline-block;
+}
 </style>
 
-<div class="header-bottom">
+<div class="header-bottom" align="center">
 	<ul class="center_list">
 				<li>
-					<a>FAQ</a>
+					<a onclick="javascript:location.href='<%=cp%>/center/faq/list'">FAQ</a>
 				</li>
 				<li>
-					<a onclick="javascript:location.href='<%=cp%>/center/gongji/list';">공지사항/이벤트</a>
+					<a onclick="javascript:location.href='<%=cp%>/center';">공지사항/이벤트</a>
 				</li>
 				<li>
 					<a>1:1문의</a>
