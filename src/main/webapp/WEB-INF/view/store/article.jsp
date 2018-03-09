@@ -233,6 +233,51 @@ th {
 /* .qna-list tbody tr {
 	cursor: pointer;
 } */
+ 
+.modal-title {
+	font-weight: bold;
+	margin-left: 10px;
+}
+ 
+.reviews-write textarea{
+	width: 550px;
+	height: 200px;
+	margin: 10px;
+	border-radius: 5px;
+}
+
+.modal-body-txt {
+	margin-bottom: 10px;
+	margin-top: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.footer-buttonBox {
+	text-align: center;
+	margin: 10px;
+}
+
+.reviewCreate {
+	width: 80px;
+	height: 30px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.reviewCancel {
+	width: 80px;
+	height: 30px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.footer-txt {
+	text-align: left;
+	margin: 10px;
+}
 
 </style>
 
@@ -670,7 +715,7 @@ $('#myTab a').click(function (e) {
 				
 					<div class="qnaInsert">
 						<h5>★ 상품 문의사항이 아닌 반품/교환관련 문의는 고객센터 1:1 문의를 이용해주세요.</h5>
-						<button type="button" class="btn btn-default qnaInsertBtn">상품문의</button>
+						<button type="button" class="btn btn-default qnaInsertBtn" data-toggle="modal" data-target="#myModal">상품문의</button>
 					</div>
 					
 					<form name="qnaForm" id="qnaForm" action="">
@@ -767,3 +812,36 @@ $('#myTab a').click(function (e) {
 	</div>
 
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+    
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">상품 Q&A 작성</h4>
+			</div>
+			<div class="modal-body">
+				<p class="modal-body-txt">[그리니즈] 덴탈껌 30개입</p>
+				<div class="reviews-write">
+					<textarea rows="1" cols="5" id="reviewBox" name="reviewBox"
+					placeholder="내용을 입력하세요(5자 ~ 250자)"></textarea>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="footer-buttonBox">
+					<button type="button" class="btn btn-default reviewCreate" data-dismiss="modal">등록</button>
+					<button type="button" class="btn btn-default reviewCancel" data-dismiss="modal">취소</button>
+				</div>
+				<div class="footer-txt">
+					<p style="font-weight: bold;">* 이용안내</p>
+					<p>재판매글, 상업성 홍보글, 미풍양속을 해치는 글 등 상품 Q&A의 취지에 어긋나는 글은 삭제될 수 있습니다.</p>
+				</div>
+			</div>
+		</div>
+      
+	</div>
+</div>
+

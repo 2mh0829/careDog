@@ -55,13 +55,13 @@
 		<put-attribute name="footer"
 			value="/WEB-INF/view/blog/layout/blogFooter.jsp" />
 	</definition>
-	<definition name=".blog.*.*.*" extends=".blogLayout">
+<definition name=".blog.*.*.*" extends=".main4Layout">
 		<put-attribute name="body" value="/WEB-INF/view/blog/{1}/{2}/{3}.jsp" />
 	</definition>
-	<definition name=".blog.*.*" extends=".blogLayout">
+	<definition name=".blog.*.*" extends=".main4Layout">
 		<put-attribute name="body" value="/WEB-INF/view/blog/{1}/{2}.jsp" />
 	</definition>
-	<definition name=".blog.*" extends=".blogLayout">
+	<definition name=".blog.*" extends=".blogPostLayout">
 		<put-attribute name="body" value="/WEB-INF/view/blog/{1}.jsp" />
 	</definition>
 
@@ -79,12 +79,6 @@
 		<put-attribute name="body" value="/WEB-INF/view/main/main.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
 		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
-	</definition>
-	<definition name=".messenger" template="/WEB-INF/view/blog/layout/postLayout_messenger.jsp">
-		<put-attribute name="title" value="spring" />
-		<put-attribute name="blogHeader" value="/WEB-INF/view/blog/layout/postHeader.jsp" />
-		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
-		<put-attribute name="messenger" value="/WEB-INF/view/mypage/messenger.jsp" />
 	</definition>
 
 	<definition name=".mypageMemberEdit.*" extends=".blogPostLayout">

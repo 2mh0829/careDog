@@ -2,19 +2,19 @@
 /* caredog */
 .blog-layout {
 		background-color:#D4F4FA;
-	width:1020px;
+	width:1300px;
 	padding-top:20px;
 	margin:0px auto;
 }
-.blog-background{
+/* .blog-background{
 	position:static;
 		background-color:#D4F4FA;
 		width:100%;
 		height:100%;
-}
+} */
 .blog-header {
 	
-	width:1020px;
+	width:1300px;
 	margin:0px auto;
 	 clear: both;
 }

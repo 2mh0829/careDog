@@ -27,12 +27,12 @@ public class MypageController {
 	public String test() {
 		return "mypage/test";
 	}
-	@RequestMapping(value="/blog/{blogSeq}/eidtMemberInfo")
+	@RequestMapping(value="/blog/{blogId}/editMemberInfo")
 	public String editMemberInfo(
-			@PathVariable long blogSeq,
+			@PathVariable int blogId,
 			Model model) throws Exception {
 
-		model.addAttribute("blogSeq",blogSeq);
+		model.addAttribute("blogId",blogId);
 		return "member/join";
 	}
 }
