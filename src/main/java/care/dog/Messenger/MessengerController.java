@@ -8,7 +8,7 @@ public class MessengerController {
 	
 	@RequestMapping(value="/messenger")
 	public String main() {
-		return ".mypage.messenger";
+		return ".messenger";
 	}
 
 }

@@ -1,14 +1,29 @@
 @CHARSET "UTF-8";
-
+/* caredog */
 .blog-layout {
+		background-color:#D4F4FA;
 	width:1020px;
+	padding-top:20px;
 	margin:0px auto;
 }
-
+.blog-background{
+	position:static;
+		background-color:#D4F4FA;
+		width:100%;
+		height:100%;
+}
 .blog-header {
+	
+	width:1020px;
+	margin:0px auto;
 	 clear: both;
 }
-
+.blog-HeaderBetweenBodyLine{
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: gray;
+	width:100%;
+}
 .blog-header-top {
 	clear: both;
 	height: 70px;
@@ -22,7 +37,7 @@
 .blog-header-menu {
     clear: both;	
 }
-
+}
 .nav {
   float: left;
   width: 1020px;
@@ -53,15 +68,17 @@
 }
 
 .blog-body {
+
 	clear: both;
 }
 
 .blog-body-left{
-	float:left;
+			float:left;
 	font-size: 9pt;
 }
 
 .blog-left {
+
 	margin-top:15px;
 	clear:both;
 	text-align:left;
@@ -70,7 +87,6 @@
 	border:1px solid #ccc;
 	padding: 8px 6px;
 	border-radius:5px;
-}
 
 .profile-photo {
 	clear:both;
@@ -82,7 +98,7 @@
 }
 
 .blog-body-right {
-	margin-top:10px;
+margin-top:10px;
 	float:left;
 	text-align:left;
 	min-height:600px;

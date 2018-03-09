@@ -51,8 +51,8 @@ function prologue() {
 
 <div class="blog-header-top">
               <div style="float: left;">
-                     <a href="<%=cp%>/">
-                        <span style="color: #424951; font-style: italic; font-family: arial black; font-size: 30px; font-weight: bold;">SPRING</span>
+                     <a href="<%=cp%>/nblog">
+                        <span style="color: #424951; font-style: italic; font-family: arial black; font-size: 30px; font-weight: bold;">MyPage</span>
                      </a>
               </div>
               <div style="float: right; text-align: right;">
@@ -63,21 +63,12 @@ function prologue() {
 						<a href="">이웃 블로그</a>
 									&nbsp;|&nbsp;					
 						<a href="<%=cp%>/nblog">전체 블로그</a>
-									&nbsp;|&nbsp;					
-					    <c:if test="${empty sessionScope.member}">
-							<a href="<%=cp%>/member/login">로그인</a>
-						</c:if>
-						<c:if test="${not empty sessionScope.member}">
-								<span style="color:blue;">${sessionScope.member.userName}</span>님
-								&nbsp;|&nbsp;
-								<a href="<%=cp%>/member/logout">로그아웃</a>
-						</c:if>
               </div>
 </div>
         
 <div class="blog-header-menu">
                 <ul class="nav">
-                     <li class="list-menu-item"><a href="${blogUrl}">블로그</a></li>
+                     <li class="list-menu-item"><a href="${blogUrl}">메인</a></li>
                      <li class="list-menu-item"><a href="${blogUrl}?menu=1&categoryNum=1">공지</a></li>
                      <li class="list-menu-item"><a href="javascript:photoView();">포토</a></li>
                      <li class="list-menu-item"><a href="javascript:guestbook();">방명록</a></li>
