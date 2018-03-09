@@ -55,13 +55,13 @@
 		<put-attribute name="footer"
 			value="/WEB-INF/view/blog/layout/blogFooter.jsp" />
 	</definition>
-	<definition name=".blog.*.*.*" extends=".blogLayout">
+<definition name=".blog.*.*.*" extends=".main4Layout">
 		<put-attribute name="body" value="/WEB-INF/view/blog/{1}/{2}/{3}.jsp" />
 	</definition>
-	<definition name=".blog.*.*" extends=".blogLayout">
+	<definition name=".blog.*.*" extends=".main4Layout">
 		<put-attribute name="body" value="/WEB-INF/view/blog/{1}/{2}.jsp" />
 	</definition>
-	<definition name=".blog.*" extends=".blogLayout">
+	<definition name=".blog.*" extends=".blogPostLayout">
 		<put-attribute name="body" value="/WEB-INF/view/blog/{1}.jsp" />
 	</definition>
 

@@ -7,15 +7,11 @@
 	String cp = request.getContextPath();
 %>
 <style>
-.container {
-	height: 800px;
-	/* clear:both; */
-	/* min-width:700px; */
-	padding-left: 0px;
-	padding-right: 0xp;
-	padding-top: 30px;
-}
 
+.blog-body-left{
+width:0%;
+height:0%;
+}
 .messengerLeft {
 	width: 30%;
 	height: 100%;
@@ -27,7 +23,7 @@
 }
 
 .messengerBody {
-	width: 100%;
+
 	height:730px;
 	min-width: 700px;
 }
