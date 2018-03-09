@@ -203,7 +203,7 @@ li{
 }
 
 .main-middle-inner {
-	border-bottom: 1px solid #dcdcdc;
+	border: 1px solid black;
 }
 
 .price-tot {
@@ -223,9 +223,35 @@ li{
 }
 
 .row {
-	border: 1px solid black;
-	margin-left: auto;
-    margin-right: auto;
+	/* border-top: 1px solid #ccc; */
+	border: 1px solid blue;
+	margin-left: 1px;
+    /* margin-right: auto; */
+    width: 621px;
+    /* padding: 40px 0; */
+    height: 190px;
+}
+
+.row img {
+	width: 100px;
+	height: 80px;
+	margin-top: 35px;
+}
+
+.inner {
+	border: 1px solid red;
+}
+
+.row dl {
+	margin-left: 120px;
+    top: -80px;
+    position: relative;
+    width: 190px;
+    border: 1px solid;
+}
+
+.row dt {
+	margin-bottom: 10px;
 }
 
 </style>
@@ -322,10 +348,20 @@ li{
 	<div class="inner">
 		<div class="main-middle-inner">
 			<div class="row">
-				<label class="name">
-					<img class="sitter-face" 
-					src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_80%2Cw_300/MTE5NTU2MzE2MTk1NTU0ODI3/daniel-day-lewis-9268727-2-402.jpg">
-				</label>
+				<img src="<%=cp%>/resource/img/service/dogIcon.png">
+				<dl class="carryAble">
+					<dt>
+						돌봄가능한 강아지 크기 & 나이
+					</dt>
+					<dd>
+						<i class="glyphicon glyphicon-check"></i>
+						1kg 부터 모두 가능합니다.
+					</dd>
+					<dd>
+						<i class="glyphicon glyphicon-check"></i>
+						강아지, 성견, 노령견 케어 가능합니다.
+					</dd>
+				</dl>
 			</div>
 		</div>
 	</div>
