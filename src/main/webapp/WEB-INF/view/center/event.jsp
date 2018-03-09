@@ -56,19 +56,10 @@
       <td align="left" width="100">
           <button type="button" class="btn" onclick="reloadBoard();">새로고침</button>
       </td>
-      <td align="center">
-          <form name="searchForm" action="" method="post">
-              <select id="searchKey" name="searchKey" class="selectField">
-                  <option value="subject">제목</option>
-                  <option value="content">내용</option>
-                  <option value="created">등록일</option>
-            </select>
-            <input type="text" id="searchValue" name="searchValue" class="boxTF">
-            <button type="button" class="btn" onclick="searchList();">검색</button>
-        </form>
-      </td>
       <td align="right" width="100">
+      <c:if test="${sessionScope.member.memberId=='admin' }">
           <button type="button" class="btn" onclick="insertForm();">글올리기</button>
+      </c:if>
       </td>
    </tr>
 </table>

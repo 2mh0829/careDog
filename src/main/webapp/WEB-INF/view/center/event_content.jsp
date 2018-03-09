@@ -177,6 +177,11 @@ line-height: 0;
 						</div>
 					</td>
 				</tr>
+				<tr>
+			  <td colspan="2" align="left" style="padding: 10px 5px;">
+			      <img src="<%=cp%>/center/event/content/${dto.imageFilename}" style="max-width:100%; height:auto; resize:both;">
+			   </td>
+			</tr>
 				<c:forEach var="vo" items="${listFile }">
 				<tr>
 					<td>
@@ -206,7 +211,7 @@ line-height: 0;
         <c:if test="${sessionScope.member.memberId=='admin'}">
             <button type="button" class="btn" onclick="updateForm('${dto.num}', '${pageNo}');">수정</button>
         </c:if>
-        <c:if test="${sessionScope.member.userId=='admin'}">
+        <c:if test="${sessionScope.member.memberId=='admin'}">
             <button type="button" class="btn" onclick="deleteBoard('${dto.num}', '${pageNo}');">삭제</button>
         </c:if>
     </td>

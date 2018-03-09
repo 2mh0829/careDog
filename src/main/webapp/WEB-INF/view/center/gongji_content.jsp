@@ -156,10 +156,6 @@ line-height: 0;
 </style>
 <div id="Container">
 	<div id="Contents">
-		<ul class="gongji_Tabs">
-			<li id="gongji_alert"><a>공지사항</a></li>
-			<li id="gongji_event"><a>이벤트</a></li>
-		</ul>
 		<table class="cent_board_view">
 			<colgroup>
 				<col style="width:80%;">
@@ -168,27 +164,57 @@ line-height: 0;
 			<tbody>
 				<tr>
 					<td>
-						<strong class="cent_evt">[공지/이벤트]</strong>
-						<span class="cent_tit">제목입니다.</span>
+						<strong class="cent_evt">${dto.isGongji }</strong>
+						<span class="cent_tit">${dto.subject }</span>
 					</td>
-					<td class="cent_date">2018.01.01</td>
+					<td class="cent_name">${dto.memberId }</td>
+					<td class="cent_date">${dto.created }</td>
 				</tr>
 				<tr>
 					<td class="cent_textarea" colspan="2">
 						<div class="textareaEdit">
-						easy
+						${dto.content }
 						</div>
 					</td>
 				</tr>
+				<c:forEach var="vo" items="${listFile }">
+				<tr>
+					<td>
+						<a href="<%=cp%>/center/gongji/download?fileNum=${vo.fileNum}">${vo.originalFilename }</a>
+						 (<fmt:formatNumber value="${vo.fileSize/1024}" pattern="0.00"/> KByte)
+					</td>
+				</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 		<ul class="prev-next">
 			<li>
-				<button type="button">다음글</button>
+				<c:if test="${not empty nextReadDto }">
+					<a href="javascript:contentBoard('${nextReadDto.num }','${pageNo }');">${nextReadDto.subject }</a>
+				</c:if>
 			</li>
 			<li>
-				<button type="button">이전글</button>
+				<c:if test="${not empty preReadDto }">
+					<a href="javascript:contentBoard('${preReadDto.num }', '${pageNo }');">${preReadDto.subject }</a>
+				</c:if>
 			</li>
 		</ul>
 	</div>
+	<table style="width: 100%; margin: 0px auto 20px; border-spacing: 0px;">
+<tr height="45">
+    <td width="300" align="left">
+        <c:if test="${sessionScope.member.memberId=='admin'}">
+            <button type="button" class="btn" onclick="updateForm('${dto.num}', '${pageNo}');">수정</button>
+        </c:if>
+        <c:if test="${sessionScope.member.memberId=='admin'}">
+            <button type="button" class="btn" onclick="deleteBoard('${dto.num}', '${pageNo}');">삭제</button>
+        </c:if>
+    </td>
+
+    <td align="right">
+        <button type="button" class="btn" onclick="listPage('${pageNo}')">리스트</button>
+    </td>
+</tr>
+</table>
+	
 </div>
