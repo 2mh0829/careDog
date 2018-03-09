@@ -61,6 +61,7 @@ div {
 }
 
 .pagenation {
+	display: inline-block;
 	width: 1100px;
 	height: auto;
 	margin: 0 auto 50px auto;
@@ -325,24 +326,32 @@ function changeKind(value){
 }
 
 function page(num){
+	$(this).find('span').attr('class','select');
 	pageNum=num;
 	findDog('');
-	var a;
 	$(".pagenation").find("a").remove();
-	var content="<c:forEach var='i' begin='1' end='10'>";
-	content+="<a href='javascript:page(${i})' onclick='changePage();'>${i}</a>";
+	
+	var prevNum = pageNum-1;
+	var nextNum = pageNum+1;
+	
+	var content = "";
+	content+=(pageNum==1?"":"<a href='javascript:page("+prevNum+")' class='img'><img src='<%=cp%>/resource/img/strayDog/btn_prev.png' alt='이전 목록 보기'></a>");
+	content+="<c:forEach var='i' begin='1' end='10'>";
+	content+="<a href='javascript:page(${i})'><span id='listPage' class=''>${i}</span></a>";
 	content+="</c:forEach>";
-	content+="<a href='javascript:page("+num+1+")' onclick='changePage();' class='img'>"
-	content+="<img src='<%=cp%>/resource/img/btn_nxt.png' alt='다음 목록 보기'></a>";
+	content+="<a href='javascript:page("+nextNum+")' class='img'>"
+	content+="<img src='<%=cp%>/resource/img/strayDog/btn_nxt.png' alt='다음 목록 보기'></a>";
 	/* <span class="select">1</span>  */
 	
 	$(".pagenation").append(content);
 }
 
-function changePage(){
+$(".pagenation a").on("click",function(e){
+	e.preventDefault();
 	
-}
- 
+	$('a:active span').attr('class','select');
+});
+
 </script>
 
 <div class="body-container">
