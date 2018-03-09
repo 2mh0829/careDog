@@ -6,6 +6,7 @@
 	String cp = request.getContextPath();
 %>
 <style>
+
 .strayDog {
 	width: 310px;
 	height: 550px;
@@ -98,6 +99,11 @@ div {
 	margin-right: 10px;
 	text-align: center;
 	border: 1px solid #2e5fa4;
+}
+
+::selection {
+    background: #26579c;
+    color: #fff;
 }
 
 .search_area {
@@ -224,6 +230,8 @@ $(document).ready(function(){
 
 function changeCity(value){
 	city=value;
+	gu='';
+	center='';
 	findDog('');
 	var queryParams= encodeURIComponent('upr_cd')+'='+ encodeURIComponent(value); 
 	$.ajax({
@@ -245,6 +253,7 @@ function changeCity(value){
 
 function changeCenter(value){
 	gu=value;
+	center='';
 	findDog('');
 	var queryParams= encodeURIComponent('upr_cd')+'='+ encodeURIComponent(city);
 	queryParams+='&'+encodeURIComponent('org_cd')+'='+encodeURIComponent(value);
@@ -310,12 +319,6 @@ function findDog(value){
 	
 }
 
-function printDog(data){
-	var content;
-	console.log(data.popfile1)
-	
-}
-
 function changeDog(value){
 	center=value;
 	findDog('');
@@ -326,32 +329,34 @@ function changeKind(value){
 }
 
 function page(num){
-	$(this).find('span').attr('class','select');
 	pageNum=num;
 	findDog('');
 	$(".pagenation").find("a").remove();
-	
+	//startPage, endPage;
+	//startPage=
 	var prevNum = pageNum-1;
 	var nextNum = pageNum+1;
 	
 	var content = "";
 	content+=(pageNum==1?"":"<a href='javascript:page("+prevNum+")' class='img'><img src='<%=cp%>/resource/img/strayDog/btn_prev.png' alt='이전 목록 보기'></a>");
 	content+="<c:forEach var='i' begin='1' end='10'>";
-	content+="<a href='javascript:page(${i})'><span id='listPage' class=''>${i}</span></a>";
+	content+="<a href='javascript:page(${i})' onclick='onchange()'>${i}</a>";
 	content+="</c:forEach>";
 	content+="<a href='javascript:page("+nextNum+")' class='img'>"
 	content+="<img src='<%=cp%>/resource/img/strayDog/btn_nxt.png' alt='다음 목록 보기'></a>";
 	/* <span class="select">1</span>  */
 	
-	
 	$(".pagenation").append(content);
+	
+}
+function onchange(){
+	$(".pagenation a").on("click",function(e){
+		e.preventDefault();
+		console.log(this);
+		$('a span').attr('class','select');
+	});
 }
 
-$(".pagenation a").on("click",function(e){
-	e.preventDefault();
-	
-	$('a:active span').attr('class','select');
-});
 
 </script>
 
