@@ -58,6 +58,7 @@
 	}
 	function messenger() {
 		var url = "${blogUrl}/messenger";
+		$('.blog-body-left').remove();
 		$.get(url, {
 			tmp : new Date().getTime()
 		}, function(data) {
@@ -65,7 +66,7 @@
 		})
 	}
 	function editMemberInfo() {
-		var url = "{blogUrl}/editMemberInfo";
+		var url = "${blogUrl}/editMemberInfo";
 		$.get(url, {
 			tmp : new Date().getTime()
 		}, function(data) {
@@ -97,8 +98,8 @@
 		<li class="list-menu-item"><a href="javascript:guestbook();">방명록</a></li>
 		<li class="list-menu-item"><a href="javascript:guestbook();">마이펫</a></li>
 		<li class="list-menu-item"><a href="javascript:guestbook();">장바구니</a></li>
-		<li class="list-menu-item"><a href="javascript:messenger()">메신저</a></li>
-		<li class="list-menu-item" style="float: right;"><a
-			href="javascript:prologue();">프롤로그</a></li>
+		<li class="list-menu-item"><a href="javascript:messenger();">메신저</a></li>
+		<li class="list-menu-item"><a href="javascript:messenger();">일정관리</a></li>
+		<li class="list-menu-item"><a href="javascript:messenger();">친구관리</a></li>
 	</ul>
 </div>

@@ -51,7 +51,6 @@ public class BlogController {
 	public String blogCreatedForm(
 			HttpSession session,
 			Model model) throws Exception {
-		System.out.println("/nblog/createdddd");
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		// 블로그 만들기 폼
 		

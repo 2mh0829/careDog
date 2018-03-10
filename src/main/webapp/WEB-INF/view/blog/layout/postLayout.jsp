@@ -12,37 +12,22 @@
 <head>
 <meta charset="UTF-8">
 <title>spring</title>
-<%-- 
-<link rel="stylesheet" href="<%=cp%>/resource/css/blog/style.css"
-	type="text/css"> --%>
-<link rel="stylesheet" href="<%=cp%>/resource/css/blog/layout4.css"
-	type="text/css">
-<link rel="stylesheet"
-	href="<%=cp%>/resource/jquery/css/jquery-ui.min.css" type="text/css" />
-<link rel="stylesheet"
-	href="<%=cp%>/resource/bootstrap/css/bootstrap.min.css" type="text/css" />
-<link rel="stylesheet"
-	href="<%=cp%>/resource/bootstrap/css/bootstrap-theme.min.css"
-	type="text/css" />
-<link rel="stylesheet" href="<%=cp%>/resource/css/font.css?ver=1.2"
-	type="text/css">
-<link rel="stylesheet" href="<%=cp%>/resource/css/style.css?ver=1"
-	type="text/css">
-<link rel="stylesheet" href="<%=cp%>/resource/css/layout.css?ver=3.1"
-	type="text/css">
-<link rel="shortcut icon" href="<%=cp%>/resource/img/icon/favicon.ico"
-	type="image/x-icon" />
-<link rel="icon" href="<%=cp%>/resource/img/icon/favicon.ico"
-	type="image/x-icon" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="<%=cp%>/resource/css/blog/style.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/blog/layout4.css"	type="text/css">
+<link rel="stylesheet"	href="<%=cp%>/resource/jquery/css/jquery-ui.min.css" type="text/css" />
+
+<link rel="stylesheet" href="<%=cp%>/resource/css/font.css?ver=1.2"	type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/style.css?ver=1"	type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/layout.css?ver=3.1"	type="text/css">
+<link rel="shortcut icon" href="<%=cp%>/resource/img/icon/favicon.ico"	type="image/x-icon" />
+<link rel="icon" href="<%=cp%>/resource/img/icon/favicon.ico"	type="image/x-icon" />
 <script type="text/javascript" src="<%=cp%>/resource/js/util.js"></script>
-<script type="text/javascript"
-	src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
-<style>
-.footer {
-	float: left;
-}
-</style>
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.ui.datepicker-ko.js"></script>
+<link rel="stylesheet"	href="<%=cp%>/resource/bootstrap/css/bootstrap.min.css" type="text/css" />
+<link rel="stylesheet"	href="<%=cp%>/resource/bootstrap/css/bootstrap-theme.min.css"	type="text/css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="header">
@@ -66,9 +51,6 @@
 		</div>
 	</div>
 
-	<script type="text/javascript"
-		src="<%=cp%>/resource/jquery/js/jquery-ui.min.js"></script>
-	<script type="text/javascript"
-		src="<%=cp%>/resource/jquery/js/jquery.ui.datepicker-ko.js"></script>
+
 </body>
 </html>

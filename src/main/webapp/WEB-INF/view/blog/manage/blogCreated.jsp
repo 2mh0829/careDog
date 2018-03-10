@@ -101,7 +101,7 @@ function themeList() {
 <div class="bodyFrame3">
     <div style="width:700px; padding-top:35px; clear: both; margin: 0px auto;">
         <div class="body-title">
-              <h3> <span style="font-family: Webdings">2</span> 블로그 ${mode=="created"?"생성하기":"수정하기" }</h3>
+              <h3> <span style="font-family: Webdings">2</span> 마이페이지 ${mode=="created"?"생성하기":"수정하기" }</h3>
         </div>
      </div>
     		
@@ -133,7 +133,7 @@ function themeList() {
 			  </tr>
 			
 			  <tr> 
-			      <td width="100" style="text-align: left; padding-top:5px;" valign="top">블로그 소개<br>(150자 이내)</td>
+			      <td width="110" style="text-align: left; padding-top:5px;" valign="top">마이페이지 소개<br>(150자 이내)</td>
 			      <td colspan="2" valign="top" style="padding:5px 0px 5px 0px;"> 
 			        <textarea name="introduce" cols="75" rows="5" class="boxTA" style="width:98%; height: 50px;">${dto.introduce}</textarea>
 			      </td>
@@ -217,7 +217,7 @@ function themeList() {
 			  </tr> 
 
 			  <tr height="40">
-			      <td width="100" style="text-align: left;">블로그공개</td>
+			      <td width="100" style="text-align: left;">마이페이지 공개</td>
 			      <td colspan="2"> 
 			            <input type="radio" value="0" name="closed" ${dto.closed=="0"?"checked='checked'":"" }> 공개&nbsp;&nbsp;&nbsp;
 			            <input type="radio" value="1" name="closed" ${dto.closed=="1"?"checked='checked'":"" }> 비공개

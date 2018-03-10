@@ -46,10 +46,10 @@
 /* footer */
 .footer {
     width:100%;
-    bottom: 0;
+    /* bottom: 0; */
     /* height:50px; */
     margin:0 auto;
-    /* text-align:center; */
+    text-align:center;
     background-color: #ffffff;
     /* line-height: 50px; */
     /* border-top:1px solid #cccccc; */
