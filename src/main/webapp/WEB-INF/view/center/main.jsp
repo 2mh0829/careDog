@@ -28,22 +28,66 @@
 .tabs li.active{
 background-color: #eee;
 }
+
+.comm1sTabs.customer {overflow:hidden;height:55px;margin:30px 0 0;padding-bottom:5px}
+.comm1sTabs.customer > li {position:relative;float:left;width:340px;text-align:center;border:0}
+.comm1sTabs.customer > li+li {width:511px;margin-left:-1px}
+.comm1sTabs.customer > li {display:block;height:50px;background:#f6f6f6;font-size:18px;color:#666;font-weight:400;border-left:1px solid #e6e6e6}
+.comm1sTabs.customer > li:first-child {border:0}
+.comm1sTabs.customer > li.active {background:#555 !important;color:#fff;border:0}
+.comm1sTabs.customer > li.active:before {position:absolute;content:'';bottom:-5px;left:50%;width:12px;height:5px;margin-left:-6px;background:url("http://www.oliveyoung.co.kr/pc-static-root/image/comm/bg_tab_arrow.png") no-repeat 0 0}
+
+.comm1sTabs.customer+.search-period {margin-top:35px !important}
+.area-customer .comm2sTabs {margin-top:35px}
+
+.comm1sTabs {overflow:hidden;width:100%;margin:15px 0 0;}
+.comm1sTabs.threeSet li {width:50%;}
+.comm1sTabs.threeSet li:first-child {width:50%;}
+.comm1sTabs > li {float:left;width:50%;border-left:1px solid #e3e3e3;border-bottom:2px solid #969937;text-align:center;background:#f6f6f6}
+.comm1sTabs > li:first-child {border-left:0}
+.comm1sTabs > li {display:block;height:50px;padding-top:15px;color:#333;font-size:18px}
+.comm1sTabs > li.active {border-left:2px solid #969937;border-top:2px solid #969937;border-right:2px solid #969937;border-bottom:0;background:#fff}
+.comm1sTabs > li.active {padding-top:13px}
+.comm1sTabs > li.active+li {border-left:0}
+
+/* BOARD LIST */
+.board-list-1s {table-layout:fixed;width:1020px;margin:0 auto;border-top:2px solid #888;}
+.board-list-1s thead tr th {padding:22px 0 20px;border-bottom:1px solid #888;text-align: center;}
+.board-list-1s thead.visible, .board-list-1s thead.visible tr, .board-list-1s thead.visible tr th {z-index:-1;visibility:hidden;position:absolute;top:-99999px;width:0;height:0;font-size:0;text-indent:-99999px;line-height:0;}
+.board-list-1s tr td {padding:23px 0 24px;border-bottom:1px solid #e6e6e6;color:#666;font-size:14px;text-align:center;line-height:20px;vertical-align:middle;}
+.board-list-1s tr td.subject {position:relative;padding-left:15px;text-align:left;}
+.board-list-1s tr td.subject a {display:inline-block;max-width:65%;color:#333;vertical-align:middle}
+.board-list-1s tr td.subject strong.FG01 {display:inline-block;color:#333;font-size:18px;line-height:30px;width:70px;height:20px;border-radius:10px;color:#fff;font-size:12px;text-align:center;line-height:20px;background:#a68fcd;}
+.board-list-1s tr td.subject strong.FG02 {display:inline-block;color:#333;font-size:18px;line-height:30px;width:70px;height:20px;border-radius:10px;color:#fff;font-size:12px;text-align:center;line-height:20px;background:#ed95b7;}
+.board-list-1s tr td.subject .tx_store {position:absolute;top:24px;right:10px;color:#888}
+.board-list-1s tr.checked td.subject strong {color:#969937;}
+.board-list-1s tr td.addr {padding-left:15px;text-align:left;}
+.board-list-1s tr td a {display:inline-block;}
+.board-list-1s tr td .tel {display:inline-block;padding:0 0 0 20px;background:url("http://www.oliveyoung.co.kr/pc-static-root/css/../image/comm/ico_tel13x13.png") no-repeat 0 3px;text-align:left;}
+.board-list-1s tr td .jeem-check {display:inline-block;width:25px;height:23px;background:url("http://www.oliveyoung.co.kr/pc-static-root/css/../image/comm/ico_check25x23_off.png") no-repeat 0 0;font-size:0;text-indent:-99999px;line-height:0;cursor:pointer;vertical-align:top;}
+.board-list-1s tr.checked td .jeem-check {background:url("http://www.oliveyoung.co.kr/pc-static-root/css/../image/comm/ico_check25x23_on.png") no-repeat 0 0;}
+
+.board-list-1s tr td .ButtonMap {display:inline-block;width:78px;height:36px;padding:10px 0 0;border-radius:5px;border:1px solid #ddd;color:#333;font-size:14px;text-align:center;line-height:18px;}
+
+.board-list-1s tr td .ButtonTime {display:inline-block;width:70px;height:28px;margin:0 0 0;padding:3px 0 0;border-radius:5px;border:1px solid #ccc;color:#666;font-size:12px;text-align:center;line-height:18px;background:transparent;vertical-align:middle;}
+.board-list-1s tr td .FG01, .board-list-1s tr td .FG02, .board-list-1s tr td .FG03, .board-list-1s tr td .FG04 {position:relative;top:-1px;margin:0 15px 0 0;}
+
 </style>
 
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.form.js"></script>
 <script type="text/javascript">
 $(function(){
-	$("#tab-gongji").addClass("active");
+	$("#tabGongji").addClass("active");
 	listPage(1);
 
-	$("ul.tabs li").click(function() {
+	$("ul.comm1sTabs li").click(function() {
 		tab = $(this).attr("data-tab");
 		
-		$("ul.tabs li").each(function(){
+		$("ul.comm1sTabs li").each(function(){
 			$(this).removeClass("active");
 		});
 		
-		$("#tab-"+tab).addClass("active");
+		$("#tab"+tab).addClass("active");
 		
 		listPage(1);
 	});
@@ -51,7 +95,7 @@ $(function(){
 
 // 글리스트 및 페이징 처리
 function listPage(page) {
-	var $tab = $(".tabs .active");
+	var $tab = $(".comm1sTabs .active");
 	var tab = $tab.attr("data-tab");
 	var url="<%=cp%>/center/"+tab+"/list";
 	
@@ -110,7 +154,7 @@ function reloadBoard() {
 
 // 글쓰기폼
 function insertForm() {
-	var $tab = $(".tabs .active");
+	var $tab = $(".comm1sTabs .active");
 	var tab = $tab.attr("data-tab");
 	var url="<%=cp%>/center/"+tab+"/created";
 
@@ -187,7 +231,7 @@ function sendCancel(page) {
 
 // 게시글 보기
 function contentBoard(num, page) {
-	var $tab = $(".tabs .active");
+	var $tab = $(".comm1sTabs .active");
 	var tab = $tab.attr("data-tab");
 	var url="<%=cp%>/center/"+tab+"/content";
 	
@@ -201,7 +245,7 @@ function contentBoard(num, page) {
 
 // 글 수정폼
 function updateForm(num, page) {
-	var $tab = $(".tabs .active");
+	var $tab = $(".comm1sTabs .active");
 	var tab = $tab.attr("data-tab");
 	var url="<%=cp%>/center/"+tab+"/update";
 	
@@ -217,7 +261,7 @@ function updateForm(num, page) {
 
 //글 답변폼
 function replyForm(num, page) {
-	var $tab = $(".tabs .active");
+	var $tab = $(".comm1sTabs .active");
 	var tab = $tab.attr("data-tab");
 	var url="<%=cp%>/center/"+tab+"/reply";
 	
@@ -233,7 +277,7 @@ function replyForm(num, page) {
 
 // 글 삭제
 function deleteBoard(num, page) {
-	var $tab = $(".tabs .active");
+	var $tab = $(".comm1sTabs .active");
 	var tab = $tab.attr("data-tab");
 	var url="<%=cp%>/center/"+tab+"/delete";
 	
@@ -301,18 +345,13 @@ function deletePhoto() {
 	}
 </script>
 
-<div class="body-container" style="width: 700px;">
-    <div>
-            <div style="clear: both;">
-	           <ul class="tabs">
-			       <li id="tab-gongji" data-tab="gongji" class="active">공지사항</li>
-			       <li id="tab-event" data-tab="event">이벤트</li>
-			   </ul>
-		   </div>
-		   <div id="tab-content" style="clear:both; padding: 20px 10px 0px;"></div>
-    </div>
+<div class="body-container" style="width: 1020px;">
+    <ul class="comm1sTabs threeSet customer">
+				<li id="tabgongji" data-tab="gongji" class="active">공지사항</li>
+				<li id="tabevent" data-tab="event" >이벤트</li>
+	</ul>
+	<div id="tab-content" style="clear:both; padding: 20px 10px 0px;"></div>
 </div>
-
 <form name="centerSearchForm" action="" method="post">
     <input type="hidden" name="searchKey" value="subject">
     <input type="hidden" name="searchValue" value="">

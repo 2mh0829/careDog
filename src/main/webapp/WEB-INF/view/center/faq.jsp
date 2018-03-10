@@ -11,6 +11,31 @@ ul, ol, li, dl, dt, dd, form, fieldset, input, select, label, textarea, img, a {
 ul, ol {list-style:none;}
 .TabsConts {display:none;}
 .TabsConts.on {display:block;}
+
+/* TAB */
+.TabsConts {display:none;}
+.TabsConts.on {display:block;}
+.comm2sTabs {overflow:hidden;width:100%;margin-top:30px;}
+.comm2sTabs > li {float:left;width:50%;height:40px;margin:0 0 0 -1px;background:#fff;box-sizing:border-box;border:1px solid #ddd;}
+.comm2sTabs > li:first-child {margin:0;}
+.comm2sTabs > li > button {width:100%;height:38px;color:#666;background:#fff;box-sizing:border-box;font-size:14px;line-height:18px;}
+.comm2sTabs > li.on {border:2px solid #8f9100;background:#8f9100;}
+.comm2sTabs > li.on > button {height:36px;background:#8f9100;color:#fff;}
+.comm2sTabs.fiveSet > li {width:205px}
+.comm2sTabs.fiveSet > li:first-child {width:204px}
+.comm2sTabs.sevenSet > li {width:14.5%;}
+.comm2sTabs.sevenSet > li:first-child {width:14%;margin:0;}
+.comm2sTabs.sevenSet > li:last-child {width:13.5%;}
+
+.tabConts {display:none}
+.tabConts.show {display:block}
+
+/* 공통 플루트 박스 */
+.area-over {overflow:hidden;position:relative;width:100%;}
+.area-over .left, .area-over .right {width:380px;}
+.area-over .left {float:left;}
+.area-over .right {float:right;}
+
 /* 고객센터 > 공통 게시판 */
 .list-customer {width:1020px;margin:0 auto;}
 .list-customer ul {overflow:hidden;width:100%;border-top:2px solid #888}
@@ -50,17 +75,17 @@ ul, ol {list-style:none;}
 
 .list-customer ul li .tit > span.tx_same {color:#969937;font-weight:700}
 
+/* 고객센터 탭 */
 .comm2sTabs.iconTab {height:120px;margin-bottom:60px}
 .comm2sTabs.iconTab > li {width:147px;height:120px}
 .comm2sTabs.iconTab > li:first-child {margin-left:0;width:144px}
-.comm2sTabs.iconTab > li > button {width:100%;height:118px;padding-top:60px;color:#222;background:url("http://www.oliveyoung.co.kr/pc-static-root/image/comm/ico_tab_customer.png") no-repeat 0 0;font-weight:400}
-.comm2sTabs.iconTab > li > button.icon_tab01 {background-position:50px 24px}
-.comm2sTabs.iconTab > li > button.icon_tab02 {background-position:-95px 24px}
-.comm2sTabs.iconTab > li > button.icon_tab03 {background-position:-239px 24px}
-.comm2sTabs.iconTab > li > button.icon_tab04 {background-position:-385px 24px}
-.comm2sTabs.iconTab > li > button.icon_tab05 {background-position:-532px 24px}
-.comm2sTabs.iconTab > li > button.icon_tab06 {background-position:-675px 24px}
-.comm2sTabs.iconTab > li > button.icon_tab07 {background-position:-823px 24px}
+.comm2sTabs.iconTab > li > button.faq_icon1 {width:100%;height:118px;padding-top:60px;color:#222;background:url("<%=cp%>/resource/img/faq/faq_icon1.png") no-repeat 0 0;font-weight:400;background-position:50px 24px}
+.comm2sTabs.iconTab > li > button.faq_icon2 {width:100%;height:118px;padding-top:60px;color:#222;background:url("<%=cp%>/resource/img/faq/faq_icon2.png") no-repeat 0 0;font-weight:400;background-position:50px 24px}
+.comm2sTabs.iconTab > li > button.faq_icon3 {width:100%;height:118px;padding-top:60px;color:#222;background:url("<%=cp%>/resource/img/faq/faq_icon3.png") no-repeat 0 0;font-weight:400;background-position:50px 24px}
+.comm2sTabs.iconTab > li > button.faq_icon4 {width:100%;height:118px;padding-top:60px;color:#222;background:url("<%=cp%>/resource/img/faq/faq_icon4.png") no-repeat 0 0;font-weight:400;background-position:50px 24px}
+.comm2sTabs.iconTab > li > button.faq_icon5 {width:100%;height:118px;padding-top:60px;color:#222;background:url("<%=cp%>/resource/img/faq/faq_icon5.png") no-repeat 0 0;font-weight:400;background-position:50px 24px}
+.comm2sTabs.iconTab > li > button.faq_icon6 {width:100%;height:118px;padding-top:60px;color:#222;background:url("<%=cp%>/resource/img/faq/faq_icon6.png") no-repeat 0 0;font-weight:400;background-position:50px 24px}
+.comm2sTabs.iconTab > li > button.faq_icon7 {width:100%;height:118px;padding-top:60px;color:#222;background:url("<%=cp%>/resource/img/faq/faq_icon7.png") no-repeat 0 0;font-weight:400;background-position:50px 24px}
 
 .comm2sTabs.iconTab > li > button.icon_tab06+.twoTabs,
 .comm2sTabs.iconTab > li > button.icon_tab07+.twoTabs {right:0}
@@ -68,190 +93,209 @@ ul, ol {list-style:none;}
 .comm2sTabs.iconTab > li.on {border:1px solid #ddd}
 .comm2sTabs.iconTab > li.on > button {color:#fff}
 
+/* 고객센터 > 회원&멤버십 탭 */
+.area-customer .comm2sTabs {overflow:visible;position:relative;height:40px;box-sizing:initial;}
+.area-customer .twoTabs {display:none;overflow:hidden;position:absolute;left:0;bottom:-42px}
+.area-customer .comm2sTabs > li.on .twoTabs {display:block;}
+.area-customer .twoTabs li {float:left;padding:0 12px 0 11px;background:url("http://www.oliveyoung.co.kr/pc-static-root/image/comm/bar1x13_gray.gif") no-repeat 0 0;}
+.area-customer .twoTabs li:first-child {background:none;}
+.area-customer .twoTabs li button {background:#fff;color:#888;font-weight:400;font-size:16px}
+.area-customer .twoTabs li.on button {color:#333;font-weight:bold}
+.TabsConts-textus {display:none;}
+.TabsConts-textus.on {display:block;}
+
+/* BOARD LIST */
+.board-list-1s {table-layout:fixed;width:1020px;margin:0 auto;border-top:2px solid #888;}
+.board-list-1s thead tr th {padding:22px 0 20px;border-bottom:1px solid #888;text-align: center;}
+.board-list-1s thead.visible, .board-list-1s thead.visible tr, .board-list-1s thead.visible tr th {z-index:-1;visibility:hidden;position:absolute;top:-99999px;width:0;height:0;font-size:0;text-indent:-99999px;line-height:0;}
+.board-list-1s tr td {padding:23px 0 24px;border-bottom:1px solid #e6e6e6;color:#666;font-size:14px;text-align:center;line-height:20px;vertical-align:middle;}
+.board-list-1s tr td.subject {position:relative;padding-left:15px;text-align:left;}
+.board-list-1s tr td.subject a {display:inline-block;max-width:65%;color:#333;vertical-align:middle}
+.board-list-1s tr td.subject strong {display:block;color:#333;font-size:18px;line-height:30px;}
+.board-list-1s tr td.subject .tx_store {position:absolute;top:24px;right:10px;color:#888}
+.board-list-1s tr.checked td.subject strong {color:#969937;}
+.board-list-1s tr td.addr {padding-left:15px;text-align:left;}
+.board-list-1s tr td a {display:inline-block;}
+.board-list-1s tr td .tel {display:inline-block;padding:0 0 0 20px;background:url("http://www.oliveyoung.co.kr/pc-static-root/css/../image/comm/ico_tel13x13.png") no-repeat 0 3px;text-align:left;}
+.board-list-1s tr td .jeem-check {display:inline-block;width:25px;height:23px;background:url("http://www.oliveyoung.co.kr/pc-static-root/css/../image/comm/ico_check25x23_off.png") no-repeat 0 0;font-size:0;text-indent:-99999px;line-height:0;cursor:pointer;vertical-align:top;}
+.board-list-1s tr.checked td .jeem-check {background:url("http://www.oliveyoung.co.kr/pc-static-root/css/../image/comm/ico_check25x23_on.png") no-repeat 0 0;}
+
+.board-list-1s tr td .ButtonMap {display:inline-block;width:78px;height:36px;padding:10px 0 0;border-radius:5px;border:1px solid #ddd;color:#333;font-size:14px;text-align:center;line-height:18px;}
+
+.board-list-1s tr td .ButtonTime {display:inline-block;width:70px;height:28px;margin:0 0 0;padding:3px 0 0;border-radius:5px;border:1px solid #ccc;color:#666;font-size:12px;text-align:center;line-height:18px;background:transparent;vertical-align:middle;}
+.board-list-1s tr td .FG01, .board-list-1s tr td .FG02, .board-list-1s tr td .FG03, .board-list-1s tr td .FG04 {position:relative;top:-1px;margin:0 15px 0 0;}
+
+/* 플래그 */
+#Wrapper .FG01, #Wrapper .FG02, #Wrapper .FG03, #Wrapper .FG04 {display:inline-block;width:70px;height:20px;border-radius:10px;color:#fff;font-size:12px;text-align:center;line-height:20px}
+#Wrapper .FG01 {background:#969937;}
+#Wrapper .FG02 {background:#a68fcd;}
+#Wrapper .FG03 {background:#ed95b7;}
+#Wrapper .FG04 {background:#f5a031;}
+
+/* PAGEING */
+.pageing {padding:30px 0 0;font-size:0;text-align:center;line-height:0;}
+.pageing a, .pageing strong {display:inline-block;width:30px;height:30px;margin:0 2px;border:1px solid #e5e5e5;color:#888;font-size:14px;line-height:28px;vertical-align:top;box-sizing:border-box;font-weight:700}
+.pageing a {text-decoration:none;}
+.pageing .prev, .pageing .next {height:30px;padding:0;font-size:0;text-indent:-99999px;line-height:0;}
+.pageing .prev {margin-right:8px;background:url("http://www.oliveyoung.co.kr/pc-static-root/css/../image/comm/ico_pageing_prev7x11.png") no-repeat center center;}
+.pageing .next {margin-left:8px;background:url("http://www.oliveyoung.co.kr/pc-static-root/css/../image/comm/ico_pageing_next7x11.png") no-repeat center center;}
+.pageing strong, .pageing a:hover, .pageing a:active, .pageing a:focus, .pageing strong:hover, .pageing strong:focus, .pageing strong:active {border:1px solid #666;color:#333;font-weight:700}
+
+.pageing span {display:inline-block;width:30px;height:30px;border:1px solid #e5e5e5;text-indent:-9999px}
+
+#TabsOpenArea{width: 1020px;height: 100%;margin: 0 auto;}
 </style>
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.form.js"></script>
 <script type="text/javascript">
-
-
+$('.list-customer .tit').click(function(e){
+    e.preventDefault();
+    if($(this).parents('li').hasClass('open')){
+        $(this).parents('li').removeClass('open');
+    }else{
+        $(this).parents('li').addClass('open').siblings().removeClass('open');
+    }
+});
 </script>
 <div class="body-container">
-
-<div class="area-customer">
-	<ul class="comm2sTabs iconTab">
-		<li class="on" data-cd="99"><button type="button" class="icon_tab01">TOP10</button>
-		</li>
-		<li data-cd="40"><button type="button" class="icon_tab02">회원/멤버십</button>
-		</li>
-		<li data-cd="10"><button type="button" class="icon_tab03">주문/결제</button>
-		</li>
-		<li data-cd="20"><button type="button" class="icon_tab04">배송</button>
-		</li>
-		<li data-cd="30"><button type="button" class="icon_tab05">교환/반품/환불</button>
-		</li>					
-	</ul>
-</div>
-
-<div class="TabsConts on">
-	
-					<div class="list-customer">
-						<ul>
-	
-		
-									
-							<li>
-								<p class="tit"><strong>TOP10</strong>증정품이 배송되지 않았어요.</p>
-								<ul class="conts">
-									<li class="question">
-										<p class="pdzero">
-											증정품의 경우, 한정수량으로 진행됨에 따라 조기 소진 시 배송되지 않을 수 있습니다.<br>
-상품 주문 시 '결제하기' 버튼을 클릭하시면 수령하실 수 있는 증정품에 대한 안내가 팝업으로&nbsp;노출되며,<br>
-해당 안내가 노출되는 경우 증정품 수령이 가능하지만, 노출되지 않는다면 증정품이 소진되어<br>
-배송이 어려운 경우입니다.<br>
-<br>
-주문 이후, 주문/배송 조회 화면에서 '주문상세보기' 버튼을 눌러 주문상세를 조회하시면<br>
-해당 화면에서도 수령하실 수 있는 증정품에 대한 내역을 확인 하실 수 있습니다.<br>
-<br>
-결제 시 팝업 노출도 되었고, 주문상세조회에서도 증정품 내역을 확인하실 수 있으나 증정품을<br>
-수령하지 못하신 경우라면 올리브영 온라인몰 고객센터(1522-0882)로 연락 주시면<br>
-신속하게 처리 도와 드리겠습니다.<br>
-&nbsp;
-										</p>
-									</li>
-								</ul>
-							</li>
-											
-							<li>
-								<p class="tit"><strong>TOP10</strong>뷰티테스터에 당첨되었는데.. 후기는 어디에서 작성하나요?</p>
-								<ul class="conts">
-									<li class="question">
-										<p class="pdzero">
-											뷰티테스터 당첨 확인 및 후기 작성은 마이페이지 內 마이활동 → 뷰티테스터 참여현황 에서 가능합니다.<br>
-<a href="https://www.oliveyoung.co.kr/store/mypage/getMyBeautyList.do"><span style="color:#0066cc">뷰티테스터 참여현황으로 바로 이동 클릭</span></a>
-										</p>
-									</li>
-								</ul>
-							</li>
-											
-							<li>
-								<p class="tit"><strong>TOP10</strong>배송비는 얼마인가요?</p>
-								<ul class="conts">
-									<li class="question">
-										<p class="pdzero">
-											배송비는 실결제금액 기준 2만원 이상 결제 시 무료이며, 2만원 이하 결제의 경우 기본적으로 배송비는 2,500원입니다.<br>
-<br>
-※ 추가 배송비가&nbsp;발생하는 경우<br>
-&nbsp;- 도서산간:&nbsp;+2,500원 (5,000원)<br>
-&nbsp;- 제주도:&nbsp;&nbsp;+2,500원 (5,000원)<br>
-&nbsp;- 제주도의 도서산간 지역:&nbsp;&nbsp;+7,000원 (9,500원)<br>
-&nbsp;
-										</p>
-									</li>
-								</ul>
-							</li>
-											
-							<li>
-								<p class="tit"><strong>TOP10</strong>주문 후에 언제까지 입금해야 하나요?</p>
-								<ul class="conts">
-									<li class="question">
-										<p class="pdzero">
-											무통장 입금으로 주문 시 24시간 이내에 입금해주셔야 주문이 가능하며,<br>
-24시간 이후에는 자동으로 주문이 취소됩니다.
-										</p>
-									</li>
-								</ul>
-							</li>
-											
-							<li>
-								<p class="tit"><strong>TOP10</strong>1+1 상품 주문할때 수량은 1개만 하면 되나요?</p>
-								<ul class="conts">
-									<li class="question">
-										<p class="pdzero">
-											1+1, 혹은 2+1 등의 프로모션의 경우,<br>
-주문하실 수량만 입력하시면 +1은 자동으로 계산되어 함께 배송됩니다.<br>
-(ex. 1+1 상품 1개 주문 → +1 상품 자동 계산되어 2개로 배송)
-										</p>
-									</li>
-								</ul>
-							</li>
-											
-							<li>
-								<p class="tit"><strong>TOP10</strong>반품할 때 비용이 드나요?</p>
-								<ul class="conts">
-									<li class="question">
-										<p class="pdzero">
-											반품 시 지불하셔야 하는 반품비용은 회수비 2,500원입니다.<br>
-<br>
-※ 추가비용이 발생하는 경우<br>
-&nbsp;- 도서산간:&nbsp;+2,500원 (5,000원)<br>
-&nbsp;- 제주도:&nbsp;&nbsp;+2,500원 (5,000원)<br>
-&nbsp;- 제주도의 도서산간 지역:&nbsp;&nbsp;+7,000원 (9,500원)<br>
-&nbsp;- 무료배송이었으나 부분적인 반품으로 인해 무료배송 조건(결제금액 2만원 이상)이 깨진 경우<br>
-&nbsp;&nbsp; : &nbsp;면제받으셨던 초기 배송비&nbsp;2,500원 추가 발생<br>
-<br>
-반품비는 환불금액에서 차감처리 됩니다.<br>
-다만 상품의 불량, 배송 오류 등 당사의 실수로 인한 반품의 경우, 반품에 필요한 비용은 당사가 부담합니다.
-										</p>
-									</li>
-								</ul>
-							</li>
-											
-							<li>
-								<p class="tit"><strong>TOP10</strong>반품은 언제까지 가능한가요?</p>
-								<ul class="conts">
-									<li class="question">
-										<p class="pdzero">
-											반품은 상품을 수령하신 날짜를 기준으로 15일 이내에 가능합니다.<br>
-다만 상품의 불량, 배송 오류 등 당사의 실수로 인한 반품인 경우, 30일 이내 신청이 가능합니다.
-										</p>
-									</li>
-								</ul>
-							</li>
-											
-							<li>
-								<p class="tit"><strong>TOP10</strong>[매장] 결제했던 신용카드를 분실했는데 교환/환불이 가능한가요?</p>
-								<ul class="conts">
-									<li class="question">
-										<p class="pdzero">
-											분실한 신용카드 번호와 유효기간을 확인 후 구입매장으로 방문해주시면 교환/환불이 가능합니다.<br>
-(15일 이내 가능, 영수증 지참 필요)
-										</p>
-									</li>
-								</ul>
-							</li>
-											
-							<li>
-								<p class="tit"><strong>TOP10</strong>주문한 상품은 언제 배송되나요?</p>
-								<ul class="conts">
-									<li class="question">
-										<p class="pdzero">
-											</p><p>온라인몰에서 주문하신 상품은 주문일 기준 3일~5일 이내(주말 및 공휴일 제외)로 배송됩니다.<br>
-<br>
-※ 도서산간, 제주도 지역의 경우 5~7일 이내 배송됩니다.<br>
-※ 브랜드 세일 기간에는 주문량 폭주로 인해 주문일로부터 5~7일 이내 배송됩니다.<br>
-※ 예약배송 상품의 경우, 지정된 배송일에 배송됩니다.<br>
-&nbsp;</p>
-<br>
-&nbsp;
-										<p></p>
-									</li>
-								</ul>
-							</li>
-											
-							<li>
-								<p class="tit"><strong>TOP10</strong>매장 위치, 연락처, 영업시간 등의 정보는 어디서 확인할 수 있나요?</p>
-								<ul class="conts">
-									<li class="question">
-										<p class="pdzero">
-											올리브영의 매장 위치, 연락처, 영업시간 등의 정보는 홈페이지 우측 상단 '올리브영 매장안내'를 통해 확인하실 수 있습니다.
-										</p>
-									</li>
-								</ul>
-							</li>
-					
-			
-		
-	
-						</ul>
-					</div>
+<div id="TabsOpenArea">
+				<div class="area-customer">
+					<ul class="comm2sTabs iconTab">
+						<li class="on" data-cd="99"><button type="button" class="faq_icon1">TOP10</button>
+						</li>
+						<li data-cd="40"><button type="button" class="faq_icon2">회원/멤버십</button>
+						</li>
+						<li data-cd="10"><button type="button" class="faq_icon3">주문/결제</button>
+						</li>
+						<li data-cd="20"><button type="button" class="faq_icon4">배송</button>
+						</li>
+						<li data-cd="30"><button type="button" class="faq_icon5">교환/반품/환불</button>
+						</li>
+						<li data-cd="60"><button type="button" class="faq_icon6">이벤트</button>
+						</li>
+						<li data-cd="90"><button type="button" class="faq_icon7">기타</button>
+						</li>
+					</ul>
 				</div>
+<table class="board-list-1s">
+						<caption></caption>
+						<colgroup>
+							<col style="width:9%;">
+							<col style="width:79%;">
+							<col style="width:12%;"><!-- 2017-03-10 수정 : colgroup 영역 전체 복사+붙여넣기해주세요(각 항목 간격 수정) -->
+						</colgroup>
+						<thead>
+							<tr>
+								<th scope="col">번호</th>
+								<th scope="col">제목</th>
+								<th scope="col">등록일</th>
+							</tr>
+						</thead>
+						<tbody>
+			<tr>
+								<td>72</td>
+								<td class="subject"><strong class="FG01">일반 </strong><a href="javascript:counsel.noticeList.goDetail('31417')">오리역점 리뉴얼로 인한 영업 일시 중단 안내</a></td>
+								<td>2018.03.09</td>
+							</tr>
+							<tr>
+								<td>71</td>
+								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31416')">&lt;히알루B5 단독 런칭 기대평 이벤트&gt; 이벤트 당첨자 발표</a></td>
+								<td>2018.03.08</td>
+							</tr>
+							<tr>
+								<td>70</td>
+								<td class="subject"><strong class="FG04">뷰티테스터 </strong><a href="javascript:counsel.noticeList.goDetail('31415')">2-2차 뷰티테스터 당첨자발표: 나르시소 로드리게즈 플뢰르</a></td>
+								<td>2018.03.08</td>
+							</tr>
+							<tr>
+								<td>69</td>
+								<td class="subject"><strong class="FG04">뷰티테스터 </strong><a href="javascript:counsel.noticeList.goDetail('31414')">2-2차 뷰티테스터 당첨자발표: 보타니쿠스 페이셜 로즈오일</a></td>
+								<td>2018.03.08</td>
+							</tr>
+							<tr>
+								<td>68</td>
+								<td class="subject"><strong class="FG04">뷰티테스터 </strong><a href="javascript:counsel.noticeList.goDetail('31413')">2-2차 뷰티테스터 당첨자발표: 울트라브이 이베데논 앰플기획</a></td>
+								<td>2018.03.08</td>
+							</tr>
+							<tr>
+								<td>67</td>
+								<td class="subject"><strong class="FG04">뷰티테스터 </strong><a href="javascript:counsel.noticeList.goDetail('31412')">2-2차 뷰티테스터 당첨자발표: 라네이처 울날중 12p</a></td>
+								<td>2018.03.08</td>
+							</tr>
+							<tr>
+								<td>66</td>
+								<td class="subject"><strong class="FG04">뷰티테스터 </strong><a href="javascript:counsel.noticeList.goDetail('31411')">2-2차 뷰티테스터 당첨자발표: 드라마 베이비 물티슈 62매</a></td>
+								<td>2018.03.08</td>
+							</tr>
+							<tr>
+								<td>65</td>
+								<td class="subject"><strong class="FG01">일반 </strong><a href="javascript:counsel.noticeList.goDetail('31410')">올리브영 안드로이드앱 OS 지원범위 변경 안내</a></td>
+								<td>2018.03.07</td>
+							</tr>
+							<tr>
+								<td>64</td>
+								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31400')">&lt;2월엔X2 더블혜택&gt; 이벤트 당첨자 발표</a></td>
+								<td>2018.03.02</td>
+							</tr>
+							<tr>
+								<td>63</td>
+								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31399')">멤버십 승급 회원 대상 &lt;겟잇뷰티콘&gt; 초대이벤트 당첨자 발표</a></td>
+								<td>2018.03.02</td>
+							</tr>
+							<tr>
+								<td>62</td>
+								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31398')">뮤지컬&lt;존 도우&gt; 당첨자발표</a></td>
+								<td>2018.03.02</td>
+							</tr>
+							<tr>
+								<td>61</td>
+								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31397')">1월 아산 스파비스 이벤트 당첨자 발표</a></td>
+								<td>2018.02.27</td>
+							</tr>
+							<tr>
+								<td>60</td>
+								<td class="subject"><strong class="FG01">일반 </strong><a href="javascript:counsel.noticeList.goDetail('31396')">CJ ONE 시스템 작업 공지(3/13 오전 2시~6시)</a></td>
+								<td>2018.02.26</td>
+							</tr>
+							<tr>
+								<td>59</td>
+								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31395')">도서&lt;메리포핀스&gt; 당첨자발표</a></td>
+								<td>2018.02.26</td>
+							</tr>
+							<tr>
+								<td>58</td>
+								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31394')">도서&lt;그날의 온도 그날의 빛 그날의 분위기&gt; 당첨자발표</a></td>
+								<td>2018.02.26</td>
+							</tr>
+							<tr>
+								<td>57</td>
+								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31393')">도서&lt;가장 쉬운 독학 예쁜 손글씨&gt; 당첨자발표</a></td>
+								<td>2018.02.26</td>
+							</tr>
+							<tr>
+								<td>56</td>
+								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31392')">도서&lt;도서 시짱, 나의 시짱&gt; 당첨자발표</a></td>
+								<td>2018.02.26</td>
+							</tr>
+							<tr>
+								<td>55</td>
+								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31391')">&lt;알베르토 자코메티 한국특별전&gt; 당첨자발표</a></td>
+								<td>2018.02.26</td>
+							</tr>
+							<tr>
+								<td>54</td>
+								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31390')">연극&lt;와일드패밀리&gt; 당첨자발표</a></td>
+								<td>2018.02.26</td>
+							</tr>
+							<tr>
+								<td>53</td>
+								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31389')">뮤지컬&lt;홀연했던 사나이&gt; 당첨자발표</a></td>
+								<td>2018.02.26</td>
+							</tr>
+						</tbody>
+					</table>
+	<div class="pageing">
+		<strong title="현재 페이지">1</strong>
+	</div>
+
+			</div>
 			</div>	
