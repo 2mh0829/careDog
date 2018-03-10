@@ -18,17 +18,16 @@
 }
 
 
-.allStrayDog .strayDog {width:310px; height:570px; float:left; margin:40px 8px 60px 8px; background:#fff; border:1px solid #ccc;}
+.allStrayDog .strayDog {width:310px; height:600px; float:left; margin:40px 8px 60px 8px; background:#fff; border:1px solid #ccc;}
 .allStrayDog .strayDog img {vertical-align:top;width:310px; height:261px; /*margin-bottom:25px;*/}
 .allStrayDog .strayDog ul {height:403px; padding:0 10px; margin-top:25px;}
 .allStrayDog .strayDog ul li {line-height:30px; color:#666;letter-spacing:-0.5px;font-size:14px;}
-.allStrayDog .strayDog ul li span .red {color:red;}
+.allStrayDog .strayDog ul li span.red {color:red;}
 .allStrayDog .strayDog ul li.full {clear:both;}
 .allStrayDog .strayDog ul li strong {font-family: 'NanumGothicWebBold'!important; font-weight:normal; color:#222; padding-right:5px; font-size:16px;}
 .allStrayDog .strayDog ul li i {font-size:16px; color:#2e5fa4; font-style:normal;}
 .allStrayDog .strayDog ul li span {line-height:22px; color:#666;}
 .allStrayDog .strayDog ul li.half {width:50%; float:left;}
-.allStrayDog .strayDog button {background:#2e5fa4; width:100%; height:55px; vertical-align:bottom; text-align:center; font-size:18px; color:#fff; line-height:55px;}
 
 ::selection {background:#26579c; color:#fff;}
 
@@ -46,7 +45,7 @@
 .search_area img {vertical-align:top; margin-top:5px; margin-right:8px;}
 .search_area span {height:35px; line-height:35px; font-size:16px; color:#444; width:10px; display:inline-block; vertical-align:top;}
 
-/* a{text-decoration:none;cursor:pointer;outline:none;}  
+a{text-decoration:none;cursor:pointer;outline:none;}  
 a:hover,a:active{text-decoration:none;}
 a:focus , button:focus {outline:1px dotted #ccc;} */
 textarea, select, button, table {font-family:inherit; font-size:inherit; line-height:inherit;}
@@ -64,9 +63,6 @@ strong {font-family: 'NanumGothicWebBold' !important; } /* 강조 */
 </style>
 <script type="text/javascript"
 	src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 var city,gu, center, kind, total
 var pageNum=1;
@@ -176,19 +172,18 @@ function findDog(value){
 			total = data.totalCount;
 			console.log(list)
 			$.each(list, function(index, item){
-				content+="<div class='strayDog'><a title='확대 이미지 보기' href="+item.popfile+" class='lytebox' data-lyte-options='slide:false' data-title='CareDog'>";
-				content+="<a href='#' img='' class='tx-animal-image' src='"+item.popfile+"'>";
-				content+="<img src="+item.popfile+" width='310' height='261' border='0' align='center'></a></a><ul>";
-				content+="<li class='full'><strong>접수일</strong> <i> "+item.happenDt+"&nbsp;&nbsp;(공고번호: "+item.noticeNo+" <span class='red'></span>)";
+				content+="<div class='strayDog'><button type='button' data-toggle='modal' data-target='#strayDogDetail'>";
+				content+="<img src="+item.popfile+" width='310' height='261' border='0' align='center'></button><ul>";
+				content+="<li class='full'><strong>접수일</strong> <i> "+item.happenDt+"&nbsp;&nbsp;(공고번호:<span class='red'> "+item.noticeNo+" </span>)";
 				content+="</i></li><li class='full'><strong>발견장소</strong></li><li class='full'>"+item.happenPlace+"</li>";
-				content+="<li class='half'><strong>품종</strong> "+item.kindCd+"</li>";
+				content+="<li class='full'><strong>품종</strong> "+item.kindCd+"</li>";
 				content+="<li class='half'><strong>성별</strong> "+item.sexCd+"</li>";
 				content+="<li class='half'><strong>연령</strong> "+item.age+"</li>";
 				content+="<li class='half'><strong>색상</strong> "+item.colorCd+"</li>";
 				content+="<li class='half'><strong>중성화수술</strong> "+item.neuterYn+"</li>";
 				content+="<li class='half'><strong>체중</strong> "+item.weight+"</li>";
-				content+="<li class='half'><strong>건강상태</strong> "+item.processState+"</li><br>";
-				content+="<li class='half'><strong>특징</strong></li>";
+				content+="<li class='half'><strong>상태</strong> "+item.processState+"</li><br>";
+				content+="<li class='full'><strong>특징</strong></li>";
 				content+="<li class='full'><span>"+item.specialMark+"</span></li></ul></div>";
 			});
 			$(".allStrayDog").append(content);
@@ -196,6 +191,7 @@ function findDog(value){
 	});
 	
 }
+
 
 function changeDog(value){
 	center=value;
@@ -256,5 +252,70 @@ function onchange(){
 	<div class="allStrayDog">
 	</div>
 	<div id="pagingNav" class="pagenation"></div>
- 
+</div>
+
+<!-- detailDog Modal -->
+<div class="modal fade" id="strayDogDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+		<img src="+item.popfile+" width='310' height='261' border='0' align='center'>
+							<!--습득신고내용부분-->	
+		<ul>
+		<caption>공고번호-경남-통영-2018-00086 의 상세정보</caption>
+                                    「동물보호법」 제17조, 같은 법 시행령 제7조 및 같은 법 시행규칙 제20조에 따라 구조된 동물의 보호상황을 아래와<br> 같이 공고합니다.
+              <li class="half">공고번호</li>
+			<li class="half">경남-통영-2018-00086</li>
+			<li class="half">품 종</li>
+			<li class="half">[개] 믹스견</li>
+			<li class="half">색 상</li>
+			<li class="half">흰색/크림색/검회색</li>
+			<li class="half">성 별</li>
+			<li class="half">수컷</li>
+			<li class="half">중성화 여부</li>
+			<li class="half">아니오</li>
+			<li class="half">나이/체중</li>
+			<li class="half">2017(년생)&nbsp;/&nbsp;3.1(Kg)</li>
+			<li class="half">접수일시</li>
+			<li class="half">20180310</li>
+			<li class="half">발생장소</li>
+			<li class="half">산양 스포츠파크 근처</li>
+			<li class="half">특 징</li>
+			<li class="half">형제자견(00084,00085)과 함께 입소,정수리부위 검회색 털</li>
+			<li class="half">공고기한</li>
+			<li class="half">20180310 ~ 20180320</li>
+							  <!-- 
+							  <tr>
+								<th scope="row">등록번호</th>
+								<td>&nbsp;</td>
+								<th scope="row">RFID_CD</th>
+								<td class="widthIn">&nbsp;</td>
+							  </tr>
+							   -->
+								<!--<th scope="col">특 징</th>-->
+			<li class="half"> ** 유기동물 문의는 보호센터에 연락하시기 바랍니다.&nbsp;</li>
+			<li class="half">보호센터이름</li>
+			<li class="half"><strong>사랑애완동물병원</strong></li>
+			<li class="half">전화번호</li>
+			<li class="half">055-648-7582</strong></li>
+			<li class="half">보호장소</li>
+			<li class="half"><strong>경상남도 통영시 광도면 죽림3로 33 (광도면) 사랑애완동물병원</strong></li>
+			<li class="half">관할기관</li>
+			<li class="half">경상남도 통영시</li>
+			<li class="half">담당자</li>
+			<li class="half">조준태</li>
+			<li class="half">연락처</li>
+			<li class="half">055-650-6241</li>
+			<li class="half">특이사항</li>
+			<li class="half"></li>
+	<br>
+		<strong>상기 동물을 분실하신 소유주께서는 보호센터로 문의하시어 동물을 찾아가시기 바라며,  동물보호 법 제17조<br><br>
+		의 규정에 따른 공고가 있는 날부터 10일이 경과하여도 소유자 등을 알 수 없는 경우에는 유실물법  제12조<br><br>
+		및 민법 제253조의 규정에 불구하고 해당 시,군,구 자치구가 그 동물의 소유권을 취득하게 됩니다.<br><br>								 
+			<strong>2018년 03월 10일</strong> <br><br>
+			<strong> 통영시장(직인생략) </strong>
+	</strong>
+      </ul>
+	</div> 
+	<div align="center" style="float:left;padding-left:15px;padding-top:35px">※ 해당 글은 동물보호관리시스템을 참조한 것입니다. </div>
+    </div>
 </div>

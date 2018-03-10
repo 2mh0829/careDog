@@ -69,12 +69,20 @@ public class StrayDogServiceImpl implements StrayDogService {
 						neuCheck=neu;
 					}
 					
+					String person = root.getElementsByTagName("chargeNm").item(i).getTextContent().toString();
+					String pChk = "";
+					if(person==null) {
+						pChk="없음";
+					}else {
+						pChk=person;
+					}
+					
 					HashMap<String, Object> map = new HashMap<String, Object>();
 					map.put("age", root.getElementsByTagName("age").item(i).getTextContent().toString()); //나이
 					map.put("careAddr", root.getElementsByTagName("careAddr").item(i).getTextContent().toString()); //보호장소
 					map.put("careNm", root.getElementsByTagName("careNm").item(i).getTextContent().toString()); //보호소 이름
 					map.put("careTel", root.getElementsByTagName("careTel").item(i).getTextContent().toString()); //보호소 번호
-					map.put("chargeNm", root.getElementsByTagName("chargeNm").item(i).getTextContent().toString()); //담당자
+					map.put("chargeNm", pChk); //담당자
 					map.put("colorCd", root.getElementsByTagName("colorCd").item(i).getTextContent().toString()); 
 					map.put("desertionNo", root.getElementsByTagName("desertionNo").item(i).getTextContent().toString()); //유기번호
 					map.put("filename", root.getElementsByTagName("filename").item(i).getTextContent().toString()); //썸네일

@@ -10,6 +10,9 @@
 .menu2 {
 	background: #1991d7;
 }
+.menu2 a {
+	color: #fff;
+}
 
 </style>
 

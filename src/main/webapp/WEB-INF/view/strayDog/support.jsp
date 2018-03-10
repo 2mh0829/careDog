@@ -6,172 +6,85 @@
    String cp = request.getContextPath();
 %>
 <style>
-.sponsor__body {
-    margin-top: 50px;
+.content { float: left; width: 954px; /*min-height:800px;*/}
+.content.page-main { float: none; width: auto; }
+.page-tit { margin: 30px 0; color: #222; line-height: 1; margin-left: -2px; font-size: 32px; position:relative; }/* 20171027 수정 */
+.page-tit:before { display: block; width: 30px; margin-bottom: 12px; margin-left: 2px; border-top: 3px solid #1991d7; content: ''; }
+.gobusan {position:absolute; right:0; vertical-align:middle; font-weight:normal;} /* 20171027 추가*/
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
 }
-div {
-    display: block;
-}
-ul, menu, dir {
-    display: block;
-    list-style-type: disc;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    -webkit-padding-start: 40px;
-}
-.sponsor__list {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    border-top: 1px solid #d6d6d6;
-    border-left: 1px solid #d6d6d6;
-}
-.sponsor__list:after {
-    display: block;
-    clear: both;
-    content: '';
-}
-.sponsor__item {
-    float: left;
-    position: relative;
-    display: inline-block;
-    width: 50%;
-    padding: 30px;
-    border-bottom: 1px solid #d6d6d6;
-    border-right: 1px solid #d6d6d6;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
+.sponsor__area { margin: 20px 0 0; }
+.sponsor__tit { margin: 0; font-size: 36px; color: #222; }
+.sponsor__point { color: #1991d7; }
+.sponsor__txt { margin: 20px 0 0; font-weight: 700; color: #222; font-size: 24px; }
+.sponsor__subject { font-weight: 700; color: #222; font-size: 14px; }
+.sponsor__subject + .sponsor__content { margin-top: 8px; }
+.sponsor__content { margin: 0; padding: 0; color: #666; font-size: 14px; }
+.sponsor__content + .sponsor__subject { margin-top: 15px; }
+.sponsor__postscript { margin: 25px 0 0; color: #1991d7; font-size: 13px; }
+.sponsor__body { margin-top: 50px; }
+.sponsor__list { padding: 0; margin: 0; list-style: none; border-top: 1px solid #d6d6d6; border-left: 1px solid #d6d6d6; }
+.sponsor__list:after { display: block; clear: both; content: ''; }
+.sponsor__item { float: left; position: relative; display: inline-block; width: 50%; padding: 30px; border-bottom: 1px solid #d6d6d6; border-right: 1px solid #d6d6d6; -webkit-box-sizing: border-box; box-sizing: border-box; }
+.sponsor__item-wrap { height: 100%; background: url("<%=cp%>/resource/img/strayDog/sponsor_icon1.png") no-repeat right bottom; }
+.sponsor__item-wrap.nth-2 { background-image: url("<%=cp%>/resource/img/strayDog/sponsor_icon2.png"); }
+.sponsor__item-wrap.nth-3 { background-image: url("<%=cp%>/resource/img/strayDog/sponsor_icon3.png"); }
+.sponsor__item-wrap.nth-4 { background-image: url("<%=cp%>/resource/img/strayDog/sponsor_icon4.png"); }
+.sponsor__item-tit { margin: 0; font-size: 18px; color: #1991d7; }
+.sponsor__item-txt { margin: 12px 0 0; font-size: 14px; color: #767676; line-height: 1.3; }
+.sponsor__item-link { position: absolute; bottom: 30px; display: inline-block; width: 140px; height: 40px; margin: 20px 0 0; line-height: 40px; background-color: #1991d7; color: #fff; text-align: center; }
+.sponsor__item-link.type-another { width: 110px; height: 40px; }
+.sponsor__item-link.type-another + .type-another { left: 150px; }
+.sponsor__sub-tit { margin: 60px 0 0; font-size: 24px; color: #222; }
+.sponsor__account-box { width: 100%; height: 75px; margin-top: 20px; border: 1px solid #d6d6d6; -webkit-box-sizing: border-box; box-sizing: border-box; text-align: center; }
+.sponsor__account-txt { position: relative; display: inline-block; margin: 0; padding-left: 70px; line-height: 75px; color: #222; font-weight: 700; }
+.sponsor__account-txt:before { position: absolute; top: 0; bottom: 0; left: 0; width: 60px; height: 37px; margin: auto 0; background: url("<%=cp%>/resource/img/strayDog/sponsor_icon5.png") no-repeat; content: ''; }
+.sponsor__account-list { margin: 20px 0 0; padding: 0; list-style: none; }
+.sponsor__account-item { text-indent: -14px; padding-left: 14px; line-height: 1; }
+.sponsor__account-item + .sponsor__account-item { margin-top: 10px; }
+body { font-size: 14px; font-family: "Nanum Gothic", sans-serif; word-break: keep-all; color: #555; }
 
-.h180 {
-    height: 180px !important;
-}
-.h200 {
-    height: 200px !important;
-}
-li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-}
-.sponsor__item-wrap {
-    height: 100%;
-    background: url(<%=cp%>/resource/img/strayDog/sponsor_icon1.png) no-repeat right bottom;
-}
-.sponsor__item-wrap.nth-2 {
-    background-image: url(<%=cp%>/resource/img/strayDog/sponsor_icon2.png);
-}
-.sponsor__item-wrap.nth-3 {
-    background-image: url(<%=cp%>/resource/img/strayDog/sponsor_icon3.png);
-}
-.sponsor__item-wrap.nth-4 {
-    background-image: url(<%=cp%>/resource/img/strayDog/sponsor_icon4.png);
-}
+fieldset { border: none; margin: 0; padding: 0; }
 
-.sponsor__item-tit {
-    margin: 0;
-    font-size: 18px;
-    color: #1991d7;
-}
-.sponsor__sub-tit {
-    margin: 60px 0 0;
-    font-size: 24px;
-    color: #222;
-}
-.sponsor__account-box {
-    width: 100%;
-    height: 75px;
-    margin-top: 20px;
-    border: 1px solid #d6d6d6;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    text-align: center;
-}
-.sponsor__account-txt {
-    position: relative;
-    display: inline-block;
-    margin: 0;
-    padding-left: 70px;
-    line-height: 75px;
-    color: #222;
-    font-weight: 700;
-}
-.sponsor__account-txt:before {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 37px;
-    margin: auto 0;
-    background: url(../images/content/sponsor_icon5.png) no-repeat;
-    content: '';
-}
-.sponsor__account-list {
-    margin: 20px 0 0;
-    padding: 0;
-    list-style: none;
-}
-.sponsor__account-item {
-    text-indent: -14px;
-    padding-left: 14px;
-    line-height: 1;
-}
-h3 {
-    display: block;
-    font-size: 1.17em;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    font-weight: bold;
-}
+legend { position: absolute; top: -999em; left: -999em; }
 
-.sponsor__item-txt {
-    margin: 12px 0 0;
-    font-size: 14px;
-    color: #767676;
-    line-height: 1.3;
-}
-p {
-    line-height: 1.5;
-    margin: 1em 0;
-}
-p {
-    display: block;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-}
-.sponsor__item-link {
-    position: absolute;
-    bottom: 30px;
-    display: inline-block;
-    width: 140px;
-    height: 40px;
-    margin: 20px 0 0;
-    line-height: 40px;
-    background-color: #1991d7;
-    color: #fff;
-    text-align: center;
-}
-a {
-    color: inherit;
-    text-decoration: none;
-}
-a {
-    background-color: transparent;
-    -webkit-text-decoration-skip: objects;
-}
-li {
-    display: list-item;
-    text-align: -webkit-match-parent;
-}
+b, strong { font-weight: bold; }
+
+p { line-height: 1.5; margin: 1em 0; }
+
+input:not([type='checkbox']), input:not([type='radio']), textarea, select { border-radius: 0; }
+
+input:not([type='checkbox']), input:not([type='radio']), textarea, select { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
+
+button, input[type='checkbox'], input[type='radio'], input[type='button'], input[type='submit'], input[type='image'] { cursor: pointer; }
+
+.font1 { font-family: "Nanum Gothic", sans-serif; }
+
+.font2 { font-family: "Open Sans", sans-serif; }
+
+.gray1 { color: #767676; }
+
+.gray2 { color: #222; }
+
+.color1 { color: #1991d7 !important; }
+
+.color2 { color: #009e52; }
+
+.color3 { color: #f24443; }
+
+.h180 { height: 180px !important; }
+
+.h200 { height: 200px !important; }
+
+.hidden { overflow: hidden; position: absolute; width: 0; height: 0; }
+.hidden.is-view { position: static; width: auto; height: auto; }
+.page-tit { margin: 30px 0; color: #222; line-height: 1; margin-left: -2px; font-size: 32px; position:relative; }/* 20171027 수정 */
+.page-tit:before { display: block; width: 30px; margin-bottom: 12px; margin-left: 2px; border-top: 3px solid #1991d7; content: ''; }
 </style>
 <div class="body-container">
-   <h5>후원입니다.</h5>
+   <h1 class="page-tit">후원신청</h1>
    <div class="sponsor__body">
 		<ul class="sponsor__list">
 			<li class="sponsor__item h180">
