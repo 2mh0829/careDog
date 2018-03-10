@@ -60,6 +60,188 @@ input {vertical-align:middle;border:none;background:none;}
 label {cursor:pointer; vertical-align:middle;}
 strong {font-family: 'NanumGothicWebBold' !important; } /* 강조 */
 
+.cs_abandoned_animal .info_wrap dl {
+    max-width: 425px;
+    line-height: 18px
+}
+
+.cs_abandoned_animal .info_wrap dl dt {
+    float: left;
+    margin-right: 10px;
+    padding-top: 5px;
+    color: #8f8f8f !important;
+}
+
+.cs_abandoned_animal .info_wrap dl dd {
+    position: relative;
+    padding-top: 5px;
+    color: #242424
+}
+
+.cs_abandoned_animal .info_wrap dl dd.info_hair {
+    float: left
+}
+
+.cs_abandoned_animal .info_wrap dl .ico_arrow {
+    display: inline-block;
+    vertical-align: top;
+    margin: 3px 5px 0 4px;
+    width: 5px;
+    height: 9px;
+    background: url(../img/sp_abandoned_animal_v2.png) no-repeat -17px -28px;
+}
+
+.cs_abandoned_animal .info_wrap dl .ico_bar {
+    display: inline-block;
+    vertical-align: top;
+    margin: 3px 9px 0 8px;
+    width: 1px;
+    height: 11px;
+    background-color: #eaeaea;
+}
+
+.cs_abandoned_animal .info_wrap dl dd a {
+    text-decoration: none
+}
+
+.cs_abandoned_animal .info_wrap dl dd a.link_map {
+    margin-left: 2px
+}
+
+.cs_abandoned_animal .info_wrap dl dd a:hover {
+    text-decoration: underline
+}
+
+.cs_abandoned_animal .info_wrap dl dd .info_tell {
+    color: #8f8f8f
+}
+
+.cs_abandoned_animal .info_wrap dl dd .ico_notice{
+    display: inline-block;
+    *display: inline;
+	overflow: hidden;
+    vertical-align: top;
+    margin: -1px 0 0 4px;
+	*zoom: 1;
+    width: 16px;
+    height: 16px;
+    background: url(../img/sp_abandoned_animal_v2.png) no-repeat -42px -25px;
+}
+
+.ly_abandoned_animal .ico_info{
+    display: inline-block;
+    *display: inline;
+	overflow: hidden;
+    vertical-align: top;
+    margin: -3px 0 0 0;
+	*zoom: 1;
+    width: 16px;
+    height: 16px;
+    background: url(../img/sp_abandoned_animal_v2.png) no-repeat -42px -25px;
+}
+.cs_abandoned_animal .info_wrap dl dd.info_notice{
+    width: 425px;
+    z-index: 100;
+}
+.cs_abandoned_animal .info_wrap dl dd .ly_notice{
+    position: absolute;
+    top: 32px;
+    right: -27px;
+    width: 289px;
+    border: 1px solid #cbdeee;
+    background-color: #fff;
+    color: #666;
+    font-size: 12px;
+    text-align: left;
+    line-height: 20px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+.cs_abandoned_animal .info_wrap dl dd .ly_notice strong{
+    display: block;
+    padding:21px 0 0 23px;
+    color: #424242;
+}
+
+
+.cs_abandoned_animal .info_wrap dl dd .ly_notice[aria-hidden="true"] {
+    display: none;
+}
+
+.cs_abandoned_animal .info_wrap dl dd .ly_notice p{
+    padding: 3px 23px 18px 23px;
+    line-height: 20px;
+    color: #666;
+    font-size: 12px;
+}
+
+.cs_abandoned_animal .info_wrap dl dd .ly_notice .btn_close{
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 13px;
+    height: 13px;
+    border: 0;
+    background: url(../img/sp_abandoned_animal_v2.png) no-repeat -38px -10px;
+    font-size: 0;
+    line-height: 0;
+    cursor: pointer;
+}
+
+/* 안내문구 및 제공 */
+
+.cs_abandoned_animal .lst_wrap+.animal_notice {
+    margin-top: 15px
+}
+
+.cs_abandoned_animal .animal_notice {
+    overflow: hidden;
+    position: relative
+}
+
+.cs_abandoned_animal .animal_notice p {
+    overflow: hidden;
+    position: relative;
+    padding-left: 10px;
+    line-height: 18px;
+    font-size: 11px;
+    font-family: '돋움', dotum, AppleSDGothicNeo, Helvetica, sans-serif;
+    color: #8f8f8f
+}
+
+.cs_abandoned_animal .animal_notice p .ico_notice {
+    position: absolute;
+    top:5px;
+    left: 0;
+    display: block;
+    width: 2px;
+    height: 47px;
+    margin: -2px 7px 0 0;
+    vertical-align: middle;
+    background-color: #e8e8e8
+}
+
+.cs_abandoned_animal .animal_notice p .ico_bar {
+    display: inline-block;
+    vertical-align: top;
+    *display: inline;
+    *zoom:1;
+    margin: 3px 3px 0 7px;
+    width: 1px;
+    height: 10px;
+    background-color: #eaeaea;
+}
+
+.cs_abandoned_animal .animal_notice a {
+    text-decoration: none;
+}
+
+.cs_abandoned_animal .animal_notice a:hover {
+    text-decoration: underline;
+}
+
 </style>
 <script type="text/javascript"
 	src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
@@ -258,64 +440,97 @@ function onchange(){
 <div class="modal fade" id="strayDogDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-		<img src="+item.popfile+" width='310' height='261' border='0' align='center'>
-							<!--습득신고내용부분-->	
-		<ul>
-		<caption>공고번호-경남-통영-2018-00086 의 상세정보</caption>
-                                    「동물보호법」 제17조, 같은 법 시행령 제7조 및 같은 법 시행규칙 제20조에 따라 구조된 동물의 보호상황을 아래와<br> 같이 공고합니다.
-              <li class="half">공고번호</li>
-			<li class="half">경남-통영-2018-00086</li>
-			<li class="half">품 종</li>
-			<li class="half">[개] 믹스견</li>
-			<li class="half">색 상</li>
-			<li class="half">흰색/크림색/검회색</li>
-			<li class="half">성 별</li>
-			<li class="half">수컷</li>
-			<li class="half">중성화 여부</li>
-			<li class="half">아니오</li>
-			<li class="half">나이/체중</li>
-			<li class="half">2017(년생)&nbsp;/&nbsp;3.1(Kg)</li>
-			<li class="half">접수일시</li>
-			<li class="half">20180310</li>
-			<li class="half">발생장소</li>
-			<li class="half">산양 스포츠파크 근처</li>
-			<li class="half">특 징</li>
-			<li class="half">형제자견(00084,00085)과 함께 입소,정수리부위 검회색 털</li>
-			<li class="half">공고기한</li>
-			<li class="half">20180310 ~ 20180320</li>
-							  <!-- 
-							  <tr>
-								<th scope="row">등록번호</th>
-								<td>&nbsp;</td>
-								<th scope="row">RFID_CD</th>
-								<td class="widthIn">&nbsp;</td>
-							  </tr>
-							   -->
-								<!--<th scope="col">특 징</th>-->
-			<li class="half"> ** 유기동물 문의는 보호센터에 연락하시기 바랍니다.&nbsp;</li>
-			<li class="half">보호센터이름</li>
-			<li class="half"><strong>사랑애완동물병원</strong></li>
-			<li class="half">전화번호</li>
-			<li class="half">055-648-7582</strong></li>
-			<li class="half">보호장소</li>
-			<li class="half"><strong>경상남도 통영시 광도면 죽림3로 33 (광도면) 사랑애완동물병원</strong></li>
-			<li class="half">관할기관</li>
-			<li class="half">경상남도 통영시</li>
-			<li class="half">담당자</li>
-			<li class="half">조준태</li>
-			<li class="half">연락처</li>
-			<li class="half">055-650-6241</li>
-			<li class="half">특이사항</li>
-			<li class="half"></li>
-	<br>
-		<strong>상기 동물을 분실하신 소유주께서는 보호센터로 문의하시어 동물을 찾아가시기 바라며,  동물보호 법 제17조<br><br>
-		의 규정에 따른 공고가 있는 날부터 10일이 경과하여도 소유자 등을 알 수 없는 경우에는 유실물법  제12조<br><br>
-		및 민법 제253조의 규정에 불구하고 해당 시,군,구 자치구가 그 동물의 소유권을 취득하게 됩니다.<br><br>								 
-			<strong>2018년 03월 10일</strong> <br><br>
-			<strong> 통영시장(직인생략) </strong>
-	</strong>
-      </ul>
-	</div> 
-	<div align="center" style="float:left;padding-left:15px;padding-top:35px">※ 해당 글은 동물보호관리시스템을 참조한 것입니다. </div>
-    </div>
+		<div class="solo_wrap">
+			<h4 class="detail_title">
+				<a nocr="" onclick="return goOtherCR(this, 'a=nco_xca*1.number&amp;r=1&amp;i=881795fd_000000765F8F&amp;u=' + urlencode(this.href));"
+					href="<%=cp%>/resource/img/dog2.jpg" target="_blank" class="tit">경기-안산-2018-00204</a> 
+				<span class="ico_notice"><span class="blind">공고중</span></span>
+			</h4>
+			<div class="info_wrap">
+				<div class="animal_img">
+					<a nocr=""
+						onclick="return goOtherCR(this, 'a=nco_xca*1.image&amp;r=1&amp;i=881795fd_000000765F8F&amp;u=' + urlencode(this.href));"
+						class="thumb" href="<%=cp%>/resource/img/dog2.jpg" target="_blank"> 
+						<img src="<%=cp%>/resource/img/dog2.jpg" width="120" height="120" alt="유기동물">
+					</a>
+				</div>
+				<div class="animal_info">
+					<dl>
+						<dt>품종</dt>
+						<dd>
+							개<span class="ico_arrow"></span>
+								<a onclick="return goOtherCR(this,&quot;a=nco_xca*1&amp;r=1&amp;i=&quot;+urlencode(&quot;881795fd_000000765F8F&quot;)+&quot;&amp;u=&quot;+urlencode(this.href));"
+									href="?where=nexearch&amp;sm=tab_etc&amp;query=%EB%AF%B8%EB%8B%88%EC%96%B4%EC%B3%90%ED%95%80%EC%85%94%20%EC%9C%A0%EA%B8%B0%EB%8F%99%EB%AC%BC">미니어쳐핀셔</a>,
+							수컷
+						</dd>
+						<dt>털색</dt>
+						<dd class="info_hair">흑갈</dd>
+						<dt>
+							<span class="ico_bar"></span>체중
+						</dt>
+						<dd>4(Kg)</dd>
+						<dt>나이</dt>
+						<dd>2014(년생)</dd>
+						<dt>발견</dt>
+						<dd>선부2동1034-8번지인근</dd>
+						<dt>특징</dt>
+						<dd>비만, 꼬리단미</dd>
+						<dt>접수</dt>
+						<dd>
+							<a nocr="" onclick="return goOtherCR(this, 'a=nco_xca*1.date&amp;r=1&amp;i=881795fd_000000765F8F&amp;u=' + urlencode(this.href));"
+								href="?where=nexearch&amp;sm=tab_etc&amp;query=3%EC%9B%9410%EC%9D%BC%20%EC%9C%A0%EA%B8%B0%EB%8F%99%EB%AC%BC">2018.03.10.</a>
+						</dd>
+						<dt>공고</dt>
+						<dd class="info_notice _toggle_area">
+							2018.03.10.~2018.03.22.
+							<a nocr="" onclick="goOtherTCR(this, 'a=nco_xca*1.dateinfo&amp;r=1&amp;i=881795fd_000000765F8F');return false;"
+								href="#" class="ico_notice _toggle_trigger" role="button">
+								<span class="blind">공고확인</span>
+							</a>
+							<div class="ly_notice _toggle_content" style="display: none">
+								<strong>공고기간</strong>
+								<p>동물보호법에 따라 공고가 있는 날부터 10일이 지나도 소유자를 알 수 없는 경우는 지방자치단체가
+									동물의 소유권을 취득하게 되며, 일반인에게 분양할 수 있습니다.</p>
+								<button class="btn_close _toggle_trigger">레이어 닫기</button>
+							</div>
+						</dd>
+						<dt>관할</dt>
+						<dd>
+							<a nocr="" onclick="return goOtherCR(this, 'a=nco_xca*1.region&amp;r=1&amp;i=881795fd_000000765F8F&amp;u=' + urlencode(this.href));"
+								href="?where=nexearch&amp;sm=tab_etc&amp;query=%EA%B2%BD%EA%B8%B0%EB%8F%84%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%9C%A0%EA%B8%B0%EB%8F%99%EB%AC%BC">경기도
+							안산시</a>
+						</dd>
+						<dt>보호센터</dt>
+						<dd>
+							<a nocr=""
+								onclick="return goOtherCR(this, 'a=nco_xca*1.protect&amp;r=1&amp;i=881795fd_000000765F8F&amp;u=' + urlencode(this.href));"
+								href="?where=nexearch&amp;sm=tab_etc&amp;query=(%EC%82%AC)%ED%95%9C%EB%8F%99%EB%B3%B4%20%EC%9C%A0%EA%B8%B0%EB%8F%99%EB%AC%BC">(사)한동보</a>
+						</dd>
+						<dt>보호장소</dt>
+						<dd>경기도 안산시 상록구 청곡길 50 (부곡동) 안산시 상록구 부곡동 231-5</dd>
+						<dt>전화</dt>
+						<dd>
+							031-296-0124<span class="info_tell">(9시~18시 가능)</span>
+						</dd>
+					</dl>
+				</div>
+			</div>
+			<div class="animal_notice">
+				<strong class="blind">업데이트</strong>
+				<p>
+				<span class="ico_notice"></span>본 정보는 지방자치단체와 유기동물 보호시설에서 등록한 보호중
+					동물입니다. 유기동물의 절반 가량만 주인을 찾거나 입양이 됩니다. 유기동물에 관심을 가져주세요. <br>최종
+					업데이트 2018.03.10.<span class="ico_bar"></span> 출처 
+				<a nocr="" onclick="return goOtherCR(this, 'a=nco_xca*1.source&amp;r=1&amp;i=881795fd_000000765F8F&amp;u=' + urlencode(this.href));"
+					href="http://www.animal.go.kr/portal_rnl/abandonment/protection_list.jsp"
+					target="_blank">동물보호관리시스템
+				</a>, 통계 
+				<a nocr="" onclick="return goOtherCR(this, 'a=nco_xca*1.statistic&amp;r=1&amp;i=881795fd_000000765F8F&amp;u=' + urlencode(this.href));"
+					href="http://pawinhand.kr/#locationSearch" target="_blank">포인핸드</a>
+				</p>
+			</div>
+		</div>
+
+		</div> <!-- modal-content -->
+   </div>
 </div>
