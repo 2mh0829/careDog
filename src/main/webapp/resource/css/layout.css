@@ -15,7 +15,7 @@
     width: 100%;
     height: 70px;
     clear: both;
-    z-index: 2;
+    z-index: 21;
 }
 
 .header-left {
@@ -39,7 +39,7 @@
 	margin: 0px auto;
     width: 100%;
     height: 60px;
-    z-index: 3;
+    z-index: 23;
 }
 
 
@@ -105,6 +105,7 @@
 } */
 
 .menu2 {
+	position: relative;
 	width: 100%;
 	height: 90px; 
 	line-height: 90px;
@@ -161,12 +162,19 @@ ul.navi li:hover > ul {
 
 
 
-.chatbot {
+/* .chatbot {
 	position: fixed;
 	width:150px;
 	height: 150px;
 	top: 60%;
 	left: 90%;
     margin:0px auto;
-}
+} */
 
+.chatbot {
+	position: absolute;
+	float: left;
+	top: 25%;
+	right: 10%;
+	background: red;
+}

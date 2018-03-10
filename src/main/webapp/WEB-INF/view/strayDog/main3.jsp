@@ -6,6 +6,7 @@
 	String cp = request.getContextPath();
 %>
 <style>
+
 .strayDog {
 	width: 310px;
 	height: 550px;
@@ -61,6 +62,7 @@ div {
 }
 
 .pagenation {
+	display: inline-block;
 	width: 1100px;
 	height: auto;
 	margin: 0 auto 50px auto;
@@ -97,6 +99,11 @@ div {
 	margin-right: 10px;
 	text-align: center;
 	border: 1px solid #2e5fa4;
+}
+
+::selection {
+    background: #26579c;
+    color: #fff;
 }
 
 .search_area {
@@ -223,6 +230,8 @@ $(document).ready(function(){
 
 function changeCity(value){
 	city=value;
+	gu='';
+	center='';
 	findDog('');
 	var queryParams= encodeURIComponent('upr_cd')+'='+ encodeURIComponent(value); 
 	$.ajax({
@@ -244,6 +253,7 @@ function changeCity(value){
 
 function changeCenter(value){
 	gu=value;
+	center='';
 	findDog('');
 	var queryParams= encodeURIComponent('upr_cd')+'='+ encodeURIComponent(city);
 	queryParams+='&'+encodeURIComponent('org_cd')+'='+encodeURIComponent(value);
@@ -284,8 +294,8 @@ function findDog(value){
 		,success:function(data){
 			$(".allStrayDog").find(".strayDog").remove();
 			var list=data.list;
-			//console.log(list.totalCount)
 			var content="";
+			total = data.totalCount;
 			console.log(list)
 			$.each(list, function(index, item){
 				content+="<div class='strayDog'><a title='확대 이미지 보기' href="+item.popfile+" class='lytebox' data-lyte-options='slide:false' data-title='CareDog'>";
@@ -309,12 +319,6 @@ function findDog(value){
 	
 }
 
-function printDog(data){
-	var content;
-	console.log(data.popfile1)
-	
-}
-
 function changeDog(value){
 	center=value;
 	findDog('');
@@ -327,22 +331,33 @@ function changeKind(value){
 function page(num){
 	pageNum=num;
 	findDog('');
-	var a;
 	$(".pagenation").find("a").remove();
-	var content="<c:forEach var='i' begin='1' end='10'>";
-	content+="<a href='javascript:page(${i})' onclick='changePage();'>${i}</a>";
+	//startPage, endPage;
+	//startPage=
+	var prevNum = pageNum-1;
+	var nextNum = pageNum+1;
+	
+	var content = "";
+	content+=(pageNum==1?"":"<a href='javascript:page("+prevNum+")' class='img'><img src='<%=cp%>/resource/img/strayDog/btn_prev.png' alt='이전 목록 보기'></a>");
+	content+="<c:forEach var='i' begin='1' end='10'>";
+	content+="<a href='javascript:page(${i})' onclick='onchange()'>${i}</a>";
 	content+="</c:forEach>";
-	content+="<a href='javascript:page("+num+1+")' onclick='changePage();' class='img'>"
-	content+="<img src='<%=cp%>/resource/img/btn_nxt.png' alt='다음 목록 보기'></a>";
+	content+="<a href='javascript:page("+nextNum+")' class='img'>"
+	content+="<img src='<%=cp%>/resource/img/strayDog/btn_nxt.png' alt='다음 목록 보기'></a>";
 	/* <span class="select">1</span>  */
 	
 	$(".pagenation").append(content);
-}
-
-function changePage(){
 	
 }
- 
+function onchange(){
+	$(".pagenation a").on("click",function(e){
+		e.preventDefault();
+		console.log(this);
+		$('a span').attr('class','select');
+	});
+}
+
+
 </script>
 
 <div class="body-container">
