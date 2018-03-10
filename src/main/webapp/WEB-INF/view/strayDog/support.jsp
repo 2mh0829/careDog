@@ -182,7 +182,7 @@ li {
 						보내주시는 정기 후원입니다.
 					</p>
 					
-					<a class="sponsor__item-link" href="https://www.animals.or.kr:40000/ani-main/08member/login.asp?sslurl2=yes&amp;bname=&amp;url=/ani-main/05cartoon/cartoon01.asp">정기후원 신청</a>
+					<a class="sponsor__item-link" href="<%=cp %>/strayDog/fixSupport">정기후원 신청</a>
 					
 				</div>
 			</li>

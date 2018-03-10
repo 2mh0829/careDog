@@ -7,195 +7,73 @@
 %>
 <style>
 
-.strayDog {
-	width: 310px;
-	height: 550px;
-	float: left;
-	margin: 40px 2px 60px 2px;
-	background: #fff;
-	border: 1px solid #ccc;
-	font-family: 'NanumGothicWeb', 'NanumGothicWebBold', 'Dotum', '돋움',
-		Helvetica, AppleGothic, Sans-serif;
-	color: #444;
-	overflow: hidden;
-	box-sizing: border-box;
-}
+.pagenation {width:1100px; height:auto; margin:0 auto 50px auto; text-align:center; clear:both;}
+.pagenation a {display:inline-block; width:40px; height:40px; line-height:40px; font-size:16px; color:#444; margin-right:10px; text-align:center; background:#f3f3f3; border:1px solid #ccc;}
+.pagenation a.img {border:0; background:none; padding-top:12px; height:28px;}
+.pagenation .select {background:#2e5fa4;display:inline-block; width:40px; height:40px; line-height:40px; font-size:16px; color:#fff; font-family: 'NanumGothicWebBold'!important; font-weight:normal; margin-right:10px; text-align:center; border:1px solid #2e5fa4;}
 
-.allStrayDog {
-	width: 1000px;
-	height: auto;
-	margin: 0 auto 50px auto;
-}
-
+.strayDog {width:1000px; height:auto; margin:0 auto 50px auto;}
 .strayDog+.strayDog {
 	margin-left: 2%
 }
 
-/* .body-container {
-		width: 1100px;
-    	height: auto;
-   	 	margin: 0 auto 50px auto;
-	} */
-li.full {
-	clear: both;
-}
 
-li.half {
-	width: 50%;
-	float: left;
-}
+.allStrayDog .strayDog {width:310px; height:570px; float:left; margin:40px 8px 60px 8px; background:#fff; border:1px solid #ccc;}
+.allStrayDog .strayDog img {vertical-align:top;width:310px; height:261px; /*margin-bottom:25px;*/}
+.allStrayDog .strayDog ul {height:403px; padding:0 10px; margin-top:25px;}
+.allStrayDog .strayDog ul li {line-height:30px; color:#666;letter-spacing:-0.5px;font-size:14px;}
+.allStrayDog .strayDog ul li span .red {color:red;}
+.allStrayDog .strayDog ul li.full {clear:both;}
+.allStrayDog .strayDog ul li strong {font-family: 'NanumGothicWebBold'!important; font-weight:normal; color:#222; padding-right:5px; font-size:16px;}
+.allStrayDog .strayDog ul li i {font-size:16px; color:#2e5fa4; font-style:normal;}
+.allStrayDog .strayDog ul li span {line-height:22px; color:#666;}
+.allStrayDog .strayDog ul li.half {width:50%; float:left;}
+.allStrayDog .strayDog button {background:#2e5fa4; width:100%; height:55px; vertical-align:bottom; text-align:center; font-size:18px; color:#fff; line-height:55px;}
 
-li {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	display: list-item;
-	text-align: -webkit-match-parent;
-	line-height: 30px;
-	color: #666;
-	letter-spacing: -0.5px;
-	font-size: 14px;
-}
+::selection {background:#26579c; color:#fff;}
 
-div {
-	display: block;
-}
+.no-result {width:1100px; height:auto; margin:40px auto 50px auto; text-align:center; background:#fff;font-size:16px; color:#2e5fa4; border:1px solid #ccc; padding:20px 0;}
 
-.pagenation {
-	display: inline-block;
-	width: 1100px;
-	height: auto;
-	margin: 0 auto 50px auto;
-	text-align: center;
-	clear: both;
-	font-family: 'NanumGothicWeb', 'NanumGothicWebBold', 'Dotum', '돋움',
-		Helvetica, AppleGothic, Sans-serif;
-	color: #444;
-}
+.search_area {width:width:1098px; height:auto; margin:0 auto 50px auto; text-align:center;padding:15px 0 0 0; background:#fff; border:1px solid #ccc; line-height:35px;}
+.search_area select {height:35px; font-size:16px; color:#444; display:inline-block; vertical-align:middle; line-height:35px; margin-bottom:15px; background:#fff;}
+.search_area select.wd100 {width:100px; padding-left:5px;}
+.search_area select.wd165 {width:165px; padding-left:5px; margin-right:8px;}
+.search_area select.wd120 {width:120px; padding-left:5px; margin-right:8px;}
+.search_area label {font-size:16px; color:#444; margin-right:8px; line-height:35px; vertical-align:top;}
+.search_area input[type="text"] {width:155px; height:35px; line-height:35px; padding:0 5px; display:inline-block; margin-right:8px;background:#fff;  vertical-align:middle;margin-bottom:15px;}
+.search_area button {width:80px; height:35px; color:#fff; font-size:16px; background:#2e5fa4;margin-bottom:15px;}
+.search_area input[type="checkbox"] {width:16px; height:16px; margin-right:8px; vertical-align:top; margin-top:10px;}
+.search_area img {vertical-align:top; margin-top:5px; margin-right:8px;}
+.search_area span {height:35px; line-height:35px; font-size:16px; color:#444; width:10px; display:inline-block; vertical-align:top;}
 
-.pagenation a {
-	display: inline-block;
-	width: 40px;
-	height: 40px;
-	line-height: 40px;
-	font-size: 16px;
-	color: #444;
-	margin-right: 10px;
-	text-align: center;
-	background: #f3f3f3;
-	border: 1px solid #ccc;
-}
+/* a{text-decoration:none;cursor:pointer;outline:none;}  
+a:hover,a:active{text-decoration:none;}
+a:focus , button:focus {outline:1px dotted #ccc;} */
+textarea, select, button, table {font-family:inherit; font-size:inherit; line-height:inherit;}
+legend{display:none; overflow:hidden; visibility:hidden; height:0; font-size:0; line-height:0;} /* For Screen Reader */
+img, fieldset, button {border:0;}
+img{vertical-align:middle;}
+fieldset, button, input {vertical-align:middle;}
+ul, ol, li, dl, dt, dd {list-style:none;margin:0;padding:0;}
+em, i, address {font-style:normal; font-weight:normal;}
+textarea, button {line-height:1.2; /* 입력폼에서 춤추지 않는 최소 줄간 1.2 */ vertical-align: bottom;}
+input {vertical-align:middle;border:none;background:none;}
+label {cursor:pointer; vertical-align:middle;}
+strong {font-family: 'NanumGothicWebBold' !important; } /* 강조 */
 
-.pagenation .select {
-	background: #2e5fa4;
-	display: inline-block;
-	width: 40px;
-	height: 40px;
-	line-height: 40px;
-	font-size: 16px;
-	color: #fff;
-	font-family: 'NanumGothicWebBold' !important;
-	font-weight: normal;
-	margin-right: 10px;
-	text-align: center;
-	border: 1px solid #2e5fa4;
-}
-
-::selection {
-    background: #26579c;
-    color: #fff;
-}
-
-.search_area {
-	width: width:1098px;
-	height: auto;
-	margin: 0 auto 50px auto;
-	text-align: center;
-	padding: 15px 0 0 0;
-	background: #fff;
-	border: 1px solid #ccc;
-	line-height: 35px;
-}
-
-.search_area select.wd100 {
-	width: 100px;
-	padding-left: 5px;
-}
-
-.search_area select.wd165 {
-	width: 165px;
-	padding-left: 5px;
-	margin-right: 8px;
-}
-
-.search_area select.wd120 {
-	width: 120px;
-	padding-left: 5px;
-	margin-right: 8px;
-}
-
-.search_area select {
-	height: 35px;
-	font-size: 16px;
-	color: #444;
-	display: inline-block;
-	vertical-align: middle;
-	line-height: 35px;
-	margin-bottom: 15px;
-	background: #fff;
-}
-
-select {
-	border: 1px solid #dfdfdf;
-	height: 26px;
-	vertical-align: middle;
-	color: #666;
-	background: #f3f3f3;
-}
-
-.search_area label {
-	font-size: 16px;
-	color: #444;
-	margin-right: 8px;
-	line-height: 35px;
-	vertical-align: top;
-}
-
-textarea, select, button, table {
-	font-family: inherit;
-	font-size: inherit;
-	line-height: inherit;
-}
-
-.search_area input[type="text"] {
-	width: 155px;
-	height: 35px;
-	line-height: 35px;
-	padding: 0 5px;
-	display: inline-block;
-	margin-right: 8px;
-	background: #fff;
-	vertical-align: middle;
-	margin-bottom: 15px;
-}
-
-.search_area button {
-	width: 80px;
-	height: 35px;
-	color: #fff;
-	font-size: 16px;
-	background: #2e5fa4;
-	margin-bottom: 15px;
-}
 </style>
 <script type="text/javascript"
 	src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 var city,gu, center, kind, total
 var pageNum=1;
 var startPage, endPage;
 $(document).ready(function(){
 	findDog('');
+
 	page(1);
 	  $.ajax({
 		url:'<%=cp%>/strayDog/sido'
@@ -300,7 +178,7 @@ function findDog(value){
 			$.each(list, function(index, item){
 				content+="<div class='strayDog'><a title='확대 이미지 보기' href="+item.popfile+" class='lytebox' data-lyte-options='slide:false' data-title='CareDog'>";
 				content+="<a href='#' img='' class='tx-animal-image' src='"+item.popfile+"'>";
-				content+="<img src="+item.popfile+" width='348' height='261' border='0' align='center'></a></a><ul>";
+				content+="<img src="+item.popfile+" width='310' height='261' border='0' align='center'></a></a><ul>";
 				content+="<li class='full'><strong>접수일</strong> <i> "+item.happenDt+"&nbsp;&nbsp;(공고번호: "+item.noticeNo+" <span class='red'></span>)";
 				content+="</i></li><li class='full'><strong>발견장소</strong></li><li class='full'>"+item.happenPlace+"</li>";
 				content+="<li class='half'><strong>품종</strong> "+item.kindCd+"</li>";
@@ -309,7 +187,7 @@ function findDog(value){
 				content+="<li class='half'><strong>색상</strong> "+item.colorCd+"</li>";
 				content+="<li class='half'><strong>중성화수술</strong> "+item.neuterYn+"</li>";
 				content+="<li class='half'><strong>체중</strong> "+item.weight+"</li>";
-				content+="<li class='half'><strong>건강상태</strong> "+item.processState+"</li>";
+				content+="<li class='half'><strong>건강상태</strong> "+item.processState+"</li><br>";
 				content+="<li class='half'><strong>특징</strong></li>";
 				content+="<li class='full'><span>"+item.specialMark+"</span></li></ul></div>";
 			});
@@ -329,14 +207,14 @@ function changeKind(value){
 }
 
 function page(num){
-	pageNum=num;
+	pageNum = num;
 	findDog('');
 	$(".pagenation").find("a").remove();
 	//startPage, endPage;
 	//startPage=
 	var prevNum = pageNum-1;
 	var nextNum = pageNum+1;
-	
+
 	var content = "";
 	content+=(pageNum==1?"":"<a href='javascript:page("+prevNum+")' class='img'><img src='<%=cp%>/resource/img/strayDog/btn_prev.png' alt='이전 목록 보기'></a>");
 	content+="<c:forEach var='i' begin='1' end='10'>";
@@ -347,8 +225,8 @@ function page(num){
 	/* <span class="select">1</span>  */
 	
 	$(".pagenation").append(content);
-	
 }
+
 function onchange(){
 	$(".pagenation a").on("click",function(e){
 		e.preventDefault();
@@ -377,6 +255,6 @@ function onchange(){
 	</div>
 	<div class="allStrayDog">
 	</div>
-	<div id="pagingNav" class="pagenation">
-	</div>
+	<div id="pagingNav" class="pagenation"></div>
+ 
 </div>
