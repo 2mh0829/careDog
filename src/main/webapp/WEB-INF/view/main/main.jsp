@@ -13,32 +13,45 @@ body {
 	margin : 0;
 	padding : 0;
 	background : url (img.jpg) center center fixed no-repeat;
+	overflow: hidden;
+}
+
+ul.navi li a {
+	color: white;
+}
+
+.header-right a {
+	color: white;
 }
 
 #main-vidio{
 	position: absolute;
-	width: 1200px;
-	top: 70px;
-	left: 0px;
+	width: 100%;
+	top: 0; 
+	left: 0;
 }
 
 video {
 	/* position : fixed; */
-	top : 0;
+	top : -50;
 	left : 0;
-	min-width : 100 %;
-	min-height : 100 %;
-	width : auto;
+	min-width : 100%;
+	min-height : 100%;
+	width : 100%;
 	height : auto;
 	z-index : -1;
 }
 
 </style>
 
+<script type="text/javascript">
 
+	$("#menu-background").html("");
+	
+</script>
 
 <div id="main-vidio">
-	<video autoplay loop poster="img.jpg">
+	<video autoplay loop>
 		<source src="<%=cp %>/resource/vidio/main_vidio.mp4">
 	</video>
 </div>

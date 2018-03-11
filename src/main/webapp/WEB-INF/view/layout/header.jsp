@@ -11,6 +11,14 @@
     animation-name: example;
     animation-duration: 1s;
 }
+
+#background {
+	position: absolute;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+}
+
 </style>
 
 <script>
@@ -36,32 +44,28 @@ $(window).scroll(function() {
 </script>
 
 <div class="header-top">
-	<div class="header-left">
-		<div style="float: left; margin-top: 5px;">
-			<img src="<%=cp %>/resource/img/dog_icon.png" style="width: 60px;">
-		</div>
-		<span class="title-font" style="line-height: 70px; margin-left: 10px;">
-			<a href="<%=cp %>/">
-				cD
-			</a>
-		</span>
-	</div>
+
+	<div id='menu-background'>
+		<img src="<%=cp %>/resource/img/menu.png">
+	</div> 
 	
+
 	<div class="menu-container hidden-xs hidden-sm" align="center">
 		<div class="menu">
+			
 			<ul id="mainMenu" class="navi">
-				<li value="1"><a href="<%=cp %>/intro">Abt.careDog</a></li>
-				<li value="2"><a href="<%=cp %>/service">Service</a></li>
-				<li value="3"><a href="<%=cp %>/mungstargram">mungstargram</a></li>
-				<li value="4"><a href="<%=cp %>/strayDog">유기견</a></li>
-				<li value="5"><a href="<%=cp %>/dog119">애견119</a></li>
-				<li value="6"><a href="<%=cp %>/info">정보</a></li>
-				<li value="7"><a href="<%=cp %>/store">펫스토어</a></li>
-				<li value="8"><a href="<%=cp %>/center">고객센터</a></li>
+				<li><a href="<%=cp %>/service">Service</a></li>
+				<li><a href="<%=cp %>/mungstargram">mungstargram</a></li>
+				<li><a href="<%=cp %>/strayDog">유기견</a></li>
+				<li><a href="<%=cp %>/dog119">애견119</a></li>
+				<li><a href="<%=cp %>/info">정보</a></li>
+				<li><a href="<%=cp %>/store">펫스토어</a></li>
+				<li><a href="<%=cp %>/center">고객센터</a></li>
 			</ul>
 		</div>
 	</div>
-	
+
+
 	<div class="header-right" align="right" style="line-height: 70px;">
 	<c:if test="${empty sessionScope.member }">
 		<a href="<%=cp %>/member/login"><span class="glyphicon glyphicon-log-in">&nbsp;</span>sign in</a> &nbsp;&nbsp;
@@ -79,7 +83,7 @@ $(window).scroll(function() {
                 </c:if>
             </c:if>
 	</div>
-	
+
 	
 </div>
 
