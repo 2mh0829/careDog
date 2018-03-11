@@ -18,6 +18,11 @@
 	left: 0;
 }
 
+#menu-background {
+	height: 75px;
+	overflow: hidden;
+}
+
 .header-left img {
 	width: 80px;
 }
@@ -27,22 +32,47 @@
 <script>
 
 $(window).scroll(function() {
-	if($(this).scrollTop() >= 65){
-		$(".menu2").css("height","65px");
-		$(".menu2").css("line-height","65px");
-	}else{
-		$(".menu2").css("height","90px");
-		$(".menu2").css("line-height","90px");
+	if($(this).scrollTop() < 25){
+		$(".header-bottom").css("position", "absolute");
+		$(".header-bottom").css("margin-top", "25px");
+		$(".header-bottom").attr("onmouseover", "menuOverAction();");
+	}else if($(this).scrollTop() >= $(".header-bottom").offset().top){
+		$(".header-bottom").css("position", "fixed");
+		$(".header-bottom").css("margin-top", "0");
+		$(".header-bottom").css("top", "0");
+		$(".header-bottom").attr("onmouseover", "");
+		$(".header-bottom").attr("onmouseout", "");
+	}else if($(this).scrollTop() > 200 && $(this).scrollTop() < $(".header-bottom").offset().top){
+		$(".header-bottom").css("margin-top", "0");
+		$(".header-bottom").css("top", "0");
 	}
 });
 
+function menuOverAction() {
+	$(".header-bottom").animate({top: "40px"}, 500);
+}
 
+$(function() {
+	$(".header-bottom").attr("onmouseover", "menuOverAction();");
+	/* $(document).mousemove(function(e) {
+		if(e.pageY > 130){
+			$(".header-bottom").one("animate",function(){
+				
+			});
+			$(".header-bottom").animate({top: "0"}, 0);
+		} 
+	}); */
+});
 </script>
 
 
 <div class="header-top">
 
 	<div id='menu-background'>
+		<img src="<%=cp %>/resource/img/menu.png">
+	</div>
+	
+	<div style="position: absolute; width: 189px; top: 0; left: 50px; margin-left: -50px; overflow: hidden;">
 		<img src="<%=cp %>/resource/img/menu.png">
 	</div>
 	
