@@ -31,6 +31,13 @@
 
 <script>
 
+$('#right-banner').animate({
+	top : $(window).scrollTop() + "px"
+}, {
+	queue : false,
+	duration : 350
+});
+
 $(window).scroll(function() {
 	if($(this).scrollTop() < 25){
 		$(".header-bottom").css("position", "absolute");
@@ -42,26 +49,20 @@ $(window).scroll(function() {
 		$(".header-bottom").css("top", "0");
 		$(".header-bottom").attr("onmouseover", "");
 		$(".header-bottom").attr("onmouseout", "");
-	}else if($(this).scrollTop() > 200 && $(this).scrollTop() < $(".header-bottom").offset().top){
-		$(".header-bottom").css("margin-top", "0");
-		$(".header-bottom").css("top", "0");
 	}
 });
 
 function menuOverAction() {
-	$(".header-bottom").animate({top: "40px"}, 500);
+	$(".header-bottom").animate({top: "40px"}, {queue : false, duration : 300});
 }
 
 $(function() {
 	$(".header-bottom").attr("onmouseover", "menuOverAction();");
-	/* $(document).mousemove(function(e) {
+	$(document).mousemove(function(e) {
 		if(e.pageY > 130){
-			$(".header-bottom").one("animate",function(){
-				
-			});
-			$(".header-bottom").animate({top: "0"}, 0);
+			$(".header-bottom").animate({top: "0"}, {queue : false});
 		} 
-	}); */
+	});
 });
 </script>
 
