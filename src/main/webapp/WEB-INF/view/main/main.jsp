@@ -42,11 +42,19 @@ video {
 	z-index : -1;
 }
 
+.header-left {
+	color: white;
+	font-size: 30px;
+	font-weight: bold;
+}
+
 </style>
 
 <script type="text/javascript">
 
 	$("#menu-background").html("");
+	
+	$(".header-left").html("careDog");
 	
 </script>
 

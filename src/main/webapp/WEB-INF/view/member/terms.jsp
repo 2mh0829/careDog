@@ -6,8 +6,15 @@
    String cp = request.getContextPath();
 %>
 
+<script>
+function open_terms() {
+	$(".modal").modal();
+}
+</script>
+
 <div class="body-container">
-	<button onclick="asd();">asdasd</button>
+	<button onclick="open_terms();">asdasd</button>
+	
 <!-- MODAL -->
 <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
    <div class="modal-dialog modal-lg">

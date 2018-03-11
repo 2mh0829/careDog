@@ -8,7 +8,7 @@
 
 <style>
 .menu2 {
-	background: yellow;
+	background: #ffb677;
 	color: black;
 	line-height: normal;
 }

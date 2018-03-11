@@ -26,7 +26,9 @@
             <intercept-url pattern="/index.jsp" access="permitAll" />
             <intercept-url pattern="/main" access="permitAll" />
             <intercept-url pattern="/member/login" access="permitAll" />
-            <intercept-url pattern="/member/member" access="permitAll" />
+            <intercept-url pattern="/member/signUp" access="permitAll" />
+            <intercept-url pattern="/member/id" access="permitAll" />
+            <intercept-url pattern="/member/pwd" access="permitAll" />
 			<intercept-url pattern="/member/userIdCheck" access="permitAll" />
 			
 			<intercept-url pattern="/mungstargram" access="permitAll" />
