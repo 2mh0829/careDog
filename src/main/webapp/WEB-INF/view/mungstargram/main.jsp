@@ -8,10 +8,6 @@
 
 <style>
 
-body {
-	background: #eee;
-}
-
 .header {
 	background: white;
 }

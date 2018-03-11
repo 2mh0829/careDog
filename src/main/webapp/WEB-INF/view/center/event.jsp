@@ -6,50 +6,34 @@
    String cp = request.getContextPath();
 %>
 
-<table style="width: 100%; margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
-  <tr><td height="1" colspan="5" bgcolor="#cccccc"></td></tr>
-  <tr align="center" bgcolor="#eeeeee" height="35" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;">
-      <th width="60" style="color: #787878;">번호</th>
-  	  <th width="80" style="color: #787878;">분류</th>
-      <th style="color: #787878;">제목</th>
-      <th width="80" style="color: #787878;">작성일</th>
-  </tr>
- 
- <c:forEach var="dto" items="${eventList}">
-  <tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;"> 
-      <td><span style="display: inline-block;width: 28px;height:18px;line-height:18px; background: #ED4C00;color: #FFFFFF">공지</span></td>
-      <td align="left" style="padding-left: 10px;">
-           <a href="javascript:articleBoard('${dto.num}', '${pageNo}');">${dto.subject}</a>
-      </td>
-      <td>${dto.created}</td>
-  </tr>
-</c:forEach>
-
-<c:forEach var="dto" items="${list}">
-  <tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;"> 
-      <td>${dto.num}</td>
-      <td align="left" style="padding-left: 10px;">
-           <a href="javascript:contentBoard('${dto.num}', '${pageNo}');">${dto.subject}</a>
-      </td>
-      <td>${dto.isEvent }</td>
-      <td>${dto.subject}</td>
-      <td>${dto.created}</td>
-  </tr>
-  </c:forEach>
-</table>
- 
-<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
-   <tr height="35">
-	<td align="center">
-       <c:if test="${dataCount==0 }">
-           등록된 게시물이 없습니다.
-       </c:if>
-       <c:if test="${dataCount!=0 }">
-           ${paging}
-       </c:if>
-	</td>
-   </tr>
-</table>
+<table class="board-list-1s">
+						<caption></caption>
+						<colgroup>
+							<col style="width:9%;">
+							<col style="width:79%;">
+							<col style="width:12%;">
+						</colgroup>
+						<thead>
+							<tr>
+								<th scope="col">번호</th>
+								<th scope="col">제목</th>
+								<th scope="col">등록일</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="dto" items="${list }">
+								<tr>
+								<td>${dto.num }</td>
+								<td class="subject">
+								<c:if test="${dto.isEvent == 1}">
+								<strong class="FG01">이벤트</strong>
+								</c:if>
+								${dto.subject }</td>
+								<td>${dto.created }</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
 
 <table style="width: 100%; margin: 10px auto; border-spacing: 0px;">
    <tr height="40">

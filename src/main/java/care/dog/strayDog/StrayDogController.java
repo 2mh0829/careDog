@@ -83,6 +83,12 @@ public class StrayDogController {
 		return ".strayDog.tempSupport";
 	}
 	
+	@RequestMapping(value="/strayDog/fixSupport")
+	public String fixSupport() {
+		
+		return ".strayDog.fixSupport";
+	}
+	
 	@RequestMapping(value="/strayDog/addSupport")
 	public String addSupport() {
 		

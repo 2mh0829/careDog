@@ -8,27 +8,54 @@
 %>
 
 <style>
-.main-image{
-	position: absolute;
-	top: 70px;
-	left: 0px;
+
+body {
+	margin : 0;
+	padding : 0;
+	background : url (img.jpg) center center fixed no-repeat;
+	overflow: hidden;
 }
+
+ul.navi li a {
+	color: white;
+}
+
+.header-right a {
+	color: white;
+}
+
+#main-vidio{
+	position: absolute;
+	width: 100%;
+	top: 0; 
+	left: 0;
+}
+
+video {
+	/* position : fixed; */
+	top : -50;
+	left : 0;
+	min-width : 100%;
+	min-height : 100%;
+	width : 100%;
+	height : auto;
+	z-index : -1;
+}
+
 </style>
 
-<script>
-var i = 0;
-setInterval(function() {
-	if(i == 4) i = 0;
-	i++;
-	var mainImg = document.getElementById("mainImg");
-	mainImg.src = "<%=cp %>/resource/img/dog" + i + ".jpg";
-}, 5000);
+<script type="text/javascript">
+
+	$("#menu-background").html("");
+	
 </script>
 
-<div class="main-image">
-	<img id="mainImg" src="<%=cp %>/resource/img/dog1.jpg" style="width: 100%;">
+<div id="main-vidio">
+	<video autoplay loop>
+		<source src="<%=cp %>/resource/vidio/main_vidio.mp4">
+	</video>
 </div>
 
-<div class="body-container" style="width: 70%;">
+<div class="body-container" style="width: 70%; height: 800px;">
 
 </div>
