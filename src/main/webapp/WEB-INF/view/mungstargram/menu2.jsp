@@ -8,7 +8,7 @@
 
 <style>
 .menu2 {
-	background: yellow;
+	background: #ffb677;
 	color: black;
 	line-height: normal;
 }
@@ -17,7 +17,7 @@
 	display: table-cell;
 	vertical-align: middle;
 	width: 250px;
-	height: 90px;
+	height: 65px;
 }
 
 #searchBar {
@@ -155,8 +155,8 @@
 </style>
 
 <script type="text/javascript">
-$(window).scroll(function() {
-	if($(this).scrollTop() >= 70){
+/* $(window).scroll(function() {
+	if($(this).scrollTop() >= 65){
 		$(".search-container").css("height","65px");
 		$(".menu2").css("line-height","normal");
 	}else{
@@ -164,6 +164,7 @@ $(window).scroll(function() {
 		$(".menu2").css("line-height","normal");
 	}
 });
+ */
 
 $(function() {
 	var searchKeyword = "";

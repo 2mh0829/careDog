@@ -3,9 +3,10 @@
 /* header */
 .header {
     width: 100%;
+    height: 130px;
     text-align: left;
     background: white;
-    background-color: rgba( 255, 255, 255, 0 );
+    overflow-x: hidden;
     /* position: static; */
 }
 
@@ -13,12 +14,15 @@
 	position: relative;
     margin: 0px auto;
     width: 100%;
-    height: 70px;
+    height: 65px;
     clear: both;
-    z-index: 21;
+    z-index: 51;
 }
 
 .header-left {
+	position: absolute;
+	top: 15px;
+	left: 60px;
     margin: 0 auto;
     width: 15%;
     margin-left: 20px;
@@ -27,6 +31,9 @@
 }
 
 .header-right {
+	position: absolute;
+	top: 0;
+	right: 0;
 	margin: 0 auto;
 	margin-right: 40px;
 	width: 20%;
@@ -35,13 +42,13 @@
 }
 
 .header-bottom {
-	position: relative;
-	margin: 0px auto;
+	position: absolute;
+	top: 0;
+	margin-top: 25px;
     width: 100%;
-    height: 60px;
+    height: 65px;
     z-index: 23;
 }
-
 
 /* footer */
 .footer {
@@ -79,36 +86,26 @@
 
 /* menu */
 .menu-container {
+	position: absolute;
 	margin: 0 auto;
-	width: 60%;
+	top: 0;
+	width: 100%;
     height: 100%;
+    line-height: 65px;
+    vertical-align: middle;
     float: left;
 }
 
 .menu {
 	position: absolute;
 	margin:0px auto;
-    /*  min-height: 60px; 
-    clear: both;
-    border-radius: 4px;*/
-    /* box-shadow: inset 0 1px 0 rgba(255,255,255,.15), 0 1px 5px rgba(0,0,0,.075);
-    background-color: #f8f8f8;
-    border: 1px solid #e7e7e7; 
-	box-sizing: border-box;*/
 }
-
-/* ul.navi {
-  width:100%;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-} */
 
 .menu2 {
 	position: relative;
 	width: 100%;
-	height: 90px; 
-	line-height: 90px;
+	height: 65px; 
+	line-height: 65px;
 	font-size: 20px;
 	color: white;
 	font-weight: bold;
@@ -117,19 +114,20 @@
 
 ul.navi li { 
   display: inline;
+  border-right: 1px dotted #ccc;
 }
 
 ul.navi li a {
   /* float: inherit; */
-  line-height: 60px;
   text-decoration: none;
   margin: 0 auto;
-  padding: 0 30px;
+  padding: 0 25px; 
+  font-weight: bold;
+  opacity: 0.8;
 }
 
 ul.navi .current a, ul.navi li:hover > a {
   color: #333;
-  font-weight : 900;
   text-decoration: none;
 }
 

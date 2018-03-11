@@ -117,7 +117,7 @@ $(function() {
 		<div class="info-container">
 			<p>CareDog 컴퍼니</p>
 			<p style="color: #696969;">대표 : HAN | 사업자등록번호 : 111-22-33333 | 통신판매업허가번호 2018-서울마포-8102</p>
-			<p style="border-bottom: 1px solid #aaaaaa; padding-bottom: 10px; color: #696969;">주소 : 서울 마포구 월드컵북로 21 풍성빌딩 | 전화:7979-8282</p>
+			<p style="border-bottom: 1px solid #aaaaaa; padding-bottom: 10px; color: #696969;">주소 : 서울 마포구 월드컵북로 21 풍성빌딩 | 전화 : 7979-8282</p>
 			<p>COPYRIGHT(C) 2018 CareDog컴퍼니 All right reserved.</p>
 		</div>
 	</div>

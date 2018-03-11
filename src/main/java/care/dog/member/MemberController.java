@@ -48,14 +48,13 @@ public class MemberController {
 	}
 	
 	// 회원가입 및 회원정보 수정 -----------------------
-	@RequestMapping(value="/member/member", method=RequestMethod.GET)
+	@RequestMapping(value="/member/signUp", method=RequestMethod.GET)
 	public String memberForm(Model model) {
-
 		model.addAttribute("mode", "created");
-		return ".member.member";
+		return ".member.signUp";
 	}
 	
-	@RequestMapping(value="/member/member", method=RequestMethod.POST)
+	@RequestMapping(value="/member/signUp", method=RequestMethod.POST)
 	public String memberSubmit(
 			Member dto,
 			Model model) throws Exception {
@@ -193,4 +192,6 @@ public class MemberController {
 		model.put("passed", passed);
 		return model;
 	}
+	
+	
 }
