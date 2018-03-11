@@ -14,9 +14,12 @@
 
 #background {
 	position: absolute;
-	overflow: hidden;
 	top: 0;
 	left: 0;
+}
+
+.header-left img {
+	width: 80px;
 }
 
 </style>
@@ -24,17 +27,10 @@
 <script>
 
 $(window).scroll(function() {
-	if($(this).scrollTop() >= 70){
-		$(".header-bottom").css("position","fixed");
-		$(".header-bottom").css("top","0px");
-		$(".menu2").css("position","fixed");
-		$(".menu2").css("top","0px");
+	if($(this).scrollTop() >= 65){
 		$(".menu2").css("height","65px");
 		$(".menu2").css("line-height","65px");
 	}else{
-		$(".header-bottom").css("position","relative");
-		$(".header-bottom").css("background","");
-		$(".menu2").css("position","absolute");
 		$(".menu2").css("height","90px");
 		$(".menu2").css("line-height","90px");
 	}
@@ -43,30 +39,30 @@ $(window).scroll(function() {
 
 </script>
 
+
 <div class="header-top">
 
 	<div id='menu-background'>
 		<img src="<%=cp %>/resource/img/menu.png">
-	</div> 
-	
-
-	<div class="menu-container hidden-xs hidden-sm" align="center">
-		<div class="menu">
-			
-			<ul id="mainMenu" class="navi">
-				<li><a href="<%=cp %>/service">Service</a></li>
-				<li><a href="<%=cp %>/mungstargram">mungstargram</a></li>
-				<li><a href="<%=cp %>/strayDog">유기견</a></li>
-				<li><a href="<%=cp %>/dog119">애견119</a></li>
-				<li><a href="<%=cp %>/info">정보</a></li>
-				<li><a href="<%=cp %>/store">펫스토어</a></li>
-				<li><a href="<%=cp %>/center">고객센터</a></li>
-			</ul>
-		</div>
 	</div>
-
-
-	<div class="header-right" align="right" style="line-height: 70px;">
+	
+	<div class="header-left">
+		<img src="<%=cp %>/resource/img/main-dog.png">	
+	</div>
+	
+	<div class="menu-container" align="center">
+		<ul id="mainMenu" class="navi">
+			<li><a href="<%=cp %>/service">Service&nbsp;</a></li>
+			<li><a href="<%=cp %>/mungstargram">mungstargram&nbsp;</a></li>
+			<li><a href="<%=cp %>/strayDog">유기견&nbsp;</a></li>
+			<li><a href="<%=cp %>/dog119">애견119&nbsp;</a></li>
+			<li><a href="<%=cp %>/info">정보&nbsp;</a></li>
+			<li><a href="<%=cp %>/store">펫스토어&nbsp;</a></li>
+			<li><a href="<%=cp %>/center">고객센터&nbsp;</a></li>
+		</ul>
+	</div>
+	
+	<div class="header-right" align="right" style="line-height: 65px;">
 	<c:if test="${empty sessionScope.member }">
 		<a href="<%=cp %>/member/login"><span class="glyphicon glyphicon-log-in">&nbsp;</span>sign in</a> &nbsp;&nbsp;
 		<a href="<%=cp %>/member/join"><span class="glyphicon glyphicon-user">&nbsp;</span>sign up</a>
@@ -83,18 +79,15 @@ $(window).scroll(function() {
                 </c:if>
             </c:if>
 	</div>
-
 	
 </div>
 
-
-<%-- 
+<!-- 
 <div class="header-bottom">
-	<div class="menu-container hidden-md hidden-lg" align="center">
+	<div class="menu-container" align="center">
 		<div style="float: right;">
 			<a>▤ </a>
 		</div>
 	</div>
 </div>
---%>
- 
+ -->

@@ -5,7 +5,6 @@
     width: 100%;
     text-align: left;
     background: white;
-    overflow: hidden;
     /* position: static; */
 }
 
@@ -13,12 +12,14 @@
 	position: relative;
     margin: 0px auto;
     width: 100%;
-    height: 80px;
     clear: both;
     z-index: 51;
 }
 
 .header-left {
+	position: absolute;
+	top: 15px;
+	left: 60px;
     margin: 0 auto;
     width: 15%;
     margin-left: 20px;
@@ -27,6 +28,9 @@
 }
 
 .header-right {
+	position: absolute;
+	top: 0;
+	right: 0;
 	margin: 0 auto;
 	margin-right: 40px;
 	width: 20%;
@@ -35,7 +39,8 @@
 }
 
 .header-bottom {
-	position: relative;
+	position: fixed;
+	top: 0;
 	margin: 0px auto;
     width: 100%;
     height: 90px;
@@ -81,10 +86,11 @@
 .menu-container {
 	position: absolute;
 	margin: 0 auto;
-	top: 10;
-	left: 300px;
+	top: 0;
 	width: 100%;
     height: 100%;
+    line-height: 65px;
+    vertical-align: middle;
     float: left;
 }
 
@@ -106,14 +112,16 @@
 
 ul.navi li { 
   display: inline;
+  border-right: 1px dotted #ccc;
 }
 
 ul.navi li a {
   /* float: inherit; */
-  line-height: 60px;
   text-decoration: none;
   margin: 0 auto;
-  padding: 0 30px;
+  padding: 0 25px; 
+  font-weight: bold;
+  opacity: 0.8;
 }
 
 ul.navi .current a, ul.navi li:hover > a {
