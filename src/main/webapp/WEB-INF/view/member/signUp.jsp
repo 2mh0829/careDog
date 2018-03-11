@@ -354,9 +354,9 @@ function open_terms() {
          <div>
                <div class="col-lg-12">
                     <ul class="nav nav-tabs mt-15">
-                      <li class="nav-item"><a class="nav-link active" href="#tab-01" data-toggle="tab">서비스이용약관</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#tab-02" data-toggle="tab">개인정보처리방침</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#tab-03" data-toggle="tab">이메일 무단 수집 거부</a></li>
+                      <li class="nav-item"><a class="nav-link active" href="#tab-01" role="tab" data-toggle="tab">서비스이용약관</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#tab-02" role="tab" data-toggle="tab">개인정보처리방침</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#tab-03" role="tab" data-toggle="tab">이메일 무단 수집 거부</a></li>
                     </ul>
                </div>
             </div>
