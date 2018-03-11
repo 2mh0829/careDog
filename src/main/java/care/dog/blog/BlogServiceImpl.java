@@ -169,6 +169,7 @@ public class BlogServiceImpl implements BlogService{
 
 	@Override
 	public BlogInfo readBlogInfo(String memberId) {
+		System.out.println("##"+memberId);
 		BlogInfo dto=null;
 		try {
 			dto=dao.selectOne("blog.readBlogInfo", memberId);
