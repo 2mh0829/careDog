@@ -23,6 +23,8 @@ public class EventServiceImpl implements EventService{
 	public int insertEvent(Event dto, String pathname) {
 		int result = 0;
 		try {
+			int seq = dao.selectOne("event.seq");
+			dto.setNum(seq);
 			result = dao.insertData("event.insertEvent",dto);
 			
 			if(! dto.getUpload().isEmpty()) {

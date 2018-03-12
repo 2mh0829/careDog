@@ -24,12 +24,26 @@
 </sql>
 
 <insert id="insertEvent" parameterType="care.dog.center.event.Event">
-INSERT INTO event (num, memberId, subject, content, isEvent)
-VALUES (event.seq_NEXTVAL, #{memberId}, #{subject}, #{content},  #{isEvent})
+INSERT INTO event (num, memberId, subject, content, isEvent, created)
+VALUES (#{num}, #{memberId}, #{subject}, #{content}, 1, sysdate)
 </insert>
 
 <select id="listEvent" parameterType="map" resultType="care.dog.center.event.Event">
-SELECT num, isEvent, subject, created FROM event WHERE isEvent=1 ORDER BY num DESC
+SELECT * FROM (
+	SELECT ROWNUM rnum, tb.* FROM (
+		SELECT num, e.memberId, subject, content, created ,isEvent
+		FROM event e
+		JOIN member1 m ON e.memberId=m.memberId
+		<where>
+        	<if test="searchValue != null and searchValue != ''">
+				<include refid="where-list"/>
+		    </if>
+	    </where>
+	    ORDER BY num DESC
+	    <![CDATA[
+	) tb WHERE ROWNUM <= 10
+) WHERE rnum >= 1
+]]>
 </select>
 
 <update id="updateEvent" parameterType="care.dog.center.event.Event">
@@ -97,21 +111,14 @@ FROM eventFile WHERE fileNum=#{fileNum}
 DELETE FROM eventFile WHERE num=#{num}
 </delete>
 
-<select id="dataCount" parameterType="map" resultType="care.dog.center.event.Event">
-SELECT * FROM (
-	SELECT ROWNUM rnum, tb.* FROM (
-		SELECT num, e.memberId, subject, content, created ,isEvent
-		FROM event e
-		JOIN member1 m ON e.memberId=m.memberId
+<select id="dataCount" parameterType="map" 
+	       resultType="Integer">
+		SELECT NVL(COUNT(*), 0) FROM event e
+		     JOIN member1 m ON e.memberId=m.memberId
 		<where>
-        	<if test="searchValue != null and searchValue != ''">
+			<if test="searchValue != null and searchValue!=''  ">
 				<include refid="where-list"/>
-		    </if>
-	    </where>
-	    ORDER BY num DESC
-	    <![CDATA[
-	) tb WHERE ROWNUM <= #{end}
-) WHERE rnum >= #{start}
-]]>
+			</if>
+		</where>
 </select>
 </mapper>

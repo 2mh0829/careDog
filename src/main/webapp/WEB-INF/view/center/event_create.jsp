@@ -123,9 +123,7 @@ textarea {
 				<tbody>
 					<tr>
 						<td>
-							<c:if test="${dto.isEvent==1 }">
-							<strong class="FG01">공지사항</strong>
-							</c:if>
+							<strong class="FG01">${dto.isEvent==1 }</strong>
 						</td>
 						<td>
 							<span class="tit"><input type="text" name="subject" id="subject" style="width: 691px;"></span>
