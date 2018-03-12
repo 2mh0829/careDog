@@ -130,7 +130,7 @@ textarea {
 						<td>
 							<span class="tit"><input type="text" id="subject" style="width: 691px;"></span>
 						</td>
-						<td class="name">${sessionScope.member.memberId } / ${dto.created }</td>
+						<td class="name">${sessionScope.member.memberId }</td>
 
 
 					</tr>
