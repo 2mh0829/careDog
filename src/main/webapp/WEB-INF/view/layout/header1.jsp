@@ -20,7 +20,7 @@
 }
 
 .header-left img {
-	width: 80px;
+	width: 100px;
 }
 
 </style>
@@ -48,7 +48,7 @@
 	</div>
 	
 	<div class="header-left">
-		<a href="<%=cp %>"><img src="<%=cp %>/resource/img/logo.png"></a>	
+		<a href="<%=cp %>"><img src="<%=cp %>/resource/img/logo_black.png"></a>	
 	</div>
 	
 	<div class="header-right" align="right" style="line-height: 65px;">
