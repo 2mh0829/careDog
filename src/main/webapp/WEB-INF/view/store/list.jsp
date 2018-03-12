@@ -91,36 +91,43 @@
 
 	<div class="content section01">
 	
-		<!-- 상품 이미지 -->
-		<div class="product-image">
-			<a href="<%=cp%>/store/article">
-				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-			</a>
-		</div>
-		
-		<!-- 브랜드명 -->
-		<div class="product-brand">
-			<!-- <a href="#">그리니즈</a> -->
-			그리니즈
-		</div>
-		
-		<!-- 상품 제목 -->
-		<div class="product-title">
-			<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-		</div>
-		
-		<!-- 상품 가격 -->
-		<div class="product-price">
-			<strong>40000</strong>원
-		</div>
-		
-		<!-- new / best / sale 구분 이미지 -->
-		<div class="product-icon">
-			<img src="<%=cp%>/resource/img/store/new.gif">
-		</div>
-		
+		<c:forEach var="dto" items="${list}">
+			<!-- 상품 이미지 -->
+			<div class="product-image">
+				<a href="<%=cp%>/store/article">
+					<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
+					<%-- <img src="<%=cp%>/uploads/photo/${dto.imageFilename}"> --%>
+				</a>
+			</div>
+			
+			<!-- 브랜드명 -->
+			<div class="product-brand">
+				<!-- <a href="#">그리니즈</a> -->
+				그리니즈
+			</div>
+			
+			<!-- 상품 제목 -->
+			<div class="product-title">
+				<span class="productName" onclick="javascript:article('${dto.productId}');" >
+					${dto.productName}
+				</span>
+			</div>
+			
+			<!-- 상품 가격 -->
+			<div class="product-price">
+				<span class="sellingPrice">
+					<strong>${dto.sellingPrice}</strong>원
+				</span>
+			</div>
+			
+			<!-- new / best / sale 구분 이미지 -->
+			<div class="product-icon">
+				<img src="<%=cp%>/resource/img/store/new.gif">
+			</div>
+		</c:forEach>
 	</div>
 	
+	<%-- 
 	<div class="content section02">
 	
 		<div class="product-image">
@@ -228,7 +235,8 @@
 		</div>
 		
 	</div>
-	
+	 --%>
+	 
 	<div class="paging" align="center">
 		prev .. 1 2 3 .. next
 	</div>
