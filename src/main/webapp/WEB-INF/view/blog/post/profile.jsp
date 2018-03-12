@@ -20,12 +20,6 @@
 			</tr>
 			<tr><td colspan="2" height="1" bgcolor="#cccccc"></td></tr>
 
-			<tr height="40">
-			     <td width="100" style="text-align:left;"><label style="font-weight: 700;">닉네임</label></td>
-			     <td> 
-						${blogInfo.nickName}
-				 </td>
-			</tr>
 			<tr><td colspan="2" height="1" bgcolor="#cccccc"></td></tr>
 
 			<tr height="40">

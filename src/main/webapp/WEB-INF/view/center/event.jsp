@@ -28,7 +28,7 @@
 								<c:if test="${dto.isEvent == 1}">
 								<strong class="FG01">이벤트</strong>
 								</c:if>
-								${dto.subject }</td>
+								<a href="javascript:contentBoard('${dto.num}','${pageNo }' )">${dto.subject }</a></td>
 								<td>${dto.created }</td>
 								</tr>
 							</c:forEach>

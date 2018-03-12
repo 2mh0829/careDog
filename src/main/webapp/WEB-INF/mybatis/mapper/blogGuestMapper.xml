@@ -7,8 +7,8 @@
 	</select>
 	
 	<insert id="insertGuest" parameterType="care.dog.blog.guest.Guest">
-	INSERT INTO ${tableName}_guest(num, blogSeq, userId, content)
-	   VALUES (#{num}, #{blogSeq}, #{userId}, #{content})
+	INSERT INTO ${tableName}_guest(num, blogId, memberId, content)
+	   VALUES (#{num}, #{blogId}, #{memberId}, #{content})
 	</insert>
 	
 	<select id="dataCount" parameterType="map" resultType="Integer">
@@ -19,9 +19,9 @@
 	          parameterType="map">
 		SELECT * FROM (
 		    SELECT ROWNUM rnum, tb.* FROM (
-			     SELECT num, g.userId, m.userName, g.blogSeq, g.content, g.created
+			     SELECT num, g.memberId, m.userName, g.blogId, g.content, g.created
 			        FROM ${tableName}_guest g 
-	                JOIN member2 m ON g.userId=m.userId
+	                JOIN member1 m ON g.memberId=m.memberId
 	                ORDER BY num DESC
 	<![CDATA[
 	        ) tb WHERE ROWNUM <= #{end}
