@@ -24,8 +24,8 @@
 </sql>
 
 <insert id="insertEvent" parameterType="care.dog.center.event.Event">
-INSERT INTO event (num, memberId, isEvent, subject, content, created)
-VALUES (#{num}, #{memberId}, #{isEvent}, #{subject}, #{content}, #{created})
+INSERT INTO event (num, memberId, subject, content, isEvent)
+VALUES (event.seq_NEXTVAL, #{memberId}, #{subject}, #{content},  #{isEvent})
 </insert>
 
 <select id="listEvent" parameterType="map" resultType="care.dog.center.event.Event">
@@ -100,7 +100,7 @@ DELETE FROM eventFile WHERE num=#{num}
 <select id="dataCount" parameterType="map" resultType="care.dog.center.event.Event">
 SELECT * FROM (
 	SELECT ROWNUM rnum, tb.* FROM (
-		SELECT num, e.memberId, isEvent, subject, content, created
+		SELECT num, e.memberId, subject, content, created ,isEvent
 		FROM event e
 		JOIN member1 m ON e.memberId=m.memberId
 		<where>

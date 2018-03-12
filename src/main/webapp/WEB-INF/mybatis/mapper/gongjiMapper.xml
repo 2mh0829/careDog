@@ -24,8 +24,8 @@
 </sql>
 
 <insert id="insertGongji" parameterType="care.dog.center.Gongji">
-INSERT INTO gongji (num, memberId, isGongji, subject, content, imageFilename, created)
-VALUES (#{num}, #{memberId}, #{isGongji}, #{subject}, #{content}, #{imageFilename}, #{created})
+INSERT INTO gongji (num, memberId, isGongji, subject, content, created)
+VALUES (#{num}, #{memberId}, #{isGongji}, #{subject}, #{content}, #{created})
 </insert>
 
 <select id="listGongji" parameterType="map" resultType="care.dog.center.Gongji">
@@ -100,7 +100,7 @@ DELETE FROM gongjiFile WHERE num=#{num}
 <select id="dataCount" parameterType="map" resultType="care.dog.center.Gongji">
 SELECT * FROM (
 	SELECT ROWNUM rnum, tb.* FROM (
-		SELECT num, g.memberId, isGongji, subject, content, imageFilename, created
+		SELECT num, g.memberId, isGongji, subject, content, created
 		FROM gongji g
 		JOIN member1 m ON g.memberId=m.memberId
 		<where>

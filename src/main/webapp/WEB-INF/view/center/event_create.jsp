@@ -112,7 +112,7 @@ textarea {
 	/*outline:none;*/
 }
 </style>
-
+<form name="boardForm" method="post" enctype="multipart/form-data">
 <div class="body-container" style="width: 1020px;">
 <table class="board-view-1s mgT40">
 				<colgroup>
@@ -124,11 +124,11 @@ textarea {
 					<tr>
 						<td>
 							<c:if test="${dto.isEvent==1 }">
-							<strong class="FG01">이벤트</strong>
+							<strong class="FG01">공지사항</strong>
 							</c:if>
 						</td>
 						<td>
-							<span class="tit"><input type="text" id="subject" style="width: 691px;"></span>
+							<span class="tit"><input type="text" name="subject" id="subject" style="width: 691px;"></span>
 						</td>
 						<td class="name">${sessionScope.member.memberId }</td>
 
@@ -137,7 +137,7 @@ textarea {
 					<tr>
 						<td class="textus" colspan="3">
 						<div class="contEditor">
-						<textarea id="eventInput" cols="5" rows="1" style="width:98%;height:280px;"></textarea>
+						<textarea id="eventInput" name="content" cols="5" rows="1" style="width:98%;height:280px;"></textarea>
 
 </div>
 </td>
@@ -173,3 +173,4 @@ textarea {
 		</div>
 
 </div>
+</form>
