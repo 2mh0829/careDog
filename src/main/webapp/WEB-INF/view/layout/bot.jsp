@@ -10,11 +10,11 @@
 #right-banner {
 	position: absolute;
 	width: 100px;
-	height: 400px;
+	height: 300px;
 	top: 0;
 	left: 0;
 	z-index: 10;
-	background: #ffc;
+	background: #ffffff;
 	padding: 5px;
 	border: 1px solid #CCCCCC;
 	text-align: center;
@@ -23,8 +23,24 @@
 
 .banner-top {
 	margin: 0 auto;
-	width: 90%;
-	height: 220px;
+	/* width: 90%; */
+	width: 80px;
+	height: 120px;
+	display: table;
+	border-bottom: 1px solid #808080;
+}
+
+.banner-title {
+	border-bottom: 1px solid #808080;
+	padding-bottom: 5px;
+}
+
+.banner-cart {
+	width: 80px;
+	text-align: center;
+	height: 80px;
+	display: table-cell;
+	vertical-align: middle;
 }
 
 .banner-middle {
@@ -108,8 +124,20 @@ $("body").on("click", ".ui-dialog-titlebar-close", function() {
 </script>
 
 
-<div id="right-banner">배너 영역
-	<div class='banner-top'></div>
+<div id="right-banner">
+
+	<div class="banner-title">
+		<span>Quick menu</span>
+	</div>
+	
+	<div class='banner-top'>
+		<div class="banner-cart">
+			<a href="<%=cp%>/store/cart">
+				<img src="<%=cp%>/resource/img/shopping-cart.png" style="width: 30px;">
+			</a>
+			<p style="font-size: 12px; padding-top: 20px;">장바구니</p>
+		</div>
+	</div>
 	
 	<div class='banner-middle'>
 		<div onclick="bot_open();">

@@ -66,13 +66,14 @@
 .paging {
 	clear: both;
 	font-size: 23px;
+	padding: 20px;
 }
 	
 </style>
 
 <div class="body-container">	
 
-	<div class="header">
+	<div class="list-header">
 
 		<div class="list-title">
 			<h3>ALL</h3>
@@ -89,9 +90,10 @@
 
 	</div>
 
-	<div class="content section01">
+	<c:forEach var="dto" items="${list}">
 	
-		<c:forEach var="dto" items="${list}">
+		<div class="content section">
+	
 			<!-- 상품 이미지 -->
 			<div class="product-image">
 				<a href="<%=cp%>/store/article">
@@ -124,119 +126,9 @@
 			<div class="product-icon">
 				<img src="<%=cp%>/resource/img/store/new.gif">
 			</div>
-		</c:forEach>
-	</div>
+		</div>
+	</c:forEach>
 	
-	<%-- 
-	<div class="content section02">
-	
-		<div class="product-image">
-			<a href="<%=cp%>/store/article">
-				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-			</a>
-		</div>
-		
-		<div class="product-brand">
-			<!-- <a href="#">그리니즈</a> -->
-			그리니즈
-		</div>
-		
-		<div class="product-title">
-			<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-		</div>
-		
-		<div class="product-price">
-			<strong>40000</strong>원
-		</div>
-		
-		<div class="product-icon">
-			<img src="<%=cp%>/resource/img/store/new.gif">
-		</div>
-		
-	</div>
-	
-	<div class="content section03">
-	
-		<div class="product-image">
-			<a href="<%=cp%>/store/article">
-				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-			</a>
-		</div>
-		
-		<div class="product-brand">
-			<!-- <a href="#">그리니즈</a> -->
-			그리니즈
-		</div>
-		
-		<div class="product-title">
-			<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-		</div>
-		
-		<div class="product-price">
-			<strong>40000</strong>원
-		</div>
-		
-		<div class="product-icon">
-			<img src="<%=cp%>/resource/img/store/new.gif">
-		</div>
-		
-	</div>
-	
-	<div class="content section04">
-	
-		<div class="product-image">
-			<a href="<%=cp%>/store/article">
-				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-			</a>
-		</div>
-		
-		<div class="product-brand">
-			<!-- <a href="#">그리니즈</a> -->
-			그리니즈
-		</div>
-		
-		<div class="product-title">
-			<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-		</div>
-		
-		<div class="product-price">
-			<strong>40000</strong>원
-		</div>
-		
-		<div class="product-icon">
-			<img src="<%=cp%>/resource/img/store/new.gif">
-		</div>
-		
-	</div>
-	
-	<div class="content section05">
-	
-		<div class="product-image">
-			<a href="<%=cp%>/store/article">
-				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-			</a>
-		</div>
-		
-		<div class="product-brand">
-			<!-- <a href="#">그리니즈</a> -->
-			그리니즈
-		</div>
-		
-		<div class="product-title">
-			<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-		</div>
-		
-		<div class="product-price">
-			<strong>40000</strong>원
-		</div>
-		
-		<div class="product-icon">
-			<img src="<%=cp%>/resource/img/store/new.gif">
-		</div>
-		
-	</div>
-	 --%>
-	 
 	<div class="paging" align="center">
 		prev .. 1 2 3 .. next
 	</div>
