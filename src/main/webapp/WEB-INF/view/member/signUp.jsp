@@ -351,8 +351,8 @@ function open_terms() {
          </div>
          
          <div class="modal-body">
-	         <div class="col-lg-12">
-	         	<ul class="nav nav-tabs mt-15">
+	        <div class="col-lg-12"> 
+				<ul class="nav nav-tabs mt-15">
 	
 					<li class="nav-item"><a class="nav-link" href="#tab-01" data-toggle="tab">서비스이용약관</a></li>
 					
@@ -361,13 +361,14 @@ function open_terms() {
 					<li class="nav-item"><a class="nav-link" href="#tab-03" data-toggle="tab">이메일 무단 수집 거부</a></li>
 					
 				</ul>
-			</div>	
-			<div class="modal-body modal-short">
-				<div class="tab-content">
-				
+			</div>
+
+		
+			<div class="tab-content">
+
 				<div class="tab-pane fade in active" id= "tab-01">
 				
-				<pre class="fs-12">
+					<pre class="fs-12">
 [ 회원가입약관 ]
 
 제 1 장 총 칙
@@ -718,15 +719,14 @@ DB로 옮겨진 개인정보는 법률에 의한 경우가 아니고서는 보�
                </pre>
 				
 				</div>
-				
-				</div> <!-- tab-content -->
-			</div><!-- modal-body short -->
-			
+
+</div> <!-- tab-content -->
+
 		<div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-check"></i>확인</button>
         </div>
 
-      </div><!-- /.modal-content -->
+      </div><!-- /.modal-body -->
          
 
           </div>
