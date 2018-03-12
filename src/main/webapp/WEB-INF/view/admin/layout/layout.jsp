@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Care Dog</title>
+<title>Dog Mate</title>
 
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-ui.min.js"></script>
@@ -26,11 +26,9 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="<%=cp %>/resource/css/font.css?ver=1.2" type="text/css">
 <link rel="stylesheet" href="<%=cp %>/resource/css/style.css?ver=1" type="text/css">
-<link rel="stylesheet" href="<%=cp %>/resource/css/layout.css?ver=2.5" type="text/css">
-
+<link rel="stylesheet" href="<%=cp %>/resource/css/layout.css?ver=3.5" type="text/css">
 
 </head>
-
 <body>
 
 <div class="header">
@@ -38,22 +36,11 @@
 </div>
 
 <div class="container">
-	<div class="left-container">
-		<tiles:insertAttribute name="left" />
-	</div>
-	
-	<div class="">
-		<tiles:insertAttribute name="body" />
-	</div>
+	<tiles:insertAttribute name="body" />
 </div>
 
 <div class="footer">
 	<tiles:insertAttribute name="footer" />
-</div>
-
-
-<div class="chatbot">
-	<tiles:insertAttribute name="bot" />
 </div>
 
 </body>
