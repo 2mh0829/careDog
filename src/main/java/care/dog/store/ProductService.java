@@ -6,9 +6,7 @@ import java.util.Map;
 public interface ProductService {
 	
 	public List<Product> listProduct(Map<String, Object> map);
-
-	//public int dataCount(Map<String, Object> map);
-
-	public int dataCount();
+	public int dataCount(Map<String, Object> map);
+	//public int dataCount();
 
 }

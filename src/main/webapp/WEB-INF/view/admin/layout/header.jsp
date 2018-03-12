@@ -3,8 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
-	String cp = request.getContextPath();
+   String cp = request.getContextPath();
 %>
+
 
 <style>
 
@@ -18,29 +19,30 @@
 	width: 100px;
 }
 
+a {
+	color: white;
+}
+
 </style>
 
 
 <div class="header-top">
 
 	<div id='menu-background'>
-		<img src="<%=cp %>/resource/img/menu.png">
+		<img src="<%=cp %>/resource/img/menu_admin.png">
 	</div>
 	
 	<div class="menu-container" align="center">
 		<ul id="mainMenu" class="navi">
-			<li><a href="<%=cp %>/service">서비스&nbsp;</a></li>
-			<li><a href="<%=cp %>/mungstargram">멍스타그램&nbsp;</a></li>
-			<li><a href="<%=cp %>/strayDog">유기견&nbsp;</a></li>
-			<li><a href="<%=cp %>/dog119">펫119&nbsp;</a></li>
-			<li><a href="<%=cp %>/info">정보&nbsp;</a></li>
-			<li><a href="<%=cp %>/store">펫#&nbsp;</a></li>
-			<li><a href="<%=cp %>/center">고객센터&nbsp;</a></li>
+			<li><a href="<%=cp %>">서비스&nbsp;</a></li>
+			<li><a href="<%=cp %>">펫#&nbsp;</a></li>
+			<li><a href="<%=cp %>">유기견&nbsp;</a></li>
+			<li><a href="<%=cp %>">고객센터&nbsp;</a></li>
 		</ul>
 	</div>
 	
 	<div class="header-left">
-		<a href="<%=cp %>"><img src="<%=cp %>/resource/img/logo_black.png"></a>	
+		<a href="<%=cp %>"><img src="<%=cp %>/resource/img/logo_white.png"></a>	
 	</div>
 	
 	<div class="header-right" align="right" style="line-height: 65px;">
@@ -62,4 +64,3 @@
 	</div>
 	
 </div>
-

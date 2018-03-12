@@ -71,6 +71,20 @@
 	
 </style>
 
+<script type="text/javascript">
+
+function searchList() {
+	var f = document.searchForm;
+	f.submit();
+}
+
+function article(num) {
+	var url="${articleUrl}&num="+num;
+	location.href=url;
+}
+
+</script>
+
 <div class="body-container">	
 
 	<div class="list-header">
@@ -104,8 +118,9 @@
 			
 			<!-- 브랜드명 -->
 			<div class="product-brand">
-				<!-- <a href="#">그리니즈</a> -->
-				그리니즈
+				<span class="brand" onclick="javascript:article('${dto.productId}');" >
+					${dto.brand}
+				</span>
 			</div>
 			
 			<!-- 상품 제목 -->
@@ -129,10 +144,43 @@
 		</div>
 	</c:forEach>
 	
+	<!-- 
 	<div class="paging" align="center">
 		prev .. 1 2 3 .. next
 	</div>
-	
+	 -->
+	 
+	  <div class="paging" style="text-align: center; min-height: 50px; line-height: 50px;">
+            <c:if test="${dataCount==0 }">
+                  등록된 게시물이 없습니다.
+            </c:if>
+            <c:if test="${dataCount!=0 }">
+                ${paging}
+            </c:if>
+        </div>        
+        
+        <div style="clear: both;">
+        		<div style="float: left; width: 20%; min-width: 85px;">
+        		    <button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/store/list';">새로고침</button>
+        		</div>
+        		<div style="float: left; width: 60%; text-align: center;">
+        		     <form name="searchForm" action="<%=cp%>/store/list" method="post" class="form-inline">
+						  <select class="form-control input-sm" name="searchKey" >
+						      <option value="productName">제품명</option>
+						      <option value="brand">브랜드명</option>
+						  </select>
+						  <input type="text" class="form-control input-sm input-search" name="searchValue">
+						  <button type="button" class="btn btn-info btn-sm btn-search" onclick="searchList();">
+						  <span class="glyphicon glyphicon-search"></span> 검색</button>
+        		     </form>
+        		</div>
+        		<%-- 
+        		<div style="float: left; width: 20%; min-width: 85px; text-align: right;">
+        		    <button type="button" class="btn btn-primary btn-sm bbtn" onclick="javascript:location.href='<%=cp%>/photo/created';"><span class="glyphicon glyphicon glyphicon-pencil"></span> 등록하기</button>
+        		</div>
+        		 --%>
+        </div>
+	 
 </div>	
 
 
