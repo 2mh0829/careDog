@@ -1,17 +1,11 @@
 @CHARSET "UTF-8";
 /* caredog */
 .blog-layout {
-		background-color:#D4F4FA;
+	
 	width:1300px;
 	padding-top:20px;
 	margin:0px auto;
 }
-/* .blog-background{
-	position:static;
-		background-color:#D4F4FA;
-		width:100%;
-		height:100%;
-} */
 .blog-header {
 	
 	width:1300px;
@@ -25,9 +19,9 @@
 	width:100%;
 }
 .blog-header-top {
-	clear: both;
-	height: 70px;
-	line-height: 70px;
+	/* clear: both; */
+/* 	height: 30px; */
+/* 	line-height: 70px; */
 }
 
 .blog-header-top a{
@@ -54,16 +48,17 @@
 .nav li a {
   float: left;
   font-size:14px;
-  color: #fff;
+  color: #5C95C5;
   text-decoration: none;
   margin: 0;
+  font-weight: bold;
   padding: 13px 20px;
-  background: #424951;  
+  
 }
 
 .nav > .active > a, .nav > .active > a:hover, .nav > .active > a:focus {
-    color: #fff;
-    background-color: #2f3741;
+    color: #5C95C5;
+    background-color: #EBF7FF;
     font-weight: bold;
 }
 
@@ -75,8 +70,11 @@
 .blog-body-left{
 			float:left;
 	font-size: 9pt;
+	
 }
-
+.sch{
+	width:400px;
+}
 .blog-left {
 
 	margin-top:15px;
@@ -87,19 +85,20 @@
 	border:1px solid #ccc;
 	padding: 8px 6px;
 	border-radius:5px;
-
+}
 .profile-photo {
 	clear:both;
 	margin:0px auto;
 	height:164px;
 	width:164px;
-	border:1px solid #ccc;
+	/* border:1px solid #ccc; */
 	padding: 2px 2px;
 }
 
 .blog-body-right {
 margin-top:10px;
 	float:left;
+	
 	text-align:left;
 	min-height:600px;
 	padding: 5px;

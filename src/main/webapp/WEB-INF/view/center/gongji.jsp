@@ -20,6 +20,7 @@
 								<th scope="col">등록일</th>
 							</tr>
 						</thead>
+						
 						<tbody>
 							<c:forEach var="dto" items="${list }">
 								<tr>
@@ -28,7 +29,7 @@
 								<c:if test="${dto.isGongji == 1}">
 								<strong class="FG02">공지사항</strong>
 								</c:if>
-								${dto.subject }</td>
+								<a href="javascript:contentBoard('${dto.num }','${pageNo }')">${dto.subject }</a></td>
 								<td>${dto.created }</td>
 								</tr>
 							</c:forEach>

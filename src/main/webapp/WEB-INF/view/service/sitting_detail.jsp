@@ -7,38 +7,18 @@
 %>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css"></script>
 
 <script>
 
-$(function(){
-    $("#left-datepicker").datepicker({
-    	dateFormat: "yy-mm-dd",
-    	showAnim: "slideDown",
-    	showMonthAfterYear: true,
-    	yearSuffix: '년',
-    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-    	minDate: 0
-    });
-});
-
-$(function(){
-    $("#right-datepicker").datepicker({
-    	dateFormat: "yy-mm-dd",
-    	showAnim: "slideDown",
-    	showMonthAfterYear: true,
-    	yearSuffix: '년',
-    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-    	minDate: 0
-    });
-});
-
 $( function() {
     $( "#datepicker" ).datepicker({
+    	dateFormat: "yy-mm-dd",
+    	showAnim: "slideDown",
+    	showMonthAfterYear: true,
+    	yearSuffix: '년',
+    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+    	minDate: 0
     	autoSize: true
     });
 } );
@@ -293,6 +273,17 @@ li{
 	margin-bottom: 5px;
 }
 
+.environment {
+	padding-top: 40px;
+}
+
+.environment h3 {
+	margin-bottom: 15px;
+    color: #18ab29;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 </style>
 
 <div class="body-container">
@@ -418,6 +409,14 @@ li{
 			</div>
 			<div id="datepicker">
 				
+			</div>
+		</div>
+		<div class="environment">
+			<h3>돌봄 환경</h3>
+			<div class="row-environment">
+				<dl class="col-sm-6 left">
+					<dt class="pull-left">돌봄공간</dt>
+				</dl>
 			</div>
 		</div>
 	</div>

@@ -20,14 +20,14 @@ $(function(){
 });
 
 function listPage(page) {
-	var url="<%=cp%>/blog/${blogSeq}/guestList";
+	var url="<%=cp%>/blog/${blogId}/guestList";
 	$.post(url, {pageNo:page}, function(data){
 		printGuest(data);
 	}, "json");
 }
 
 function sendGuest() {
-	var uid="${sessionScope.member.userId}";
+	var uid="${sessionScope.member.memberId}";
 	if(! uid) {
 		alert("로그인이 필요 합니다.");
 		return false;
@@ -39,7 +39,7 @@ function sendGuest() {
 	
 	$.ajax({
 		type:"POST"
-		,url:"<%=cp%>/blog/${blogSeq}/guestCreated"
+		,url:"<%=cp%>/blog/${blogId}/guestCreated"
 		,data:query
 		,dataType:"JSON"
 		,success:function(data) {
@@ -69,14 +69,14 @@ function check() {
 }
 
 function deleteGuest(num, page) {
-	var uid="${sessionScope.member.userId}";
+	var uid="${sessionScope.member.memberId}";
 	if(! uid) {
 		alert("로그인이 필요 합니다.");
 		return;
 	}
 	
 	if(confirm("게시물을 삭제하시겠습니까 ? ")) {	
-		var url="<%=cp%>/blog/${blogSeq}/guestDelete";
+		var url="<%=cp%>/blog/${blogId}/guestDelete";
 		$.post(url, {num:num, pageNo:page}, function(data){
 			var isLogin=data.isLogin;
 			if(isLogin=="false") {
@@ -91,7 +91,7 @@ function deleteGuest(num, page) {
 }
 
 function printGuest(data) {
-	var uid="${sessionScope.member.userId}";
+	var uid="${sessionScope.member.memberId}";
 	var total_page=data.total_page;
 	var dataCount=data.dataCount;
 	var pageNo=data.pageNo;
@@ -110,14 +110,14 @@ function printGuest(data) {
 		for(var idx=0; idx<data.list.length; idx++) {
 			var num=data.list[idx].num;
 			var userName=data.list[idx].userName;
-			var userId=data.list[idx].userId;
+			var memberId=data.list[idx].memberId;
 			var content=data.list[idx].content;
 			var created=data.list[idx].created;
 			
 			out+="    <tr height='30'  style='border: 1px solid #c3c3c3;'>";
 			out+="      <td width='50%' style='padding-left: 5px;'>"+ userName+"</td>";
 			out+="      <td width='50%' align='right' style='padding-right: 5px;'>" + created;
-			if(uid==userId || uid=="admin" || owner==1) {
+			if(uid==memberId || uid=="admin" || owner==1) {
 				out+=" | <a onclick='deleteGuest(\""+num+"\", \""+pageNo+"\");'>삭제</a></td>" ;
 			} else {
 				out+=" | <a href='#'>신고</a></td>" ;
@@ -138,7 +138,7 @@ function printGuest(data) {
 	$("#listGuest").html(out);
 }
 </script>
-
+ <div class="bodyFrame4" id="blog-content" style="margin-bottom: 20px;">
 <div class="blog-body-content" style="padding-bottom: 0px;">
       <div style="width:100%; height: 30px; line-height: 30px; border-bottom: 1px solid #212121;">
             <b>방명록</b>
@@ -158,4 +158,5 @@ function printGuest(data) {
           
       <div id="listGuest" style="width:100%; margin: 0px 0px 10px;"></div>
 
+</div>
 </div>
