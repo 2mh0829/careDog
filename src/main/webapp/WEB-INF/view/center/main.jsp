@@ -324,6 +324,7 @@ function deletePhoto() {
 	  if(confirm("위 자료를 삭제 하시 겠습니까 ? "))
 	  	location.href=url;
 	</c:if>    
+	
 	<c:if test="${sessionScope.member.memberId!='admin'}">
 	  alert("게시물을 삭제할 수  없습니다.");
 	</c:if>
@@ -352,6 +353,7 @@ function deletePhoto() {
 	</ul>
 	<div id="tab-content" style="clear:both; padding: 20px 10px 0px;"></div>
 </div>
+
 <form name="centerSearchForm" action="" method="post">
     <input type="hidden" name="searchKey" value="subject">
     <input type="hidden" name="searchValue" value="">

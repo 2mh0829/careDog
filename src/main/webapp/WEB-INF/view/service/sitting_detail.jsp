@@ -7,10 +7,11 @@
 %>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+
 <script>
 
-$(function(){
-    $("#left-datepicker").datepicker({
+$( function() {
+    $( "#datepicker" ).datepicker({
     	dateFormat: "yy-mm-dd",
     	showAnim: "slideDown",
     	showMonthAfterYear: true,
@@ -18,24 +19,25 @@ $(function(){
     	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
     	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
     	minDate: 0
+    	autoSize: true
     });
-});
-
-$(function(){
-    $("#right-datepicker").datepicker({
-    	dateFormat: "yy-mm-dd",
-    	showAnim: "slideDown",
-    	showMonthAfterYear: true,
-    	yearSuffix: '년',
-    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-    	minDate: 0
-    });
-});
+} );
 
 </script>
 
 <style>
+
+.ui-datepicker {
+	width: 335px;
+	height: 190px;
+	
+}
+
+#datepicker {
+	display: inline-block;
+	float: right;
+	font-size: 12px;
+}
 
 li{
 	list-style-type: none;
@@ -230,28 +232,56 @@ li{
     width: 621px;
     /* padding: 40px 0; */
     height: 190px;
+    display: inline-block;
 }
 
 .row img {
-	width: 100px;
+	width: 90px;
 	height: 80px;
-	margin-top: 35px;
+	/* margin-top: 35px; */
 }
 
 .inner {
 	border: 1px solid red;
 }
 
-.row dl {
-	margin-left: 120px;
-    top: -80px;
+.row .carryAble {
+	margin-left: 5px;
+	margin-right: 15px;
+    top: 40px;
     position: relative;
-    width: 190px;
-    border: 1px solid;
+    width: 202px;
+    border: 1px solid black;
+    display: inline-block;
+}
+
+.row .carryAble-time {
+	margin-left: 5px;
+	margin-right: 5px;
+    top: 30px;
+    position: relative;
+    width: 180px;
+    border: 1px solid black;
+    display: inline-block;
 }
 
 .row dt {
 	margin-bottom: 10px;
+}
+
+.row dd {
+	margin-bottom: 5px;
+}
+
+.environment {
+	padding-top: 40px;
+}
+
+.environment h3 {
+	margin-bottom: 15px;
+    color: #18ab29;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 </style>
@@ -361,6 +391,31 @@ li{
 						<i class="glyphicon glyphicon-check"></i>
 						강아지, 성견, 노령견 케어 가능합니다.
 					</dd>
+				</dl>
+				<img src="<%=cp%>/resource/img/service/clock.png">
+				<dl class="carryAble-time">
+					<dt>
+						데이케어 & 하루종일
+					</dt>
+					<dd>
+						<i class="glyphicon glyphicon-check"></i>
+						데이케어 : 9~6시
+					</dd>
+					<dd>
+						<i class="glyphicon glyphicon-check"></i>
+						하루종일 : 24시간
+					</dd>
+				</dl>
+			</div>
+			<div id="datepicker">
+				
+			</div>
+		</div>
+		<div class="environment">
+			<h3>돌봄 환경</h3>
+			<div class="row-environment">
+				<dl class="col-sm-6 left">
+					<dt class="pull-left">돌봄공간</dt>
 				</dl>
 			</div>
 		</div>

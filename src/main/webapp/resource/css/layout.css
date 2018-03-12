@@ -3,8 +3,10 @@
 /* header */
 .header {
     width: 100%;
+    height: 130px;
     text-align: left;
     background: white;
+    overflow-x: hidden;
     /* position: static; */
 }
 
@@ -12,6 +14,7 @@
 	position: relative;
     margin: 0px auto;
     width: 100%;
+    height: 65px;
     clear: both;
     z-index: 51;
 }
@@ -39,14 +42,13 @@
 }
 
 .header-bottom {
-	position: fixed;
+	position: absolute;
 	top: 0;
-	margin: 0px auto;
+	margin-top: 25px;
     width: 100%;
-    height: 90px;
+    height: 65px;
     z-index: 23;
 }
-
 
 /* footer */
 .footer {
@@ -102,8 +104,8 @@
 .menu2 {
 	position: relative;
 	width: 100%;
-	height: 90px; 
-	line-height: 90px;
+	height: 65px; 
+	line-height: 65px;
 	font-size: 20px;
 	color: white;
 	font-weight: bold;

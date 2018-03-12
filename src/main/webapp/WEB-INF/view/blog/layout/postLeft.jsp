@@ -50,6 +50,14 @@ function profile() {
 	});
 	
 }
+function secession() {
+	var url = "<%=cp%>/mypage/secession";
+	$.get(url, {
+		tmp : new Date().getTime()
+	}, function(data) {
+		$(".blog-body").html(data);
+	})
+}
 </script>
 
 <div class="blog-left">
@@ -58,7 +66,7 @@ function profile() {
               <img src="<%=cp%>/resource/images/noimage.png" width="164" height="164">
           </c:if>
           <c:if test="${not empty  blogInfo.profilePhoto}">
-              <img src="<%=cp%>/uploads/blog/${blogInfo.memberId}/${blogInfo.profilePhoto}" width="164" height="164">
+              <img style="border-radius:100px" src="<%=cp%>/uploads/blog/${blogInfo.memberId}/${blogInfo.profilePhoto}" width="164" height="164">
           </c:if>
      </div>
      <div style="padding: 10px 2px 5px; white-space:pre;">${blogInfo.introduce}</div>
@@ -86,6 +94,6 @@ function profile() {
 	<a href="#">북마크</a><br>
 	<a href="<%=cp%>/mypage/test">구매내역</a><br>
 	<a href="#">봉사/후원 내역</a><br>
-	<a href="/mypage/secession">회원탈퇴</a>
+	<a href="javascript:secession();">회원탈퇴</a>
 	</div>
 </div>

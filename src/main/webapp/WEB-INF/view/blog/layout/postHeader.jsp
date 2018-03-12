@@ -58,29 +58,24 @@
 	}
 	function messenger() {
 		var url = "${blogUrl}/messenger";
-		$('.blog-body-left').remove();
+	/* 	$('.blog-body-left').remove(); */
 		$.get(url, {
 			tmp : new Date().getTime()
 		}, function(data) {
-			$("#blog-content").html(data);
+			$(".blog-body").html(data);
 		})
 	}
 	function editMemberInfo() {
-		var url = "${blogUrl}/editMemberInfo";
+		var url = "<%=cp%>/mypage/editMemberInfo";
 		$.get(url, {
 			tmp : new Date().getTime()
 		}, function(data) {
-			$("#blog-content").html(data);
+			$(".blog-body").html(data);
 		})
 	}
 </script>
 
-<div class="blog-header-top">
-	<div style="float: left;">
-		<a href="<%=cp%>/nblog"> <span
-			style="color: #424951; font-style: italic; font-family: arial black; font-size: 30px; font-weight: bold;">MyPage</span>
-		</a>
-	</div>
+<%-- <div class="blog-header-top">
 	<div style="float: right; text-align: right;">
 		<c:if test="${blogInfo.memberId!=sessionScope.member.memberId}">
 			<a href="<%=cp%>/nblog/me">내 블로그</a>
@@ -88,7 +83,7 @@
 						</c:if>
 		<a href="">이웃 블로그</a> &nbsp;|&nbsp; <a href="<%=cp%>/nblog">전체 블로그</a>
 	</div>
-</div>
+</div> --%>
 
 <div class="blog-header-menu">
 	<ul class="nav">
@@ -102,4 +97,5 @@
 		<li class="list-menu-item"><a href="javascript:messenger();">일정관리</a></li>
 		<li class="list-menu-item"><a href="javascript:messenger();">친구관리</a></li>
 	</ul>
+
 </div>
