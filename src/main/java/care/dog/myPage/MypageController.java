@@ -36,4 +36,9 @@ public class MypageController {
 
 		return "member/signUp";
 	}
+	@RequestMapping(value="mypage/myPetList")
+	public String myPetList() throws Exception {
+
+		return "mypage/myPetList";
+	}
 }

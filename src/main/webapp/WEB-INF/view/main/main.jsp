@@ -53,8 +53,7 @@ video {
 <script type="text/javascript">
 
 	$("#menu-background").html("");
-	
-	$(".header-left").html("careDog");
+	$(".header-left").html("<a href='<%=cp %>'><img src='<%=cp %>/resource/img/logo_white.png'></a>");
 	
 </script>
 

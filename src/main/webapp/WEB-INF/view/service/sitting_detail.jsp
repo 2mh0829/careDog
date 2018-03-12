@@ -7,7 +7,6 @@
 %>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-
 <script>
 
 $( function() {
@@ -205,7 +204,7 @@ li{
 }
 
 .main-middle-inner {
-	border: 1px solid black;
+	/* border: 1px solid black; */
 }
 
 .price-tot {
@@ -225,8 +224,8 @@ li{
 }
 
 .row {
-	/* border-top: 1px solid #ccc; */
-	border: 1px solid blue;
+	border: 1px solid #ccc;
+	/* border: 1px solid blue; */
 	margin-left: 1px;
     /* margin-right: auto; */
     width: 621px;
@@ -242,8 +241,8 @@ li{
 }
 
 .inner {
-	border: 1px solid red;
-	height: 500px;
+	/* border: 1px solid red; */
+	height: 600px;
 }
 
 .row .carryAble {
@@ -252,17 +251,17 @@ li{
     top: 40px;
     position: relative;
     width: 202px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: inline-block;
 }
 
 .row .carryAble-time {
-	margin-left: 5px;
+	margin-left: 17px;
 	margin-right: 5px;
     top: 30px;
     position: relative;
     width: 180px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: inline-block;
 }
 
@@ -291,10 +290,12 @@ li{
 
 .main-middle-environ {
 	/* padding: 40px 0; */
-    /* border-bottom: 1px solid #dcdcdc; */
-    border: 1px solid;
+    border: 1px solid #dcdcdc;
+    /* border: 1px solid; */
     width: 623px;
     height: 190px;
+    display: inline-block;
+    margin-top: 40px;
 }
 
 /*.environ-area {
@@ -347,6 +348,70 @@ li{
 
 .colored {
 	background-color: #f0f0f0;
+}
+
+.sitter-information {
+	border: 1px solid;
+}
+
+.sitter-infor {
+	border: 1px solid #cccccc;
+    /* display: inline-block; */
+    height: 190px;
+    width: 335px;
+    float: right;
+    margin-top: 40px;
+}
+
+.sitter-face {
+	display: inline-block;
+	width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+}
+
+.sitter {
+	border-bottom:1px solid #cccccc;
+	margin-top: 10px;
+	margin-left: 10px;
+	width: 310px;
+}
+
+.sitter-name {
+	padding-left: 30px;
+	font-size: 20px;
+    font-weight: 500;
+   /*  float: right; */
+    
+}
+
+.sitter i {
+	float: right;
+	/* padding-bottom: 20px; */
+	top: -15px;
+}
+
+.dog-name {
+	padding-left: 30px;
+	font-size: 20px;
+    font-weight: 500;
+}
+
+.dog-info {
+	font-size: 15px;
+    font-weight: 500;
+    float: right;
+    margin-top: 40px;
+}
+
+.customer-rating {
+	border: 1px solid;
+	margin-top: 40px;
+}
+
+.main-middle-environ h3 {
+	margin-left: 12px;
 }
 
 </style>
@@ -528,8 +593,22 @@ li{
 				</dl>	
 			</div>
 		</div>
-		<div>
-			
+		<div class="sitter-infor">
+			<label class="sitter">
+				<img class="sitter-face" 
+				src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_80%2Cw_300/MTE5NTU2MzE2MTk1NTU0ODI3/daniel-day-lewis-9268727-2-402.jpg">
+				<label class="sitter-name">김경애</label>
+					<i class="glyphicon glyphicon-map-marker">고양시 일산서구 대화동</i>
+			</label>
+			<label class="sitter">
+				<img class="sitter-face" 
+				src="http://cfile5.uf.tistory.com/image/2737C53656F686912C5801">
+				<label class="dog-name">검둥이<br></label>
+				<label class="dog-info">말티즈, 남, 7세</label>
+			</label>
+		</div>
+		<div class="customer-rating">
+			<h1>후기</h1>
 		</div>
 	</div>
 </div>
