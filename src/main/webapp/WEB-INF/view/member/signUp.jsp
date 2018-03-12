@@ -6,8 +6,340 @@
    String cp = request.getContextPath();
 %>
 
-<div class="body-container">
-	<button onclick="asd();">asdasd</button>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="<%=cp%>/resource/bootstrap/css/bootstrap.min.css" type="text/css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+
+<style>
+pre {
+	max-height: 480px;
+}
+</style>
+
+<script type="text/javascript">
+function memberOk() {
+	var f = document.memberForm;
+	var str;
+
+	str = f.userId.value;
+	str = str.trim();
+	if(!str) {
+		alert("아이디를 입력하세요. ");
+		f.userId.focus();
+		return;
+	}
+	if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
+		alert("아이디는 5~10자이며 첫글자는 영문자이어야 합니다.");
+		f.userId.focus();
+		return;
+	}
+	f.userId.value = str;
+
+	str = f.userPwd.value;
+	str = str.trim();
+	if(!str) {
+		alert("패스워드를 입력하세요. ");
+		f.userPwd.focus();
+		return;
+	}
+	if(!/^(?=.*[a-z])(?=.*[!@#$%^*+=-]|.*[0-9]).{5,10}$/i.test(str)) { 
+		alert("패스워드는 5~10자이며 하나 이상의 숫자나 특수문자가 포함되어야 합니다.");
+		f.userPwd.focus();
+		return;
+	}
+	f.userPwd.value = str;
+
+	if(str!= f.userPwdCheck.value) {
+        alert("패스워드가 일치하지 않습니다. ");
+        f.userPwdCheck.focus();
+        return;
+	}
+	
+    str = f.userName.value;
+	str = str.trim();
+    if(!str) {
+        alert("이름을 입력하세요. ");
+        f.userName.focus();
+        return;
+    }
+    f.userName.value = str;
+
+    str = f.birth.value;
+	str = str.trim();
+    if(!str || !isValidDateFormat(str)) {
+        alert("생년월일를 입력하세요[YYYY-MM-DD]. ");
+        f.birth.focus();
+        return;
+    }
+    
+    str = f.tel1.value;
+	str = str.trim();
+    if(!str) {
+        alert("전화번호를 입력하세요. ");
+        f.tel1.focus();
+        return;
+    }
+
+    str = f.tel2.value;
+	str = str.trim();
+    if(!str) {
+        alert("전화번호를 입력하세요. ");
+        f.tel2.focus();
+        return;
+    }
+    if(!/^(\d+)$/.test(str)) {
+        alert("숫자만 가능합니다. ");
+        f.tel2.focus();
+        return;
+    }
+
+    str = f.tel3.value;
+	str = str.trim();
+    if(!str) {
+        alert("전화번호를 입력하세요. ");
+        f.tel3.focus();
+        return;
+    }
+    if(!/^(\d+)$/.test(str)) {
+        alert("숫자만 가능합니다. ");
+        f.tel3.focus();
+        return;
+    }
+    
+    str = f.email1.value;
+	str = str.trim();
+    if(!str) {
+        alert("이메일을 입력하세요. ");
+        f.email1.focus();
+        return;
+    }
+
+    str = f.email2.value;
+	str = str.trim();
+    if(!str) {
+        alert("이메일을 입력하세요. ");
+        f.email2.focus();
+        return;
+    }
+
+    var mode="${mode}";
+    if(mode=="created") {
+    	f.action = "<%=cp%>/";
+    } else if(mode=="update") {
+    	f.action = "<%=cp%>/";
+    }
+
+    f.submit();
+}
+
+function changeEmail() {
+    var f = document.memberForm;
+	    
+    var str = f.selectEmail.value;
+    if(str!="direct") {
+        f.email2.value=str; 
+        f.email2.readOnly = true;
+        f.email1.focus(); 
+    }
+    else {
+        f.email2.value="";
+        f.email2.readOnly = false;
+        f.email1.focus();
+    }
+}
+
+function userIdCheck() {
+	
+}
+
+function open_terms() {
+	$(".modal").modal();
+}
+
+</script>
+<div class="body-container" style="width: 700px;">
+    <div class="body-title">
+        <h3><span style="font-family: Webdings">2</span> ${mode=="created"?"회원 가입":"회원 정보 수정"} </h3>
+    </div>
+    
+        <div>
+			<form name="memberForm" method="post">
+			  <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px;">
+			  <tr>
+			      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
+			            <label style="font-weight: 900;">아이디</label>
+			      </td>
+			      <td style="padding: 0 0 15px 15px;">
+			        <p style="margin-top: 1px; margin-bottom: 5px;">
+			            <input type="text" name="userId" id="userId" value="${dto.userId}"
+                         onchange="userIdCheck();" style="width: 95%;"
+                         ${mode=="update" ? "readonly='readonly' ":""}
+                         maxlength="15" class="boxTF" placeholder="아이디">
+			        </p>
+			        <p class="help-block">아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.</p>
+			      </td>
+			  </tr>
+			
+			  <tr>
+			      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
+			            <label style="font-weight: 900;">패스워드</label>
+			      </td>
+			      <td style="padding: 0 0 15px 15px;">
+			        <p style="margin-top: 1px; margin-bottom: 5px;">
+			            <input type="password" name="userPwd" maxlength="15" class="boxTF"
+			                       style="width:95%;" placeholder="패스워드">
+			        </p>
+			        <p class="help-block">패스워드는 5~10자 이내이며, 하나 이상의 숫자나 특수문자가 포함되어야 합니다.</p>
+			      </td>
+			  </tr>
+			
+			  <tr>
+			      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
+			            <label style="font-weight: 900;">패스워드 확인</label>
+			      </td>
+			      <td style="padding: 0 0 15px 15px;">
+			        <p style="margin-top: 1px; margin-bottom: 5px;">
+			            <input type="password" name="userPwdCheck" maxlength="15" class="boxTF"
+			                       style="width: 95%;" placeholder="패스워드 확인">
+			        </p>
+			        <p class="help-block">패스워드를 한번 더 입력해주세요.</p>
+			      </td>
+			  </tr>
+			
+			  <tr>
+			      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
+			            <label style="font-weight: 900;">이름</label>
+			      </td>
+			      <td style="padding: 0 0 15px 15px;">
+			        <p style="margin-top: 1px; margin-bottom: 5px;">
+			            <input type="text" name="userName" value="${dto.userName}" maxlength="30" class="boxTF"
+		                      style="width: 95%;"
+		                      ${mode=="update" ? "readonly='readonly' ":""}
+		                      placeholder="이름">
+			        </p>
+			      </td>
+			  </tr>
+			
+			  <tr>
+			      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
+			            <label style="font-weight: 900;">생년월일</label>
+			      </td>
+			      <td style="padding: 0 0 15px 15px;">
+			        <p style="margin-top: 1px; margin-bottom: 5px;">
+			            <input type="text" name="birth" value="${dto.birth}" maxlength="10" 
+			                       class="boxTF" style="width: 95%;" placeholder="생년월일">
+			        </p>
+			        <p class="help-block">생년월일은 2000-01-01 형식으로 입력 합니다.</p>
+			      </td>
+			  </tr>
+			  
+			  <tr>
+			      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
+			            <label style="font-weight: 900;">이메일</label>
+			      </td>
+			      <td style="padding: 0 0 15px 15px;">
+			        <p style="margin-top: 1px; margin-bottom: 5px;">
+			            <input type="text" name="email1" value="${dto.email1}" size="13" maxlength="30"  class="boxTF">
+			            @ 
+			            <input type="text" name="email2" value="${dto.email2}" size="13" maxlength="30"  class="boxTF" readonly="readonly">
+			            <select name="selectEmail" onchange="changeEmail();" class="selectField">
+			                <option value="">선 택</option>
+			                <option value="naver.com" ${dto.email2=="naver.com" ? "selected='selected'" : ""}>네이버 메일</option>
+			                <option value="hanmail.net" ${dto.email2=="hanmail.net" ? "selected='selected'" : ""}>한 메일</option>
+			                <option value="hotmail.com" ${dto.email2=="hotmail.com" ? "selected='selected'" : ""}>핫 메일</option>
+			                <option value="gmail.com" ${dto.email2=="gmail.com" ? "selected='selected'" : ""}>지 메일</option>
+			                <option value="direct">직접입력</option>
+			            </select>
+			        </p>
+			      </td>
+			  </tr>
+			  
+			  <tr>
+			      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
+			            <label style="font-weight: 900;">전화번호</label>
+			      </td>
+			      <td style="padding: 0 0 15px 15px;">
+			        <p style="margin-top: 1px; margin-bottom: 5px;">
+			            <select class="selectField" id="tel1" name="tel1" >
+			                <option value="">선 택</option>
+			                <option value="010" ${dto.tel1=="010" ? "selected='selected'" : ""}>010</option>
+			                <option value="011" ${dto.tel1=="011" ? "selected='selected'" : ""}>011</option>
+			                <option value="016" ${dto.tel1=="016" ? "selected='selected'" : ""}>016</option>
+			                <option value="017" ${dto.tel1=="017" ? "selected='selected'" : ""}>017</option>
+			                <option value="018" ${dto.tel1=="018" ? "selected='selected'" : ""}>018</option>
+			                <option value="019" ${dto.tel1=="019" ? "selected='selected'" : ""}>019</option>
+			            </select>
+			            -
+			            <input type="text" name="tel2" value="${dto.tel2}" class="boxTF" maxlength="4">
+			            -
+			            <input type="text" name="tel3" value="${dto.tel3}" class="boxTF" maxlength="4">
+			        </p>
+			      </td>
+			  </tr>
+			  
+			  <tr>
+			      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
+			            <label style="font-weight: 900;">우편번호</label>
+			      </td>
+			      <td style="padding: 0 0 15px 15px;">
+			        <p style="margin-top: 1px; margin-bottom: 5px;">
+			            <input type="text" name="zip" value="${dto.zip}"
+			                       class="boxTF" readonly="readonly">
+			            <button type="button" class="btn" >우편번호</button>          
+			        </p>
+			      </td>
+			  </tr>
+			  
+			  <tr>
+			      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
+			            <label style="font-weight: 900;">주소</label>
+			      </td>
+			      <td style="padding: 0 0 15px 15px;">
+			        <p style="margin-top: 1px; margin-bottom: 5px;">
+			            <input type="text" name="addr1" value="${dto.addr1}" maxlength="50" 
+			                       class="boxTF" style="width: 95%;" placeholder="기본 주소" readonly="readonly">
+			        </p>
+			        <p style="margin-bottom: 5px;">
+			            <input type="text" name="addr2" value="${dto.addr2}" maxlength="50" 
+			                       class="boxTF" style="width: 95%;" placeholder="나머지 주소">
+			        </p>
+			      </td>
+			  </tr>
+			  <c:if test="${mode=='created'}">
+				  <tr>
+				      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
+				            <label style="font-weight: 900;">약관동의</label>
+				      </td>
+				      <td style="padding: 0 0 15px 15px;">
+				        <p style="margin-top: 7px; margin-bottom: 5px;">
+				             <label>
+				                 <input id="agree" name="agree" type="checkbox" checked="checked"
+				                      onchange="form.sendButton.disabled = !checked"> <a onclick="open_terms()">이용약관</a>에 동의합니다.
+				             </label>
+				        </p>
+				      </td>
+				  </tr>
+			  </c:if>
+			  </table>
+			
+			  <table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
+			     <tr height="45"> 
+			      <td align="center" >
+			        <button type="button" name="sendButton" class="btn" onclick="memberOk();">${mode=="created"?"회원가입":"정보수정"}</button>
+			        <button type="reset" class="btn">다시입력</button>
+			        <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/';">${mode=="created"?"가입취소":"수정취소"}</button>
+			      </td>
+			    </tr>
+			    <tr height="30">
+			        <td align="center" style="color: blue;">${message}</td>
+			    </tr>
+			  </table>
+			</form>
+        </div>
+</div>
+
+
+
 <!-- MODAL -->
 <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
    <div class="modal-dialog modal-lg">
@@ -22,9 +354,9 @@
          <div>
                <div class="col-lg-12">
                     <ul class="nav nav-tabs mt-15">
-                      <li class="nav-item"><a class="nav-link active" href="#tab-01" data-toggle="tab">서비스이용약관</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#tab-02" data-toggle="tab">개인정보처리방침</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#tab-03" data-toggle="tab">이메일 무단 수집 거부</a></li>
+                      <li class="nav-item"><a class="nav-link active" href="#tab-01" role="tab" data-toggle="tab">서비스이용약관</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#tab-02" role="tab" data-toggle="tab">개인정보처리방침</a></li>
+                      <li class="nav-item"><a class="nav-link" href="#tab-03" role="tab" data-toggle="tab">이메일 무단 수집 거부</a></li>
                     </ul>
                </div>
             </div>
@@ -38,7 +370,7 @@
 제 1 장 총 칙
 
 제 1 조 (목적)
-1. 이 이용약관(이하 '약관')은 (주)이포넷(이하 '회사')과 이용 고객(이하 '회원')간에 회사가 제공하는 서비스의
+1. 이 이용약관(이하 '약관')은 (주)careDog(이하 '회사')과 이용 고객(이하 '회원')간에 회사가 제공하는 서비스의
    가입조건 및 이용에 관한 제반 사항과 기타 필요한 사항을 구체적으로 규정함을 목적으로 합니다.
 
 제 2 조 (이용약관의 효력 및 변경)
@@ -70,7 +402,7 @@
 제 5 조 (이용계약의 성립)
 1. 이용계약은 이용하고자 하는 고객의 본 이용약관 내용에 대한 동의와 이용신청에 대해 회사가 승인함으로써
    성립합니다.
-2. 본 이용약관에 대한 동의는 가입신청 시 (주)이포넷의 '동의' 단추를 누름으로써 동의한 것으로 간주합니다.
+2. 본 이용약관에 대한 동의는 가입신청 시 (주)careDog의 '동의' 단추를 누름으로써 동의한 것으로 간주합니다.
 
 제 6 조 (서비스 이용 신청)
 1. 본 서비스를 이용하고자 하는 사용자는 회사에서 요청하는 정보(성명, 전자메일주소, 연락처 등)를 제공하여
@@ -201,7 +533,7 @@
 제 5 장 계약 해지 및 이용 제한
 
 제 17 조 (계약 변경 및 해지)
-1. 회원이 이용계약을 해지하고자 하는 때에는 회원 본인이 (주)이포넷 번역포털 사이트 내의 "회원탈퇴"메뉴를 이용해
+1. 회원이 이용계약을 해지하고자 하는 때에는 회원 본인이 (주)careDog 번역포털 사이트 내의 "회원탈퇴"메뉴를 이용해
    가입해지를 해야 합니다.
 
 제 18 조 (서비스 이용제한)
@@ -264,7 +596,7 @@
                   <pre class="fs-12">
 [ 개인정보취급방침 ]
 
- '㈜이포넷'은 (이하 '회사'는) 고객님의 개인정보를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을
+ '㈜careDog'은 (이하 '회사'는) 고객님의 개인정보를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을
   준수하고 있습니다.
 
 회사는 개인정보취급방침을 통하여 고객님께서 제공하시는 개인정보가 어떠한 용도와 방식으로 이용되고 있으며,
@@ -336,8 +668,8 @@ DB로 옮겨진 개인정보는 법률에 의한 경우가 아니고서는 보�
 거치신 후 직접 열람, 정정 또는 탈퇴가 가능합니다. 혹은 개인정보관리책임자에게 서면, 전화 또는 이메일로 연락하시면
 지체 없이 조치하겠습니다. 귀하가 개인정보의 오류에 대한 정정을 요청하신 경우에는 정정을 완료하기 전까지 당해
 개인정보를 이용 또는 제공하지 않습니다. 또한 잘못된 개인정보를 제3자에게 이미 제공한 경우에는 정정 처리결과를
-제3자에게 지체없이 통지하여 정정이 이루어지도록 하겠습니다. 이포넷은 이용자 혹은 법정 대리인의 요청에 의해 해지
-또는 삭제된 개인정보는 "이포넷이 수집하는 개인정보의 보유 및 이용기간"에 명시된 바에 따라 처리하고 그 외의 용도로
+제3자에게 지체없이 통지하여 정정이 이루어지도록 하겠습니다. careDog은 이용자 혹은 법정 대리인의 요청에 의해 해지
+또는 삭제된 개인정보는 "careDog이 수집하는 개인정보의 보유 및 이용기간"에 명시된 바에 따라 처리하고 그 외의 용도로
 열람 또는 이용할 수 없도록 처리하고 있습니다.
 
 
@@ -386,5 +718,4 @@ DB로 옮겨진 개인정보는 법률에 의한 경우가 아니고서는 보�
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
       </div>
-      <!-- /MODAL -->
-</div>
+<!-- /MODAL -->

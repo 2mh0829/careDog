@@ -27,12 +27,13 @@ public class MypageController {
 	public String test() {
 		return "mypage/test";
 	}
-	@RequestMapping(value="/blog/{blogId}/editMemberInfo")
-	public String editMemberInfo(
-			@PathVariable int blogId,
-			Model model) throws Exception {
+	@RequestMapping(value="mypage/secession", method=RequestMethod.GET)
+	public String secession() {
+		return "mypage/secession";
+	}
+	@RequestMapping(value="mypage/editMemberInfo")
+	public String editMemberInfo() throws Exception {
 
-		model.addAttribute("blogId",blogId);
-		return "member/join";
+		return "member/signUp";
 	}
 }

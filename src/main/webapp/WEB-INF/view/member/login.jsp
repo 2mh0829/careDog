@@ -8,20 +8,26 @@
 
 <style type="text/css">
 .lbl {
-   position:absolute; 
-   margin-left:15px; margin-top: 17px;
-   color: #999999; font-size: 11pt;
+	position: absolute;
+	margin-left: 15px;
+	margin-top: 17px;
+	color: #999999;
+	font-size: 11pt;
 }
+
 .loginTF {
-  width: 340px; height: 35px;
-  padding: 5px;
-  padding-left: 15px;
-  border:1px solid #999999;
-  color:#333333;
-  margin-top:5px; margin-bottom:5px;
-  font-size:14px;
-  border-radius:4px;
+	width: 340px;
+	height: 35px;
+	padding: 5px;
+	padding-left: 15px;
+	border: 1px solid #999999;
+	color: #333333;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	border-radius: 4px;
 }
+
 </style>
 
 <script type="text/javascript">
@@ -56,14 +62,14 @@ function sendLogin() {
 </script>
 
 <div class="body-container">
-    <div style="margin: 0px auto; padding-top:90px; width:360px;">
+    <div style="margin: 0px auto; width:360px;">
     	<div style="text-align: center;">
         	<span style="font-weight: bold; font-size:27px; color: #424951;">회원 로그인</span>
         </div>
         
 		<form name="loginForm" method="post" action="">
 		  <table style="margin: 15px auto; width: 360px; border-spacing: 0px;">
-		  <tr align="center" height="60"> 
+		  <tr align="center" height="50"> 
 		      <td> 
                 <label for="userId" id="lblUserId" class="lbl" >아이디</label>
 		        <input type="text" name="userId" id="userId" class="loginTF" maxlength="15"
@@ -72,7 +78,7 @@ function sendLogin() {
                            onblur="bgLabel(this, 'lblUserId');">
 		      </td>
 		  </tr>
-		  <tr align="center" height="60"> 
+		  <tr align="center" height="50"> 
 		      <td>
 		        <label for="userPwd" id="lblUserPwd" class="lbl" >패스워드</label>
 		        <input type="password" name="userPwd" id="userPwd" class="loginTF" maxlength="20" 
@@ -83,15 +89,15 @@ function sendLogin() {
 		  </tr>
 		  <tr align="center" height="65" > 
 		      <td>
-		        <button type="button" onclick="sendLogin();" class="btnConfirm">로그인</button>
+		        <button type="button" onclick="sendLogin();" class="loginTF">로그인</button>
 		      </td>
 		  </tr>
 
 		  <tr align="center" height="45">
 		      <td>
-		       		<a href="<%=cp%>/">아이디찾기</a>&nbsp;&nbsp;&nbsp;
-		       		<a href="<%=cp%>/">패스워드찾기</a>&nbsp;&nbsp;&nbsp;
-		       		<a href="<%=cp%>/">회원가입</a>
+		       		<a href="<%=cp%>/member/id">아이디찾기</a>&nbsp;&nbsp;&nbsp;
+		       		<a href="<%=cp%>/member/pwd">패스워드찾기</a>&nbsp;&nbsp;&nbsp;
+		       		<a href="<%=cp%>/member/signUp">회원가입</a>
 		      </td>
 		  </tr>
 		  

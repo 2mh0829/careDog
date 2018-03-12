@@ -34,9 +34,11 @@
 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
 		<put-attribute name="blogHeader"
 			value="/WEB-INF/view/blog/layout/postHeader.jsp" />
-		<put-attribute name="blogLeft"
-			value="/WEB-INF/view/blog/layout/postLeft.jsp" />
-		<put-attribute name="blogBody" value="/WEB-INF/view/blog/post/post.jsp" />
+		<put-attribute name="blogLeft" value="/WEB-INF/view/blog/layout/postLeft.jsp" />
+		<put-attribute name="blogLeft2" value="/WEB-INF/view/mypage/myPetInfo.jsp" />
+		<put-attribute name="blogLeft3" value="/WEB-INF/view/mypage/sch/sch.jsp" />
+		<put-attribute name="blogBody" value="/WEB-INF/view/blog/post/profile.jsp" />
+		<put-attribute name="blogBody2" value="/WEB-INF/view/blog/guest/guest.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
 	</definition>
 
@@ -88,11 +90,12 @@
 <definition name=".member.*" extends=".mainLayout">
 		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp" />
 		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
+		<put-attribute name="header" value="/WEB-INF/view/layout/header1.jsp" />
+		
 	</definition>
 	<definition name=".adminLayout" template="/WEB-INF/view/admin/layout/layout.jsp">
 		<put-attribute name="title" value="spring" />
-		<put-attribute name="header"
-			value="/WEB-INF/view/admin/layout/header.jsp" />
+		<put-attribute name="header" value="/WEB-INF/view/admin/layout/header.jsp" />
 		<put-attribute name="body" value="/WEB-INF/view/admin/main/main.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
 	</definition>

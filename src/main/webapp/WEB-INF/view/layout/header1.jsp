@@ -7,10 +7,6 @@
 %>
 
 <style>
-.menu2 {
-    animation-name: example;
-    animation-duration: 1s;
-}
 
 #background {
 	position: absolute;
@@ -28,37 +24,6 @@
 }
 
 </style>
-
-<script>
-
-$(window).scroll(function() {
-	if($(this).scrollTop() < 25){
-		$(".header-bottom").css("position", "absolute");
-		$(".header-bottom").css("margin-top", "25px");
-		$(".header-bottom").attr("onmouseover", "menuOverAction();");
-	}else if($(this).scrollTop() >= $(".header-bottom").offset().top){
-		$(".header-bottom").css("position", "fixed");
-		$(".header-bottom").css("margin-top", "0");
-		$(".header-bottom").css("top", "0");
-		$(".header-bottom").attr("onmouseover", "");
-		$(".header-bottom").attr("onmouseout", "");
-	}
-});
-
-function menuOverAction() {
-	$(".header-bottom").animate({top: "40px"}, {queue : false, duration : 300});
-}
-
-$(function() {
-	$(".header-bottom").attr("onmouseover", "menuOverAction();");
-	$(document).mousemove(function(e) {
-		if(e.pageY > 130 && document.activeElement != document.getElementById("inpTx")){
-			$(".header-bottom").animate({top: "0"}, {queue : false, duration : 100});
-		} 
-	});
-});
-
-</script>
 
 
 <div class="header-top">
@@ -106,12 +71,3 @@ $(function() {
 	
 </div>
 
-<!-- 
-<div class="header-bottom">
-	<div class="menu-container" align="center">
-		<div style="float: right;">
-			<a>▤ </a>
-		</div>
-	</div>
-</div>
- -->
