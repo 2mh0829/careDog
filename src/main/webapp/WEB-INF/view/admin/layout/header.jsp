@@ -15,11 +15,6 @@
 	left: 0;
 }
 
-#menu-background {
-	height: 75px;
-	overflow: hidden;
-}
-
 .header-left img {
 	width: 100px;
 }
@@ -35,16 +30,14 @@ a {
 
 	<div id='menu-background'>
 		<img src="<%=cp %>/resource/img/menu_admin.png">
-		<div style="position: absolute; width: 189px; top: 0; left: 50px; margin-left: -50px; overflow: hidden;">
-			<img src="<%=cp %>/resource/img/menu_admin.png">
-		</div>
 	</div>
 	
 	<div class="menu-container" align="center">
 		<ul id="mainMenu" class="navi">
-			<li><a href="<%=cp %>/service">펫#&nbsp;</a></li>
-			<li><a href="<%=cp %>/mungstargram">mungstargram&nbsp;</a></li>
-			<li><a href="<%=cp %>/strayDog">유기견&nbsp;</a></li>
+			<li><a href="<%=cp %>">서비스&nbsp;</a></li>
+			<li><a href="<%=cp %>">펫#&nbsp;</a></li>
+			<li><a href="<%=cp %>">유기견&nbsp;</a></li>
+			<li><a href="<%=cp %>">고객센터&nbsp;</a></li>
 		</ul>
 	</div>
 	
