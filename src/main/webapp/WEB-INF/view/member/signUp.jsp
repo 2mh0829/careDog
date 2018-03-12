@@ -339,7 +339,6 @@ function open_terms() {
 </div>
 
 
-
 <!-- MODAL -->
 <div class="modal fade" id="termsModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
    <div class="modal-dialog modal-lg">
@@ -351,20 +350,24 @@ function open_terms() {
             </button>
          </div>
          
-         <div>
-               <div class="col-lg-12">
-                    <ul class="nav nav-tabs mt-15">
-                      <li class="nav-item"><a class="nav-link active" href="#tab-01" role="tab" data-toggle="tab">서비스이용약관</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#tab-02" role="tab" data-toggle="tab">개인정보처리방침</a></li>
-                      <li class="nav-item"><a class="nav-link" href="#tab-03" role="tab" data-toggle="tab">이메일 무단 수집 거부</a></li>
-                    </ul>
-               </div>
-            </div>
-            
-            <div class="modal-body modal-short">
-            <div class="tab-content">
-               <div class="tab-pane active" id="tab-01">
-                  <pre class="fs-12">
+         <div class="modal-body">
+	         <div class="col-lg-12">
+	         	<ul class="nav nav-tabs mt-15">
+	
+					<li class="nav-item"><a class="nav-link" href="#tab-01" data-toggle="tab">서비스이용약관</a></li>
+					
+					<li class="nav-item"><a class="nav-link" href="#tab-02" data-toggle="tab">개인정보처리방침</a></li>
+					
+					<li class="nav-item"><a class="nav-link" href="#tab-03" data-toggle="tab">이메일 무단 수집 거부</a></li>
+					
+				</ul>
+			</div>	
+			<div class="modal-body modal-short">
+				<div class="tab-content">
+				
+				<div class="tab-pane fade in active" id= "tab-01">
+				
+				<pre class="fs-12">
 [ 회원가입약관 ]
 
 제 1 장 총 칙
@@ -591,9 +594,12 @@ function open_terms() {
 이 약관은 2017년 12월 01일부터 시행합니다.
 
                   </pre>
-                </div>
-                <div class="tab-pane fade" id="tab-02">
-                  <pre class="fs-12">
+				
+				</div>
+				
+				<div class="tab-pane fade" id="tab-02">
+				
+				<pre class="fs-12">
 [ 개인정보취급방침 ]
 
  '㈜careDog'은 (이하 '회사'는) 고객님의 개인정보를 중요시하며, "정보통신망 이용촉진 및 정보보호"에 관한 법률을
@@ -689,9 +695,12 @@ DB로 옮겨진 개인정보는 법률에 의한 경우가 아니고서는 보�
 전화번호: 02-3465-8590
 이메일: yhpark1@e4net.net
                   </pre>
-                </div>
-                <div class="tab-pane fade" id="tab-03">
-                  <pre class="fs-12">
+				
+				</div>
+				
+				<div class="tab-pane" id="tab-03">
+				
+				<pre class="fs-12">
 당사의 대표메일 및 당사의 직원에게 무차별적으로 보내지는 타사의 메일을 차단하기 위해, 본 웹사이트에 게시된 이메일
 주소가 전자우편수집 프로그램이나 그 밖의 기술적 장치를 이용하여 무단으로 수집되는 것을 거부하며, 이를 위반 시
 정보통신망 법에 의해 형사 처벌됨을 유념하시기 바랍니다.
@@ -707,15 +716,21 @@ DB로 옮겨진 개인정보는 법률에 의한 경우가 아니고서는 보�
 3. 누구든지 제1항 및 제2항의 규정에 의하여 수집, 판매 및 유통이 금지된 전자우편주소임을 알고 이를 정보전송에 이용하여서는
    아니 된다.
                </pre>
-                </div>
-              </div>
-            </div>
-
-            <div class="modal-footer">
+				
+				</div>
+				
+				</div> <!-- tab-content -->
+			</div><!-- modal-body short -->
+			
+		<div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-check"></i>확인</button>
-            </div>
+        </div>
 
-          </div><!-- /.modal-content -->
+      </div><!-- /.modal-content -->
+         
+
+          </div>
         </div><!-- /.modal-dialog -->
       </div>
 <!-- /MODAL -->
+            
