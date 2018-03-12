@@ -24,8 +24,8 @@
 </sql>
 
 <insert id="insertEvent" parameterType="care.dog.center.event.Event">
-INSERT INTO event (num, memberId, isEvent, subject, content, imageFilename, created)
-VALUES (#{num}, #{memberId}, #{isEvent}, #{subject}, #{content}, #{imageFilename}, #{created})
+INSERT INTO event (num, memberId, isEvent, subject, content, created)
+VALUES (#{num}, #{memberId}, #{isEvent}, #{subject}, #{content}, #{created})
 </insert>
 
 <select id="listEvent" parameterType="map" resultType="care.dog.center.event.Event">
@@ -33,7 +33,7 @@ SELECT num, isEvent, subject, created FROM event WHERE isEvent=1 ORDER BY num DE
 </select>
 
 <update id="updateEvent" parameterType="care.dog.center.event.Event">
-UPDATE event SET isEvent=#{isEvent}, subject=#{subject}, content=#{content}, imageFilename=#{imageFilename}
+UPDATE event SET isEvent=#{isEvent}, subject=#{subject}, content=#{content}
 WHERE num=#{num}
 </update>
 
@@ -100,7 +100,7 @@ DELETE FROM eventFile WHERE num=#{num}
 <select id="dataCount" parameterType="map" resultType="care.dog.center.event.Event">
 SELECT * FROM (
 	SELECT ROWNUM rnum, tb.* FROM (
-		SELECT num, e.memberId, isEvent, subject, content, imageFilename, created
+		SELECT num, e.memberId, isEvent, subject, content, created
 		FROM event e
 		JOIN member1 m ON e.memberId=m.memberId
 		<where>
