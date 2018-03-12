@@ -115,60 +115,61 @@ textarea {
 <form name="boardForm" method="post" enctype="multipart/form-data">
 <div class="body-container" style="width: 1020px;">
 <table class="board-view-1s mgT40">
-				<colgroup>
-					<col style="width:12.5%;">
-					<col style="width:70%;">
-					<col style="width:12.5%">
-				</colgroup>
-				<tbody>
-					<tr>
-						<td>
-							<strong class="FG01">${dto.isEvent==1 }</strong>
-						</td>
-						<td>
-							<span class="tit"><input type="text" name="subject" id="subject" style="width: 691px;"></span>
-						</td>
-						<td class="name">${sessionScope.member.memberId }</td>
-
-
-					</tr>
-					<tr>
-						<td class="textus" colspan="3">
-						<div class="contEditor">
-						<textarea id="eventInput" name="content" cols="5" rows="1" style="width:98%;height:280px;"></textarea>
-
-</div>
-</td>
-</tr>
+	<colgroup>
+	<col style="width:12.5%;">
+	<col style="width:70%;">
+	<col style="width:12.5%">
+	</colgroup>
+	<tbody>
+	<tr>
+		<td>
+			<strong class="FG01">${dto.isEvent==1 }</strong>
+		</td>
+		<td>
+			<span class="tit"><input type="text" name="subject" id="subject" style="width: 691px;"></span>
+		</td>
+		<td class="name">${sessionScope.member.memberId }
+		</td>
+	</tr>
+	<tr>
+		<td class="textus" colspan="3">
+			<div class="contEditor">
+				<textarea id="eventInput" name="content" cols="5" rows="1" style="width:98%;height:280px;"></textarea>
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input type="file" name="upload">
+		</td>
+	</tr>
 </table>
 
 <div>
-			<ul>
-				<li><input type="file" name="upload"></li>
-			</ul>
-		</div>
-		<div>
-			<c:if test="${mode=='update' }">
-				<c:forEach var="vo" items="${listFile }">
-					<ul>
-						<li><strong>첨부된&nbsp;&nbsp;파일</strong></li>
-						<li>${vo.originalFilename } | <a href="javascript:deleteFile('${vo.fileNum }');">삭제</a></li>
-					</ul>
-				</c:forEach>
-			</c:if>		
-		</div>
-		<div class="btn_area">
-			<ul>
-				<li><button type="button" class="btn" onclick="sendOk('${mode}', '${pageNo}');">${mode=='update'?'수정완료':'등록하기'}</button></li>
-				<li><button type="reset" class="btn">다시입력</button></li>
-				<li><button type="button" class="btn" onclick="sendCancel('${pageNo}');">${mode=='update'?'수정취소':'등록취소'}</button></li>
-				<li> <c:if test="${mode=='update'}">
-         	 			<input type="hidden" name="num" value="${dto.num}">
-        	 			<input type="hidden" name="pageNo" value="${pageNo}">
-        			</c:if>
-        		</li>
-			</ul>
-		</div>
+	<div>
+		<c:if test="${mode=='update' }">
+			<c:forEach var="vo" items="${listFile }">
+				<ul>
+					<li><strong>첨부된&nbsp;&nbsp;파일</strong></li>
+					<li>${vo.originalFilename } | <a href="javascript:deleteFile('${vo.fileNum }');">삭제</a></li>
+				</ul>
+			</c:forEach>
+		</c:if>		
+	</div>
+	<div class="btn_area">
+		<ul>
+			<li><button type="button" class="btn" onclick="sendOk('${mode}', '${pageNo}');">${mode=='update'?'수정완료':'등록하기'}</button></li>
+			<li><button type="reset" class="btn">다시입력</button></li>
+			<li><button type="button" class="btn" onclick="sendCancel('${pageNo}');">${mode=='update'?'수정취소':'등록취소'}</button></li>
+			<li>
+				<c:if test="${mode=='update'}">
+	        		<input type="hidden" name="num" value="${dto.num}">
+	        		<input type="hidden" name="pageNo" value="${pageNo}">
+	        	</c:if>
+        	</li>
+		</ul>
+	</div>
+</div>
 
 </div>
 </form>
