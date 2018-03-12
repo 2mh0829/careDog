@@ -21,11 +21,9 @@
 
 .header-left {
 	position: absolute;
-	top: 15px;
+	top: 10px;
 	left: 60px;
     margin: 0 auto;
-    width: 15%;
-    margin-left: 20px;
     height: 100%;
     float: left;
 }

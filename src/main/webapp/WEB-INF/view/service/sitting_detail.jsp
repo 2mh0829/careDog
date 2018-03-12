@@ -7,38 +7,18 @@
 %>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css"></script>
 
 <script>
 
-$(function(){
-    $("#left-datepicker").datepicker({
-    	dateFormat: "yy-mm-dd",
-    	showAnim: "slideDown",
-    	showMonthAfterYear: true,
-    	yearSuffix: '년',
-    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-    	minDate: 0
-    });
-});
-
-$(function(){
-    $("#right-datepicker").datepicker({
-    	dateFormat: "yy-mm-dd",
-    	showAnim: "slideDown",
-    	showMonthAfterYear: true,
-    	yearSuffix: '년',
-    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-    	minDate: 0
-    });
-});
-
 $( function() {
     $( "#datepicker" ).datepicker({
+    	dateFormat: "yy-mm-dd",
+    	showAnim: "slideDown",
+    	showMonthAfterYear: true,
+    	yearSuffix: '년',
+    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+    	minDate: 0,
     	autoSize: true
     });
 } );
@@ -263,6 +243,7 @@ li{
 
 .inner {
 	border: 1px solid red;
+	height: 500px;
 }
 
 .row .carryAble {
@@ -291,6 +272,81 @@ li{
 
 .row dd {
 	margin-bottom: 5px;
+}
+
+.environment {
+	padding-top: 40px;
+}
+
+.environment h3 {
+	margin-bottom: 15px;
+    color: #18ab29;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.row-environment {
+	border: 1px solid black;
+}
+
+.main-middle-environ {
+	/* padding: 40px 0; */
+    /* border-bottom: 1px solid #dcdcdc; */
+    border: 1px solid;
+    width: 623px;
+    height: 190px;
+}
+
+/*.environ-area {
+	border: 1px solid;
+	width: 50%;
+}*/
+
+ .environ-title img {
+	width: 20px;
+	height: 20px;
+}
+
+.environ-title dt {
+	width: 45%;
+	border-bottom: 1px solid #cccccc;
+	height: 40px;
+	line-height: 2.5;
+}
+
+.environ-title dd {
+	width: 55%;
+	border-bottom: 1px solid #cccccc;
+	height: 40px;
+	line-height: 2.5;
+   
+}
+
+.environ-area-left {
+	float: left;
+	/* border: 1px solid; */
+	width: 50%;
+	height: 133px;
+}
+
+.environ-area-right {
+	float:right;
+	/* border:1px solid blue; */
+	width: 50%;
+	height: 133px;
+}
+
+.area-name {
+	padding-left: 12px;
+}
+
+.environ-text {
+	float: right;
+	margin-right: 15px;
+}
+
+.colored {
+	background-color: #f0f0f0;
 }
 
 </style>
@@ -419,6 +475,61 @@ li{
 			<div id="datepicker">
 				
 			</div>
+		</div>
+		<div class="main-middle-environ">
+			<h3>돌봄 환경</h3>
+			<div class="environ-area-left">
+					<dl class="environ-title">
+					<dt class="colored pull-left">
+						<img src="<%=cp%>/resource/img/service/house.JPG">
+						<label class="area-name">돌봄 공간</label>
+					</dt>
+					<dd class="colored pull-right">
+						<label class="environ-text">빌라</label>
+					</dd>
+					<dt class="pull-left">
+						<img src="<%=cp%>/resource/img/service/subway.JPG">
+						<label class="area-name">근처 지하철역</label>
+					</dt>
+					<dd class="pull-right">
+						<label class="environ-text">서울역</label>
+					</dd>
+					<dt class="colored pull-left">
+						<img src="<%=cp%>/resource/img/service/yard.JPG">
+						<label class="area-name">마당 유무</label>
+					</dt>
+					<dd class="colored pull-right">
+						<label class="environ-text">있습니다</label>
+					</dd>
+			</div>
+			<div class="environ-area-right">
+				<dl class="environ-title">
+				<dt class="colored pull-left">
+					<img src="<%=cp%>/resource/img/service/baby.JPG">
+					<label class="area-name">14세 미만 아동</label>
+				</dt>
+				<dd class="colored pull-right">
+					<label class="environ-text">있습니다</label>
+				</dd>
+				<dt class="pull-left">
+					<img src="<%=cp%>/resource/img/service/family.JPG">
+					<label class="area-name">가족 동거 유무</label>
+				</dt>
+				<dd class="pull-right">
+					<label class="environ-text">없습니다</label>
+				</dd>
+				<dt class="colored pull-left">
+					<img src="<%=cp%>/resource/img/service/cat.JPG">
+					<label class="area-name">다른 동물 유무</label>
+				</dt>
+				<dd class="colored pull-right">
+					<label class="environ-text">없습니다</label>
+				</dd>	
+				</dl>	
+			</div>
+		</div>
+		<div>
+			
 		</div>
 	</div>
 </div>
