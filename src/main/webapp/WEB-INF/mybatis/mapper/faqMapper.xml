@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="faq">
+
+<insert id="insertfaq" parameterType="care.dog.center.faq.FAQ">
+INSERT INTO faq(num, memberId, subject, content) VALUES(faq_seq.NEXTVAL, #{memberId}, #{subject}, #{content})
+</insert>
+
+<update id="updatefaq" parameterType="care.dog.center.faq.FAQ">
+UPDATE faq SET subject = #{subject}, content = #{content}
+</update>
+
+<select id="listfaq" parameterType="map" resultType="care.dog.center.faq.FAQ">
+SELECT * FROM (
+	SELECT ROWNUM rnum, tb.* FROM(
+		SELECT num, f.memberId, subject, content
+		FROM faq f
+		JOIN member1 m ON f.memberId = m.memberId
+		<where>
+			<if test="searchValue != null and searchValue != ''">
+				<include refid="where-list"/>
+			</if>
+		</where>
+		ORDER BY NUM DESC
+		<![CDATA[	
+	) tb WHERE ROWNUM <= 10
+) WHERE rnum >= 1
+]]>
+</select>
+
+</mapper>
