@@ -224,7 +224,7 @@ li{
 }
 
 .row {
-	border: 1px solid #ccc;
+	border: 1px solid #ffb861;
 	/* border: 1px solid blue; */
 	margin-left: 1px;
     /* margin-right: auto; */
@@ -290,7 +290,7 @@ li{
 
 .main-middle-environ {
 	/* padding: 40px 0; */
-    border: 1px solid #dcdcdc;
+    /* border: 1px solid #dcdcdc; */
     /* border: 1px solid; */
     width: 623px;
     height: 190px;
@@ -355,7 +355,7 @@ li{
 }
 
 .sitter-infor {
-	border: 1px solid #cccccc;
+	/* border: 1px solid #cccccc; */
     /* display: inline-block; */
     height: 190px;
     width: 335px;
