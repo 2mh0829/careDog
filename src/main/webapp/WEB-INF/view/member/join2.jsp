@@ -70,6 +70,17 @@ function changeEmail() {
 
 function joinNext() {
 	var f = document.memberForm;
+	var str;
+	
+	str = f.email2.value;
+	str = str.trim();
+    if(!str) {
+        alert("이메일을 입력하세요. ");
+        f.email2.focus();
+        return;
+    }
+    
+    
 	f.action = "<%=cp%>/member/join3";
 	f.submit();
 }

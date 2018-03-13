@@ -263,11 +263,10 @@ public class MyUtil {
 		if(str==null||str.length()==0)
 			return "";
 
-//    	 str=str.replaceAll("&", "&amp;");
-//    	 str=str.replaceAll("\"", "&quot;");
-//    	 str=str.replaceAll(">", "&gt;");
-//    	 str=str.replaceAll("<", "&lt;");
-    	 
+    	 str=str.replaceAll("&", "&amp;");
+    	 str=str.replaceAll("\"", "&quot;");
+    	 str=str.replaceAll(">", "&gt;");
+    	 str=str.replaceAll("<", "&lt;");
     	 str=str.replaceAll(" ", "&nbsp;");
     	 str=str.replaceAll("\n", "<br>");
     	 

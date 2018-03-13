@@ -168,9 +168,9 @@ public class MailSender {
 			msg.setSubject(dto.getSubject());
 
 			// HTML 형식인 경우 \r\n을  <br>로 변환
-			if(mailType.indexOf("text/html") != -1) {
-				dto.setContent(myUtil.htmlSymbols(dto.getContent()));
-			}
+//			if(mailType.indexOf("text/html") != -1) {
+//				dto.setContent(myUtil.htmlSymbols(dto.getContent()));
+//			}
 
 			makeMessage(msg, dto);
 			msg.setHeader("X-Mailer", dto.getSenderName());
