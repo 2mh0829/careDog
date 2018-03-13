@@ -246,13 +246,11 @@ strong {font-family: 'NanumGothicWebBold' !important; } /* 강조 */
 <script type="text/javascript"
 	src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
-var city,gu, center, kind, total
+var city,gu, center, kind, total, paging;
 var pageNum=1;
 var startPage, endPage;
 $(document).ready(function(){
 	findDog('');
-
-	page(1);
 	  $.ajax({
 		url:'<%=cp%>/strayDog/sido'
 		,dataType:'json'
@@ -352,6 +350,7 @@ function findDog(value){
 			var list=data.list;
 			var content="";
 			total = data.totalCount;
+			paging = data.paging;
 			console.log(list)
 			$.each(list, function(index, item){
 				content+="<div class='strayDog'><button type='button' data-toggle='modal' data-target='#strayDogDetail'>";
@@ -369,6 +368,7 @@ function findDog(value){
 				content+="<li class='full'><span>"+item.specialMark+"</span></li></ul></div>";
 			});
 			$(".allStrayDog").append(content);
+			$(".pagenation").append(paging);
 		}
 	});
 	
@@ -384,39 +384,17 @@ function changeKind(value){
 	findDog('');
 }
 
-function page(num){
-	pageNum = num;
-	findDog('');
+function listPage(num){
+	pageNum=num;
 	$(".pagenation").find("a").remove();
-	//startPage, endPage;
-	//startPage=
-	var prevNum = pageNum-1;
-	var nextNum = pageNum+1;
-
-	var content = "";
-	content+=(pageNum==1?"":"<a href='javascript:page("+prevNum+")' class='img'><img src='<%=cp%>/resource/img/strayDog/btn_prev.png' alt='이전 목록 보기'></a>");
-	content+="<c:forEach var='i' begin='1' end='10'>";
-	content+="<a href='javascript:page(${i})' onclick='onchange()'>${i}</a>";
-	content+="</c:forEach>";
-	content+="<a href='javascript:page("+nextNum+")' class='img'>"
-	content+="<img src='<%=cp%>/resource/img/strayDog/btn_nxt.png' alt='다음 목록 보기'></a>";
-	/* <span class="select">1</span>  */
-	
-	$(".pagenation").append(content);
-}
-
-function onchange(){
-	$(".pagenation a").on("click",function(e){
-		e.preventDefault();
-		console.log(this);
-		$('a span').attr('class','select');
-	});
+	findDog('');
 }
 
 
 </script>
 
 <div class="body-container">
+ <!-- 검색영역 -->
 	<div class="search_area">
 		<form name="search_form" method="post" action="?act=list&amp;bid=animal">
 			시도	<select id="city" name="city" onchange="changeCity(this.value);" class="wd120">
@@ -431,8 +409,12 @@ function onchange(){
 			</select>
 		</form>
 	</div>
+	
+<!-- 리스트 출력 -->
 	<div class="allStrayDog">
 	</div>
+	
+<!-- 페이징 -->
 	<div id="pagingNav" class="pagenation"></div>
 </div>
 
