@@ -5,7 +5,7 @@
 <%
    String cp = request.getContextPath();
 %>
- <div class="bodyFrame4" id="blog-content" style="margin-bottom: 20px;">
+<div class="bodyFrame4" id="blog-content" style="margin-bottom: 20px;">
 <div class="blog-body-content" style="padding-bottom: 0px;">
       <div style="width:100%; height: 30px; line-height: 30px; border-bottom: 1px solid #212121;">
             <b>회원소개</b>
