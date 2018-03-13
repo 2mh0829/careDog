@@ -45,6 +45,7 @@ h1 {
 
 </style>
 
+
 <div class="body-container">
 	<div id="join-img-box">
 		<img src="<%=cp %>/resource/img/join3.jpg">

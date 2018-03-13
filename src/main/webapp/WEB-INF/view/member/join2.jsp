@@ -52,8 +52,26 @@ body {
 
 <script>
 
+function changeEmail() {
+    var f = document.memberForm;
+	    
+    var str = f.selectEmail.value;
+    if(str!="direct") {
+        f.email2.value=str; 
+        f.email2.readOnly = true;
+        f.email1.focus(); 
+    }
+    else {
+        f.email2.value="";
+        f.email2.readOnly = false;
+        f.email1.focus();
+    }
+}
+
 function joinNext() {
-	location.href = "<%=cp %>/member/join3";
+	var f = document.memberForm;
+	f.action = "<%=cp%>/member/join3";
+	f.submit();
 }
 
 </script>
