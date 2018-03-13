@@ -164,7 +164,7 @@ function insertForm() {
 
 // 글등록, 수정등록, 답변등록
 function sendOk(mode, page) {
-	var $tab = $(".tabs .active");
+	var $tab = $(".comm1sTabs .active");
 	var tab = $tab.attr("data-tab");
 	
     var f = document.boardForm;

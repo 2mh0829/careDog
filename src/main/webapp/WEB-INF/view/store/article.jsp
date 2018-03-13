@@ -229,6 +229,10 @@ th {
 }
  */
  
+.question-tr:hover { 
+	cursor: pointer;
+}
+
 /* qna테이블의 모든 tr  */
 /* .qna-list tbody tr {
 	cursor: pointer;
@@ -721,7 +725,7 @@ $('#myTab a').click(function (e) {
 					<form name="qnaForm" id="qnaForm" action="">
 						<table class="table table-condensed qna-list" id="qnaTable" style="width: 800px">
 							<tbody class="pane1">
-								<tr data-toggle="collapse" data-target="#answer1" data-parent="#qnaTable">
+								<tr class="question-tr" data-toggle="collapse" data-target="#answer1" data-parent="#qnaTable">
 									<td>
 										<div class="divTd" style="width: 100px;">
 											<!-- 답변완료 여부 버튼 - 이미지로? -->
@@ -760,7 +764,7 @@ $('#myTab a').click(function (e) {
 										</div>
 									</td>
 								</tr>
-								<tr data-toggle="collapse" data-target="#answer2" data-parent="#qnaTable">
+								<tr class="question-tr" data-toggle="collapse" data-target="#answer2" data-parent="#qnaTable">
 									<td>
 										<div class="divTd" style="width: 100px;">
 											<!-- 답변완료 여부 버튼 이미지로? -->

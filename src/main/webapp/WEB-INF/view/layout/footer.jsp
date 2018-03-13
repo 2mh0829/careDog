@@ -38,7 +38,7 @@
 }
 
 .footer-menu {
-	margin: 15px;
+	margin: 15px auto;
 	border-top: 1.2px solid #aaaaaa;
 	border-bottom: 1.2px solid #dddddd;
 	padding: 15px;

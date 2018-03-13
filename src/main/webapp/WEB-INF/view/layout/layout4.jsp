@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Dog Mate</title>
+<title>Care Dog</title>
 
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-ui.min.js"></script>
@@ -53,7 +53,6 @@
 
 
 <div class="chatbot">
-	<!-- <h1 align="center"><a>챗봇</a></h1> -->
 	<tiles:insertAttribute name="bot" />
 </div>
 

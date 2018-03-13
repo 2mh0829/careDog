@@ -66,13 +66,28 @@
 .paging {
 	clear: both;
 	font-size: 23px;
+	padding: 20px;
 }
 	
 </style>
 
+<script type="text/javascript">
+
+function searchList() {
+	var f = document.searchForm;
+	f.submit();
+}
+
+function article(num) {
+	var url="${articleUrl}&num="+num;
+	location.href=url;
+}
+
+</script>
+
 <div class="body-container">	
 
-	<div class="header">
+	<div class="list-header">
 
 		<div class="list-title">
 			<h3>ALL</h3>
@@ -89,150 +104,83 @@
 
 	</div>
 
-	<div class="content section01">
+	<c:forEach var="dto" items="${list}">
 	
-		<!-- 상품 이미지 -->
-		<div class="product-image">
-			<a href="<%=cp%>/store/article">
-				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-			</a>
-		</div>
-		
-		<!-- 브랜드명 -->
-		<div class="product-brand">
-			<!-- <a href="#">그리니즈</a> -->
-			그리니즈
-		</div>
-		
-		<!-- 상품 제목 -->
-		<div class="product-title">
-			<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-		</div>
-		
-		<!-- 상품 가격 -->
-		<div class="product-price">
-			<strong>40000</strong>원
-		</div>
-		
-		<!-- new / best / sale 구분 이미지 -->
-		<div class="product-icon">
-			<img src="<%=cp%>/resource/img/store/new.gif">
-		</div>
-		
-	</div>
+		<div class="content section">
 	
-	<div class="content section02">
+			<!-- 상품 이미지 -->
+			<div class="product-image">
+				<a href="<%=cp%>/store/article">
+					<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
+					<%-- <img src="<%=cp%>/uploads/photo/${dto.imageFilename}"> --%>
+				</a>
+			</div>
+			
+			<!-- 브랜드명 -->
+			<div class="product-brand">
+				<span class="brand" onclick="javascript:article('${dto.productId}');" >
+					${dto.brand}
+				</span>
+			</div>
+			
+			<!-- 상품 제목 -->
+			<div class="product-title">
+				<span class="productName" onclick="javascript:article('${dto.productId}');" >
+					${dto.productName}
+				</span>
+			</div>
+			
+			<!-- 상품 가격 -->
+			<div class="product-price">
+				<span class="sellingPrice">
+					<strong>${dto.sellingPrice}</strong>원
+				</span>
+			</div>
+			
+			<!-- new / best / sale 구분 이미지 -->
+			<div class="product-icon">
+				<img src="<%=cp%>/resource/img/store/new.gif">
+			</div>
+		</div>
+	</c:forEach>
 	
-		<div class="product-image">
-			<a href="<%=cp%>/store/article">
-				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-			</a>
-		</div>
-		
-		<div class="product-brand">
-			<!-- <a href="#">그리니즈</a> -->
-			그리니즈
-		</div>
-		
-		<div class="product-title">
-			<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-		</div>
-		
-		<div class="product-price">
-			<strong>40000</strong>원
-		</div>
-		
-		<div class="product-icon">
-			<img src="<%=cp%>/resource/img/store/new.gif">
-		</div>
-		
-	</div>
-	
-	<div class="content section03">
-	
-		<div class="product-image">
-			<a href="<%=cp%>/store/article">
-				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-			</a>
-		</div>
-		
-		<div class="product-brand">
-			<!-- <a href="#">그리니즈</a> -->
-			그리니즈
-		</div>
-		
-		<div class="product-title">
-			<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-		</div>
-		
-		<div class="product-price">
-			<strong>40000</strong>원
-		</div>
-		
-		<div class="product-icon">
-			<img src="<%=cp%>/resource/img/store/new.gif">
-		</div>
-		
-	</div>
-	
-	<div class="content section04">
-	
-		<div class="product-image">
-			<a href="<%=cp%>/store/article">
-				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-			</a>
-		</div>
-		
-		<div class="product-brand">
-			<!-- <a href="#">그리니즈</a> -->
-			그리니즈
-		</div>
-		
-		<div class="product-title">
-			<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-		</div>
-		
-		<div class="product-price">
-			<strong>40000</strong>원
-		</div>
-		
-		<div class="product-icon">
-			<img src="<%=cp%>/resource/img/store/new.gif">
-		</div>
-		
-	</div>
-	
-	<div class="content section05">
-	
-		<div class="product-image">
-			<a href="<%=cp%>/store/article">
-				<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-			</a>
-		</div>
-		
-		<div class="product-brand">
-			<!-- <a href="#">그리니즈</a> -->
-			그리니즈
-		</div>
-		
-		<div class="product-title">
-			<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-		</div>
-		
-		<div class="product-price">
-			<strong>40000</strong>원
-		</div>
-		
-		<div class="product-icon">
-			<img src="<%=cp%>/resource/img/store/new.gif">
-		</div>
-		
-	</div>
-	
+	<!-- 
 	<div class="paging" align="center">
 		prev .. 1 2 3 .. next
 	</div>
-	
+	 -->
+	 
+	  <div class="paging" style="text-align: center; min-height: 50px; line-height: 50px;">
+            <c:if test="${dataCount==0 }">
+                  등록된 게시물이 없습니다.
+            </c:if>
+            <c:if test="${dataCount!=0 }">
+                ${paging}
+            </c:if>
+        </div>        
+        
+        <div style="clear: both;">
+        		<div style="float: left; width: 20%; min-width: 85px;">
+        		    <button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/store/list';">새로고침</button>
+        		</div>
+        		<div style="float: left; width: 60%; text-align: center;">
+        		     <form name="searchForm" action="<%=cp%>/store/list" method="post" class="form-inline">
+						  <select class="form-control input-sm" name="searchKey" >
+						      <option value="productName">제품명</option>
+						      <option value="brand">브랜드명</option>
+						  </select>
+						  <input type="text" class="form-control input-sm input-search" name="searchValue">
+						  <button type="button" class="btn btn-info btn-sm btn-search" onclick="searchList();">
+						  <span class="glyphicon glyphicon-search"></span> 검색</button>
+        		     </form>
+        		</div>
+        		<%-- 
+        		<div style="float: left; width: 20%; min-width: 85px; text-align: right;">
+        		    <button type="button" class="btn btn-primary btn-sm bbtn" onclick="javascript:location.href='<%=cp%>/photo/created';"><span class="glyphicon glyphicon glyphicon-pencil"></span> 등록하기</button>
+        		</div>
+        		 --%>
+        </div>
+	 
 </div>	
 
 

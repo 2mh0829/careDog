@@ -31,6 +31,5 @@
 		<a href="<%=cp%>/store/list">식기 & 하우스</a>
 		<a href="<%=cp%>/store/list">외출 & 패션</a>
 		<a href="<%=cp%>/store/list">장난감</a>
-		<a href="<%=cp%>/store/list">검색</a>
 	</div>
 </div>

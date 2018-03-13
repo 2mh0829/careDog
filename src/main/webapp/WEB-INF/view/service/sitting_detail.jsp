@@ -7,7 +7,6 @@
 %>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-
 <script>
 
 $( function() {
@@ -18,7 +17,7 @@ $( function() {
     	yearSuffix: '년',
     	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
     	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-    	minDate: 0
+    	minDate: 0,
     	autoSize: true
     });
 } );
@@ -205,7 +204,7 @@ li{
 }
 
 .main-middle-inner {
-	border: 1px solid black;
+	/* border: 1px solid black; */
 }
 
 .price-tot {
@@ -225,8 +224,8 @@ li{
 }
 
 .row {
-	/* border-top: 1px solid #ccc; */
-	border: 1px solid blue;
+	border: 1px solid #ccc;
+	/* border: 1px solid blue; */
 	margin-left: 1px;
     /* margin-right: auto; */
     width: 621px;
@@ -242,7 +241,8 @@ li{
 }
 
 .inner {
-	border: 1px solid red;
+	/* border: 1px solid red; */
+	height: 600px;
 }
 
 .row .carryAble {
@@ -251,17 +251,17 @@ li{
     top: 40px;
     position: relative;
     width: 202px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: inline-block;
 }
 
 .row .carryAble-time {
-	margin-left: 5px;
+	margin-left: 17px;
 	margin-right: 5px;
     top: 30px;
     position: relative;
     width: 180px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     display: inline-block;
 }
 
@@ -282,6 +282,136 @@ li{
     color: #18ab29;
     font-size: 18px;
     font-weight: bold;
+}
+
+.row-environment {
+	border: 1px solid black;
+}
+
+.main-middle-environ {
+	/* padding: 40px 0; */
+    border: 1px solid #dcdcdc;
+    /* border: 1px solid; */
+    width: 623px;
+    height: 190px;
+    display: inline-block;
+    margin-top: 40px;
+}
+
+/*.environ-area {
+	border: 1px solid;
+	width: 50%;
+}*/
+
+ .environ-title img {
+	width: 20px;
+	height: 20px;
+}
+
+.environ-title dt {
+	width: 45%;
+	border-bottom: 1px solid #cccccc;
+	height: 40px;
+	line-height: 2.5;
+}
+
+.environ-title dd {
+	width: 55%;
+	border-bottom: 1px solid #cccccc;
+	height: 40px;
+	line-height: 2.5;
+   
+}
+
+.environ-area-left {
+	float: left;
+	/* border: 1px solid; */
+	width: 50%;
+	height: 133px;
+}
+
+.environ-area-right {
+	float:right;
+	/* border:1px solid blue; */
+	width: 50%;
+	height: 133px;
+}
+
+.area-name {
+	padding-left: 12px;
+}
+
+.environ-text {
+	float: right;
+	margin-right: 15px;
+}
+
+.colored {
+	background-color: #f0f0f0;
+}
+
+.sitter-information {
+	border: 1px solid;
+}
+
+.sitter-infor {
+	border: 1px solid #cccccc;
+    /* display: inline-block; */
+    height: 190px;
+    width: 335px;
+    float: right;
+    margin-top: 40px;
+}
+
+.sitter-face {
+	display: inline-block;
+	width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+}
+
+.sitter {
+	border-bottom:1px solid #cccccc;
+	margin-top: 10px;
+	margin-left: 10px;
+	width: 310px;
+}
+
+.sitter-name {
+	padding-left: 30px;
+	font-size: 20px;
+    font-weight: 500;
+   /*  float: right; */
+    
+}
+
+.sitter i {
+	float: right;
+	/* padding-bottom: 20px; */
+	top: -15px;
+}
+
+.dog-name {
+	padding-left: 30px;
+	font-size: 20px;
+    font-weight: 500;
+}
+
+.dog-info {
+	font-size: 15px;
+    font-weight: 500;
+    float: right;
+    margin-top: 40px;
+}
+
+.customer-rating {
+	border: 1px solid;
+	margin-top: 40px;
+}
+
+.main-middle-environ h3 {
+	margin-left: 12px;
 }
 
 </style>
@@ -411,13 +541,74 @@ li{
 				
 			</div>
 		</div>
-		<div class="environment">
+		<div class="main-middle-environ">
 			<h3>돌봄 환경</h3>
-			<div class="row-environment">
-				<dl class="col-sm-6 left">
-					<dt class="pull-left">돌봄공간</dt>
-				</dl>
+			<div class="environ-area-left">
+					<dl class="environ-title">
+					<dt class="colored pull-left">
+						<img src="<%=cp%>/resource/img/service/house.JPG">
+						<label class="area-name">돌봄 공간</label>
+					</dt>
+					<dd class="colored pull-right">
+						<label class="environ-text">빌라</label>
+					</dd>
+					<dt class="pull-left">
+						<img src="<%=cp%>/resource/img/service/subway.JPG">
+						<label class="area-name">근처 지하철역</label>
+					</dt>
+					<dd class="pull-right">
+						<label class="environ-text">서울역</label>
+					</dd>
+					<dt class="colored pull-left">
+						<img src="<%=cp%>/resource/img/service/yard.JPG">
+						<label class="area-name">마당 유무</label>
+					</dt>
+					<dd class="colored pull-right">
+						<label class="environ-text">있습니다</label>
+					</dd>
 			</div>
+			<div class="environ-area-right">
+				<dl class="environ-title">
+				<dt class="colored pull-left">
+					<img src="<%=cp%>/resource/img/service/baby.JPG">
+					<label class="area-name">14세 미만 아동</label>
+				</dt>
+				<dd class="colored pull-right">
+					<label class="environ-text">있습니다</label>
+				</dd>
+				<dt class="pull-left">
+					<img src="<%=cp%>/resource/img/service/family.JPG">
+					<label class="area-name">가족 동거 유무</label>
+				</dt>
+				<dd class="pull-right">
+					<label class="environ-text">없습니다</label>
+				</dd>
+				<dt class="colored pull-left">
+					<img src="<%=cp%>/resource/img/service/cat.JPG">
+					<label class="area-name">다른 동물 유무</label>
+				</dt>
+				<dd class="colored pull-right">
+					<label class="environ-text">없습니다</label>
+				</dd>	
+				</dl>	
+			</div>
+		</div>
+		<div class="sitter-infor">
+			<label class="sitter">
+				<img class="sitter-face" 
+				src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_80%2Cw_300/MTE5NTU2MzE2MTk1NTU0ODI3/daniel-day-lewis-9268727-2-402.jpg">
+				<label class="sitter-name">김경애</label>
+					<i class="glyphicon glyphicon-map-marker">고양시 일산서구 대화동</i>
+			</label>
+			<label class="sitter">
+				<img class="sitter-face" 
+				src="http://cfile5.uf.tistory.com/image/2737C53656F686912C5801">
+				<label class="dog-name">검둥이<br></label>
+				<label class="dog-info">말티즈, 남, 7세</label>
+			</label>
+		</div>
+		<div class="customer-rating">
+			<h1>후기</h1>
 		</div>
 	</div>
 </div>

@@ -66,10 +66,10 @@ function secession() {
               <img src="<%=cp%>/resource/images/noimage.png" width="164" height="164">
           </c:if>
           <c:if test="${not empty  blogInfo.profilePhoto}">
-              <img style="border-radius:100px" src="<%=cp%>/uploads/blog/${blogInfo.memberId}/${blogInfo.profilePhoto}" width="164" height="164">
+              <img style="border-radius:200px;margin-left: 70px;" src="<%=cp%>/uploads/blog/${blogInfo.memberId}/${blogInfo.profilePhoto}" width="250" height="250">
           </c:if>
      </div>
-     <div style="padding: 10px 2px 5px; white-space:pre;">${blogInfo.introduce}</div>
+<%--      <div style="padding: 10px 2px 5px; white-space:pre;">${blogInfo.introduce}</div> --%>
      <c:if test="${blogInfo.memberId==sessionScope.member.memberId}">
          <div style="padding: 5px 2px; text-align: center;">
              [<a href="javascript:postInsert();"><b>포스트 글쓰기</b></a>]
@@ -85,10 +85,7 @@ function secession() {
              </c:if>
              | <a href="">쪽지</a>
      </div>
-</div>
-
-<div class="blog-left">
-    <div class="category-list">
+      <div class="category-list">
 	<a href="#">펫시터 등록하기</a><br>
 	<a href="#">서비스이용내역</a><br>
 	<a href="#">북마크</a><br>
@@ -96,4 +93,7 @@ function secession() {
 	<a href="#">봉사/후원 내역</a><br>
 	<a href="javascript:secession();">회원탈퇴</a>
 	</div>
+       
 </div>
+
+<div class="blog-left"></div>

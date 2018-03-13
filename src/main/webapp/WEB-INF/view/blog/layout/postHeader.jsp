@@ -73,6 +73,14 @@
 			$(".blog-body").html(data);
 		})
 	}
+	function myPetList() {
+		var url = "<%=cp%>/mypage/myPetList";
+		$.get(url, {
+			tmp : new Date().getTime()
+		}, function(data) {
+			$(".blog-body").html(data);
+		})
+	}
 </script>
 
 <%-- <div class="blog-header-top">
@@ -89,13 +97,13 @@
 	<ul class="nav">
 		<li class="list-menu-item"><a href="${blogUrl}">메인</a></li>
 		<li class="list-menu-item"><a href="javascript:editMemberInfo();">개인정보수정</a></li>
-		<li class="list-menu-item"><a href="javascript:photoView();">포토</a></li>
-		<li class="list-menu-item"><a href="javascript:guestbook();">방명록</a></li>
-		<li class="list-menu-item"><a href="javascript:guestbook();">마이펫</a></li>
+	<!-- 	<li class="list-menu-item"><a href="javascript:photoView();">포토</a></li> -->
+		<li class="list-menu-item"><a href="javascript:myPetList();">마이펫</a></li>
 		<li class="list-menu-item"><a href="javascript:guestbook();">장바구니</a></li>
 		<li class="list-menu-item"><a href="javascript:messenger();">메신저</a></li>
 		<li class="list-menu-item"><a href="javascript:messenger();">일정관리</a></li>
 		<li class="list-menu-item"><a href="javascript:messenger();">친구관리</a></li>
+		<li class="list-menu-item"><a href="javascript:messenger();">펫시터 서비스 관리</a></li>
 	</ul>
 
 </div>

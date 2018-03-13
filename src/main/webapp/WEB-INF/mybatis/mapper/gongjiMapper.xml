@@ -24,12 +24,26 @@
 </sql>
 
 <insert id="insertGongji" parameterType="care.dog.center.Gongji">
-INSERT INTO gongji (num, memberId, isGongji, subject, content, imageFilename, created)
-VALUES (#{num}, #{memberId}, #{isGongji}, #{subject}, #{content}, #{imageFilename}, #{created})
+INSERT INTO gongji (num, memberId, isGongji, subject, content, created)
+VALUES (#{num}, #{memberId}, 1, #{subject}, #{content}, sysdate)
 </insert>
 
 <select id="listGongji" parameterType="map" resultType="care.dog.center.Gongji">
-SELECT num, isGongji, subject, created FROM gongji WHERE isGongji=1 ORDER BY num DESC
+SELECT * FROM (
+	SELECT ROWNUM rnum, tb.* FROM (
+		SELECT num, g.memberId, subject, content, created ,isGongji
+		FROM gongji g
+		JOIN member1 m ON g.memberId=m.memberId
+		<where>
+        	<if test="searchValue != null and searchValue != ''">
+				<include refid="where-list"/>
+		    </if>
+	    </where>
+	    ORDER BY num DESC
+	    <![CDATA[
+	) tb WHERE ROWNUM <= 10
+) WHERE rnum >= 1
+]]>
 </select>
 
 <update id="updateGongji" parameterType="care.dog.center.Gongji">
@@ -97,21 +111,12 @@ FROM gongjiFile WHERE fileNum=#{fileNum}
 DELETE FROM gongjiFile WHERE num=#{num}
 </delete>
 
-<select id="dataCount" parameterType="map" resultType="care.dog.center.Gongji">
-SELECT * FROM (
-	SELECT ROWNUM rnum, tb.* FROM (
-		SELECT num, g.memberId, isGongji, subject, content, imageFilename, created
-		FROM gongji g
-		JOIN member1 m ON g.memberId=m.memberId
-		<where>
-        	<if test="searchValue != null and searchValue != ''">
-				<include refid="where-list"/>
-		    </if>
-	    </where>
-	    ORDER BY num DESC
-	    <![CDATA[
-	) tb WHERE ROWNUM <= #{end}
-) WHERE rnum >= #{start}
-]]>
+<select id="dataCount" parameterType="map" resultType="Integer">
+SELECT NVL(COUNT(*),0) FROM gongji g JOIN member1 m ON g.memberId=m.memberId
+<where>
+	<if test="searchValue != null and searchValue !=''">
+		<include refid="where-list"/>
+	</if>
+</where>
 </select>
 </mapper>
