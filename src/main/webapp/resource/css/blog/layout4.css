@@ -89,6 +89,7 @@
 .profile-photo {
 	clear:both;
 	margin:0px auto;
+	float: left;
 	/* height:164px;
 	width:164px; */
 	/* border:1px solid #ccc; */

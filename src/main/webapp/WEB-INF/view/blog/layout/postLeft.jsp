@@ -46,7 +46,7 @@ function postInsert() {
 function profile() {
 	var url="${blogUrl}/profile";
 	$.get(url, {temp:new Date().getTime()}, function(data){
-		$("#blog-content").html(data);
+		$(".blog-body").html(data);
 	});
 	
 }
@@ -63,34 +63,29 @@ function secession() {
 <div class="blog-left">
      <div class="profile-photo">
           <c:if test="${empty  blogInfo.profilePhoto}">
-              <img src="<%=cp%>/resource/images/noimage.png" width="164" height="164">
+              <img src="<%=cp%>/resource/images/noimage.png" width="250" height="250">
           </c:if>
           <c:if test="${not empty  blogInfo.profilePhoto}">
-              <img style="border-radius:200px;margin-left: 70px;" src="<%=cp%>/uploads/blog/${blogInfo.memberId}/${blogInfo.profilePhoto}" width="250" height="250">
+              <img style="border-radius:200px;" src="<%=cp%>/uploads/blog/${blogInfo.memberId}/${blogInfo.profilePhoto}" width="250" height="250">
           </c:if>
-     </div>
-<%--      <div style="padding: 10px 2px 5px; white-space:pre;">${blogInfo.introduce}</div> --%>
-     <c:if test="${blogInfo.memberId==sessionScope.member.memberId}">
-         <div style="padding: 5px 2px; text-align: center;">
-             [<a href="javascript:postInsert();"><b>포스트 글쓰기</b></a>]
+           <c:if test="${blogInfo.memberId==sessionScope.member.memberId}">
+         <div style="margin-top:10px; padding: 5px 2px; text-align: center;">
+             [<a href="javascript:postInsert();"><b>프로필 사진 수정</b></a> <c:if test="${blogInfo.memberId==sessionScope.member.memberId}">
+                  | <a href="${blogUrl}/manage"><b>관리</b></a>
+             </c:if>]
          </div>
      </c:if>
-     <div style="padding: 5px 2px; text-align: center;">
-             <a href="javascript:profile()">프로필</a>
-             <c:if test="${blogInfo.memberId!=sessionScope.member.memberId}">
-                 | <a href="">이웃추가</a>
-             </c:if>
-             <c:if test="${blogInfo.memberId==sessionScope.member.memberId}">
-                  | <a href="${blogUrl}/manage">관리</a>
-             </c:if>
-             | <a href="">쪽지</a>
      </div>
+<%--      <div style="padding: 10px 2px 5px; white-space:pre;">${blogInfo.introduce}</div> --%>
+    
+   
+   
       <div class="category-list">
-	<a href="#">펫시터 등록하기</a><br>
-	<a href="#">서비스이용내역</a><br>
-	<a href="#">북마크</a><br>
-	<a href="<%=cp%>/mypage/test">구매내역</a><br>
-	<a href="#">봉사/후원 내역</a><br>
+	<a href="#">펫시터 등록하기</a><br><br><br>
+	<a href="#">서비스이용내역</a><br><br><br>
+	<a href="#">북마크</a><br><br><br>
+	<a href="<%=cp%>/mypage/test">구매내역</a><br><br><br>
+	<a href="#">봉사/후원 내역</a><br><br><br>
 	<a href="javascript:secession();">회원탈퇴</a>
 	</div>
        

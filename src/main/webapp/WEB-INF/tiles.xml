@@ -89,9 +89,7 @@
 
 <definition name=".member.*" extends=".mainLayout">
 		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp" />
-		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
 		<put-attribute name="header" value="/WEB-INF/view/layout/header1.jsp" />
-		
 	</definition>
 	<definition name=".adminLayout" template="/WEB-INF/view/admin/layout/layout.jsp">
 		<put-attribute name="title" value="careDog" />

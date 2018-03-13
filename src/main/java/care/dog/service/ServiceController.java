@@ -15,5 +15,10 @@ public class ServiceController {
 	public String sitting_detail() {
 		return ".service.sitting_detail";
 	}
+	
+	@RequestMapping(value="/service/sitter_input")
+	public String sitter_input() {
+		return ".service.sitter_input";
+	}
 
 }
