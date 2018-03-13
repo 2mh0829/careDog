@@ -23,24 +23,24 @@ public class ProductServiceImpl implements ProductService{
 		List<Product> list = null;
 		try {
 			list = dao.selectList("store.listProduct", map);
-			System.out.println(list);
+			//System.out.println(list);
 		} catch (Exception e) {
 		}
 		return list;
 	}
 	
-/*
 	@Override
 	public int dataCount(Map<String, Object> map) {
 		int result = 0;
 		try {
 			result = dao.selectOne("store.dataCount", map);
-			System.out.println("dataCount: " + result);
+			//System.out.println("dataCount: " + result);
 		} catch (Exception e) {
 		}
 		return result;
 	}
-*/
+
+	/*
 	@Override
 	public int dataCount() {
 		int result = 0;
@@ -51,5 +51,6 @@ public class ProductServiceImpl implements ProductService{
 		}
 		return result;
 	}
-
+*/
+	
 }

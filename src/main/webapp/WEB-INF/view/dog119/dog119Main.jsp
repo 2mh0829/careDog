@@ -148,5 +148,37 @@
 			</p>
 		</div>
 	</div>
+	
+	<div class="dog119_btn">
 		<button type="button" onclick="javascript:location.href='<%=cp%>/dog119/created'">등록하기</button>
+	</div>
+	
+	<nav>
+   <ul id="pagination" class="pagination"></ul>
+</nav>
+	 <script src="/resources/bootstrap/js/jquery.twbsPagination.js"></script>
+            <script type="text/javascript">
+            $(document).ready(function() {
+                 
+                $("#search").click(function(){
+                    $("#frmSearch").submit();
+                });
+                     
+                var totalPages = 10;//전체 페이지
+                var visiblePages = 10;//리스트 보여줄 페이지
+                var startPage = 1;//현재 페이지
+                 
+                $('#pagination').twbsPagination({
+                    totalPages: totalPages,
+                    visiblePages: visiblePages,
+                    startPage: startPage,
+                    onPageClick: function (event, page) {
+                        $('#startPage').val(page);//보고 싶은 페이지
+                        $('#visiblePages').val(visiblePages);
+                        $("#frmSearch").submit();
+                    }
+                });
+                                 
+            });
+            </script>
 </div>

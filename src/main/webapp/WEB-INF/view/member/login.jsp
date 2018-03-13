@@ -59,6 +59,12 @@ function sendLogin() {
     f.submit();
 }
 
+function enter_check() {
+	if(event.keyCode == 13){
+		sendLogin();
+	}
+}
+
 </script>
 
 <div class="body-container">
@@ -84,7 +90,8 @@ function sendLogin() {
 		        <input type="password" name="userPwd" id="userPwd" class="loginTF" maxlength="20" 
 		                   tabindex="2"
                            onfocus="document.getElementById('lblUserPwd').style.display='none';"
-                           onblur="bgLabel(this, 'lblUserPwd');">
+                           onblur="bgLabel(this, 'lblUserPwd');"
+                           onkeyup="enter_check();">
 		      </td>
 		  </tr>
 		  <tr align="center" height="65" > 
