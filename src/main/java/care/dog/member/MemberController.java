@@ -47,11 +47,20 @@ public class MemberController {
 		return ".member.expired";
 	}
 	
-	// 회원가입 및 회원정보 수정 -----------------------
-	@RequestMapping(value="/member/signUp", method=RequestMethod.GET)
-	public String memberForm(Model model) {
-		model.addAttribute("mode", "created");
-		return ".member.signUp";
+	// 회원가입  -----------------------
+	@RequestMapping(value="/member/join1", method=RequestMethod.GET)
+	public String join1Form() {
+		return ".member.join1";
+	}
+
+	@RequestMapping(value="/member/join2", method=RequestMethod.GET)
+	public String join2Form() {
+		return ".member.join2";
+	}
+	
+	@RequestMapping(value="/member/join3", method=RequestMethod.GET)
+	public String join3Form() {
+		return ".member.join3";
 	}
 	
 	@RequestMapping(value="/member/signUp", method=RequestMethod.POST)

@@ -11,6 +11,7 @@
     border: #d5d5d5 solid 1px;
     padding: 10px;
     min-height: 50px;
+    display: none;
 }
 </style>
 
@@ -137,11 +138,25 @@ function printGuest(data) {
 	
 	$("#listGuest").html(out);
 }
+var foldingFlag=0;
+function folding(){
+	if(foldingFlag==1){
+		$(".guest-write").css("display","none");
+		$("#foldingText").html("<a href='javascript:folding();'>작성하기</a>");
+		foldingFlag=0;
+	}
+	else{
+		$(".guest-write").css("display","block");
+		$("#foldingText").html("<a href='javascript:folding();'>접기</a>");
+		foldingFlag=1;
+	}
+}
 </script>
  <div class="bodyFrame4" id="blog-content" style="margin-bottom: 20px;">
 <div class="blog-body-content" style="padding-bottom: 0px;">
       <div style="width:100%; height: 30px; line-height: 30px; border-bottom: 1px solid #212121;">
-            <b>방명록</b>
+            <div style="float:left"><b>방명록</b></div>
+            <div id="foldingText" style="float:right"><a href="javascript:folding();">작성하기</a></div>
       </div>
       
       <div class="guest-write" style="margin-top: 15px;">

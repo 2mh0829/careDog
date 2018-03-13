@@ -72,7 +72,7 @@ public class StrayDogServiceImpl implements StrayDogService {
 					String person = root.getElementsByTagName("chargeNm").item(i).getTextContent().toString();
 					String pChk = "";
 					if(person==null) {
-						pChk="없음";
+						pChk="미정";
 					}else {
 						pChk=person;
 					}
@@ -227,8 +227,8 @@ public class StrayDogServiceImpl implements StrayDogService {
 	} // listKind END
 
 	@Override
-	public String totalCount(Map<String, Object> model) {
-		String totalCount="";
+	public Map<String, Object> pagenation(Map<String, Object> model) {
+		Map<String, Object> map = new HashMap<>();
 		String mainUrl = MAINURL+ "abandonmentPublic";
 	        try {
 	        	String serviceKey= "?" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + KEY;
@@ -250,13 +250,18 @@ public class StrayDogServiceImpl implements StrayDogService {
 	
 				Element root = doc.getDocumentElement();
 	
-				totalCount = root.getElementsByTagName("totalCount").item(0).getTextContent().toString();
+				String totalCount = root.getElementsByTagName("totalCount").item(0).getTextContent().toString();
+				String numOfRows = root.getElementsByTagName("numOfRows").item(0).getTextContent().toString();
+				String pageNo = root.getElementsByTagName("pageNo").item(0).getTextContent().toString();
+				map.put("totalCount", totalCount); // 총 게시물 수
+				map.put("numOfRows", numOfRows); // 한 페이지에 보여지는 글 수
+				map.put("pageNo", pageNo); // 현재페이지
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		
-		return totalCount;
+		return map;
 	}
 	
 }

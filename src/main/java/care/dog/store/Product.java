@@ -9,6 +9,7 @@ public class Product {
 
 	private int productId; // 상품id - 시퀀스
 	private String productName;
+	private String brand;
 	private int sellingPrice; // 판매가
 	private int price; // 정가
 	private int amount; // 수량
@@ -91,5 +92,19 @@ public class Product {
 	public void setUpload(MultipartFile upload) {
 		this.upload = upload;
 	}
-
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	
+	@Override
+	public String toString() {
+		return "Product [listNum=" + listNum + ", num=" + num + ", productId=" + productId + ", productName="
+				+ productName + ", brand=" + brand + ", sellingPrice=" + sellingPrice + ", price=" + price + ", amount="
+				+ amount + ", isContinued=" + isContinued + ", mileage=" + mileage + ", categoryId=" + categoryId
+				+ ", imageFilename=" + imageFilename + ", upload=" + upload + "]";
+	}
+	
 }

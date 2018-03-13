@@ -5,10 +5,10 @@
 <%
    String cp = request.getContextPath();
 %>
-
+<div class="bodyFrame4" id="blog-content" style="margin-bottom: 20px;">
 <div class="blog-body-content" style="padding-bottom: 0px;">
       <div style="width:100%; height: 30px; line-height: 30px; border-bottom: 1px solid #212121;">
-            <b>프로필</b>
+            <b>회원소개</b>
       </div>
 
      <table style="width: 100%; margin: 0px auto 10px; border-spacing: 0px;">
@@ -27,7 +27,6 @@
 			     <td colspan="2" valign="top" style="white-space: pre; padding: 5px 0 5px 0;">${blogInfo.introduce}</td>
 			</tr>
 			<tr><td colspan="2" height="1" bgcolor="#cccccc"></td></tr>
-
 			<tr height="40">
 			     <td width="100" style="text-align:left;"><label style="font-weight: 700;">성별</label></td>
 			     <td> 
@@ -53,4 +52,5 @@
 			<tr><td colspan="2" height="1" bgcolor="#cccccc"></td></tr>
      </table>      
 
+</div>
 </div>

@@ -59,6 +59,12 @@ function sendLogin() {
     f.submit();
 }
 
+function enter_check() {
+	if(event.keyCode == 13){
+		sendLogin();
+	}
+}
+
 </script>
 
 <div class="body-container">
@@ -84,7 +90,8 @@ function sendLogin() {
 		        <input type="password" name="userPwd" id="userPwd" class="loginTF" maxlength="20" 
 		                   tabindex="2"
                            onfocus="document.getElementById('lblUserPwd').style.display='none';"
-                           onblur="bgLabel(this, 'lblUserPwd');">
+                           onblur="bgLabel(this, 'lblUserPwd');"
+                           onkeyup="enter_check();">
 		      </td>
 		  </tr>
 		  <tr align="center" height="65" > 
@@ -97,7 +104,7 @@ function sendLogin() {
 		      <td>
 		       		<a href="<%=cp%>/member/id">아이디찾기</a>&nbsp;&nbsp;&nbsp;
 		       		<a href="<%=cp%>/member/pwd">패스워드찾기</a>&nbsp;&nbsp;&nbsp;
-		       		<a href="<%=cp%>/member/signUp">회원가입</a>
+		       		<a href="<%=cp%>/member/join1">회원가입</a>
 		      </td>
 		  </tr>
 		  

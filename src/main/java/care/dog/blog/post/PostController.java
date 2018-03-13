@@ -215,6 +215,7 @@ public class PostController {
 
 		model.addAttribute("blogInfo", blogInfo);
 		return "blog/post/profile";
+		
 	}
 
 	@RequestMapping(value="/blog/{blogId}/prologue")

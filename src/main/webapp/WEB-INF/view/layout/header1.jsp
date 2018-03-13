@@ -8,15 +8,15 @@
 
 <style>
 
+#menu-background {
+	height: 75px;
+	overflow: hidden;
+}
+
 #background {
 	position: absolute;
 	top: 0;
 	left: 0;
-}
-
-#menu-background {
-	height: 75px;
-	overflow: hidden;
 }
 
 .header-left img {
@@ -37,12 +37,12 @@
 	
 	<div class="menu-container" align="center">
 		<ul id="mainMenu" class="navi">
-			<li><a href="<%=cp %>/service">Service&nbsp;</a></li>
-			<li><a href="<%=cp %>/mungstargram">mungstargram&nbsp;</a></li>
+			<li><a href="<%=cp %>/service">서비스&nbsp;</a></li>
+			<li><a href="<%=cp %>/mungstargram">멍스타그램&nbsp;</a></li>
 			<li><a href="<%=cp %>/strayDog">유기견&nbsp;</a></li>
-			<li><a href="<%=cp %>/dog119">애견119&nbsp;</a></li>
+			<li><a href="<%=cp %>/dog119">펫119&nbsp;</a></li>
 			<li><a href="<%=cp %>/info">정보&nbsp;</a></li>
-			<li><a href="<%=cp %>/store">펫스토어&nbsp;</a></li>
+			<li><a href="<%=cp %>/store">펫#&nbsp;</a></li>
 			<li><a href="<%=cp %>/center">고객센터&nbsp;</a></li>
 		</ul>
 	</div>
@@ -54,7 +54,7 @@
 	<div class="header-right" align="right" style="line-height: 65px;">
 	<c:if test="${empty sessionScope.member }">
 		<a href="<%=cp %>/member/login"><span class="glyphicon glyphicon-log-in">&nbsp;</span>sign in</a> &nbsp;&nbsp;
-		<a href="<%=cp %>/member/signUp"><span class="glyphicon glyphicon-user">&nbsp;</span>sign up</a>
+		<a href="<%=cp %>/member/join1"><span class="glyphicon glyphicon-user">&nbsp;</span>sign up</a>
 	</c:if>
 	<c:if test="${not empty sessionScope.member }">
 	  <span style="color:blue;">${sessionScope.member.userName}</span>님

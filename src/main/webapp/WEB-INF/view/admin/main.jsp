@@ -6,4 +6,6 @@
    String cp = request.getContextPath();
 %>
 
-마이페이지 메인입니다.
+<div>
+	
+</div>

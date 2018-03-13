@@ -7,20 +7,16 @@
 %>
 
 <style>
-.menu2 {
-    animation-name: example;
-    animation-duration: 1s;
+
+#menu-background {
+	height: 75px;
+	overflow: hidden;
 }
 
 #background {
 	position: absolute;
 	top: 0;
 	left: 0;
-}
-
-#menu-background {
-	height: 75px;
-	overflow: hidden;
 }
 
 .header-left img {
@@ -32,19 +28,20 @@
 <script>
 
 $(window).scroll(function() {
-	if($(this).scrollTop() < 25){
+	if($(this).scrollTop() < 65){
 		$(".header-bottom").css("position", "absolute");
-		$(".header-bottom").css("margin-top", "25px");
-		$(".header-bottom").attr("onmouseover", "menuOverAction();");
+		$(".header-bottom").css("margin-top", "65px");
+		/* $(".header-bottom").attr("onmouseover", "menuOverAction();"); */
 	}else if($(this).scrollTop() >= $(".header-bottom").offset().top){
 		$(".header-bottom").css("position", "fixed");
 		$(".header-bottom").css("margin-top", "0");
 		$(".header-bottom").css("top", "0");
-		$(".header-bottom").attr("onmouseover", "");
-		$(".header-bottom").attr("onmouseout", "");
+/* 		$(".header-bottom").attr("onmouseover", "");
+		$(".header-bottom").attr("onmouseout", ""); */
 	}
 });
 
+/*
 function menuOverAction() {
 	$(".header-bottom").animate({top: "40px"}, {queue : false, duration : 300});
 }
@@ -57,7 +54,7 @@ $(function() {
 		} 
 	});
 });
-
+ */
 </script>
 
 
@@ -68,17 +65,17 @@ $(function() {
 		<div style="position: absolute; width: 189px; top: 0; left: 50px; margin-left: -50px; overflow: hidden;">
 			<img src="<%=cp %>/resource/img/menu.png">
 		</div>
-	</div>
+	</div> 
 	
 	<div class="menu-container" align="center">
 		<ul id="mainMenu" class="navi">
-			<li><a href="<%=cp %>/service">Service&nbsp;</a></li>
-			<li><a href="<%=cp %>/mungstargram">mungstargram&nbsp;</a></li>
-			<li><a href="<%=cp %>/strayDog">유기견&nbsp;</a></li>
-			<li><a href="<%=cp %>/dog119">애견119&nbsp;</a></li>
-			<li><a href="<%=cp %>/info">정보&nbsp;</a></li>
-			<li><a href="<%=cp %>/store">펫스토어&nbsp;</a></li>
-			<li><a href="<%=cp %>/center">고객센터&nbsp;</a></li>
+			<li><a href="<%=cp %>/service">서비스</a></li>
+			<li><a href="<%=cp %>/mungstargram">멍스타그램</a></li>
+			<li><a href="<%=cp %>/strayDog">유기견</a></li>
+			<li><a href="<%=cp %>/dog119">펫119</a></li>
+			<li><a href="<%=cp %>/info">정보</a></li>
+			<li><a href="<%=cp %>/store">펫#</a></li>
+			<li><a href="<%=cp %>/center">고객센터</a></li>
 		</ul>
 	</div>
 	
@@ -89,7 +86,7 @@ $(function() {
 	<div class="header-right" align="right" style="line-height: 65px;">
 	<c:if test="${empty sessionScope.member }">
 		<a href="<%=cp %>/member/login"><span class="glyphicon glyphicon-log-in">&nbsp;</span>sign in</a> &nbsp;&nbsp;
-		<a href="<%=cp %>/member/signUp"><span class="glyphicon glyphicon-user">&nbsp;</span>sign up</a>
+		<a href="<%=cp %>/member/join1"><span class="glyphicon glyphicon-user">&nbsp;</span>sign up</a>
 	</c:if>
 	<c:if test="${not empty sessionScope.member }">
 	  <span style="color:blue;">${sessionScope.member.userName}</span>님

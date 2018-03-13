@@ -187,10 +187,10 @@ public class EventController {
 		
 		Event dto = service.readEvent(num);
 		if(dto==null) {
-			return ".center/event";
+			return "center/event";
 		}
 		if(! info.getMemberId().equals(dto.getMemberId())) {
-			return ".center/event";
+			return "center/event";
 		}
 		
 		List<Event> listFile = service.listFile(num);

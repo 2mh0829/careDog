@@ -6,7 +6,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Gongji {
 	private int listnum, num;
-	
 	private String memberId, subject, content, created;
 	private int isGongji;
 	private String imageFilename;

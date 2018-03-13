@@ -49,7 +49,9 @@
 		<tiles:insertAttribute name="header" />
 	</div>
 	<div class="blog-header">
+		
 		<tiles:insertAttribute name="blogHeader" />
+			<tiles:insertAttribute name="blogLeft" />
 	</div>
 	<div class="blog-HeaderBetweenBodyLine"></div>
 	<div class="blog-layout">
