@@ -37,7 +37,7 @@
 		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView" />
 		<property name="viewNames" value=".*" />
 	</bean>
-	
+	<!--  -->
 	<!-- 파일 업로드 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

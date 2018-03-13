@@ -104,7 +104,7 @@ function enter_check() {
 		      <td>
 		       		<a href="<%=cp%>/member/id">아이디찾기</a>&nbsp;&nbsp;&nbsp;
 		       		<a href="<%=cp%>/member/pwd">패스워드찾기</a>&nbsp;&nbsp;&nbsp;
-		       		<a href="<%=cp%>/member/signUp">회원가입</a>
+		       		<a href="<%=cp%>/member/join1">회원가입</a>
 		      </td>
 		  </tr>
 		  
