@@ -334,71 +334,36 @@ function chk() {
 	<div class="content" id="AnimalsContent">
 		<h1 class="page-tit">애견 건강 정보</h1>
 		<div class="board__all">
-
 			<div class="imageList__content">
 				<ul class="board__list">
 
+<c:forEach var="dto" items="${callList}">
 					<li class="board__item" style="line-height: 55px;">
 						<p class="board__subject">
-
-							<a
-								href="?num=68&amp;bname=zetyx_board_edu&amp;ct=yes&amp;cpage=1&amp;search=&amp;keyword=&amp;cate1=a&amp;menu1="
-								class="board__link"> <span class="board__number">51</span>
-								[기자간담회후기] 서울시교육청 동물복지교육 자문활동이 결실을 맺었습니다!
+							<a href="?num=68&amp;bname=zetyx_board_edu&amp;ct=yes&amp;cpage=1&amp;search=&amp;keyword=&amp;cate1=a&amp;menu1=" class="board__link">
+								<span class="board__number">${dto.boardNum}</span>
+								${dto.title}
 							</a>
-
 						<span class="viewCntIcon">(1)</span>
 						</p>
 						<div class="board__info">
 
 
-							<span class="board__span board__view">117</span> <span
-								class="board__span board__date"> 2018.02.27 </span>
+							<span class="board__span board__view">${dto.hitCount}</span> 
+							<span class="board__span board__date"> ${dto.created} </span>
 						</div>
 					</li>
-
-					<li class="board__item" style="line-height: 55px;">
-						<p class="board__subject">
-
-							<a
-								href="?num=30&amp;bname=zetyx_board_edu&amp;ct=yes&amp;cpage=1&amp;search=&amp;keyword=&amp;cate1=a&amp;menu1="
-								class="board__link"> <span class="board__number">22</span>
-								유아 대상 동물보호 교육 이벤트 참여
-							</a>
-
-							<!-- <img class="newTitleIcon" src="/ani-main/images/content/listNewIcon.png"/> -->
-
-						</p>
-						<div class="board__info">
-
-
-							<span class="board__span board__view">376</span> <span
-								class="board__span board__date"> 2017.07.31 </span>
-						</div>
-					</li>
+</c:forEach>
 
 				</ul>
 
 				<ul class="board__listPageing">
-
-					<li class="board__pageingPrevBtn"><a><img
-							src="<%=cp%>/resource/img/dog119/listPrevBtn.png">&nbsp;</a></li>
-
-					<li><a class="on">1</a></li>
-
-					<li><a
-						href="?cpage=2&amp;bname=zetyx_board_edu&amp;keyword=&amp;search=&amp;cate1=a&amp;menu1=">2</a></li>
-
-					<li class="board__pageingNextBtn"><a> <img
-							src="<%=cp%>/resource/img/dog119/listNextBtn.png">&nbsp;
-					</a></li>
-
-
+				${paging}
 				</ul>
 			</div>
 <!-- 검색 -->
 			<div class="board__search">
-				<form name="form1" method="post" action="?cate1=a&amp;bname=zetyx_board_edu">
+				<form name="form1" method="post" action="">
 					<div class="board__select">
 						<select name="search" style="display: none;">
 							<option value="subject">제목</option>
@@ -406,16 +371,13 @@ function chk() {
 							<option value="name">이름</option>
 						</select> 
 						
-						<span id class="selectboxit-container selectboxit-container" role="combobox" aria-autocomplete="list" aria-haspopup="true"
+						<span class="selectboxit-container selectboxit-container" role="combobox" aria-autocomplete="list" aria-haspopup="true"
 							aria-expanded="false" aria-owns aria-labelledby> 
-							<span id="" class="selectboxit  selectboxit-enabled selectboxit-btn"
-								name="search" tabindex="0" unselectable="on"> 
+							<span id="" class="selectboxit  selectboxit-enabled selectboxit-btn" name="search" tabindex="0" unselectable="on"> 
 								<span class="selectboxit-option-icon-container"> 
-									<i id="" class="selectboxit-default-icon selectboxit-option-icon selectboxit-container"
-										unselectable="on"></i>
+									<i id="" class="selectboxit-default-icon selectboxit-option-icon selectboxit-container" unselectable="on"></i>
 								</span> 
-								<span id="" class="selectboxit-text" unselectable="on"
-									data-val="subject" aria-live="polite" style="max-width: 428px;">제목</span>
+								<span id="" class="selectboxit-text" unselectable="on" data-val="subject" aria-live="polite" style="max-width: 428px;">제목</span>
 									<span id="" class="selectboxit-arrow-container" unselectable="on"> 
 									<i id="" class="selectboxit-arrow selectboxit-default-arrow" unselectable="on"></i>
 								</span>
