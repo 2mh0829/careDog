@@ -115,6 +115,7 @@
 ul.navi li { 
   display: inline;
   border-right: 1px dotted #ccc;
+  padding-right: 5px;
 }
 
 ul.navi li a {
@@ -127,7 +128,7 @@ ul.navi li a {
 }
 
 ul.navi .current a, ul.navi li:hover > a {
-  color: #333;
+  color: #4596d1;
   text-decoration: none;
 }
 
@@ -135,6 +136,7 @@ ul.navi ul {
   display: none;
 }
 
+/* 
 ul.navi li:hover > ul {
   position: absolute;
   display: block;
@@ -143,7 +145,7 @@ ul.navi li:hover > ul {
   margin: 40px 0 0 -1px;
   z-index: 101;
 }
-
+ */
 
 .left-container {
 	/* width: 15%;
