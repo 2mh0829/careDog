@@ -151,7 +151,14 @@ function userIdCheck() {
 function open_terms() {
 	$(".modal").modal();
 }
-
+function secession() {//회원탈퇴페이지 (마이페이지에서사용)
+	var url = "<%=cp%>/mypage/secession";
+	$.get(url, {
+		tmp : new Date().getTime()
+	}, function(data) {
+		$(".blog-body").html(data);
+	})
+}
 </script>
 <div class="body-container" style="width: 700px;">
     <div class="body-title">
@@ -324,6 +331,9 @@ function open_terms() {
 			        <button type="button" name="sendButton" class="btn" onclick="memberOk();">${mode=="created"?"회원가입":"정보수정"}</button>
 			        <button type="reset" class="btn">다시입력</button>
 			        <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/';">${mode=="created"?"가입취소":"수정취소"}</button>
+			         <c:if test="${mode!='created'}">
+			        <button type="button" class="btn" onclick="javascript:secession();">회원탈퇴</button>
+			        </c:if>
 			      </td>
 			    </tr>
 			    <tr height="30">
