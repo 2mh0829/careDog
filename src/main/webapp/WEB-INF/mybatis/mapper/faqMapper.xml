@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="faq">
 
-<insert id="insertfaq" parameterType="care.dog.center.faq.FAQ">
+<!-- <insert id="insertfaq" parameterType="care.dog.center.faq.FAQ">
 INSERT INTO faq(num, memberId, subject, content) VALUES(faq_seq.NEXTVAL, #{memberId}, #{subject}, #{content})
 </insert>
 
@@ -28,5 +28,5 @@ SELECT * FROM (
 ) WHERE rnum >= 1
 ]]>
 </select>
-
+ -->
 </mapper>
