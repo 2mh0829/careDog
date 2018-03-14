@@ -28,10 +28,6 @@ public class MyPageController {
 	private MyUtilGeneral util;
 
 
-	@RequestMapping(value="/myPage", method=RequestMethod.GET)
-	public String main() {
-		return ".myPage.main";
-	}
 	@RequestMapping(value="/myPage/editMember", method=RequestMethod.GET)
 	public String member() {
 		return ".myPageMemberEdit.join";
@@ -64,10 +60,8 @@ public class MyPageController {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		MyPageInfo myPageInfo=myPageService.readMyPageInfo(info.getMemberId());
 		if(myPageInfo==null) {
-			
 			return "redirect:/myPage/created";
 		}
-		
 		return "redirect:/myPage/"+myPageInfo.getMyPageId();
 	}
 
@@ -77,7 +71,6 @@ public class MyPageController {
 			Model model) throws Exception {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		// 블로그 만들기 폼
-		
 		if (info == null) {
 			return "redirect:/member/login";
 		}
