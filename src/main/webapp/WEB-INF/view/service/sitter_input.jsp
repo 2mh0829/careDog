@@ -257,9 +257,10 @@ li {
 }
 
 .row img {
-	width: 90px;
-	height: 80px;
-	margin-left: 20px;
+	width: 50px;
+    height: 40px;
+    margin-left: 20px;
+    margin-top: -85px;
 }
 
 .inner {
@@ -292,6 +293,7 @@ li {
 .row dt {
 	margin-bottom: 10px;
 	font-size: 20px;
+	display: inline-block;
 }
 
 .row dd {
@@ -529,6 +531,15 @@ li {
     background: white;
 }
 
+.col-tag i {
+	margin-left: 30px;
+    font-size: 30px;
+}
+
+.btn-group {
+	margin-left: 85px;
+}
+
 </style>
 
 <div class="body-container">
@@ -655,16 +666,54 @@ li {
 						</div>
 					</dd>
 				</dl>
-				<img src="<%=cp%>/resource/img/service/clock.png">
-				<dl class="carryAble-time">
-					<dt>데이케어 & 하루종일</dt>
-					<dd>
-						<i class="glyphicon glyphicon-check"></i> 데이케어 : 9~6시
-					</dd>
-					<dd>
-						<i class="glyphicon glyphicon-check"></i> 하루종일 : 24시간
-					</dd>
-				</dl>
+				
+				<%-- <img src="<%=cp%>/resource/img/service/clock.png"> --%>
+				<li class="col-tag">
+					<dl>
+						<i class="glyphicon glyphicon-tag"></i>
+						<dt>&nbsp;&nbsp;&nbsp;&nbsp;원하는 태그를 모두 선택해주세요!</dt>
+						<dd>
+							<div class="btn-group" data-toggle="buttons">
+							<label for="apt" class="btn">
+								<input type="checkbox" id="apt" class="checkbox">아파트
+							</label>
+							<label for="yard" class="btn">
+								<input type="checkbox" id="yard" class="checkbox">마당
+							</label>
+							<label for="oldDogCare" class="btn">
+								<input type="checkbox" id="oldDogCare" class="checkbox">노령견케어
+							</label>
+							<label for="sickDogCare" class="btn">
+								<input type="checkbox" id="sickDogCare">환자견케어
+							</label>
+							<label for="license" class="btn">
+								<input type="checkbox" id="license">자격증보유
+							</label>
+							<label for="outdoor" class="btn">
+								<input type="checkbox" id="outdoor">실외배변
+							</label>
+							<label for="pickUp" class="btn">
+								<input type="checkbox" id="pickUp">픽업가능
+							</label>
+							<label for="handmade" class="btn">
+								<input type="checkbox" id="handmade">수제간식
+							</label>
+							<label for="noDog" class="btn">
+								<input type="checkbox" id="noDog">반려견없는곳
+							</label>
+							<label for="emergency" class="btn">
+								<input type="checkbox" id="emergency">응급처치
+							</label>
+							<label for="pillAble" class="btn">
+								<input type="checkbox" id="pillAble">투약가능
+							</label>
+							<label for="bigDog" class="btn">
+								<input type="checkbox" id="bigDog">대형견
+							</label>
+							</div>
+						</dd>
+					</dl>
+				</li>
 			</div>
 <!-- 			<div id="datepicker"></div> -->
 		</div>
