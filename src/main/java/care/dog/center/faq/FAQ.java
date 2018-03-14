@@ -6,7 +6,7 @@ public class FAQ {
 	private String memberId;
 	private String subject;
 	private String content;
-	
+	private int faqsort;
 	
 	public int getListNum() {
 		return listNum;
@@ -37,6 +37,12 @@ public class FAQ {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public int getFaqsort() {
+		return faqsort;
+	}
+	public void setFaqsort(int faqsort) {
+		this.faqsort = faqsort;
 	}
 
 }

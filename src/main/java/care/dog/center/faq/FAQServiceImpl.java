@@ -38,8 +38,13 @@ public class FAQServiceImpl implements FAQService{
 
 	@Override
 	public int deleteFaq(int num, String pathname) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		try {
+			result = dao.deleteData("faq.deletefaq",num);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 
 	@Override
@@ -54,6 +59,17 @@ public class FAQServiceImpl implements FAQService{
 	}
 
 	@Override
+	public List<FAQ> listFaqMember(Map<String, Object> map) {
+		List<FAQ> list = null;
+		try {
+			list = dao.selectList("faq.listfaqMember",map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+	
+	@Override
 	public int dataCount(Map<String, Object> map) {
 		int result = 0;
 		try {
@@ -66,8 +82,13 @@ public class FAQServiceImpl implements FAQService{
 
 	@Override
 	public FAQ readFAQ(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		FAQ dto = null;
+		try {
+			dto = dao.selectOne("faq.readfaq",num);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return dto;
 	}
 
 	@Override
@@ -81,5 +102,6 @@ public class FAQServiceImpl implements FAQService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

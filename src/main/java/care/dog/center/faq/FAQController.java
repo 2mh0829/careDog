@@ -28,8 +28,8 @@ public class FAQController {
 		return ".center.faqmain";
 	}
 	
-	@RequestMapping(value="/center/faq10")
-	public String faqList(
+	@RequestMapping(value="/center/taball")
+	public String faqAllList(
 			@RequestParam(value="pageNo", defaultValue="1") int cur_page,
 			@RequestParam(value="searchKey", defaultValue="subject") String searchKey,
 			@RequestParam(value="searchValue", defaultValue="") String searchValue,
@@ -49,8 +49,6 @@ public class FAQController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchKey", searchKey);
 		map.put("searchValue", searchValue);
-		System.out.println("============="+searchKey+"===============");
-		System.out.println("============="+searchValue+"===============");
 		
 		dataCount = service.dataCount(map);
 		if(dataCount != 0) {
@@ -86,6 +84,60 @@ public class FAQController {
 		return "center/faq";
 	}
 	
-	
+	@RequestMapping(value="/center/tabfmember")
+	public String faqMember(
+			@RequestParam(value="pageNo", defaultValue="1") int cur_page,
+			@RequestParam(value="searchKey", defaultValue="subject") String searchKey,
+			@RequestParam(value="searchValue", defaultValue="") String searchValue,
+			HttpServletRequest req,
+			Model model
+			) throws Exception {
+		
+		// 페이징
+		int rows = 10;
+		int tot_page = 10;
+		int dataCount = 0;
+		
+		if(req.getMethod().equalsIgnoreCase("GET")) {
+			searchValue = URLDecoder.decode(searchValue,"utf-8");
+		}
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("searchKey", searchKey);
+		map.put("searchValue", searchValue);
+		
+		dataCount = service.dataCount(map);
+		if(dataCount != 0) {
+			tot_page = myUtil.pageCount(rows, dataCount);
+		}
+		
+		if(tot_page < cur_page)
+			tot_page = cur_page;
+		
+		int start = (cur_page-1)* rows+1;
+		int end = cur_page*rows;
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<FAQ> listmember = service.listFaqMember(map);
+		
+		int listNum, n = 0;
+		Iterator<FAQ> it = listmember.iterator();
+		while(it.hasNext()) {
+			FAQ data = it.next();
+			listNum = dataCount - (start + n -1);
+			data.setListNum(listNum);
+		}
+		
+		String paging = myUtil.paging(cur_page, tot_page);
+		
+		model.addAttribute("list",listmember);
+		model.addAttribute("pageNo",cur_page);
+		model.addAttribute("dataCount",dataCount);
+		model.addAttribute("total_page",tot_page);
+		model.addAttribute("paging",paging);
+		
+		return "center/faqmember";
+	}
 	
 }

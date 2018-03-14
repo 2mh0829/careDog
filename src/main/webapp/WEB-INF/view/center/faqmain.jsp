@@ -29,7 +29,7 @@ background-color: #eee;
 
 .comm1sTabs.customer {overflow:hidden;height:55px;margin:30px 0 0;padding-bottom:5px}
 .comm1sTabs.customer > li {position:relative;float:left;width:340px;text-align:center;border:0}
-.comm1sTabs.customer > li+li {width:511px;margin-left:-1px}
+.comm1sTabs.customer > li+li {width:146px;margin-left:-1px}
 .comm1sTabs.customer > li {display:block;height:50px;background:#f6f6f6;font-size:18px;color:#666;font-weight:400;border-left:1px solid #e6e6e6}
 .comm1sTabs.customer > li:first-child {border:0}
 .comm1sTabs.customer > li.active {background:#555 !important;color:#fff;border:0}
@@ -40,7 +40,7 @@ background-color: #eee;
 
 .comm1sTabs {overflow:hidden;width:100%;margin:15px 0 0;}
 .comm1sTabs.threeSet li {width:50%;}
-.comm1sTabs.threeSet li:first-child {width:50%;}
+.comm1sTabs.threeSet li:first-child {width:146px;float: left;}
 .comm1sTabs > li {float:left;width:50%;border-left:1px solid #e3e3e3;border-bottom:2px solid #969937;text-align:center;background:#f6f6f6}
 .comm1sTabs > li:first-child {border-left:0}
 .comm1sTabs > li {display:block;height:50px;padding-top:15px;color:#333;font-size:18px}
@@ -69,6 +69,7 @@ background-color: #eee;
 
 .board-list-1s tr td .ButtonTime {display:inline-block;width:70px;height:28px;margin:0 0 0;padding:3px 0 0;border-radius:5px;border:1px solid #ccc;color:#666;font-size:12px;text-align:center;line-height:18px;background:transparent;vertical-align:middle;}
 .board-list-1s tr td .FG01, .board-list-1s tr td .FG02, .board-list-1s tr td .FG03, .board-list-1s tr td .FG04 {position:relative;top:-1px;margin:0 15px 0 0;}
+.sub_title_area.customer {height:100px;background:#faeee1 url("<%=cp%>/resource/img/faq/bg_customer_top.png") no-repeat 50% 0}
 
 </style>
 
@@ -92,12 +93,12 @@ $(function(){
 
 // 글리스트 및 페이징 처리
 function listPage(page) {
-	var $tab = $(".comm1sTabs .active");
+	var $tab = $("ul.comm1sTabs .active");
 	var tab = $tab.attr("data-tab");
-	var url="<%=cp%>/center/tab"+tab;
+	var url="<%=cp%>/center/tab"+tab;	//careDog/center/taball
 	
 	var query="pageNo="+page;
-	var search=$('form[name=centerSearchForm]').serialize();
+	var search=$('form[name=faqsearchForm]').serialize();
 	query=query+"&"+search;
 	
 	ajaxHTML(url, "get", query);
@@ -133,7 +134,7 @@ function ajaxHTML(url, type, query) {
 
 // 검색
 function searchList() {
-	var f=document.centerSearchForm;
+	var f=document.faqsearchForm;
 	f.searchKey.value=$("#searchKey").val();
 	f.searchValue.value=$.trim($("#searchValue").val());
 
@@ -142,7 +143,7 @@ function searchList() {
 
 // 새로고침
 function reloadBoard() {
-	var f=document.centerSearchForm;
+	var f=document.faqsearchForm;
 	f.searchKey.value="subject";
 	f.searchValue.value="";
 	
@@ -151,7 +152,7 @@ function reloadBoard() {
 
 // 글쓰기폼
 function insertForm() {
-	var $tab = $(".comm1sTabs .active");
+	var $tab = $("ul.comm1sTabs .active");
 	var tab = $tab.attr("data-tab");
 	var url="<%=cp%>/center/"+tab+"/created";
 
@@ -161,7 +162,7 @@ function insertForm() {
 
 // 글등록, 수정등록, 답변등록
 function sendOk(mode, page) {
-	var $tab = $(".comm1sTabs .active");
+	var $tab = $("ul.comm1sTabs .active");
 	var tab = $tab.attr("data-tab");
 	
     var f = document.boardForm;
@@ -234,7 +235,7 @@ function contentBoard(num, page) {
 	
 	var query = "num="+num;
 	
-	var search=$('form[name=centerSearchForm]').serialize();
+	var search=$('form[name=faqsearchForm]').serialize();
 	query=query+"&pageNo="+page+"&"+search;
 	
 	ajaxHTML(url, "get", query);
@@ -312,8 +313,12 @@ function deleteBoard(num, page) {
 }
 </script>
 <div class="body-container" style="width: 1020px;">
+
+<div class="sub_title_area customer">
+	<h1>고객센터 <span>무엇을 도와드릴까요?</span></h1>
+</div>
     <ul class="comm1sTabs threeSet customer">
-				<li id="tabfaq10" data-tab="faq10" class="active">TOP10</li>
+				<li id="taball" data-tab="all" class="active">전체</li>
 				<li id="tabfmember" data-tab="fmember" >회원/멤버십</li>
 				<li id="tabfbuy" data-tab="fbuy" >주문/결제</li>
 				<li id="tabfdelivery" data-tab="fdelivery" >배송</li>
@@ -324,7 +329,7 @@ function deleteBoard(num, page) {
 	<div id="tab-content" style="clear:both; padding: 20px 10px 0px;"></div>
 </div>
 
-<form name="centerSearchForm" action="" method="post">
+<form name="faqsearchForm" action="" method="post">
     <input type="hidden" name="searchKey" value="subject">
     <input type="hidden" name="searchValue" value="">
 </form>
