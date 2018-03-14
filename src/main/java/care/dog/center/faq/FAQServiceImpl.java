@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import care.dog.common.dao.CommonDAO;
 
+@Service("faq.faqService")
 public class FAQServiceImpl implements FAQService{
 	
 	@Autowired
@@ -53,8 +55,13 @@ public class FAQServiceImpl implements FAQService{
 
 	@Override
 	public int DataCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		try {
+			result = dao.selectOne("faq.dataCount",map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
 	}
 
 	@Override

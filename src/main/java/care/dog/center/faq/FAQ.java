@@ -2,11 +2,18 @@ package care.dog.center.faq;
 
 public class FAQ {
 	
-	private int num;
+	private int listNum, num;
 	private String memberId;
 	private String subject;
 	private String content;
 	
+	
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
 	public int getNum() {
 		return num;
 	}
