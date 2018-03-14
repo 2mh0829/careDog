@@ -125,13 +125,6 @@ ul, ol {list-style:none;}
 .board-list-1s tr td .ButtonTime {display:inline-block;width:70px;height:28px;margin:0 0 0;padding:3px 0 0;border-radius:5px;border:1px solid #ccc;color:#666;font-size:12px;text-align:center;line-height:18px;background:transparent;vertical-align:middle;}
 .board-list-1s tr td .FG01, .board-list-1s tr td .FG02, .board-list-1s tr td .FG03, .board-list-1s tr td .FG04 {position:relative;top:-1px;margin:0 15px 0 0;}
 
-/* 플래그 */
-#Wrapper .FG01, #Wrapper .FG02, #Wrapper .FG03, #Wrapper .FG04 {display:inline-block;width:70px;height:20px;border-radius:10px;color:#fff;font-size:12px;text-align:center;line-height:20px}
-#Wrapper .FG01 {background:#969937;}
-#Wrapper .FG02 {background:#a68fcd;}
-#Wrapper .FG03 {background:#ed95b7;}
-#Wrapper .FG04 {background:#f5a031;}
-
 /* PAGEING */
 .pageing {padding:30px 0 0;font-size:0;text-align:center;line-height:0;}
 .pageing a, .pageing strong {display:inline-block;width:30px;height:30px;margin:0 2px;border:1px solid #e5e5e5;color:#888;font-size:14px;line-height:28px;vertical-align:top;box-sizing:border-box;font-weight:700}
@@ -147,14 +140,86 @@ ul, ol {list-style:none;}
 </style>
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.form.js"></script>
 <script type="text/javascript">
-$('.list-customer .tit').click(function(e){
-    e.preventDefault();
-    if($(this).parents('li').hasClass('open')){
-        $(this).parents('li').removeClass('open');
-    }else{
-        $(this).parents('li').addClass('open').siblings().removeClass('open');
+
+//탭버튼
+$("#TabsOpenArea .comm2sTabs").children("li").each(function(idx) {
+    if ($(this).attr("data-cd") == "99") {
+        $(this).bind("click", function() {
+            common.wlog("customer_faq_top10");
+        });
+    
+    } else if ($(this).attr("data-cd") == "40") {
+        $(this).bind("click", function() {
+            common.wlog("customer_faq_membership");
+        });
+        
+    } else if ($(this).attr("data-cd") == "10") {
+        $(this).bind("click", function() {
+            common.wlog("customer_faq_order");
+        });
+        
+    } else if ($(this).attr("data-cd") == "20") {
+        $(this).bind("click", function() {
+            common.wlog("customer_faq_delivery");
+        });
+        
+    } else if ($(this).attr("data-cd") == "30") {
+        $(this).bind("click", function() {
+            common.wlog("customer_faq_refund");
+        });
+        
+    } else if ($(this).attr("data-cd") == "60") {
+        $(this).bind("click", function() {
+            common.wlog("customer_faq_event");
+        });
+        
+    } else if ($(this).attr("data-cd") == "90") {
+        $(this).bind("click", function() {
+            common.wlog("customer_faq_etc");
+        });
+        
     }
+
 });
+
+function listPage(page){
+	var $tab = $(".comm2sTabs.iconTab li.on");
+	var tab = $tab.arrt("data-cd");
+	var url = "<%=cp%>/center/"+tab+"/list";
+	
+	var query = "pageNo="+page;
+	var search = $('form[name=faqSearchForm]').serialize();
+	query=query+"&"+search;
+	
+	ajaxHTML(url, "get", query);
+}
+
+function ajaxHTML(url, type, query){
+	$.ajax({
+		type:type,
+		url:url,
+		data:query,
+		success:function(data){
+			if($.trim(data)=="error"){
+				listPage(1);
+				return;
+			}
+			$("#TabsOpenArea").html(data);
+		}
+	,beforeSend : function(jqXHR){
+		jqXHR.setRequestHeader("AJAX", true);
+	}
+	,error : function(jqXHR){
+		if(jqXHR.status == 401){
+			console.log(jqXHR);
+		} else if (jqXHR.status == 403){
+			location.href="<%=cp%>/member/noAuthorized";
+		} else {
+			console.log(jqXHR.responseText);
+		}
+	}
+	});
+}
 </script>
 <div class="body-container">
 <div id="TabsOpenArea">
@@ -191,106 +256,13 @@ $('.list-customer .tit').click(function(e){
 							</tr>
 						</thead>
 						<tbody>
-			<tr>
-								<td>72</td>
-								<td class="subject"><strong class="FG01">일반 </strong><a href="javascript:counsel.noticeList.goDetail('31417')">오리역점 리뉴얼로 인한 영업 일시 중단 안내</a></td>
-								<td>2018.03.09</td>
-							</tr>
+						<c:forEach var="dto" items="${list }">
 							<tr>
-								<td>71</td>
-								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31416')">&lt;히알루B5 단독 런칭 기대평 이벤트&gt; 이벤트 당첨자 발표</a></td>
-								<td>2018.03.08</td>
+								<td>${dto.num }</td>
+								<td class="subject"><a href="javascript:faqBoard('${dto.num }','${pageNo }')">${dto.subject }</a></td>
+								<td>${dto.memberId }</td>
 							</tr>
-							<tr>
-								<td>70</td>
-								<td class="subject"><strong class="FG04">뷰티테스터 </strong><a href="javascript:counsel.noticeList.goDetail('31415')">2-2차 뷰티테스터 당첨자발표: 나르시소 로드리게즈 플뢰르</a></td>
-								<td>2018.03.08</td>
-							</tr>
-							<tr>
-								<td>69</td>
-								<td class="subject"><strong class="FG04">뷰티테스터 </strong><a href="javascript:counsel.noticeList.goDetail('31414')">2-2차 뷰티테스터 당첨자발표: 보타니쿠스 페이셜 로즈오일</a></td>
-								<td>2018.03.08</td>
-							</tr>
-							<tr>
-								<td>68</td>
-								<td class="subject"><strong class="FG04">뷰티테스터 </strong><a href="javascript:counsel.noticeList.goDetail('31413')">2-2차 뷰티테스터 당첨자발표: 울트라브이 이베데논 앰플기획</a></td>
-								<td>2018.03.08</td>
-							</tr>
-							<tr>
-								<td>67</td>
-								<td class="subject"><strong class="FG04">뷰티테스터 </strong><a href="javascript:counsel.noticeList.goDetail('31412')">2-2차 뷰티테스터 당첨자발표: 라네이처 울날중 12p</a></td>
-								<td>2018.03.08</td>
-							</tr>
-							<tr>
-								<td>66</td>
-								<td class="subject"><strong class="FG04">뷰티테스터 </strong><a href="javascript:counsel.noticeList.goDetail('31411')">2-2차 뷰티테스터 당첨자발표: 드라마 베이비 물티슈 62매</a></td>
-								<td>2018.03.08</td>
-							</tr>
-							<tr>
-								<td>65</td>
-								<td class="subject"><strong class="FG01">일반 </strong><a href="javascript:counsel.noticeList.goDetail('31410')">올리브영 안드로이드앱 OS 지원범위 변경 안내</a></td>
-								<td>2018.03.07</td>
-							</tr>
-							<tr>
-								<td>64</td>
-								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31400')">&lt;2월엔X2 더블혜택&gt; 이벤트 당첨자 발표</a></td>
-								<td>2018.03.02</td>
-							</tr>
-							<tr>
-								<td>63</td>
-								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31399')">멤버십 승급 회원 대상 &lt;겟잇뷰티콘&gt; 초대이벤트 당첨자 발표</a></td>
-								<td>2018.03.02</td>
-							</tr>
-							<tr>
-								<td>62</td>
-								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31398')">뮤지컬&lt;존 도우&gt; 당첨자발표</a></td>
-								<td>2018.03.02</td>
-							</tr>
-							<tr>
-								<td>61</td>
-								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31397')">1월 아산 스파비스 이벤트 당첨자 발표</a></td>
-								<td>2018.02.27</td>
-							</tr>
-							<tr>
-								<td>60</td>
-								<td class="subject"><strong class="FG01">일반 </strong><a href="javascript:counsel.noticeList.goDetail('31396')">CJ ONE 시스템 작업 공지(3/13 오전 2시~6시)</a></td>
-								<td>2018.02.26</td>
-							</tr>
-							<tr>
-								<td>59</td>
-								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31395')">도서&lt;메리포핀스&gt; 당첨자발표</a></td>
-								<td>2018.02.26</td>
-							</tr>
-							<tr>
-								<td>58</td>
-								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31394')">도서&lt;그날의 온도 그날의 빛 그날의 분위기&gt; 당첨자발표</a></td>
-								<td>2018.02.26</td>
-							</tr>
-							<tr>
-								<td>57</td>
-								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31393')">도서&lt;가장 쉬운 독학 예쁜 손글씨&gt; 당첨자발표</a></td>
-								<td>2018.02.26</td>
-							</tr>
-							<tr>
-								<td>56</td>
-								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31392')">도서&lt;도서 시짱, 나의 시짱&gt; 당첨자발표</a></td>
-								<td>2018.02.26</td>
-							</tr>
-							<tr>
-								<td>55</td>
-								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31391')">&lt;알베르토 자코메티 한국특별전&gt; 당첨자발표</a></td>
-								<td>2018.02.26</td>
-							</tr>
-							<tr>
-								<td>54</td>
-								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31390')">연극&lt;와일드패밀리&gt; 당첨자발표</a></td>
-								<td>2018.02.26</td>
-							</tr>
-							<tr>
-								<td>53</td>
-								<td class="subject"><strong class="FG03">이벤트 </strong><a href="javascript:counsel.noticeList.goDetail('31389')">뮤지컬&lt;홀연했던 사나이&gt; 당첨자발표</a></td>
-								<td>2018.02.26</td>
-							</tr>
+						</c:forEach>	
 						</tbody>
 					</table>
 	<div class="pageing">
@@ -299,3 +271,8 @@ $('.list-customer .tit').click(function(e){
 
 			</div>
 			</div>	
+			
+<form name="faqSearchForm" action="" method="post">
+    <input type="hidden" name="searchKey" value="subject">
+    <input type="hidden" name="searchValue" value="">
+</form>			
