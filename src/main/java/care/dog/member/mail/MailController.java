@@ -19,7 +19,8 @@ public class MailController {
 		content += "<div align='center' style='background: #eee; margin-top: 30px; padding: 20px;'>";
 		content += "<div style='font-size: 30px; font-weight: bold; margin: 30px auto;'>Care Dog 가입을 환영합니다.</div>";
 		content += "<img src='http://cfile23.uf.tistory.com/image/9931294B5AA7E1542BB6B8' width='400px;'>";
-		content += "<br><a href='localhost:9090/careDog/member/login'><button style='background: #4286f4; width:300px; height: 50px; color: white; font-size: 20px; font-weight: bold; margin: 30px auto;' type='button'>인증하기</button></a></div>";
+		content += "<br><a href='http://localhost:9090/careDog/member/join3' target='_blank'>";
+		content += "<button style='background: #4286f4; width:300px; height: 50px; color: white; font-size: 20px; font-weight: bold; margin: 30px auto;' type='button'>인증하기</button></a></div>";
 		
 		dto.setContent(content);
 		
