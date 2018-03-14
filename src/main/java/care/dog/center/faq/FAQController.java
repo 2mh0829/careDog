@@ -24,6 +24,11 @@ public class FAQController {
 	private MyUtil myUtil;
 	
 	@RequestMapping(value="/center/faq")
+	public String faqMain() {
+		return ".center.faqmain";
+	}
+	
+	@RequestMapping(value="/center/faq10")
 	public String faqList(
 			@RequestParam(value="pageNo", defaultValue="1") int cur_page,
 			@RequestParam(value="searchKey", defaultValue="subject") String searchKey,
@@ -44,8 +49,10 @@ public class FAQController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("searchKey", searchKey);
 		map.put("searchValue", searchValue);
+		System.out.println("============="+searchKey+"===============");
+		System.out.println("============="+searchValue+"===============");
 		
-		dataCount = service.DataCount(map);
+		dataCount = service.dataCount(map);
 		if(dataCount != 0) {
 			tot_page = myUtil.pageCount(rows, dataCount);
 		}
@@ -63,7 +70,7 @@ public class FAQController {
 		int listNum, n = 0;
 		Iterator<FAQ> it = list.iterator();
 		while(it.hasNext()) {
-			FAQ data = (FAQ)it.next();
+			FAQ data = it.next();
 			listNum = dataCount - (start + n -1);
 			data.setListNum(listNum);
 		}
@@ -76,7 +83,7 @@ public class FAQController {
 		model.addAttribute("total_page",tot_page);
 		model.addAttribute("paging",paging);
 		
-		return ".center.faq";
+		return "center/faq";
 	}
 	
 	

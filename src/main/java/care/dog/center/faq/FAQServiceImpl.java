@@ -54,7 +54,7 @@ public class FAQServiceImpl implements FAQService{
 	}
 
 	@Override
-	public int DataCount(Map<String, Object> map) {
+	public int dataCount(Map<String, Object> map) {
 		int result = 0;
 		try {
 			result = dao.selectOne("faq.dataCount",map);

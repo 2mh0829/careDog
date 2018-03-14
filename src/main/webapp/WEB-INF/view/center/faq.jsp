@@ -12,24 +12,6 @@ ul, ol {list-style:none;}
 .TabsConts {display:none;}
 .TabsConts.on {display:block;}
 
-/* TAB */
-.TabsConts {display:none;}
-.TabsConts.on {display:block;}
-.comm2sTabs {overflow:hidden;width:100%;margin-top:30px;}
-.comm2sTabs > li {float:left;width:50%;height:40px;margin:0 0 0 -1px;background:#fff;box-sizing:border-box;border:1px solid #ddd;}
-.comm2sTabs > li:first-child {margin:0;}
-.comm2sTabs > li > button {width:100%;height:38px;color:#666;background:#fff;box-sizing:border-box;font-size:14px;line-height:18px;}
-.comm2sTabs > li.on {border:2px solid #8f9100;background:#8f9100;}
-.comm2sTabs > li.on > button {height:36px;background:#8f9100;color:#fff;}
-.comm2sTabs.fiveSet > li {width:205px}
-.comm2sTabs.fiveSet > li:first-child {width:204px}
-.comm2sTabs.sevenSet > li {width:14.5%;}
-.comm2sTabs.sevenSet > li:first-child {width:14%;margin:0;}
-.comm2sTabs.sevenSet > li:last-child {width:13.5%;}
-
-.tabConts {display:none}
-.tabConts.show {display:block}
-
 /* 공통 플루트 박스 */
 .area-over {overflow:hidden;position:relative;width:100%;}
 .area-over .left, .area-over .right {width:380px;}
@@ -75,35 +57,6 @@ ul, ol {list-style:none;}
 
 .list-customer ul li .tit > span.tx_same {color:#969937;font-weight:700}
 
-/* 고객센터 탭 */
-.comm2sTabs.iconTab {height:120px;margin-bottom:60px}
-.comm2sTabs.iconTab > li {width:147px;height:120px}
-.comm2sTabs.iconTab > li:first-child {margin-left:0;width:144px}
-.comm2sTabs.iconTab > li > button.faq_icon1 {width:100%;height:118px;padding-top:60px;color:#222;background:url("<%=cp%>/resource/img/faq/faq_icon1.png") no-repeat 0 0;font-weight:400;background-position:50px 24px}
-.comm2sTabs.iconTab > li > button.faq_icon2 {width:100%;height:118px;padding-top:60px;color:#222;background:url("<%=cp%>/resource/img/faq/faq_icon2.png") no-repeat 0 0;font-weight:400;background-position:50px 24px}
-.comm2sTabs.iconTab > li > button.faq_icon3 {width:100%;height:118px;padding-top:60px;color:#222;background:url("<%=cp%>/resource/img/faq/faq_icon3.png") no-repeat 0 0;font-weight:400;background-position:50px 24px}
-.comm2sTabs.iconTab > li > button.faq_icon4 {width:100%;height:118px;padding-top:60px;color:#222;background:url("<%=cp%>/resource/img/faq/faq_icon4.png") no-repeat 0 0;font-weight:400;background-position:50px 24px}
-.comm2sTabs.iconTab > li > button.faq_icon5 {width:100%;height:118px;padding-top:60px;color:#222;background:url("<%=cp%>/resource/img/faq/faq_icon5.png") no-repeat 0 0;font-weight:400;background-position:50px 24px}
-.comm2sTabs.iconTab > li > button.faq_icon6 {width:100%;height:118px;padding-top:60px;color:#222;background:url("<%=cp%>/resource/img/faq/faq_icon6.png") no-repeat 0 0;font-weight:400;background-position:50px 24px}
-.comm2sTabs.iconTab > li > button.faq_icon7 {width:100%;height:118px;padding-top:60px;color:#222;background:url("<%=cp%>/resource/img/faq/faq_icon7.png") no-repeat 0 0;font-weight:400;background-position:50px 24px}
-
-.comm2sTabs.iconTab > li > button.icon_tab06+.twoTabs,
-.comm2sTabs.iconTab > li > button.icon_tab07+.twoTabs {right:0}
-
-.comm2sTabs.iconTab > li.on {border:1px solid #ddd}
-.comm2sTabs.iconTab > li.on > button {color:#fff}
-
-/* 고객센터 > 회원&멤버십 탭 */
-.area-customer .comm2sTabs {overflow:visible;position:relative;height:40px;box-sizing:initial;}
-.area-customer .twoTabs {display:none;overflow:hidden;position:absolute;left:0;bottom:-42px}
-.area-customer .comm2sTabs > li.on .twoTabs {display:block;}
-.area-customer .twoTabs li {float:left;padding:0 12px 0 11px;background:url("http://www.oliveyoung.co.kr/pc-static-root/image/comm/bar1x13_gray.gif") no-repeat 0 0;}
-.area-customer .twoTabs li:first-child {background:none;}
-.area-customer .twoTabs li button {background:#fff;color:#888;font-weight:400;font-size:16px}
-.area-customer .twoTabs li.on button {color:#333;font-weight:bold}
-.TabsConts-textus {display:none;}
-.TabsConts-textus.on {display:block;}
-
 /* BOARD LIST */
 .board-list-1s {table-layout:fixed;width:1020px;margin:0 auto;border-top:2px solid #888;}
 .board-list-1s thead tr th {padding:22px 0 20px;border-bottom:1px solid #888;text-align: center;}
@@ -136,123 +89,21 @@ ul, ol {list-style:none;}
 
 .pageing span {display:inline-block;width:30px;height:30px;border:1px solid #e5e5e5;text-indent:-9999px}
 
-#TabsOpenArea{width: 1020px;height: 100%;margin: 0 auto;}
+.sub_title_area.customer {height:100px;background:#faeee1 url("<%=cp%>/faq/bg_customer_top.png") no-repeat 50% 0}
+
 </style>
-<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.form.js"></script>
-<script type="text/javascript">
-
-//탭버튼
-$("#TabsOpenArea .comm2sTabs").children("li").each(function(idx) {
-    if ($(this).attr("data-cd") == "99") {
-        $(this).bind("click", function() {
-            common.wlog("customer_faq_top10");
-        });
-    
-    } else if ($(this).attr("data-cd") == "40") {
-        $(this).bind("click", function() {
-            common.wlog("customer_faq_membership");
-        });
-        
-    } else if ($(this).attr("data-cd") == "10") {
-        $(this).bind("click", function() {
-            common.wlog("customer_faq_order");
-        });
-        
-    } else if ($(this).attr("data-cd") == "20") {
-        $(this).bind("click", function() {
-            common.wlog("customer_faq_delivery");
-        });
-        
-    } else if ($(this).attr("data-cd") == "30") {
-        $(this).bind("click", function() {
-            common.wlog("customer_faq_refund");
-        });
-        
-    } else if ($(this).attr("data-cd") == "60") {
-        $(this).bind("click", function() {
-            common.wlog("customer_faq_event");
-        });
-        
-    } else if ($(this).attr("data-cd") == "90") {
-        $(this).bind("click", function() {
-            common.wlog("customer_faq_etc");
-        });
-        
-    }
-
-});
-
-function listPage(page){
-	var $tab = $(".comm2sTabs.iconTab li.on");
-	var tab = $tab.arrt("data-cd");
-	var url = "<%=cp%>/center/"+tab+"/list";
-	
-	var query = "pageNo="+page;
-	var search = $('form[name=faqSearchForm]').serialize();
-	query=query+"&"+search;
-	
-	ajaxHTML(url, "get", query);
-}
-
-function ajaxHTML(url, type, query){
-	$.ajax({
-		type:type,
-		url:url,
-		data:query,
-		success:function(data){
-			if($.trim(data)=="error"){
-				listPage(1);
-				return;
-			}
-			$("#TabsOpenArea").html(data);
-		}
-	,beforeSend : function(jqXHR){
-		jqXHR.setRequestHeader("AJAX", true);
-	}
-	,error : function(jqXHR){
-		if(jqXHR.status == 401){
-			console.log(jqXHR);
-		} else if (jqXHR.status == 403){
-			location.href="<%=cp%>/member/noAuthorized";
-		} else {
-			console.log(jqXHR.responseText);
-		}
-	}
-	});
-}
-</script>
-<div class="body-container">
-<div id="TabsOpenArea">
-				<div class="area-customer">
-					<ul class="comm2sTabs iconTab">
-						<li class="on" data-cd="99"><button type="button" class="faq_icon1">TOP10</button>
-						</li>
-						<li data-cd="40"><button type="button" class="faq_icon2">회원/멤버십</button>
-						</li>
-						<li data-cd="10"><button type="button" class="faq_icon3">주문/결제</button>
-						</li>
-						<li data-cd="20"><button type="button" class="faq_icon4">배송</button>
-						</li>
-						<li data-cd="30"><button type="button" class="faq_icon5">교환/반품/환불</button>
-						</li>
-						<li data-cd="60"><button type="button" class="faq_icon6">이벤트</button>
-						</li>
-						<li data-cd="90"><button type="button" class="faq_icon7">기타</button>
-						</li>
-					</ul>
-				</div>
-<table class="board-list-1s">
+<table class="board-list-1s" id="board-list-1s">
 						<caption></caption>
 						<colgroup>
 							<col style="width:9%;">
 							<col style="width:79%;">
-							<col style="width:12%;"><!-- 2017-03-10 수정 : colgroup 영역 전체 복사+붙여넣기해주세요(각 항목 간격 수정) -->
+							<col style="width:12%;">
 						</colgroup>
 						<thead>
 							<tr>
 								<th scope="col">번호</th>
 								<th scope="col">제목</th>
-								<th scope="col">등록일</th>
+								<th scope="col">ID</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -266,13 +117,11 @@ function ajaxHTML(url, type, query){
 						</tbody>
 					</table>
 	<div class="pageing">
-		<strong title="현재 페이지">1</strong>
+		<c:if test="${dataCount == 0 }">
+		<strong title="현재 페이지">페이지가 없습니다.</strong>
+		</c:if>
+		<c:if test="${dataCount != 0 }">
+		<strong title="현재 페이지">${paging }</strong>
+		</c:if>
 	</div>
-
-			</div>
-			</div>	
-			
-<form name="faqSearchForm" action="" method="post">
-    <input type="hidden" name="searchKey" value="subject">
-    <input type="hidden" name="searchValue" value="">
-</form>			
+	
