@@ -53,12 +53,20 @@
 	
 	
 	<select id="dhDetail" resultType="care.dog.dog119.dogHealthVo.DogHealthVo" parameterType="Integer">
-		SELECT title, content, created, m.username, hitCount
+		SELECT boardNum, title, content, created, m.username, hitCount
 		FROM dogHealth dh JOIN member1 m ON dh.memberId=m.memberId
 		LEFT OUTER JOIN(
 			SELECT num, COUNT(*) likeDh FROM dogHealthLike
 			GROUP BY num
 		) dhl ON dh.boardNum=dhl.num
 		WHERE dh.boardNum=#{boardNum}
+	</select>
+	
+	<insert id="dhLike" parameterType="map">
+		INSERT INTO dogHealthLike(num, memberId) VALUES (#{num}, #{memberId})
+	</insert>
+	
+	<select id="dhLikeCnt" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(*) FROM dogHealthLike WHERE num=#{boardNum}
 	</select>
 </mapper>

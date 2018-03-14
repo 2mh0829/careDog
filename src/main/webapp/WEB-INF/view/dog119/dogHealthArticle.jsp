@@ -94,13 +94,18 @@ button, input[type='checkbox'], input[type='radio'], input[type='button'], input
 function dhRecommand(){
 	if(!confirm("게시물을 추천하십니까?"))
 		return;
-	
+	var num = "${dto.boardNum}";
+	console.log(num);
 	var q = ${dto.boardNum};
-	$.post('<%=cp%>/dog119/dhRecommand',
-		{boardNum: "${dto.boardNum}"},
+	$.post('<%=cp%>/dog119/dhLike',
+		{num: "${dto.boardNum}"},
 		function(data){
-			
-		}
+			if(data.state=="false"){
+				alert("좋아요는 한번만 가능합니다.")
+			} else if(data.state=="true"){
+				$('.contentsInfo-goodCont').text(data.likeCnt);
+			} 
+		},'json'
 	);
 }
 </script>
@@ -108,8 +113,7 @@ function dhRecommand(){
 <div class="body-container">
 
 	<div class="content" id="AnimalsContent">
-				<h1 class="page-tit">교육 안내
-				</h1>
+				<h1 class="page-tit">교육 안내</h1>
 				
 			<div class="imageView__content">
 				<div class="imageView__viewArea">
@@ -127,7 +131,7 @@ function dhRecommand(){
 								${dto.created}
 								</span>
 								<span class="contentsInfo-viewCnt">${dto.hitCount}</span>
-								<span class="contentsInfo-goodCont">${dto.likeDh}</span>
+								<span class="contentsInfo-goodCont">${dto.likeCnt}</span>
 								
 							</div>
 						</div>

@@ -12,13 +12,20 @@ public class DogHealthVo {
 	private String dhReplyCreated;
 	private String memberId;
 	private String username;
-	private int likeDh;
+	private int likeCnt;
+	private int listNum;
 	
-	public int getLikeDh() {
-		return likeDh;
+	public int getListNum() {
+		return listNum;
 	}
-	public void setLikeDh(int likeDh) {
-		this.likeDh = likeDh;
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
+	public int getLikeCnt() {
+		return likeCnt;
+	}
+	public void setLikeCnt(int likeDh) {
+		this.likeCnt = likeDh;
 	}
 	public String getUsername() {
 		return username;

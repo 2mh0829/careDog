@@ -340,7 +340,7 @@ function chk() {
 <c:forEach var="dto" items="${callList}">
 					<li class="board__item" style="line-height: 55px;">
 						<p class="board__subject">
-							<a href="${dhArticle}&boardNum=${dto.boardNum}" class="board__link">
+							<a href="${dhArticle}&boardNum=${dto.boardNum}&listNum=${dto.listNum}" class="board__link">
 								<span class="board__number">${dto.boardNum}</span>
 								${dto.title}
 							</a>
