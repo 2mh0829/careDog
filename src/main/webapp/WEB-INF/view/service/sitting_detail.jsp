@@ -9,6 +9,30 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <script>
 
+$(function(){
+    $("#left-datepicker").datepicker({
+    	dateFormat: "yy-mm-dd",
+    	showAnim: "slideDown",
+    	showMonthAfterYear: true,
+    	yearSuffix: '년',
+    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+    	minDate: 0
+    });
+});
+
+$(function(){
+    $("#right-datepicker").datepicker({
+    	dateFormat: "yy-mm-dd",
+    	showAnim: "slideDown",
+    	showMonthAfterYear: true,
+    	yearSuffix: '년',
+    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+    	minDate: 0
+    });
+});
+
 $( function() {
     $( "#datepicker" ).datepicker({
     	dateFormat: "yy-mm-dd",
@@ -26,7 +50,7 @@ $( function() {
 
 <style>
 
-.ui-datepicker {
+.main-middle-inner .ui-datepicker {
 	width: 335px;
 	height: 190px;
 	
@@ -224,7 +248,7 @@ li{
 }
 
 .row {
-	border: 1px solid #ccc;
+	border: 1px solid #ffb861;
 	/* border: 1px solid blue; */
 	margin-left: 1px;
     /* margin-right: auto; */
@@ -290,7 +314,7 @@ li{
 
 .main-middle-environ {
 	/* padding: 40px 0; */
-    border: 1px solid #dcdcdc;
+    /* border: 1px solid #dcdcdc; */
     /* border: 1px solid; */
     width: 623px;
     height: 190px;
@@ -355,7 +379,7 @@ li{
 }
 
 .sitter-infor {
-	border: 1px solid #cccccc;
+	/* border: 1px solid #cccccc; */
     /* display: inline-block; */
     height: 190px;
     width: 335px;

@@ -62,7 +62,9 @@ function sendLogin() {
 function enter_check() {
 	if(event.keyCode == 13){
 		sendLogin();
-	}
+	}/* else if(event.keyCode == 9){
+		$("#loginBtn").focus();
+	} */
 }
 
 </script>
@@ -77,7 +79,7 @@ function enter_check() {
 		  <table style="margin: 15px auto; width: 360px; border-spacing: 0px;">
 		  <tr align="center" height="50"> 
 		      <td> 
-                <label for="userId" id="lblUserId" class="lbl" >아이디</label>
+                <label for="userId" id="lblUserId" class="lbl">아이디</label>
 		        <input type="text" name="userId" id="userId" class="loginTF" maxlength="15"
 		                   tabindex="1"
                            onfocus="document.getElementById('lblUserId').style.display='none';"
@@ -86,17 +88,17 @@ function enter_check() {
 		  </tr>
 		  <tr align="center" height="50"> 
 		      <td>
-		        <label for="userPwd" id="lblUserPwd" class="lbl" >패스워드</label>
+		        <label for="userPwd" id="lblUserPwd" class="lbl">패스워드</label>
 		        <input type="password" name="userPwd" id="userPwd" class="loginTF" maxlength="20" 
 		                   tabindex="2"
                            onfocus="document.getElementById('lblUserPwd').style.display='none';"
                            onblur="bgLabel(this, 'lblUserPwd');"
-                           onkeyup="enter_check();">
+                           onkeydown="enter_check();">
 		      </td>
 		  </tr>
 		  <tr align="center" height="65" > 
 		      <td>
-		        <button type="button" onclick="sendLogin();" class="loginTF">로그인</button>
+		        <button id="loginBtn" type="button" onclick="sendLogin();" class="loginTF" tabindex="3">로그인</button>
 		      </td>
 		  </tr>
 
@@ -104,7 +106,7 @@ function enter_check() {
 		      <td>
 		       		<a href="<%=cp%>/member/id">아이디찾기</a>&nbsp;&nbsp;&nbsp;
 		       		<a href="<%=cp%>/member/pwd">패스워드찾기</a>&nbsp;&nbsp;&nbsp;
-		       		<a href="<%=cp%>/member/signUp">회원가입</a>
+		       		<a href="<%=cp%>/member/join1">회원가입</a>
 		      </td>
 		  </tr>
 		  

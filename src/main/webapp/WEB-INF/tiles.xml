@@ -5,7 +5,6 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-
 	<definition name=".main4Layout" template="/WEB-INF/view/layout/layout4.jsp">
 		<put-attribute name="title" value="careDog" />
 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
@@ -29,43 +28,25 @@
 	</definition>
 
 	<!-- 개인 블로그 3단 -->
-	<definition name=".blogPostLayout" template="/WEB-INF/view/blog/layout/postLayout.jsp">
+	<definition name=".myPageLayout" template="/WEB-INF/view/layout/myPage/myPageLayout.jsp">
 		<put-attribute name="title" value="careDog" />
 		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
 		<put-attribute name="blogHeader"
-			value="/WEB-INF/view/blog/layout/postHeader.jsp" />
-		<put-attribute name="blogLeft" value="/WEB-INF/view/blog/layout/postLeft.jsp" />
-		<put-attribute name="blogLeft2" value="/WEB-INF/view/mypage/myPetInfo.jsp" />
-		<put-attribute name="blogLeft3" value="/WEB-INF/view/mypage/sch/sch.jsp" />
-		<put-attribute name="blogBody" value="/WEB-INF/view/blog/post/profile.jsp" />
-		<put-attribute name="blogBody2" value="/WEB-INF/view/blog/guest/guest.jsp" />
+			value="/WEB-INF/view/layout/myPage/myPageHeader.jsp" />
+		<put-attribute name="blogLeft" value="/WEB-INF/view/layout/myPage/myPageLeft.jsp" />
+		<put-attribute name="blogLeft2" value="/WEB-INF/view/myPage/myPetInfo.jsp" />
+		<put-attribute name="blogLeft3" value="/WEB-INF/view/myPage/sch/sch.jsp" />
+		<put-attribute name="blogBody" value="/WEB-INF/view/myPage/main/profile.jsp" />
+		<put-attribute name="blogBody2" value="/WEB-INF/view/myPage/guest/guest.jsp" />
 		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
 	</definition>
-
+<!-- 
 	<definition name=".blogPost.*.*.*" extends=".blogPostLayout">
 		<put-attribute name="left"
 			value="/WEB-INF/view/blog/layout/{1}Left.jsp" />
 		<put-attribute name="body" value="/WEB-INF/view/blog/{2}/{3}.jsp" />
-	</definition>
+	</definition> -->
 
-	<!-- 블로그 3단 -->
-	<definition name=".blogLayout" template="/WEB-INF/view/blog/layout/blogLayout.jsp">
-		<put-attribute name="title" value="careDog" />
-		<put-attribute name="header"
-			value="/WEB-INF/view/blog/layout/blogHeader.jsp" />
-		<put-attribute name="body" value="/WEB-INF/view/blog/main/main.jsp" />
-		<put-attribute name="footer"
-			value="/WEB-INF/view/blog/layout/blogFooter.jsp" />
-	</definition>
-<definition name=".blog.*.*.*" extends=".main4Layout">
-		<put-attribute name="body" value="/WEB-INF/view/blog/{1}/{2}/{3}.jsp" />
-	</definition>
-	<definition name=".blog.*.*" extends=".main4Layout">
-		<put-attribute name="body" value="/WEB-INF/view/blog/{1}/{2}.jsp" />
-	</definition>
-	<definition name=".blog.*" extends=".blogPostLayout">
-		<put-attribute name="body" value="/WEB-INF/view/blog/{1}.jsp" />
-	</definition>
 
 	<definition name=".mainLayout" template="/WEB-INF/view/layout/layout.jsp">
 		<put-attribute name="title" value="careDog" />
@@ -75,23 +56,10 @@
 		<put-attribute name="bot" value="" />
 		<put-attribute name="menu2" value="" />
 	</definition>
-	<definition name=".mypage" template="/WEB-INF/view/layout/postLayout.jsp">
-		<put-attribute name="title" value="careDog" />
-		<put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
-		<put-attribute name="body" value="/WEB-INF/view/main/main.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
-		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
-	</definition>
-
-	<definition name=".mypageMemberEdit.*" extends=".blogPostLayout">
-		<put-attribute name="blogBody" value="/WEB-INF/view/member/{1}.jsp" />
-	</definition>
 
 <definition name=".member.*" extends=".mainLayout">
 		<put-attribute name="body" value="/WEB-INF/view/member/{1}.jsp" />
-		<put-attribute name="bot" value="/WEB-INF/view/layout/bot.jsp" />
 		<put-attribute name="header" value="/WEB-INF/view/layout/header1.jsp" />
-		
 	</definition>
 	<definition name=".adminLayout" template="/WEB-INF/view/admin/layout/layout.jsp">
 		<put-attribute name="title" value="careDog" />

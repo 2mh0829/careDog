@@ -25,7 +25,7 @@
 
 <insert id="insertGongji" parameterType="care.dog.center.Gongji">
 INSERT INTO gongji (num, memberId, isGongji, subject, content, created)
-VALUES (#{num}, #{memberId}, #{isGongji}, #{subject}, #{content}, #{created})
+VALUES (#{num}, #{memberId}, 1, #{subject}, #{content}, sysdate)
 </insert>
 
 <select id="listGongji" parameterType="map" resultType="care.dog.center.Gongji">
