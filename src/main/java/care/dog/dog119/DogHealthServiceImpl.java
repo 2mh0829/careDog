@@ -28,8 +28,13 @@ public class DogHealthServiceImpl implements DogHealthService {
 
 	@Override
 	public int updateHitCount(int num) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		try {
+			result = dao.updateData("dogHealth.updateHitCount", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
@@ -41,6 +46,17 @@ public class DogHealthServiceImpl implements DogHealthService {
 			e.printStackTrace();
 		}
 		return cnt;
+	}
+
+	@Override
+	public DogHealthVo dhDetail(int boardNum) {
+		DogHealthVo dto = null;
+		try {
+			dto = dao.selectOne("dogHealth.dhDetail", boardNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 }

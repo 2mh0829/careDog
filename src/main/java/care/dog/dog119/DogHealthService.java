@@ -9,4 +9,5 @@ public interface DogHealthService {
 	public List<DogHealthVo> listBoard(Map<String, Object> map);
 	public int updateHitCount(int num);
 	public int dataCount(Map<String, Object> map);
+	public DogHealthVo dhDetail(int boardNum);
 }

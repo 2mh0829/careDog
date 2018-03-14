@@ -103,6 +103,7 @@ public class Dog119Controller {
 		
 		String query = "";
 		String dhListUrl = cp+"/dog119/dhList";
+		String dhArticle = cp+"/dog119/dhArticle?page="+page;
 		
 		if(keyword.length() != 0) {
 			try {
@@ -114,11 +115,13 @@ public class Dog119Controller {
 		
 		if(query.length()!=0) {
 			dhListUrl = cp+"/dog119/dhList?"+query;
+			dhArticle = cp+"/dog119/article?page="+page+"&"+query;
 		}
 		
 		String paging = myUtilBootstrap.paging(page, totalPage, dhListUrl);
 		
 		model.addAttribute("callList", callList);
+		model.addAttribute("dhArticle",dhArticle);
 		model.addAttribute("page",page);
 		model.addAttribute("dataCount", dataCount);
 		model.addAttribute("totalPage", totalPage);
@@ -132,6 +135,28 @@ public class Dog119Controller {
 	public String healthCreate() {
 		
 		return ".dog119.dogHealthCreate";
+	}
+	
+	@RequestMapping(value="/dog119/dhArticle")
+	public String healthArticle(
+			@RequestParam Map<String, Object> map, Model model) {
+		String query = "page="+map.get("page");
+		int boardNum = Integer.parseInt((String)map.get("boardNum"));
+		DogHealthVo dto = service.dhDetail(boardNum);
+		
+		service.updateHitCount(boardNum);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("search", (String)map.get("search"));
+		model.addAttribute("keyword", (String)map.get("keyword"));
+		model.addAttribute("page", (String)map.get("page"));
+		
+		return ".dog119.dogHealthArticle";
+	}
+	
+	@RequestMapping(value="/dog119/dhRecommand")
+	public String healthRecommand() {
+		
 	}
 	
 }
