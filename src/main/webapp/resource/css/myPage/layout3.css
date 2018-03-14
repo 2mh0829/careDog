@@ -1,25 +1,25 @@
 @CHARSET "UTF-8";
 
-.blog-main {
+.myPage-main {
 	width:1020px;
 	margin:0px auto;
 }
 
-.blog-main-header {
+.myPage-main-header {
 	 clear: both;
 }
 
-.blog-main-header-top {
+.myPage-main-header-top {
 	clear: both;
 	height: 70px;
 	line-height: 70px;
 }
 
-.blog-main-header-top a{
+.myPage-main-header-top a{
 	text-decoration: none;
 }
 
-.blog-main-header-menu {
+.myPage-main-header-menu {
     clear: both;	
 }
 
@@ -52,24 +52,24 @@
     font-weight: bold;
 }
 
-.blog-main-body {
+.myPage-main-body {
 	floag:left;
 	clear:both;
 	min-height: 600px;
 }
 
-.blog-main-body .bodyFrame3 {
+.myPage-main-body .bodyFrame3 {
 	clear:both;
 	width:1020px;
 	margin:10px auto;
 }
 
-.blog-main-footer {
+.myPage-main-footer {
 	padding-top:10px;
 	text-align: center;
 }
 
-.blog-main-footer a {
+.myPage-main-footer a {
 	text-decoration: none;
 }
 
