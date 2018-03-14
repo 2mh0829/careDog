@@ -5,8 +5,6 @@
 <%
    String cp = request.getContextPath();
 %>
-
-<link rel="stylesheet" href="<%=cp%>/resource/css/tabs.css" type="text/css">
 <style>
 .alert-info {
     border: 1px solid #9acfea;
@@ -76,7 +74,7 @@ background-color: #eee;
 
 <script type="text/javascript">
 $(function(){
-	$("#tabGongji").addClass("active");
+	$("#tabfaq10").addClass("active");
 	listPage(1);
 
 	$("ul.comm1sTabs li").click(function() {
@@ -96,7 +94,7 @@ $(function(){
 function listPage(page) {
 	var $tab = $(".comm1sTabs .active");
 	var tab = $tab.attr("data-tab");
-	var url="<%=cp%>/center/"+tab+"/list";
+	var url="<%=cp%>/center/tab"+tab;
 	
 	var query="pageNo="+page;
 	var search=$('form[name=centerSearchForm]').serialize();
@@ -312,43 +310,16 @@ function deleteBoard(num, page) {
 	        }
 	});
 }
-
-function deletePhoto() {
-	<c:if test="${sessionScope.member.memberId=='admin'}">
-	  var num = "${dto.num}";
-	  var page = "${page}";
-	  var query = "num="+num+"&page="+page;
-	  var url = "<%=cp%>/center/"+tab+"/delphoto?" + query;
-
-	  if(confirm("위 자료를 삭제 하시 겠습니까 ? "))
-	  	location.href=url;
-	</c:if>    
-	
-	<c:if test="${sessionScope.member.memberId!='admin'}">
-	  alert("게시물을 삭제할 수  없습니다.");
-	</c:if>
-	}
-
-	function updatePhoto() {
-	<c:if test="${sessionScope.member.memberId=='admin'}">
-	  var num = "${dto.num}";
-	  var page = "${page}";
-	  var query = "num="+num+"&page="+page;
-	  var url = "<%=cp%>/center/"+tab+"/updatephoto?" + query;
-
-	  location.href=url;
-	</c:if>
-
-	<c:if test="${sessionScope.member.memberId!='admin'}">
-	 alert("게시물을 수정할 수  없습니다.");
-	</c:if>
-	}
 </script>
-
 <div class="body-container" style="width: 1020px;">
     <ul class="comm1sTabs threeSet customer">
-				<li id="tabgongji" data-tab="gongji" class="active">공지사항</li>
-				<li id="tabevent" data-tab="event" >이벤트</li>
+				<li id="tabfaq10" data-tab="faq10" class="active">TOP10</li>
+				<li id="tabfmember" data-tab="fmember" >회원/멤버십</li>
+				<li id="tabfbuy" data-tab="fbuy" >주문/결제</li>
+				<li id="tabfdelivery" data-tab="fdelivery" >배송</li>
+				<li id="tabfrefund" data-tab="frefund" >교환/반품/환불</li>
+				<li id="tabfevent" data-tab="fevent" >이벤트</li>
+				<li id="tabfetc" data-tab="fetc" >기타</li>
 	</ul>
 	<div id="tab-content" style="clear:both; padding: 20px 10px 0px;"></div>
 </div>
@@ -357,4 +328,3 @@ function deletePhoto() {
     <input type="hidden" name="searchKey" value="subject">
     <input type="hidden" name="searchValue" value="">
 </form>
-
