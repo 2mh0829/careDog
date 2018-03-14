@@ -44,5 +44,5 @@
 		<property name="defaultEncoding" value="utf-8" />
 		<property name="maxUploadSize" value="20971520" />
 	</bean>
-
+	
 </beans>

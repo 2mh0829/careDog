@@ -58,11 +58,6 @@ public class MemberController {
 		return ".member.join2";
 	}
 	
-	@RequestMapping(value="/member/join3", method=RequestMethod.GET)
-	public String join3Form() {
-		return ".member.join3";
-	}
-	
 	@RequestMapping(value="/member/signUp", method=RequestMethod.POST)
 	public String memberSubmit(
 			Member dto,
