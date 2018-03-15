@@ -152,11 +152,11 @@ function open_terms() {
 	$(".modal").modal();
 }
 function secession() {//회원탈퇴페이지 (마이페이지에서사용)
-	var url = "<%=cp%>/mypage/secession";
+	var url = "<%=cp%>/member/secession";
 	$.get(url, {
 		tmp : new Date().getTime()
 	}, function(data) {
-		$(".blog-body").html(data);
+		$(".myPage-body").html(data);
 	})
 }
 </script>

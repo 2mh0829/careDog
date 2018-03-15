@@ -28,27 +28,15 @@ public class MyPageController {
 	private MyUtilGeneral util;
 
 
-	@RequestMapping(value="/myPage/editMember", method=RequestMethod.GET)
-	public String member() {
-		return ".myPageMemberEdit.join";
-	}
-	@RequestMapping(value="/myPage/test", method=RequestMethod.GET)
-	public String test() {
-		return "myPage/test";
-	}
-	@RequestMapping(value="myPage/secession", method=RequestMethod.GET)
-	public String secession() {
-		return "myPage/secession";
-	}
 	@RequestMapping(value="myPage/editMemberInfo")
 	public String editMemberInfo() throws Exception {
 
 		return "member/signUp";
 	}
-	@RequestMapping(value="myPage/myPetList")
+	@RequestMapping(value="/myPage/myPetList")
 	public String myPetList() throws Exception {
 
-		return "myPage/myPetList";
+		return "myPage/myPet/myPetList";
 	}
 
 	@RequestMapping(value="/myPage")
@@ -185,6 +173,7 @@ public class MyPageController {
 		model.addAttribute("myPageInfo", myPageInfo);
 		model.addAttribute("myPageUrl", cp+"/myPage/"+myPageId);
 		model.addAttribute("owner", owner);
+		System.out.println("@@@#=>"+myPageInfo.toString());
 
 		return ".myPageLayout";
 	}

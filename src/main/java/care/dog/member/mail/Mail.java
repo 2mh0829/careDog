@@ -5,13 +5,16 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class Mail {
+import care.dog.member.vo.MemberPVO;
+
+public class Mail extends MemberPVO {
 	private String receiverEmail;  // 받는 사람  이메일
 	private String senderEmail; // 보내는 사람  이메일
 	private String senderName; // 보내는 사람  이름
 	private String subject; // 메일 제목
 	private String content; // 메일 내용
 
+	
 	// 스프링에서 파일 받기
 	private List<MultipartFile> upload; // <input type="file" name="upload"
 	private List<String> savePathname = new ArrayList<>();

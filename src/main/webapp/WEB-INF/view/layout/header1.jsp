@@ -57,7 +57,7 @@
 		<a href="<%=cp %>/member/join1"><span class="glyphicon glyphicon-user">&nbsp;</span>sign up</a>
 	</c:if>
 	<c:if test="${not empty sessionScope.member }">
-	  <span style="color:blue;">${sessionScope.member.userName}</span>님
+	  <span style="color:#4596d1">${sessionScope.member.userName}</span>님
                 &nbsp;|&nbsp;
       <a href="<%=cp%>/member/logout">로그아웃</a>
                 &nbsp;|&nbsp;

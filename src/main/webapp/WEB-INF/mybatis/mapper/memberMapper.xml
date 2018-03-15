@@ -5,66 +5,70 @@
 	<select id="readMember" parameterType="String" resultType="care.dog.member.Member">
 		SELECT m1.memberId, userName, userPwd
 		FROM member1 m1
-		LEFT OUTER JOIN 	member2 m2 ON m1.memberId = m2.memberId
+		LEFT OUTER JOIN member2 m2 ON m1.memberId = m2.memberId
 		WHERE m1.memberId = #{memberId}
 	</select>
 	
 	<update id="updateLastLogin" parameterType="String">
 		UPDATE  member1 SET last_login = SYSDATE
-		WHERE userId=#{userId}
+		WHERE memberId=#{memberId}
 	</update>
 	
     <insert id="insertMember1" parameterType="care.dog.member.Member">
-       INSERT INTO member1(userId, userName, userPwd) VALUES
-                 (#{userId}, #{userName}, #{userPwd}) 
+       INSERT INTO member1(memberId, userName, userPwd, isMember) 
+       VALUES (#{memberId}, #{userName}, #{userPwd}, 0) 
     </insert>
 
     <insert id="insertMember2" parameterType="care.dog.member.Member">
-       INSERT INTO member2
-            (userId, birth, email, tel, zip, addr1, addr2)  VALUES 
-            (#{userId}, #{birth}, #{email}, #{tel}, 
-                    #{zip, jdbcType=VARCHAR}, #{addr1, jdbcType=VARCHAR}, 
-                    #{addr2, jdbcType=VARCHAR})
+       INSERT INTO member2 (memberId, birth, email, tel, zipCode, address1, address2)
+       VALUES (#{memberId}, #{birth}, #{email}, #{tel},
+                    #{zipCode, jdbcType=VARCHAR}, #{address1, jdbcType=VARCHAR}, 
+                    #{address2, jdbcType=VARCHAR})
     </insert>
 	
     <update id="insertMember" parameterType="care.dog.member.Member">
        INSERT ALL
-           INTO member1(userId, userName, userPwd) VALUES (#{userId}, #{userName}, #{userPwd})
-           INTO member2(userId, birth, email, tel, zip, addr1, addr2)  VALUES 
-                    (#{userId}, #{birth}, #{email}, #{tel}, 
-                        #{zip, jdbcType=VARCHAR}, #{addr1, jdbcType=VARCHAR}, 
-                        #{addr2, jdbcType=VARCHAR})
+           INTO member1(memberId, userName, userPwd) VALUES (#{memberId}, #{userName}, #{userPwd})
+           INTO member2(memberId, birth, email, tel, zipCode, address1, address2)  VALUES 
+                    (#{memberId}, #{birth}, #{email}, #{tel}, 
+                        #{zipCode, jdbcType=VARCHAR}, #{address1, jdbcType=VARCHAR}, 
+                        #{address2, jdbcType=VARCHAR})
             SELECT * FROM dual     
     </update>
 	
     <!-- 회원정보 수정  --> 
     <update id="updateMember1" parameterType="care.dog.member.Member">
         UPDATE member1 SET userPwd=#{userPwd}, modify_date=SYSDATE
-               WHERE userId=#{userId}
+               WHERE memberId=#{memberId}
     </update>
 	
     <update id="updateMember2" parameterType="care.dog.member.Member">
         UPDATE member2 SET email=#{email, jdbcType=VARCHAR}, 
                      tel=#{tel, jdbcType=VARCHAR}, birth=#{birth, jdbcType=VARCHAR},
-                     zip=#{zip, jdbcType=VARCHAR},
-                     addr1=#{addr1, jdbcType=VARCHAR}, addr2=#{addr2, jdbcType=VARCHAR}
-               WHERE userId=#{userId}
+                     zipCode=#{zipCode, jdbcType=VARCHAR},
+                     address1=#{address1, jdbcType=VARCHAR}, address2=#{address2, jdbcType=VARCHAR}
+               WHERE memberId=#{memberId}
     </update>
 
     <update id="updateMemberEnabled" parameterType="map">
         UPDATE member1 SET enabled=#{enabled}
-               WHERE userId=#{userId}
+               WHERE memberId=#{memberId}
     </update>
+    
+    <!-- member1 테이블 정보 삭제  -->    
+    <delete id="deleteMember1" parameterType="String">
+    	DELETE FROM member1 WHERE memberId=#{memberId}
+    </delete>
     
     <!-- member2 테이블 정보 삭제  -->    
     <delete id="deleteMember2" parameterType="String">
-    	DELETE FROM member2 WHERE userId=#{userId}
+    	DELETE FROM member2 WHERE memberId=#{memberId}
     </delete>
 
 	<!-- 어쏘러티(권한) 테이블 -->    
 	<insert id="insertAuthority" parameterType="care.dog.member.Member">
-	    INSERT INTO memberAuthority(userId, authority)
-	        VALUES (#{userId}, #{authority})
+	    INSERT INTO memberAuthority(memberId, authority)
+	        VALUES (#{memberId}, #{authority})
 	</insert>
 	
 	<select id="listAuthority" parameterType="String" resultType="care.dog.member.Member">
@@ -76,5 +80,21 @@
 	     UPDATE memberAuthority SET authority=#{authority}
 	         WHERE memberId=#{memberId} AND authority=#{oldAuthority}
 	</update>
-
+	
+	<!-- 권한확인 -->  
+	<select id="selectIsMember" resultType="String">
+		SELECT memberId FROM member1
+		WHERE isMember = 0
+	</select>
+	
+	<update id="updateIsMember" parameterType="String">
+		UPDATE member1 SET isMember = 1
+		WHERE memberId = #{memberId} 
+	</update>
+	
+	<select id="isMemberByMemberId" parameterType="String" resultType="Integer">
+		SELECT isMember FROM member1
+		WHERE memberId = #{memberId}
+	</select>
+	
 </mapper>

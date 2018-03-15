@@ -34,7 +34,7 @@
 		<put-attribute name="myPageHeader"
 			value="/WEB-INF/view/layout/myPage/myPageHeader.jsp" />
 		<put-attribute name="myPageLeft" value="/WEB-INF/view/layout/myPage/myPageLeft.jsp" />
-		<put-attribute name="myPageLeft2" value="/WEB-INF/view/myPage/myPetInfo.jsp" />
+		<put-attribute name="myPageLeft2" value="/WEB-INF/view/myPage/myPet/myPetInfo.jsp" />
 		<put-attribute name="myPageLeft3" value="/WEB-INF/view/myPage/sch/sch.jsp" />
 		<put-attribute name="myPageBody" value="/WEB-INF/view/myPage/main/profile.jsp" />
 		<put-attribute name="myPageBody2" value="/WEB-INF/view/myPage/guest/guest.jsp" />

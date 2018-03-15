@@ -42,20 +42,10 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void insertMember(Member dto) throws Exception {
 		try {
-//			if(dto.getEmail1() != null && dto.getEmail1().length()!=0 &&
-//					dto.getEmail2() != null && dto.getEmail2().length()!=0)
-//				dto.setEmail(dto.getEmail1() + "@" + dto.getEmail2());
-//			
-//			if(dto.getTel1() != null && dto.getTel1().length()!=0 &&
-//					dto.getTel2() != null && dto.getTel2().length()!=0 &&
-//							dto.getTel3() != null && dto.getTel3().length()!=0)
-//				dto.setTel(dto.getTel1() + "-" + dto.getTel2() + "-" + dto.getTel3());
-			
-			
 			// 회원정보 저장
-			// dao.insertData("member.insertMember1", dto);
-			// dao.insertData("member.insertMember2", dto);
-			dao.insertData("member.insertMember", dto);
+			dao.insertData("member.insertMember1", dto);
+			dao.insertData("member.insertMember2", dto);
+//			dao.insertData("member.insertMember", dto);
 			
 			// 권한저장
 			dto.setAuthority("ROLE_USER");
@@ -151,5 +141,51 @@ public class MemberServiceImpl implements MemberService {
 		} catch (Exception e) {
 		}
 		return list;
+	}
+	
+	
+	@Override
+	public List<String> selectIsMember() {
+		List<String> list = null;
+		try {
+			list = dao.selectList("member.selectIsMember");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
+	@Override
+	public int updateIsMember(String memberId) {
+		int result = 0;
+		try {
+			result = dao.updateData("member.updateIsMember", memberId);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int isMemberByMemberId(String memberId) {
+		int result = 0;
+		try {
+			result = dao.selectOne("member.isMemberByMemberId", memberId);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteAuthFail(String memberId) throws Exception {
+		int result = 0;
+		try {
+			result = dao.deleteData("member.deleteMember2", memberId);
+			result = dao.deleteData("member.deleteMember1", memberId);
+		} catch (Exception e) {
+			throw e;
+		}
+		return result;
 	}
 }

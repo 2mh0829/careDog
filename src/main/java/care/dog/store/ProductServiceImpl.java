@@ -40,17 +40,36 @@ public class ProductServiceImpl implements ProductService{
 		return result;
 	}
 
-	/*
 	@Override
-	public int dataCount() {
-		int result = 0;
+	public List<Product> listProductReply(Map<String, Object> map) {
+		List<Product> list = null;
 		try {
-			result = dao.selectOne("store.dataCount");
-			System.out.println("dataCount: " + result);
+			list = dao.selectList("store.listProductReply", map);
 		} catch (Exception e) {
 		}
-		return result;
+		return list;
 	}
-*/
+
+	@Override
+	public Product readProduct(int productId) {
+		Product dto = null;
+		try {
+			dto = dao.selectOne("store.readProduct", productId);
+		} catch (Exception e) {
+		}
+		return dto;
+	}
+
+	@Override
+	public List<String> readOption(int productId) {
+		List<String> list = null;
+		try {
+			list = dao.selectList("store.readOption", productId);
+		} catch (Exception e) {
+		}
+		return list;
+	}
+
+	
 	
 }
