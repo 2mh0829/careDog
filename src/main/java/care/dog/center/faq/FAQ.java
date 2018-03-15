@@ -2,11 +2,18 @@ package care.dog.center.faq;
 
 public class FAQ {
 	
-	private int num;
+	private int listNum, num;
 	private String memberId;
 	private String subject;
 	private String content;
+	private int faqsort;
 	
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
 	public int getNum() {
 		return num;
 	}
@@ -30,6 +37,12 @@ public class FAQ {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public int getFaqsort() {
+		return faqsort;
+	}
+	public void setFaqsort(int faqsort) {
+		this.faqsort = faqsort;
 	}
 
 }

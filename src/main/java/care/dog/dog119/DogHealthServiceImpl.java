@@ -22,14 +22,18 @@ public class DogHealthServiceImpl implements DogHealthService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(list);
 		return list;
 	}
 
 	@Override
 	public int updateHitCount(int num) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		try {
+			result = dao.updateData("dogHealth.updateHitCount", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
@@ -41,6 +45,40 @@ public class DogHealthServiceImpl implements DogHealthService {
 			e.printStackTrace();
 		}
 		return cnt;
+	}
+
+	@Override
+	public DogHealthVo dhDetail(int boardNum) {
+		DogHealthVo dto = null;
+		try {
+			dto = dao.selectOne("dogHealth.dhDetail", boardNum);
+			System.out.println("서비스임플ㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹ"+dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
+	@Override
+	public int insertDhLike(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.insertData("dogHealth.dhLike", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public int dhLikeCnt(int num) {
+		int result = 0;
+		try {
+			result = dao.selectOne("dogHealth.dhLikeCnt", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

@@ -63,9 +63,9 @@ public class MailSender {
          // gmail : 내계정 - 로그인 및 보안 => 아래부분 보안수준이 낮은 앱 사용  허용으로 변경
          // 네이버 : 메일 아래부분 환경설정 클릭후 POP3등을 허용
 	    	  
-	          String username =  "2mh0829@naver.com"; // 네이버 사용자;
+	          String username =  "hhaahaa@naver.com"; // 네이버 사용자;
 	          // String username =  "지메일아이디"; // gmail 사용자;  
-	          String password = "mh5135mh"; // 패스워드;
+	          String password = "caredoggclass!"; // 패스워드;  
 	          return new PasswordAuthentication(username, password);  
 	       }  
 	}
@@ -124,7 +124,7 @@ public class MailSender {
 		
 		Properties p = new Properties();   
 		
-		dto.setSenderEmail("2mh0829@naver.com");
+		dto.setSenderEmail("hhaahaa@naver.com");
 		dto.setSenderName("Care Dog");
 		dto.setSubject("[Care Dog] 회원가입을 위한 인증 메일입니다.");
   

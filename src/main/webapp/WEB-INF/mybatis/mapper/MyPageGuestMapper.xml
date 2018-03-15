@@ -15,8 +15,7 @@
 	   SELECT NVL(COUNT(*), 0) FROM ${tableName}_guest
 	</select>
 	
-	<select id="listGuest" resultType="care.dog.myPage.guest.Guest" 
-	          parameterType="map">
+	<select id="listGuest" resultType="care.dog.myPage.guest.Guest" parameterType="map">
 		SELECT * FROM (
 		    SELECT ROWNUM rnum, tb.* FROM (
 			     SELECT num, g.memberId, m.userName, g.myPageId, g.content, g.created

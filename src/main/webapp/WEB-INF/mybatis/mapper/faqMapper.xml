@@ -3,18 +3,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="faq">
 
-<!-- <insert id="insertfaq" parameterType="care.dog.center.faq.FAQ">
-INSERT INTO faq(num, memberId, subject, content) VALUES(faq_seq.NEXTVAL, #{memberId}, #{subject}, #{content})
+<select id="seq" resultType="Integer">
+SELECT faq_seq.NEXTVAL FROM dual
+</select>
+
+<sql id="where-list">
+	<if test="searchKey == 'memberId'">
+	memberId=#{searchValue}
+	</if>
+	<if test="searchKey == 'subject'">
+	INSTR(subject, #{searchValue}) &gt; 0
+	</if>
+	<if test="searchKey == 'content'">
+	DBMS_LOB.INSTR(content, #{searchValue}) &gt; 0
+	</if>
+</sql>
+
+<insert id="insertfaq" parameterType="care.dog.center.faq.FAQ">
+INSERT INTO faq(num, memberId, subject, content, faqsort) VALUES(faq_seq.NEXTVAL, #{memberId}, #{subject}, #{content}, #{faqsort})
 </insert>
 
 <update id="updatefaq" parameterType="care.dog.center.faq.FAQ">
-UPDATE faq SET subject = #{subject}, content = #{content}
+UPDATE faq SET subject = #{subject}, content = #{content}, faqsort = #{faqsort} WHERE num = #{num}
 </update>
+
+<delete id="deletefaq" parameterType="Integer">
+DELETE FROM faq WHERE num = #{num}
+</delete>
 
 <select id="listfaq" parameterType="map" resultType="care.dog.center.faq.FAQ">
 SELECT * FROM (
 	SELECT ROWNUM rnum, tb.* FROM(
-		SELECT num, f.memberId, subject, content
+		SELECT num, f.memberId, subject, content, faqsort
 		FROM faq f
 		JOIN member1 m ON f.memberId = m.memberId
 		<where>
@@ -22,11 +42,41 @@ SELECT * FROM (
 				<include refid="where-list"/>
 			</if>
 		</where>
-		ORDER BY NUM DESC
+		ORDER BY num DESC
 		<![CDATA[	
 	) tb WHERE ROWNUM <= 10
 ) WHERE rnum >= 1
 ]]>
 </select>
- -->
+
+<select id="listfaqMember" parameterType ="map" resultType="care.dog.center.faq.FAQ">
+SELECT * FROM (
+	SELECT ROWNUM rnum, tb.* FROM(
+		SELECT num, f.memberId, subject, content, faqsort
+		FROM faq f
+		JOIN member1 m ON f.memberId = m.memberId
+        WHERE faqsort = 2
+		ORDER BY num DESC
+	<![CDATA[	
+	) tb WHERE ROWNUM <= 10
+) WHERE rnum >= 1
+]]>
+</select>
+
+<select id="dataCount" parameterType="map" resultType="Integer">
+SELECT NVL (count(*),0) FROM faq f
+JOIN member1 m ON f.memberId=m.memberId
+<where>
+	<if test="searchValue != null and searchValue != ''">
+		<include refid="where-list"/>
+	</if>
+</where>
+</select>
+
+<select id="readfaq" parameterType="Integer" resultType="care.dog.center.faq.FAQ">
+SELECT num, f.memberId, subject, content, faqsort
+FROM faq f JOIN member1 m ON f.memberId = m.memberId
+WHERE num = #{num}
+</select>
+
 </mapper>

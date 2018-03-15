@@ -9,15 +9,19 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import care.dog.common.MyUtilBootstrap;
 import care.dog.dog119.dogHealthVo.DogHealthVo;
+import care.dog.member.SessionInfo;
 
 @Controller("dog119.dog119Controller")
 public class Dog119Controller {
@@ -97,12 +101,13 @@ public class Dog119Controller {
 		while(it.hasNext()) {
 			DogHealthVo dhList = it.next();
 			listNum = dataCount - (start+n-1);
-			dhList.setBoardNum(listNum);
+			dhList.setListNum(listNum);
 			n++;
 		}
 		
 		String query = "";
 		String dhListUrl = cp+"/dog119/dhList";
+		String dhArticle = cp+"/dog119/dhArticle?page="+page;
 		
 		if(keyword.length() != 0) {
 			try {
@@ -114,11 +119,14 @@ public class Dog119Controller {
 		
 		if(query.length()!=0) {
 			dhListUrl = cp+"/dog119/dhList?"+query;
+			dhArticle = cp+"/dog119/article?page="+page+"&"+query;
 		}
 		
 		String paging = myUtilBootstrap.paging(page, totalPage, dhListUrl);
+		System.out.println(callList);
 		
 		model.addAttribute("callList", callList);
+		model.addAttribute("dhArticle",dhArticle);
 		model.addAttribute("page",page);
 		model.addAttribute("dataCount", dataCount);
 		model.addAttribute("totalPage", totalPage);
@@ -134,4 +142,45 @@ public class Dog119Controller {
 		return ".dog119.dogHealthCreate";
 	}
 	
+	@RequestMapping(value="/dog119/dhArticle")
+	public String healthArticle(
+			@RequestParam Map<String, Object> map, Model model) {
+		String query = "page="+map.get("page");
+		int boardNum = Integer.parseInt((String)map.get("boardNum"));
+		DogHealthVo dto = service.dhDetail(boardNum);
+		service.updateHitCount(boardNum);
+		System.out.println("controller================>"+dto);
+		model.addAttribute("dto", dto);
+		model.addAttribute("search", (String)map.get("search"));
+		model.addAttribute("keyword", (String)map.get("keyword"));
+		model.addAttribute("page", (String)map.get("page"));
+		
+		return ".dog119.dogHealthArticle";
+	}
+	
+	@RequestMapping(value="/dog119/dhLike", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> healthRecommand(
+			HttpSession session, @RequestParam int num
+			) {
+		Map<String, Object> map = new HashMap<>();
+		String state = "true";
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("num", num);
+		param.put("memberId", info.getMemberId());
+		
+		int result = service.insertDhLike(param);
+		int cnt =0;
+		if(result==0) {
+			state = "false";
+		} else {
+			state = "true";
+			cnt = service.dhLikeCnt(num);
+		}
+		map.put("state", state);
+		map.put("likeCnt", cnt);
+		return map;
+	}
 }

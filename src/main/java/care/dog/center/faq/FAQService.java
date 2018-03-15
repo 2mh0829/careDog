@@ -8,7 +8,8 @@ public interface FAQService {
 	public int updateFaq(FAQ dto, String pathname);
 	public int deleteFaq(int num, String pathname);
 	public List<FAQ> listFaq(Map<String, Object> map);
-	public int DataCount(Map<String, Object> map);
+	public List<FAQ> listFaqMember(Map<String, Object> map);
+	public int dataCount(Map<String, Object> map);
 	
 	public FAQ readFAQ(int num);
 	public FAQ preReadFAQ(Map<String, Object> map);

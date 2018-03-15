@@ -196,6 +196,10 @@ public class MemberController {
 		model.put("passed", passed);
 		return model;
 	}
+	@RequestMapping(value="member/secession", method=RequestMethod.GET)
+	public String secession() {
+		return "member/secession";
+	}
 	
 	
 }
