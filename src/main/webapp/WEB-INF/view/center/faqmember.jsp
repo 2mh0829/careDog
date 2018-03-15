@@ -100,29 +100,9 @@ ul, ol {list-style:none;}
 						<c:forEach var="dto" items="${list }">
 							<tr>
 								<td>${dto.num }</td>
-								<c:choose>
-								<c:when test="${dto.faqsort == 1 }">
-								<td>전체</td>
-								</c:when>
-								<c:when test="${dto.faqsort == 2 }">
+								<c:if test="${dto.faqsort==2 }">
 								<td>회원/멤버십</td>
-								</c:when>
-								<c:when test="${dto.faqsort == 3 }">
-								<td>주문/결제</td>
-								</c:when>
-								<c:when test="${dto.faqsort == 4 }">
-								<td>배송</td>
-								</c:when>
-								<c:when test="${dto.faqsort == 5 }">
-								<td>교환/반품/환불</td>
-								</c:when>
-								<c:when test="${dto.faqsort == 6 }">
-								<td>이벤트</td>
-								</c:when>
-								<c:otherwise>
-								<td>기타</td>
-								</c:otherwise>
-								</c:choose>
+								</c:if>
 								<td class="subject"><a href="javascript:faqBoard('${dto.num }','${pageNo }')">${dto.subject }</a></td>
 								<td>${dto.memberId }</td>
 							</tr>
