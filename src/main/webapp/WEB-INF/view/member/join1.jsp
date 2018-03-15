@@ -22,7 +22,7 @@ body {
 .join-container {
 	width: 800px;
 	margin: 0 auto;
-}
+}s
 
 #join-img-box img {
 	width: 100%;

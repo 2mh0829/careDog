@@ -160,16 +160,6 @@ public class MyPageServiceImpl implements MyPageService{
 		return dto;
 	}
 
-	@Override
-	public MyPageInfo readMyPageInfoProfile(int myPageId) {
-		MyPageInfo dto=null;
-		try {
-			dto=dao.selectOne("myPage.readMyPageInfoProfile", myPageId);
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-		return dto;
-	}
 
 	@Override
 	public int updateMyPageVisitorCount(int myPageId) {
@@ -186,13 +176,7 @@ public class MyPageServiceImpl implements MyPageService{
 	public int createMyPageTable(int myPageId) {
 		int result=0;
 		try {
-			dao.updateData("myPage.createBoardTable", myPageId);
-			dao.updateData("myPage.createBoardLikeTable",myPageId);
-			dao.updateData("myPage.createBoardFileTable", myPageId);
-			dao.updateData("myPage.createBoardReplyTable",myPageId);
-			dao.updateData("myPage.createBoardReplyLikeTable", myPageId);
 			dao.updateData("myPage.createGuestTable", myPageId);
-			dao.updateData("myPage.createPhotoTable", myPageId);
 			result=1;
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -204,14 +188,7 @@ public class MyPageServiceImpl implements MyPageService{
 	public int dropMyPageTable(int myPageId) {
 		int result=0;
 		try {
-			dao.updateData("myPage.dropBoardReplyLikeTable", myPageId);
-			dao.updateData("myPage.dropBoardReplyTable", myPageId);
-			dao.updateData("myPage.dropBoardFileTable", myPageId);
-			dao.updateData("myPage.dropBoardLikeTable", myPageId);
-			dao.updateData("myPage.dropBoardTable", myPageId);
-			dao.updateData("myPage.dropBoardCategoryTable", myPageId);
 			dao.updateData("myPage.dropGuestTable", myPageId);
-			dao.updateData("myPaget.dropPhotoTable", myPageId);
 			result=1;
 		} catch (Exception e) {
 			System.out.println(e.toString());
