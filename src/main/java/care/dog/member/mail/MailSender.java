@@ -146,6 +146,8 @@ public class MailSender {
 		p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");   
 		p.put("mail.smtp.socketFactory.fallback", "false");  
 		
+		System.out.println(dto.getSenderName());
+		
 		try {
 			Authenticator auth = new SMTPAuthenticator();
 			
@@ -165,6 +167,7 @@ public class MailSender {
 			
 			// 제목
 			msg.setSubject(dto.getSubject());
+			System.out.println(dto.getSubject());
 
 			// HTML 형식인 경우 \r\n을  <br>로 변환
 //			if(mailType.indexOf("text/html") != -1) {

@@ -1,8 +1,6 @@
 package care.dog.member.mail;
 
-import java.sql.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
@@ -11,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import care.dog.member.Member;
 import care.dog.member.MemberService;
 
 @Controller("mail.mailController")
@@ -22,26 +19,17 @@ public class MailController {
 	private MemberService service;
 	
 	@RequestMapping(value="/member/join3")
-	public String sendSubmit(Mail dto, Model model, @RequestParam Map<String, Object> map) throws Exception {
-		
-		Member vo = new Member();
-		
-		vo.setMemberId((String)map.get("memberId"));
-		vo.setUserPwd((String)map.get("userPwd"));
-		vo.setUserName((String)map.get("userName"));
-		vo.setEmail(map.get("email1") + "@" + map.get("email2"));
-		vo.setTel(map.get("tel1") + "-" + map.get("tel2") + "-" + map.get("tel3"));
-		vo.setBirth((String)map.get("birth"));
-		vo.setZipCode((String)map.get("zipCode"));
-		vo.setAddress1((String)map.get("address1"));
-		vo.setAddress2((String)map.get("address2"));
+	public String sendSubmit(Mail dto, Model model) throws Exception {
 		
 		ShaPasswordEncoder passwordEncoder=new ShaPasswordEncoder(256);
-		String hashed = passwordEncoder.encodePassword(vo.getUserPwd(), null);
-		vo.setUserPwd(hashed);
+		String hashed = passwordEncoder.encodePassword(dto.getUserPwd(), null);
+		dto.setUserPwd(hashed);
 		
-		dto.setReceiverEmail(vo.getEmail());
-		int userHashCode = vo.getMemberId().hashCode();
+		dto.setEmail(dto.getEmail1() + "@" + dto.getEmail2());
+		dto.setTel(dto.getTel1() + "-" + dto.getTel2() + "-" + dto.getTel3());
+		
+		dto.setReceiverEmail(dto.getEmail());
+		int userHashCode = dto.getMemberId().hashCode();
 		
 		String content = "";
 		content += "<div align='center' style='background: #eee; margin-top: 30px; padding: 20px; width: 800px;'>";
@@ -54,12 +42,11 @@ public class MailController {
 		
 		boolean b = mailSender.mailSend(dto);
 		
-		//String msg="<span style='color:blue;'>"+dto.getReceiverEmail()+"</span> 님에게<br>";
 		String msg = "";
 		if(b) {
 			msg += "인증메일이 성공적으로 발송되었습니다.";
 			try {
-				service.insertMember(vo);
+				service.insertMember(dto);
 			} catch (Exception e) {
 			}
 		} else {
@@ -67,7 +54,7 @@ public class MailController {
 		}
 		
 		model.addAttribute("message", msg);
-		model.addAttribute("memberId", vo.getMemberId());
+		model.addAttribute("memberId", dto.getMemberId());
 		
 		return ".member.join3";
 	}

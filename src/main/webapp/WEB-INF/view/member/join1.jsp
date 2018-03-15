@@ -22,7 +22,7 @@ body {
 .join-container {
 	width: 800px;
 	margin: 0 auto;
-}s
+}
 
 #join-img-box img {
 	width: 100%;
@@ -438,7 +438,7 @@ function joinNext() {
 	이메일: e4trans@e4net.net
 	개인정보관리책임자: 이명하
 	전화번호: 02-5678-1234
-	이메일: 2mh0829@naver.com
+	이메일: hhaahaa@naver.com
 	
 				</textarea>
 			</div>
