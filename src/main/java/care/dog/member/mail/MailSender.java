@@ -56,7 +56,7 @@ public class MailSender {
 
 	// 네이버를 이용하여 메일을 보내는 경우 보내는사람의 이메일이 아래 게정과 다르면 메일 전송이 안된다. 
 	// SMTP 권한
-	private class SMTPAuthenticator extends javax.mail.Authenticator {
+	private class SMTPAuthenticator extends javax.mail.Authenticator {//..
 		  @Override
 	      public PasswordAuthentication getPasswordAuthentication() {  
          // 지메일은 경고메시지 전송 - 전송받은 메일에서 보안 수준을 낮추는 링크를 클릭하고 수준을 낮추면 메일 전송가능
