@@ -15,7 +15,7 @@
 <div class="header-bottom">
 	<div class="menu2" align="center">
 		<a href="<%=cp%>/dog119">실종 신고</a>
-		<a href="">동물병원</a>
+		<a href="<%=cp%>/dog119/dogHospital">동물병원</a>
 		<a href="<%=cp%>/dog119/dogHealth">애견 건강정보</a>
 	</div>
 </div>

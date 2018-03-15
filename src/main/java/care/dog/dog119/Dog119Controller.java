@@ -148,8 +148,8 @@ public class Dog119Controller {
 		String query = "page="+map.get("page");
 		int boardNum = Integer.parseInt((String)map.get("boardNum"));
 		DogHealthVo dto = service.dhDetail(boardNum);
+		dto.setLikeCnt(service.dhLikeCnt(boardNum));
 		service.updateHitCount(boardNum);
-		System.out.println("controller================>"+dto);
 		model.addAttribute("dto", dto);
 		model.addAttribute("search", (String)map.get("search"));
 		model.addAttribute("keyword", (String)map.get("keyword"));
@@ -182,5 +182,10 @@ public class Dog119Controller {
 		map.put("state", state);
 		map.put("likeCnt", cnt);
 		return map;
+	}
+	
+	@RequestMapping(value="/dog119/dogHospital")
+	public String dogHospital() {
+		return ".dog119.dogHospital";
 	}
 }
