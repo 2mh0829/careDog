@@ -65,7 +65,7 @@ public class MailSender {
 	    	  
 	          String username =  "hhaahaa@naver.com"; // 네이버 사용자;
 	          // String username =  "지메일아이디"; // gmail 사용자;  
-	          String password = "caredoggclass!"; // 패스워드;  
+	          String password = "caredoggclass11"; // 패스워드;  
 	          return new PasswordAuthentication(username, password);  
 	       }  
 	}
