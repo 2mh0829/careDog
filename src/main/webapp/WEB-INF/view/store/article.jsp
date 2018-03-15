@@ -309,6 +309,7 @@ $('#myTab a').click(function (e) {
 		<!-- 왼쪽 부분 -->
 		<div class="left_area">
 			<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
+			<%-- <img src="<%=cp%>/uploads/store/${dto.imageFilename}"> --%>
 		</div>
 		
 		<!-- 오른쪽 부분-->
@@ -317,20 +318,20 @@ $('#myTab a').click(function (e) {
 			<!-- 상품정보 테이블 -->
 			<div class="product_info">
 			
-				<p class="product_name">[그리니즈] 덴탈껌 30개입</p>
+				<p class="product_name">${dto.productName }</p>
 				<br>
 			
 				<ul class="info_list">
 					<li>
 						<span class="txt_title">판매가</span>
 						<span class="txt_content cur_price">
-							<span class="txt_num">42,000</span>원
+							<span class="txt_num">${dto.sellingPrice }</span>원
 						</span>
 					</li>
 					<li>
 						<span class="txt_title">마일리지 적립금</span>
 						<span class="txt_content mileage">
-							<span class="txt_num">200</span>원
+							<span class="txt_num">${dto.mileage }</span>원
 						</span>
 					</li>
 					<li>
@@ -349,10 +350,9 @@ $('#myTab a').click(function (e) {
 			 
 				 <select class="form-control" id="sel1">
 	        		<option selected="selected">옵션을 선택해주세요.</option>
-	        		<option>1</option>
-	        		<option>2</option>
-	        		<option>3</option>
-	        		<option>4</option>
+	        		<c:forEach var="optionDto" items="${list_option}">
+	        			<option>${optionDto.optionContent }</option>
+	        		</c:forEach>
 	      		</select>
 			 
 			</div>

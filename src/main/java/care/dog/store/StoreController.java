@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import care.dog.common.MyUtil;
@@ -107,8 +108,45 @@ public class StoreController {
 		return ".store.list";
 	}
 	
+	//댓글 리스트 출력
+	//model을 던져야되나,,,?
+	public String listProductReply() {
+		return ".store.article";
+	}
+	
 	@RequestMapping(value="/store/article")
-	public String productDetail() {
+	public String productDetail(
+			@RequestParam(value="searchKey", defaultValue="productName") String searchKey,
+			@RequestParam(value="searchValue", defaultValue="") String searchValue,
+			@RequestParam(value="paging", defaultValue="1") int page,
+			@RequestParam(value="productId") int productId,
+			Model model
+			) throws Exception{
+		
+		List<String> list_option = null;
+		
+		String query="page="+page;
+		
+		if(searchValue.length()!=0) {
+			query+="&searchKey="+searchKey+"&searchValue="+searchValue;
+		}
+		
+		searchValue = URLDecoder.decode(searchValue, "utf-8");
+		
+		//읽을 상품의 정보 가져오기
+		Product dto = service.readProduct(productId);
+		System.out.println("dto : " + dto);
+		if (dto == null)
+			return "redirect:/store/list?"+query;
+		
+		//상품의 옵션내용을 productDetail 테이블에서 가져오기
+		list_option = service.readOption(productId);
+
+		model.addAttribute("dto", dto);
+		model.addAttribute("list_option", list_option);
+		model.addAttribute("page", page);
+		model.addAttribute("query", query);
+		
 		return ".store.article";
 	}
 	
