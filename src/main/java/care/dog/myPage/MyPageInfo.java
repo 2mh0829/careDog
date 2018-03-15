@@ -181,4 +181,14 @@ public class MyPageInfo {
 		this.profilePhoto = profilePhoto;
 	}
 
+	@Override
+	public String toString() {
+		return "MyPageInfo [myPageId=" + myPageId + ", visitorCount=" + visitorCount + ", closed=" + closed
+				+ ", memberId=" + memberId + ", userName=" + userName + ", title=" + title + ", introduce=" + introduce
+				+ ", created=" + created + ", groupNum=" + groupNum + ", themeNum=" + themeNum + ", gender=" + gender
+				+ ", city=" + city + ", hobby=" + hobby + ", groupSubject=" + groupSubject + ", subject=" + subject
+				+ ", upload=" + upload + ", profilePhoto=" + profilePhoto + ", isUserName=" + isUserName + ", isCity="
+				+ isCity + ", isGender=" + isGender + ", isHobby=" + isHobby + "]";
+	}
+
 }

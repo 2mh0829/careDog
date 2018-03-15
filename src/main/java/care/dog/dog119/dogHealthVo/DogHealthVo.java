@@ -11,7 +11,28 @@ public class DogHealthVo {
 	private String dhReplyContent;
 	private String dhReplyCreated;
 	private String memberId;
+	private String username;
+	private int likeCnt;
+	private int listNum;
 	
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
+	public int getLikeCnt() {
+		return likeCnt;
+	}
+	public void setLikeCnt(int likeDh) {
+		this.likeCnt = likeDh;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public int getBoardNum() {
 		return boardNum;
 	}

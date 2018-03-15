@@ -7,11 +7,16 @@
 	String cp = request.getContextPath();
 %>
 <style>
-
-.blog-body-left{
-width:0%;
-height:0%;
+.blog-body-left {
+	width: 0%;
+	height: 0%;
 }
+
+.myPage-layout {
+	padding: 0 0 0 0;
+	width: 100%;
+}
+
 .messengerLeft {
 	width: 30%;
 	height: 100%;
@@ -20,12 +25,6 @@ height:0%;
 	border-right-style: solid;
 	border-right-color: #D5D5D5;
 	float: left;
-}
-
-.messengerBody {
-
-	height:730px;
-	min-width: 700px;
 }
 
 .messengerRight {
@@ -89,6 +88,10 @@ height:0%;
 	background-color: blue;
 	border-radius: 20px;
 }
+.messageInput{
+	height:20px;
+	border-top: 1px,solid,#D5D5D5;
+}
 </style>
 <script>
 	$(document).ready(function() {
@@ -101,8 +104,20 @@ height:0%;
 			var temp = "ㅤ" + $(".messageTextRight").eq(i).text() + "ㅤ";
 			$(".messageTextRight").eq(i).text(temp);
 		}
+		var a = getDocHeight()
+		$(".myPage-layout").css("height", a - 172);
+		$(".messengerBody").css("height", a - 242);
+
 	})
+	function getDocHeight() {
+		var doc = document;
+		return Math.max(doc.body.scrollHeight,
+				doc.documentElement.scrollHeight, doc.body.offsetHeight,
+				doc.documentElement.offsetHeight, doc.body.clientHeight,
+				doc.documentElement.clientHeight);
+	}
 </script>
+
 <div class="messengerHeader">
 	<div class="messengerHeaderLeft">
 		<div
@@ -130,17 +145,23 @@ height:0%;
 		</div>
 	</div>
 	<div class="messengerRight">
-		<div class="messageListBox">
-			<div class="messageTextRight" style="float: right">aaa</div>
-		</div>
-		<div class="messageListBox">
-			<div class="messageTextLeft" style="float: left">
-				<img src="<%=cp%>/resource/img/myPage/jsh.jpg">
-				<div>bbb</div>
+		<div class="messageList">
+			<div class="messageListBox">
+				<div class="messageTextRight" style="float: right">aaa</div>
+			</div>
+			<div class="messageListBox">
+				<div class="messageTextLeft" style="float: left">
+					<img src="<%=cp%>/resource/img/myPage/jsh.jpg">
+					<div>bbb</div>
+				</div>
+			</div>
+			<div class="messageListBox">
+				<div class="messageTextRight" style="float: right">ccc</div>
 			</div>
 		</div>
-		<div class="messageListBox">
-			<div class="messageTextRight" style="float: right">ccc</div>
+		
+		<div class="messageInput">
+		sdfewf
 		</div>
 	</div>
 </div>

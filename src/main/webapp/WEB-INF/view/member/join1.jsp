@@ -22,7 +22,7 @@ body {
 .join-container {
 	width: 800px;
 	margin: 0 auto;
-}
+}s
 
 #join-img-box img {
 	width: 100%;
@@ -477,7 +477,7 @@ function joinNext() {
 	</div>
 	
 	<div align="center">
-		<button class="btn okBtn" onclick="joinNext();">확인</button>
+		<button class="btn okBtn" onclick="joinNext();">다음</button>
 		<button class="btn cancleBtn" onclick="location.href='<%=cp %>/member/login'">취소</button>
 	</div>
 

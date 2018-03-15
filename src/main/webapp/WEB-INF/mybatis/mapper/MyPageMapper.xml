@@ -29,7 +29,8 @@
 	</update>
 		<!-- 개인 블로그의 메인 화면에 출력할 정보 -->
 	<select id="readMyPageInfoHome" parameterType="Integer" resultType="care.dog.myPage.MyPageInfo">
-	    SELECT b.myPageId, b.memberId,title, introduce, visitorCount, created, profilePhoto
+	    SELECT b.myPageId, b.memberId,title, introduce, visitorCount, created, profilePhoto,userName, isUserName, city
+	              ,isCity, gender, isGender, hobby, isHobby
 	           FROM myPageInfo b
 	           join myPageProfile p on b.myPageId=p.myPageId
 	           join member2 m on b.memberId=m.memberId
@@ -38,15 +39,7 @@
 		<update id="updateMyPageVisitorCount" parameterType="Integer" >
 	    UPDATE myPageInfo SET visitorCount=visitorCount+1 WHERE myPageId=#{myPageId}
 	</update>
-	<!-- 개인 블로그의 프로필에 출력할 정보 -->
- 	<select id="readMyPageInfoProfile" parameterType="Integer" resultType="care.dog.myPage.MyPageInfo">
-	    SELECT b.myPageId, memberId, introduce  
-	              ,userName, isUserName, photoFilename, city
-	              ,isCity, gender, isGender, hobby, isHobby
-	           FROM myPageInfo b
-	           JOIN myPageProfile p ON b.myPageId = p.myPageId
-	           WHERE b.myPageId=#{myPageId}
-	</select> 
+
 	
 		<!-- 테이블 생성 및 삭제  -->
 

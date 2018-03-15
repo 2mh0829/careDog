@@ -52,6 +52,10 @@ body {
 
 <script>
 
+function memberIdCheck() {
+	
+}
+
 function changeEmail() {
     var f = document.memberForm;
 	    
@@ -72,14 +76,106 @@ function joinNext() {
 	var f = document.memberForm;
 	var str;
 	
-	str = f.email2.value;
+	str = f.memberId.value;
+	str = str.trim();
+	if(!str) {
+		alert("아이디를 입력하세요. ");
+		f.memberId.focus();
+		return;
+	}
+	if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
+		alert("아이디는 5~10자이며 첫글자는 영문자이어야 합니다.");
+		f.memberId.focus();
+		return;
+	}
+	f.memberId.value = str;
+
+	str = f.userPwd.value;
+	str = str.trim();
+	if(!str) {
+		alert("패스워드를 입력하세요. ");
+		f.userPwd.focus();
+		return;
+	}
+	if(!/^(?=.*[a-z])(?=.*[!@#$%^*+=-]|.*[0-9]).{5,10}$/i.test(str)) { 
+		alert("패스워드는 5~10자이며 하나 이상의 숫자나 특수문자가 포함되어야 합니다.");
+		f.userPwd.focus();
+		return;
+	}
+	f.userPwd.value = str;
+
+	if(str!= f.userPwdCheck.value) {
+        alert("패스워드가 일치하지 않습니다. ");
+        f.userPwdCheck.focus();
+        return;
+	}
+	
+    str = f.userName.value;
+	str = str.trim();
+    if(!str) {
+        alert("이름을 입력하세요. ");
+        f.userName.focus();
+        return;
+    }
+    f.userName.value = str;
+
+/*     str = f.birth.value;
+	str = str.trim();
+    if(!str || !isValidDateFormat(str)) {
+        alert("생년월일를 입력하세요[YYYY-MM-DD]. ");
+        f.birth.focus();
+        return;
+    } */
+    
+    str = f.tel1.value;
+	str = str.trim();
+    if(!str) {
+        alert("전화번호를 입력하세요. ");
+        f.tel1.focus();
+        return;
+    }
+
+    str = f.tel2.value;
+	str = str.trim();
+    if(!str) {
+        alert("전화번호를 입력하세요. ");
+        f.tel2.focus();
+        return;
+    }
+    if(!/^(\d+)$/.test(str)) {
+        alert("숫자만 가능합니다. ");
+        f.tel2.focus();
+        return;
+    }
+
+    str = f.tel3.value;
+	str = str.trim();
+    if(!str) {
+        alert("전화번호를 입력하세요. ");
+        f.tel3.focus();
+        return;
+    }
+    if(!/^(\d+)$/.test(str)) {
+        alert("숫자만 가능합니다. ");
+        f.tel3.focus();
+        return;
+    }
+    
+    str = f.email1.value;
+	str = str.trim();
+    if(!str) {
+        alert("이메일을 입력하세요. ");
+        f.email1.focus();
+        return;
+    }
+
+    str = f.email2.value;
 	str = str.trim();
     if(!str) {
         alert("이메일을 입력하세요. ");
         f.email2.focus();
         return;
     }
-    
     
 	f.action = "<%=cp%>/member/join3";
 	f.submit();
@@ -107,8 +203,8 @@ function joinNext() {
 				      </td>
 				      <td style="padding: 0 0 15px 15px;">
 				        <p style="margin-top: 1px; margin-bottom: 5px;">
-				            <input type="text" name="userId" id="userId" value="${dto.userId}"
-	                         onchange="userIdCheck();" style="width: 95%;"
+				            <input type="text" name="memberId" id="memberId" value="${dto.memberId}"
+	                         onchange="memberIdCheck();" style="width: 95%;"
 	                         ${mode=="update" ? "readonly='readonly' ":""}
 	                         maxlength="15" class="boxTF" placeholder="아이디">
 				        </p>
@@ -219,7 +315,7 @@ function joinNext() {
 				      </td>
 				      <td style="padding: 0 0 15px 15px;">
 				        <p style="margin-top: 1px; margin-bottom: 5px;">
-				            <input type="text" name="zip" value="${dto.zip}"
+				            <input type="text" name="zipCode" value="${dto.zip}"
 				                       class="boxTF" readonly="readonly">
 				            <button type="button" class="btn" >우편번호</button>          
 				        </p>
@@ -232,11 +328,11 @@ function joinNext() {
 				      </td>
 				      <td style="padding: 0 0 15px 15px;">
 				        <p style="margin-top: 1px; margin-bottom: 5px;">
-				            <input type="text" name="addr1" value="${dto.addr1}" maxlength="50" 
+				            <input type="text" name="address1" value="${dto.addr1}" maxlength="50" 
 				                       class="boxTF" style="width: 95%;" placeholder="기본 주소" readonly="readonly">
 				        </p>
 				        <p style="margin-bottom: 5px;">
-				            <input type="text" name="addr2" value="${dto.addr2}" maxlength="50" 
+				            <input type="text" name="address2" value="${dto.addr2}" maxlength="50"
 				                       class="boxTF" style="width: 95%;" placeholder="나머지 주소">
 				        </p>
 						</td>

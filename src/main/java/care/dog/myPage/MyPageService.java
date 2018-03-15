@@ -17,7 +17,6 @@ public interface MyPageService {
 
 	public MyPageInfo readMyPageInfo(String memberId);
 	public MyPageInfo readMyPageInfoHome(int myPageId);
-	public MyPageInfo readMyPageInfoProfile(int myPageId);
 	
 	public int updateMyPageVisitorCount(int myPageId);
 
