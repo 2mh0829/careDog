@@ -41,8 +41,8 @@ SELECT * FROM (
 	    </where>
 	    ORDER BY num DESC
 	    <![CDATA[
-	) tb WHERE ROWNUM <= 10
-) WHERE rnum >= 1
+	) tb WHERE ROWNUM <= #{end}
+) WHERE rnum >= #{start}
 ]]>
 </select>
 
