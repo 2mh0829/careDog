@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class Mail {
+import care.dog.member.vo.MemberPVO;
+
+public class Mail extends MemberPVO {
 	private String receiverEmail;  // 받는 사람  이메일
 	private String senderEmail; // 보내는 사람  이메일
 	private String senderName; // 보내는 사람  이름
