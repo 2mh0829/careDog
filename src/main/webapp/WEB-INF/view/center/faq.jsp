@@ -101,7 +101,7 @@ ul, ol {list-style:none;}
 							<tr>
 								<td>${dto.num }</td>
 								<c:choose>
-								<c:when test="${dto.faqsort == 1 }">
+								<c:when test="${dto.faqsort == 0 }">
 								<td>전체</td>
 								</c:when>
 								<c:when test="${dto.faqsort == 2 }">
@@ -123,7 +123,7 @@ ul, ol {list-style:none;}
 								<td>기타</td>
 								</c:otherwise>
 								</c:choose>
-								<td class="subject"><a href="javascript:faqBoard('${dto.num }','${pageNo }')">${dto.subject }</a></td>
+								<td class="subject"><a href="javascript:faqBoard('${dto.num }','${pageNo }','${dto.faqsort }')">${dto.subject }</a></td>
 								<td>${dto.memberId }</td>
 							</tr>
 						</c:forEach>	

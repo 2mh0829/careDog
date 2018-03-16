@@ -95,11 +95,9 @@ $(function(){
 function listPage(page) {
 	var $tab = $("ul.comm1sTabs .active");
 	var tab = $tab.attr("data-tab");
-	var url="<%=cp%>/center/tab"+tab;	//careDog/center/taball
+	var url="<%=cp%>/center/tab"+tab;
 	
 	var query="pageNo="+page;
-	var search=$('form[name=faqsearchForm]').serialize();
-	query=query+"&"+search;
 	
 	ajaxHTML(url, "get", query);
 }
@@ -115,6 +113,7 @@ function ajaxHTML(url, type, query) {
 				listPage(1);
 				return;
 			}
+			console.log(data);
 			$("#tab-content").html(data);
 		}
 		,beforeSend : function(jqXHR) {
@@ -132,15 +131,6 @@ function ajaxHTML(url, type, query) {
 	});
 }
 
-// 검색
-function searchList() {
-	var f=document.faqsearchForm;
-	f.searchKey.value=$("#searchKey").val();
-	f.searchValue.value=$.trim($("#searchValue").val());
-
-	listPage(1);
-}
-
 // 새로고침
 function reloadBoard() {
 	var f=document.faqsearchForm;
@@ -151,20 +141,14 @@ function reloadBoard() {
 }
 
 // 글쓰기폼
-function insertForm() {
-	var $tab = $("ul.comm1sTabs .active");
-	var tab = $tab.attr("data-tab");
-	var url="<%=cp%>/center/"+tab+"/created";
-
-	var query="tmp="+new Date().getTime();
+function insertForm(num) {
+	var url="<%=cp%>/center/faq/create";
+	var query = "num="+num;
 	ajaxHTML(url, "get", query);
 }
 
 // 글등록, 수정등록, 답변등록
 function sendOk(mode, page) {
-	var $tab = $("ul.comm1sTabs .active");
-	var tab = $tab.attr("data-tab");
-	
     var f = document.boardForm;
 
 	var str = f.subject.value;
@@ -181,7 +165,7 @@ function sendOk(mode, page) {
         return;
     }
 	
-    var url="<%=cp%>/center/"+tab+"/"+mode;
+    var url="<%=cp%>/center/faq/"+mode;
     var query = new FormData(f); // IE는 10이상에서만 가능
     
 	$.ajax({
@@ -229,14 +213,9 @@ function sendCancel(page) {
 
 // 게시글 보기
 function faqBoard(num, page, faqsort) {
-/* 	var $tab = $("ul.comm1sTabs .active");
-	var tab = $tab.attr("data-tab"); */
 	var url="<%=cp%>/center/faq/content";
-	
 	var query = "num="+num;
-	
-	var search=$('form[name=faqsearchForm]').serialize();
-	query=query+"&pageNo="+page+"&"+search;
+	query=query+"&pageNo="+page+"&faqsort="+faqsort;
 	ajaxHTML(url, "get", query);
 }
 
@@ -256,7 +235,7 @@ function updateForm(num, page) {
 	ajaxHTML(url, "get", query);
 }
 
-// 글 삭제
+ // 글 삭제
 function deleteBoard(num, page) {
 	var $tab = $("ul.comm1sTabs .active");
 	var tab = $tab.attr("data-tab");
@@ -292,9 +271,11 @@ function deleteBoard(num, page) {
 	                console.log(jqXHR.responseText);
 	            }
 	        }
-	});
+	}); 
 }
+
 </script>
+
 <div class="body-container" style="width: 1020px;">
 
 <div class="sub_title_area customer">
@@ -312,8 +293,15 @@ function deleteBoard(num, page) {
 	<div id="tab-content" style="clear:both; padding: 20px 10px 0px;"></div>
 </div>
 
-<form name="faqsearchForm" action="" method="post">
-    <input type="hidden" name="searchKey" value="subject">
-    <input type="hidden" name="searchValue" value="">
-    <input type="hidden" name="faqsort">
-</form>
+<div style="width: 100%; margin: 10px auto; border-spacing: 0px;">
+   <ul >
+      <li >
+          <button type="button" class="btn" onclick="reloadBoard();">새로고침</button>
+      </li>
+      <li >
+      <c:if test="${sessionScope.member.memberId=='admin' }">
+          <button type="button" class="btn" onclick="insertForm();">글올리기</button>
+      </c:if>
+      </li>
+   </ul>
+</div>
