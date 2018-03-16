@@ -80,5 +80,11 @@ public class Member {
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
+	@Override
+	public String toString() {
+		return "Member [memberId=" + memberId + ", userPwd=" + userPwd + ", userName=" + userName + ", authority="
+				+ authority + ", isMember=" + isMember + ", tel=" + tel + ", email=" + email + ", zipCode=" + zipCode
+				+ ", address1=" + address1 + ", address2=" + address2 + ", birth=" + birth + "]";
+	}
 	
 }

@@ -102,6 +102,9 @@ height : 500px; */
 	color : #D5D5D5;
 	font-size: 17px;
 }
+.friendList{
+cursor: pointer
+}
 </style>
 <script>
 	$(document).ready(function() {
@@ -131,25 +134,37 @@ height : 500px; */
 	}
 	function findFriends(){
 		var url="<%=cp%>/messenger/findFriends";
-		var count=0;
+		var str;
  		$.ajax({
 			type:"POST",
 			url:url,
 			success:function(data){
+				$(".modal-body").html("");
 				for(i=0;i<data.friendList.length;i++){
-					count++;
-					
+					$(".modal-body").append("<div class='friendList' onClick='getFriend(\""+data.friendList[i].userName+"\");' data-dismiss='modal'>"+data.friendList[i].memberId+"("+data.friendList[i].userName+")</div>");
+					$("#myModal").modal();
 				}
-				alert(count);
+			
 			},
 			error:function(e){
 				$(".modal-body").text("이이이이이히");
 			    $("#myModal").modal();
 				alert("연결 오류가 발생했습니다.");
-			}
+			}//"<img src='<%=cp%>/resource/img/myPage/jsh.jpg'"
 		}) 
 	}
-
+	function getFriend(userName){
+	$(".messengerLeft").append('<div class="messageMemberList">'
+			+'<img src="<%=cp%>/resource/img/myPage/jsh.jpg"'
+			+'	style="margin-right: 10px; width: 50px; border-radius: 50px; float: left">'
+			+'	<div style="margin-top: 7px; width: 30%; float: left">'
+			+'	<div style="font-size: 15px">'+userName+'</div>'
+			+'	<div style="font-size: 12px; color: #D5D5D5">메세지를 입력해 주세요</div>'
+			+'	</div>'
+			+'	<div'
+			+'	style="text-align: right; color: #D5D5D5; margin-top: 10px; float: right"></div>'
+		+'</div>');
+	}
 </script>
 
 <div class="messengerHeader">
@@ -204,14 +219,13 @@ height : 500px; */
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">회원목록</h4>
       </div>
       <div class="modal-body">
         
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
       </div>
     </div>
   </div>

@@ -9,51 +9,84 @@
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <script>
-	$(function() {
-		$("#left-datepicker").datepicker(
-				{
-					dateFormat : "yy-mm-dd",
-					showAnim : "slideDown",
-					showMonthAfterYear : true,
-					yearSuffix : '년',
-					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
-							'8월', '9월', '10월', '11월', '12월' ],
-					dayNamesMin : [ '월', '화', '수', '목', '금', '토', '일' ],
-					minDate : 0
-				});
-	});
+$(function() {
+	$("#left-datepicker").datepicker(
+			{
+				dateFormat : "yy-mm-dd",
+				showAnim : "slideDown",
+				showMonthAfterYear : true,
+				yearSuffix : '년',
+				monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
+						'8월', '9월', '10월', '11월', '12월' ],
+				dayNamesMin : [ '월', '화', '수', '목', '금', '토', '일' ],
+				minDate : 0
+			});
+});
 
-	$(function() {
-		$("#right-datepicker").datepicker(
-				{
-					dateFormat : "yy-mm-dd",
-					showAnim : "slideDown",
-					showMonthAfterYear : true,
-					yearSuffix : '년',
-					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
-							'8월', '9월', '10월', '11월', '12월' ],
-					dayNamesMin : [ '월', '화', '수', '목', '금', '토', '일' ],
-					minDate : 0
-				});
-	});
+$(function() {
+	$("#right-datepicker").datepicker(
+			{
+				dateFormat : "yy-mm-dd",
+				showAnim : "slideDown",
+				showMonthAfterYear : true,
+				yearSuffix : '년',
+				monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
+						'8월', '9월', '10월', '11월', '12월' ],
+				dayNamesMin : [ '월', '화', '수', '목', '금', '토', '일' ],
+				minDate : 0
+			});
+});
 
-	$(function() {
-		$("#datepicker").datepicker(
-				{
-					dateFormat : "yy-mm-dd",
-					showAnim : "slideDown",
-					showMonthAfterYear : true,
-					yearSuffix : '년',
-					monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
-							'8월', '9월', '10월', '11월', '12월' ],
-					dayNamesMin : [ '월', '화', '수', '목', '금', '토', '일' ],
-					minDate : 0,
-					autoSize : true
-				});
+$(function() {
+	$("#datepicker").datepicker(
+			{
+				dateFormat : "yy-mm-dd",
+				showAnim : "slideDown",
+				showMonthAfterYear : true,
+				yearSuffix : '년',
+				monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월',
+						'8월', '9월', '10월', '11월', '12월' ],
+				dayNamesMin : [ '월', '화', '수', '목', '금', '토', '일' ],
+				minDate : 0,
+				autoSize : true
+			});
+});
+
+// just jsp --
+
+$(function(){
+	$("body").on('click','#sizeDD li>a',function(){
+		$('#sizeText').text($(this).text());
 	});
+});
+
+$(function(){
+	$("body").on('click','#ageDD li>a',function(){
+		$('#ageText').text($(this).text());
+	});
+});
+
+//--
+
+$(function(){
+	$("body").on('change','.inputMoney',function(){
+		var sum = parseInt($("#inputMoney-date").val()) + parseInt($("#inputMoney-dog").val());
+		tot = sum + sum * 1/10;
+		$('.totPrice').html(tot);
+		
+		// tot를 .submit으로 보낸다
+	})
+});
+
+</script>
+<script type="text/javascript">
+	
 </script>
 
 <style>
+
+.ui-datepicker-calendar > tbody td.ui-datepicker-week-end:last-child a { color: red; }
+
 .main-middle-inner .ui-datepicker {
 	width: 335px;
 	height: 190px;
@@ -72,7 +105,7 @@ li {
 .main-top {
 	padding-bottom: 6px;
 	/* border: 1px solid blue; */
-	height: 495px;
+	/* height: 495px; */
 }
 
 .main-top-slider {
@@ -110,7 +143,7 @@ li {
 .main-top-detail {
 	width: 335px;
 	/* float: right; */
-	/* height: 300px; */
+	height: 345px;
 	/* z-index: 97; */
 	border: 1px solid #ffb861;
 	display: inline-block;
@@ -126,6 +159,7 @@ li {
 .titleWord {
 	text-align: center;
 	margin-bottom: 10px;
+	margin-top: 20px;
 }
 
 .reser-date input {
@@ -134,7 +168,7 @@ li {
 }
 
 .reser-date dd {
-	margin-left: 30px;
+	margin-left: 45px;
 }
 
 .price {
@@ -174,6 +208,7 @@ li {
 	line-height: 200%;
 	font-weight: normal;
 	height: 40px;
+	margin-left: 10px;
 }
 
 .price-detail dd {
@@ -206,7 +241,8 @@ li {
 	padding: 15px 133px;
 	text-decoration: none;
 	text-shadow: 0px 1px 0px #2f6627;
-	float: left;
+	/* float: left; */
+	margin-left: 15px;
 }
 
 .btnRequire:hover {
@@ -452,7 +488,7 @@ li {
 	height: 44px;
 	margin-left: 20px;
 	font-size: 25px;
-	/* border: 1px solid #ffb861; */
+	border: 3px solid orange;
 }
 
 .inputBtn {
@@ -490,7 +526,7 @@ li {
 }
 
 .main-photos {
-	border: 3px dotted black;
+	border: 3px solid #ffb861;
 	height: 410px;
 	width: 980px;
 }
@@ -524,7 +560,7 @@ li {
 }
 
 .btnSer {
-	width: 120px;
+	width: 148px;
     height: 34px;
     border-radius: 4px;
     border: 1px solid #ccc;
@@ -540,35 +576,45 @@ li {
 	margin-left: 85px;
 }
 
+.main-text {
+	resize: none;
+    margin: 25px;
+    border: none;
+    font-size: 20px;
+}
+
 </style>
 
 <div class="body-container">
+<form name="inputForm" method="post">
 	<div class="sitter-title">
 		<h1>글 제목</h1>
-		<input type="text" class="textTitle">
+		<input type="text" class="textTitle" name="title">
 	</div>
 	<div class="main-top">
 		<div class="main-top-slider">
-			<div class="main-photos"></div>
-			<ul class="photo-array">
+			<div class="main-photos">
+				<textarea class="main-text" cols="100" rows="13"></textarea>
+			</div>
+			<!-- <ul class="photo-array">
 				<li class="array-small"></li>
 				<li class="array-small"></li>
 				<li class="array-small"></li>
-			</ul>
+			</ul> -->
 		</div>
 	</div>
 	<div class="inner">
 		<div class="main-middle-inner">
 				<div class="main-top-detail">
-			<form class="main-detail">
+			
 				<div class="reser-date">
 					<dl>
 						<dt class="titleWord">가능한 날짜를 선택해주세요!</dt>
 						<dd>
 							<i class="glyphicon glyphicon-calendar"></i> <input type="text"
-								id="left-datepicker" placeholder="시작 날짜"> <span>></span>
+								id="left-datepicker" placeholder="시작 날짜" name="startDate"> <span>></span>
 							<i class="glyphicon glyphicon-calendar"></i> <input type="text"
-								id="right-datepicker" placeholder="마침 날짜">
+								id="right-datepicker" placeholder="마침 날짜" name="endDate">
 						</dd>
 					</dl>
 					<dl class="price-detail">
@@ -577,14 +623,14 @@ li {
 								<button type="button" class="inputBtn" data-toggle="dropdown">
 									<span id="">24시간 돌봄</span> <span class="caret"></span>
 								</button>
-								<ul class="dropdown-menu">
-									<li><a href="#">24시간 돌봄</a></li>
-									<li><a href="#">데이케어</a></li>
+								<ul class="dropdown-menu" id="reserDiv">
+									<li value="1"><a href="#">24시간 돌봄</a></li>
+									<li value="2"><a href="#">데이케어</a></li>
 								</ul>
 							</div>
 						</dt>
 						<dd>
-							<input type="text" class="inputMoney" value="입력하세요">원
+							<input type="text" id="inputMoney-date" class="inputMoney" value="입력하세요" onclick="this.value=''">원
 							<!-- <span class="oneDayPrice">30,000원</span> -->
 						</dd>
 						<dt>
@@ -608,7 +654,7 @@ li {
 							</div>
 						</dt>
 						<dd>
-							<input type="text" class="inputMoney" value="입력하세요">원
+							<input type="text" id="inputMoney-dog" class="inputMoney" value="입력하세요" onclick="this.value=''">원
 						</dd>
 						<dt>
 							<span class="input-title">부가세</span>
@@ -620,15 +666,15 @@ li {
 							<span class="input-title-tot">합계</span>
 						</dt>
 						<dd class="price-tot">
-							<span class="">30,000원</span>
+							<span class="totPrice"></span>원
 						</dd>
 					</dl>
 				</div>
-				<button type="button" class="btnRequire">등록</button>
+				<button type="submit" class="btnRequire">등록</button>
 				<!-- <a href="#" class="reserQA"> <i
 					class="glyphicon glyphicon-comment"></i> 예약문의하기
 				</a> -->
-			</form>
+			
 		</div>
 			<div class="row">
 				<img src="<%=cp%>/resource/img/service/dogIcon.png">
@@ -726,21 +772,21 @@ li {
 							class="area-name">돌봄 공간</label>
 					</dt>
 					<dd class="colored pull-right">
-						<input type="text" class="environ-text" value="입력하세요">
+						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
 					</dd>
 					<dt class="pull-left">
 						<img src="<%=cp%>/resource/img/service/subway.JPG"> <label
 							class="area-name">근처 지하철역</label>
 					</dt>
 					<dd class="pull-right">
-						<input type="text" class="environ-text" value="입력하세요">
+						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
 					</dd>
 					<dt class="colored pull-left">
 						<img src="<%=cp%>/resource/img/service/yard.JPG"> <label
 							class="area-name">마당 유무</label>
 					</dt>
 					<dd class="colored pull-right">
-						<input type="text" class="environ-text" value="입력하세요">
+						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
 					</dd>
 				</dl>
 			</div>
@@ -751,21 +797,21 @@ li {
 							class="area-name">14세 미만 아동</label>
 					</dt>
 					<dd class="colored pull-right">
-						<input type="text" class="environ-text" value="입력하세요">
+						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
 					</dd>
 					<dt class="pull-left">
 						<img src="<%=cp%>/resource/img/service/family.JPG"> <label
 							class="area-name">가족 동거 유무</label>
 					</dt>
 					<dd class="pull-right">
-						<input type="text" class="environ-text" value="입력하세요">
+						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
 					</dd>
 					<dt class="colored pull-left">
 						<img src="<%=cp%>/resource/img/service/cat.JPG"> <label
 							class="area-name">다른 동물 유무</label>
 					</dt>
 					<dd class="colored pull-right">
-						<input type="text" class="environ-text" value="입력하세요">
+						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
 					</dd>
 				</dl>
 			</div>
@@ -785,6 +831,7 @@ li {
 			<h1>후기</h1>
 		</div> -->
 	</div>
+	</form>
 </div>
 
 
