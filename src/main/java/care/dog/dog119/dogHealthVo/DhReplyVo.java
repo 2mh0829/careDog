@@ -3,7 +3,7 @@ package care.dog.dog119.dogHealthVo;
 public class DhReplyVo {
 	private int boardNum;
 	private String memberId;
-	private String content;
+	private String dhReplyContent;
 	private String created;
 	
 	public String getCreated() {
@@ -24,10 +24,10 @@ public class DhReplyVo {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getContent() {
-		return content;
+	public String getDhReplyContent() {
+		return dhReplyContent;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setDhReplyContent(String dhReplyContent) {
+		this.dhReplyContent = dhReplyContent;
 	}
 }
