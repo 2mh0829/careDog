@@ -122,7 +122,7 @@ public class MyPageController {
 		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
-		MyPageInfo myPageInfo=myPageService.readMyPageInfoHome(myPageId);
+		MyPageInfo myPageInfo=myPageService.readMyPageInfoHome(myPageId);//asdsadsadsad
 		if(myPageInfo==null) {
 			return "redirect:/nmyPage";
 		}
