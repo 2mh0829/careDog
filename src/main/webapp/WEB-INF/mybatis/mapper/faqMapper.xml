@@ -17,6 +17,9 @@ SELECT faq_seq.NEXTVAL FROM dual
 	<if test="searchKey == 'content'">
 	DBMS_LOB.INSTR(content, #{searchValue}) &gt; 0
 	</if>
+	<if test="searchKey == 'faqsort'">
+	faqsort = #{searchValue}
+	</if>
 </sql>
 
 <insert id="insertfaq" parameterType="care.dog.center.faq.FAQ">
@@ -44,8 +47,8 @@ SELECT * FROM (
 		</where>
 		ORDER BY num DESC
 		<![CDATA[	
-	) tb WHERE ROWNUM <= 10
-) WHERE rnum >= 1
+	) tb WHERE ROWNUM <= #{end}
+) WHERE rnum >= #{start}
 ]]>
 </select>
 
@@ -58,8 +61,78 @@ SELECT * FROM (
         WHERE faqsort = 2
 		ORDER BY num DESC
 	<![CDATA[	
-	) tb WHERE ROWNUM <= 10
-) WHERE rnum >= 1
+	) tb WHERE ROWNUM <= #{end}
+) WHERE rnum >= #{start}
+]]>
+</select>
+
+<select id="listfaqBuy" parameterType ="map" resultType="care.dog.center.faq.FAQ">
+SELECT * FROM (
+	SELECT ROWNUM rnum, tb.* FROM(
+		SELECT num, f.memberId, subject, content, faqsort
+		FROM faq f
+		JOIN member1 m ON f.memberId = m.memberId
+        WHERE faqsort = 3
+		ORDER BY num DESC
+	<![CDATA[	
+	) tb WHERE ROWNUM <= #{end}
+) WHERE rnum >= #{start}
+]]>
+</select>
+
+<select id="listfaqDelivery" parameterType ="map" resultType="care.dog.center.faq.FAQ">
+SELECT * FROM (
+	SELECT ROWNUM rnum, tb.* FROM(
+		SELECT num, f.memberId, subject, content, faqsort
+		FROM faq f
+		JOIN member1 m ON f.memberId = m.memberId
+        WHERE faqsort = 4
+		ORDER BY num DESC
+	<![CDATA[	
+	) tb WHERE ROWNUM <= #{end}
+) WHERE rnum >= #{start}
+]]>
+</select>
+
+<select id="listfaqRefund" parameterType ="map" resultType="care.dog.center.faq.FAQ">
+SELECT * FROM (
+	SELECT ROWNUM rnum, tb.* FROM(
+		SELECT num, f.memberId, subject, content, faqsort
+		FROM faq f
+		JOIN member1 m ON f.memberId = m.memberId
+        WHERE faqsort = 5
+		ORDER BY num DESC
+	<![CDATA[	
+	) tb WHERE ROWNUM <= #{end}
+) WHERE rnum >= #{start}
+]]>
+</select>
+
+<select id="listfaqEvent" parameterType ="map" resultType="care.dog.center.faq.FAQ">
+SELECT * FROM (
+	SELECT ROWNUM rnum, tb.* FROM(
+		SELECT num, f.memberId, subject, content, faqsort
+		FROM faq f
+		JOIN member1 m ON f.memberId = m.memberId
+        WHERE faqsort = 6
+		ORDER BY num DESC
+	<![CDATA[	
+	) tb WHERE ROWNUM <= #{end}
+) WHERE rnum >= #{start}
+]]>
+</select>
+
+<select id="listfaqEtc" parameterType ="map" resultType="care.dog.center.faq.FAQ">
+SELECT * FROM (
+	SELECT ROWNUM rnum, tb.* FROM(
+		SELECT num, f.memberId, subject, content, faqsort
+		FROM faq f
+		JOIN member1 m ON f.memberId = m.memberId
+        WHERE faqsort = 7
+		ORDER BY num DESC
+	<![CDATA[	
+	) tb WHERE ROWNUM <= #{end}
+) WHERE rnum >= #{start}
 ]]>
 </select>
 
@@ -67,8 +140,11 @@ SELECT * FROM (
 SELECT NVL (count(*),0) FROM faq f
 JOIN member1 m ON f.memberId=m.memberId
 <where>
+    <if test="faqsort != 0">
+    	faqsort = #{faqsort}
+    </if>
 	<if test="searchValue != null and searchValue != ''">
-		<include refid="where-list"/>
+		and <include refid="where-list"/>
 	</if>
 </where>
 </select>

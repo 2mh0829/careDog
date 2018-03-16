@@ -41,8 +41,8 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<Product> listProductReply(Map<String, Object> map) {
-		List<Product> list = null;
+	public List<Reply> listProductReply(Map<String, Object> map) {
+		List<Reply> list = null;
 		try {
 			list = dao.selectList("store.listProductReply", map);
 		} catch (Exception e) {
@@ -68,6 +68,16 @@ public class ProductServiceImpl implements ProductService{
 		} catch (Exception e) {
 		}
 		return list;
+	}
+
+	@Override
+	public int dataCountReply(int productId) {
+		int result = 0;
+		try {
+			result = dao.selectOne("store.dataCountReply", productId);
+		} catch (Exception e) {
+		}
+		return result;
 	}
 
 	

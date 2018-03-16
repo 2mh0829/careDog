@@ -3,6 +3,7 @@ package care.dog.dog119;
 import java.util.List;
 import java.util.Map;
 
+import care.dog.dog119.dogHealthVo.DhReplyVo;
 import care.dog.dog119.dogHealthVo.DogHealthVo;
 
 public interface DogHealthService {
@@ -13,4 +14,8 @@ public interface DogHealthService {
 	
 	public int insertDhLike(Map<String, Object> map);
 	public int dhLikeCnt(int num);
+	
+	public List<DhReplyVo> listDhReply(Map<String, Object> map);
+	public int insertDhReply(DhReplyVo dto);
+	public int dhReplyCount(int boardNum);
 }

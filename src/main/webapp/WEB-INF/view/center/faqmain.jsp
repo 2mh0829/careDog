@@ -228,22 +228,21 @@ function sendCancel(page) {
 }
 
 // 게시글 보기
-function contentBoard(num, page) {
-	var $tab = $(".comm1sTabs .active");
-	var tab = $tab.attr("data-tab");
-	var url="<%=cp%>/center/"+tab+"/content";
+function faqBoard(num, page, faqsort) {
+/* 	var $tab = $("ul.comm1sTabs .active");
+	var tab = $tab.attr("data-tab"); */
+	var url="<%=cp%>/center/faq/content";
 	
 	var query = "num="+num;
 	
 	var search=$('form[name=faqsearchForm]').serialize();
 	query=query+"&pageNo="+page+"&"+search;
-	
 	ajaxHTML(url, "get", query);
 }
 
 // 글 수정폼
 function updateForm(num, page) {
-	var $tab = $(".comm1sTabs .active");
+	var $tab = $("ul.comm1sTabs .active");
 	var tab = $tab.attr("data-tab");
 	var url="<%=cp%>/center/"+tab+"/update";
 	
@@ -257,25 +256,9 @@ function updateForm(num, page) {
 	ajaxHTML(url, "get", query);
 }
 
-//글 답변폼
-function replyForm(num, page) {
-	var $tab = $(".comm1sTabs .active");
-	var tab = $tab.attr("data-tab");
-	var url="<%=cp%>/center/"+tab+"/reply";
-	
-	var query;
-	if(tab=="gongji")
-		query="num="+num;
-	else
-		query="num="+num;
-	query=query+"&pageNo="+page
-	
-	ajaxHTML(url, "get", query);
-}
-
 // 글 삭제
 function deleteBoard(num, page) {
-	var $tab = $(".comm1sTabs .active");
+	var $tab = $("ul.comm1sTabs .active");
 	var tab = $tab.attr("data-tab");
 	var url="<%=cp%>/center/"+tab+"/delete";
 	
@@ -332,4 +315,5 @@ function deleteBoard(num, page) {
 <form name="faqsearchForm" action="" method="post">
     <input type="hidden" name="searchKey" value="subject">
     <input type="hidden" name="searchValue" value="">
+    <input type="hidden" name="faqsort">
 </form>

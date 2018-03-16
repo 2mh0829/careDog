@@ -9,10 +9,12 @@ public interface FAQService {
 	public int deleteFaq(int num, String pathname);
 	public List<FAQ> listFaq(Map<String, Object> map);
 	public List<FAQ> listFaqMember(Map<String, Object> map);
+	public List<FAQ> listFaqBuy(Map<String, Object> map);
+	public List<FAQ> listFaqDelivery(Map<String, Object> map);
+	public List<FAQ> listFaqRefund(Map<String, Object> map);
+	public List<FAQ> listFaqEvent(Map<String, Object> map);
+	public List<FAQ> listFaqEtc(Map<String, Object> map);
 	public int dataCount(Map<String, Object> map);
-	
 	public FAQ readFAQ(int num);
-	public FAQ preReadFAQ(Map<String, Object> map);
-	public FAQ nextReadFAQ(Map<String, Object> map);
 
 }

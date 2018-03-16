@@ -108,6 +108,46 @@ function dhRecommand(){
 		},'json'
 	);
 }
+
+$(function(){
+	listPage(1);
+});
+
+function listPage(page){
+	var url = "<%=cp%>/dog119/dhReplyList";
+	var boardNum="${dto.boardNum}";
+	var content = "";
+	$.get(url, {boardNum:boardNum, page:page},function(){
+		content+="<li><div class='imageView__replyItem'><div class='imageView__writer'>";
+		content+=data.memberId+"</div><div class='imageView__writeDate'>";"
+		content+=data.created+"| <a href='#'>삭제</a></div></div>";
+		content+="<div class='imageView__replyContent'>"+data.content+"</div></li>";
+	});
+	
+	$(".dhReplyList").append(content);
+}
+
+function insertReply(){
+	var content = encodeURIComponent($("#replyContent").val().trim());
+	
+	if(!content){
+		$("#replyContent").focus();
+		return;
+	}
+	
+	var url = "<%=cp%>/dog119/dhReplyInsert"
+	var q = "boardNum=${dto.boardNum}&content="+content;
+	
+	$.ajax({
+		url:url,
+		type:'post',
+		data:q,
+		dataType:'json',
+		success:function(data){
+			console.log(data);
+		}
+	});
+}
 </script>
 
 <div class="body-container">
@@ -148,7 +188,7 @@ function dhRecommand(){
 						</div>
 					</div>
 					<div class="imageView__viewReplayWrite"><!-- style="display:none;" -->
-						<form name="join" method="post" action="memo.asp?num=71&amp;cate1=a&amp;bname=zetyx_board_edu">
+						<form name="join" method="post">
 							<div class="imageView__replyTitle">댓글달기</div>
 							
 							<div class="imageView__writerInfo">
@@ -157,25 +197,16 @@ function dhRecommand(){
 							
 							<div class="imageView__writeInfo"></div>
 							<div class="imageView__writeContent"><input type="hidden" value="" name="keynum">
-								<div class="imageView__writeArea"><textarea name="content"></textarea></div>
-								<div class="imageView__writeSubmit"><input type="submit" onclick="javascript:join();return false;" value="등록"></div><!--  style="display:none;"-->
+								<div class="imageView__writeArea"><textarea id="replyContent"></textarea></div>
+								<div class="imageView__writeSubmit"><input type="submit" onclick="javascript:insertReply();return false;" value="등록"></div><!--  style="display:none;"-->
 							</div>
 						</form>
 					</div>
 <!-- 댓글 -->
 					<div class="imageView__viewReplayList">
 						<div class="imageView__replyTitleResult">댓글</div>
-						<ul>
-							<li>
-								<div class="imageView__replyItem">
-									<div class="imageView__writer">김시원</div>
-									<div class="imageView__writeDate">
-										2017-12-24 오후 3:03:22 | 
-										  <a href="memo_del.asp?num=53&amp;ct=yes&amp;cate1=&amp;mnum=39&amp;bname=zetyx_board_edu&amp;cate2=b">삭제</a>
-									</div>
-								</div>
-								<div class="imageView__replyContent">방학 때 읽어서 독후감 쓰겠습니다!</div>
-							</li>
+						<ul class="dhReplyList">
+						
 						</ul>
 					</div>
 					
@@ -199,17 +230,14 @@ function dhRecommand(){
 
 				<!-- 게시글 목록추 -->
 				
-				<div class="board__all">
+				<!-- <div class="board__all">
 				
 
 
 					<div class="imageList__content">
 
 						<ul class="board__listPageing">
-					
-						<li class="board__pageingPrevBtn"><a><img src="/ani-main/images/content/listPrevBtn.png">&nbsp;</a></li>
-
-<!-- 리스트 -->						
+리스트						
 							<li>paging</li>
 						</ul>
 					</div>
@@ -231,7 +259,7 @@ function dhRecommand(){
 		</form>
 	</div>
 
-				</div>
+				</div> -->
 				<!-- 게시글 목록추가 끝-->
 			</div>
 
