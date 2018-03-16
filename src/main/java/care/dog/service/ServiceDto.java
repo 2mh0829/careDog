@@ -1,6 +1,6 @@
 package care.dog.service;
 
-public class Service {
+public class ServiceDto {
 
 	private String sittingId;
 	private String memberId;
@@ -136,5 +136,15 @@ public class Service {
 	public void setOther(String other) {
 		this.other = other;
 	}
+	
+	@Override
+	public String toString() {
+		return "ServiceDto [sittingId=" + sittingId + ", memberId=" + memberId + ", title=" + title + ", content="
+				+ content + ", startDate=" + startDate + ", endDate=" + endDate + ", reserDiv=" + reserDiv
+				+ ", reserCost=" + reserCost + ", addPet=" + addPet + ", addPetCost=" + addPetCost + ", carableWeight="
+				+ carableWeight + ", catableAge=" + catableAge + ", tag=" + tag + ", space=" + space + ", subway="
+				+ subway + ", yard=" + yard + ", baby=" + baby + ", family=" + family + ", other=" + other + "]";
+	}
+	
 	
 }

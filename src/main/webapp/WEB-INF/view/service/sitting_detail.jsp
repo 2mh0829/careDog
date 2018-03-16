@@ -17,6 +17,7 @@ $(function(){
     	yearSuffix: '년',
     	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
     	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+    	
     	minDate: 0
     });
 });
@@ -46,9 +47,21 @@ $( function() {
     });
 } );
 
+/* $(function(){
+	$("body").on('change','.inputMoney',function(){
+		var sum = parseInt($("#inputMoney-date").val()) + parseInt($("#inputMoney-dog").val());
+		tot = sum + sum * 1/10;
+		$('.totPrice').html(tot);
+		
+		// tot를 .submit으로 보낸다
+	})
+}); */
+
 </script>
 
 <style>
+
+.ui-datepicker-calendar > tbody td.ui-datepicker-week-end:last-child a { color: red; }
 
 .main-middle-inner .ui-datepicker {
 	width: 335px;
@@ -266,7 +279,7 @@ li{
 
 .inner {
 	/* border: 1px solid red; */
-	height: 600px;
+	/* height: 600px; */
 }
 
 .row .carryAble {
@@ -430,12 +443,29 @@ li{
 }
 
 .customer-rating {
-	border: 1px solid;
+	border: 1px solid #ccc;
 	margin-top: 40px;
 }
 
 .main-middle-environ h3 {
 	margin-left: 12px;
+}
+
+.hi {
+	border: 1px solid orange;
+	height: 150px;
+    margin-top: 60px;
+}
+
+.hi-sitter {
+	font-size: 18px;
+    padding-bottom: 10px;
+    margin: 12px;
+    border-bottom: 1px solid #ccc;
+}
+
+.hi-body {
+	padding: 12px;
 }
 
 </style>
@@ -630,6 +660,14 @@ li{
 				<label class="dog-name">검둥이<br></label>
 				<label class="dog-info">말티즈, 남, 7세</label>
 			</label>
+		</div>
+		<div class="hi">
+			<div class="hi-header">
+				<div class="hi-sitter"><span style="font-weight: bold;">김경애</span> 펫시터님의 한마디</div>
+			</div>
+			<div class="hi-body">
+				내용
+			</div>
 		</div>
 		<div class="customer-rating">
 			<h1>후기</h1>
