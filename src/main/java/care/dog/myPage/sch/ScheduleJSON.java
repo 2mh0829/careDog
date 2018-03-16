@@ -1,5 +1,5 @@
 package care.dog.myPage.sch;
-
+//aa
 public class ScheduleJSON {
 	private int id;
 

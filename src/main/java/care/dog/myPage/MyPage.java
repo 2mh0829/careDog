@@ -1,5 +1,5 @@
 package care.dog.myPage;
-
+//aa
 public class MyPage {
 private int myPageId,visitorCount,closed;
 private String memberId, title, introduce,created;

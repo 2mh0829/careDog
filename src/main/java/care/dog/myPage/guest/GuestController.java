@@ -20,7 +20,7 @@ import care.dog.common.MyUtilGeneral;
 import care.dog.member.SessionInfo;
 import care.dog.myPage.MyPageInfo;
 import care.dog.myPage.MyPageService;
-
+//aa
 
 @Controller("myPage.guest.guestController")
 public class GuestController {

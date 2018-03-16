@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import care.dog.common.dao.CommonDAO;
 import care.dog.member.Member;
-
+//aa
 @Service("messenger.messengerService")
 public class MessengerServiceImpl implements MessengerService{
 	
