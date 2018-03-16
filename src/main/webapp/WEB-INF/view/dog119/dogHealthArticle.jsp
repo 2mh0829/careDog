@@ -141,7 +141,7 @@ function dhRecommand(){
 							
 							<span>
                             	<div style="text-align: center;">
-                                  ${dto.content}
+                                  	${dto.content}
                                 </div>
 							</span>
 					
@@ -152,7 +152,7 @@ function dhRecommand(){
 							<div class="imageView__replyTitle">댓글달기</div>
 							
 							<div class="imageView__writerInfo">
-								세션 아이디
+								${sessionScope.member.userName}
 							</div>
 							
 							<div class="imageView__writeInfo"></div>
@@ -206,9 +206,6 @@ function dhRecommand(){
 					<div class="imageList__content">
 
 						<ul class="board__listPageing">
-					
-						<li class="board__pageingPrevBtn"><a><img src="/ani-main/images/content/listPrevBtn.png">&nbsp;</a></li>
-
 <!-- 리스트 -->						
 							<li>paging</li>
 						</ul>

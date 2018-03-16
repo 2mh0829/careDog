@@ -56,7 +56,7 @@ public class MailSender {
 
 	// 네이버를 이용하여 메일을 보내는 경우 보내는사람의 이메일이 아래 게정과 다르면 메일 전송이 안된다. 
 	// SMTP 권한
-	private class SMTPAuthenticator extends javax.mail.Authenticator {
+	private class SMTPAuthenticator extends javax.mail.Authenticator {//..
 		  @Override
 	      public PasswordAuthentication getPasswordAuthentication() {  
          // 지메일은 경고메시지 전송 - 전송받은 메일에서 보안 수준을 낮추는 링크를 클릭하고 수준을 낮추면 메일 전송가능
@@ -65,7 +65,7 @@ public class MailSender {
 	    	  
 	          String username =  "hhaahaa@naver.com"; // 네이버 사용자;
 	          // String username =  "지메일아이디"; // gmail 사용자;  
-	          String password = "caredoggclass!"; // 패스워드;  
+	          String password = "caredoggclass11"; // 패스워드;  
 	          return new PasswordAuthentication(username, password);  
 	       }  
 	}
@@ -146,6 +146,8 @@ public class MailSender {
 		p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");   
 		p.put("mail.smtp.socketFactory.fallback", "false");  
 		
+		System.out.println(dto.getSenderName());
+		
 		try {
 			Authenticator auth = new SMTPAuthenticator();
 			
@@ -165,6 +167,7 @@ public class MailSender {
 			
 			// 제목
 			msg.setSubject(dto.getSubject());
+			System.out.println(dto.getSubject());
 
 			// HTML 형식인 경우 \r\n을  <br>로 변환
 //			if(mailType.indexOf("text/html") != -1) {

@@ -196,9 +196,15 @@ public class MemberController {
 		model.put("passed", passed);
 		return model;
 	}
-	@RequestMapping(value="member/secession", method=RequestMethod.GET)
+	
+	@RequestMapping(value="member/secession", method=RequestMethod.GET)//jh
 	public String secession() {
 		return "member/secession";
+	}
+	@RequestMapping(value="member/editMemberInfo")//jh
+	public String editMemberInfo() throws Exception {
+
+		return "member/signUp";
 	}
 	
 	
