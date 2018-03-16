@@ -91,12 +91,13 @@ var time1 = setInterval(function() {
 
 function authCheck() {
 	var url = "<%=cp %>/member/auth_completed";
-	var data = "";
+	var memberId = $("#memberId").val();
+	var data = {memberId:memberId};
 	$.ajax({
 		url: url
 		,data: data
 		,success: function(){
-			alert("secces");
+			alert("세션 시간이 만료되었습니다.");
 		}
 	});
 }
@@ -109,15 +110,17 @@ function authCheck() {
 	</div>
 
 	<div align="center" class="ok-container">
-		<h1><b>인증메일이 발송되었습니다.</b></h1>
+		<h1><b>${message }</b></h1>
 		<br>
 		<h4>인증메일 확인 후 로그인 가능합니다.</h4>
 		<br>
 		<div><span id="time" style="color: red;">03:00</span><span>&nbsp;초 남음</span></div>
 		<br><br><br><br>
 		<button class="okBtn" onclick="location.href='<%=cp %>/member/login'"><h4>로그인 하기</h4></button>
+		
+		<div><input type="hidden" id="memberId" value="${memberId }"></div>
+		
 	</div>
-	
 	
 </div>
 

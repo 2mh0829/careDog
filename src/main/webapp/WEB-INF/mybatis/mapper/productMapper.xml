@@ -42,9 +42,28 @@
 	     </where>
 	</select>
 	 
-	<!--  
-	<select id="dataCount" resultType="Integer">
-	SELECT COUNT(*) FROM product
+	<!-- resultType String으로 바꿔야하나 dto가 하나로 정의 되어서? -->
+	<select id="readOption" parameterType="Integer" resultType="care.dog.store.Product">
+	select p.productId, productName, optionId, optionContent
+    FROM product p 
+    	join productOption o
+    	on p.productId = o.productId
+    where p.productId = #{productId}
+    ORDER BY productId
 	</select>
- -->
+	
+	<select id="readProduct" parameterType="Integer" resultType="care.dog.store.Product">
+	SELECT productId, productName, imageFilename, sellingPrice, price, amount, 
+		isContinued, mileage, p.categoryId, c.categoryName
+	FROM product p 
+    	JOIN productCategory c
+    	ON p.categoryId = c.categoryId
+	where productId = #{productId}
+	ORDER BY productId
+	</select>
+	
 </mapper>
+
+
+
+

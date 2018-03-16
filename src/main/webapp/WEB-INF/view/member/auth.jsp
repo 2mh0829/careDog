@@ -46,10 +46,12 @@ h1 {
 
 </style>
 
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
+
 <script>
 
-setTimeout(function() { $("#msg").html("2초후 종료"); }, 1000);
-setTimeout(function() { $("#msg").html("1초후 종료"); }, 2000);
+setTimeout(function() { $("#countBox").html("2초후 종료"); }, 1000);
+setTimeout(function() { $("#countBox").html("1초후 종료"); }, 2000);
 setTimeout(function() { window.close(); }, 3000);
 
 </script>
@@ -62,7 +64,7 @@ setTimeout(function() { window.close(); }, 3000);
 	<div align="center" class="ok-container">
 		<h1><b>인증되었습니다.</b></h1>
 		<br>
-		<div id="msg">3초후 종료</div>
+		<div id='countBox'>3초후 종료</div>
 		<br><br><br><br>
 	</div>
 </div>
