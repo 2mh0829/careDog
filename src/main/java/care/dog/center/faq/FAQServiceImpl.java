@@ -92,15 +92,58 @@ public class FAQServiceImpl implements FAQService{
 	}
 
 	@Override
-	public FAQ preReadFAQ(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<FAQ> listFaqBuy(Map<String, Object> map) {
+		List<FAQ> list = null;
+		try {
+			list = dao.selectList("faq.listfaqBuy",map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
 	}
 
 	@Override
-	public FAQ nextReadFAQ(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<FAQ> listFaqDelivery(Map<String, Object> map) {
+		List<FAQ> list = null;
+		try {
+			list = dao.selectList("faq.listfaqDelivery",map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
+	@Override
+	public List<FAQ> listFaqRefund(Map<String, Object> map) {
+		List<FAQ> list = null;
+		try {
+			list = dao.selectList("faq.listfaqRefund", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
+	@Override
+	public List<FAQ> listFaqEvent(Map<String, Object> map) {
+		List<FAQ> list = null;
+		try {
+			list = dao.selectList("faq.listfaqEvent",map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
+	}
+
+	@Override
+	public List<FAQ> listFaqEtc(Map<String, Object> map) {
+		List<FAQ> list = null;
+		try {
+			list = dao.selectList("faq.listfaqEtc",map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
 	}
 
 

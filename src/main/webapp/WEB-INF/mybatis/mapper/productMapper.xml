@@ -62,6 +62,25 @@
 	ORDER BY productId
 	</select>
 	
+	<select id="listProductReply" parameterType="map" resultType="care.dog.store.Reply">
+	SELECT * FROM (
+		SELECT ROWNUM rnum, tb.* FROM (
+			SELECT replyId, replyContent, grade, to_char(created, 'yyyy.mm.dd') created, 
+            	productId, memberId 
+			FROM productReply
+            where productId = #{productId}
+			ORDER BY created desc
+	<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>
+	</select>
+	
+	<select id="dataCountReply" parameterType="Integer" resultType="Integer">
+	SELECT NVL(COUNT(*), 0) FROM productReply
+	where productId = #{productId}
+	</select>
+	
 </mapper>
 
 

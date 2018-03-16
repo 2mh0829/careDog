@@ -48,6 +48,30 @@ body {
 	background: #ccc;
 }
 
+
+#blackBox {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: black;
+	opacity: 0.6;
+	z-index: 104;
+	visibility: hidden;
+}
+
+.modal-out {
+	display: table;
+	margin: 0 auto;
+	height: 100%;
+}
+
+.modal-in {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+
 </style>
 
 <script>
@@ -177,6 +201,9 @@ function joinNext() {
         return;
     }
     
+	$("#blackBox").css("top", $(document).scrollTop());
+	$("#blackBox").css("visibility", "visible");
+	$("body").css("overflow", "hidden");
 	f.action = "<%=cp%>/member/join3";
 	f.submit();
 }
@@ -350,3 +377,9 @@ function joinNext() {
 
 	
 </div>
+
+	<div id="blackBox" align="center">
+		<div class="modal-out">
+			<div class="modal-in"><img src="<%=cp %>/resource/img/gif/ajax-loader2.gif" width="50px;"></div>
+		</div>
+	</div>

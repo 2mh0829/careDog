@@ -20,13 +20,13 @@
 </sql>
 
 <select id="listBoard" parameterType="map" resultType="care.dog.dog119.dogHealthVo.DogHealthVo">
-	select*from(
-		select rownum rnum, tb.*from(
+	select * from(
+		select rownum rnum, tb.* from(
 			select boardNum, dh.memberId, title, content, created, hitCount
-			from doghealth dh JOIN member1 m
-			ON dh.memberId=m.memberId
+			from doghealth dh
+                        JOIN member1 m ON dh.memberId=m.memberId
 			<where>
-				<if test="searchValue != null and searchValue!=''">
+				<if test="searchValue != null and searchValue!='' ">
 					<include refid="where-list"/>
 				</if>
 			</where>
@@ -36,8 +36,8 @@
 		)tb where rownum <= #{end}
 	)where rnum>=#{start}
 ]]>
-	</select>
-	
+</select>
+
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		select NVL(count(*),0) from doghealth join member1 on doghealth.memberId= member1.memberId
 		<where>
@@ -50,7 +50,6 @@
 	<update id="updateHitCount" parameterType="Integer">
 		UPDATE doghealth SET hitCount=hitCount+1 WHERE boardNum=#{boardNum}
 	</update>
-	
 	
 	<select id="dhDetail" resultType="care.dog.dog119.dogHealthVo.DogHealthVo" parameterType="Integer">
 		SELECT boardNum, title, content, created, m.username, hitCount
@@ -69,4 +68,27 @@
 	<select id="dhLikeCnt" parameterType="Integer" resultType="Integer">
 		SELECT COUNT(*) FROM dogHealthLike WHERE num=#{boardNum}
 	</select>
+	
+	<insert id="dhReplyInsert" parameterType="care.dog.dog119.dogHealthVo.DhReplyVo">
+		INSERT INTO dogHealthReply (dhReplyNum, dhReplyContent, memberId, boardNum) VALUES (dhReply_seq.NEXTVAL, #{content},#{memberId},#{boardNum})
+	</insert>
+	
+	<select id="dhReplyCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0) FROM dogHealthReply WHERE boardNum=#{boardNum}
+	</select>
+	
+	<select id="dhReplyList" parameterType="map" resultType="care.dog.dog119.dogHealthVo.DhReplyVo">
+			SELECT*FROM(
+				SELECT ROWNUM rnum, tb.* FROM(
+					SELECT dhReplyNum, m.memberId, b.boardNum, content, created
+					FROM dogHealthReply dhr
+					JOIN member1 m ON dhr.memberId=m.memberId
+					WHERE boardNum=#{boardNum}
+					ORDER BY dhr.dhReplyNum DESC
+<![CDATA[
+				) tb WHERE ROWNUM <= #{end}
+			)WHERE rnum >= #{start}
+]]>
+		</select>
+
 </mapper>

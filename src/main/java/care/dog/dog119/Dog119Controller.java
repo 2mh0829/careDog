@@ -3,6 +3,7 @@ package care.dog.dog119;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import care.dog.common.MyUtilBootstrap;
+import care.dog.dog119.dogHealthVo.DhReplyVo;
 import care.dog.dog119.dogHealthVo.DogHealthVo;
 import care.dog.member.SessionInfo;
 
@@ -187,5 +189,68 @@ public class Dog119Controller {
 	@RequestMapping(value="/dog119/dogHospital")
 	public String dogHospital() {
 		return ".dog119.dogHospital";
+	}
+	
+	@RequestMapping(value="/dog119/dhReplyInsert", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> dhReplyInsert(
+			DhReplyVo dto, HttpSession session
+			) {
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		String state="true";
+		
+		if(info==null) {
+			state="loginFail";
+		}else {
+			dto.setMemberId(info.getMemberId());
+			int result=service.insertDhReply(dto);
+			if(result==0)
+				state="false";
+		}
+		Map<String, Object> map = new HashMap<>();
+		map.put("state", state);
+		return map;
+	}
+	
+	@RequestMapping(value="/dog119/dhReplyList")
+	public String dhReplyList(@RequestParam int boardNum,
+			@RequestParam(value="pageNo", defaultValue="1") int page,
+			Model model
+			) {
+		int rows=5;
+		int totalPage=0;
+		int dataCount=0;
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("boardNum", boardNum);
+		
+		dataCount=service.dhReplyCount(boardNum);
+		totalPage=myUtilBootstrap.pageCount(rows, dataCount);
+		if(page>totalPage)
+			page=totalPage;
+		
+		int start=(page-1)*rows+1;
+		int end=page*rows;
+		
+		map.put("start", start);
+		map.put("end", end);
+		List<DhReplyVo> listReply=service.listDhReply(map);
+		
+		for(DhReplyVo dto: listReply) {
+			dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+		}
+		
+		//AJAX 용 페이징
+		String paging=myUtilBootstrap.pagingMethod(page, totalPage, "listPage");
+		
+		//포워딩할 jsp로 넘길 데이터
+		model.addAttribute("listReply", listReply);
+		model.addAttribute("pageNo", page);
+		model.addAttribute("replyCount", dataCount);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("paging", paging);
+		
+		//AJAX는 .으로 하면 안됨
+		return "bbs/listReply";
 	}
 }
