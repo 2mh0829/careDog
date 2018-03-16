@@ -206,9 +206,6 @@ function dhRecommand(){
 					<div class="imageList__content">
 
 						<ul class="board__listPageing">
-					
-						<li class="board__pageingPrevBtn"><a><img src="/ani-main/images/content/listPrevBtn.png">&nbsp;</a></li>
-
 <!-- 리스트 -->						
 							<li>paging</li>
 						</ul>
