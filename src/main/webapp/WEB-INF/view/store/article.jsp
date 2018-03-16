@@ -162,11 +162,11 @@ th {
 .divTd {
 	display: table;
 	margin: 10px;
-	font-size: 15px;
 	/* height는 각자 태그에 맞게 */
 }
 
 .divTd p {
+	/* font-size: 15px; */
 	display: table-cell;
 	vertical-align: middle;
 }
@@ -298,6 +298,19 @@ $('#myTab a').click(function (e) {
 	  e.preventDefault()
 	  $(this).tab('show')
 })
+
+$(function(){
+	listPage(1);
+});
+
+function listPage(page) {
+	var url="<%=cp%>/store/listProductReply";
+	var productId="${dto.productId}";
+	
+	$.get(url, {productId:productId, pageNo:page}, function(data){
+		$("#listProductReply").html(data);
+	});
+}
 
 </script>
 
@@ -659,58 +672,39 @@ $('#myTab a').click(function (e) {
 						<button type="button" class="btn btn-default commentInsertBtn">상품평작성</button>
 					</div>
 					
-					<form name="commentForm" id="commentForm" action="">
+					<div id="listProductReply"></div>
+					
+					<%-- <form name="commentForm" id="commentForm" action="">
 						<table class="table table-condensed comment-list" style="width: 800px">
 							<tbody>
-								<tr>
-									<td>
-										<div class="divTd" style="width: 100px;">
-											<p class="tdTxt">별점이미지</p>
-											<!-- <img alt="" src=""> -->
-										</div>
-									</td>
-									<td>
-										<div class="divTd" style="width: 500px;">
-											<p class="tdTxt">저렴하게 구매했어요</p>
-										</div>
-									</td>
-									<td>
-										<div class="divTd" style="width: 100px;">
-											<p class="tdTxt">han</p>
-										</div>
-									</td>
-									<td>
-										<div class="divTd" style="width: 100px;">
-											<p class="tdTxt">2018.03.01</p>
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="divTd" style="width: 100px;">
-											<p class="tdTxt">별점이미지</p>
-											<!-- <img alt="" src=""> -->
-										</div>
-									</td>
-									<td>
-										<div class="divTd" style="width: 500px;">
-											<p class="tdTxt">진짜 잘먹어요</p>
-										</div>
-									</td>
-									<td>
-										<div class="divTd" style="width: 100px;">
-											<p class="tdTxt">spring</p>
-										</div>
-									</td>
-									<td>
-										<div class="divTd" style="width: 100px;">
-											<p class="tdTxt">2018.02.28</p>
-										</div>
-									</td>
-								</tr>
+								<c:forEach var="dto" items="${listProductReply}">
+									<tr style="border-bottom: 1px solid #cdcdcd;">
+										<td>
+											<div class="divTd" style="width: 100px;">
+												<p class="tdTxt" style="font-size: 15px;">${dto.grade } 점</p>
+												<!-- <img alt="" src=""> -->
+											</div>
+										</td>
+										<td>
+											<div class="divTd" style="width: 500px;">
+												<p class="tdTxt" style="font-size: 15px;">${dto.replyContent }</p>
+											</div>
+										</td>
+										<td>
+											<div class="divTd" style="width: 100px;">
+												<p class="tdTxt" style="font-size: 15px;">${dto.memberId }</p>
+											</div>
+										</td>
+										<td>
+											<div class="divTd" style="width: 100px;">
+												<p class="tdTxt" style="font-size: 15px;">${dto.created }</p>
+											</div>
+										</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
-					</form>
+					</form> --%>
 					
 				</div>
 				
