@@ -1,5 +1,6 @@
 package care.dog.dog119;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import care.dog.common.dao.CommonDAO;
+import care.dog.dog119.dogHealthVo.DhReplyVo;
 import care.dog.dog119.dogHealthVo.DogHealthVo;
 
 @Service("dog119.dogHealthService")
@@ -75,6 +77,40 @@ public class DogHealthServiceImpl implements DogHealthService {
 		int result = 0;
 		try {
 			result = dao.selectOne("dogHealth.dhLikeCnt", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public List<DhReplyVo> listDhReply(Map<String, Object> map) {
+		List<DhReplyVo> list = new ArrayList<>();
+		try {
+			list = dao.selectList("dogHealth.dhReplyList",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int insertDhReply(DhReplyVo dto) {
+		int result=0;
+		try {
+			result=dao.insertData("dogHealth.dhReplyInsert",dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int dhReplyCount(int boardNum) {
+		int result = 0 ;
+		try {
+			result = dao.selectOne("dogHealth.dhReplyCount", boardNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
