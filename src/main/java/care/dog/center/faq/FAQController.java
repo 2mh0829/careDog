@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import care.dog.common.MyUtil;
@@ -446,15 +447,25 @@ public class FAQController {
 		
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 		
-		Map<String, Object> map = new HashMap<String, Object>();
+		/*Map<String, Object> map = new HashMap<String, Object>();
 		map.put("num", num);
 		map.put("faqsort", faqsort);
 		map.put("searchKey", searchKey);
-		map.put("searchValue", searchValue);
+		map.put("searchValue", searchValue);*/
 		
+		model.addAttribute("faqsort",faqsort);
 		model.addAttribute("dto",dto);
 		model.addAttribute("pageNo",page);
 		
 		return "center/faq_content";
+	}
+	
+	@RequestMapping(value="/center/faq/create", method=RequestMethod.GET)
+	public String createForm(
+			Model model
+			) throws Exception{
+		model.addAttribute("pageNo","1");
+		model.addAttribute("mode","create");
+		return "center/faq_create";
 	}
 }

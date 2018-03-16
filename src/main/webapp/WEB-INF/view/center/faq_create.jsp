@@ -39,7 +39,7 @@
 .board-write-1s tbody tr td input[type="password"] {height:38px;}
 .board-write-1s tbody tr td input[type="radio"],
 .board-write-1s tbody tr td input[type="checkbox"] {vertical-align:middle;}
-.board-write-1s tbody tr td .over {overflow:hidden;}zAas
+.board-write-1s tbody tr td .over {overflow:hidden;}
 .board-write-1s tbody tr td select+select,
 .board-write-1s tbody tr td input[type="text"]+select {margin-left:2px}
 .board-write-1s tbody tr td .input-delete {display:inline-block;}
@@ -98,83 +98,69 @@
 .result-common .all-delete {position:absolute;bottom:14px;right:0;min-width:70px;width:auto;height:28px;padding:0 5px;border-radius:5px;border:1px solid #aaa;color:#666;background:#fff;font-size:12px} /*{position:absolute;bottom:14px;right:0;width:80px;height:38px;border-radius:5px;border:1px solid #aaa;background:#fff;color:#666;font-size:14px;line-height:18px;white-space:nowrap;}*/
 
 .board-view-1s>tbody>tr:first-child td strong {display:inline-block;color:#333;font-size:18px;line-height:30px;width:70px;height:20px;border-radius:10px;color:#fff;font-size:12px;text-align:center;line-height:20px;background:#a68fcd;}
+textarea {
+	border:1px solid #ccc;
+	padding:10px 8px;
+	border-radius:5px;
+	resize:none;
+	font-family:'AppleGothic', 'Roboto', 'montserrat', 'noto', sans-serif;
+	font-size:14px;
+	line-height:20px;
+	box-shadow:none;
+	box-sizing:border-box;
+	-webkit-appearance:none;
+	/*outline:none;*/
+}
 </style>
-
+<form name="boardForm" method="post" enctype="multipart/form-data">
 <div class="body-container" style="width: 1020px;">
 <table class="board-view-1s mgT40">
-				<colgroup>
-					<col style="width:9%">
-					<col style="width:66%;">
-					<col style="width:12.5%;">
-					<col style="width:12.5%">
-				</colgroup>
-				<tbody>
+	<colgroup>
+	<col style="width:18%;">
+	<col style="width:70%;">
+	<col style="width:12%;">
+	</colgroup>
+	<tbody>
+	<tbody>
 					<tr>
-					<td class="num">${dto.num }</td>
-					
-					<c:choose>
-					<c:when test="${dto.faqsort == 0}">
 					<td>
-						<strong class="FG01">전체</strong>
+						<select id="sfaqsort">
+							<option value="tabfmember">회원/멤버십</option>
+							<option value="tabfbuy">주문/결제</option>
+							<option value="tabfdelivery">배송</option>
+							<option value="tabfrefund">교환/환불/반품</option>
+							<option value="tabfevent">이벤트</option>
+							<option value="tabetc">기타</option>
+						</select>
 					</td>
-					</c:when>
-					<c:when test="${dto.faqsort == 2}">
 					<td>
-						<strong class="FG01">회원/멤버십</strong>
+						<span class="tit"><input type="text" name="subject" id="subject" style="width: 691px;"></span>
 					</td>
-					</c:when>
-					<c:when test="${dto.faqsort == 3}">
-					<td>
-						<strong class="FG01">주문/결제</strong>
-					</td>
-					</c:when>
-					<c:when test="${dto.faqsort == 4}">
-					<td>
-						<strong class="FG01">배송</strong>
-					</td>
-					</c:when>
-					<c:when test="${dto.faqsort == 5}">
-					<td>
-						<strong class="FG01">교환/반품/환불</strong>
-					</td>
-					</c:when>
-					<c:when test="${dto.faqsort == 6}">
-					<td>
-						<strong class="FG01">이벤트</strong>
-					</td>
-					</c:when>
-					<c:when test="${dto.faqsort == 7}">
-					<td>
-						<strong class="FG01">기타</strong>
-					</td>
-					</c:when>
-					</c:choose>
-					<td class="tit">${dto.subject }</td>
-					<td class="name">${dto.memberId }</td>
-					</tr>
-					<tr>
-					<td class="textus" colspan="3">
-						<div class="contEditor">
-						<p><span style="font-size:14px"><span style="color:#000000">${dto.content }</span></span></p>
-						</div>
-					</td>
+					<td class="name">${SessionScope.member.memberId }</td>
 					</tr>
 				</tbody>
-			</table>
-	<table style="width: 100%; margin: 0px auto 20px; border-spacing: 0px;">
-<tr height="45">
-    <td width="300" align="left">
-        <c:if test="${sessionScope.member.memberId=='admin'}">
-            <button type="button" class="btn" onclick="updateForm('${dto.num}', '${pageNo}');">수정</button>
-        </c:if>
-        <c:if test="${sessionScope.member.memberId=='admin'}">
-            <button type="button" class="btn" onclick="deleteBoard('${dto.num}', '${pageNo}');">삭제</button>
-        </c:if>
-    </td>
-
-    <td align="right">
-        <button type="button" class="btn" onclick="listPage('${pageNo}')">리스트</button>
-    </td>
-</tr>
+	<tr>
+		<td class="textus" colspan="3">
+			<div class="contEditor">
+				<textarea id="eventInput" name="content" cols="5" rows="1" style="width:98%;height:280px;"></textarea>
+			</div>
+		</td>
+	</tr>
 </table>
+<div>
+	<div class="btn_area">
+		<ul>
+			<li><button type="button" class="btn" onclick="sendOk('${mode}', '${pageNo}');">${mode=='update'?'수정완료':'등록하기'}</button></li>
+			<li><button type="reset" class="btn">다시입력</button></li>
+			<li><button type="button" class="btn" onclick="sendCancel('${pageNo}');">${mode=='update'?'수정취소':'등록취소'}</button></li>
+			<li>
+				<c:if test="${mode=='update'}">
+	        		<input type="hidden" name="num" value="${dto.num}">
+	        		<input type="hidden" name="pageNo" value="${pageNo}">
+	        	</c:if>
+        	</li>
+		</ul>
+	</div>
 </div>
+</div>
+</form>

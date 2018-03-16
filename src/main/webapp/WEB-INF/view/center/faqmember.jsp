@@ -103,7 +103,7 @@ ul, ol {list-style:none;}
 								<c:if test="${dto.faqsort==2 }">
 								<td>회원/멤버십</td>
 								</c:if>
-								<td class="subject"><a href="javascript:faqBoard('${dto.num }','${pageNo }')">${dto.subject }</a></td>
+								<td class="subject"><a href="javascript:faqBoard('${dto.num }','${pageNo }','${dto.faqsort }')">${dto.subject }</a></td>
 								<td>${dto.memberId }</td>
 							</tr>
 						</c:forEach>	
