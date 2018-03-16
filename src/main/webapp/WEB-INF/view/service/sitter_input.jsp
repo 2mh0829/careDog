@@ -583,6 +583,14 @@ li {
     font-size: 20px;
 }
 
+.col-tag label {
+	padding: 7px 6px;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+}
+
 </style>
 
 <div class="body-container">
@@ -594,7 +602,7 @@ li {
 	<div class="main-top">
 		<div class="main-top-slider">
 			<div class="main-photos">
-				<textarea class="main-text" cols="100" rows="13"></textarea>
+				<textarea class="main-text" cols="91" rows="13"></textarea>
 			</div>
 			<!-- <ul class="photo-array">
 				<li class="array-small"></li>
