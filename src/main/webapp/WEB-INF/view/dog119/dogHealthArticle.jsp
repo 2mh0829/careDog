@@ -117,11 +117,18 @@ function listPage(page){
 	var url = "<%=cp%>/dog119/dhReplyList";
 	var boardNum="${dto.boardNum}";
 	var content = "";
-	$.get(url, {boardNum:boardNum, page:page},function(){
-		content+="<li><div class='imageView__replyItem'><div class='imageView__writer'>";
-		content+=data.memberId+"</div><div class='imageView__writeDate'>";"
-		content+=data.created+"| <a href='#'>삭제</a></div></div>";
-		content+="<div class='imageView__replyContent'>"+data.content+"</div></li>";
+	$.ajax({
+		url:url, 
+		data:{boardNum:boardNum, page:page},
+		dataType:'json',
+		success:function(data){
+	
+			console.log(data)
+			content+="<li><div class='imageView__replyItem'><div class='imageView__writer'>";
+			content+=data.memberId+"</div><div class='imageView__writeDate'>";
+			content+=data.created+"| <a href='#'>삭제</a></div></div>";
+			content+="<div class='imageView__replyContent'>"+data.content+"</div></li>";
+		}
 	});
 	
 	$(".dhReplyList").append(content);
