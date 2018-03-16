@@ -29,16 +29,21 @@ public class StoreController {
 
 	@RequestMapping(value = "/store")
 	public String main(HttpServletRequest req, Model model) {
-
+		
+		int current_page = 1;
 		String cp = req.getContextPath();
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("start", 1);
 		map.put("end", 4);
 
+		String articleUrl = cp + "/store/article?page=" + current_page;
+		articleUrl = cp + "/store/article?page=" + current_page;
+		
 		List<Product> list = service.listProduct(map);
 
 		model.addAttribute("list", list);
+		model.addAttribute("articleUrl", articleUrl);
 
 		return ".store.main";
 	}
