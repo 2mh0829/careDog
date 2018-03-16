@@ -89,6 +89,14 @@
 			$(".myPage-body").html(data);
 		})
 	}
+	function registerPS() {
+		var url = "<%=cp%>/service/sitter_input";
+		$.get(url, {
+			tmp : new Date().getTime()
+		}, function(data) {
+			$(".myPage-body").html(data);
+		})
+	}
 </script>
 
 <%-- <div class="myPage-header-top">
@@ -112,7 +120,7 @@
 		<li class="list-menu-item"><a href="javascript:messenger();">일정관리</a></li>
 		<li class="list-menu-item"><a href="javascript:messenger();">친구관리</a></li>
 		<li class="list-menu-item"><a href="javascript:messenger();">펫시터 서비스 관리</a></li>
-		<li class="list-menu-item"><a href="javascript:messenger();">펫시터 등록하기</a></li>
+		<li class="list-menu-item"><a href="javascript:registerPS();">펫시터 등록하기</a></li>
 		<li class="list-menu-item"><a href="javascript:messenger();">이용현황</a></li>
 	</ul>
 </div>
