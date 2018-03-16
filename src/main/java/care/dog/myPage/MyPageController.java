@@ -24,15 +24,9 @@ public class MyPageController {
 	@Autowired
 	private MyPageService myPageService;
 	
-	@Autowired
-	private MyUtilGeneral util;
+	//@Autowired
+	//private MyUtilGeneral util;
 
-
-	@RequestMapping(value="myPage/editMemberInfo")
-	public String editMemberInfo() throws Exception {
-
-		return "member/signUp";
-	}
 	@RequestMapping(value="/myPage/myPetList")
 	public String myPetList() throws Exception {
 

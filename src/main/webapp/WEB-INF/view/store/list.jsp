@@ -78,8 +78,8 @@ function searchList() {
 	f.submit();
 }
 
-function article(num) {
-	var url="${articleUrl}&num="+num;
+function article(productId) {
+	var url="${articleUrl}&productId="+productId;
 	location.href=url;
 }
 
@@ -110,22 +110,22 @@ function article(num) {
 	
 			<!-- 상품 이미지 -->
 			<div class="product-image">
-				<a href="<%=cp%>/store/article">
+				<a href="javascript:article('${dto.productId}');">
 					<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-					<%-- <img src="<%=cp%>/uploads/photo/${dto.imageFilename}"> --%>
+					<%-- <img src="<%=cp%>/uploads/store/${dto.imageFilename}"> --%>
 				</a>
 			</div>
 			
 			<!-- 브랜드명 -->
-			<div class="product-brand">
-				<span class="brand" onclick="javascript:article('${dto.productId}');" >
+			<div class="product-brand" onclick="javascript:article('${dto.productId}');">
+				<span class="brand">
 					${dto.brand}
 				</span>
 			</div>
 			
 			<!-- 상품 제목 -->
-			<div class="product-title">
-				<span class="productName" onclick="javascript:article('${dto.productId}');" >
+			<div class="product-title" onclick="javascript:article('${dto.productId}');">
+				<span class="productName">
 					${dto.productName}
 				</span>
 			</div>
@@ -143,12 +143,6 @@ function article(num) {
 			</div>
 		</div>
 	</c:forEach>
-	
-	<!-- 
-	<div class="paging" align="center">
-		prev .. 1 2 3 .. next
-	</div>
-	 -->
 	 
 	  <div class="paging" style="text-align: center; min-height: 50px; line-height: 50px;">
             <c:if test="${dataCount==0 }">

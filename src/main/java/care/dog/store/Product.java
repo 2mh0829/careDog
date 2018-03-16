@@ -16,6 +16,9 @@ public class Product {
 	private int isContinued; // 단종여부 - number(1) default 1
 	private int mileage;
 	private int categoryId; // 분류id
+	
+	private int optionId; 
+	private String optionContent;
 
 	private String imageFilename; // 상품 이미지
 	private MultipartFile upload;
@@ -104,7 +107,21 @@ public class Product {
 		return "Product [listNum=" + listNum + ", num=" + num + ", productId=" + productId + ", productName="
 				+ productName + ", brand=" + brand + ", sellingPrice=" + sellingPrice + ", price=" + price + ", amount="
 				+ amount + ", isContinued=" + isContinued + ", mileage=" + mileage + ", categoryId=" + categoryId
-				+ ", imageFilename=" + imageFilename + ", upload=" + upload + "]";
+				+ ", optionId=" + optionId + ", optionContent=" + optionContent + ", imageFilename=" + imageFilename
+				+ ", upload=" + upload + "]";
+	}
+	
+	public int getOptionId() {
+		return optionId;
+	}
+	public void setOptionId(int optionId) {
+		this.optionId = optionId;
+	}
+	public String getOptionContent() {
+		return optionContent;
+	}
+	public void setOptionContent(String optionContent) {
+		this.optionContent = optionContent;
 	}
 	
 }

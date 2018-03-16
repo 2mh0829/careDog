@@ -6,6 +6,7 @@
 <%
 	String cp = request.getContextPath();
 %>
+
 <style>
 .blog-body-left {
 	width: 0%;
@@ -32,7 +33,10 @@
 	height: 100%;
 	float: left;
 }
-
+.messageList{
+/* background-color:green;
+height : 500px; */
+}
 .messengerHeader {
 	float: left;
 	width: 100%;
@@ -89,8 +93,14 @@
 	border-radius: 20px;
 }
 .messageInput{
-	height:20px;
-	border-top: 1px,solid,#D5D5D5;
+	height:60px;
+	border-top-width: 1px;
+	border-top-style:solid;
+	border-top-color:#D5D5D5;
+	padding-left: 15px;
+	padding-top:15px;
+	color : #D5D5D5;
+	font-size: 17px;
 }
 </style>
 <script>
@@ -107,7 +117,10 @@
 		var a = getDocHeight()
 		$(".myPage-layout").css("height", a - 172);
 		$(".messengerBody").css("height", a - 242);
-
+		var c = $(".messengerBody").height();
+		var d = $(".messageInput").height();
+		$(".messageList").css("height",c-80);
+		
 	})
 	function getDocHeight() {
 		var doc = document;
@@ -116,6 +129,27 @@
 				doc.documentElement.offsetHeight, doc.body.clientHeight,
 				doc.documentElement.clientHeight);
 	}
+	function findFriends(){
+		var url="<%=cp%>/messenger/findFriends";
+		var count=0;
+ 		$.ajax({
+			type:"POST",
+			url:url,
+			success:function(data){
+				for(i=0;i<data.friendList.length;i++){
+					count++;
+					
+				}
+				alert(count);
+			},
+			error:function(e){
+				$(".modal-body").text("이이이이이히");
+			    $("#myModal").modal();
+				alert("연결 오류가 발생했습니다.");
+			}
+		}) 
+	}
+
 </script>
 
 <div class="messengerHeader">
@@ -125,8 +159,8 @@
 			<b>CareDog Messenger</b>
 		</div>
 		<div style="width: 35%; float: left;">
-			<img src="<%=cp%>/resource/img/myPage/addBtn.png"
-				style="width: 20px; margin-right: 5px; margin-top: 10px; float: right;">
+			<a id="findFriendsATag" onClick="findFriends();"><img class="addFriendImgBtn" src="<%=cp%>/resource/img/myPage/addBtn.png"
+				style="width: 20px; margin-right: 5px; margin-top: 10px; float: right;"></a>
 		</div>
 	</div>
 	<div class="messengerHeaderRight">이종훈</div>
@@ -161,11 +195,24 @@
 		</div>
 		
 		<div class="messageInput">
-		sdfewf
+		<input type="text" style="border:none;" value="Type a message.."><input style="margin-right:30px; float:right;width:50px; height:30px;" type="button" value="send">
 		</div>
 	</div>
 </div>
-
-
-
-
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
