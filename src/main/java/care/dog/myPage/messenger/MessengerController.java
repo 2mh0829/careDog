@@ -20,7 +20,7 @@ public class MessengerController {
 	@Autowired
 	MessengerService service;
 	
-	@RequestMapping(value="/messenger")
+	@RequestMapping(value="/messenger")//aa
 	public String messenger() throws Exception {
 		return "myPage/messenger/messenger";
 	}
