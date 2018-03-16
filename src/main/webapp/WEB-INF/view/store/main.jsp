@@ -153,6 +153,14 @@
  
 </style>
 
+<script>
+
+function article(productId) {
+	var url="${articleUrl}&productId="+productId;
+	location.href=url;
+}
+
+</script>
 
 <div class="bener">
 
@@ -218,120 +226,45 @@
 		</div>
 	
 		<div class="product-container">
-				
-			<div class="content section01">
 		
-				<!-- 상품 이미지 -->
-				<div class="product-image">
-					<a href="<%=cp%>/store/article">
-						<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-					</a>
-				</div>
-					
-				<!-- 브랜드명 -->
-				<div class="product-brand">
-					<!-- <a href="#">그리니즈</a> -->
-					그리니즈
-				</div>	
-					
-				<!-- 상품 제목 -->
-				<div class="product-title">
-					<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-				</div>
-					
-				<!-- 상품 가격 -->
-				<div class="product-price">
-					<h3 class="priceTxt"><strong>40000</strong>원</h3>
-				</div>
-					
-				<!-- new / best / sale 구분 이미지 -->
-				<div class="product-icon">
-					<img src="<%=cp%>/resource/img/store/new.gif">
-				</div>
-					
-			</div>
+			<c:forEach var="dto" items="${list}" varStatus="status">
+				<div class="content section">
 			
-			<div class="content section02">
-	
-				<div class="product-image">
-					<a href="<%=cp%>/store/article">
-						<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-					</a>
+					<!-- 상품 이미지 -->
+					<div class="product-image">
+						<a href="javascript:article('${dto.productId}');">
+							<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
+							<%-- <img src="<%=cp%>/uploads/store/${dto.imageFilename}"> --%>
+						</a>
+					</div>
+						
+					<!-- 브랜드명 -->
+					<div class="product-brand" onclick="javascript:article('${dto.productId}');">
+						<span class="brand">
+							${dto.brand}
+						</span>
+					</div>
+					
+					<!-- 상품 제목 -->
+					<div class="product-title" onclick="javascript:article('${dto.productId}');">
+						<span class="productName">
+							${dto.productName}
+						</span>
+					</div>
+						
+					<!-- 상품 가격 -->
+					<div class="product-price">
+						<span class="sellingPrice">
+							<strong>${dto.sellingPrice}</strong>원
+						</span>
+					</div>
+					
+					<!-- new / best / sale 구분 이미지 -->
+					<div class="product-icon">
+						<img src="<%=cp%>/resource/img/store/new.gif">
+					</div>
 				</div>
-				
-				<div class="product-brand">
-					<!-- <a href="#">그리니즈</a> -->
-					그리니즈
-				</div>
-				
-				<div class="product-title">
-					<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-				</div>
-				
-				<div class="product-price">
-					<h3 class="priceTxt"><strong>40000</strong>원</h3>
-				</div>
-				
-				<div class="product-icon">
-					<img src="<%=cp%>/resource/img/store/new.gif">
-				</div>
-				
-			</div>
-			
-			<div class="content section03">
-			
-				<div class="product-image">
-					<a href="<%=cp%>/store/article">
-						<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-					</a>
-				</div>
-				
-				<div class="product-brand">
-					<!-- <a href="#">그리니즈</a> -->
-					그리니즈
-				</div>
-				
-				<div class="product-title">
-					<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-				</div>
-				
-				<div class="product-price">
-					<h3 class="priceTxt"><strong>40000</strong>원</h3>
-				</div>
-				
-				<div class="product-icon">
-					<img src="<%=cp%>/resource/img/store/new.gif">
-				</div>
-				
-			</div>
-			
-			<div class="content section04">
-			
-				<div class="product-image">
-					<a href="<%=cp%>/store/article">
-						<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-					</a>
-				</div>
-				
-				<div class="product-brand">
-					<!-- <a href="#">그리니즈</a> -->
-					그리니즈
-				</div>
-				
-				<div class="product-title">
-					<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-				</div>
-				
-				<div class="product-price">
-					<h3 class="priceTxt"><strong>40000</strong>원</h3>
-				</div>
-				
-				<div class="product-icon">
-					<img src="<%=cp%>/resource/img/store/new.gif">
-				</div>
-				
-			</div>
-				
+			</c:forEach>
 		</div>
 		
 		<div class="btn-area" align="center">
@@ -361,118 +294,52 @@
 
 <div class="body-container">	
 	<div class="containerWrap">
+	
 		<div class="sub-title">
 			<h2>BEST SELLER</h2>
 		</div>
+		
 		<div class="product-container">
 		
-			<div class="content section01">
-		
-				<div class="product-image">
-					<a href="<%=cp%>/store/article">
-						<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-					</a>
-				</div>
-				
-				<div class="product-brand">
-					<!-- <a href="#">그리니즈</a> -->
-					그리니즈
-				</div>
+			<c:forEach var="dto" items="${list}" varStatus="status">
+				<div class="content section">
+			
+					<!-- 상품 이미지 -->
+					<div class="product-image">
+						<a href="javascript:article('${dto.productId}');">
+							<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
+							<%-- <img src="<%=cp%>/uploads/store/${dto.imageFilename}"> --%>
+						</a>
+					</div>
+						
+					<!-- 브랜드명 -->
+					<div class="product-brand" onclick="javascript:article('${dto.productId}');">
+						<span class="brand">
+							${dto.brand}
+						</span>
+					</div>
 					
-				<div class="product-title">
-					<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-				</div>
+					<!-- 상품 제목 -->
+					<div class="product-title" onclick="javascript:article('${dto.productId}');">
+						<span class="productName">
+							${dto.productName}
+						</span>
+					</div>
+						
+					<!-- 상품 가격 -->
+					<div class="product-price">
+						<span class="sellingPrice">
+							<strong>${dto.sellingPrice}</strong>원
+						</span>
+					</div>
 					
-				<div class="product-price">
-					<h3 class="priceTxt"><strong>40000</strong>원</h3>
+					<!-- new / best / sale 구분 이미지 -->
+					<div class="product-icon">
+						<img src="<%=cp%>/resource/img/store/new.gif">
+					</div>
 				</div>
-					
-				<div class="product-icon">
-					<img src="<%=cp%>/resource/img/store/new.gif">
-				</div>
-					
-			</div>
+			</c:forEach>
 			
-			<div class="content section02">
-	
-				<div class="product-image">
-					<a href="<%=cp%>/store/article">
-						<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-					</a>
-				</div>
-				
-				<div class="product-brand">
-					<!-- <a href="#">그리니즈</a> -->
-					그리니즈
-				</div>
-				
-				<div class="product-title">
-					<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-				</div>
-				
-				<div class="product-price">
-					<h3 class="priceTxt"><strong>40000</strong>원</h3>
-				</div>
-				
-				<div class="product-icon">
-					<img src="<%=cp%>/resource/img/store/new.gif">
-				</div>
-				
-			</div>
-			
-			<div class="content section03">
-			
-				<div class="product-image">
-					<a href="<%=cp%>/store/article">
-						<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-					</a>
-				</div>
-				
-				<div class="product-brand">
-					<!-- <a href="#">그리니즈</a> -->
-					그리니즈
-				</div>
-				
-				<div class="product-title">
-					<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-				</div>
-				
-				<div class="product-price">
-					<h3 class="priceTxt"><strong>40000</strong>원</h3>
-				</div>
-				
-				<div class="product-icon">
-					<img src="<%=cp%>/resource/img/store/new.gif">
-				</div>
-				
-			</div>
-			
-			<div class="content section04">
-			
-				<div class="product-image">
-					<a href="<%=cp%>/store/article">
-						<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-					</a>
-				</div>
-				
-				<div class="product-brand">
-					<!-- <a href="#">그리니즈</a> -->
-					그리니즈
-				</div>
-				
-				<div class="product-title">
-					<a href="<%=cp%>/store/article">[그리니즈] 펫타이트 덴탈껌 30개입</a>
-				</div>
-				
-				<div class="product-price">
-					<h3 class="priceTxt"><strong>40000</strong>원</h3>
-				</div>
-				
-				<div class="product-icon">
-					<img src="<%=cp%>/resource/img/store/new.gif">
-				</div>
-				
-			</div>
 		</div>
 		<div class="btn-area" align="center">
 			<a href="<%=cp%>/store/list" class="">
