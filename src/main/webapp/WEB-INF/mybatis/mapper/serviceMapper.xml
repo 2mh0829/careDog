@@ -3,8 +3,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="service">
 
-	<insert id="insertService" parameterType="care.dog.service.Service">
-		INSERT INTO SITTING_INPUT(sittingId, title, content, startDate, endDate, reserDiv, reserCost,
+	<insert id="insertService" parameterType="care.dog.service.ServiceDto">
+		INSERT INTO sitting_input(sittingId, title, content, startDate, endDate, reserDiv, reserCost,
 		addPet, addPetCost, carableWeight, carableAge, tag, space, subway, yard, baby,
 		family, other)
 		VALUES (sittingId_seq.NEXTVAL, #{title}, #{content}, #{startDate}, #{endDate}, #{reserDiv}, #{reserCost},

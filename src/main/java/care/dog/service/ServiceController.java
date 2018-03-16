@@ -1,11 +1,15 @@
 package care.dog.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("service.serviceController")
 public class ServiceController {
+	
+	@Autowired
+	private ServiceService service;
 	
 	@RequestMapping(value="/service")
 	public String main() {
@@ -24,9 +28,12 @@ public class ServiceController {
 	}
 	
 	@RequestMapping(value="/service/sitter_input", method=RequestMethod.POST)
-	public String sitter_input_submit(Service dto) {
+	public String sitter_input_submit(ServiceDto dto) {
 		
-		return "redirect:/bbs/list";
+		service.insertService(dto);
+		System.out.println(dto.toString());
+		
+		return "redirect:/service";
 		
 	}
 

@@ -72,6 +72,8 @@ $(function(){
 
 <style>
 
+.ui-datepicker-calendar > tbody td.ui-datepicker-week-end:last-child a { color: red; }
+
 .ui-datepicker{ 
 	z-index: 9999 !important;
 }
@@ -386,7 +388,7 @@ li>a>span{
     margin: 0 auto;
     clear: both;
     position: relative;
-    border: 1px solid #bcbcbc;
+    /* border: 1px solid #bcbcbc; */
 }
 
 .sitter-list {
@@ -533,6 +535,7 @@ li>a>span{
 .inner {
 	width: 100%;
 	height: 220px;
+	border: 1px solid orange;
 }
 
 .pull-right{
