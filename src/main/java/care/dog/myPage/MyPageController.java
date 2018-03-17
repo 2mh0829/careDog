@@ -1,5 +1,5 @@
 package care.dog.myPage;
-
+//aa
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -122,7 +122,7 @@ public class MyPageController {
 		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
-		MyPageInfo myPageInfo=myPageService.readMyPageInfoHome(myPageId);
+		MyPageInfo myPageInfo=myPageService.readMyPageInfoHome(myPageId);//asdsadsadsad
 		if(myPageInfo==null) {
 			return "redirect:/nmyPage";
 		}

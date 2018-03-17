@@ -188,4 +188,14 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return result;
 	}
+
+	@Override
+	public int memberIdCheck(String memberId) {
+		int result = 0;
+		try {
+			result = dao.selectOne("member.memberIdCheck", "memberId");
+		} catch (Exception e) {
+		}
+		return result;
+	}
 }

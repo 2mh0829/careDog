@@ -77,7 +77,62 @@ body {
 <script>
 
 function memberIdCheck() {
+	var url = "<%=cp %>/member/memberIdCheck";
+	var memberId = $("#memberId").val();
+	var data = {memberId:memberId};
 	
+	if(memberId.length < 5 || memberId > 12){
+		$("#memberId-help").css("color", "red");
+		$("#memberId-help").text("아이디는 5~12자어야 합니다.");
+		return;
+	}
+	
+	$.ajax({
+		url: url
+		,data: data
+		,dataType: "json"
+		,success: function(data) {
+			/* if(data == 0){
+				$("#memberId-help").css("color", "blue");
+				$("#memberId-help").text("사용가능한 아이디입니다.");
+			}else {
+				$("#memberId-help").css("color", "red");
+				$("#memberId-help").text("이미 존재하는 아이디입니다.");
+			} */
+			console.log(data.passed);
+		}
+		,error: function(e) {
+			console.log(e);
+		}
+	});
+	
+}
+
+function userPwdChecked1() {
+	var f = document.memberForm;
+	var str = f.userPwd.value;
+	str = str.trim();
+	if(!/^(?=.*[a-z])(?=.*[!@#$%^*+=-]|.*[0-9]).{5,12}$/i.test(str)) { 
+		$("#userPwd-Help").css("color", "red");
+		$("#userPwd-Help").text("패스워드는 5~12자이며 하나 이상의 숫자나 특수문자가 포함되어야 합니다.");
+		f.userPwd.focus();
+		return;
+	}
+	$("#userPwd-Help").css("color", "blue");
+	$("#userPwd-Help").text("사용가능합니다.");
+}
+
+function userPwdChecked2() {
+	var f = document.memberForm;
+	var str = f.userPwd.value;
+	if(str!= f.userPwdCheck.value) {
+		$("#userPwdCheck-Help").css("color", "red");
+		$("#userPwdCheck-Help").text("패스워드가 일치하지 않습니다.");
+        f.userPwdCheck.focus();
+        return;
+	}
+		$("#userPwdCheck-Help").css("color", "blue");
+		$("#userPwdCheck-Help").text("패스워드가 일치합니다.");
 }
 
 function changeEmail() {
@@ -87,13 +142,38 @@ function changeEmail() {
     if(str!="direct") {
         f.email2.value=str; 
         f.email2.readOnly = true;
-        f.email1.focus(); 
     }
     else {
         f.email2.value="";
         f.email2.readOnly = false;
-        f.email1.focus();
+		f.email2.focus(); 
     }
+    emailChecked();
+}
+
+function emailChecked() {
+	var f = document.memberForm;
+	var url = "<%=cp %>/member/emailChecked";
+	var email1 = f.email1.value;
+	var email2 = f.email2.value;
+	var email = email1 + "@" + email2;
+	var data = {email:email};
+	
+	$.ajax({
+		url: url
+		,data: data
+		,dataType: "json"
+		,success: function(data) {
+			console.log("success"); 
+		}
+	});
+}
+
+function checkForNumber() {
+	if((event.keyCode > 47) && (event.keyCode < 58)) {
+		return;
+	}
+	event.returnValue = false;
 }
 
 function joinNext() {
@@ -107,8 +187,8 @@ function joinNext() {
 		f.memberId.focus();
 		return;
 	}
-	if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
-		alert("아이디는 5~10자이며 첫글자는 영문자이어야 합니다.");
+	if(!/^[a-z0-9_]{5,12}$/i.test(str)) { 
+		alert("아이디는 5~12자어야 합니다.");
 		f.memberId.focus();
 		return;
 	}
@@ -235,7 +315,7 @@ function joinNext() {
 	                         ${mode=="update" ? "readonly='readonly' ":""}
 	                         maxlength="15" class="boxTF" placeholder="아이디">
 				        </p>
-				        <p class="help-block">아이디는 5~10자 이내이며, 첫글자는 영문자로 시작해야 합니다.</p>
+				        <p id="memberId-help" class="help-block">아이디는 5~12자어야 합니다.</p>
 				      </td>
 				  </tr>
 				
@@ -246,9 +326,9 @@ function joinNext() {
 				      <td style="padding: 0 0 15px 15px;">
 				        <p style="margin-top: 1px; margin-bottom: 5px;">
 				            <input type="password" name="userPwd" maxlength="15" class="boxTF"
-				                       style="width:95%;" placeholder="패스워드">
+				                       style="width:95%;" placeholder="패스워드" onchange="userPwdChecked1();">
 				        </p>
-				        <p class="help-block">패스워드는 5~10자 이내이며, 하나 이상의 숫자나 특수문자가 포함되어야 합니다.</p>
+				        <p id="userPwd-Help" class="help-block">패스워드는 5~12자 이내이며, 하나 이상의 숫자나 특수문자가 포함되어야 합니다.</p>
 				      </td>
 				  </tr>
 				
@@ -259,9 +339,9 @@ function joinNext() {
 				      <td style="padding: 0 0 15px 15px;">
 				        <p style="margin-top: 1px; margin-bottom: 5px;">
 				            <input type="password" name="userPwdCheck" maxlength="15" class="boxTF"
-				                       style="width: 95%;" placeholder="패스워드 확인">
+				                       style="width: 95%;" placeholder="패스워드 확인" onchange="userPwdChecked2();">
 				        </p>
-				        <p class="help-block">패스워드를 한번 더 입력해주세요.</p>
+				        <p id="userPwdCheck-Help" class="help-block">패스워드를 한번 더 입력해주세요.</p>
 				      </td>
 				  </tr>
 				
@@ -298,9 +378,9 @@ function joinNext() {
 				      </td>
 				      <td style="padding: 0 0 15px 15px;">
 				        <p style="margin-top: 1px; margin-bottom: 5px;">
-				            <input type="text" name="email1" value="${dto.email1}" size="13" maxlength="30"  class="boxTF">
+				            <input type="text" name="email1" value="${dto.email1}" size="13" maxlength="30" onchange="emailChecked();" class="boxTF">
 				            @ 
-				            <input type="text" name="email2" value="${dto.email2}" size="13" maxlength="30"  class="boxTF" readonly="readonly">
+				            <input type="text" name="email2" value="${dto.email2}" size="13" maxlength="30" onchange="emailChecked();" class="boxTF" readonly="readonly">
 				            <select name="selectEmail" onchange="changeEmail();" class="selectField">
 				                <option value="">선 택</option>
 				                <option value="naver.com" ${dto.email2=="naver.com" ? "selected='selected'" : ""}>네이버 메일</option>
@@ -329,9 +409,9 @@ function joinNext() {
 				                <option value="019" ${dto.tel1=="019" ? "selected='selected'" : ""}>019</option>
 				            </select>
 				            -
-				            <input type="text" name="tel2" value="${dto.tel2}" class="boxTF" maxlength="4">
+				            <input type="text" name="tel2" value="${dto.tel2}" class="boxTF" maxlength="4" onkeypress="checkForNumber();">
 				            -
-				            <input type="text" name="tel3" value="${dto.tel3}" class="boxTF" maxlength="4">
+				            <input type="text" name="tel3" value="${dto.tel3}" class="boxTF" maxlength="4" onkeypress="checkForNumber();">
 				        </p>
 				      </td>
 				  </tr>

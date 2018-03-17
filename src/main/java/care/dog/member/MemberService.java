@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface MemberService {
-	public Member readMember(String userId); //
+	public Member readMember(String memberId); //
+	public int memberIdCheck(String memberId);
 	
 	public void insertMember(Member dto) throws Exception ; //
 	

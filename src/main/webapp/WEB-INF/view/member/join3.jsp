@@ -46,6 +46,8 @@ h1 {
 </style>
 
 <script>
+
+
 var i = 59;
 var time1 = setInterval(function() {
 	if(i == 0){
@@ -97,10 +99,26 @@ function authCheck() {
 		url: url
 		,data: data
 		,success: function(){
-			alert("세션 시간이 만료되었습니다.");
+			alert("세션 시간이 만료되었습니다. 로그인 페이지로 이동합니다.");
+			location.href = "<%=cp %>/member/login";
 		}
 	});
 }
+
+
+function noEvent() {
+	if (event.keyCode == 116) {
+		event.keyCode = 2;
+		return false;
+	} else if (event.ctrlKey && (event.keyCode == 78 || event.keyCode == 82)) {
+		return false;
+	}
+}
+
+$(function() {
+	document.onkeydown = noEvent;
+	$("body").attr("oncontextmenu", "return false");
+});
 
 </script>
 

@@ -1,5 +1,5 @@
 package care.dog.myPage.guest;
-
+//aa
 public class Guest {
 	private int num;
 	private String memberId, userName, content, created;
