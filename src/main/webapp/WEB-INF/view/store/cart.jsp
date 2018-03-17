@@ -171,56 +171,6 @@ th {
 							</div>
 						</td>
 					</tr>
-					<!-- 후에 삭제될 tr -->
-					<tr>
-						<td>
-							<div class="divTd" style="width: 50px;">
-								<p><input type="checkbox" id="check_td_cart"></p>
-							</div>
-						</td>
-						<td>
-							<div class="divFloat product_img" style="width: 110px;">
-								<img src="<%=cp%>/resource/img/store/dog_snack1.jpg" 
-								style="width: 100px;">
-							</div>
-							<div class="divFloat product_name" style="width: 350px;">
-								<p class="pNameTxt1">서울우유</p>
-								<p class="pNameTxt2">[서울우유] 아이펫밀크 180ml x 10ea</p>
-								<p class="pNameTxt3">옵션 : 180ml x 10ea</p>
-							</div>
-						</td>
-						<td>
-							<div class="divTd" style="width: 100px;">
-								<p>
-									<select id="productCntSel" name="productCntSel" class="select"
-									style="width: 90px;">
-										<option value="1" selected="selected">1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-										<option value="6">6</option>
-										<option value="7">7</option>
-										<option value="8">8</option>
-										<option value="9">9</option>
-										<option value="10">10</option>
-									</select>
-								</p>
-							</div>
-						</td>
-						<td>
-							<div class="divTd" style="width: 100px;">
-								<p>30,000원</p>
-							</div>
-						</td>
-						<td>
-							<div class="divTd" style="width: 100px;">
-								<p>
-									<button type="button" class="btn btn-default deleteBtn">X</button>
-								</p>
-							</div>
-						</td>
-					</tr>
 				</tbody>
 			</table>
 			
