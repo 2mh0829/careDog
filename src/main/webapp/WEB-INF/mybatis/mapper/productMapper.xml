@@ -81,6 +81,25 @@
 	where productId = #{productId}
 	</select>
 	
+	<select id="listProductQna" parameterType="map" resultType="care.dog.store.Qna">
+	SELECT * FROM (
+		SELECT ROWNUM rnum, tb.* FROM (
+			SELECT qnaId, question, answer, to_char(qCreated, 'yyyy.mm.dd') qCreated, 
+           to_char(aCreated, 'yyyy.mm.dd') aCreated, isAnswered, productId, memberId 
+			FROM productQna
+            where productId = #{productId}
+			ORDER BY qCreated desc
+	<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>
+	</select>
+	
+	<select id="dataCountQna" parameterType="Integer" resultType="Integer">
+	SELECT NVL(COUNT(*), 0) FROM productQna
+	where productId = #{productId}
+	</select>
+	
 </mapper>
 
 

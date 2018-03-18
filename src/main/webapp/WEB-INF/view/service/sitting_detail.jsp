@@ -223,7 +223,7 @@ li{
 	color:#ffffff;
 	font-family:Arial;
 	font-size:17px;
-	padding: 15px 110px;
+	padding: 15px 116px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2f6627;
 	float: left;

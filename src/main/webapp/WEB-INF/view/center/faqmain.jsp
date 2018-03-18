@@ -143,11 +143,18 @@ function reloadBoard() {
 // 글쓰기폼
 function insertForm(num) {
 	var url="<%=cp%>/center/faq/create";
-	var query = "num="+num;
+	var query = "num="+num+"&faqsort="+faqsort;
+	alert(query);
 	ajaxHTML(url, "get", query);
 }
 
-// 글등록, 수정등록, 답변등록
+var faqsort = '2';
+function aaa(value){
+	faqsort = value;
+	
+}
+
+//글등록, 수정등록, 답변등록
 function sendOk(mode, page) {
     var f = document.boardForm;
 
@@ -167,12 +174,10 @@ function sendOk(mode, page) {
 	
     var url="<%=cp%>/center/faq/"+mode;
     var query = new FormData(f); // IE는 10이상에서만 가능
-    
+    query.append("faqsort",faqsort);
 	$.ajax({
         type:"post"
         ,url:url
-        ,processData: false  // file 전송시 필수
-        ,contentType: false  // file 전송시 필수
         ,data: query
         ,dataType:"json"
         ,success:function(data) {
@@ -221,32 +226,20 @@ function faqBoard(num, page, faqsort) {
 
 // 글 수정폼
 function updateForm(num, page) {
-	var $tab = $("ul.comm1sTabs .active");
-	var tab = $tab.attr("data-tab");
-	var url="<%=cp%>/center/"+tab+"/update";
-	
-	var query;
-	if(tab=="gongji")
-		query="num="+num;
-	else
-		query="num="+num;
-	query=query+"&pageNo="+page
-	
+	var url="<%=cp%>/center/faq/update";
+	var query="num="+num;
+	query=query+"&pageNo="+page;
+	alert(query);
 	ajaxHTML(url, "get", query);
+	
 }
 
  // 글 삭제
 function deleteBoard(num, page) {
-	var $tab = $("ul.comm1sTabs .active");
-	var tab = $tab.attr("data-tab");
-	var url="<%=cp%>/center/"+tab+"/delete";
+	var url="<%=cp%>/center/faq/delete";
 	
-	var query;
-	if(tab=="gongji") {
-		query="num="+num;
-	} else { 
-		query="num="+num;
-	}
+	var query="num="+num;	
+	query=query+"&pageNo="+page;
 	
 	if(! confirm("위 게시물을 삭제 하시 겠습니까 ? "))
 		  return;

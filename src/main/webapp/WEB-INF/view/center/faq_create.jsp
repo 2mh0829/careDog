@@ -124,13 +124,13 @@ textarea {
 	<tbody>
 					<tr>
 					<td>
-						<select id="sfaqsort">
-							<option value="tabfmember">회원/멤버십</option>
-							<option value="tabfbuy">주문/결제</option>
-							<option value="tabfdelivery">배송</option>
-							<option value="tabfrefund">교환/환불/반품</option>
-							<option value="tabfevent">이벤트</option>
-							<option value="tabetc">기타</option>
+						<select id="sfaqsort" onchange="aaa(this.value);">
+							<option value="2" >회원/멤버십</option>
+							<option value="3">주문/결제</option>
+							<option value="4">배송</option>
+							<option value="5">교환/환불/반품</option>
+							<option value="6">이벤트</option>
+							<option value="7">기타</option>
 						</select>
 					</td>
 					<td>

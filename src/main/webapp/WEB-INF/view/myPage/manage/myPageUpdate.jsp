@@ -10,30 +10,10 @@
   function sendMyPage() {
         var f = document.myPageForm;
 
-    	var str = f.groupNum.value;
-        if(!str) {
-            alert("블로그 주제를 선택 하세요. ");
-            f.groupNum.focus();
-            return;
-        }
-        
-    	str = f.themeNum.value;
-        if(!str) {
-            alert("블로그 주제를 선택 하세요. ");
-            f.themeNum.focus();
-            return;
-        }
-
-    	str = f.title.value;
-        if(!str || str.length>50) {
-            alert("50자 이내의 블로그 제목을 입력 하세요. ");
-            f.title.focus();
-            return;
-        }
         
     	str = f.introduce.value;
         if(!str || str.length>150) {
-            alert("150자 이내의 블로그 소개를 입력 하세요. ");
+            alert("150자 이내의 마이페이지 소개를 입력 하세요. ");
             f.introduce.focus();
             return;
         }
@@ -59,21 +39,15 @@
     			return false;
     		}
     	}        
-    	str = f.prologue.value;
-        if(!str) {
-            alert("프롤로그를 입력하세요. ");
-            f.prologue.focus();
-            return false;
-        }
 
-       f.action = "<%=cp%>/myPage/${dto.myPageSeq}/updateMyPage";
+       f.action = "<%=cp%>/myPage/${dto.myPageId}/updateMyPage";
             
        f.submit();
   }
   
   function profileImageDelete() {
 		if(confirm("등록된 사진을 삭제 하시겠습니까 ?")) {
-			var url="<%=cp%>/myPage/${dto.myPageSeq}/deleteImageMyPage";
+			var url="<%=cp%>/myPage/${dto.myPageId}/deleteImageMyPage";
 			var filename="${dto.photoFilename}";
 			var uid="${dto.userId}";
 			$.post(url, {filename:filename, userId:uid}, function(data){
@@ -92,23 +66,15 @@
 
 <div>
          <div style="width: 100%; height: 30px; line-height: 30px; border-bottom: 1px solid #212121;">
-              <b>블로그 수정</b>
+              <b>마이페이지 수정</b>
          </div>
          
         <div style="width: 100%; clear: both;">
     		<form name="myPageForm" method="post" enctype="multipart/form-data">
 			  <table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
 
-			
-			  <tr height="40"> 
-			      <td width="100" style="text-align: left;">제목</td>
-			      <td colspan="2"> 
-			        <input type="text" name="title" maxlength="100" class="boxTF" style="width: 98%;" value="${dto.title}">
-			      </td>
-			  </tr>
-			
 			  <tr> 
-			      <td width="100" style="text-align: left; padding-top:5px;" valign="top">블로그 소개<br>(150자 이내)</td>
+			      <td width="100" style="text-align: left; padding-top:5px;" valign="top">마이페이지 소개<br>(150자 이내)</td>
 			      <td colspan="2" valign="top" style="padding:5px 0px 5px 0px;"> 
 			           <textarea name="introduce" cols="75" rows="5" class="boxTA" style="width:98%; height: 50px;">${dto.introduce}</textarea>
 			      </td>
@@ -198,7 +164,7 @@
 			  </tr>
 
 			  <tr height="40">
-			      <td width="100" style="text-align: left;">블로그공개</td>
+			      <td width="100" style="text-align: left;">마이페이지공개</td>
 			      <td colspan="2"> 
 			            <input type="radio" value="0" name="closed" ${dto.closed=="0"?"checked='checked'":"" }> 공개&nbsp;&nbsp;&nbsp;
 			            <input type="radio" value="1" name="closed" ${dto.closed=="1"?"checked='checked'":"" }> 비공개
@@ -217,7 +183,7 @@
 			     <tr height="45"> 
 			      <td align="center" >
 					   <button type="button" class="btn1" onclick="sendMyPage();"> 수정완료 </button>
-                       <button type="button" class="btn1" onclick="javascript:location.href='<%=cp%>/myPage/${dto.myPageSeq}/manage';"> 수정취소 </button>
+                       <button type="button" class="btn1" onclick="javascript:location.href='<%=cp%>/myPage/${dto.myPageId}';"> 수정취소 </button>
                        <input type="hidden" name="photoFilename" value="${dto.photoFilename}">
 			      </td>
 			    </tr>

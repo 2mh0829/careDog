@@ -43,6 +43,13 @@ function profile() {
 	});
 	
 }
+function editBlogProfileInfo() {
+	var url="<%=cp%>/myPage/editBlogProfileInfo";
+	$.get(url, {temp:new Date().getTime()}, function(data){
+		$(".myPage-body").html(data);
+	});
+	
+}
 
 </script>
 
@@ -56,7 +63,7 @@ function profile() {
           </c:if>
            <c:if test="${myPageInfo.memberId==sessionScope.member.memberId}">
          <div style="margin-top:10px; padding: 5px 2px; text-align: center;">
-             [<a href="javascript:postInsert();"><b>프로필 사진 수정</b></a> <c:if test="${myPageInfo.memberId==sessionScope.member.memberId}">
+             [<a href="javascript:editBlogProfileInfo();"><b>프로필 수정</b></a> <c:if test="${myPageInfo.memberId==sessionScope.member.memberId}">
                   | <a href="${myPageUrl}/manage"><b>관리</b></a>
              </c:if>]
          </div>
