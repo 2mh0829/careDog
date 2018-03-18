@@ -24,7 +24,7 @@
 .imageView__snsGroup a { display: inline-block; line-height: 1; }
 .imageView__viewReplayWrite { padding: 20px 0 10px 0; }
 .imageView__viewReplayWrite:after { display: block; content: ""; clear: both; }
-.imageView__replyTitle { float: left; font-size: 14px; color: #222222; font-weight: 800; padding-right: 15px; margin-right: 17px; height: 32px; line-height: 32px; background: url("../images/content/replyWriteIcon.jpg") right center no-repeat; }
+.imageView__replyTitle { float: left; font-size: 14px; color: #222222; font-weight: 800; padding-right: 15px; margin-right: 17px; height: 32px; line-height: 32px; background: url("<%=cp%>/resource/img/dog119/replyWriteIcon.jpg") right center no-repeat; }
 .imageView__writerInfo { float: left; font-size: 13px; color: #767676; font-weight: 400; }
 .imageView__writerInfo:before { content: " | "; padding-right: 13px; }
 .imageView__writerInfo input[type="text"],
@@ -128,9 +128,10 @@ function listPage(page){
 			content+=data.memberId+"</div><div class='imageView__writeDate'>";
 			content+=data.created+"| <a href='#'>삭제</a></div></div>";
 			content+="<div class='imageView__replyContent'>"+data.content+"</div></li>";
+			content+=data.paging;
 		}
 	});
-	
+	y
 	$(".dhReplyList").append(content);
 }
 

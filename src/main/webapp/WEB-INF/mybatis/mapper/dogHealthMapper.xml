@@ -80,7 +80,7 @@
 	<select id="dhReplyList" parameterType="map" resultType="care.dog.dog119.dogHealthVo.DhReplyVo">
 			SELECT*FROM(
 				SELECT ROWNUM rnum, tb.* FROM(
-					SELECT dhReplyNum, m.memberId, b.boardNum, dhReplyContent, created
+					SELECT dhReplyNum, m.memberId, boardNum, dhReplyContent, created
 					FROM dogHealthReply dhr
 					JOIN member1 m ON dhr.memberId=m.memberId
 					WHERE boardNum=#{boardNum}
