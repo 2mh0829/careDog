@@ -87,6 +87,8 @@ function memberIdCheck() {
 		return;
 	}
 	
+	alert(url);
+	
 	$.ajax({
 		url: url
 		,data: data
