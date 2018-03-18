@@ -52,7 +52,17 @@ $(function() {
 			});
 });
 
-// just jsp --
+$(function(){
+	$("body").on('click','#care-div li>a',function(){
+		$('#careTime').text($(this).text());
+	});
+});
+
+$(function(){
+	$("body").on('click','#carePay li>a',function(){
+		$('#payTxt').text($(this).text());
+	});
+});
 
 $(function(){
 	$("body").on('click','#sizeDD li>a',function(){
@@ -66,21 +76,61 @@ $(function(){
 	});
 });
 
-//--
-
-$(function(){
+$(function(){ // 돌봄비용 * 부가세 (소수점 절삭, 1의자리 0으로)
 	$("body").on('change','.inputMoney',function(){
-		var sum = parseInt($("#inputMoney-date").val()) + parseInt($("#inputMoney-dog").val());
-		tot = sum + sum * 1/10;
-		$('.totPrice').html(tot);
+		// 돌봄비용 + 반려견 추가비용
+		var sum = parseInt($("#inputMoney-date").val());
+		tot = (sum + sum * 1/10);
 		
-		// tot를 .submit으로 보낸다
+		// 소수점 절삭, 1의자리 0으로
+		tot = Math.floor(tot/10)*10;
+		
+		$('.totPrice').html(tot);
 	})
 });
 
+/* $(function(){ // 돌봄비용 + 반려견 추가비용 (소수점 절삭, 1의자리 0으로)
+	$("body").on('change','.inputMoney',function(){
+		// 돌봄비용 + 반려견 추가비용
+		var sum = parseInt($("#inputMoney-date").val()) + parseInt($("#inputMoney-dog").val());
+		tot = (sum + sum * 1/10);
+		
+		// 소수점 절삭, 1의자리 0으로
+		tot = Math.floor(tot/10)*10;
+		
+		$('.totPrice').html(tot);
+	})
+}); */
+
 </script>
 <script type="text/javascript">
-		
+
+// 반려견 X 선택시 버튼 비활성화
+function setDisabled() {
+	/* alert("YOU PUT "+elementId+" !!"); */
+	document.getElementById('inputMoney-dog').value='';
+	document.getElementById('inputMoney-dog').readOnly=true;
+	/* alert(el); */
+}
+
+// 반려견 추가 선택시 버튼 재활성화
+function setAbled(){
+	/* document.getElementById('inputMoney-dog').value=''; */
+	document.getElementById('inputMoney-dog').readOnly=false;
+	document.getElementById('inputMoney-dog').value='';
+}
+
+// input창에 숫자만 가능하게
+function inputOnlyNum(){
+	 var acode = event.keyCode;
+	 if(acode == 37 || acode == 39 || acode == 8 || acode == 127 || acode == 9 || (acode>47 && acode<58) || (acode>95 && acode<106)) {
+	 	/* alert("YEEES"); */
+	 } else {
+		alert("ONLY NUMBER !!");
+	  	return false;
+	 }
+}
+	
 </script>
 
 <style>
@@ -105,7 +155,7 @@ li {
 .main-top {
 	padding-bottom: 6px;
 	/* border: 1px solid blue; */
-	/* height: 495px; */
+	height: 564px;
 }
 
 .main-top-slider {
@@ -132,7 +182,7 @@ li {
     height: 133px;
     float: left;
     margin-right: 20px;
-    border: 3px dotted black;
+    border: 3px dotted orange;
     margin-bottom: 80px;
 }
 
@@ -145,7 +195,7 @@ li {
 	/* float: right; */
 	height: 345px;
 	/* z-index: 97; */
-	border: 1px solid #ffb861;
+	border: 1px solid orange;
 	display: inline-block;
 }
 
@@ -280,7 +330,7 @@ li {
 }
 
 .row {
-	border: 1px solid #ffb861;
+	border: 1px solid orange;
 	/* border: 1px solid blue; */
 	/* margin-left: 1px; */
 	/* margin-right: auto; */
@@ -301,8 +351,8 @@ li {
 
 .inner {
 	/* border: 1px solid red; */
-	height: 600px;
-	margin-top: 130px;
+	height: 1000px;
+	/* margin-top: 130px; */
 }
 
 .row .carryAble {
@@ -526,7 +576,7 @@ li {
 }
 
 .main-photos {
-	border: 3px solid #ffb861;
+	border: 3px dotted orange;
 	height: 410px;
 	width: 980px;
 }
@@ -578,7 +628,7 @@ li {
 
 .main-text {
 	resize: none;
-    margin: 25px;
+    /* margin: 25px; */
     border: none;
     font-size: 20px;
 }
@@ -589,6 +639,24 @@ li {
     border-radius: 4px;
     border: 1px solid #ccc;
     margin-top: 5px;
+}
+
+.hi {
+	border: 1px solid orange;
+    height: 250px;
+    margin-top: 60px;
+    margin-right: 20px;
+}
+
+.hi-sitter {
+	font-size: 18px;
+    padding-bottom: 10px;
+    margin: 12px;
+    border-bottom: 1px solid #ccc;
+}
+
+.hi-body {
+	padding: 12px;
 }
 
 </style>
@@ -602,13 +670,13 @@ li {
 	<div class="main-top">
 		<div class="main-top-slider">
 			<div class="main-photos">
-				<textarea class="main-text" cols="91" rows="13"></textarea>
 			</div>
-			<!-- <ul class="photo-array">
+			<ul class="photo-array">
 				<li class="array-small"></li>
 				<li class="array-small"></li>
 				<li class="array-small"></li>
-			</ul> -->
+			</ul>
+			
 		</div>
 	</div>
 	<div class="inner">
@@ -629,16 +697,16 @@ li {
 						<dt>
 							<div class="dropdown">
 								<button type="button" class="inputBtn" data-toggle="dropdown">
-									<span id="">24시간 돌봄</span> <span class="caret"></span>
+									<span id="careTime">24시간 돌봄</span> <span class="caret"></span>
 								</button>
-								<ul class="dropdown-menu" id="reserDiv">
+								<ul class="dropdown-menu" id="care-div">
 									<li value="1"><a href="#">24시간 돌봄</a></li>
 									<li value="2"><a href="#">데이케어</a></li>
 								</ul>
 							</div>
 						</dt>
 						<dd>
-							<input type="text" id="inputMoney-date" class="inputMoney" value="입력하세요" onclick="this.value=''">원
+							<input type="text" id="inputMoney-date" class="inputMoney" value="입력하세요" onclick="this.value=''" onkeydown="return inputOnlyNum();">원
 							<!-- <span class="oneDayPrice">30,000원</span> -->
 						</dd>
 						<dt>
@@ -651,18 +719,19 @@ li {
 									<i class="glyphicon glyphicon-minus"></i>
 								</button>
 							</div> -->
+
 							<div class="dropdown">
 								<button type="button" class="inputBtn" data-toggle="dropdown">
-									<span id="">반려견 추가비용</span> <span class="caret"></span>
+									<span id="payTxt">반려견 추가비용</span> <span class="caret"></span>
 								</button>
-								<ul class="dropdown-menu">
-									<li><a href="#">반려견 추가비용</a></li>
-									<li><a href="#">반려견 추가 X</a></li>
+								<ul class="dropdown-menu" id="carePay">
+									<li><a href="#" onclick="setAbled()">반려견 추가비용</a></li>
+									<li><a href="#" onclick="setDisabled()">반려견 추가 X</a></li>
 								</ul>
 							</div>
 						</dt>
 						<dd>
-							<input type="text" id="inputMoney-dog" class="inputMoney" value="입력하세요" onclick="this.value=''">원
+							<input type="text" id="inputMoney-dog" class="inputMoney" value="입력하세요" onclick="this.value=''" onkeydown='return inputOnlyNum();'>원
 						</dd>
 						<dt>
 							<span class="input-title">부가세</span>
@@ -671,7 +740,7 @@ li {
 							<span class="oneDayPrice">10%</span>
 						</dd>
 						<dt>
-							<span class="input-title-tot">합계</span>
+							<span class="input-title-tot">하루당 비용</span>
 						</dt>
 						<dd class="price-tot">
 							<span class="totPrice"></span>원
@@ -835,9 +904,14 @@ li {
 					남, 7세</label>
 			</label>
 		</div>
-		<!-- <div class="customer-rating">
-			<h1>후기</h1>
-		</div> -->
+		<div class="hi">
+			<div class="hi-header">
+				<div class="hi-sitter"><span style="font-weight: bold;">김경애</span> 펫시터님의 한마디</div>
+			</div>
+			<div class="hi-body">
+				<textarea class="main-text" cols="104" rows="6"></textarea>
+			</div>
+		</div>
 	</div>
 	</form>
 </div>
