@@ -35,4 +35,15 @@ public class MessengerController {
 		map.put("friendList", list);
 		return map;//why not change?
 	}
+	@ResponseBody
+	@RequestMapping(value="/messenger/getMessageMemberList")
+	public Map<String,Object> getMessageMemberList(HttpSession session) throws Exception {
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		String memberId = info.getMemberId();
+		Map<String,Object> map = new HashMap<>();
+		List<Member> list= service.listFriend(memberId);
+		map.put("friendList", list);
+		return map;//why not change?
+	}
+	
 }

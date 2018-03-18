@@ -12,17 +12,10 @@
   function sendMyPage() {
         var f = document.myPageForm;
 
-
-       str = f.title.value;
-        if(!str || str.length>50) {
-            alert("50자 이내의 블로그 제목을 입력 하세요. ");
-            f.title.focus();
-            return;
-        }
         
        str = f.introduce.value;
         if(!str || str.length>150) {
-            alert("150자 이내의 블로그 소개를 입력 하세요. ");
+            alert("150자 이내의 마이페이지 소개를 입력 하세요. ");
             f.introduce.focus();
             return;
         }
@@ -64,7 +57,7 @@
            <table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
 <%-- 
            <tr height="40"> 
-               <td width="100" style="text-align: left;">블로그주제</td>
+               <td width="100" style="text-align: left;">마이페이지주제</td>
                <td colspan="2"> 
                    <select name="groupNum" id="groupNum" class="selectField"
                                onchange="themeList();">
@@ -79,12 +72,6 @@
                </td>
            </tr> --%>
          
-           <tr height="40">
-               <td width="100" style="text-align: left;">제목</td>
-               <td colspan="2"> 
-                 <input type="text" name="title" size="75" maxlength="100" class="boxTF" style="width: 98%;" value="${dto.title}">
-               </td>
-           </tr>
          
            <tr> 
                <td width="110" style="text-align: left; padding-top:5px;" valign="top">마이페이지 소개<br>(150자 이내)</td>

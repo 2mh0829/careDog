@@ -92,7 +92,22 @@ body {
 <script>
 
 function joinNext() {
-	location.href = "<%=cp %>/member/join2";
+	
+	for(var i=0; i<3; i++){
+		if($(".checked")[i].checked == false){
+			alert("동의 항목을 체크해 주세요.");
+			return;
+		}
+	}
+	
+	var form = document.createElement("form");
+	var url = "<%=cp %>/member/join2";
+	form.setAttribute("action", url);
+	form.setAttribute("method", "post");
+	
+	document.body.appendChild(form);
+	form.submit();
+	
 }
 
 </script>
@@ -338,7 +353,7 @@ function joinNext() {
 				</textarea>
 			</div>
 			<div class="term-agree">
-				<input type="checkbox"><label>&nbsp;동의?</label>
+				<input type="checkbox" class="checked"><label>&nbsp;동의?</label>
 			</div>
 		</div>
 	
@@ -443,7 +458,7 @@ function joinNext() {
 				</textarea>
 			</div>
 			<div class="term-agree">
-				<input type="checkbox"><label>&nbsp;동의?</label>
+				<input type="checkbox" class="checked"><label>&nbsp;동의?</label>
 			</div>
 		</div>
 	
@@ -470,7 +485,7 @@ function joinNext() {
 				</textarea>
 			</div>
 			<div class="term-agree">
-				<input type="checkbox"><label>&nbsp;동의?</label>
+				<input type="checkbox" class="checked"><label>&nbsp;동의?</label>
 			</div>
 		</div>
 	
@@ -480,7 +495,6 @@ function joinNext() {
 		<button class="btn okBtn" onclick="joinNext();">다음</button>
 		<button class="btn cancleBtn" onclick="location.href='<%=cp %>/member/login'">취소</button>
 	</div>
-
 	
 </div>
 

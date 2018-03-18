@@ -9,6 +9,11 @@
 		WHERE m1.memberId = #{memberId}
 	</select>
 	
+	<select id="memberIdCheck" parameterType="String" resultType="Integer">
+		SELECT COUNT(memberId) FROM member1
+		WHERE memberId = #{memberId}
+	</select>
+	
 	<update id="updateLastLogin" parameterType="String">
 		UPDATE  member1 SET last_login = SYSDATE
 		WHERE memberId=#{memberId}

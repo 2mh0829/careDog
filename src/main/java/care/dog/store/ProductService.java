@@ -15,5 +15,9 @@ public interface ProductService {
 	public List<String> readOption(int productId);
 	//상품평 수
 	public int dataCountReply(int productId);
+	//qna 리스트
+	public List<Qna> listProductQna(Map<String, Object> map);
+	//qna 수
+	public int dataCountQna(int productId);
 
 }

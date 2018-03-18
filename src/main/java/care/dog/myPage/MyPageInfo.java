@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class MyPageInfo {
 	private int myPageId,visitorCount,closed;
-	private String memberId,userName, title, introduce,created;
+	private String memberId,userName,introduce,created;
 	private int groupNum, themeNum;
 	private String gender, city, hobby;
 	private String groupSubject, subject;
@@ -43,14 +43,6 @@ public class MyPageInfo {
 
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getIntroduce() {
@@ -184,7 +176,7 @@ public class MyPageInfo {
 	@Override
 	public String toString() {
 		return "MyPageInfo [myPageId=" + myPageId + ", visitorCount=" + visitorCount + ", closed=" + closed
-				+ ", memberId=" + memberId + ", userName=" + userName + ", title=" + title + ", introduce=" + introduce
+				+ ", memberId=" + memberId + ", userName=" + userName + ", introduce=" + introduce
 				+ ", created=" + created + ", groupNum=" + groupNum + ", themeNum=" + themeNum + ", gender=" + gender
 				+ ", city=" + city + ", hobby=" + hobby + ", groupSubject=" + groupSubject + ", subject=" + subject
 				+ ", upload=" + upload + ", profilePhoto=" + profilePhoto + ", isUserName=" + isUserName + ", isCity="

@@ -102,12 +102,34 @@ height : 500px; */
 	color : #D5D5D5;
 	font-size: 17px;
 }
-.friendList{
+.addFriendBtn{
 cursor: pointer
 }
 </style>
 <script>
 	$(document).ready(function() {
+		adjustMessengerLayoutSize();
+		//getMessageMemberList();
+		
+	})
+	function getMessageMemberList(){
+		var url="<%=cp%>/messenger/getMessageMemberList";
+ 		$.ajax({
+			type:"POST",
+			url:url,
+			success:function(data){
+				$(".modal-body").html("");
+				for(i=0;i<data.friendList.length;i++){
+					$(".modal-body").append("<div class='friendList' onClick='getFriend(\""+data.friendList[i].userName+"\");' data-dismiss='modal'>"+data.friendList[i].memberId+"("+data.friendList[i].userName+")</div>");
+					$("#myModal").modal();
+				}
+			},
+			error:function(e){
+				alert("연결 오류가 발생했습니다.");
+			}//"<img src='<%=cp%>/resource/img/myPage/jsh.jpg'"
+		}) 
+	}
+	function adjustMessengerLayoutSize(){ <!--메신저크기조정-->
 		var a = 0;
 		for (i = 0; i < $(".messageTextLeft").length; i++) {
 			var temp = "ㅤ" + $(".messageTextLeft").eq(i).text() + "ㅤ";
@@ -123,8 +145,8 @@ cursor: pointer
 		var c = $(".messengerBody").height();
 		var d = $(".messageInput").height();
 		$(".messageList").css("height",c-80);
-		
-	})
+	}
+	
 	function getDocHeight() {
 		var doc = document;
 		return Math.max(doc.body.scrollHeight,
@@ -132,9 +154,8 @@ cursor: pointer
 				doc.documentElement.offsetHeight, doc.body.clientHeight,
 				doc.documentElement.clientHeight);
 	}
-	function findFriends(){
+	function findFriends(){<!--친구추가버튼-->
 		var url="<%=cp%>/messenger/findFriends";
-		var str;
  		$.ajax({
 			type:"POST",
 			url:url,
@@ -144,16 +165,13 @@ cursor: pointer
 					$(".modal-body").append("<div class='friendList' onClick='getFriend(\""+data.friendList[i].userName+"\");' data-dismiss='modal'>"+data.friendList[i].memberId+"("+data.friendList[i].userName+")</div>");
 					$("#myModal").modal();
 				}
-			
 			},
 			error:function(e){
-				$(".modal-body").text("이이이이이히");
-			    $("#myModal").modal();
 				alert("연결 오류가 발생했습니다.");
 			}//"<img src='<%=cp%>/resource/img/myPage/jsh.jpg'"
 		}) 
 	}
-	function getFriend(userName){
+	function getFriend(userName){<!--친구받아와서 목록에 추가-->
 	$(".messengerLeft").append('<div class="messageMemberList">'
 			+'<img src="<%=cp%>/resource/img/myPage/jsh.jpg"'
 			+'	style="margin-right: 10px; width: 50px; border-radius: 50px; float: left">'
@@ -174,8 +192,8 @@ cursor: pointer
 			<b>CareDog Messenger</b>
 		</div>
 		<div style="width: 35%; float: left;">
-			<a id="findFriendsATag" onClick="findFriends();"><img class="addFriendImgBtn" src="<%=cp%>/resource/img/myPage/addBtn.png"
-				style="width: 20px; margin-right: 5px; margin-top: 10px; float: right;"></a>
+			<img class="addFriendBtn" onClick="findFriends();" src="<%=cp%>/resource/img/myPage/addBtn.png"
+				style="width: 20px; margin-right: 5px; margin-top: 10px; float: right;">
 		</div>
 	</div>
 	<div class="messengerHeaderRight">이종훈</div>

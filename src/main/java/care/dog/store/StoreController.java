@@ -159,7 +159,7 @@ public class StoreController {
 
 	// 상품평 리스트 : AJAX-TEXT
 	@RequestMapping(value = "/store/listProductReply")
-	public String listReply(
+	public String listProductReply(
 			@RequestParam int productId, 
 			@RequestParam(value = "pageNo", defaultValue = "1") int current_page,
 			@RequestParam(value = "paging", defaultValue = "1") int page,
@@ -203,6 +203,62 @@ public class StoreController {
 		model.addAttribute("paging", paging);
 
 		return "store/listProductReply";
+	}
+	
+	// Qna 리스트 : AJAX-TEXT
+	@RequestMapping(value = "/store/listProductQna")
+	public String listProductQna(
+			@RequestParam int productId, 
+			@RequestParam(value = "pageNo", defaultValue = "1") int current_page,
+			@RequestParam(value = "paging", defaultValue = "1") int page,
+			Model model
+			) {
+			
+		List<Qna> listProductQna = null;
+			
+		int rows = 5;
+		int total_page = 0;
+		int dataCount = 0;
+
+		// Qna 페이징
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("productId", productId);
+
+		// Qna 수 count
+		dataCount = service.dataCountQna(productId);
+			
+		total_page = myUtil.pageCount(rows, dataCount);
+		if (current_page > total_page)
+			current_page = total_page;
+
+		int start = (current_page - 1) * rows + 1;
+		int end = current_page * rows;
+
+		map.put("start", start);
+		map.put("end", end);
+		
+		// Qna 리스트
+		listProductQna = service.listProductQna(map);
+		
+		// 엔터를 <br>
+		Iterator<Qna> it = listProductQna.iterator();
+		while(it.hasNext()) {
+			Qna dto = it.next();
+			dto.setQuestion(dto.getQuestion().replaceAll("\n", "<br>"));
+			dto.setAnswer(dto.getAnswer().replaceAll("\n", "<br>"));
+		}
+
+		// AJAX 용 페이징
+		String paging = myUtil.pagingMethod(current_page, total_page, "listPage");
+
+		// 포워딩할 jsp로 넘길 데이터
+		model.addAttribute("listProductQna", listProductQna);
+		model.addAttribute("pageNo", current_page);
+		model.addAttribute("qnaCount", dataCount);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("paging", paging);
+
+		return "store/listProductQna";
 	}
 
 	@RequestMapping(value = "/store/order")

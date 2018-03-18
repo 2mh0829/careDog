@@ -21,6 +21,11 @@ public class MailController {
 	@RequestMapping(value="/member/join3")
 	public String sendSubmit(Mail dto, Model model) throws Exception {
 		
+		String msg = "";
+		if(dto.getMemberId() == null) {
+			return ".member.error";
+		}
+		
 		ShaPasswordEncoder passwordEncoder=new ShaPasswordEncoder(256);
 		String hashed = passwordEncoder.encodePassword(dto.getUserPwd(), null);
 		dto.setUserPwd(hashed);
@@ -32,17 +37,18 @@ public class MailController {
 		int userHashCode = dto.getMemberId().hashCode();
 		
 		String content = "";
-		content += "<div align='center' style='background: #eee; margin-top: 30px; padding: 20px; width: 800px;'>";
-		content += "<div style='font-size: 30px; font-weight: bold; margin: 30px auto;'>Care Dog 가입을 환영합니다.</div>";
-		content += "<img src='http://cfile23.uf.tistory.com/image/9931294B5AA7E1542BB6B8' width='400px;'>";
-		content += "<br><a href='http://localhost:9090/careDog/member/auth?authCode=" + userHashCode + "' target='_blank'>";
-		content += "<button style='background: #4286f4; width:300px; height: 50px; color: white; font-size: 20px; font-weight: bold; margin: 30px auto;' type='button'>인증하기</button></a></div>";
-		
+
+		content += "<div align='left' style='margin-top: 30px; padding: 20px;'><div>";
+		content += "<img src='http://cfile4.uf.tistory.com/image/994A44375AAB7FE7048473' width='700px;'></div>";
+		content += "<div style=\"position: relative; top: -430px; left: 150px;\"><div style='font-size: 20px; font-weight: bold; margin: 90px 12px;'>CareDog 가입을 환영합니다.</div>";
+		content += "<a href='http://localhost:9090/careDog/member/auth?authCode=" + userHashCode + "' target='_blank'>";
+		content += "<button style='background: #4286f4; width: 300px; height: 50px; color: white; font-size: 15px; font-weight: bold;' type='button'>인증하기</button>";
+		content += "</a></div></div>";
+
 		dto.setContent(content);
 		
 		boolean b = mailSender.mailSend(dto);
 		
-		String msg = "";
 		if(b) {
 			msg += "인증메일이 성공적으로 발송되었습니다.";
 			try {
@@ -60,13 +66,16 @@ public class MailController {
 	}
 	
 	@RequestMapping(value="/member/auth")
-	public String auth(@RequestParam int authCode) {
+	public String auth(@RequestParam int authCode, Model model) {
+		String msg = "이미 가입처리가 되었습니다.";
 		List<String> list = service.selectIsMember();
 		for(int i=0; i<list.size(); i++) {
 			if(list.get(i).hashCode() == authCode) {
 				service.updateIsMember(list.get(i));
+				msg = "인증되었습니다.";
 			}
 		}
+		model.addAttribute("msg", msg);
 		return "member/auth";
 	}
 
