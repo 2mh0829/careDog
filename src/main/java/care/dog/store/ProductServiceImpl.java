@@ -80,6 +80,26 @@ public class ProductServiceImpl implements ProductService{
 		return result;
 	}
 
+	@Override
+	public List<Qna> listProductQna(Map<String, Object> map) {
+		List<Qna> list = null;
+		try {
+			list = dao.selectList("store.listProductQna", map);
+		} catch (Exception e) {
+		}
+		return list;
+	}
+
+	@Override
+	public int dataCountQna(int productId) {
+		int result = 0;
+		try {
+			result = dao.selectOne("store.dataCountQna", productId);
+		} catch (Exception e) {
+		}
+		return result;
+	}
+
 	
 	
 }

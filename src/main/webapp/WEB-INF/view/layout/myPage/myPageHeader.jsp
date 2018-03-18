@@ -8,6 +8,7 @@
 <script type="text/javascript">
 	$(function() {
 		var idx = "${menu}";
+		console.log(idx);
 		if (!idx)
 			idx = 0;
 		var menu = $(".list-menu-item")[idx];
@@ -119,7 +120,7 @@
 		<li class="list-menu-item"><a href="javascript:messenger();">메신저</a></li>
 		<li class="list-menu-item"><a href="javascript:messenger();">일정관리</a></li>
 		<li class="list-menu-item"><a href="javascript:messenger();">친구관리</a></li>
-		<li class="list-menu-item"><a href="javascript:messenger();">펫시터 서비스 관리</a></li>
+		<li class="list-menu-item"><a href="javascript:messenger();">CareDog 서비스 관리</a></li>
 		<li class="list-menu-item"><a href="javascript:registerPS();">펫시터 등록하기</a></li>
 		<li class="list-menu-item"><a href="javascript:messenger();">이용현황</a></li>
 	</ul>

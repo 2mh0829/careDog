@@ -9,12 +9,12 @@
 <style>
 
 .container-top {
-	width: 850px;
-	height: 550px;
+	width: 900px;
+	height: 650px;
 }
 
 .container-bottom {
-	width: 850px;
+	width: 900px;
 }
 
 .left_area {
@@ -95,7 +95,7 @@
 
 .product_option_box {
 	margin: 10px auto;
-	height: 80px;
+	height: 60px;
 }
 
 .product_total_price {
@@ -106,7 +106,7 @@
 
 .product_btn_area {
 	padding: 20px auto;
-	height: 100px;
+	height: 80px;
 }
 
 .roundBtn {
@@ -283,10 +283,21 @@ th {
 	margin: 10px;
 }
 
+.option_total_content {
+	margin: 5px; 
+	height: 100px;
+	background: #f9f9f9; 
+	border: 1px solid #dddddd; 
+	border-radius: 5px; 
+	padding: 10px;
+}
+
+
 </style>
 
 <script type="text/javascript">
 
+/* 
 $('#dropul li').on('click', function(){
 
 	//alert($(this).attr('value'));
@@ -298,7 +309,8 @@ $('#myTab a').click(function (e) {
 	  e.preventDefault()
 	  $(this).tab('show')
 })
-
+ */
+ 
 $(function(){
 	listPage(1);
 });
@@ -310,6 +322,65 @@ function listPage(page) {
 	$.get(url, {productId:productId, pageNo:page}, function(data){
 		$("#listProductReply").html(data);
 	});
+	
+	var url2="<%=cp%>/store/listProductQna";
+	var productId2="${dto.productId}";
+	
+	$.get(url2, {productId:productId2, pageNo:page}, function(data){
+		$("#listProductQna").html(data);
+	});
+}
+
+$(function() { 
+	
+	$("body").on("change", "#sel1", function() {
+		//console.log($("#sel1").val());
+		var value = $("#sel1").val();
+		var price = ${dto.sellingPrice };
+		var str = "";
+		var i = 0;
+		str += "<div id='option_content"+i+"' class='option_total_content'>";
+		str += "<div style='height: 40px;'>";
+		str += "<p style='float: left; font-size: 15px; font-weight: bold;'>"+value+"</p>";
+		str += "<p style='float: right;'>";
+		str += "<button type='button' class='btn btn-default delOptionBtn' onclick='delete_option("+i+")'>X</button>";
+		str += "</p>";
+		str += "</div>";
+		str += "<div style='clear: both; height: 50px;'>";
+		str += "<select id='opt_amount' class='form-control' style='width: 60px; float: left;'>";
+		str += "<option value='1'>1</option>";
+		str += "<option value='2'>2</option>";
+		str += "<option value='3'>3</option>";
+		str += "<option value='4'>4</option>";
+		str += "<option value='5'>5</option>";
+		str += "<option value='6'>6</option>";
+		str += "<option value='7'>7</option>";
+		str += "<option value='8'>8</option>";
+		str += "<option value='9'>9</option>";
+		str += "<option value='10'>10</option>";
+		str += "</select>";
+		str += "<p style='float: right; font-size: 20px; font-weight: bold;'>"+price+"원</p>";
+		str += "</div>";
+		str += "</div>";
+		
+		$("#option_total").append(str);
+		
+		$("body").on("change", "#opt_amount", function() {
+			//console.log($("#opt_amount").val());
+			var final_price = $("#opt_amount").val() * price;
+			//console.log(final_price);
+			
+			$("#changePrice").text(final_price);
+			
+		});
+		
+	});
+	
+});
+
+function delete_option(num) {
+	$("#option_content" + num).remove(); //옵션삭제
+	$("#changePrice").text("0"); //가격 원상태로
 }
 
 </script>
@@ -364,17 +435,42 @@ function listPage(page) {
 				 <select class="form-control" id="sel1">
 	        		<option selected="selected">옵션을 선택해주세요.</option>
 	        		<c:forEach var="optionDto" items="${list_option}">
-	        			<option>${optionDto.optionContent }</option>
+	        			<option value="${optionDto.optionContent }">${optionDto.optionContent }</option>
 	        		</c:forEach>
 	      		</select>
 			 
 			</div>
 			
+			<!-- 선택한 옵션에 대한 개수와 가격정보 -->
+			<div id="option_total">
+				<%-- <div style="height: 40px;">
+					<p class="" style="float: left; font-size: 15px; font-weight: bold;">선택된옵션</p>
+					<p style="float: right;">
+						<button type="button" class="btn btn-default delOptionBtn">X</button>
+					</p>
+				</div>
+				<div style="clear: both; height: 50px;">	
+					<select class="form-control" style="width: 60px; float: left;">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select>
+					<p style="float: right; font-size: 20px; font-weight: bold;">${dto.sellingPrice }원</p>
+				</div> --%>
+			</div>
+			
 			<!-- 상품 금액 합계 -->
-			<div class="product_total_price">
+			<div id="product_total_price" class="product_total_price" style="clear: both;">
 				<span class="txt_title">상품금액 합계</span>
 				<span class="txt_content">
-					<span class="txt_num">0</span>원
+					<span id="changePrice" class="txt_num">0</span>원
 				</span>
 			</div>
 			
@@ -716,13 +812,15 @@ function listPage(page) {
 						<button type="button" class="btn btn-default qnaInsertBtn" data-toggle="modal" data-target="#myModal">상품문의</button>
 					</div>
 					
-					<form name="qnaForm" id="qnaForm" action="">
+					<div id="listProductQna"></div>
+					
+					<!-- <form name="qnaForm" id="qnaForm" action="">
 						<table class="table table-condensed qna-list" id="qnaTable" style="width: 800px">
 							<tbody class="pane1">
 								<tr class="question-tr" data-toggle="collapse" data-target="#answer1" data-parent="#qnaTable">
 									<td>
 										<div class="divTd" style="width: 100px;">
-											<!-- 답변완료 여부 버튼 - 이미지로? -->
+											답변완료 여부 버튼 - 이미지로?
 											<button type="button" class="btn btn-default qnaOkBtn" disabled="disabled">답변완료</button>
 										</div>
 									</td>
@@ -761,7 +859,7 @@ function listPage(page) {
 								<tr class="question-tr" data-toggle="collapse" data-target="#answer2" data-parent="#qnaTable">
 									<td>
 										<div class="divTd" style="width: 100px;">
-											<!-- 답변완료 여부 버튼 이미지로? -->
+											답변완료 여부 버튼 이미지로?
 											<button type="button" class="btn btn-default qnaOkBtn" disabled="disabled">답변완료</button>
 										</div>
 									</td>
@@ -799,7 +897,7 @@ function listPage(page) {
 								</tr>
 							</tbody>
 						</table>
-					</form>
+					</form> -->
 					
 				</div>
 				
