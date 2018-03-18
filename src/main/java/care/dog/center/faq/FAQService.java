@@ -4,9 +4,9 @@ import java.util.List;
 import java.util.Map;
 
 public interface FAQService {
-	public int insertFaq(FAQ dto, String pathname);
-	public int updateFaq(FAQ dto, String pathname);
-	public int deleteFaq(int num, String pathname);
+	public int insertFaq(FAQ dto);
+	public int updateFaq(FAQ dto);
+	public int deleteFaq(int num);
 	public List<FAQ> listFaq(Map<String, Object> map);
 	public List<FAQ> listFaqMember(Map<String, Object> map);
 	public List<FAQ> listFaqBuy(Map<String, Object> map);
