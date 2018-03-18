@@ -122,29 +122,36 @@ function listPage(page){
 		data:{boardNum:boardNum, page:page},
 		dataType:'json',
 		success:function(data){
-	
-			console.log(data)
-			content+="<li><div class='imageView__replyItem'><div class='imageView__writer'>";
-			content+=data.memberId+"</div><div class='imageView__writeDate'>";
-			content+=data.created+"| <a href='#'>삭제</a></div></div>";
-			content+="<div class='imageView__replyContent'>"+data.content+"</div></li>";
-			content+=data.paging;
+			$(".dhReplyList").find("li").remove();
+			console.log(data.listReply);
+			console.log(data.replyCount)
+			 var list = data.listReply;
+				var content = '';
+				
+				$.each(list, function(index,item){
+					content+="<li><div class='imageView__replyItem'>";
+					content+="<div class='imageView__writer'>"+item.memberId+"</div><div class='imageView__writeDate'>";
+					content+=item.created+" |  <a href='#'>삭제</a></div></div>";
+					content+="<div class='imageView__replyContent'>"+item.dhReplyContent+"</div></li>";
+				});
+				content+=data.paging;
+				$(".dhReplyList").append(content);
 		}
 	});
-	y
+	
 	$(".dhReplyList").append(content);
 }
 
 function insertReply(){
-	var content = encodeURIComponent($("#replyContent").val().trim());
-	
-	if(!content){
+	var dhReplyContent = encodeURIComponent($("#replyContent").val().trim());
+	console.log(dhReplyContent);
+	if(!dhReplyContent){
 		$("#replyContent").focus();
 		return;
 	}
 	
 	var url = "<%=cp%>/dog119/dhReplyInsert"
-	var q = "boardNum=${dto.boardNum}&content="+content;
+	var q = "boardNum=${dto.boardNum}&dhReplyContent="+dhReplyContent;
 	
 	$.ajax({
 		url:url,
@@ -153,6 +160,8 @@ function insertReply(){
 		dataType:'json',
 		success:function(data){
 			console.log(data);
+			$("#replyContent").val('');
+			listPage(1);
 		}
 	});
 }

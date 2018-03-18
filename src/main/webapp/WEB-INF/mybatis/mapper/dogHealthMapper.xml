@@ -70,7 +70,7 @@
 	</select>
 	
 	<insert id="dhReplyInsert" parameterType="care.dog.dog119.dogHealthVo.DhReplyVo">
-		INSERT INTO dogHealthReply (dhReplyNum, dhReplyContent, memberId, boardNum) VALUES (dhReply_seq.NEXTVAL, #{content},#{memberId},#{boardNum})
+		INSERT INTO dogHealthReply (dhReplyNum, dhReplyContent, memberId, boardNum) VALUES (dhReply_seq.NEXTVAL, #{dhReplyContent},#{memberId},#{boardNum})
 	</insert>
 	
 	<select id="dhReplyCount" parameterType="map" resultType="Integer">

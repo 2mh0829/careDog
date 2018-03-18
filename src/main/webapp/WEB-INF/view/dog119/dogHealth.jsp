@@ -77,6 +77,12 @@ h1 {
 .board__searchBtn input[type="submit"] { width: 40px; height: 40px; border: 1px solid #1991d7; border: none; text-indent: -9999px; background: #1991d7 url("<%=cp%>/resource/img/dog119/searchIcon.png") center center no-repeat; }
 .board__searchBtn input[type="button"] { width: 40px; height: 40px; border: 1px solid #1991d7; border: none; text-indent: -9999px; background: #1991d7 url("<%=cp%>/resource/img/dog119/searchIcon.png") center center no-repeat; }
 .menu__select { width: 120px; }
+.viewCntIcon { font-size: 13px; color: #999999; padding-left: 20px; background: url("<%=cp%>/resource/img/dog119/listReplyCnt.png") 0 4px no-repeat; margin: 0 5px; }
+
+img + .viewCntIcon { margin-left: 10px; margin-right: 0; }
+
+.viewCntIcon.type-f14 { font-size: 14px; background: url("<%=cp%>/resource/img/dog119/listReplyCnt.png") 0 2px no-repeat; }
+
 button,
 select { /* 1 */
   text-transform: none;
@@ -344,7 +350,9 @@ function chk() {
 								<span class="board__number">${dto.boardNum}</span>
 								${dto.title}
 							</a>
-						<span class="viewCntIcon">(1)</span>
+<c:if test="${dto.dhReplyCount!=0}">
+						<span class="viewCntIcon">(${dto.dhReplyCount})</span>
+</c:if>
 						</p>
 						<div class="board__info">
 
@@ -358,7 +366,7 @@ function chk() {
 				</ul>
 
 				<ul class="board__listPageing">
-				${paging}
+					${paging}
 				</ul>
 			</div>
 <!-- 검색 -->

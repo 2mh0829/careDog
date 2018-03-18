@@ -69,6 +69,7 @@ public class Dog119Controller {
 		int totalPage = 0;
 		int rows=10;
 		int dataCount = 0;
+		int replyCount=0;
 		
 		if(req.getMethod().equalsIgnoreCase("GET")) {
 			try {
@@ -104,6 +105,8 @@ public class Dog119Controller {
 			DogHealthVo dhList = it.next();
 			listNum = dataCount - (start+n-1);
 			dhList.setListNum(listNum);
+			replyCount=service.dhReplyCount(dhList.getBoardNum());
+			dhList.setDhReplyCount(replyCount);
 			n++;
 		}
 		
