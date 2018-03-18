@@ -44,6 +44,10 @@ h1 {
 	border: none;
 }
 
+#countBox {
+	color: red;
+}
+
 </style>
 
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
@@ -62,7 +66,7 @@ setTimeout(function() { window.close(); }, 3000);
 	</div>
 
 	<div align="center" class="ok-container">
-		<h1><b>인증되었습니다.</b></h1>
+		<h1><b>${msg }</b></h1>
 		<br>
 		<div id='countBox'>3초후 종료</div>
 		<br><br><br><br>

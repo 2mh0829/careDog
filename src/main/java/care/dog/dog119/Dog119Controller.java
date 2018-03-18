@@ -213,9 +213,9 @@ public class Dog119Controller {
 	}
 	
 	@RequestMapping(value="/dog119/dhReplyList")
-	public String dhReplyList(@RequestParam int boardNum,
-			@RequestParam(value="pageNo", defaultValue="1") int page,
-			Model model
+	@ResponseBody
+	public Map<String, Object> dhReplyList(@RequestParam int boardNum,
+			@RequestParam(value="pageNo", defaultValue="1") int page
 			) {
 		int rows=5;
 		int totalPage=0;
@@ -237,20 +237,21 @@ public class Dog119Controller {
 		List<DhReplyVo> listReply=service.listDhReply(map);
 		
 		for(DhReplyVo dto: listReply) {
-			dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+			dto.setDhReplyContent(dto.getDhReplyContent().replaceAll("\n", "<br>"));
 		}
 		
 		//AJAX 용 페이징
 		String paging=myUtilBootstrap.pagingMethod(page, totalPage, "listPage");
 		
+		Map<String, Object> model = new HashMap<>();
 		//포워딩할 jsp로 넘길 데이터
-		model.addAttribute("listReply", listReply);
-		model.addAttribute("pageNo", page);
-		model.addAttribute("replyCount", dataCount);
-		model.addAttribute("totalPage", totalPage);
-		model.addAttribute("paging", paging);
+		model.put("listReply", listReply);
+		model.put("pageNo", page);
+		model.put("replyCount", dataCount);
+		model.put("totalPage", totalPage);
+		model.put("paging", paging);
 		
 		//AJAX는 .으로 하면 안됨
-		return "bbs/listReply";
+		return model;
 	}
 }

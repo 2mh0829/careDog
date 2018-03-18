@@ -54,10 +54,15 @@ public class MemberController {
 	}
 
 	@RequestMapping(value="/member/join2", method=RequestMethod.GET)
+	public String join2Error() {
+		return ".member.error";
+	}
+	
+	@RequestMapping(value="/member/join2", method=RequestMethod.POST)
 	public String join2Form() {
 		return ".member.join2";
 	}
-	
+/*	
 	@RequestMapping(value="/member/signUp", method=RequestMethod.POST)
 	public String memberSubmit(
 			Member dto,
@@ -85,7 +90,7 @@ public class MemberController {
 		
 		return ".member.complete";
 	}
-
+*/
 	@RequestMapping(value="/member/pwd", method=RequestMethod.GET)
 	public String pwdForm(
 			String dropout,
@@ -181,26 +186,34 @@ public class MemberController {
 		return ".member.complete";
 	}
 	
-	@RequestMapping(value="/member/userIdCheck")
+	@RequestMapping(value="/member/memberIdCheck")
 	@ResponseBody
-	public Map<String, Object> userIdCheck(
-			@RequestParam String userId
-			) throws Exception {
-		String passed="false";
-		Member dto=service.readMember(userId);
-		if(dto==null)
-			passed="true";
+	public Map<String, Object> memberIdCheck(String memberId) throws Exception {
+		System.out.println("member/memberIdCheck");
+		int passed = 1;
+		int usedMemberId = service.memberIdCheck(memberId);
+		if(usedMemberId == 0)
+			passed = 0;
 		
-   	    // 작업 결과를 json으로 전송
+		System.out.println(memberId);
+		
 		Map<String, Object> model = new HashMap<>(); 
 		model.put("passed", passed);
 		return model;
 	}
 	
+	@RequestMapping(value="/member/emailChecked")
+	public Map<String, Object> emailChecked(String email){
+		System.out.println("emailCheck");
+		System.out.println(email);
+		return null;
+	}
+
 	@RequestMapping(value="member/secession", method=RequestMethod.GET)//jh
 	public String secession() {
 		return "member/secession";
 	}
+	
 	@RequestMapping(value="member/editMemberInfo")//jh
 	public String editMemberInfo() throws Exception {
 

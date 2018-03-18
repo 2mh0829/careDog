@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- aa -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="messenger">
+
+<!-- Find members except me -->
+<select id="listFriend" parameterType="String" resultType="care.dog.member.Member">
+		SELECT memberId, userName
+		FROM member1
+		WHERE memberId != #{memberId} 
+	</select>
+</mapper>

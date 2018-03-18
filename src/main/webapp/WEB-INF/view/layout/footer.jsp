@@ -58,7 +58,7 @@
 
 <script>
 
-$(function() {
+<%-- $(function() {
 	
 	var windowWidth = $(window).width();
 		
@@ -95,12 +95,12 @@ $(function() {
 		}
 	}
 
-});
+}); --%>
 </script>
 
-<div>
+<%-- <div>
 	<img id="runnig_dog" src="<%=cp %>/resource/img/running_dog.gif" style="width: 150px; position: relative; left: 5px; top: 20px;">
-</div>
+</div> --%>
 
 <div class="footer-container">
 	<div class="footer-menu">

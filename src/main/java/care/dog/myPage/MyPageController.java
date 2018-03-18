@@ -1,5 +1,5 @@
 package care.dog.myPage;
-
+//aa
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,14 +60,11 @@ public class MyPageController {
 		//Map<String, Object> map=new HashMap<>();
 	//	map.put("field", "b.userId");
 	//	map.put("field_value", info.getMemberId());
-//		MyPageInfo myPageInfo=myPageService.readMyPageInfo(info.getMemberId());
-//		if(myPageInfo!=null) {
-//			model.addAttribute("message", "블로그는 계정당 하나만 만들수 있습니다.");
-//			return ".myPage.manage.message";
-//		}
-//		
-//		List<MyPageTheme> listGroup=myPageService.listMyPageThemeGroup();
-
+		MyPageInfo myPageInfo=myPageService.readMyPageInfo(info.getMemberId());
+		if(myPageInfo!=null) {
+			model.addAttribute("message", "블로그는 계정당 하나만 만들수 있습니다.");
+			return ".myPage.manage.message";
+		}
 		MyPageInfo dto = new MyPageInfo();
 		dto.setIsUserName(1);
 		dto.setGender("남자");
@@ -78,11 +75,14 @@ public class MyPageController {
 
 		model.addAttribute("mode", "created");
 		model.addAttribute("dto", dto);
-	//	model.addAttribute("listGroup", listGroup);
 		
 		return ".myPage.manage.myPageCreated";
 	}
-	
+	@RequestMapping(value="/myPage/editBlogProfileInfo", method = RequestMethod.GET)
+	public String editBlogProfileInfo(
+			Model model) throws Exception {
+		return "myPage/manage/myPageUpdate";
+	}
 	@RequestMapping(value="/myPage/created", method = RequestMethod.POST)
 	public String myPageCreatedSubmit(
 			MyPageInfo dto,
@@ -108,6 +108,8 @@ public class MyPageController {
 
 		return "redirect:/myPage/"+dto.getMyPageId();
 	}
+	
+	
 	@RequestMapping(value="/myPage/{myPageId}")
 	public String main(
 			@PathVariable int myPageId,
@@ -122,7 +124,7 @@ public class MyPageController {
 		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
-		MyPageInfo myPageInfo=myPageService.readMyPageInfoHome(myPageId);
+		MyPageInfo myPageInfo=myPageService.readMyPageInfoHome(myPageId);//asdsadsadsad
 		if(myPageInfo==null) {
 			return "redirect:/nmyPage";
 		}

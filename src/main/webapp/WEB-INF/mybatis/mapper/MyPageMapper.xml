@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!-- aa -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="myPage">
 	<!-- 생성되는 블로그 정보 저장 -->
@@ -8,13 +8,13 @@
 	</select>
 	
 	<insert id="insertMyPageInfo" parameterType="care.dog.myPage.MyPageInfo">
-	    INSERT INTO myPageInfo(myPageId, memberId, title, introduce, closed)
-	      VALUES (#{myPageId}, #{memberId}, #{title}, #{introduce}, 
+	    INSERT INTO myPageInfo(myPageId, memberId, introduce, closed)
+	      VALUES (#{myPageId}, #{memberId}, #{introduce}, 
 	                #{closed})
 	</insert>
 		<!-- 내 블로그의 전체 정보 -->
 	<select id="readMyPageInfo" parameterType="String" resultType="care.dog.myPage.MyPageInfo">
-	    SELECT myPageId, memberId, title, introduce, visitorCount, created, closed from myPageInfo where memberId = #{memberId}
+	    SELECT myPageId, memberId, introduce, visitorCount, created, closed from myPageInfo where memberId = #{memberId}
 	</select>
 	<insert id="insertMyPageProfile" parameterType="care.dog.myPage.MyPageInfo">
 	    INSERT INTO myPageProfile(myPageId, userName, isUserName, 
@@ -29,7 +29,7 @@
 	</update>
 		<!-- 개인 블로그의 메인 화면에 출력할 정보 -->
 	<select id="readMyPageInfoHome" parameterType="Integer" resultType="care.dog.myPage.MyPageInfo">
-	    SELECT b.myPageId, b.memberId,title, introduce, visitorCount, created, profilePhoto,userName, isUserName, city
+	    SELECT b.myPageId, b.memberId,introduce, visitorCount, created, profilePhoto,userName, isUserName, city
 	              ,isCity, gender, isGender, hobby, isHobby
 	           FROM myPageInfo b
 	           join myPageProfile p on b.myPageId=p.myPageId

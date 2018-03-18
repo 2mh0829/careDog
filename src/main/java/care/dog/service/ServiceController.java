@@ -24,7 +24,7 @@ public class ServiceController {
 	@RequestMapping(value="/service/sitter_input", method=RequestMethod.GET)
 	public String sitter_input() {
 		
-		return ".service.sitter_input";
+		return "service/sitter_input";
 	}
 	
 	@RequestMapping(value="/service/sitter_input", method=RequestMethod.POST)
