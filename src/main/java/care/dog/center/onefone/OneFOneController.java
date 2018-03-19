@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller("onefone.onefoneController")
 public class OneFOneController {
 	
-	@RequestMapping(value="/center/onefone/create", method=RequestMethod.GET)
+	@RequestMapping(value="/center/onefone")
 	public String OneforOneMain() {
-		return "";
+		
+		return "center/onefone";
 	}
 
 }

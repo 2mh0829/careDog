@@ -73,6 +73,7 @@ background-color: #eee;
 
 </style>
 
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.form.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#tabfaq10").addClass("active");
@@ -113,7 +114,6 @@ function ajaxHTML(url, type, query) {
 				listPage(1);
 				return;
 			}
-			console.log(data);
 			$("#tab-content").html(data);
 		}
 		,beforeSend : function(jqXHR) {
@@ -141,17 +141,15 @@ function reloadBoard() {
 }
 
 // 글쓰기폼
-function insertForm(num) {
+function insertForm() {
 	var url="<%=cp%>/center/faq/create";
-	var query = "num="+num+"&faqsort="+faqsort;
-	alert(query);
+	var query = "faqsort="+faqsort;
 	ajaxHTML(url, "get", query);
 }
 
 var faqsort = '2';
 function aaa(value){
 	faqsort = value;
-	
 }
 
 //글등록, 수정등록, 답변등록
@@ -173,8 +171,13 @@ function sendOk(mode, page) {
     }
 	
     var url="<%=cp%>/center/faq/"+mode;
-    var query = new FormData(f); // IE는 10이상에서만 가능
-    query.append("faqsort",faqsort);
+    
+    // var query = new FormData(f); // IE는 10이상에서만 가능
+    // query.append("faqsort",faqsort);
+    
+    f.faqsort.value=faqsort;
+    var query = $("form[name=boardForm]").serialize();
+
 	$.ajax({
         type:"post"
         ,url:url
@@ -188,7 +191,7 @@ function sendOk(mode, page) {
         	if(page==undefined || page=="")
         		page="1";
         	
-        	if(mode=="created" || mode=="reply") {
+        	if(mode=="created") {
         		reloadBoard()
         	} else {
         		listPage(page);
@@ -207,6 +210,7 @@ function sendOk(mode, page) {
             }
         }
 	});
+
 }
 // 글쓰기 취소, 수정 취소, 답변 취소
 function sendCancel(page) {
@@ -229,7 +233,6 @@ function updateForm(num, page) {
 	var url="<%=cp%>/center/faq/update";
 	var query="num="+num;
 	query=query+"&pageNo="+page;
-	alert(query);
 	ajaxHTML(url, "get", query);
 	
 }
@@ -283,18 +286,9 @@ function deleteBoard(num, page) {
 				<li id="tabfevent" data-tab="fevent" >이벤트</li>
 				<li id="tabfetc" data-tab="fetc" >기타</li>
 	</ul>
-	<div id="tab-content" style="clear:both; padding: 20px 10px 0px;"></div>
+	<div id="tab-content" style="clear:both; padding: 20px 10px 0px;">
+	
+	</div>
+	
 </div>
 
-<div style="width: 100%; margin: 10px auto; border-spacing: 0px;">
-   <ul >
-      <li >
-          <button type="button" class="btn" onclick="reloadBoard();">새로고침</button>
-      </li>
-      <li >
-      <c:if test="${sessionScope.member.memberId=='admin' }">
-          <button type="button" class="btn" onclick="insertForm();">글올리기</button>
-      </c:if>
-      </li>
-   </ul>
-</div>
