@@ -100,8 +100,9 @@ select {
  /*outline:none;*/
 }
 
-/* form*/
-input {
+input[type="text"],
+input[type="password"],
+input[type="tel"] {
  height:38px;
  margin:0;
  padding:0;
@@ -121,15 +122,6 @@ input {
  -moz-appearance:none;
  letter-spacing:0.5px;
  vertical-align:top;
-}
-input[type="text"],
-input[type="password"],
-input[type="tel"] {
- padding:0 10px;
- background-color:#fff;
- font-size:14px;
- line-height:20px;
- color:#888;
 }
 input[type="text"]::-ms-clear,
 input[type="password"]::-ms-clear,
@@ -183,7 +175,8 @@ button {border:0;padding:0;box-shadow:none;cursor:pointer;}
                                 <p class="pt20">※ 1:1문의 서비스 제공을 위한 최소한의 개인정보이며 거부할 수 있습니다. 다만, 수집에 동의하지 않을 경우 서비스 이용이 제한됩니다.</p>
 								</ul>
 								<ul>
-									<li><input type="radio" ></li>
+									<li><input type="radio" name="check_info" value="agree">동의</li>
+									<li><input type="radio" name="check_info" value="disagree" checked="checked">비동의</li>
 								</ul>
 						</td>
 				</tr>
@@ -238,9 +231,9 @@ button {border:0;padding:0;box-shadow:none;cursor:pointer;}
 									</select>
 									<input type="hidden" id="cellSctNo" value="010">
 									<span class="des">-</span>
-									<input type="tel" class="sms" name="cellTxnoNo" value="2251" title="휴대폰 가운데 4자리를 입력하세요" maxlength="4" placeholder="0000" style="width:122px;">
+									<input type="tel" class="sms" name="cellTxnoNo" value="" title="휴대폰 가운데 4자리를 입력하세요" maxlength="4" placeholder="0000" style="width:122px;">
 									<span class="des">-</span>
-									<input type="tel" class="sms" name="cellEndNo" value="3879" title="휴대폰 마지막 4자리를 입력하세요" maxlength="4" placeholder="0000" style="width:122px;">
+									<input type="tel" class="sms" name="cellEndNo" value="" title="휴대폰 마지막 4자리를 입력하세요" maxlength="4" placeholder="0000" style="width:122px;">
 								</li>
 								
 							</ul>
@@ -277,7 +270,12 @@ button {border:0;padding:0;box-shadow:none;cursor:pointer;}
 							<span class="txt">5MB 이하의 이미지 파일 (JPG, PNG, GIF) 1개를 첨부하실 수 있습니다.</span>
 						</td>
 					</tr>
-					
+					<tr>
+						<ul>
+							<li><a href="javascript:;" id="cnslSubmit" class="btnGreen">등록</a></li>
+							<li><a href="javascript:;" id="cnslCancel" class="btnGray">취소</a></li>
+						</ul>
+					</tr>
 				
 			</tbody>
 		</table>
