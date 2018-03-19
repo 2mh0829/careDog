@@ -15,7 +15,7 @@ public class FAQServiceImpl implements FAQService{
 	private CommonDAO dao;
 
 	@Override
-	public int insertFaq(FAQ dto, String pathname) {
+	public int insertFaq(FAQ dto) {
 		int result = 0;
 		try {
 			result = dao.insertData("faq.insertfaq",dto);
@@ -26,7 +26,7 @@ public class FAQServiceImpl implements FAQService{
 	}
 
 	@Override
-	public int updateFaq(FAQ dto, String pathname) {
+	public int updateFaq(FAQ dto) {
 		int result = 0;
 		try {
 			result = dao.updateData("faq.updatefaq",dto);
@@ -37,7 +37,7 @@ public class FAQServiceImpl implements FAQService{
 	}
 
 	@Override
-	public int deleteFaq(int num, String pathname) {
+	public int deleteFaq(int num) {
 		int result = 0;
 		try {
 			result = dao.deleteData("faq.deletefaq",num);

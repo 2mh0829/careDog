@@ -30,4 +30,10 @@ public class DhReplyVo {
 	public void setDhReplyContent(String dhReplyContent) {
 		this.dhReplyContent = dhReplyContent;
 	}
+	@Override
+	public String toString() {
+		return "DhReplyVo [boardNum=" + boardNum + ", memberId=" + memberId + ", dhReplyContent=" + dhReplyContent
+				+ ", created=" + created + "]";
+	}
+	
 }
