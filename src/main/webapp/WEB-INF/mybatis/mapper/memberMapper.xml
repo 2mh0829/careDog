@@ -102,4 +102,9 @@
 		WHERE memberId = #{memberId}
 	</select>
 	
+	<select id="emailChecked" parameterType="String" resultType="Integer">
+		SELECT COUNT(email) FROM member2
+		WHERE email = #{email}
+	</select>
+	
 </mapper>
