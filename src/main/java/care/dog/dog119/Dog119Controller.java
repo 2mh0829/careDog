@@ -257,4 +257,18 @@ public class Dog119Controller {
 		//AJAX는 .으로 하면 안됨
 		return model;
 	}
+	
+	@RequestMapping(value="/dog119/dhInsert")
+	public String dhInsert(@RequestParam Map<String, Object> data, HttpSession session){
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		String memberId = info.getMemberId();
+		DogHealthVo dto = new DogHealthVo();
+		dto.setTitle((String) data.get("title"));
+		dto.setContent((String) data.get("content"));
+		dto.setMemberId(memberId);
+		
+		service.dhInsert(dto);
+		
+		return "redirect:/dog119/dogHealth";
+	}
 }

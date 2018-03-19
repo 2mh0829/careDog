@@ -19,6 +19,10 @@
 	</if>
 </sql>
 
+<insert id="dhInsert" parameterType="care.dog.dog119.dogHealthVo.DogHealthVo">
+	INSERT INTO doghealth (boardNum,title, content, memberId) VALUES (doghealth_seq.NEXTVAL, #{title},#{content},#{memberId})
+</insert>
+
 <select id="listBoard" parameterType="map" resultType="care.dog.dog119.dogHealthVo.DogHealthVo">
 	select * from(
 		select rownum rnum, tb.* from(

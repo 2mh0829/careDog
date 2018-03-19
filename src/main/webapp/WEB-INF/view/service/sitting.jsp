@@ -521,7 +521,7 @@ li>a>span{
 }
 
 #stay {
-    color: #fac058;
+    color: black;
 }
 
 .evaluation {
@@ -1058,10 +1058,10 @@ li>a>span{
 						<span class="label">투약가능</span>
 					</dd>
 					<dd class="price">
-						<label class="daycare">
+						<!-- <label class="daycare">
 							Day Care / 
 							<strong>22,000원</strong>
-						</label>
+						</label> -->
 						<label id="stay">
 							1박 / 
 							<strong>30,000원</strong>
