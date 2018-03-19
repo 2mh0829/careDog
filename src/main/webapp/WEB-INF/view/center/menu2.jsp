@@ -24,7 +24,7 @@ display: inline-block;
 					<a onclick="javascript:location.href='<%=cp%>/center';">공지사항/이벤트</a>
 				</li>
 				<li>
-					<a>1:1문의</a>
+					<a onclick="javascript:location.href='<%=cp %>/center/onefone';">1:1문의</a>
 				</li>
 			</ul>
 </div>

@@ -54,7 +54,6 @@ public class DogHealthServiceImpl implements DogHealthService {
 		DogHealthVo dto = null;
 		try {
 			dto = dao.selectOne("dogHealth.dhDetail", boardNum);
-			System.out.println("서비스임플ㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹ"+dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -111,6 +110,17 @@ public class DogHealthServiceImpl implements DogHealthService {
 		int result = 0 ;
 		try {
 			result = dao.selectOne("dogHealth.dhReplyCount", boardNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public int dhInsert(DogHealthVo dto) {
+		int result = 0;
+		try {
+			result = dao.insertData("dogHealth.dhInsert", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

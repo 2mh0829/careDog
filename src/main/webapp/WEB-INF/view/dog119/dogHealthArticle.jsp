@@ -24,7 +24,7 @@
 .imageView__snsGroup a { display: inline-block; line-height: 1; }
 .imageView__viewReplayWrite { padding: 20px 0 10px 0; }
 .imageView__viewReplayWrite:after { display: block; content: ""; clear: both; }
-.imageView__replyTitle { float: left; font-size: 14px; color: #222222; font-weight: 800; padding-right: 15px; margin-right: 17px; height: 32px; line-height: 32px; background: url("../images/content/replyWriteIcon.jpg") right center no-repeat; }
+.imageView__replyTitle { float: left; font-size: 14px; color: #222222; font-weight: 800; padding-right: 15px; margin-right: 17px; height: 32px; line-height: 32px; background: url("<%=cp%>/resource/img/dog119/replyWriteIcon.jpg") right center no-repeat; }
 .imageView__writerInfo { float: left; font-size: 13px; color: #767676; font-weight: 400; }
 .imageView__writerInfo:before { content: " | "; padding-right: 13px; }
 .imageView__writerInfo input[type="text"],
@@ -122,12 +122,20 @@ function listPage(page){
 		data:{boardNum:boardNum, page:page},
 		dataType:'json',
 		success:function(data){
-	
-			console.log(data)
-			content+="<li><div class='imageView__replyItem'><div class='imageView__writer'>";
-			content+=data.memberId+"</div><div class='imageView__writeDate'>";
-			content+=data.created+"| <a href='#'>삭제</a></div></div>";
-			content+="<div class='imageView__replyContent'>"+data.content+"</div></li>";
+			$(".dhReplyList").find("li").remove();
+			console.log(data.listReply);
+			console.log(data.replyCount)
+			 var list = data.listReply;
+				var content = '';
+				
+				$.each(list, function(index,item){
+					content+="<li><div class='imageView__replyItem'>";
+					content+="<div class='imageView__writer'>"+item.memberId+"</div><div class='imageView__writeDate'>";
+					content+=item.created+" |  <a href='#'>삭제</a></div></div>";
+					content+="<div class='imageView__replyContent'>"+item.dhReplyContent+"</div></li>";
+				});
+				content+=data.paging;
+				$(".dhReplyList").append(content);
 		}
 	});
 	
@@ -135,15 +143,15 @@ function listPage(page){
 }
 
 function insertReply(){
-	var content = encodeURIComponent($("#replyContent").val().trim());
-	
-	if(!content){
+	var dhReplyContent = encodeURIComponent($("#replyContent").val().trim());
+	console.log(dhReplyContent);
+	if(!dhReplyContent){
 		$("#replyContent").focus();
 		return;
 	}
 	
 	var url = "<%=cp%>/dog119/dhReplyInsert"
-	var q = "boardNum=${dto.boardNum}&content="+content;
+	var q = "boardNum=${dto.boardNum}&dhReplyContent="+dhReplyContent;
 	
 	$.ajax({
 		url:url,
@@ -152,6 +160,8 @@ function insertReply(){
 		dataType:'json',
 		success:function(data){
 			console.log(data);
+			$("#replyContent").val('');
+			listPage(1);
 		}
 	});
 }

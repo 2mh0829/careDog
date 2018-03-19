@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import care.dog.common.MyUtil;
+import care.dog.member.SessionInfo;
 
 @Controller("faq.faqController")
 public class FAQController {
@@ -467,5 +470,93 @@ public class FAQController {
 		model.addAttribute("pageNo","1");
 		model.addAttribute("mode","create");
 		return "center/faq_create";
+	}
+	
+	@RequestMapping(value="/center/faq/create", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> createsubmit(
+			FAQ dto,
+			HttpSession session
+			) throws Exception{
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		String state = "true";
+		
+		System.out.println("========"+dto);
+		
+		if(info.getMemberId().equals("admin")) {
+			dto.setMemberId(info.getMemberId());
+			service.insertFaq(dto);
+		} else {
+			state = "false";
+		}
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		
+		return model;
+	}
+	
+	@RequestMapping(value="/center/faq/update", method=RequestMethod.GET)
+	public String updateForm(
+			@RequestParam(value="num") int num,
+			@RequestParam(value="pageNo") String page,
+			HttpSession session,
+			Model model
+			) throws Exception{
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		FAQ dto = service.readFAQ(num);
+		if(dto==null) {
+			return "center/faq";
+		}
+		
+		model.addAttribute("mode","update");
+		model.addAttribute("dto",dto);
+		System.out.println("======================"+dto);
+		model.addAttribute("pageNo",page);
+		
+		return "center/faq_create";
+	}
+	
+	@RequestMapping(value="/center/faq/update", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> updateSubmit(
+			FAQ dto,
+			HttpSession session
+			) throws Exception{
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		String state = "true";
+		
+		if(info.getMemberId().equals("admin")) {
+			dto.setMemberId(info.getMemberId());
+			service.updateFaq(dto);
+		} else {
+			state = "false";
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		return model;
+	}
+	
+	@RequestMapping(value="/center/faq/delete", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> delete(
+			@RequestParam(value="num") int num,
+			@RequestParam(value="pageNo") String page,
+			HttpSession session
+			) throws Exception{
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		String state = "true";
+		
+		if(info.getMemberId().equals("admin")) {
+			service.deleteFaq(num);
+		} else {
+			state = "false";
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		
+		return model;
 	}
 }

@@ -193,7 +193,17 @@ public class MemberServiceImpl implements MemberService {
 	public int memberIdCheck(String memberId) {
 		int result = 0;
 		try {
-			result = dao.selectOne("member.memberIdCheck", "memberId");
+			result = dao.selectOne("member.memberIdCheck", memberId);
+		} catch (Exception e) {
+		}
+		return result;
+	}
+
+	@Override
+	public int emailChecked(String email) {
+		int result = 0;
+		try {
+			result = dao.selectOne("member.emailChecked", email);
 		} catch (Exception e) {
 		}
 		return result;
