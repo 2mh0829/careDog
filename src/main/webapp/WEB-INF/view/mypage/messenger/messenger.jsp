@@ -225,17 +225,16 @@ var friendNameTemp=0;
 						+"	<div class='messageTime' style='text-align: right; color: #D5D5D5; margin-top: 10px; float: right'>"+msgTime+"</div></div>");
 	}
 	
+	function getMessageList(userName,memberId){
+		//alert(userName+$(this).index());
+		$(".messengerHeaderRight").text(userName);
+		$(".headerMemberId").text(memberId);
+		$(".messageList").html("");
+		messageCount=0;
+		getMessages();
+	};
 	$(function(){
-		$("body").on("click",".messageMemberList",function(){
-			var userName = $(this).attr("data-userName");
-			var memberId = $(this).attr("data-memberId");
-			//alert(userName+$(this).index());
-			$(".messengerHeaderRight").text(userName);
-			$(".headerMemberId").text(memberId);
-			$(".messageList").html("");
-			messageCount=0;
-			getMessages();
-		});
+		$("body").on("click",".messageMemberList",getMessageList($(this).attr("data-userName"),$(this).attr("data-memberId")));
 	});
 	
 	function checkDuplicationFriend(userName){
