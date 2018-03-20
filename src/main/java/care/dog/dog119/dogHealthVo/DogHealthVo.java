@@ -7,9 +7,7 @@ public class DogHealthVo {
 	private String content;
 	private String created;
 	private int hitCount;
-	private int dhReplyNum;
-	private String dhReplyContent;
-	private String dhReplyCreated;
+	private int dhReplyCount;
 	private String memberId;
 	private String username;
 	private int likeCnt;
@@ -63,23 +61,11 @@ public class DogHealthVo {
 	public void setHitCount(int hitCount) {
 		this.hitCount = hitCount;
 	}
-	public int getDhReplyNum() {
-		return dhReplyNum;
+	public int getDhReplyCount() {
+		return dhReplyCount;
 	}
-	public void setDhReplyNum(int dhReplyNum) {
-		this.dhReplyNum = dhReplyNum;
-	}
-	public String getDhReplyContent() {
-		return dhReplyContent;
-	}
-	public void setDhReplyContent(String dhReplyContent) {
-		this.dhReplyContent = dhReplyContent;
-	}
-	public String getDhReplyCreated() {
-		return dhReplyCreated;
-	}
-	public void setDhReplyCreated(String dhReplyCreated) {
-		this.dhReplyCreated = dhReplyCreated;
+	public void setDhReplyCount(int dhReplyCount) {
+		this.dhReplyCount = dhReplyCount;
 	}
 	public String getMemberId() {
 		return memberId;
@@ -91,8 +77,7 @@ public class DogHealthVo {
 	@Override
 	public String toString() {
 		return "DogHealthVo [boardNum=" + boardNum + ", title=" + title + ", content=" + content + ", created="
-				+ created + ", hitCount=" + hitCount + ", dhReplyNum=" + dhReplyNum + ", dhReplyContent="
-				+ dhReplyContent + ", dhReplyCreated=" + dhReplyCreated + ", memberId=" + memberId + "]";
+				+ created + ", hitCount=" + hitCount + ", dhReplyNum=" + dhReplyCount  + ", memberId=" + memberId + "]";
 	}
 	
 }

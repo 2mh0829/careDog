@@ -335,19 +335,21 @@ $(function() {
 	
 	$("body").on("change", "#sel1", function() {
 		//console.log($("#sel1").val());
-		var value = $("#sel1").val();
+		var text = $("#sel1").text(); //optionContent
+		var value = $("#sel1").val(); //optionId
 		var price = ${dto.sellingPrice };
 		var str = "";
 		var i = 0;
 		str += "<div id='option_content"+i+"' class='option_total_content'>";
 		str += "<div style='height: 40px;'>";
-		str += "<p style='float: left; font-size: 15px; font-weight: bold;'>"+value+"</p>";
+		str += "<p style='float: left; font-size: 15px; font-weight: bold;'>"+text+"</p>";
+		str += "<input type='hidden' value='"+ value +"' id='optionId'>";
 		str += "<p style='float: right;'>";
 		str += "<button type='button' class='btn btn-default delOptionBtn' onclick='delete_option("+i+")'>X</button>";
 		str += "</p>";
 		str += "</div>";
 		str += "<div style='clear: both; height: 50px;'>";
-		str += "<select id='opt_amount' class='form-control' style='width: 60px; float: left;'>";
+		str += "<select id='amount' name='amount' class='form-control' style='width: 60px; float: left;'>";
 		str += "<option value='1'>1</option>";
 		str += "<option value='2'>2</option>";
 		str += "<option value='3'>3</option>";
@@ -365,9 +367,9 @@ $(function() {
 		
 		$("#option_total").append(str);
 		
-		$("body").on("change", "#opt_amount", function() {
+		$("body").on("change", "#amount", function() {
 			//console.log($("#opt_amount").val());
-			var final_price = $("#opt_amount").val() * price;
+			var final_price = $("#amount").val() * price;
 			//console.log(final_price);
 			
 			$("#changePrice").text(final_price);
@@ -381,6 +383,33 @@ $(function() {
 function delete_option(num) {
 	$("#option_content" + num).remove(); //옵션삭제
 	$("#changePrice").text("0"); //가격 원상태로
+}
+
+function listCart() {
+	var url = "<%=cp %>/store/stack";
+	var productId = $("#productId").val();
+	var amount = $("#amount").val();
+	var optionId = $("#optionId").val();
+	var data = {productId:productId, amount:amount, optionId:optionId};
+	//console.log(data);
+	$.ajax({
+		url: url
+		,data: data
+		,type: "post"
+		,dataType: "json"
+		,success: function(data) {
+			var state = data.state;
+			if(state==1){
+				if(confirm("장바구니에 상품이 담겼습니다. 장바구니로 이동하시겠습니까?"))
+					location.href = "<%=cp%>/store/cart";
+				else
+					return;
+			}
+		}
+		,error: function(e) {
+			console.log(e.responseText);
+		}
+	});
 }
 
 </script>
@@ -402,8 +431,10 @@ function delete_option(num) {
 			<!-- 상품정보 테이블 -->
 			<div class="product_info">
 			
-				<p class="product_name">${dto.productName }</p>
+				<p class="product_name" id="productName">${dto.productName }</p>
 				<br>
+				
+				<input type="hidden" id="productId" value="${dto.productId }">
 			
 				<ul class="info_list">
 					<li>
@@ -435,36 +466,14 @@ function delete_option(num) {
 				 <select class="form-control" id="sel1">
 	        		<option selected="selected">옵션을 선택해주세요.</option>
 	        		<c:forEach var="optionDto" items="${list_option}">
-	        			<option value="${optionDto.optionContent }">${optionDto.optionContent }</option>
+	        			<option value="${optionDto.optionId }">${optionDto.optionContent }</option>
 	        		</c:forEach>
 	      		</select>
 			 
 			</div>
 			
 			<!-- 선택한 옵션에 대한 개수와 가격정보 -->
-			<div id="option_total">
-				<%-- <div style="height: 40px;">
-					<p class="" style="float: left; font-size: 15px; font-weight: bold;">선택된옵션</p>
-					<p style="float: right;">
-						<button type="button" class="btn btn-default delOptionBtn">X</button>
-					</p>
-				</div>
-				<div style="clear: both; height: 50px;">	
-					<select class="form-control" style="width: 60px; float: left;">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-						<option value="6">6</option>
-						<option value="7">7</option>
-						<option value="8">8</option>
-						<option value="9">9</option>
-						<option value="10">10</option>
-					</select>
-					<p style="float: right; font-size: 20px; font-weight: bold;">${dto.sellingPrice }원</p>
-				</div> --%>
-			</div>
+			<div id="option_total"></div>
 			
 			<!-- 상품 금액 합계 -->
 			<div id="product_total_price" class="product_total_price" style="clear: both;">
@@ -476,8 +485,12 @@ function delete_option(num) {
 			
 			<!-- 버튼 -->
 			<div class="product_btn_area">
-				<button type="button" class="btn btn-default roundBtn btnCart" 
+				<%-- <button type="button" class="btn btn-default roundBtn btnCart" 
 				onclick="location.href='<%=cp%>/store/cart'">
+				장바구니
+				</button> --%>
+				<button type="button" class="btn btn-default roundBtn btnCart" 
+				onclick="listCart();">
 				장바구니
 				</button>
 				&nbsp;&nbsp;
@@ -490,7 +503,7 @@ function delete_option(num) {
 		</div>
 	
 	</div>
-	
+
 	<!-- 하단부 : 탭 -->
 	<div class="container-bottom">
 	
@@ -770,38 +783,6 @@ function delete_option(num) {
 					
 					<div id="listProductReply"></div>
 					
-					<%-- <form name="commentForm" id="commentForm" action="">
-						<table class="table table-condensed comment-list" style="width: 800px">
-							<tbody>
-								<c:forEach var="dto" items="${listProductReply}">
-									<tr style="border-bottom: 1px solid #cdcdcd;">
-										<td>
-											<div class="divTd" style="width: 100px;">
-												<p class="tdTxt" style="font-size: 15px;">${dto.grade } 점</p>
-												<!-- <img alt="" src=""> -->
-											</div>
-										</td>
-										<td>
-											<div class="divTd" style="width: 500px;">
-												<p class="tdTxt" style="font-size: 15px;">${dto.replyContent }</p>
-											</div>
-										</td>
-										<td>
-											<div class="divTd" style="width: 100px;">
-												<p class="tdTxt" style="font-size: 15px;">${dto.memberId }</p>
-											</div>
-										</td>
-										<td>
-											<div class="divTd" style="width: 100px;">
-												<p class="tdTxt" style="font-size: 15px;">${dto.created }</p>
-											</div>
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</form> --%>
-					
 				</div>
 				
 				<!-- QnA 탭 -->
@@ -813,91 +794,6 @@ function delete_option(num) {
 					</div>
 					
 					<div id="listProductQna"></div>
-					
-					<!-- <form name="qnaForm" id="qnaForm" action="">
-						<table class="table table-condensed qna-list" id="qnaTable" style="width: 800px">
-							<tbody class="pane1">
-								<tr class="question-tr" data-toggle="collapse" data-target="#answer1" data-parent="#qnaTable">
-									<td>
-										<div class="divTd" style="width: 100px;">
-											답변완료 여부 버튼 - 이미지로?
-											<button type="button" class="btn btn-default qnaOkBtn" disabled="disabled">답변완료</button>
-										</div>
-									</td>
-									<td>
-										<div class="divTd" style="width: 500px; height: 30px;">
-											<p class="qnaTxt">도대체 언제 배송하세요?</p>
-										</div>
-									</td>
-									<td>
-										<div class="divTd" style="width: 100px; height: 30px;">
-											<p class="qnaTxt">han</p>
-										</div>
-									</td>
-									<td>
-										<div class="divTd" style="width: 100px; height: 30px;">
-											<p class="qnaTxt">2018.03.01</p>
-										</div>
-									</td>
-								</tr>
-								<tr id="answer1" class="collapse" >
-									<td colspan="4" class="hiddenRow">
-										<div class="fold-content">
-											<div class="answer_mark">
-												<p>A</p>
-											</div>
-											<div class="answer_container">
-											반갑습니다<br>
-											올리브영 온라인몰입니다.<br><br>
-											고객님께서 주문하신 상품은 결제일 기준 3~5일 이내(주말/공휴일 제외) 배송될 예정입니다.<br><br>
-											올리브영 온라인몰 고객센터 (1522-0882 / 운영시간 : 평일 09시~18시) 및 1:1 게시판으로 문의 주시면 배송에 대한 정확한 안내 도와드리겠습니다.<br><br>
-											감사합니다.<br>
-											</div>
-										</div>
-									</td>
-								</tr>
-								<tr class="question-tr" data-toggle="collapse" data-target="#answer2" data-parent="#qnaTable">
-									<td>
-										<div class="divTd" style="width: 100px;">
-											답변완료 여부 버튼 이미지로?
-											<button type="button" class="btn btn-default qnaOkBtn" disabled="disabled">답변완료</button>
-										</div>
-									</td>
-									<td>
-										<div class="divTd" style="width: 500px; height: 30px;">
-											<p class="qnaTxt">주문했는데 언제 받을수있나요?</p>
-										</div>
-									</td>
-									<td>
-										<div class="divTd" style="width: 100px; height: 30px;">
-											<p class="qnaTxt">spring</p>
-										</div>
-									</td>
-									<td>
-										<div class="divTd" style="width: 100px; height: 30px;">
-											<p class="qnaTxt">2018.02.28</p>
-										</div>
-									</td>
-								</tr>
-								<tr id="answer2" class="collapse">
-									<td colspan="4" class="hiddenRow">
-										<div class="fold-content">
-											<div class="answer_mark">
-												<p>A</p>
-											</div>
-											<div class="answer_container">
-											반갑습니다<br>
-											올리브영 온라인몰입니다.<br><br>
-											고객님께서 주문하신 상품은 결제일 기준 3~5일 이내(주말/공휴일 제외) 배송될 예정입니다.<br><br>
-											올리브영 온라인몰 고객센터 (1522-0882 / 운영시간 : 평일 09시~18시) 및 1:1 게시판으로 문의 주시면 배송에 대한 정확한 안내 도와드리겠습니다.<br><br>
-											감사합니다.<br>
-											</div>
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</form> -->
 					
 				</div>
 				

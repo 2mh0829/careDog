@@ -69,6 +69,7 @@ public class Dog119Controller {
 		int totalPage = 0;
 		int rows=10;
 		int dataCount = 0;
+		int replyCount=0;
 		
 		if(req.getMethod().equalsIgnoreCase("GET")) {
 			try {
@@ -104,6 +105,8 @@ public class Dog119Controller {
 			DogHealthVo dhList = it.next();
 			listNum = dataCount - (start+n-1);
 			dhList.setListNum(listNum);
+			replyCount=service.dhReplyCount(dhList.getBoardNum());
+			dhList.setDhReplyCount(replyCount);
 			n++;
 		}
 		
@@ -253,5 +256,19 @@ public class Dog119Controller {
 		
 		//AJAX는 .으로 하면 안됨
 		return model;
+	}
+	
+	@RequestMapping(value="/dog119/dhInsert")
+	public String dhInsert(@RequestParam Map<String, Object> data, HttpSession session){
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		String memberId = info.getMemberId();
+		DogHealthVo dto = new DogHealthVo();
+		dto.setTitle((String) data.get("title"));
+		dto.setContent((String) data.get("content"));
+		dto.setMemberId(memberId);
+		
+		service.dhInsert(dto);
+		
+		return "redirect:/dog119/dogHealth";
 	}
 }

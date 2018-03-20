@@ -92,6 +92,18 @@ th {
 
 </style>
 
+<script>
+
+$(function() {
+	var amountAll = $("#amountAll").val();
+	//console.log(amountAll);
+	//value 값으로 선택
+	$("#productCntSel").val(amountAll).prop("selected", true);
+});
+
+
+</script>
+
 <div class="body-container">
 
 	<div class="cart-content">
@@ -122,6 +134,7 @@ th {
 						</th>
 					</tr>
 					<!-- 후에 tr추가되도록 수정 -->
+					<c:forEach var="dto" items="${listCart }">
 					<tr>
 						<td>
 							<div class="divTd" style="width: 50px;">
@@ -134,17 +147,18 @@ th {
 								style="width: 100px;">
 							</div>
 							<div class="divFloat product_name" style="width: 350px;">
-								<p class="pNameTxt1">서울우유</p>
-								<p class="pNameTxt2">[서울우유] 아이펫밀크 180ml x 10ea</p>
-								<p class="pNameTxt3">옵션 : 180ml x 10ea</p>
+								<p class="pNameTxt1">${dto.brand }</p>
+								<p class="pNameTxt2">${dto.productName }</p>
+								<p class="pNameTxt3">${dto.optionContent }</p>
+								<input type="hidden" value="${dto.amountAll }" id="amountAll">
 							</div>
 						</td>
 						<td>
 							<div class="divTd" style="width: 100px;">
 								<p>
-									<select id="productCntSel" name="productCntSel" class="select"
+									<select id="productCntSel" class="select"
 									style="width: 90px;">
-										<option value="1" selected="selected">1</option>
+										<option value="1">1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>
 										<option value="4">4</option>
@@ -160,7 +174,7 @@ th {
 						</td>
 						<td>
 							<div class="divTd" style="width: 100px;">
-								<p>30,000원</p>
+								<p>${dto.totalPrice }</p>
 							</div>
 						</td>
 						<td>
@@ -171,6 +185,7 @@ th {
 							</div>
 						</td>
 					</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 			
@@ -182,15 +197,15 @@ th {
 				<table class="table table-condensed order-info-tbl-cart">
 					<tr>
 						<td><p class="left_txt">총 상품금액</p></td>
-						<td><p class="right_txt">16,800원</p></td>
-					</tr>
-					<tr>
-						<td><p class="left_txt">배송비</p></td>
 						<td><p class="right_txt">0원</p></td>
 					</tr>
 					<tr>
+						<td><p class="left_txt">배송비</p></td>
+						<td><p class="right_txt">2500원</p></td>
+					</tr>
+					<tr>
 						<td><p class="left_txt">총 결제금액</p></td>
-						<td><p class="right_txt">16,800원</p></td>
+						<td><p class="right_txt">0원</p></td>
 					</tr>
 					<tr>
 						<td>

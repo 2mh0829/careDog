@@ -161,7 +161,7 @@ li{
 
 .price {
 	margin-top: 10px;
-	padding-left: 12px;
+	padding-left: 45px;
 }
 
 .won {
@@ -223,7 +223,7 @@ li{
 	color:#ffffff;
 	font-family:Arial;
 	font-size:17px;
-	padding: 15px 110px;
+	padding: 15px 116px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #2f6627;
 	float: left;
@@ -501,15 +501,16 @@ li{
 							<input type="text" id="right-datepicker" placeholder="마침 날짜">
 						</dd>
 						<dd class="price">
+							하루
 							<span class="won">30,000원</span>
 							<div class="dropdown">
-							<button type="button" class="weight" data-toggle="dropdown">
+							<!-- <button type="button" class="weight" data-toggle="dropdown">
 								15kg 미만 <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" id="weightDD">
 								<li><a href="#">15kg 미만</a></li>
 								<li><a href="#">15kg 이상</a></li>
-							</ul>
+							</ul> -->
 							</div>
 						</dd>
 						<dd class="pet-add">
@@ -536,13 +537,13 @@ li{
 							</div>
 						</dt>
 						<dd>
-							<span class="pet-add-price">30,000원</span>
+							<span class="pet-add-price">20,000원</span>
 						</dd>
 						<dt>
 							부가세
 						</dt>
 						<dd>
-							<span class="oneDayPrice">30,000원</span>
+							<span class="oneDayPrice">10%</span>
 						</dd>
 						<dt>
 							<span class="price-tot-text">합계</span>

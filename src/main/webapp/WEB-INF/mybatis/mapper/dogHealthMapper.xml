@@ -19,6 +19,10 @@
 	</if>
 </sql>
 
+<insert id="dhInsert" parameterType="care.dog.dog119.dogHealthVo.DogHealthVo">
+	INSERT INTO doghealth (boardNum,title, content, memberId) VALUES (doghealth_seq.NEXTVAL, #{title},#{content},#{memberId})
+</insert>
+
 <select id="listBoard" parameterType="map" resultType="care.dog.dog119.dogHealthVo.DogHealthVo">
 	select * from(
 		select rownum rnum, tb.* from(
@@ -70,7 +74,7 @@
 	</select>
 	
 	<insert id="dhReplyInsert" parameterType="care.dog.dog119.dogHealthVo.DhReplyVo">
-		INSERT INTO dogHealthReply (dhReplyNum, dhReplyContent, memberId, boardNum) VALUES (dhReply_seq.NEXTVAL, #{content},#{memberId},#{boardNum})
+		INSERT INTO dogHealthReply (dhReplyNum, dhReplyContent, memberId, boardNum) VALUES (dhReply_seq.NEXTVAL, #{dhReplyContent},#{memberId},#{boardNum})
 	</insert>
 	
 	<select id="dhReplyCount" parameterType="map" resultType="Integer">
@@ -80,7 +84,7 @@
 	<select id="dhReplyList" parameterType="map" resultType="care.dog.dog119.dogHealthVo.DhReplyVo">
 			SELECT*FROM(
 				SELECT ROWNUM rnum, tb.* FROM(
-					SELECT dhReplyNum, m.memberId, b.boardNum, dhReplyContent, created
+					SELECT dhReplyNum, m.memberId, boardNum, dhReplyContent, created
 					FROM dogHealthReply dhr
 					JOIN member1 m ON dhr.memberId=m.memberId
 					WHERE boardNum=#{boardNum}

@@ -44,5 +44,12 @@ public class FAQ {
 	public void setFaqsort(int faqsort) {
 		this.faqsort = faqsort;
 	}
+	@Override
+	public String toString() {
+		return "FAQ [listNum=" + listNum + ", num=" + num + ", memberId=" + memberId + ", subject=" + subject
+				+ ", content=" + content + ", faqsort=" + faqsort + "]";
+	}
+	
+	
 
 }

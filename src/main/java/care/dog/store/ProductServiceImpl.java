@@ -100,6 +100,37 @@ public class ProductServiceImpl implements ProductService{
 		return result;
 	}
 
+	@Override
+	public int dataCountCart() {
+		int result = 0;
+		try {
+			result = dao.selectOne("store.dataCountCart");
+		} catch (Exception e) {
+		}
+		return result;
+	}
+
+	@Override
+	public List<Cart> listCart(Map<String, Object> map) {
+		List<Cart> list = null;
+		try {
+			list = dao.selectList("store.listCart", map);
+		} catch (Exception e) {
+		}
+		return list;
+	}
+
+	@Override
+	public int insertCart(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.insertData("store.insertCart", map);
+			result = 1;
+		} catch (Exception e) {
+		}
+		return result;
+	}
+
 	
 	
 }

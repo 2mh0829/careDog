@@ -127,6 +127,7 @@ dt {
 
 .sitter-search dt{
 	margin-bottom: 5px;
+	margin-left: 5px;
 }
 
 .sitter-group{
@@ -291,7 +292,7 @@ li>a>span{
 }
 
 .btnAge {
-	width: 120px;
+	width: 150px;
 	height: 34px;
 	border-radius: 4px;
 	border: 1px solid #ccc;
@@ -299,7 +300,7 @@ li>a>span{
 }
 
 .btnWeight {
-	width: 120px;
+	width: 150px;
 	height: 34px;
 	border-radius: 4px;
 	border: 1px solid #ccc;
@@ -520,7 +521,7 @@ li>a>span{
 }
 
 #stay {
-    color: #fac058;
+    color: black;
 }
 
 .evaluation {
@@ -549,11 +550,18 @@ li>a>span{
 }
 
 .evaluation img {
-	width: 110px;
+	width: 40px;
 }
 
 .evaluation pull-left {
 	top: 100px;
+}
+
+#rating {
+	position: relative;
+    top: -2px;
+    margin-left: 12px;
+    width: 30px;
 }
 
 </style>
@@ -885,7 +893,7 @@ li>a>span{
 			<dd>
 				<div class="dropdown">
 					<button type="button" class="btnService" data-toggle="dropdown">
-						<span id="typeText">24시간 돌봄</span>
+						<span id="typeText">선택하세요</span>
 						&nbsp;
 						<span class="caret"></span>
 					</button>
@@ -1034,13 +1042,11 @@ li>a>span{
 							김경애
 						</label>
 						<label class="dogs">
-							<img class="dogIcon" 
-							src="https://www.iconexperience.com/_img/o_collection_png/green_dark_grey/512x512/plain/dog.png">
-							반려견
+							<img src="<%=cp%>/resource/img/service/redHeart.JPG" id="rating">
 							<strong>
-								#
+								4.7
 							</strong>
-							마리							
+							점				
 						</label>
 					</dt>
 					<dd class="sitter-tag">
@@ -1052,10 +1058,10 @@ li>a>span{
 						<span class="label">투약가능</span>
 					</dd>
 					<dd class="price">
-						<label class="daycare">
+						<!-- <label class="daycare">
 							Day Care / 
 							<strong>22,000원</strong>
-						</label>
+						</label> -->
 						<label id="stay">
 							1박 / 
 							<strong>30,000원</strong>
@@ -1063,9 +1069,6 @@ li>a>span{
 					</dd>
 				</dl>
 				<div class="evaluation">
-					<label class="pull-left">
-						<img src="<%=cp%>/resource/img/service/grade_img.png">
-						펫시터 총점</label>
 					<label class="pull-right">
 						<i class="glyphicon glyphicon-list-alt"></i>
 						고객 후기 ##개

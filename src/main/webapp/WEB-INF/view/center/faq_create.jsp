@@ -112,7 +112,8 @@ textarea {
 	/*outline:none;*/
 }
 </style>
-<form name="boardForm" method="post" enctype="multipart/form-data">
+
+<form name="boardForm" method="post">
 <div class="body-container" style="width: 1020px;">
 <table class="board-view-1s mgT40">
 	<colgroup>
@@ -124,17 +125,17 @@ textarea {
 	<tbody>
 					<tr>
 					<td>
-						<select id="sfaqsort">
-							<option value="tabfmember">회원/멤버십</option>
-							<option value="tabfbuy">주문/결제</option>
-							<option value="tabfdelivery">배송</option>
-							<option value="tabfrefund">교환/환불/반품</option>
-							<option value="tabfevent">이벤트</option>
-							<option value="tabetc">기타</option>
+						<select id="sfaqsort" onchange="aaa(this.value);">
+							<option value="2" >회원/멤버십</option>
+							<option value="3">주문/결제</option>
+							<option value="4">배송</option>
+							<option value="5">교환/환불/반품</option>
+							<option value="6">이벤트</option>
+							<option value="7">기타</option>
 						</select>
 					</td>
 					<td>
-						<span class="tit"><input type="text" name="subject" id="subject" style="width: 691px;"></span>
+						<span class="tit"><input type="text" name="subject" id="subject" style="width: 691px;" value="${dto.subject }"></span>
 					</td>
 					<td class="name">${SessionScope.member.memberId }</td>
 					</tr>
@@ -142,7 +143,7 @@ textarea {
 	<tr>
 		<td class="textus" colspan="3">
 			<div class="contEditor">
-				<textarea id="eventInput" name="content" cols="5" rows="1" style="width:98%;height:280px;"></textarea>
+				<textarea id="eventInput" name="content" cols="5" rows="1" style="width:98%;height:280px;">${dto.content }</textarea>
 			</div>
 		</td>
 	</tr>
@@ -154,6 +155,7 @@ textarea {
 			<li><button type="reset" class="btn">다시입력</button></li>
 			<li><button type="button" class="btn" onclick="sendCancel('${pageNo}');">${mode=='update'?'수정취소':'등록취소'}</button></li>
 			<li>
+			    <input type="hidden" name="faqsort">
 				<c:if test="${mode=='update'}">
 	        		<input type="hidden" name="num" value="${dto.num}">
 	        		<input type="hidden" name="pageNo" value="${pageNo}">

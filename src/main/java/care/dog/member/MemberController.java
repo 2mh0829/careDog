@@ -186,27 +186,23 @@ public class MemberController {
 		return ".member.complete";
 	}
 	
-	@RequestMapping(value="/member/memberIdCheck")
+	@RequestMapping(value="/member/memberIdCheck", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> memberIdCheck(String memberId) throws Exception {
-		System.out.println("member/memberIdCheck");
-		int passed = 1;
-		int usedMemberId = service.memberIdCheck(memberId);
-		if(usedMemberId == 0)
-			passed = 0;
-		
-		System.out.println(memberId);
-		
+		int passed = 0;
+		passed = service.memberIdCheck(memberId);
+
 		Map<String, Object> model = new HashMap<>(); 
 		model.put("passed", passed);
 		return model;
 	}
 	
-	@RequestMapping(value="/member/emailChecked")
-	public Map<String, Object> emailChecked(String email){
-		System.out.println("emailCheck");
-		System.out.println(email);
-		return null;
+	@RequestMapping(value="/member/emailChecked", method=RequestMethod.POST)
+	@ResponseBody
+	public int emailChecked(String email){
+		int result = 0;
+		result = service.emailChecked(email);
+		return result;
 	}
 
 	@RequestMapping(value="member/secession", method=RequestMethod.GET)//jh

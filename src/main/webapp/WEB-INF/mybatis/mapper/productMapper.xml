@@ -100,6 +100,34 @@
 	where productId = #{productId}
 	</select>
 	
+	<insert id="insertCart" parameterType="map"> 
+	insert into cart(cartId, amountAll, productId, memberId, optionId)
+	values(cart_seq.NEXTVAL, #{amount}, #{productId}, #{memberId}, #{optionId})	
+	</insert>
+	
+	<select id="dataCountCart" resultType="Integer">
+	SELECT NVL(COUNT(*), 0) FROM product
+	</select>
+	
+	<select id="listCart" parameterType="map" resultType="care.dog.store.Cart">
+	SELECT * FROM (
+		SELECT ROWNUM rnum, tb.* FROM (
+			SELECT cartId, amountAll, to_char(enrollDate, 'yyyy.mm.dd') enrollDate, 
+           c.productId, productName, brand, (amountAll * sellingPrice) totalPrice, 
+           memberId, c.optionId, optionContent
+			FROM cart c
+            join productOption o
+            on c.optionId = o.optionId
+            join product p
+            on c.productId = p.productId
+            where memberId = #{memberId}
+			ORDER BY enrollDate desc
+	<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>
+	</select>
+	
 </mapper>
 
 
