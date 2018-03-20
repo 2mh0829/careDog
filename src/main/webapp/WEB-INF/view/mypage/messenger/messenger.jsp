@@ -149,6 +149,7 @@ var friendNameTemp=0;
 			type:"POST",
 			url:url,
 			success:function(data){
+				console.log(data.mML.length);
 			 	for(i=0;i<data.mML.length;i++){
 					getFriend(data.mML[i].receiverUserName,data.mML[i].receiverId,data.mML[i].msg,data.mML[i].msgTime);
 				}
@@ -236,9 +237,6 @@ var friendNameTemp=0;
 			getMessages();
 		});
 	});
-	function getMessageList(userName,memberId,idx){ <!--리스트에 친구 누르면 대화 불러오기-->
-
-	}
 	
 	function checkDuplicationFriend(userName){
 		var mML =$(".messageMemberList");

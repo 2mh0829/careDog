@@ -55,13 +55,16 @@ public class MessengerController {
 				list.get(i).setSenderUserName(list.get(i).getReceiverUserName());
 			}
 			if (i > 0) {
-				if (list.get(i).getReceiverId().equalsIgnoreCase(list.get(i - 1).getReceiverId())) {
-					list.remove(i - 1);
+				for(int j=0;j<i;j++)
+				if (list.get(i).getReceiverId().equalsIgnoreCase(list.get(j).getReceiverId())) {
+					list.remove(i);
 					i--;
 				}
 			}
+			
 		}
-
+		for(int i=0;i<list.size();i++)
+		System.out.println(list.get(i).toString());
 		map.put("mML", list);
 		return map;
 	}
