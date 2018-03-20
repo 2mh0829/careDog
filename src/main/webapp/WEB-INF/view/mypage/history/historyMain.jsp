@@ -11,7 +11,6 @@
 <div class="category-list">
 	<a href="#">서비스이용내역</a><br>
 	<br> <a href="#">북마크</a><br>
-	<br> <a href="<%=cp%>/myPage/test">주문내역</a><br>
 	<br> <a href="#">봉사/후원 내역</a>
 </div>
 

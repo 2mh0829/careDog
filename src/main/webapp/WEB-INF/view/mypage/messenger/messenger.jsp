@@ -34,8 +34,21 @@
 	float: left;
 }
 .messageList{
-/* background-color:green;
-height : 500px; */
+overflow:auto;
+
+    scrollbar-face-color: #FFFFFF;
+
+    scrollbar-highlight-color: #DADADA;
+
+    scrollbar-3dlight-color: #FFFFFF;
+
+    scrollbar-shadow-color: #DADADA;
+
+    scrollbar-darkshadow-color: #FFFFFF;
+
+    scrollbar-track-color: #FFFFFF;
+
+    scrollbar-arrow-color: #DADADA;
 }
 .messengerHeader {
 	float: left;
@@ -77,28 +90,32 @@ height : 500px; */
 	weight: 100%;
 	margin-left: 20px;
 	margin-right: 20px;
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 .messageTextLeft {
-	font-size: 25px;
+	font-size: 15px;
 	background-color: #D5D5D5;
 	border-radius: 20px;
+		padding-left:5px;
+	padding-right:5px;
 }
 
 .messageTextRight {
 	color: white;
-	font-size: 25px;
-	background-color: blue;
+	font-size: 15px;
+	background-color: skyblue;
 	border-radius: 20px;
+	padding-left:5px;
+	padding-right:5px;
 }
 .messageInput{
-	height:60px;
+	height:40px;
 	border-top-width: 1px;
 	border-top-style:solid;
 	border-top-color:#D5D5D5;
 	padding-left: 15px;
-	padding-top:15px;
+	padding-top:10px;
 	color : #D5D5D5;
 	font-size: 17px;
 }
@@ -111,12 +128,19 @@ cursor: pointer
 .pointer{
 cursor : pointer
 }
+input{
+outline-width:0}
 </style>
 <script>
+var messageCount=0;
+var friendNameTemp=0;
 	$(document).ready(function() {
 		adjustMessengerLayoutSize();
 		getMessageMemberList(); <!--메신저페이지들어오면 대화기록있는 친구리스트 불러오기-->
-		getMessages();
+		mInterval = setInterval("checkChanged()",1500);<%--메세지검사--%>
+		$('#inputMessage').on('click',function(){
+			$(this).prop('value',"");
+		});
 	
 	})
 	function getMessageMemberList(){
@@ -125,12 +149,14 @@ cursor : pointer
 			type:"POST",
 			url:url,
 			success:function(data){
-				for(i=0;i<data.mML.length;i++){
+			 	for(i=0;i<data.mML.length;i++){
 					getFriend(data.mML[i].receiverUserName,data.mML[i].receiverId,data.mML[i].msg,data.mML[i].msgTime);
 				}
 				if(data.mML.length>=0)
 				getMessageList(data.mML[0].receiverUserName,data.mML[0].receiverId);
+				getMessages();
 			},
+		
 			error:function(e){
 				alert("연결 오류가 발생했습니다.");
 			}
@@ -146,12 +172,12 @@ cursor : pointer
 			var temp = "ㅤ" + $(".messageTextRight").eq(i).text() + "ㅤ";
 			$(".messageTextRight").eq(i).text(temp);
 		}
-		var a = getDocHeight()
-		$(".myPage-layout").css("height", a - 172);
-		$(".messengerBody").css("height", a - 242);
+		var a = getDocHeight();
+		$(".myPage-layout").css("height", a - 210);
+		$(".messengerBody").css("height", a - 240);
 		var c = $(".messengerBody").height();
 		var d = $(".messageInput").height();
-		$(".messageList").css("height",c-80);
+		$(".messageList").css("height",c-60);
 	}
 	
 	function getDocHeight() {
@@ -181,24 +207,37 @@ cursor : pointer
 	function getFriend(userName,memberId,msg,msgTime){<!--친구받아와서 목록에 추가-->
 		
 		<!--기존에 친구대화목록이 있으면 추가하지 않기-->
-	if(checkDuplicationFriend(userName)==0){
-		alert('이미 친구가 대화목록에 있습니다');
-		return;
-	}
-	$(".messengerLeft").append("<div class='messageMemberList pointer' onClick='getMessageList(\""+userName+"\",\""+memberId+"\");'>"
-				+"<img src='https://pbs.twimg.com/media/CJdjthrUEAAjkCl.jpg'"
-				+"	style='margin-right: 10px; width: 50px; border-radius: 50px; float: left'>"
-				+"	<div style='margin-top: 7px; width: 30%; float: left'>"
-				+"	<div class='messageMemberName' style='font-size: 15px'>"+userName+"</div>"
-				+"	<div style='font-size: 12px; color: #D5D5D5'>"+msg+"</div></div>"
-				+"	<div style='text-align: right; color: #D5D5D5; margin-top: 10px; float: right'>"+msgTime+"</div></div>");
+		if(checkDuplicationFriend(userName)==0){
+			alert('이미 친구가 대화목록에 있습니다');
+			return;
+		}
+		if(msg.length>30) 
+			msg=msg.substr(0,30)+"...";
+		
+			// $(".messengerLeft").append("<div class='messageMemberList pointer'  data-userName='"+userName+"' onClick='getMessageList(\""+userName+"\",\""+memberId+"\","+$('.messageMemberList').index(this)+");'>"
+		$(".messengerLeft").append("<div class='messageMemberList pointer'  data-userName='"+userName+"' data-memberId='"+memberId+"'>"
+						+"<img src='https://pbs.twimg.com/media/CJdjthrUEAAjkCl.jpg'"
+						+"	style='margin-right: 10px; width: 50px; border-radius: 50px; float: left'>"
+						+"	<div style='margin-top: 7px; width: 30%; float: left'>"
+						+"	<div class='messageMemberName' style='font-size: 15px'>"+userName+"</div>"
+						+"	<div class='messageMsg' style='font-size: 12px; width:auto;color: #D5D5D5'>"+msg+"</div></div>"
+						+"	<div class='messageTime' style='text-align: right; color: #D5D5D5; margin-top: 10px; float: right'>"+msgTime+"</div></div>");
 	}
 	
-	function getMessageList(userName,memberId){ <!--리스트에 친구 누르면 대화 불러오기-->
-		$(".messengerHeaderRight").text(userName);
-		$(".headerMemberId").text(memberId);
-		$(".messageList").html("");
-		var url = "<%=cp%>/messenger/getMessageList";
+	$(function(){
+		$("body").on("click",".messageMemberList",function(){
+			var userName = $(this).attr("data-userName");
+			var memberId = $(this).attr("data-memberId");
+			//alert(userName+$(this).index());
+			$(".messengerHeaderRight").text(userName);
+			$(".headerMemberId").text(memberId);
+			$(".messageList").html("");
+			messageCount=0;
+			getMessages();
+		});
+	});
+	function getMessageList(userName,memberId,idx){ <!--리스트에 친구 누르면 대화 불러오기-->
+
 	}
 	
 	function checkDuplicationFriend(userName){
@@ -209,16 +248,16 @@ cursor : pointer
 		}
 	}
 	function sendMessage(){
-		var url="<%=cp%>/messenger/sendMessage";
+		var url="<%=cp%>/messenger/sendMessage";		
 		var data = "receiverId="+$(".headerMemberId").text()+"&msg="+$("#inputMessage").val();
-		console.log(data);
  		$.ajax({
 			type:"POST",
 			url:url,
 			data:data,
 			dataType:"JSON",
 			success:function(data){
-			alert('성공');
+			getMessages();
+		
 			}
 			,error:function(e){
 				alert("연결 오류가 발생했습니다.");
@@ -228,19 +267,38 @@ cursor : pointer
 	function getMessages(){
 		var url="<%=cp%>/messenger/getMessages";
 		var data = "receiverId="+$(".headerMemberId").text();
-		alert(data);
  		$.ajax({
 			type:"POST",
-			url:url,weeE
+			url:url,
 			data:data,
 			dataType:"JSON",
 			success:function(data){
-			alert('성공');
+				$(".messageListBox").remove();
+				for(i=0;i<data.messageList.length;i++){
+					if(data.messageList[i].senderId=='${sessionScope.member.memberId}'){
+						$(".messageList").append("<div class='messageListBox'><div class='messageTextRight' style='float: right'>"+data.messageList[i].msg+"</div></div>");
+					}else{
+						$(".messageList").append("<div class='messageListBox'><div class='messageTextLeft' style='float: left'>"+data.messageList[i].msg+"</div></div>");
+					}
+				}
+				if (messageCount<data.messageList.length){  <%--메세지 변동사항 생기면 아래로 스크롤하고 친구목록 메세지와 시간 변경하기--%>
+					$(".messageList").scrollTop($(".messageList")[0].scrollHeight);
+					messageCount=data.messageList.length;
+					 for(i=0;i<$('.messageMemberName').length;i++){
+							if($('.messageMemberName').eq(i).text()==$(".messengerHeaderRight").text()){
+								$('.messageMsg').eq(i).text(data.messageList[data.messageList.length-1].msg);
+								$('.messageTime').eq(i).text(data.messageList[data.messageList.length-1].msgTime);
+							}
+						} 
+				}
 			}
 			,error:function(e){
 				alert("연결 오류가 발생했습니다.");
 			}
 		}) 
+	}
+	function checkChanged(){
+		getMessages();
 	}
 </script>
 
@@ -286,7 +344,8 @@ cursor : pointer
 		</div>
 		
 		<div class="messageInput">
-		<input id="inputMessage" type="text" style="border:none;" value="Type a message.."><input style="margin-right:30px; float:right;width:50px; height:30px;" type="button" onClick="sendMessage();" value="send">
+		<div style="width:80%; float:left"><input style="border:none; width:100%;" id="inputMessage" type="text" value="Type a message.."></div>
+		<div style="padding-right:25px; float:right;width:auto; height:30px;"><input type="button" onClick="sendMessage();" value="send"></div>
 		</div>
 	</div>
 </div>
