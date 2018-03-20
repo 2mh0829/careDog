@@ -231,7 +231,7 @@ cursor : pointer
 		alert(data);
  		$.ajax({
 			type:"POST",
-			url:url,
+			url:url,weeE
 			data:data,
 			dataType:"JSON",
 			success:function(data){
