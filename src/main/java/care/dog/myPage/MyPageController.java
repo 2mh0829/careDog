@@ -40,6 +40,9 @@ public class MyPageController {
 			Model model) throws Exception {
 		// 블로그 메인or 블로그만들기
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		if (info == null) {
+			return "redirect:/member/login";
+		}
 		MyPageInfo myPageInfo=myPageService.readMyPageInfo(info.getMemberId());
 		if(myPageInfo==null) {
 			return "redirect:/myPage/created";
