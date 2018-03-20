@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +16,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import care.dog.common.MyUtil;
+import care.dog.member.SessionInfo;
 
 @Controller("store.storeController")
 public class StoreController {
@@ -265,9 +268,94 @@ public class StoreController {
 	public String productOrder() {
 		return ".store.order";
 	}
+	
+	@RequestMapping(value = "/store/stack")
+	@ResponseBody
+	public Map<String, Object> productStack(
+			@RequestParam int productId,
+			@RequestParam int amount,
+			@RequestParam int optionId,
+			HttpSession session) {
+
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		String memberId = info.getMemberId();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);
+		map.put("productId", productId);
+		map.put("amount", amount);
+		map.put("optionId", optionId);
+		
+		//cart에 상품 dto와 memberId를 insert
+		int state = service.insertCart(map);
+		
+		model.put("state", state);
+		
+		return model;
+		
+	}
 
 	@RequestMapping(value = "/store/cart")
-	public String productCart() {
+	public String productCart(
+			@RequestParam(value = "page", defaultValue = "1") int current_page,
+			HttpServletRequest req,
+			HttpSession session,
+			Model model
+			) {
+		
+		String cp = req.getContextPath();
+
+		int rows = 5;
+		int total_page = 0;
+		int dataCount = 0;
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		String memberId = info.getMemberId();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);
+		
+		// 전체 페이지 수
+		dataCount = service.dataCountCart();
+
+		if (dataCount != 0)
+			total_page = myUtil.pageCount(rows, dataCount);
+
+		if (total_page < current_page)
+			current_page = total_page;
+
+		int start = (current_page - 1) * rows + 1;
+		int end = current_page * rows;
+
+		map.put("start", start);
+		map.put("end", end);
+
+		List<Cart> listCart = service.listCart(map);
+
+		// 글번호 만들기
+		int listNum, n = 0;
+		Iterator<Cart> it = listCart.iterator();
+		while (it.hasNext()) {
+			Cart data = it.next();
+			listNum = dataCount - (start + n - 1);
+			data.setListNum(listNum);
+			n++;
+		}
+
+		String listUrl = cp + "/store/list";
+		String articleUrl = cp + "/store/article?page=" + current_page;
+
+		String paging = myUtil.paging(current_page, total_page, listUrl);
+
+		model.addAttribute("listCart", listCart);
+		model.addAttribute("dataCount", dataCount);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("articleUrl", articleUrl);
+		model.addAttribute("page", current_page);
+		model.addAttribute("paging", paging);
+		
 		return ".store.cart";
 	}
 

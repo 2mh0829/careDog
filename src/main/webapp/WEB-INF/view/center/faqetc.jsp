@@ -118,3 +118,17 @@ ul, ol {list-style:none;}
 		</c:if>
 	</div>
 	
+		<div id="tab-list-bottom">
+		<div style="width: 100%; margin: 10px auto; border-spacing: 0px;">
+		   <ul >
+		      <li >
+		          <button type="button" class="btn" onclick="reloadBoard();">새로고침</button>
+		      </li>
+		      <li >
+		      <c:if test="${sessionScope.member.memberId=='admin' }">
+		          <button type="button" class="btn" onclick="insertForm();">글올리기</button>
+		      </c:if>
+		      </li>
+		   </ul>
+		</div>
+	</div>

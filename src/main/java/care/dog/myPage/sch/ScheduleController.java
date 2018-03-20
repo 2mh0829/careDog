@@ -23,15 +23,19 @@ public class ScheduleController {
 	@Autowired
 	private ScheduleService service;
 	
+	
 	@RequestMapping(value="/sch/sch")
 	public String sch(HttpSession session) throws Exception {
-		System.out.println("@@@/sch/sch");
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		if(info==null) {
 			return "redirect:/member/login";
 		}
-		
 		return ".menu5.sch.sch";
+	}
+	@RequestMapping(value="/sch/schMain")
+	public String schMain() throws Exception {
+
+		return "myPage/sch/sch";
 	}
 
 	// 대화상자에 출력 할 일정 추가 폼
