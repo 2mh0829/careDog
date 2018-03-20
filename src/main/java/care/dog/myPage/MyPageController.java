@@ -32,6 +32,12 @@ public class MyPageController {
 
 		return "myPage/myPet/myPetList";
 	}
+	@RequestMapping(value="/myPage/historyMain")
+	public String historyMain() throws Exception {
+
+		return "myPage/history/historyMain";
+	}
+
 
 	@RequestMapping(value="/myPage")
 	public String main(
@@ -65,8 +71,8 @@ public class MyPageController {
 	//	map.put("field_value", info.getMemberId());
 		MyPageInfo myPageInfo=myPageService.readMyPageInfo(info.getMemberId());
 		if(myPageInfo!=null) {
-			model.addAttribute("message", "블로그는 계정당 하나만 만들수 있습니다.");
-			return ".myPage.manage.message";
+			model.addAttribute("message", "마이페이지는 계정당 하나만 만들수 있습니다.");
+			return ".myPage.main.message";
 		}
 		MyPageInfo dto = new MyPageInfo();
 		dto.setIsUserName(1);
@@ -79,12 +85,12 @@ public class MyPageController {
 		model.addAttribute("mode", "created");
 		model.addAttribute("dto", dto);
 		
-		return ".myPage.manage.myPageCreated";
+		return ".myPage.main.myPageCreated";
 	}
 	@RequestMapping(value="/myPage/editBlogProfileInfo", method = RequestMethod.GET)
 	public String editBlogProfileInfo(
 			Model model) throws Exception {
-		return "myPage/manage/myPageUpdate";
+		return "myPage/main/myPageUpdate";
 	}
 	@RequestMapping(value="/myPage/created", method = RequestMethod.POST)
 	public String myPageCreatedSubmit(
@@ -105,8 +111,8 @@ public class MyPageController {
 		dto.setMemberId(info.getMemberId());
 		int result=myPageService.insertMyPage(dto, pathname);
 		if(result==0) {
-			model.addAttribute("message", "블로그를 생성하지 못했습니다. 다시 시도 하시기 바랍니다.");
-			return ".myPage.manage.message";
+			model.addAttribute("message", "마이페이지를 생성하지 못했습니다. 다시 시도 하시기 바랍니다.");
+			return ".myPage.main.message";
 		}
 
 		return "redirect:/myPage/"+dto.getMyPageId();
