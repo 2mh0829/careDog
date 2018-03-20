@@ -236,83 +236,6 @@ em,address { font-style:normal }
 }
 </style>
 
-<script type="text/javascript">
-function mapReset() {
-document.formID.posx.value = "";
-document.formID.posy.value = "";
-}
-
-function mix(m) {
-	if (m == 354 || m == 353) { //믹스견 기타견종
-		document.getElementById('show1').style.display = '';
-		document.formID.kind_more.focus();
-	} else {
-		document.getElementById('show1').style.display = 'none';
-		document.formID.kind_more.value = "";
-	}
-}
-
-function apply(sel) {
-	if (sel == 'Y') {
-		document.getElementById('id_name').style.display = '';
-		document.getElementById('id_sns').style.display = '';
-	} else {
-		document.getElementById('id_name').style.display = 'none';
-		document.getElementById('id_sns').style.display = 'none';
-		document.formID.apply_name.value = "";
-	}
-}
-
-var map;
-var idx=0;
-
-function initMap() {
-	map = new google.maps.Map(document.getElementById('map_canvas'), {
-    zoom: 15,
-    center: {lat: 37.566673, lng: 126.978393}
-  });
-	if(idx==1){
-		  marker.clear();
-			idx=0;
-		}
-	
-  map.addListener('click', function(e) {
-	  
-  		placeMarkerAndPanTo(e.latLng, map);
-        getAddress(e.latLng, map);
-        map.setCenter(map.getPosition());
-  });
-}
-
-function placeMarkerAndPanTo(latLng, map) {
-    var marker = new google.maps.Marker({
-      position: latLng,
-      map: map
-    });
-    idx++;
-  }
-
-function getAddress(latlng, map) {
-	  var geocoder = new google.maps.Geocoder();
-	  geocoder.geocode({
-        latLng: latlng
-    }, function(results, status) {
-			if (status == google.maps.GeocoderStatus.OK) {
-				var address = results[0].formatted_address;
-				new google.maps.InfoWindow({
-					content : address + "<br />(Lat, Lng) = " + latlng
-				}).open(map, new google.maps.Marker({
-					position : latlng,
-					map : map
-				}));
-			}
-			document.getElementById('posx').value=latlng;
-		});
-	}
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCb7DDKFrw7KNX2RnVNw1iGdUahxBWuwmE&language=ko&callback=initMap" async defer>
-</script>
 <div class="body-container">
 	<div class="content">
 
@@ -585,8 +508,9 @@ function getAddress(latlng, map) {
 					* 지도를 확대/축소/이동 하면서 지도위에 한번 클릭하면 해당 좌표가 자동으로 입력되며, 다시 클릭하면 새로운 지점이 선택됩니다.<br><br>
 					* 실종지점을 잘 모르는경우 대략적인 위치라도 선택하는것이 좋습니다.<br><br>* 지도 아래의 취소를 누르면 해당 좌표가 적용되지 않습니다." 
 					onclick="return false;">지도사용법</a>) : </span>
-						<div id="map_canvas" class="map_postbox"></div> 
-						위치 : <input type="text" class="text-map" id="posx" name="posx" readonly value="">
+						<div id="map" style="width:270px;height:320px;"></div>
+						X: <input type="text" class="text-map" id="posx" name="posx" readonly value="">
+						,Y: <input type="text" class="text-map" id="posy" name="posy" readonly value="">
 						<a href="javascript:mapReset()" title="취소">취소</a>
 					</label> 
 					<label> 
@@ -696,3 +620,97 @@ function getAddress(latlng, map) {
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6d00eac2ad03dd3b680a9af94cd77521&libraries=services"></script>
+<script type="text/javascript">
+
+function mapReset() {
+	document.formID.posx.value = "";
+	document.formID.posy.value = "";
+}
+
+
+function mix(m) {
+	if (m == 354 || m == 353) { //믹스견 기타견종
+		document.getElementById('show1').style.display = '';
+		document.formID.kind_more.focus();
+	} else {
+		document.getElementById('show1').style.display = 'none';
+		document.formID.kind_more.value = "";
+	}
+}
+
+function apply(sel) {
+	if (sel == 'Y') {
+		document.getElementById('id_name').style.display = '';
+		document.getElementById('id_sns').style.display = '';
+	} else {
+		document.getElementById('id_name').style.display = 'none';
+		document.getElementById('id_sns').style.display = 'none';
+		document.formID.apply_name.value = "";
+	}
+}
+
+//지도 
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new daum.maps.LatLng(37.55458690944549, 126.97049604488703), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+var geocoder = new daum.maps.services.Geocoder(); // 주소-좌표 변환
+var addr = '';
+
+geocoder.addressSearch(addr, function(result, status) {
+
+    // 정상적으로 검색이 완료됐으면 
+     if (status === daum.maps.services.Status.OK) {
+
+        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new daum.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+      /*   var infowindow = new daum.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+        });
+        infowindow.open(map, marker);
+ */
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});    
+
+// 지도를 클릭한 위치에 표출할 마커입니다
+var marker = new daum.maps.Marker({ 
+    // 지도 중심좌표에 마커를 생성합니다 
+    position: map.getCenter() 
+}); 
+// 지도에 마커를 표시합니다
+marker.setMap(map);
+
+// 지도에 클릭 이벤트를 등록합니다
+// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+daum.maps.event.addListener(map, 'click', function(mouseEvent) {        
+    
+    // 클릭한 위도, 경도 정보를 가져옵니다 
+    var latlng = mouseEvent.latLng; 
+    
+    // 마커 위치를 클릭한 위치로 옮깁니다
+    marker.setPosition(latlng);
+    
+    $("input[name=posx]").val(latlng.getLat());
+    $("input[name=posy]").val(latlng.getLng());
+    
+});
+
+function change(value){
+	addr+=value;
+	console.log(value)
+}
+</script>
