@@ -35,7 +35,7 @@
             <intercept-url pattern="/member/pwd" access="permitAll" />
 			<intercept-url pattern="/member/memberIdCheck" access="permitAll" />
 			<intercept-url pattern="/member/emailChecked" access="permitAll" />
-			
+			<intercept-url pattern="/store" access="permitAll" />
 			<intercept-url pattern="/mungstargram" access="permitAll" />
 			<intercept-url pattern="/mungstargram/list" access="permitAll" />
 			<intercept-url pattern="/mungstargram/autocomplete" access="permitAll" />
