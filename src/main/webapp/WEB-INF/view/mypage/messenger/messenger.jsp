@@ -66,7 +66,7 @@ height : 500px; */
 
 .messageMemberList {
 	width: 95%;
-	height: 100px;
+	height: 60px;
 	margin-top: 15px;
 	margin-left: 15px;
 	float: left;
@@ -105,12 +105,19 @@ height : 500px; */
 .addFriendBtn{
 cursor: pointer
 }
+.friendList{
+cursor: pointer
+}
+.pointer{
+cursor : pointer
+}
 </style>
 <script>
 	$(document).ready(function() {
 		adjustMessengerLayoutSize();
-		//getMessageMemberList();
-		
+		getMessageMemberList(); <!--메신저페이지들어오면 대화기록있는 친구리스트 불러오기-->
+		getMessages();
+	
 	})
 	function getMessageMemberList(){
 		var url="<%=cp%>/messenger/getMessageMemberList";
@@ -118,15 +125,15 @@ cursor: pointer
 			type:"POST",
 			url:url,
 			success:function(data){
-				$(".modal-body").html("");
-				for(i=0;i<data.friendList.length;i++){
-					$(".modal-body").append("<div class='friendList' onClick='getFriend(\""+data.friendList[i].userName+"\");' data-dismiss='modal'>"+data.friendList[i].memberId+"("+data.friendList[i].userName+")</div>");
-					$("#myModal").modal();
+				for(i=0;i<data.mML.length;i++){
+					getFriend(data.mML[i].receiverUserName,data.mML[i].receiverId,data.mML[i].msg,data.mML[i].msgTime);
 				}
+				if(data.mML.length>=0)
+				getMessageList(data.mML[0].receiverUserName,data.mML[0].receiverId);
 			},
 			error:function(e){
 				alert("연결 오류가 발생했습니다.");
-			}//"<img src='<%=cp%>/resource/img/myPage/jsh.jpg'"
+			}
 		}) 
 	}
 	function adjustMessengerLayoutSize(){ <!--메신저크기조정-->
@@ -162,26 +169,78 @@ cursor: pointer
 			success:function(data){
 				$(".modal-body").html("");
 				for(i=0;i<data.friendList.length;i++){
-					$(".modal-body").append("<div class='friendList' onClick='getFriend(\""+data.friendList[i].userName+"\");' data-dismiss='modal'>"+data.friendList[i].memberId+"("+data.friendList[i].userName+")</div>");
+					$(".modal-body").append("<div class='friendList' onClick='getFriend(\""+data.friendList[i].userName+"\",\""+data.friendList[i].memberId+"\",\"\",\"\");' data-dismiss='modal'>"+data.friendList[i].memberId+"("+data.friendList[i].userName+")</div>");
 					$("#myModal").modal();
 				}
 			},
 			error:function(e){
 				alert("연결 오류가 발생했습니다.");
-			}//"<img src='<%=cp%>/resource/img/myPage/jsh.jpg'"
+			}
 		}) 
 	}
-	function getFriend(userName){<!--친구받아와서 목록에 추가-->
-	$(".messengerLeft").append('<div class="messageMemberList">'
-			+'<img src="<%=cp%>/resource/img/myPage/jsh.jpg"'
-			+'	style="margin-right: 10px; width: 50px; border-radius: 50px; float: left">'
-			+'	<div style="margin-top: 7px; width: 30%; float: left">'
-			+'	<div style="font-size: 15px">'+userName+'</div>'
-			+'	<div style="font-size: 12px; color: #D5D5D5">메세지를 입력해 주세요</div>'
-			+'	</div>'
-			+'	<div'
-			+'	style="text-align: right; color: #D5D5D5; margin-top: 10px; float: right"></div>'
-		+'</div>');
+	function getFriend(userName,memberId,msg,msgTime){<!--친구받아와서 목록에 추가-->
+		
+		<!--기존에 친구대화목록이 있으면 추가하지 않기-->
+	if(checkDuplicationFriend(userName)==0){
+		alert('이미 친구가 대화목록에 있습니다');
+		return;
+	}
+	$(".messengerLeft").append("<div class='messageMemberList pointer' onClick='getMessageList(\""+userName+"\",\""+memberId+"\");'>"
+				+"<img src='https://pbs.twimg.com/media/CJdjthrUEAAjkCl.jpg'"
+				+"	style='margin-right: 10px; width: 50px; border-radius: 50px; float: left'>"
+				+"	<div style='margin-top: 7px; width: 30%; float: left'>"
+				+"	<div class='messageMemberName' style='font-size: 15px'>"+userName+"</div>"
+				+"	<div style='font-size: 12px; color: #D5D5D5'>"+msg+"</div></div>"
+				+"	<div style='text-align: right; color: #D5D5D5; margin-top: 10px; float: right'>"+msgTime+"</div></div>");
+	}
+	
+	function getMessageList(userName,memberId){ <!--리스트에 친구 누르면 대화 불러오기-->
+		$(".messengerHeaderRight").text(userName);
+		$(".headerMemberId").text(memberId);
+		$(".messageList").html("");
+		var url = "<%=cp%>/messenger/getMessageList";
+	}
+	
+	function checkDuplicationFriend(userName){
+		var mML =$(".messageMemberList");
+		for(i = 0 ;i<mML.length;i++){
+			if(userName==$(".messageMemberList .messageMemberName").eq(i).text())
+			return 0;
+		}
+	}
+	function sendMessage(){
+		var url="<%=cp%>/messenger/sendMessage";
+		var data = "receiverId="+$(".headerMemberId").text()+"&msg="+$("#inputMessage").val();
+		console.log(data);
+ 		$.ajax({
+			type:"POST",
+			url:url,
+			data:data,
+			dataType:"JSON",
+			success:function(data){
+			alert('성공');
+			}
+			,error:function(e){
+				alert("연결 오류가 발생했습니다.");
+			}
+		}) 
+	}
+	function getMessages(){
+		var url="<%=cp%>/messenger/getMessages";
+		var data = "receiverId="+$(".headerMemberId").text();
+		alert(data);
+ 		$.ajax({
+			type:"POST",
+			url:url,
+			data:data,
+			dataType:"JSON",
+			success:function(data){
+			alert('성공');
+			}
+			,error:function(e){
+				alert("연결 오류가 발생했습니다.");
+			}
+		}) 
 	}
 </script>
 
@@ -196,39 +255,38 @@ cursor: pointer
 				style="width: 20px; margin-right: 5px; margin-top: 10px; float: right;">
 		</div>
 	</div>
-	<div class="messengerHeaderRight">이종훈</div>
+	<div class="messengerHeaderRight">11</div>
 </div>
 <div class="messengerBody">
 	<div class="messengerLeft">
-		<div class="messageMemberList">
-			<img src="<%=cp%>/resource/img/myPage/jsh.jpg"
-				style="margin-right: 10px; width: 50px; border-radius: 50px; float: left">
+	
+<!-- 		<div class="messageMemberList">
+			<img src="https://pbs.twimg.com/media/CJdjthrUEAAjkCl.jpg"
+				style="margin-right: 10px; width: 40px; border-radius: 30px; float: left">
 			<div style="margin-top: 7px; width: 30%; float: left">
-				<div style="font-size: 15px">조세호짱짱맨</div>
+				<div class='messageMemberName' style="font-size: 15px">조세호짱짱맨</div>
 				<div style="font-size: 12px; color: #D5D5D5">you: 소지섭님</div>
 			</div>
 			<div
 				style="text-align: right; color: #D5D5D5; margin-top: 10px; float: right">2017-06-13-15:30</div>
-		</div>
+		</div> -->
+		
 	</div>
 	<div class="messengerRight">
 		<div class="messageList">
-			<div class="messageListBox">
+	<!-- 		<div class="messageListBox">
 				<div class="messageTextRight" style="float: right">aaa</div>
 			</div>
 			<div class="messageListBox">
-				<div class="messageTextLeft" style="float: left">
-					<img src="<%=cp%>/resource/img/myPage/jsh.jpg">
-					<div>bbb</div>
-				</div>
+				<div class="messageTextLeft" style="float: left">bbb</div>
 			</div>
 			<div class="messageListBox">
 				<div class="messageTextRight" style="float: right">ccc</div>
-			</div>
+			</div> -->
 		</div>
 		
 		<div class="messageInput">
-		<input type="text" style="border:none;" value="Type a message.."><input style="margin-right:30px; float:right;width:50px; height:30px;" type="button" value="send">
+		<input id="inputMessage" type="text" style="border:none;" value="Type a message.."><input style="margin-right:30px; float:right;width:50px; height:30px;" type="button" onClick="sendMessage();" value="send">
 		</div>
 	</div>
 </div>
@@ -248,3 +306,4 @@ cursor: pointer
     </div>
   </div>
 </div>
+<div class="headerMemberId" style="display: none;"></div>

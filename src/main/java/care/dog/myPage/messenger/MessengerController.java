@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import care.dog.member.Member;
@@ -30,6 +31,7 @@ public class MessengerController {
 	public Map<String,Object> findFriends(HttpSession session) throws Exception {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		String memberId = info.getMemberId();
+		
 		Map<String,Object> map = new HashMap<>();
 		List<Member> list= service.listFriend(memberId);
 		map.put("friendList", list);
@@ -37,13 +39,63 @@ public class MessengerController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/messenger/getMessageMemberList")
-	public Map<String,Object> getMessageMemberList(HttpSession session) throws Exception {
+	public Map<String,Object> getMessageMemberList(HttpSession session) throws Exception { //
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		String memberId = info.getMemberId();
+		String myName=info.getUserName();
+		List<Messenger> list= service.getMessageMemberList(memberId);
 		Map<String,Object> map = new HashMap<>();
-		List<Member> list= service.listFriend(memberId);
-		map.put("friendList", list);
-		return map;//why not change?
+		for(int i=0;i<list.size();i++) {
+			if(list.get(i).getReceiverId().equalsIgnoreCase(memberId))
+			{
+				list.get(i).setReceiverId(list.get(i).getSenderId());
+				list.get(i).setReceiverUserName(list.get(i).getSenderUserName());
+			}
+			else if(list.get(i).getSenderId().equalsIgnoreCase(memberId)) {
+				list.get(i).setSenderId(list.get(i).getReceiverId());
+				list.get(i).setSenderUserName(list.get(i).getReceiverUserName());
+			}
+			if(i>0) {
+				if(list.get(i).getReceiverId().equalsIgnoreCase(list.get(i-1).getReceiverId()))
+					list.remove(i-1);
+				i--;
+			}
+		}
+		map.put("mML", list);
+		return map;
+	}
+	@ResponseBody
+	@RequestMapping(value="/messenger/sendMessage" , method=RequestMethod.POST)
+	public Map<String,Object> sendMessage(
+			Messenger dto,
+			HttpSession session) throws Exception { //
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		String memberId = info.getMemberId();
+		dto.setSenderId(memberId);
+		service.insertMessage(dto);
+		Map<String,Object> map = new HashMap<>();
+		
+		//List<Member> list= service.listFriend(memberId);
+		//map.put("friendList", list);
+		return map;
+	}
+	@ResponseBody
+	@RequestMapping(value="/messenger/getMessages" , method=RequestMethod.POST)
+	public Map<String,Object> getMessages(
+			Messenger dto,
+			HttpSession session) throws Exception { //
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		String myId = info.getMemberId();
+		String otherId = dto.getReceiverId();
+		Map<String,String> id = new HashMap<>();
+		id.put("receiverId", otherId);
+		id.put("senderId", myId);
+		System.out.println("receiverId=>"+otherId+"/senderId=>"+myId);
+		List<Messenger> list = service.getMessages(id);
+		System.out.println("getMessages==>"+list);
+		Map<String,Object> map = new HashMap<>();
+		map.put("messageList", list);
+		return map;
 	}
 	
 }
