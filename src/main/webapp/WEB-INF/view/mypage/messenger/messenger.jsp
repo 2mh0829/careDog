@@ -292,6 +292,7 @@ var friendNameTemp=0;
 			}
 			,error:function(e){
 				alert("연결 오류가 발생했습니다.");
+				clearInterval(mInterval);
 			}
 		}) 
 	}
