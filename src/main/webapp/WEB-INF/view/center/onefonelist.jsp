@@ -10,6 +10,43 @@
 <input type="hidden" id="cjssoq" name="cjssoq">
 </form>
 
+<style>
+/* 고객센터 > 1:1문의 > 목록 */
+.search-period {overflow:hidden;position:relative;width:100%;margin:20px 0 0;padding:20px;background:#ececec;box-sizing:border-box;border-radius:5px;border:0;}
+.search-period .select-month {overflow:hidden; padding: 0;}
+.search-period .select-month li {float:left;width:70px;height:28px;margin:0 0 0 -1px;font-size:0;line-height:0;}
+.search-period .select-month li:first-child {margin:0;}
+.search-period .select-month button {width:100%;height:28px;border:1px solid #d0d0d0;background:#fff;color:#222;font-size:12px;font-weight:400}
+.search-period .select-month li:first-child button {border-top-left-radius:5px;border-bottom-left-radius:5px;}
+.search-period .select-month li:last-child button {border-top-right-radius:5px;border-bottom-right-radius:5px;}
+.search-period .select-month li.on button {border:1px solid #848484;background:#848484;color:#fff;}
+.search-period .select-range {padding:10px 0 0;line-height:38px}
+.search-period .select-range select {height:28px;padding-right:0;color:#222;font-size:12px;line-height:16px;vertical-align:middle;border-radius: 5px;}
+.search-period .select-range label {display:inline-block;margin:0 11px 0 1px;color:#222;font-size:12px;line-height:16px;}
+.search-period .select-range .des {margin:0 15px 0 10px;}
+.search-period button.btnLookup,
+.search-period input[type="submit"] {display:inline-block;position:absolute;top:0;right:0;width:85px;height:100%;background:#969937;border-radius:0;border-top-right-radius:5px;border-bottom-right-radius:5px;color:#fff;font-size:16px;line-height:22px;border:0;'}
+.search-period.mgT30 {margin-top:20px !important}
+.search-period{margin-top: 30px;}
+
+legend {position:absolute; overflow:hidden; visibility:hidden; height:0; z-index:-1;}
+
+select {
+ width:100%;
+ height:38px;
+ padding:0 0 0 8px;
+ border:1px solid #d0d0d0;
+ border-radius:5px;
+ font-size:14px;
+ line-height:18px;
+ font-family:'AppleGothic', 'Roboto', 'montserrat', 'noto', sans-serif;
+ color:#333;
+ /*vertical-align:middle;*/
+ /*outline:none;*/
+}
+/* BORDER */
+ul li.nodata {width:100% !important;padding:200px 15px 80px !important;background:url("https://www.oliveyoung.co.kr/pc-static-root/css/../image/comm/ico_nodata104x104.png") no-repeat center 80px !important;color:#888 !important;font-size:16px !important;text-align:center !important;line-height:20px !important;}
+</style>
 
 <script>
 	var ssoCheck = "null";
@@ -32,20 +69,8 @@
 </script>
 
 
+<div id="body-Container">
 <div id="Container">
-		<!-- #Contents -->
-		<div id="Contents">
-			<div class="sub_title_area customer">
-				<h1>고객센터 <span>무엇을 도와드릴까요?</span></h1>
-				<button type="button" class="btn_inquiry" id="regForm1on1" onclick="javascript:location.href='https://www.oliveyoung.co.kr/store/counsel/getQnaForm.do';">1<em>:</em>1 문의하기</button>
-			</div>
-			
-			<ul class="comm1sTabs threeSet customer">
-				<li id="tabFaq"><a href="http://www.oliveyoung.co.kr/store/counsel/getFaqList.do">FAQ</a></li>
-				<li id="tab1on1" class="on"><a href="javascript:common.link.moveQnaList();">1:1문의</a></li>
-				<li id="tabNotice"><a href="http://www.oliveyoung.co.kr/store/counsel/getNoticeList.do">공지사항</a></li>
-			</ul>
-
 			<!-- 기간조회 -->
 			
 	<fieldset class="search-period">
@@ -129,32 +154,24 @@ $(document).ready(function(){
 });
 </script>	
 			<!-- //기간조회 -->
-			
 			<div class="list-customer onenone">
-				<ul>
-
-	
-					<li class="nodata">등록하신 1:1 문의가 없습니다.</li>
-	
+				<ul style="overflow: hidden; width: 100%; border-top: 2px solid #888;">
+					<li class="nodata" style="width:100% !important;padding:200px 15px 80px !important;background:babypink no-repeat center 80px !important;color:#888 !important;font-size:16px !important;text-align:center !important;line-height:20px !important;display: inline-block;">등록하신 1:1 문의가 없습니다.</li>
 				</ul>
 			</div>
 
 			<!-- pageing star -->
-			
-			
-
 	<div class="pageing">
-	
-	
-	
 	</div>
 
 			<!-- //pageing end -->
 
 			<div class="area1sButton pdT30">
-				<a href="javascript:common.link.moveQnaForm();" class="btnGreen">1:1문의하기</a>
+				<a href="javascript:common.link.moveQnaForm();" class="btnGreen" 
+				style="height: 50px;background-color: #969937;padding: 11px 0 9px;font-size: 18px;line-height: 30px;color: #fff;border-radius: 5px;font-weight: 700;display: inline-block;width: 150px;margin: 0 2px;box-sizing: border-box;text-align: center;">1:1문의하기</a>
 			</div>
 
 		</div>
 		<!-- //#Contents -->
+	</div>
 	</div>

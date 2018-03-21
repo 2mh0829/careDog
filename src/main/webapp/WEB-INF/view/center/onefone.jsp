@@ -139,6 +139,35 @@ select:focus{
 input[type="submit"],
 button {border:0;padding:0;box-shadow:none;cursor:pointer;} 
 .agree_box {height:167px;margin-bottom:0;padding:20px;border:1px solid #dedede;overflow-y:auto;background:#f9f6ec;font-size:14px;color:#666;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;}
+/*button*/
+.btnGreen, a.btnGreen {    
+	height: 50px;
+    background-color: #969937;
+    padding: 11px 0 9px;
+    font-size: 18px;
+    line-height: 30px;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: 700;
+    display: inline-block;
+    width: 150px;
+    margin: 0 2px;
+    box-sizing: border-box;
+    text-align: center;}
+.btnGray, a.btnGray {    
+	height: 50px;
+    background-color: #888;
+    padding: 11px 0 9px;
+    font-size: 18px;
+    line-height: 30px;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: 700;
+    display: inline-block;
+    width: 150px;
+    margin: 0 2px;
+    box-sizing: border-box;
+    text-align: center;}
 </style>
 
 <script>
@@ -271,10 +300,14 @@ button {border:0;padding:0;box-shadow:none;cursor:pointer;}
 						</td>
 					</tr>
 					<tr>
-						<ul>
-							<li><a href="javascript:;" id="cnslSubmit" class="btnGreen">등록</a></li>
-							<li><a href="javascript:;" id="cnslCancel" class="btnGray">취소</a></li>
-						</ul>
+						<td>
+							<ul>
+								<li style="margin-left:336px; padding-top: 30px;">
+								<a href="javascript:;" id="cnslSubmit" class="btnGreen">등록</a>
+								<a href="javascript:;" id="cnslCancel" class="btnGray">취소</a>
+								</li>
+							</ul>
+						</td>
 					</tr>
 				
 			</tbody>
