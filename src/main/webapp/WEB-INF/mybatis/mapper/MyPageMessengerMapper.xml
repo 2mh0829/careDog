@@ -3,10 +3,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="messenger">
 
-<!-- Find members except me -->
-<select id="listFriend" parameterType="String" resultType="care.dog.member.Member">
+	<!-- Find members except me -->
+	<select id="listFriend" parameterType="String" resultType="care.dog.member.Member">
 		SELECT memberId, userName
 		FROM member1
-		WHERE memberId != #{memberId} 
+		WHERE memberId != #{memberId}
+	</select>
+	
+	<insert id="insertMessage" parameterType="care.dog.myPage.messenger.Messenger">
+		insert into messenger(messageId, senderId, receiverId,msg)
+			values(messenger_seq.NEXTVAL,#{senderId}, #{receiverId}, #{msg})
+	</insert>
+	
+	<select id="getMessageMemberList" parameterType="String" resultType="care.dog.myPage.messenger.Messenger">
+		select senderId,receiverId,msg,msgTime,m1.userName senderUserName, m2.userName receiverUserName
+		 from messenger m
+		 join member1 m1 ON m.senderId = m1.memberId
+		 join member1 m2 ON m.receiverId = m2.memberId
+		 where senderId = #{memberId} or receiverId = #{memberId}
+	</select>
+	<select id = "getMessages" parameterType="map" resultType="care.dog.myPage.messenger.Messenger">
+		select senderId,receiverId,msg,msgTime from messenger 
+		where (senderId = #{senderId} and receiverId = #{receiverId}) or
+		 (senderId = #{receiverId} and receiverId=#{senderId})
 	</select>
 </mapper>

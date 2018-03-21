@@ -213,7 +213,7 @@ public class MemberController {
 	@RequestMapping(value="member/editMemberInfo")//jh
 	public String editMemberInfo() throws Exception {
 
-		return "member/signUp";
+		return "member/join2";
 	}
 	
 	

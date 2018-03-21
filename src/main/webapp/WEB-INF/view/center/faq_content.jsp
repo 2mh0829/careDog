@@ -161,7 +161,9 @@
 					</tr>
 				</tbody>
 			</table>
+			
 	<table style="width: 100%; margin: 0px auto 20px; border-spacing: 0px;">
+	
 <tr height="45">
     <td width="300" align="left">
         <c:if test="${sessionScope.member.memberId=='admin'}">

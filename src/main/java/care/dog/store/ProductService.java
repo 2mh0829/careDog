@@ -19,5 +19,9 @@ public interface ProductService {
 	public List<Qna> listProductQna(Map<String, Object> map);
 	//qna 수
 	public int dataCountQna(int productId);
+	public int insertCart(Map<String, Object> map);
+	public int dataCountCart();
+	public List<Cart> listCart(Map<String, Object> map);
+	public int deleteCart(int cartId);
 
 }

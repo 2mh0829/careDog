@@ -510,7 +510,8 @@ public class FAQController {
 		}
 		
 		model.addAttribute("mode","update");
-		model.addAttribute("num",num);
+		model.addAttribute("dto",dto);
+		System.out.println("======================"+dto);
 		model.addAttribute("pageNo",page);
 		
 		return "center/faq_create";
