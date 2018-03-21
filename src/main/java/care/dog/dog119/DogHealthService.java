@@ -18,4 +18,5 @@ public interface DogHealthService {
 	public List<DhReplyVo> listDhReply(Map<String, Object> map);
 	public int insertDhReply(DhReplyVo dto);
 	public int dhReplyCount(int boardNum);
+	public int dhInsert(DogHealthVo dto);
 }

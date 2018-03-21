@@ -87,24 +87,22 @@ function memberIdCheck() {
 		return;
 	}
 	
-	alert(url);
-	
 	$.ajax({
 		url: url
 		,data: data
+		,type: "post"
 		,dataType: "json"
 		,success: function(data) {
-			/* if(data == 0){
+			if(data.passed == 0){
 				$("#memberId-help").css("color", "blue");
 				$("#memberId-help").text("사용가능한 아이디입니다.");
 			}else {
 				$("#memberId-help").css("color", "red");
 				$("#memberId-help").text("이미 존재하는 아이디입니다.");
-			} */
-			console.log(data.passed);
+			}
 		}
-		,error: function(e) {
-			console.log(e);
+		,error: function(e) { 
+			console.log(e.responseText);
 		}
 	});
 	
@@ -150,7 +148,13 @@ function changeEmail() {
         f.email2.readOnly = false;
 		f.email2.focus(); 
     }
-    emailChecked();
+   
+    if(f.email1.value != "" && f.email2.value != ""){
+    	emailChecked();
+    }else{
+    	$("#email-helper").css("color", "red");
+    	$("#email-helper").text("이메일을 모두 입력해 주세요.");
+    }
 }
 
 function emailChecked() {
@@ -164,9 +168,16 @@ function emailChecked() {
 	$.ajax({
 		url: url
 		,data: data
+		,type: "post"
 		,dataType: "json"
 		,success: function(data) {
-			console.log("success"); 
+			if(data == 0){
+				$("#email-helper").css("color", "blue");
+		    	$("#email-helper").text("사용가능한 이메일 입니다.");
+			}else {
+				$("#email-helper").css("color", "red");
+		    	$("#email-helper").text("이미 가입된 이메일 입니다.");
+			}
 		}
 	});
 }
@@ -380,9 +391,9 @@ function joinNext() {
 				      </td>
 				      <td style="padding: 0 0 15px 15px;">
 				        <p style="margin-top: 1px; margin-bottom: 5px;">
-				            <input type="text" name="email1" value="${dto.email1}" size="13" maxlength="30" onchange="emailChecked();" class="boxTF">
+				            <input type="text" name="email1" value="${dto.email1}" size="13" maxlength="30" onchange="changeEmail();" class="boxTF">
 				            @ 
-				            <input type="text" name="email2" value="${dto.email2}" size="13" maxlength="30" onchange="emailChecked();" class="boxTF" readonly="readonly">
+				            <input type="text" name="email2" value="${dto.email2}" size="13" maxlength="30" onchange="changeEmail();" class="boxTF" readonly="readonly">
 				            <select name="selectEmail" onchange="changeEmail();" class="selectField">
 				                <option value="">선 택</option>
 				                <option value="naver.com" ${dto.email2=="naver.com" ? "selected='selected'" : ""}>네이버 메일</option>
@@ -392,6 +403,7 @@ function joinNext() {
 				                <option value="direct">직접입력</option>
 				            </select>
 				        </p>
+				        <p id="email-helper" class="help-block">이메일을 입력해 주세요.</p>
 				      </td>
 				  </tr>
 				  

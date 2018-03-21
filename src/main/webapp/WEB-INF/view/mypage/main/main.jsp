@@ -2,8 +2,10 @@
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%
+<%/* aa */
    String cp = request.getContextPath();
 %>
 
-마이페이지 메인입니다.
+ <div class="bodyFrame3">
+    블로그
+ </div>

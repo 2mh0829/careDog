@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +16,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import care.dog.common.MyUtil;
+import care.dog.member.SessionInfo;
 
 @Controller("store.storeController")
 public class StoreController {
@@ -49,7 +52,7 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/store/list")
-	public String productList(@RequestParam(value = "page", defaultValue = "1") int current_page,
+	public String listProduct(@RequestParam(value = "page", defaultValue = "1") int current_page,
 			@RequestParam(value = "searchKey", defaultValue = "productName") String searchKey,
 			@RequestParam(value = "searchValue", defaultValue = "") String searchValue, HttpServletRequest req,
 			Model model) throws Exception {
@@ -121,7 +124,7 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/store/article")
-	public String productDetail(@RequestParam(value = "page", defaultValue = "1") int current_page,
+	public String articleProduct(@RequestParam(value = "page", defaultValue = "1") int current_page,
 			@RequestParam(value = "searchKey", defaultValue = "productName") String searchKey,
 			@RequestParam(value = "searchValue", defaultValue = "") String searchValue,
 			@RequestParam(value = "paging", defaultValue = "1") int page,
@@ -265,10 +268,95 @@ public class StoreController {
 	public String productOrder() {
 		return ".store.order";
 	}
+	
+	@RequestMapping(value = "/store/stack")
+	@ResponseBody
+	public Map<String, Object> stackCart(
+			@RequestParam int productId,
+			@RequestParam int amount,
+			@RequestParam int optionId,
+			HttpSession session) {
+
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		String memberId = info.getMemberId();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);
+		map.put("productId", productId);
+		map.put("amount", amount);
+		map.put("optionId", optionId);
+		
+		//cart에 상품 dto와 memberId를 insert
+		int state = service.insertCart(map);
+		
+		model.put("state", state);
+		
+		return model;
+		
+	}
 
 	@RequestMapping(value = "/store/cart")
-	public String productCart() {
+	public String productCart(
+			@RequestParam(value = "page", defaultValue = "1") int current_page,
+			HttpServletRequest req,
+			HttpSession session,
+			Model model
+			) {
+		
+		int dataCount = 0;
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		if (info == null) {
+			return "redirect:/member/login";
+		}
+		String memberId = info.getMemberId();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);
+		
+		dataCount = service.dataCountCart();
+		
+		map.put("start", 1);
+		map.put("end", dataCount);
+
+		List<Cart> listCart = service.listCart(map);
+
+		model.addAttribute("listCart", listCart);
+		model.addAttribute("dataCount", dataCount);
+		/*model.addAttribute("total_page", total_page);*/
+		/*model.addAttribute("articleUrl", articleUrl);*/
+		model.addAttribute("page", current_page);
+		/*model.addAttribute("paging", paging);*/
+		
 		return ".store.cart";
+	}
+	
+	@RequestMapping(value="/store/deleteCart")
+	@ResponseBody
+	public Map<String, Object> deleteCart(
+			@RequestParam int cartId,
+			@RequestParam String memberId,
+			HttpSession session
+			) {
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		String smemberId = info.getMemberId();
+		
+		System.out.println(cartId);
+		
+		int state = 0;
+		if(smemberId.equals(memberId)) {
+			state = service.deleteCart(cartId);
+		}
+		
+		model.put("state", state);
+		
+		return model;
+		
 	}
 
 }
