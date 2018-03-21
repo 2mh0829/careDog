@@ -131,6 +131,17 @@ public class ProductServiceImpl implements ProductService{
 		return result;
 	}
 
+	@Override
+	public int deleteCart(int cartId) {
+		int result = 0;
+		try {
+			result = dao.deleteData("store.deleteCart", cartId);
+			result = 1;
+		} catch (Exception e) {
+		}
+		return result;
+	}
+
 	
 	
 }

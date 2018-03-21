@@ -52,7 +52,7 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/store/list")
-	public String productList(@RequestParam(value = "page", defaultValue = "1") int current_page,
+	public String listProduct(@RequestParam(value = "page", defaultValue = "1") int current_page,
 			@RequestParam(value = "searchKey", defaultValue = "productName") String searchKey,
 			@RequestParam(value = "searchValue", defaultValue = "") String searchValue, HttpServletRequest req,
 			Model model) throws Exception {
@@ -124,7 +124,7 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/store/article")
-	public String productDetail(@RequestParam(value = "page", defaultValue = "1") int current_page,
+	public String articleProduct(@RequestParam(value = "page", defaultValue = "1") int current_page,
 			@RequestParam(value = "searchKey", defaultValue = "productName") String searchKey,
 			@RequestParam(value = "searchValue", defaultValue = "") String searchValue,
 			@RequestParam(value = "paging", defaultValue = "1") int page,
@@ -271,7 +271,7 @@ public class StoreController {
 	
 	@RequestMapping(value = "/store/stack")
 	@ResponseBody
-	public Map<String, Object> productStack(
+	public Map<String, Object> stackCart(
 			@RequestParam int productId,
 			@RequestParam int amount,
 			@RequestParam int optionId,
@@ -305,58 +305,58 @@ public class StoreController {
 			Model model
 			) {
 		
-		String cp = req.getContextPath();
-
-		int rows = 5;
-		int total_page = 0;
 		int dataCount = 0;
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		if (info == null) {
+			return "redirect:/member/login";
+		}
 		String memberId = info.getMemberId();
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberId", memberId);
 		
-		// 전체 페이지 수
 		dataCount = service.dataCountCart();
-
-		if (dataCount != 0)
-			total_page = myUtil.pageCount(rows, dataCount);
-
-		if (total_page < current_page)
-			current_page = total_page;
-
-		int start = (current_page - 1) * rows + 1;
-		int end = current_page * rows;
-
-		map.put("start", start);
-		map.put("end", end);
+		
+		map.put("start", 1);
+		map.put("end", dataCount);
 
 		List<Cart> listCart = service.listCart(map);
 
-		// 글번호 만들기
-		int listNum, n = 0;
-		Iterator<Cart> it = listCart.iterator();
-		while (it.hasNext()) {
-			Cart data = it.next();
-			listNum = dataCount - (start + n - 1);
-			data.setListNum(listNum);
-			n++;
-		}
-
-		String listUrl = cp + "/store/list";
-		String articleUrl = cp + "/store/article?page=" + current_page;
-
-		String paging = myUtil.paging(current_page, total_page, listUrl);
-
 		model.addAttribute("listCart", listCart);
 		model.addAttribute("dataCount", dataCount);
-		model.addAttribute("total_page", total_page);
-		model.addAttribute("articleUrl", articleUrl);
+		/*model.addAttribute("total_page", total_page);*/
+		/*model.addAttribute("articleUrl", articleUrl);*/
 		model.addAttribute("page", current_page);
-		model.addAttribute("paging", paging);
+		/*model.addAttribute("paging", paging);*/
 		
 		return ".store.cart";
+	}
+	
+	@RequestMapping(value="/store/deleteCart")
+	@ResponseBody
+	public Map<String, Object> deleteCart(
+			@RequestParam int cartId,
+			@RequestParam String memberId,
+			HttpSession session
+			) {
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		String smemberId = info.getMemberId();
+		
+		System.out.println(cartId);
+		
+		int state = 0;
+		if(smemberId.equals(memberId)) {
+			state = service.deleteCart(cartId);
+		}
+		
+		model.put("state", state);
+		
+		return model;
+		
 	}
 
 }

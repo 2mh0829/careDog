@@ -106,7 +106,7 @@
 	</insert>
 	
 	<select id="dataCountCart" resultType="Integer">
-	SELECT NVL(COUNT(*), 0) FROM product
+	SELECT NVL(COUNT(*), 0) FROM cart
 	</select>
 	
 	<select id="listCart" parameterType="map" resultType="care.dog.store.Cart">
@@ -121,12 +121,16 @@
             join product p
             on c.productId = p.productId
             where memberId = #{memberId}
-			ORDER BY enrollDate desc
+			ORDER BY enrollDate
 	<![CDATA[
 			) tb WHERE ROWNUM <= #{end}
 		) WHERE rnum >= #{start}
 	]]>
 	</select>
+	
+	<delete id="deleteCart" parameterType="Integer">
+	delete from cart where cartId = #{cartId}
+	</delete>
 	
 </mapper>
 

@@ -8,65 +8,22 @@
 <script type="text/javascript">
 	$(function() {
 		var idx = "${menu}";
-		console.log(idx);
 		if (!idx)
 			idx = 0;
 		var menu = $(".list-menu-item")[idx];
 		$(menu).addClass("active");
+		console.log($(menu));
 	});
 
-	function guestbook() {
-		$(".list-menu-item").each(function() {
-			$(this).removeClass("active");
-		});
-		var menu = $(".list-menu-item")[3];
-		$(menu).addClass("active");
+var mInterval; <%--메신저 interval 컨트롤 변수--%>
 
-		var url = "${myPageUrl}/guest";
-		$.get(url, {
-			tmp : new Date().getTime()
-		}, function(data) {
-			$("#myPage-content").html(data);
-		});
-	}
-
-	function photoView() {
-		$(".list-menu-item").each(function() {
-			$(this).removeClass("active");
-		});
-		var menu = $(".list-menu-item")[2];
-		$(menu).addClass("active");
-
-		var url = "${myPageUrl}/photo";
-		var owner = "${owner}";
-		var bid = "${myPageInfo.memberId}";
-		$.post(url, {
-			bid : bid,
-			owner : owner,
-			tmp : new Date().getTime()
-		}, function(data) {
-			$("#myPage-content").html(data);
-		});
-	}
-
-	function prologue() {
-		var url = "${myPageUrl}/prologue";
-		$.get(url, {
-			tmp : new Date().getTime()
-		}, function(data) {
-			$("#myPage-content").html(data);
-		});
-	}
-	function messenger() {
-		var url = "<%=cp%>/messenger";
-	/* 	$('.myPage-body-left').remove(); */
-		$.get(url, {
-			tmp : new Date().getTime()
-		}, function(data) {
-			$(".myPage-body").html(data);
-		})
-	}
 	function editMemberInfo() {
+		clearInterval(mInterval);
+		$(".list-menu-item").each(function() {
+			$(this).removeClass("active");
+		});
+		var menu = $(".list-menu-item")[1];
+		$(menu).addClass("active");
 		var url = "<%=cp%>/member/editMemberInfo";
 		$.get(url, {
 			tmp : new Date().getTime()
@@ -75,6 +32,12 @@
 		})
 	}
 	function myPetList() {
+		clearInterval(mInterval);
+		$(".list-menu-item").each(function() {
+			$(this).removeClass("active");
+		});
+		var menu = $(".list-menu-item")[2];
+		$(menu).addClass("active");
 		var url = "<%=cp%>/myPage/myPetList";
 		$.get(url, {
 			tmp : new Date().getTime()
@@ -83,6 +46,12 @@
 		})
 	}
 	function orderManage() {
+		clearInterval(mInterval);
+		$(".list-menu-item").each(function() {
+			$(this).removeClass("active");
+		});
+		var menu = $(".list-menu-item")[3];
+		$(menu).addClass("active");
 		var url = "<%=cp%>/orderManage/main";
 		$.get(url, {
 			tmp : new Date().getTime()
@@ -90,7 +59,57 @@
 			$(".myPage-body").html(data);
 		})
 	}
+	function messenger() {
+		$(".list-menu-item").each(function() {
+			$(this).removeClass("active");
+		});
+		var menu = $(".list-menu-item")[4];
+		$(menu).addClass("active");
+
+		var url = "<%=cp%>/messenger";
+		$.get(url, {
+			tmp : new Date().getTime()
+		}, function(data) {
+			$(".myPage-body").html(data);
+		})
+	}
+	function schMain() {
+		clearInterval(mInterval);
+		$(".list-menu-item").each(function() {
+			$(this).removeClass("active");
+		});
+		var menu = $(".list-menu-item")[5];
+		$(menu).addClass("active");
+		var url = "<%=cp%>/sch/schMain";
+		$.get(url, {
+			tmp : new Date().getTime()
+		}, function(data) {
+			$(".myPage-body").empty();
+			$(".myPage-body").html(data);
+		})
+	}
+	function manageCDService() {
+		clearInterval(mInterval);
+		$(".list-menu-item").each(function() {
+			$(this).removeClass("active");
+		});
+		var menu = $(".list-menu-item")[6];
+		$(menu).addClass("active");
+	<%-- 	var url = "<%=cp%>/service/sitter_input";
+		$.get(url, {
+			tmp : new Date().getTime()
+		}, function(data) {
+			$(".myPage-body").html(data);
+		}) --%>
+		alert('준비중입니다');
+	}
 	function registerPS() {
+		clearInterval(mInterval);
+		$(".list-menu-item").each(function() {
+			$(this).removeClass("active");
+		});
+		var menu = $(".list-menu-item")[7];
+		$(menu).addClass("active");
 		var url = "<%=cp%>/service/sitter_input";
 		$.get(url, {
 			tmp : new Date().getTime()
@@ -98,6 +117,21 @@
 			$(".myPage-body").html(data);
 		})
 	}
+	function historyMain() {
+		clearInterval(mInterval);
+		$(".list-menu-item").each(function() {
+			$(this).removeClass("active");
+		});
+		var menu = $(".list-menu-item")[8];
+		$(menu).addClass("active");
+		var url = "<%=cp%>/myPage/historyMain";
+		$.get(url, {
+			tmp : new Date().getTime()
+		}, function(data) {
+			$(".myPage-body").html(data);
+		})
+	}
+
 </script>
 
 <%-- <div class="myPage-header-top">
@@ -118,10 +152,9 @@
 		<li class="list-menu-item"><a href="javascript:myPetList();">마이펫</a></li>
 		<li class="list-menu-item"><a href="javascript:orderManage();">주문관리</a></li>
 		<li class="list-menu-item"><a href="javascript:messenger();">메신저</a></li>
-		<li class="list-menu-item"><a href="javascript:messenger();">일정관리</a></li>
-		<li class="list-menu-item"><a href="javascript:messenger();">친구관리</a></li>
-		<li class="list-menu-item"><a href="javascript:messenger();">CareDog 서비스 관리</a></li>
+		<li class="list-menu-item"><a href="javascript:schMain();">일정관리</a></li>
+		<li class="list-menu-item"><a href="javascript:manageCDService();">CareDog 서비스 관리</a></li>
 		<li class="list-menu-item"><a href="javascript:registerPS();">펫시터 등록하기</a></li>
-		<li class="list-menu-item"><a href="javascript:messenger();">이용현황</a></li>
+		<li class="list-menu-item"><a href="javascript:historyMain();">이용현황</a></li>
 	</ul>
 </div>

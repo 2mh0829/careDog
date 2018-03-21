@@ -3,7 +3,6 @@ package care.dog.dog119;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -259,8 +258,10 @@ public class Dog119Controller {
 	}
 	
 	@RequestMapping(value="/dog119/dhInsert")
-	public String dhInsert(@RequestParam Map<String, Object> data, HttpSession session){
+	@ResponseBody
+	public Map<String, Object> dhInsert(@RequestParam Map<String, Object> data, HttpSession session){
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		Map<String, Object> map = new HashMap<>();
 		String memberId = info.getMemberId();
 		DogHealthVo dto = new DogHealthVo();
 		dto.setTitle((String) data.get("title"));
@@ -268,7 +269,7 @@ public class Dog119Controller {
 		dto.setMemberId(memberId);
 		
 		service.dhInsert(dto);
-		
-		return "redirect:/dog119/dogHealth";
+		//"redirect:/dog119/dogHealth"
+		return map;
 	}
 }
