@@ -1,5 +1,9 @@
 package care.dog.service;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class ServiceDto {
 
 	private String sittingId;
@@ -14,14 +18,35 @@ public class ServiceDto {
 	private String addPetCost;
 	private int carableWeight;
 	private int catableAge;
-	private String tag;
 	private String space;
 	private String subway;
 	private String yard;
 	private String baby;
 	private String family;
 	private String other;
+	private String sitterPhoto;
+	private String tag;
 	
+	private MultipartFile upload;
+	
+	public MultipartFile getUpload() {
+		return upload;
+	}
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+	}
+	public String getSitterPhoto() {
+		return sitterPhoto;
+	}
+	public void setSitterPhoto(String sitterPhoto) {
+		this.sitterPhoto = sitterPhoto;
+	}
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 	public String getSittingId() {
 		return sittingId;
 	}
@@ -94,12 +119,7 @@ public class ServiceDto {
 	public void setCatableAge(int catableAge) {
 		this.catableAge = catableAge;
 	}
-	public String getTag() {
-		return tag;
-	}
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
+	
 	public String getSpace() {
 		return space;
 	}
@@ -136,15 +156,4 @@ public class ServiceDto {
 	public void setOther(String other) {
 		this.other = other;
 	}
-	
-	@Override
-	public String toString() {
-		return "ServiceDto [sittingId=" + sittingId + ", memberId=" + memberId + ", title=" + title + ", content="
-				+ content + ", startDate=" + startDate + ", endDate=" + endDate + ", reserDiv=" + reserDiv
-				+ ", reserCost=" + reserCost + ", addPet=" + addPet + ", addPetCost=" + addPetCost + ", carableWeight="
-				+ carableWeight + ", catableAge=" + catableAge + ", tag=" + tag + ", space=" + space + ", subway="
-				+ subway + ", yard=" + yard + ", baby=" + baby + ", family=" + family + ", other=" + other + "]";
-	}
-	
-	
 }

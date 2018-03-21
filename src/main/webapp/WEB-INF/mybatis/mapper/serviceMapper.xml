@@ -4,12 +4,11 @@
 <mapper namespace="service">
 
 	<insert id="insertService" parameterType="care.dog.service.ServiceDto">
-		INSERT INTO sitting_input(sittingId, title, content, startDate, endDate, reserDiv, reserCost,
+		INSERT INTO sitterInfo(sittingId, title, content, startDate, endDate, reserDiv, reserCost,
 		addPet, addPetCost, carableWeight, carableAge, tag, space, subway, yard, baby,
 		family, other)
-		VALUES (sittingId_seq.NEXTVAL, #{title}, #{content}, #{startDate}, #{endDate}, #{reserDiv}, #{reserCost},
+		VALUES (sitterInfo_seq.NEXTVAL, #{title}, #{content}, #{startDate}, #{endDate}, #{reserDiv}, #{reserCost},
 		#{addPet}, #{addPetCost}, #{carableWeight}, #{carableAge}, #{tag}, #{space}, #{subway}, #{yard}, #{baby},
 		#{family}, #{other})
 	</insert>
-
 </mapper>
