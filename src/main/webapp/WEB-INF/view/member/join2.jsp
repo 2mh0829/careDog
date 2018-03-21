@@ -148,7 +148,7 @@ function changeEmail() {
         f.email2.readOnly = false;
 		f.email2.focus(); 
     }
-    
+   
     if(f.email1.value != "" && f.email2.value != ""){
     	emailChecked();
     }else{
