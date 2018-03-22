@@ -172,8 +172,45 @@ button {border:0;padding:0;box-shadow:none;cursor:pointer;}
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script>
+var data =[{
+	id:'hanmail',
+	text:'hanmail.net'
+},{
+	id:'naver',
+	text:'naver.com'
+},{
+	id:'nate',
+	text:'nate.com'
+},{
+	id:'hotmail',
+	text:'hotmail.com'
+},{
+	id:'yahoo',
+	text:'yahoo.co.kr'
+},{
+	id:'paran',
+	text:'paran.com'
+},{
+	id:'empal',
+	text:'empal.com'
+},{
+	id:'gmail',
+	text:'gmail.com'
+},{
+	id:'dreamwiz',
+	text:'dreamwiz.com'
+},{
+	id:'korea',
+	text:'korea.com'
+},{
+	id:'lycos',
+	text:'lycos.co.kr'
+},{
+	id:'hanafos',
+	text:'hanafos.com'
+}]
 $(document).ready(function(){
-	$('.emailSelect').select2();
+	$('#emailSelect').select2();
 });
 </script>
 
@@ -226,23 +263,7 @@ $(document).ready(function(){
 									<span class="des">@</span>
 									<input type="text" class="email" name="emailAddr2" title="직접 입력 하세요" placeholder="직접 입력 하세요" style="width:140px;ime-mode:disabled;" > <!-- disabled="disabled" -->
 									<input type="hidden" name="emailAddr" value="keh94k@naver.com">
-									<select id="emailSelect" class="emailSelect">
-										<option value="hanmail.net">hanmail.net</option>
-										<option value="naver.com">naver.com</option>
-										<option value="nate.com">nate.com</option>
-										<option value="hotmail.com">hotmail.com</option>
-										<option value="yahoo.co.kr">yahoo.co.kr</option>
-										<option value="paran.com">paran.com</option>
-										<option value="empal.com">empal.com</option>
-										<option value="gmail.com">gmail.com</option>
-										<option value="dreamwiz.com">dreamwiz.com</option>
-										<option value="korea.com">korea.com</option>
-										<option value="lycos.co.kr">lycos.co.kr</option>
-										<option value="hanafos.com">hanafos.com</option>
-										<option value="daum.net">daum.net</option>
-										<option value="chol.com">chol.com</option>
-										<option value="feechal.com">feechal.com</option>
-									</select>
+									<select class="emailSelect"></select>
 								</li>
 								<li>
 									<label for="NoticeSms">SMS</label>
