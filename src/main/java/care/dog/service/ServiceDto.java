@@ -26,15 +26,6 @@ public class ServiceDto {
 	private String other;
 	private String tag;
 	
-	private MultipartFile upload;
-	
-	public MultipartFile getUpload() {
-		return upload;
-	}
-	public void setUpload(MultipartFile upload) {
-		this.upload = upload;
-	}
-	
 	public String getTag() {
 		return tag;
 	}
@@ -156,8 +147,7 @@ public class ServiceDto {
 				+ content + ", startDate=" + startDate + ", endDate=" + endDate + ", reserDiv=" + reserDiv
 				+ ", reserCost=" + reserCost + ", addPet=" + addPet + ", addPetCost=" + addPetCost + ", carableWeight="
 				+ carableWeight + ", catableAge=" + catableAge + ", space=" + space + ", subway=" + subway + ", yard="
-				+ yard + ", baby=" + baby + ", family=" + family + ", other=" + other + ", tag=" + tag + ", upload="
-				+ upload + "]";
+				+ yard + ", baby=" + baby + ", family=" + family + ", other=" + other + ", tag=" + tag + " + ]";
 	}
 	
 	
