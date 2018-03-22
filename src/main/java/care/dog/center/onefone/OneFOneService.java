@@ -1,6 +1,6 @@
 package care.dog.center.onefone;
 
 public interface OneFOneService {
-	public int insertOneFOne(OneFOne dto);
+	public int insertOneFOne(OneFOneVo dto);
 
 }
