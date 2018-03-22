@@ -24,7 +24,6 @@ public class ServiceDto {
 	private String baby;
 	private String family;
 	private String other;
-	private String sitterPhoto;
 	private String tag;
 	
 	private MultipartFile upload;
@@ -35,12 +34,7 @@ public class ServiceDto {
 	public void setUpload(MultipartFile upload) {
 		this.upload = upload;
 	}
-	public String getSitterPhoto() {
-		return sitterPhoto;
-	}
-	public void setSitterPhoto(String sitterPhoto) {
-		this.sitterPhoto = sitterPhoto;
-	}
+	
 	public String getTag() {
 		return tag;
 	}
@@ -156,4 +150,15 @@ public class ServiceDto {
 	public void setOther(String other) {
 		this.other = other;
 	}
+	@Override
+	public String toString() {
+		return "ServiceDto [sittingId=" + sittingId + ", memberId=" + memberId + ", title=" + title + ", content="
+				+ content + ", startDate=" + startDate + ", endDate=" + endDate + ", reserDiv=" + reserDiv
+				+ ", reserCost=" + reserCost + ", addPet=" + addPet + ", addPetCost=" + addPetCost + ", carableWeight="
+				+ carableWeight + ", catableAge=" + catableAge + ", space=" + space + ", subway=" + subway + ", yard="
+				+ yard + ", baby=" + baby + ", family=" + family + ", other=" + other + ", tag=" + tag + ", upload="
+				+ upload + "]";
+	}
+	
+	
 }
