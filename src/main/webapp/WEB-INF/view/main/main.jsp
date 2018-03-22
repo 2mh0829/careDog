@@ -12,7 +12,7 @@
 body {
 	margin : 0;
 	padding : 0;
-	background : url (img.jpg) center center fixed no-repeat;
+	background : black;
 	overflow: hidden;
 }
 
