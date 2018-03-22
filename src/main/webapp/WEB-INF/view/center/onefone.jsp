@@ -139,10 +139,79 @@ select:focus{
 input[type="submit"],
 button {border:0;padding:0;box-shadow:none;cursor:pointer;} 
 .agree_box {height:167px;margin-bottom:0;padding:20px;border:1px solid #dedede;overflow-y:auto;background:#f9f6ec;font-size:14px;color:#666;box-sizing:border-box;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;}
+/*button*/
+.btnGreen, a.btnGreen {    
+	height: 50px;
+    background-color: #969937;
+    padding: 11px 0 9px;
+    font-size: 18px;
+    line-height: 30px;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: 700;
+    display: inline-block;
+    width: 150px;
+    margin: 0 2px;
+    box-sizing: border-box;
+    text-align: center;}
+.btnGray, a.btnGray {    
+	height: 50px;
+    background-color: #888;
+    padding: 11px 0 9px;
+    font-size: 18px;
+    line-height: 30px;
+    color: #fff;
+    border-radius: 5px;
+    font-weight: 700;
+    display: inline-block;
+    width: 150px;
+    margin: 0 2px;
+    box-sizing: border-box;
+    text-align: center;}
 </style>
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script>
-
+var data =[{
+	id:'hanmail',
+	text:'hanmail.net'
+},{
+	id:'naver',
+	text:'naver.com'
+},{
+	id:'nate',
+	text:'nate.com'
+},{
+	id:'hotmail',
+	text:'hotmail.com'
+},{
+	id:'yahoo',
+	text:'yahoo.co.kr'
+},{
+	id:'paran',
+	text:'paran.com'
+},{
+	id:'empal',
+	text:'empal.com'
+},{
+	id:'gmail',
+	text:'gmail.com'
+},{
+	id:'dreamwiz',
+	text:'dreamwiz.com'
+},{
+	id:'korea',
+	text:'korea.com'
+},{
+	id:'lycos',
+	text:'lycos.co.kr'
+},{
+	id:'hanafos',
+	text:'hanafos.com'
+}]
+$(document).ready(function(){
+	$('#emailSelect').select2();
+});
 </script>
 
 <div class="body-container">
@@ -194,24 +263,7 @@ button {border:0;padding:0;box-shadow:none;cursor:pointer;}
 									<span class="des">@</span>
 									<input type="text" class="email" name="emailAddr2" title="직접 입력 하세요" placeholder="직접 입력 하세요" style="width:140px;ime-mode:disabled;" > <!-- disabled="disabled" -->
 									<input type="hidden" name="emailAddr" value="keh94k@naver.com">
-									<select title="도메인 주소를 선택하세요." class="email" style="width:122px;" id="emailAddrSelect" selected="selected">	<!-- disabled="disabled" -->
-										<option value="-1" selected="selected">직접입력</option>
-										<option value="hanmail.net">hanmail.net</option>
-										<option value="naver.com">naver.com</option>
-										<option value="nate.com">nate.com</option>
-										<option value="hotmail.com">hotmail.com</option>
-										<option value="yahoo.co.kr">yahoo.co.kr</option>
-										<option value="paran.com">paran.com</option>
-										<option value="empal.com">empal.com</option>
-										<option value="gmail.com">gmail.com</option>
-										<option value="dreamwiz.com">dreamwiz.com</option>
-										<option value="korea.com">korea.com</option>
-										<option value="lycos.co.kr">lycos.co.kr</option>
-										<option value="hanafos.com">hanafos.com</option>
-										<option value="daum.net">daum.net</option>
-										<option value="chol.com">chol.com</option>
-										<option value="feechal.com">feechal.com</option>
-									</select>
+									<select class="emailSelect"></select>
 								</li>
 								<li>
 									<label for="NoticeSms">SMS</label>
@@ -250,7 +302,6 @@ button {border:0;padding:0;box-shadow:none;cursor:pointer;}
 								<option value="30">교환/반품/환불</option>
 								<option value="60">이벤트</option>
 								<option value="90">기타</option>
-
 							</select>
 							<select id="cnslMidCate" title="문의유형 항목을 선택하세요" style="width:192px;" disabled="disabled">
 								<option value="" selected="selected">선택해주세요</option>
@@ -261,20 +312,17 @@ button {border:0;padding:0;box-shadow:none;cursor:pointer;}
 						<th scope="col"><label for="InputTextarea">내용</label></th>
 						<td>
 							<textarea id="InputTextarea" name="inqCont" cols="5" rows="1" placeholder="문의내용을 입력해주세요.(2000자 이내)" style="width:98%;height:280px;"></textarea>
-							<label for="inputFile">
-								<button type="button" id="btnFile" class="file">첨부파일</button>
-							</label>
-							<input type="file" id="inputFile" name="cnslFile" class="btnFileAdd" value="첨부파일" title="첨부파일 선택" style="display:none;">
-							<input type="hidden" name="fileName" id="cnslFileName" value="">
-							<span id="fileName" class="file" style="display: none;"><span></span><button type="button" id="btnFileDelete" class="ButtonDelete">삭제</button></span>
-							<span class="txt">5MB 이하의 이미지 파일 (JPG, PNG, GIF) 1개를 첨부하실 수 있습니다.</span>
 						</td>
 					</tr>
 					<tr>
-						<ul>
-							<li><a href="javascript:;" id="cnslSubmit" class="btnGreen">등록</a></li>
-							<li><a href="javascript:;" id="cnslCancel" class="btnGray">취소</a></li>
-						</ul>
+						<td>
+							<ul>
+								<li style="margin-left:336px; padding-top: 30px;">
+								<a href="javascript:;" id="cnslSubmit" class="btnGreen">등록</a>
+								<a href="javascript:;" id="cnslCancel" class="btnGray">취소</a>
+								</li>
+							</ul>
+						</td>
 					</tr>
 				
 			</tbody>

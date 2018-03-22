@@ -33,23 +33,18 @@
 	height: 100%;
 	float: left;
 }
-.messageList{
-overflow:auto;
 
-    scrollbar-face-color: #FFFFFF;
-
-    scrollbar-highlight-color: #DADADA;
-
-    scrollbar-3dlight-color: #FFFFFF;
-
-    scrollbar-shadow-color: #DADADA;
-
-    scrollbar-darkshadow-color: #FFFFFF;
-
-    scrollbar-track-color: #FFFFFF;
-
-    scrollbar-arrow-color: #DADADA;
+.messageList {
+	overflow: auto;
+	scrollbar-face-color: #FFFFFF;
+	scrollbar-highlight-color: #DADADA;
+	scrollbar-3dlight-color: #FFFFFF;
+	scrollbar-shadow-color: #DADADA;
+	scrollbar-darkshadow-color: #FFFFFF;
+	scrollbar-track-color: #FFFFFF;
+	scrollbar-arrow-color: #DADADA;
 }
+
 .messengerHeader {
 	float: left;
 	width: 100%;
@@ -97,8 +92,8 @@ overflow:auto;
 	font-size: 15px;
 	background-color: #D5D5D5;
 	border-radius: 20px;
-		padding-left:5px;
-	padding-right:5px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 .messageTextRight {
@@ -106,30 +101,36 @@ overflow:auto;
 	font-size: 15px;
 	background-color: skyblue;
 	border-radius: 20px;
-	padding-left:5px;
-	padding-right:5px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
-.messageInput{
-	height:40px;
+
+.messageInput {
+	height: 40px;
 	border-top-width: 1px;
-	border-top-style:solid;
-	border-top-color:#D5D5D5;
+	border-top-style: solid;
+	border-top-color: #D5D5D5;
 	padding-left: 15px;
-	padding-top:10px;
-	color : #D5D5D5;
+	padding-top: 10px;
+	color: #D5D5D5;
 	font-size: 17px;
 }
-.addFriendBtn{
-cursor: pointer
+
+.addFriendBtn {
+	cursor: pointer
 }
-.friendList{
-cursor: pointer
+
+.friendList {
+	cursor: pointer
 }
-.pointer{
-cursor : pointer
+
+.pointer {
+	cursor: pointer
 }
-input{
-outline-width:0}
+
+input {
+	outline-width: 0
+}
 </style>
 <script>
 var messageCount=0;
@@ -138,8 +139,8 @@ var friendNameTemp=0;
 		adjustMessengerLayoutSize();
 		getMessageMemberList(); <!--메신저페이지들어오면 대화기록있는 친구리스트 불러오기-->
 		mInterval = setInterval("checkChanged()",1500);<%--메세지검사--%>
-		$('#inputMessage').on('click',function(){
-			$(this).prop('value',"");
+		$("#inputMessage").on("click",function(){
+			$(this).prop("value","");
 		});
 	
 	})
@@ -149,6 +150,7 @@ var friendNameTemp=0;
 			type:"POST",
 			url:url,
 			success:function(data){
+				console.log(data.mML.length);
 			 	for(i=0;i<data.mML.length;i++){
 					getFriend(data.mML[i].receiverUserName,data.mML[i].receiverId,data.mML[i].msg,data.mML[i].msgTime);
 				}
@@ -222,24 +224,22 @@ var friendNameTemp=0;
 						+"	<div class='messageMemberName' style='font-size: 15px'>"+userName+"</div>"
 						+"	<div class='messageMsg' style='font-size: 12px; width:auto;color: #D5D5D5'>"+msg+"</div></div>"
 						+"	<div class='messageTime' style='text-align: right; color: #D5D5D5; margin-top: 10px; float: right'>"+msgTime+"</div></div>");
+		
 	}
 	
+	function getMessageList(userName,memberId){
+		//alert(userName+$(this).index());
+		$(".messengerHeaderRight").text(userName);
+		$(".headerMemberId").text(memberId);
+		$(".messageList").html("");
+		messageCount=0;
+		getMessages();
+	};
 	$(function(){
-		$("body").on("click",".messageMemberList",function(){
-			var userName = $(this).attr("data-userName");
-			var memberId = $(this).attr("data-memberId");
-			//alert(userName+$(this).index());
-			$(".messengerHeaderRight").text(userName);
-			$(".headerMemberId").text(memberId);
-			$(".messageList").html("");
-			messageCount=0;
-			getMessages();
-		});
+	$("body").on("click",".messageMemberList",function(){
+		getMessageList($(this).attr("data-userName"),$(this).attr("data-memberId"));
 	});
-	function getMessageList(userName,memberId,idx){ <!--리스트에 친구 누르면 대화 불러오기-->
-
-	}
-	
+	})
 	function checkDuplicationFriend(userName){
 		var mML =$(".messageMemberList");
 		for(i = 0 ;i<mML.length;i++){
@@ -294,6 +294,7 @@ var friendNameTemp=0;
 			}
 			,error:function(e){
 				alert("연결 오류가 발생했습니다.");
+				clearInterval(mInterval);
 			}
 		}) 
 	}
@@ -309,7 +310,8 @@ var friendNameTemp=0;
 			<b>CareDog Messenger</b>
 		</div>
 		<div style="width: 35%; float: left;">
-			<img class="addFriendBtn" onClick="findFriends();" src="<%=cp%>/resource/img/myPage/addBtn.png"
+			<img class="addFriendBtn" onClick="findFriends();"
+				src="<%=cp%>/resource/img/myPage/addBtn.png"
 				style="width: 20px; margin-right: 5px; margin-top: 10px; float: right;">
 		</div>
 	</div>
@@ -317,8 +319,8 @@ var friendNameTemp=0;
 </div>
 <div class="messengerBody">
 	<div class="messengerLeft">
-	
-<!-- 		<div class="messageMemberList">
+
+		<!-- 		<div class="messageMemberList">
 			<img src="https://pbs.twimg.com/media/CJdjthrUEAAjkCl.jpg"
 				style="margin-right: 10px; width: 40px; border-radius: 30px; float: left">
 			<div style="margin-top: 7px; width: 30%; float: left">
@@ -328,11 +330,11 @@ var friendNameTemp=0;
 			<div
 				style="text-align: right; color: #D5D5D5; margin-top: 10px; float: right">2017-06-13-15:30</div>
 		</div> -->
-		
+
 	</div>
 	<div class="messengerRight">
 		<div class="messageList">
-	<!-- 		<div class="messageListBox">
+			<!-- 		<div class="messageListBox">
 				<div class="messageTextRight" style="float: right">aaa</div>
 			</div>
 			<div class="messageListBox">
@@ -342,27 +344,35 @@ var friendNameTemp=0;
 				<div class="messageTextRight" style="float: right">ccc</div>
 			</div> -->
 		</div>
-		
+
 		<div class="messageInput">
-		<div style="width:80%; float:left"><input style="border:none; width:100%;" id="inputMessage" type="text" value="Type a message.."></div>
-		<div style="padding-right:25px; float:right;width:auto; height:30px;"><input type="button" onClick="sendMessage();" value="send"></div>
+			<div style="width: 80%; float: left">
+				<input style="border: none; width: 100%;" id="inputMessage"
+					type="text" value="Type a message..">
+			</div>
+			<div
+				style="padding-right: 25px; float: right; width: auto; height: 30px;">
+				<input type="button" onClick="sendMessage();" value="send">
+			</div>
 		</div>
 	</div>
 </div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-        <h4 class="modal-title" id="myModalLabel">회원목록</h4>
-      </div>
-      <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 class="modal-title" id="myModalLabel">회원목록</h4>
+			</div>
+			<div class="modal-body"></div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
 </div>
 <div class="headerMemberId" style="display: none;"></div>

@@ -8,6 +8,7 @@
 
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+
 <script>
 $(function() {
 	$("#left-datepicker").datepicker(
@@ -53,25 +54,25 @@ $(function() {
 });
 
 $(function(){
-	$("body").on('click','#care-div li>a',function(){
+	$("body").on('click','#care-div li',function(){
 		$('#careTime').text($(this).text());
 	});
 });
 
 $(function(){
-	$("body").on('click','#carePay li>a',function(){
+	$("body").on('click','#carePay li',function(){
 		$('#payTxt').text($(this).text());
 	});
 });
 
 $(function(){
-	$("body").on('click','#sizeDD li>a',function(){
+	$("body").on('click','#sizeDD li',function(){
 		$('#sizeText').text($(this).text());
 	});
 });
 
 $(function(){
-	$("body").on('click','#ageDD li>a',function(){
+	$("body").on('click','#ageDD li',function(){
 		$('#ageText').text($(this).text());
 	});
 });
@@ -130,7 +131,21 @@ function inputOnlyNum(){
 	  	return false;
 	 }
 }
+
+/* function ajaxFileTransmit() {
+	var form = jQuery("ajaxFile")[0];
+	var formData = new FormData(form);
+	formData.append("message","To Hide File Confirm");
+	formData.append("file",jQuery("#ajaxFile"[0].files[0]));
 	
+	jQuery.ajax({
+		url : ""
+	});
+} */
+
+// -------
+
+
 </script>
 
 <style>
@@ -140,6 +155,14 @@ function inputOnlyNum(){
 .main-middle-inner .ui-datepicker {
 	width: 335px;
 	height: 190px;
+}
+
+.dropdown-menu li {
+	
+}
+
+.imgCursor {
+	cursor : pointer;
 }
 
 #datepicker {
@@ -155,7 +178,7 @@ li {
 .main-top {
 	padding-bottom: 6px;
 	/* border: 1px solid blue; */
-	height: 564px;
+	/* height: 564px; */
 }
 
 .main-top-slider {
@@ -576,7 +599,7 @@ li {
 }
 
 .main-photos {
-	border: 3px dotted orange;
+	/* border: 3px dotted orange; */
 	height: 410px;
 	width: 980px;
 }
@@ -659,24 +682,153 @@ li {
 	padding: 12px;
 }
 
+#btnInputImg {
+	width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    /* margin-left: 425px; */
+    /* margin-top: 120px; */
+}
+
+input[type=file] {
+    display: none;
+}
+
+.my_button {
+    display: inline-block;
+    width: 200px;
+    text-align: center;
+    padding: 10px;
+    background-color: #006BCC;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.imgs_wrap {
+    border: 3px dotted orange;
+    margin-bottom: 40px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 20px;
+    height: 200px;
+}
+
+.imgs_wrap img {
+    max-width: 150px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.roomPhotos {
+	border: 3px dotted orange;
+    width: 49%;
+    height: 49%;
+    display: inline-block;
+    margin-left: 5px;
+    margin-top: 1.5px;
+}
+
+#roomTxt {
+	margin-left: 5px;
+}
+
 </style>
 
+<script type="text/javascript">
+	
+	function imgFileUpload(){
+		$("#input_imgs").trigger('click');
+	}
+	
+	$(document).ready(function() {
+        $("#input_imgs").on("change", handleImgFileSelect);
+    });
+	
+	function handleImgFileSelect(e) {
+		 sel_files = [];
+         $(".imgs_wrap").empty();
+
+         var files = e.target.files;
+         var filesArr = Array.prototype.slice.call(files);
+		
+         var index = 0;
+         filesArr.forEach(function(f) {
+             if(!f.type.match("image.*")) {
+                 alert("Only .img File Available !!");
+                 return;
+             }
+
+             sel_files.push(f);
+
+             var reader = new FileReader();
+             reader.onload = function(e) {
+                 var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>";
+                 $(".imgs_wrap").append(html);
+                 index++;
+
+             }
+             reader.readAsDataURL(f);
+         });
+             
+	}
+	
+	function deleteImageAction(index) {
+        console.log("index : "+index);
+        console.log("sel length : "+sel_files.length);
+
+        sel_files.splice(index, 1);
+
+        var img_id = "#img_id_"+index;
+        $(img_id).remove(); 
+    }
+	
+</script>
+
 <div class="body-container">
-<form name="inputForm" method="post">
+<form name="inputForm" method="post" enctype="multipart/form-data">
 	<div class="sitter-title">
 		<h1>글 제목</h1>
 		<input type="text" class="textTitle" name="title">
 	</div>
+	
+	<!-- <div>
+		<div class="input_wrap">
+			<a href="javascript:" onclick="fileUploadAction();" class="my_button">파일 업로드</a>
+			<input type="file" id="input_imgs" multiple>
+		</div>
+	</div>
+	<div>
+		<div class="imgs_wrap">
+			<img id="img">
+		</div>
+	</div> 
+	<a href="javascript:" class="my_button" onclick="submitAction();">업로드</a> -->
 	<div class="main-top">
 		<div class="main-top-slider">
-			<div class="main-photos">
-			</div>
-			<ul class="photo-array">
+			<img src="<%=cp%>/resource/img/service/uploadButton.png" class="imgCursor" id="btnInputImg" onclick="imgFileUpload();">
+			<span id="roomTxt">방 사진을 추가해주세요! (4장)</span>
+			<input type="file" id="input_imgs" multiple>
+			<div>
+		        <div class="imgs_wrap">
+		            <img id="img" />
+		        </div>
+		    </div>
+			<!-- <div class="main-photos">
+				<div class="roomPhotos" id="imgs_wrap"></div>
+				<div class="roomPhotos" id="imgs_wrap1"></div>
+				<div class="roomPhotos" id="imgs_wrap2"></div>
+				<div class="roomPhotos" id="imgs_wrap3"></div>
+			</div> -->
+			<!-- <div>
+				<div class="imgs_wrap"></div>
+			</div> -->
+			<!-- <ul class="photo-array">
 				<li class="array-small"></li>
 				<li class="array-small"></li>
 				<li class="array-small"></li>
-			</ul>
-			
+			</ul> -->
 		</div>
 	</div>
 	<div class="inner">
@@ -699,14 +851,14 @@ li {
 								<button type="button" class="inputBtn" data-toggle="dropdown">
 									<span id="careTime">24시간 돌봄</span> <span class="caret"></span>
 								</button>
-								<ul class="dropdown-menu" id="care-div">
-									<li value="1"><a href="#">24시간 돌봄</a></li>
-									<li value="2"><a href="#">데이케어</a></li>
+								<ul class="dropdown-menu" id="care-div" name="reserDiv">
+									<li value="1">24시간 돌봄</li>
+									<li value="2">데이케어</li>
 								</ul>
 							</div>
 						</dt>
 						<dd>
-							<input type="text" id="inputMoney-date" class="inputMoney" value="입력하세요" onclick="this.value=''" onkeydown="return inputOnlyNum();">원
+							<input type="text" name="reserCost" id="inputMoney-date" class="inputMoney" value="입력하세요" onclick="this.value=''" onkeydown="return inputOnlyNum();">원
 							<!-- <span class="oneDayPrice">30,000원</span> -->
 						</dd>
 						<dt>
@@ -724,14 +876,14 @@ li {
 								<button type="button" class="inputBtn" data-toggle="dropdown">
 									<span id="payTxt">반려견 추가비용</span> <span class="caret"></span>
 								</button>
-								<ul class="dropdown-menu" id="carePay">
-									<li><a href="#" onclick="setAbled()">반려견 추가비용</a></li>
-									<li><a href="#" onclick="setDisabled()">반려견 추가 X</a></li>
+								<ul class="dropdown-menu" id="carePay" name="addPet">
+									<li value="1" onclick="setAbled()">반려견 추가비용</li>
+									<li value="2" onclick="setDisabled()">반려견 추가 X</li>
 								</ul>
 							</div>
 						</dt>
 						<dd>
-							<input type="text" id="inputMoney-dog" class="inputMoney" value="입력하세요" onclick="this.value=''" onkeydown='return inputOnlyNum();'>원
+							<input type="text" id="inputMoney-dog" class="inputMoney" name="addPetCost" value="입력하세요" onclick="this.value=''" onkeydown='return inputOnlyNum();'>원
 						</dd>
 						<dt>
 							<span class="input-title">부가세</span>
@@ -766,10 +918,10 @@ li {
 								&nbsp;
 								<span class="caret"></span>
 							</button>
-							<ul class="dropdown-menu" id="sizeDD">
-								<li><a href="#">소형견 (0~4.9kg)</a></li>
-								<li><a href="#">중형견 (5~14.9kg)</a></li>
-								<li><a href="#">대형견 (15kg 이상)</a></li>
+							<ul class="dropdown-menu" id="sizeDD" name="carableWeight">
+								<li value="1">소형견 (0~4.9kg)</li>
+								<li value="2">중형견 (5~14.9kg)</li>
+								<li value="3">대형견 (15kg 이상)</li>
 							</ul>
 						</div>
 					</dd>
@@ -781,10 +933,10 @@ li {
 								&nbsp;
 								<span class="caret"></span>
 							</button>
-							<ul class="dropdown-menu" id="ageDD">
-								<li><a href="#">강아지 (0~4세)</a></li>
-								<li><a href="#">성견 (5~9세)</a></li>
-								<li><a href="#">노령견 (10세 이상)</a></li>
+							<ul class="dropdown-menu" id="ageDD" name="carableAge">
+								<li value="1">강아지 (0~4세)</li>
+								<li value="2">성견 (5~9세)</li>
+								<li value="3">노령견 (10세 이상)</li>
 							</ul>
 						</div>
 					</dd>
@@ -849,21 +1001,21 @@ li {
 							class="area-name">돌봄 공간</label>
 					</dt>
 					<dd class="colored pull-right">
-						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
+						<input type="text" class="environ-text" name="space" value="입력하세요" onclick="this.value=''">
 					</dd>
 					<dt class="pull-left">
 						<img src="<%=cp%>/resource/img/service/subway.JPG"> <label
 							class="area-name">근처 지하철역</label>
 					</dt>
 					<dd class="pull-right">
-						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
+						<input type="text" class="environ-text" name="subway" value="입력하세요" onclick="this.value=''">
 					</dd>
 					<dt class="colored pull-left">
 						<img src="<%=cp%>/resource/img/service/yard.JPG"> <label
 							class="area-name">마당 유무</label>
 					</dt>
 					<dd class="colored pull-right">
-						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
+						<input type="text" class="environ-text" name="yard" value="입력하세요" onclick="this.value=''">
 					</dd>
 				</dl>
 			</div>
@@ -874,21 +1026,21 @@ li {
 							class="area-name">14세 미만 아동</label>
 					</dt>
 					<dd class="colored pull-right">
-						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
+						<input type="text" class="environ-text" name="baby" value="입력하세요" onclick="this.value=''">
 					</dd>
 					<dt class="pull-left">
 						<img src="<%=cp%>/resource/img/service/family.JPG"> <label
 							class="area-name">가족 동거 유무</label>
 					</dt>
 					<dd class="pull-right">
-						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
+						<input type="text" class="environ-text" name="family" value="입력하세요" onclick="this.value=''">
 					</dd>
 					<dt class="colored pull-left">
 						<img src="<%=cp%>/resource/img/service/cat.JPG"> <label
 							class="area-name">다른 동물 유무</label>
 					</dt>
 					<dd class="colored pull-right">
-						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
+						<input type="text" class="environ-text" name="other" value="입력하세요" onclick="this.value=''">
 					</dd>
 				</dl>
 			</div>
@@ -909,7 +1061,7 @@ li {
 				<div class="hi-sitter"><span style="font-weight: bold;">김경애</span> 펫시터님의 한마디</div>
 			</div>
 			<div class="hi-body">
-				<textarea class="main-text" cols="104" rows="6"></textarea>
+				<textarea class="main-text" name="content" cols="104" rows="6"></textarea>
 			</div>
 		</div>
 	</div>
