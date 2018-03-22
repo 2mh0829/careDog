@@ -272,4 +272,22 @@ public class Dog119Controller {
 		//"redirect:/dog119/dogHealth"
 		return map;
 	}
+	
+	@RequestMapping(value="/dog119/sido")
+	@ResponseBody
+	public Map<String, Object> sido(){
+		Map<String, Object> map = new HashMap<>();
+		List<Map<String, Object>> list = service.sido();
+		map.put("list", list);
+		return map;
+	}
+	
+	@RequestMapping(value="/dog119/gugun")
+	@ResponseBody
+	public Map<String, Object> gugun(@RequestParam String admCode){
+		Map<String, Object> map = new HashMap<>();
+		List<Map<String, Object>> list = service.gugun(admCode);
+		map.put("list", list);
+		return map;
+	}
 }

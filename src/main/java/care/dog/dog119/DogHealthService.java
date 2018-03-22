@@ -19,4 +19,7 @@ public interface DogHealthService {
 	public int insertDhReply(DhReplyVo dto);
 	public int dhReplyCount(int boardNum);
 	public int dhInsert(DogHealthVo dto);
+	
+	public List<Map<String, Object>> sido();
+	public List<Map<String, Object>> gugun(String sido);
 }
