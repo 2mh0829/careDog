@@ -259,9 +259,8 @@ public class Dog119Controller {
 	
 	@RequestMapping(value="/dog119/dhInsert")
 	@ResponseBody
-	public Map<String, Object> dhInsert(@RequestParam Map<String, Object> data, HttpSession session){
+	public void dhInsert(@RequestParam Map<String, Object> data, HttpSession session){
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
-		Map<String, Object> map = new HashMap<>();
 		String memberId = info.getMemberId();
 		DogHealthVo dto = new DogHealthVo();
 		dto.setTitle((String) data.get("title"));
@@ -270,7 +269,6 @@ public class Dog119Controller {
 		
 		service.dhInsert(dto);
 		//"redirect:/dog119/dogHealth"
-		return map;
 	}
 	
 	@RequestMapping(value="/dog119/sido")
