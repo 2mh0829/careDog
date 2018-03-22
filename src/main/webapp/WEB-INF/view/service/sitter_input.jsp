@@ -851,14 +851,14 @@ input[type=file] {
 								<button type="button" class="inputBtn" data-toggle="dropdown">
 									<span id="careTime">24시간 돌봄</span> <span class="caret"></span>
 								</button>
-								<ul class="dropdown-menu" id="care-div">
+								<ul class="dropdown-menu" id="care-div" name="reserDiv">
 									<li value="1">24시간 돌봄</li>
 									<li value="2">데이케어</li>
 								</ul>
 							</div>
 						</dt>
 						<dd>
-							<input type="text" id="inputMoney-date" class="inputMoney" value="입력하세요" onclick="this.value=''" onkeydown="return inputOnlyNum();">원
+							<input type="text" name="reserCost" id="inputMoney-date" class="inputMoney" value="입력하세요" onclick="this.value=''" onkeydown="return inputOnlyNum();">원
 							<!-- <span class="oneDayPrice">30,000원</span> -->
 						</dd>
 						<dt>
@@ -876,14 +876,14 @@ input[type=file] {
 								<button type="button" class="inputBtn" data-toggle="dropdown">
 									<span id="payTxt">반려견 추가비용</span> <span class="caret"></span>
 								</button>
-								<ul class="dropdown-menu" id="carePay">
-									<li onclick="setAbled()">반려견 추가비용</li>
-									<li onclick="setDisabled()">반려견 추가 X</li>
+								<ul class="dropdown-menu" id="carePay" name="addPet">
+									<li value="1" onclick="setAbled()">반려견 추가비용</li>
+									<li value="2" onclick="setDisabled()">반려견 추가 X</li>
 								</ul>
 							</div>
 						</dt>
 						<dd>
-							<input type="text" id="inputMoney-dog" class="inputMoney" value="입력하세요" onclick="this.value=''" onkeydown='return inputOnlyNum();'>원
+							<input type="text" id="inputMoney-dog" class="inputMoney" name="addPetCost" value="입력하세요" onclick="this.value=''" onkeydown='return inputOnlyNum();'>원
 						</dd>
 						<dt>
 							<span class="input-title">부가세</span>
@@ -918,10 +918,10 @@ input[type=file] {
 								&nbsp;
 								<span class="caret"></span>
 							</button>
-							<ul class="dropdown-menu" id="sizeDD">
-								<li>소형견 (0~4.9kg)</li>
-								<li>중형견 (5~14.9kg)</li>
-								<li>대형견 (15kg 이상)</li>
+							<ul class="dropdown-menu" id="sizeDD" name="carableWeight">
+								<li value="1">소형견 (0~4.9kg)</li>
+								<li value="2">중형견 (5~14.9kg)</li>
+								<li value="3">대형견 (15kg 이상)</li>
 							</ul>
 						</div>
 					</dd>
@@ -933,10 +933,10 @@ input[type=file] {
 								&nbsp;
 								<span class="caret"></span>
 							</button>
-							<ul class="dropdown-menu" id="ageDD">
-								<li>강아지 (0~4세)</li>
-								<li>성견 (5~9세)</li>
-								<li>노령견 (10세 이상)</li>
+							<ul class="dropdown-menu" id="ageDD" name="carableAge">
+								<li value="1">강아지 (0~4세)</li>
+								<li value="2">성견 (5~9세)</li>
+								<li value="3">노령견 (10세 이상)</li>
 							</ul>
 						</div>
 					</dd>
@@ -1001,21 +1001,21 @@ input[type=file] {
 							class="area-name">돌봄 공간</label>
 					</dt>
 					<dd class="colored pull-right">
-						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
+						<input type="text" class="environ-text" name="space" value="입력하세요" onclick="this.value=''">
 					</dd>
 					<dt class="pull-left">
 						<img src="<%=cp%>/resource/img/service/subway.JPG"> <label
 							class="area-name">근처 지하철역</label>
 					</dt>
 					<dd class="pull-right">
-						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
+						<input type="text" class="environ-text" name="subway" value="입력하세요" onclick="this.value=''">
 					</dd>
 					<dt class="colored pull-left">
 						<img src="<%=cp%>/resource/img/service/yard.JPG"> <label
 							class="area-name">마당 유무</label>
 					</dt>
 					<dd class="colored pull-right">
-						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
+						<input type="text" class="environ-text" name="yard" value="입력하세요" onclick="this.value=''">
 					</dd>
 				</dl>
 			</div>
@@ -1026,21 +1026,21 @@ input[type=file] {
 							class="area-name">14세 미만 아동</label>
 					</dt>
 					<dd class="colored pull-right">
-						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
+						<input type="text" class="environ-text" name="baby" value="입력하세요" onclick="this.value=''">
 					</dd>
 					<dt class="pull-left">
 						<img src="<%=cp%>/resource/img/service/family.JPG"> <label
 							class="area-name">가족 동거 유무</label>
 					</dt>
 					<dd class="pull-right">
-						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
+						<input type="text" class="environ-text" name="family" value="입력하세요" onclick="this.value=''">
 					</dd>
 					<dt class="colored pull-left">
 						<img src="<%=cp%>/resource/img/service/cat.JPG"> <label
 							class="area-name">다른 동물 유무</label>
 					</dt>
 					<dd class="colored pull-right">
-						<input type="text" class="environ-text" value="입력하세요" onclick="this.value=''">
+						<input type="text" class="environ-text" name="other" value="입력하세요" onclick="this.value=''">
 					</dd>
 				</dl>
 			</div>
@@ -1061,7 +1061,7 @@ input[type=file] {
 				<div class="hi-sitter"><span style="font-weight: bold;">김경애</span> 펫시터님의 한마디</div>
 			</div>
 			<div class="hi-body">
-				<textarea class="main-text" cols="104" rows="6"></textarea>
+				<textarea class="main-text" name="content" cols="104" rows="6"></textarea>
 			</div>
 		</div>
 	</div>
