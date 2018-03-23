@@ -28,32 +28,24 @@
    </definition>
 
    <!-- 개인 블로그 3단 -->
+      <definition name=".myPageRightLayout" template="/WEB-INF/view/layout/myPage/myPageRight.jsp">
+        <put-attribute name="myPageRight" value="/WEB-INF/view/myPage/sch/sch.jsp" />
+       </definition>
    <definition name=".myPageLayout" template="/WEB-INF/view/layout/myPage/myPageLayout.jsp">
       <put-attribute name="title" value="careDog" />
       <put-attribute name="header" value="/WEB-INF/view/layout/header.jsp" />
-      <put-attribute name="myPageHeader"
-         value="/WEB-INF/view/layout/myPage/myPageHeader.jsp" />
+      <put-attribute name="myPageHeader" value="/WEB-INF/view/layout/myPage/myPageHeader.jsp" />
       <put-attribute name="myPageLeft" value="/WEB-INF/view/layout/myPage/myPageLeft.jsp" />
-      <put-attribute name="myPageLeft2" value="/WEB-INF/view/myPage/myPet/myPetInfo.jsp" />
-      <put-attribute name="myPageLeft3" value="/WEB-INF/view/myPage/sch/sch.jsp" />
-      <put-attribute name="myPageBody" value="/WEB-INF/view/myPage/main/profile.jsp" />
-      <put-attribute name="myPageBody2" value="/WEB-INF/view/myPage/guest/guest.jsp" />
+      <put-attribute name="myPageBody" value="/WEB-INF/view/myPage/guest/guest.jsp" />
+      <put-attribute name="myPageRight" value="/WEB-INF/view/layout/myPage/myPageRight.jsp" />
       <put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
    </definition>
 
       <definition name=".myPage.*.*" extends=".myPageLayout">
-      <put-attribute name="myPageLeft" value="" />
-      <put-attribute name="myPageLeft2" value="" />
-      <put-attribute name="myPageLeft3" value="" />
       <put-attribute name="myPageBody" value="/WEB-INF/view/myPage/{1}/{2}.jsp" />
-      <put-attribute name="myPageBody2" value="" />
    </definition>
       <definition name=".myPage.*" extends=".myPageLayout">
-      <put-attribute name="myPageLeft" value="" />
-      <put-attribute name="myPageLeft2" value="" />
-      <put-attribute name="myPageLeft3" value="" />
       <put-attribute name="myPageBody" value="/WEB-INF/view/myPage/{1}.jsp" />
-      <put-attribute name="myPageBody2" value="" />
    </definition>
 
 

@@ -13,6 +13,9 @@
     min-height: 50px;
     display: none;
 }
+.myPage-background{
+		background-color:#E6FFFF;
+}
 </style>
 
 <script type="text/javascript">
@@ -152,8 +155,6 @@ function folding(){
 	}
 }
 </script>
- <div class="bodyFrame4" id="myPage-content" style="margin-bottom: 20px;">
-<div class="myPage-body-content" style="padding-bottom: 0px;">
       <div style="width:100%; height: 30px; line-height: 30px; border-bottom: 1px solid #212121;">
             <div style="float:left"><b>방명록</b></div>
             <div id="foldingText" style="float:right"><a href="javascript:folding();">작성하기</a></div>
@@ -172,6 +173,4 @@ function folding(){
       </div>
           
       <div id="listGuest" style="width:100%; margin: 0px 0px 10px;"></div>
-
-</div>
-</div>
+      
