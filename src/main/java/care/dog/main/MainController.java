@@ -9,7 +9,7 @@ public class MainController {
 
 	@RequestMapping(value="/main", method=RequestMethod.GET)
 	public String mainLayout() {
-		return ".mainLayout";
+		return ".startLayout";
 	}
 	
 }
