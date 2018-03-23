@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 	<select id="readMember" parameterType="String" resultType="care.dog.member.Member">
-		SELECT m1.memberId, userName, userPwd
+		SELECT m1.memberId, userName, userPwd, email, tel, zipCode, address2, address1
 		FROM member1 m1
 		LEFT OUTER JOIN member2 m2 ON m1.memberId = m2.memberId
 		WHERE m1.memberId = #{memberId}

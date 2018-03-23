@@ -171,117 +171,71 @@ button {border:0;padding:0;box-shadow:none;cursor:pointer;}
     text-align: center;}
 </style>
 <link href="<%=cp %>/resource/css/select2.min.css" rel="stylesheet" />
-<script type="text/javascript" src="<%=cp %>/resource/js/select2/i18n/ko.js"></script>
 <script type="text/javascript" src="<%=cp %>/resource/js/select2.min.js"></script>
 <script>
-$(document).ready(function(){
-	$('.emailSelect').select2({
-		placeholder: "선택하세요"
-	});
-});
-
-function listPage(page){
-	
-}
-
-var data = [
-	{
-	"text":"회원/멤버십",
-	"children":[
-		{
-			"id":101,"text":"회원 가입/탈퇴"
-		},{
-			"id":102,"text":"로그인"
-		},{
-			"id":103,"text":"회원정보 변경"
-		},{
-			"id":104,"text":"CareDog 멤버십"
-		}]
-	},{
-		"text":"펫#",
-		"children":[
-			{
-				"id":201,"text":"주문/취소"
-			},{
-				"id":202,"text":"상품"
-			},{
-				"id":203,"text":"신용카드"
-			},{
-				"id":204,"text":"무통장입금"
-			},{
-				"id":205,"text":"쿠폰"
-			},{
-				"id":206,"text":"배송기간/배송비"
-			},{
-				"id":207,"text":"상품수령"
-			},{
-				"id":208,"text":"반품"
-			},{
-				"id":209,"text":"환불"
-			}
-		]
-	},{
-		"text":"서비스",
-		"children":[
-			
-		]
-	},{
-		"text":"멍스타그램",
-		"children":[
-			
-		]
-	},{
-		"text":"유기견",
-		"children":[
-			
-		]
-	},{
-		"text":"펫119",
-		"children":[
-			
-		]
-	},{
-		"text":"정보",
-		"children":[
-			
-		]
-	},{
-		"text":"이벤트",
-		"children":[
-			{
-				"id":801,"text":"이벤트 참여방법"
-			},{
-				"id":802,"text":"이벤트 당첨확인"
-			},{
-				"id":803,"text":"이벤트 사은품 관련"
-			}
-		]
-	}];
 
 $(document).ready(function(){
 	$('.questionSelect').select2({
 		placeholder:"항목을 선택하세요",
-		allowClear:true,
-		data: data
+		allowClear:true
 	});
 });
-/* $('.questionSelect').trigger({
-    type: 'select2:select',
-    params: {
-        data: data
-    }
-}); */
-</script>
 
+function hahaSubmit(){
+		/* 문의유형 값
+		alert($("[name='questionSelect']").val())
+		alert($(".questionSelect").val()); */
+	 if ($("[name='check_info']:checked").val()=='disagree'){
+		alert('개인정보 수집 동의를 하지 않으면 가입하실 수 없습니다.');
+		return;
+	}
+	 if(! $("[name='checkid']").val()){
+		 alert('아이디를 입력하세요.');
+		 $("[name='checkid']").focus();
+		 return;
+	 }
+	 if(! $("[name='emailAddr1']").val()){
+		 alert('이메일을 입력하세요.');
+		 $("[name='emailAddr1']").focus();
+		 return;
+	 }
+	 if($("[name='emailSelect']").val()==-1){
+		 alert('도메인을 선택하세요.');
+		 $("select[name=emailSelect]").focus();
+		 return;
+	 }
+	 if(! $("[name='cellTxnoNo']").val()){
+		 alert('휴대폰 가운데 4자리를 입력하세요.');
+		 $("[name='cellTxnoNo']").focus();
+		 return;
+	 }
+	 if(! $("[name='cellEndNo']").val()){
+		 alert('휴대폰 마지막 4자리를 입력하세요.');
+		 $("[name='cellEndNo']").focus();
+		 return;
+	 }
+	 if(! $("[name='inqCont']").val()){
+		 alert('내용을 입력하세요.');
+		 $("[name='inqCont']").focus();
+		 return;
+	 }
+	 if($("[name='questionSelect']").val()==null || $("[name='questionSelect']").val()==""){
+		 alert('문의유형을 선택하세요.');
+		 return;
+	 }
+	 
+}
+
+</script>
 <div class="body-container">
 <table class="board-write-1s mgT40">
-			<caption>1:1 문의 등록</caption>
-			<colgroup>
-				<col style="width:25%;">
-				<col style="width:75%;">
-			</colgroup>
-			<tbody>
-				<form id="cnslRegForm" action="" method="POST" enctype="multipart/form-data"></form>
+	<caption>1:1 문의 등록</caption>
+	<colgroup>
+		<col style="width:25%;">
+		<col style="width:75%;">
+	</colgroup>
+	<tbody>
+		<form id="cnslRegForm" action="" method="POST" enctype="multipart/form-data">
 				<tr class="agree_box">
 					<th scope="col">개인정보수집동의</th>
 						<td>
@@ -313,16 +267,16 @@ $(document).ready(function(){
 						<td>
 							<ul>
 								<li>
-									<label for="NoticeID">Name</label>
-									<input type="text" title="이름 입력하세요" class="name" name="name" placeholder="이름을 입력하세요" style="width:152px">
+									<label for="NoticeID">ID</label>
+									<input type="text" title="아이디를 입력하세요" class="name" name="checkid" id="checkid" placeholder="아이디를 입력하세요" style="width:152px">
 								</li>
 								<li>
 									<label for="NoticeEmail">E-mail</label>
-									<input type="text" title="아이디를 입력하세요" class="email" name="emailAddr1" placeholder="아이디를 입력하세요" style="width:152px;ime-mode:disabled;" > <!-- disabled="disabled" -->
+									<input type="text" title="이메일을 입력하세요" class="email" name="emailAddr1" id="emailAddr1" placeholder="이메일을 입력하세요" style="width:152px;ime-mode:disabled;" >
 									<span class="des">@</span>
 									<input type="hidden" name="emailAddr" value="">
-									<select class="emailSelect" style="width: 152px;">
-										<option value=""></option>
+									<select title="도메인 주소를 선택하세요." id="emailSelect" name="emailSelect" id="emailSelect" class="email" style="width:122px;" id="emailAddrSelect" selected="selected">
+										<option value="-1" selected="selected">직접입력</option>
 										<option value="hanmail.net">hanmail.net</option>
 										<option value="naver.com">naver.com</option>
 										<option value="nate.com">nate.com</option>
@@ -337,8 +291,8 @@ $(document).ready(function(){
 										<option value="hanafos.com">hanafos.com</option>
 										<option value="daum.net">daum.net</option>
 										<option value="chol.com">chol.com</option>
-										<option value="feechal.com">feechal.com</option>									
-									</select>
+										<option value="feechal.com">feechal.com</option>
+								</select>
 								</li>
 								<li>
 									<label for="NoticeSms">SMS</label>
@@ -369,8 +323,40 @@ $(document).ready(function(){
 					<tr>
 						<th scope="col"><label for="TypeInquiry">문의유형</label></th>
 						<td>
-							<select class="questionSelect">
-								<option value=""></option>
+							<select class="questionSelect" name="questionSelect">
+								<option></option>
+								<optgroup label="회원/멤버십">
+								    <option value="101">회원 가입/탈퇴</option>
+								    <option value="102">로그인</option>
+								    <option value="103">회원정보 변경</option>
+								    <option value="104">CareDog 멤버십</option>
+								  </optgroup>
+								  <optgroup label="펫#">
+								    <option value="201">주문/취소</option>
+								    <option value="202">상품</option>
+								    <option value="203">신용카드</option>
+								    <option value="204">무통장입금</option>
+								    <option value="205">쿠폰</option>
+								    <option value="206">배송기간/배송비</option>
+								    <option value="207">상품수령</option>
+								    <option value="208">반품</option>
+								    <option value="209">환불</option>
+								  </optgroup>
+								  <optgroup label="서비스">
+								  </optgroup>
+								  <optgroup label="멍스타그램">
+								  </optgroup>
+								  <optgroup label="유기견">
+								  </optgroup>
+								  <optgroup label="펫119">
+								  </optgroup>
+								  <optgroup label="정보">
+								  </optgroup>
+								  <optgroup label="이벤트">
+								  	<option value="801">이벤트 참여방법</option>
+								  	<option value="802">이벤트 당첨확인</option>
+								  	<option value="803">이벤트 사은품 관련</option>
+								  </optgroup>
 							</select>
 						</td>
 					</tr>
@@ -384,14 +370,12 @@ $(document).ready(function(){
 						<td>
 							<ul>
 								<li style="margin-left:336px; padding-top: 30px;">
-								<a href="javascript:;" id="cnslSubmit" class="btnGreen">등록</a>
-								<a href="javascript:;" id="cnslCancel" class="btnGray">취소</a>
+								<button type="button" class="btnGreen" onclick="hahaSubmit();">등록</button>
 								</li>
 							</ul>
 						</td>
 					</tr>
-				
-			</tbody>
-		</table>
-	
+				</form>
+			</tbody>		
+</table>
 </div>
