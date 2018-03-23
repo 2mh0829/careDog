@@ -11,6 +11,8 @@ import care.dog.common.MyUtil;
 @Controller("onefone.onefoneController")
 public class OneFOneController {
 	@Autowired MyUtil myUtil;
+	@Autowired
+	OneFOneService service;
 	
 	@RequestMapping(value="/center/onefonelist")
 	public String OneforOneMain() {

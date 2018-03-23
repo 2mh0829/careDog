@@ -2,6 +2,7 @@ package care.dog.store;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -123,13 +124,20 @@ public class StoreController {
 		return ".store.list";
 	}
 
-	@RequestMapping(value = "/store/article")
+	@RequestMapping(value = "/store/article")//!@#
 	public String articleProduct(@RequestParam(value = "page", defaultValue = "1") int current_page,
 			@RequestParam(value = "searchKey", defaultValue = "productName") String searchKey,
 			@RequestParam(value = "searchValue", defaultValue = "") String searchValue,
 			@RequestParam(value = "paging", defaultValue = "1") int page,
-			@RequestParam(value = "productId") int productId, Model model) throws Exception {
+			@RequestParam(value = "productId", defaultValue ="0") int productId,
+			Model model,
+			HttpSession session) throws Exception {
 
+//		List<String> list = (List<String>) session.getAttribute("data");
+//		if(list!=null) {
+//			productId=Integer.valueOf(list.get(0));
+//		}
+		
 		List<String> list_option = null;
 		//List<Qna> listProductQna = null;
 
@@ -140,9 +148,10 @@ public class StoreController {
 		}
 
 		searchValue = URLDecoder.decode(searchValue, "utf-8");
-
+		
 		// 읽을 상품의 정보 가져오기
 		Product dto = service.readProduct(productId);
+		
 		if (dto == null)
 			return "redirect:/store/list?" + query;
 
@@ -152,10 +161,20 @@ public class StoreController {
 		// qna 리스트
 		//listProductQna = service.listProductQna();
 
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
+		String memberId = null;
+		if(info != null)
+			memberId = info.getMemberId();
+		
 		model.addAttribute("dto", dto);
 		model.addAttribute("list_option", list_option);
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);
+		model.addAttribute("memberId", memberId);
+//		if(list!=null)
+//		model.addAttribute("optionId", list.get(1));
+		session.removeAttribute("data");
 
 		return ".store.article";
 	}
@@ -265,21 +284,41 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/store/order")
-	public String productOrder() {
+	public String productOrder(
+			@RequestParam int cartId
+			) {
+		
+		System.out.println(cartId);
+		
 		return ".store.order";
 	}
-	
+	@RequestMapping(value="/store/storeLogin", method=RequestMethod.GET)
+	public String storeLoginForm(
+			@RequestParam String productId,
+			//@RequestParam String amount,
+			@RequestParam String optionId,
+			HttpSession session) {
+		List<String> list = new ArrayList<>();
+		list.add(productId);
+		list.add(optionId);
+		//list.add(amount);
+		//list.add(optionId);
+		session.setAttribute("redirectUrl","/store/article");
+		session.setAttribute("data",list);
+		return "redirect:/member/login";
+	}
 	@RequestMapping(value = "/store/stack")
 	@ResponseBody
 	public Map<String, Object> stackCart(
-			@RequestParam int productId,
-			@RequestParam int amount,
-			@RequestParam int optionId,
+			@RequestParam (value = "productId", defaultValue = "1")int productId,
+			@RequestParam (value = "amount", defaultValue = "1")int amount,
+			@RequestParam (value = "optionId", defaultValue = "1")int optionId,
 			HttpSession session) {
 
 		Map<String, Object> model = new HashMap<String, Object>();
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
 		String memberId = info.getMemberId();
 		
 		Map<String, Object> map = new HashMap<String, Object>();

@@ -1,6 +1,6 @@
 package care.dog.center.onefone;
 
-public class OneFOne {
+public class OneFOneVo {
 	private int num;
 	private String memberId, email, tel;
 	private int sort;
