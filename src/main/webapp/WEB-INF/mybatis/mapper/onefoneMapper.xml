@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="onefone">
+
+<!-- <select id="seq" resultType="Integer">
+select onefone_seq.NEXTVAL from dual
+</select>
+
+<insert id="insertonefone" parameterType="care.dog.onefone.OneFOneVo">
+insert into onefone(num, memberId, email, tel, sort, content, qdate) values (onefone_seq.NEXTVAL, #{memberId}, #{email}, #{tel}, #{sort}, #{content},#{qdate})
+</insert> -->
+
+
+</mapper>

@@ -136,8 +136,51 @@ $(document).ready(function(){
             finalPrice(); //총결제금액 결정
         }
     })
+    
+    changeSel();
 	
 });
+
+//수량 셀렉트박스 변경시
+function changeSel() {
+	$("body").on("click", ".select", function() {
+		
+		var amount = $(this).val(); //변경된 수량
+		var sellingPrice = $(this).attr("data-price"); //변경된 상품의 sellingPrice
+		
+		var totalPrice = (Number(amount) * Number(sellingPrice));
+
+		//totalPrice 변경
+		$(this).parent().parent().parent().siblings().find(".totalPrice").text(totalPrice);
+	
+		checkBoxChange();
+		shipment();
+		finalPrice();
+		
+		var memberId = $(".memberId").val();
+		var cartId = $(this).parent().parent().parent().siblings().find(".cartId").val();
+		var productId = $(this).parent().parent().parent().siblings().find(".productId").val();
+		var optionId = $(this).parent().parent().parent().siblings().find(".optionId").val();
+		var url = "<%=cp%>/store/updateCart";
+		var data = {amount:amount, cartId:cartId, memberId:memberId, productId:productId, optionId:optionId};
+		
+		//update
+		$.ajax({
+			url: url
+			,data: data
+			,type: "post"
+			,dataType: "json"
+			,success: function(data) {
+				var state = data.state;
+				console.log(state);
+			}
+			,error: function(e) {
+				console.log(e.responseText);
+			}
+		});
+		
+	});
+}
 
 //장바구니 상품 총가격 계산
 function checkBoxChange() {
@@ -166,9 +209,8 @@ function checkBoxChange() {
 function deleteCart(cartId) {
 	
 	if(confirm("해당 상품을 장바구니에서 삭제하시겠습니까?")){
-		$("#cartTr"+cartId).remove();
 		
-		var memberId = $("#memberId").val();
+		var memberId = $(".memberId").val();
 		var url = "<%=cp%>/store/deleteCart";
 		var data = {cartId:cartId, memberId:memberId};
 		
@@ -180,6 +222,7 @@ function deleteCart(cartId) {
 			,success: function(data) {
 				var state = data.state;
 				checkBoxChange();
+				changeSel();
 				shipment(); //배송비 결정
 				finalPrice(); //총결제금액 결정
 			}
@@ -188,6 +231,7 @@ function deleteCart(cartId) {
 			}
 		});
 		
+		$("#cartTr"+cartId).remove();
 	}
 	
 }
@@ -196,7 +240,7 @@ function deleteCart(cartId) {
 function shipment() {
 	var allPrice = $("#allPrice").text();
 	//3만원이상 구매시 배송비 무료
-	if(Number(allPrice) >= 30000){
+	if(Number(allPrice) >= 30000 || Number(allPrice) == 0){
 		$("#shipPrice").text("0");
 	}else{
 		$("#shipPrice").text("2500");
@@ -210,6 +254,23 @@ function finalPrice() {
 	var finalPrice = Number(allPrice) + Number(shipPrice);
 	$("#finalPrice").text(finalPrice);
 }
+
+//주문페이지로 이동
+function order() {
+	
+	if(confirm("선택할 상품을 주문하시겠습니까?")){
+		
+		var memberId = $(".memberId").val();
+		
+		var data="memberId=" + memberId;
+		location.href = '<%=cp%>/store/order?' + data;
+		
+	}else{
+		return;
+	}
+}
+
+
 
 </script>
 
@@ -259,16 +320,19 @@ function finalPrice() {
 								<p class="pNameTxt1">${dto.brand }</p>
 								<p class="pNameTxt2">${dto.productName }</p>
 								<p class="pNameTxt3">${dto.optionContent }</p>
-								<input type="hidden" value="${dto.amountAll }" id="amountAll">
-								<input type="hidden" value="${dataCount }" id="dataCount">
-								<input type="hidden" value="${dto.cartId }" id="cartId">
-								<input type="hidden" value="${dto.memberId }" id="memberId">
+								<input type="hidden" value="${dto.amountAll }" class="amountAll">
+								<input type="hidden" value="${dataCount }" class="dataCount">
+								<input type="hidden" value="${dto.cartId }" class="cartId">
+								<input type="hidden" value="${dto.memberId }" class="memberId">
+								<input type="hidden" value="${dto.sellingPrice }" class="sellingPrice">
+								<input type="hidden" value="${dto.optionId }" class="optionId">
+								<input type="hidden" value="${dto.productId }" class="productId">
 							</div>
 						</td>
 						<td>
 							<div class="divTd" style="width: 100px;">
 								<p>
-									<select id="amountSel${dto.cartId }" name="sel" class="select"
+									<select id="amountSel" name="sel" class="select" data-price="${dto.sellingPrice }"
 									style="width: 90px;">
 										<option value="1" ${dto.amountAll == 1 ? "selected":"" }>1</option>
 										<option value="2" ${dto.amountAll == 2 ? "selected":"" }>2</option>
@@ -286,7 +350,7 @@ function finalPrice() {
 						</td>
 						<td>
 							<div class="divTd" id="totalPrice${dto.cartId }" style="width: 100px;">
-								<p>${dto.totalPrice }</p>
+								<p class="totalPrice">${dto.totalPrice }</p>
 							</div>
 						</td>
 						<td>
@@ -340,7 +404,7 @@ function finalPrice() {
 					<tr>
 						<td>
 							<button type="button" class="btn btn-default cartBtn"
-							onclick="location.href='<%=cp%>/store/order'">
+							onclick="order();">
 								주문하기
 							</button>
 						</td>

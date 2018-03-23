@@ -12,7 +12,8 @@ public class Cart {
 	private String brand;
 	private String productName;
 	private String optionContent;
-	private int totalPrice;
+	private int totalPrice;//상품가격  * 수량
+	private int sellingPrice;//상품가격
 	
 	public int getListNum() {
 		return listNum;
@@ -89,12 +90,19 @@ public class Cart {
 		this.totalPrice = totalPrice;
 	}
 	
+	public int getSellingPrice() {
+		return sellingPrice;
+	}
+	public void setSellingPrice(int sellingPrice) {
+		this.sellingPrice = sellingPrice;
+	}
+	
 	@Override
 	public String toString() {
 		return "Cart [listNum=" + listNum + ", num=" + num + ", cartId=" + cartId + ", enrollDate=" + enrollDate
 				+ ", amountAll=" + amountAll + ", productId=" + productId + ", memberId=" + memberId + ", optionId="
 				+ optionId + ", brand=" + brand + ", productName=" + productName + ", optionContent=" + optionContent
-				+ ", totalPrice=" + totalPrice + "]";
+				+ ", totalPrice=" + totalPrice + ", sellingPrice=" + sellingPrice + "]";
 	}
 	
 }
