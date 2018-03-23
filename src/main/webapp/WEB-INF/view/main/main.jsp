@@ -51,10 +51,30 @@ video {
 
 .bgDiv {
 	width: 100%;
-	height: 2500px;
+	height: 3000px;
 	background: white;
 	-webkit-transition: 1s;
 	transition: 1s;
+}
+
+.go-top {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	z-index: 500;
+}
+
+.go-top .btn {
+	width: 50px;
+	height: 50px;
+	background: black;
+	color: white;
+	border: none;
+	outline: none;
+}
+
+.go-top .btn:active, .go-top .btn:focus {
+	outline: none;
 }
 
 
@@ -313,9 +333,9 @@ video {
 	font-weight: bold;
 }
 
-.span-title sub {
-	margin-left: 10px;
-	bottom: -.47em;
+#a-second .span-title sub {
+	margin-left: -3px;
+	bottom: -.4em;
 }
 
 .box_title {
@@ -416,12 +436,102 @@ li {
 #admin-mungstar-3 {
 	position: relative;
 	z-index: 2;
-	background: #fff;
-	top: 864px;
+	top: 900px;
 }
 
-#admin-mungstar-3 img {
+.now_list {
+	position: absolute;
+	top: 400px;
+	width: 960px;
+	left: 50%;
+	margin-left: -480px;
+	z-index: 10;
+}
+
+.list_thumb {
+	position: relative;
+	zoom: 1;
+	margin-left: -16px;
+}
+
+.list_thumb li {
+	width: 25%;
+	vertical-align: top;
+	float: left;
+	position: relative;
+	-webkit-transition: margin-top 2s;
+	transition: margin-top 2s;
+}
+
+.list_poster .box_thumb {
+	padding-top: 0 !important;
+	border: 0;
+}
+
+.img_thumb {
+	height: 100%;
+	position: relative;
+}
+
+.box_title.txt_thumb_type {
+	position: absolute;
+	top: 20px;
+	left: 16px;
+	right: 16px;
+	z-index: 2;
+	color: white;
+}
+
+.box_title .tit {
+	display: block;
+	padding-bottom: 10px;
+}
+
+.txt_thumb .txt_explain {
+	display: table;
 	width: 100%;
+	position: relative;
+	top: -100px;
+}
+
+.txt_explain .info {
+	display: block;
+	display: -webkit-box;
+	position: relative;
+	margin-left: 10px;
+	overflow: hidden;
+	width: 90%;
+	height: 56px;
+	font-size: 20px;
+	line-height: 28px;
+	text-overflow: ellipsis;
+	word-wrap: break-word;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
+.txt_tag {
+	overflow: hidden;
+	height: 28px;
+	margin-top: 15px;
+	position: relative;
+	top: -115px;
+	left: 10px;
+}
+
+/* ------------------------------------------------- */
+#admin-mungstar-4 {
+	position: relative;
+	z-index: 5;
+	top: 1500px;
+	width: 100%;
+	overflow: hidden;
+}
+
+#admin-mungstar-4 .plain {
+	margin-left: 1000px;
+	-webkit-transition: margin-left 10s linear;
+	transition: margin-left 10s linear;
 }
 </style>
 
@@ -442,29 +552,78 @@ $(function() {
 	
 	$(window).scroll(function() {
 		if($(window).scrollTop() >= 100) {
-			if($(window).scrollTop() >= 3800){
+			if($(window).scrollTop() >= 4200){
+				$(".plain").css("transition", "margin-left .1s");
+				$(".plain").one("hover", function() {
+					$(".plain").css("margin-left", "1000px");
+				});
+				$(".plain").trigger("hover");
+			}else if($(window).scrollTop() >= 3900){
+				$(".plain").css("transition", "margin-left 10s linear");
+				$(".plain").css("-webkit-transition", "margin-left 10s linear");
+				$(".plain").one("hover", function() {
+					$(".plain").css("margin-left", "-1000px");
+				});
+				$(".plain").trigger("hover");
+				
 				$(".bgDiv").one("hover", function() {
 					$(".bgDiv").css("background", "white");
 				});
-				 
 				$(".bgDiv").trigger("hover");
 			}else if($(window).scrollTop() >= 3400){
 				$(".bgDiv").one("hover", function() {
 					$(".bgDiv").css("background", "#5f84bd");
 				});
-				 
 				$(".bgDiv").trigger("hover");
-			}else if($(window).scrollTop() >= 3000){
+			}else if($(window).scrollTop() >= 3100){
+				$(".plain").css("transition", "margin-left 10s linear");
+				$(".plain").css("-webkit-transition", "margin-left 10s linear");
+				$(".plain").one("hover", function() {
+					$(".plain").css("margin-left", "-1000px");
+				});
+				$(".plain").trigger("hover");	
+			}else if($(window).scrollTop() >= 2900){
 				$(".bgDiv").one("hover", function() {
 					$(".bgDiv").css("background", "#39b0a2");
 				});
-		
 				$(".bgDiv").trigger("hover");
-			}else{
+			}else if($(window).scrollTop() >= 2500){
+				$(".plain").css("transition", "margin-left .1s");
+				$(".plain").one("hover", function() {
+					$(".plain").css("margin-left", "1000px");
+				});
+				$(".plain").trigger("hover");
+				
+				$(".list_thumb li:eq(0)").css("transition", "margin-top .8s ease-in-out 0.1s");
+				$(".list_thumb li:eq(1)").css("transition", "margin-top .8s ease-out 0.6s");
+				$(".list_thumb li:eq(2)").css("transition", "margin-top .8s ease-in-out 0.2s");
+				$(".list_thumb li:eq(3)").css("transition", "margin-top .8s ease-out 0.4s");
+				
+				$(".list_thumb li").one("hover", function() {
+					$(".list_thumb li:eq(0)").css("margin-top", "0");
+					$(".list_thumb li:eq(1)").css("margin-top", "60px");
+					$(".list_thumb li:eq(2)").css("margin-top", "0");
+					$(".list_thumb li:eq(3)").css("margin-top", "60px");
+				});
+				$(".list_thumb li").trigger("hover");
+				
 				$(".bgDiv").one("hover", function() {
 					$(".bgDiv").css("background", "white");
 				});
-				 
+				$(".bgDiv").trigger("hover");
+			}else{
+				
+				$(".list_thumb li").one("hover", function() {
+					$(".list_thumb li:eq(0)").css("margin-top", "500px");
+					$(".list_thumb li:eq(1)").css("margin-top", "500px");
+					$(".list_thumb li:eq(2)").css("margin-top", "500px");
+					$(".list_thumb li:eq(3)").css("margin-top", "500px");
+				});
+				$(".list_thumb li").trigger("hover");
+				
+				$(".bgDiv").one("hover", function() {
+					$(".bgDiv").css("background", "white");
+				});
 				$(".bgDiv").trigger("hover");
 			}
 			
@@ -583,7 +742,7 @@ $(function() {
 			<div class="box_cover">
 				<div class="box_img" style="background: url(http://images.cj.net/upfiles/main_theme/0000005736960006425453887.jpg) fixed 50% 0; background-size: cover;"></div>
 			</div>
-			<div class="box_cover over" style="height: 949px;">
+			<div id="t1" class="box_cover over" style="height: 949px;">
 				<div class="box_img2"
 					style="background: url(http://images.cj.net/upfiles/main_theme/0000005736960006425899013.jpg) fixed 50% 0; background-size: cover;">
 					<div class="dim skrollable skrollable-before"
@@ -595,7 +754,7 @@ $(function() {
 		
 		<div id="a-second">
 			<div class="btn_more2">
-				<span class="span-title">펫<sub>#</sub></span>
+				<span class="span-title">멍<sub>★</sub></span>
 			</div>
 			<span id="square-2" class="square"></span>
 		</div>
@@ -669,9 +828,236 @@ $(function() {
 	</div>
 	
 	<div id="admin-mungstar-3">
-		<img src="<%=cp %>/resource/img/mungstar/mungstar.png">
+		<div align="center">
+			<img src="<%=cp %>/resource/img/store/dog_bener.jpg" width="1200">
+		</div>
+
+		<div class="mod_thumb mod_poster poster_type col_4 now_list">
+			<ul class="list_thumb list_poster">
+				<!-- list_poster -->
+
+				<li class="list_type skrollable skrollable-after"
+					data-1000-top="margin-top:300px" data-650-top="margin-top:0px"
+					style="margin-top: 500px;">
+					<div class="box_thumb box_thumb_style">
+						<!-- [d] : now 스타일 -->
+						<div class="img_thumb box_poster">
+							<!-- box_poster -->
+							<a href="./cj_now/view.asp?bs_seq=13866&amp;schBsTp=3">
+								<div class="img_box">
+
+									<img
+										src="http://images.cj.net/upfiles/bbs/0000005742144004935937696.jpg"
+										alt="">
+
+									<div class="dim"></div>
+								</div>
+							</a>
+						</div>
+						<div class="box_title txt_thumb_type">
+							<!--div class="date"></div-->
+							<!-- 2017.12.05 -->
+							<strong class="tit">사회공헌활동</strong>
+						</div>
+						<div class="txt_thumb txt_thumb_type">
+							<div>
+								<div class="txt_explain">
+									<p class="info">
+										<a href="./cj_now/view.asp?bs_seq=13866&amp;schBsTp=3">CJ대한통운,
+											택배기사 자녀 위해 학자금 35억원 지원</a>
+									</p>
+								</div>
+
+								<p class="txt_tag">
+									<span><a href="/search/hash_search.asp?schTxt=CJ대한통운">#CJ대한통운</a></span>
+								</p>
+
+							</div>
+						</div>
+					</div>
+				</li>
+
+				<li class="list_type skrollable skrollable-between"
+					data-1000-top="margin-top:500px" data-500-top="margin-top:0px"
+					style="margin-top: 500px;">
+					<div class="box_thumb box_thumb_style">
+						<!-- [d] : now 스타일 -->
+						<div class="img_thumb box_poster">
+							<!-- box_poster -->
+							<a href="./cj_now/view.asp?bs_seq=13845&amp;schBsTp=1">
+								<div class="img_box">
+
+									<img
+										src="http://images.cj.net/upfiles/bbs/0000005711904005159333619.jpg"
+										alt="">
+
+									<div class="dim"></div>
+								</div>
+							</a>
+						</div>
+						<div class="box_title txt_thumb_type">
+							<!--div class="date"></div-->
+							<!-- 2017.12.05 -->
+							<strong class="tit">뉴스</strong>
+						</div>
+						<div class="txt_thumb txt_thumb_type">
+							<div>
+								<div class="txt_explain">
+									<p class="info">
+										<a href="./cj_now/view.asp?bs_seq=13845&amp;schBsTp=1">CJ
+											CGV, 터키서 월 4백만 관객 돌파... 진출 ...</a>
+									</p>
+								</div>
+
+								<p class="txt_tag">
+									<span><a href="/search/hash_search.asp?schTxt=CJCGV">#CJCGV</a></span>
+								</p>
+
+							</div>
+						</div>
+					</div>
+				</li>
+
+				<li class="list_type skrollable skrollable-after"
+					data-1000-top="margin-top:500px" data-700-top="margin-top:0px"
+					style="margin-top: 500px;">
+					<div class="box_thumb box_thumb_style">
+						<!-- [d] : now 스타일 -->
+						<div class="img_thumb box_poster">
+							<!-- box_poster -->
+							<a href="./cj_now/view.asp?bs_seq=13867&amp;schBsTp=2">
+								<div class="img_box">
+
+									<img
+										src="http://images.cj.net/upfiles/bbs/0000005744736005730859949.jpg"
+										alt="">
+
+									<div class="dim"></div>
+								</div>
+							</a>
+						</div>
+						<div class="box_title txt_thumb_type">
+							<!--div class="date"></div-->
+							<!-- 2017.12.05 -->
+							<strong class="tit">포커스</strong>
+						</div>
+						<div class="txt_thumb txt_thumb_type">
+							<div>
+								<div class="txt_explain">
+									<p class="info">
+										<a href="./cj_now/view.asp?bs_seq=13867&amp;schBsTp=2">코덕과
+											셀럽, 인플루언서, 뷰티 브랜드가 한 자리에? ...</a>
+									</p>
+								</div>
+
+								<p class="txt_tag">
+									<span><a href="/search/hash_search.asp?schTxt=CJ그룹">#CJ그룹</a></span><span><a
+										href="/search/hash_search.asp?schTxt=겟잇뷰티">#겟잇뷰티</a></span>
+								</p>
+
+							</div>
+						</div>
+					</div>
+				</li>
+
+				<li class="list_type skrollable skrollable-between"
+					data-1000-top="margin-top:500px" data-600-top="margin-top:0px"
+					style="margin-top: 500px;">
+					<div class="box_thumb box_thumb_style">
+						<!-- [d] : now 스타일 -->
+						<div class="img_thumb box_poster">
+							<!-- box_poster -->
+							<a href="./cj_now/view.asp?bs_seq=13872&amp;schBsTp=3">
+								<div class="img_box">
+
+									<img
+										src="http://images.cj.net/upfiles/bbs/0000005748192004155956832.jpg"
+										alt="">
+
+									<div class="dim"></div>
+								</div>
+							</a>
+						</div>
+						<div class="box_title txt_thumb_type">
+							<!--div class="date"></div-->
+							<!-- 2017.12.05 -->
+							<strong class="tit">사회공헌활동</strong>
+						</div>
+						<div class="txt_thumb txt_thumb_type">
+							<div>
+								<div class="txt_explain">
+									<p class="info">
+										<a href="./cj_now/view.asp?bs_seq=13872&amp;schBsTp=3">CJ나눔재단,
+											‘CJ도너스캠프 창의학교' 문 열어</a>
+									</p>
+								</div>
+
+								<p class="txt_tag">
+									<span><a href="/search/hash_search.asp?schTxt=CJ그룹">#CJ그룹</a></span><span><a
+										href="/search/hash_search.asp?schTxt=CJ나눔재단">#CJ나눔재단</a></span>
+								</p>
+
+							</div>
+						</div>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+
+	</div>
+	
+	<div id="admin-mungstar-4">
+		<div><img class="plain" src="<%=cp %>/resource/img/store/plain.png"></div>
 	</div>
 	
 	<div class="bgDiv"></div>
 	
+	<div class="go-top"><button id="MOVE_TOP_BTN" class="btn">next</button></div>
+	
 </div>
+
+<script>
+
+var t1 = $("#t1").offset();
+
+$(function() {
+    $("#MOVE_TOP_BTN").click(function() {
+    	var st = 0;
+    	if($(window).scrollTop() < 1800){
+    		st = 1800;
+    	}else if($(window).scrollTop() >= 1800 && $(window).scrollTop() < t1.top){
+    		st = t1.top;
+    	}else if($(window).scrollTop() >= 2800 && $(window).scrollTop() < 3600){
+    		st = 3600;
+    	}else if($(window).scrollTop() >= 3600 && $(window).scrollTop() < 4200){
+    		st = 4200;
+    	}else{
+    		st = 0;
+    	}
+        $('html, body').animate({
+            scrollTop : st
+        }, 1000);
+        return false;
+    });
+    
+    
+    $(window).scroll(function() {
+    	if($(window).scrollTop() < 1800){
+    		$("#MOVE_TOP_BTN").text("next");
+    	}else if($(window).scrollTop() >= 1800 && $(window).scrollTop() < t1.top){
+    		$("#MOVE_TOP_BTN").text("next");
+    	}else if($(window).scrollTop() >= 2800 && $(window).scrollTop() < 3600){
+    		$("#MOVE_TOP_BTN").text("next");
+    	}else if($(window).scrollTop() >= 3600 && $(window).scrollTop() < 4200){
+    		$("#MOVE_TOP_BTN").text("next");
+    	}else{
+    		$("#MOVE_TOP_BTN").text("top");
+    	}
+    });
+    
+});
+
+</script>
+
+
