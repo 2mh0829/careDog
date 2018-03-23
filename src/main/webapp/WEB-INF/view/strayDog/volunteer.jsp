@@ -209,84 +209,84 @@ function memcheck(m) {
 
 function join(){
 	 
-	if (document.board.a1.value=="") {
+	if (document.board.name.value=="") {
 		alert("신청인 성명을 입력해주세요.");
-		document.board.a1.focus();
+		document.board.name.focus();
 		return;
 	}
-	if (document.board.a2[0].checked==false && document.board.a2[1].checked==false) {
+	if (document.board.gender[0].checked==false && document.board.gender[1].checked==false) {
 		alert("성별을 선택해주세요.");
-		document.board.a2.focus();
+		document.board.gender.focus();
 		return;
 	}
-	if (document.board.a3.value=="") {
+	if (document.board.age.value=="") {
 		alert("연령을 입력해주세요.");
-		document.board.a3.focus();
+		document.board.age.focus();
 		return;
 	}
-	if(isNaN(document.board.a3.value)){
-	    document.board.a3.value="";
+	if(isNaN(document.board.age.value)){
+	    document.board.age.value="";
 	    alert("연령은 숫자로만 입력하세요");
-		document.board.a3.focus();
+		document.board.age.focus();
 	  return;
 	}
 
-	if (document.board.a4_1.value=="") {
+	if (document.board.tel_1.value=="") {
 		alert("전화번호를 입력해주세요.");
-		document.board.a4_1.focus();
+		document.board.tel_1.focus();
 		return;
 	}
-	if (document.board.a4_2.value=="") {
+	if (document.board.tel_2.value=="") {
 		alert("전화번호를 입력해주세요.");
-		document.board.a4_2.focus();
+		document.board.tel_2.focus();
 		return;
 	}	
-	if (document.board.a4_3.value=="") {
+	if (document.board.tel_3.value=="") {
 		alert("전화번호를 입력해주세요.");
-		document.board.a4_3.focus();
+		document.board.tel_3.focus();
 		return;
 	}		
-	if (document.board.a5.value=="") {
+	if (document.board.email.value=="") {
 		alert("이메일을 입력해주세요.");
-		document.board.a5.focus();
+		document.board.email.focus();
 		return;
 	} else {
-		var mailArray = document.board.a5.value.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/);
+		var mailArray = document.board.email.value.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/);
 							
 		if (mailArray == null) {
 			alert("이메일 주소가 잘못 되었습니다. 다시 입력하세요.");
-			document.board.a5.focus();
+			document.board.email.focus();
 			return;
 		}
 	}
-	if (document.board.a6.value=="") {
+	if (document.board.area.value=="") {
 		alert("사시는 지역을 입력해주세요.");
-		document.board.a6.focus();
+		document.board.area.focus();
 		return;
 	}
-	if (document.board.a7.value=="") {
+	if (document.board.peopleCnt.value=="") {
 		alert("봉사 신청 인원 수를 입력해주세요.");
-		document.board.a7.focus();
+		document.board.peopleCnt.focus();
 		return;
 	}
-	if (document.board.a8[0].checked==false && document.board.a8[1].checked==false && document.board.a8[2].checked==false && document.board.a8[3].checked==false) {
+	if (document.board.vKind[0].checked==false && document.board.vKind[1].checked==false && document.board.vKind[2].checked==false && document.board.vKind[3].checked==false) {
 		alert("자원봉사 신청 종류를 선택해주세요.");
-		document.board.a8[0].focus();
+		document.board.vKind[0].focus();
 		return;
 	}
-	if (document.board.a9[0].checked==false && document.board.a9[1].checked==false) {
+	if (document.board.experience[0].checked==false && document.board.experience[1].checked==false) {
 		alert("자원봉사 경험 유무를 선택해주세요.");
-		document.board.a9[0].focus();
+		document.board.experience[0].focus();
 		return;
 	}
-	if (document.board.a10[0].checked==false && document.board.a10[1].checked==false) {
+	if (document.board.necessity[0].checked==false && document.board.necessity[1].checked==false) {
 		alert("봉사확인증 필요 유무를 선택해주세요.");
-		document.board.a10[0].focus();
+		document.board.necessity[0].focus();
 		return;
 	}
-	if (document.board.a11[0].checked==false && document.board.a11[1].checked==false && document.board.a11[2].checked==false && document.board.a11[3].checked==false) {
+	if (document.board.vOption[0].checked==false && document.board.vOption[1].checked==false && document.board.vOption[2].checked==false && document.board.vOption[3].checked==false) {
 		alert("희망하는 자원봉사를 선택해주세요.");
-		document.board.a11[0].focus();
+		document.board.vOption[0].focus();
 		return;
 	}
 	if (document.board.fdate1.value=="") {
@@ -294,33 +294,26 @@ function join(){
 		document.board.fdate1.focus();
 		return;
 	}
-	if (document.board.a14.value=="") {
+	if (document.board.time.value=="") {
 		alert("봉사 가능 시간을 선택하세요.");
-		document.board.a14.focus();
+		document.board.time.focus();
 		return;
 	}	
-	if (document.board.a12.value=="") {
+	if (document.board.selfIntroduce.value=="") {
 		alert("간단하게 자기소개를 입력해주세요.");
-		document.board.a12.focus();
+		document.board.selfIntroduce.focus();
 		return;
 	}
-	submit();
+	submitOk();
 }
 
-function submit(){
-	var url:"<%=cp%>/strayDog/apply";
-	var q = $("form[name=board]").serialize();
-	$.ajax({
-		type:'post',
-		url:url,
-		data:q,
-		dataType:'json',
-		success:function(){
-			
-		}
-	});
+function submitOk(){
+	var f = document.board;
+	f.action = "<%=cp%>/strayDog/apply";
+	f.submit();
+	return true;
 }
-//-->
+
 </script>
 
 <div class="body-container">
@@ -355,7 +348,7 @@ function submit(){
 
 		</dl>
 	</div>
-	<form name="board">
+	<form name="board" method="post">
 	<div class="table__area mt50">
 		<table class="table1">
 			<thead>
@@ -381,7 +374,7 @@ function submit(){
 					<th class="table1__th" >신청인 성명</th>
 					<td class="table1__td">
 						<div class="input__form">
-							<input type="text" class="input1 wd240" name="a1">
+							<input type="text" class="input1 wd240" name="name">
 						</div>
 					</td>
 				</tr>
@@ -389,8 +382,8 @@ function submit(){
 					<th class="table1__th">성별</th>
 					<td class="table1__td">
 						<div class="input__form">
-							<input type="radio" name="a2" id="gender01" class="radio01" value="남"><label for="gender01" class="label01">남</label>
-							<input type="radio" name="a2" id="gender02" class="radio01" value="여"><label for="gender02" class="label01">여</label>
+							<input type="radio" name="gender" id="gender01" class="radio01" value="남"><label for="gender01" class="label01">남</label>
+							<input type="radio" name="gender" id="gender02" class="radio01" value="여"><label for="gender02" class="label01">여</label>
 						</div>
 					</td>
 				</tr>
@@ -398,7 +391,7 @@ function submit(){
 					<th class="table1__th">연령</th>
 					<td class="table1__td">
 						<div class="input__form">
-							<input type="text" class="input1 wd60" name="a3">
+							<input type="text" class="input1 wd60" name="age">
 							<span class="input__txt">세</span>
 						</div>
 					</td>
@@ -407,11 +400,11 @@ function submit(){
 					<th class="table1__th">전화번호</th>
 					<td class="table1__td">
 						<div class="input__form">
-							<input type="text" class="input1 wd60" name="a4_1">
+							<input type="text" class="input1 wd60" name="tel_1">
 							<span class="dash">-</span>
-							<input type="text" class="input1 wd60" name="a4_2">
+							<input type="text" class="input1 wd60" name="tel_2">
 							<span class="dash">-</span>
-							<input type="text" class="input1 wd60" name="a4_3">
+							<input type="text" class="input1 wd60" name="tel_3">
 						</div>
 					</td>
 				</tr>
@@ -419,7 +412,7 @@ function submit(){
 					<th class="table1__th" >이메일</th>
 					<td class="table1__td">
 						<div class="input__form">
-							<input type="text" class="input1 wd240" name="a5" value="${sessionScope.member.memberId}">
+							<input type="text" class="input1 wd240" name="email" value="${sessionScope.member.memberId}">
 						</div>
 					</td>
 				</tr>
@@ -427,7 +420,7 @@ function submit(){
 					<th class="table1__th">사시는 지역</th>
 					<td class="table1__td">
 						<div class="input__form">
-							<input type="text" class="input1 wd240" name="a6">
+							<input type="text" class="input1 wd240" name="area">
 						</div>
 					</td>
 				</tr>
@@ -435,7 +428,7 @@ function submit(){
 					<th class="table1__th">봉사활동 인원 수</th>
 					<td class="table1__td">
 						<div class="input__form">
-							<input type="text" class="input1 wd60" name="a7">
+							<input type="text" class="input1 wd60" name="peopleCnt">
 							<span class="input__txt">명</span>
 						</div>
 					</td>
@@ -444,10 +437,10 @@ function submit(){
 					<th class="table1__th">자원봉사 신청 종류</th>
 					<td class="table1__td">
 						<div class="input__form">
-							<input type="radio" name="a8" id="service01" class="radio01" value="정기봉사(월1회, 주1회 등)"><label for="service01" class="label01">정기봉사(월1회, 주1회 등)</label>
-							<input type="radio" name="a8" id="service02" class="radio01" value="비정기봉사"><label for="service02" class="label01">비정기봉사</label>
-							<input type="radio" name="a8" id="service03" class="radio01" value="입양을 전제로한 봉사"><label for="service03" class="label01">입양을 전제로한 봉사</label>
-							<input type="radio" name="a8" id="service04" class="radio01" value="동물보호교육"><label for="service04" class="label01">동물보호교육</label>
+							<input type="radio" name="vKind" id="service01" class="radio01" value="정기봉사(월1회, 주1회 등)"><label for="service01" class="label01">정기봉사(월1회, 주1회 등)</label>
+							<input type="radio" name="vKind" id="service02" class="radio01" value="비정기봉사"><label for="service02" class="label01">비정기봉사</label>
+							<input type="radio" name="vKind" id="service03" class="radio01" value="입양을 전제로한 봉사"><label for="service03" class="label01">입양을 전제로한 봉사</label>
+							<input type="radio" name="vKind" id="service04" class="radio01" value="동물보호교육"><label for="service04" class="label01">동물보호교육</label>
 						</div>
 					</td>
 				</tr>
@@ -455,8 +448,8 @@ function submit(){
 					<th class="table1__th">자원봉사 경험</th>
 					<td class="table1__td">
 						<div class="input__form">
-							<input type="radio" name="a9" id="experience01" class="radio01" value="유"><label for="experience01" class="label01">유</label>
-							<input type="radio" name="a9" id="experience02" class="radio01" value="무"><label for="experience02" class="label01">무</label>
+							<input type="radio" name="experience" id="experience01" class="radio01" value="유"><label for="experience01" class="label01">유</label>
+							<input type="radio" name="experience" id="experience02" class="radio01" value="무"><label for="experience02" class="label01">무</label>
 						</div>
 					</td>
 				</tr>
@@ -464,8 +457,8 @@ function submit(){
 					<th class="table1__th">봉사확인증</th>
 					<td class="table1__td">
 						<div class="input__form">
-							<input type="radio" name="a10" id="necessity01" class="radio01" value="필요함"><label for="necessity01" class="label01">필요함</label>
-							<input type="radio" name="a10" id="necessity02" class="radio01" value="필요하지 않음"><label for="necessity02" class="label01">필요하지 않음</label>
+							<input type="radio" name="necessity" id="necessity01" class="radio01" value="필요함"><label for="necessity01" class="label01">필요함</label>
+							<input type="radio" name="necessity" id="necessity02" class="radio01" value="필요하지 않음"><label for="necessity02" class="label01">필요하지 않음</label>
 						</div>
 					</td>
 				</tr>
@@ -473,10 +466,10 @@ function submit(){
 					<th class="table1__th">자원봉사 선택</th>
 					<td class="table1__td">
 						<div class="input__form">
-							<input type="checkbox" name="a11" id="option_check_01" class="checkbox01" value="미용"><label for="option_check_01">미용</label>
-							<input type="checkbox" name="a11" id="option_check_02" class="checkbox01" value="목욕"><label for="option_check_02">목욕</label>
-							<input type="checkbox" name="a11" id="option_check_03" class="checkbox01" value="청소 및 산책"><label for="option_check_03">청소 및 산책</label>
-							<input type="checkbox" name="a11" id="option_check_04" class="checkbox01" value="차량봉사 등"><label for="option_check_04">차량봉사 등</label>
+							<input type="checkbox" name="vOption" id="option_check_01" class="checkbox01" value="미용"><label for="option_check_01">미용</label>
+							<input type="checkbox" name="vOption" id="option_check_02" class="checkbox01" value="목욕"><label for="option_check_02">목욕</label>
+							<input type="checkbox" name="vOption" id="option_check_03" class="checkbox01" value="청소 및 산책"><label for="option_check_03">청소 및 산책</label>
+							<input type="checkbox" name="vOption" id="option_check_04" class="checkbox01" value="차량봉사 등"><label for="option_check_04">차량봉사 등</label>
 						</div>
 					</td>
 				</tr>
@@ -494,7 +487,7 @@ function submit(){
 					<th class="table1__th">봉사 가능 시간</th>
 					<td class="table1__td">
 						<div class="input__form wd100">
-							<select class="wd100 select30" name="a14" style="display: none;">
+							<select class="wd100 select30" name="time" style="display: none;">
 								   <option value="3시간">3시간</option>
 									<option value="5시간">5시간</option>
 									<option value="하루종일">하루종일</option>
@@ -506,7 +499,7 @@ function submit(){
 					<th class="table1__th">간단한 자기소개</th>
 					<td class="table1__td">
 						<div class="input__form">
-							<textarea rows="3" cols="3" class="textarea1 wd100p" name="a12"></textarea>
+							<textarea rows="3" cols="3" class="textarea1 wd100p" name="selfIntroduce"></textarea>
 						</div>
 					</td>
 				</tr>

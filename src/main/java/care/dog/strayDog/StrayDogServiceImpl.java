@@ -9,13 +9,19 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import care.dog.common.dao.CommonDAO;
+
 @Service("strayDog.strayDogServiceImpl")
 public class StrayDogServiceImpl implements StrayDogService {
+	@Autowired
+	private CommonDAO dao;
+	
 	private static String MAINURL = "http://openapi.animal.go.kr/openapi/service/rest/abandonmentPublicSrvc/";
 	private static String KEY = "9pUaOiX4C%2BiH1Rt21Bq0dLJbh2Edo6TOS4JFKHcsNK69ezsQ2p1uHBJUWTcAF4Pzybzv5RkKh7gDMY6TL2YvlQ%3D%3D";
 	private static DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -262,6 +268,17 @@ public class StrayDogServiceImpl implements StrayDogService {
 			}
 		
 		return map;
+	}
+
+	@Override
+	public int volunteerApply(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.insertData("volunteer.vInsert", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 	
 }

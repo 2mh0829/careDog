@@ -115,15 +115,17 @@ public class StrayDogController {
 		return ".strayDog.addSupport";
 	}
 	
+	//봉사신청 페이지 이동
 	@RequestMapping(value="/strayDog/volunteer")
 	public String volunteer() {
 		return ".strayDog.volunteer";
 	}
 	
-	@RequestMapping(value="/strayDog/apply")
+	//봉사 지원
+	@RequestMapping(value="/strayDog/apply", method=RequestMethod.POST)
 	public String apply(@RequestParam Map<String, Object> map) {
-		System.out.println(map);
-		return ".strayDog.main";
+		service.volunteerApply(map);
+		return "redirect:/strayDog";
 	}
 	
 }

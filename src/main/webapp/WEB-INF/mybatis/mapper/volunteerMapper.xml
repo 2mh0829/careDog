@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="volunteer">
+
+<insert id="vInsert" parameterType="map">
+	INSERT INTO SD_Volunteer(volunteerId, mem_check, name, gender, age, tel_1, tel_2, tel_3, email, area, peopleCnt, vKind
+		, experience, necessity, vOption, fdate1, time, selfIntroduce)
+	VALUES (vol_seq.NEXTVAL, #{mem_check}, #{name}, #{gender}, #{age}, #{tel_1}, #{tel_2}, #{tel_3}, #{email}, #{area}, #{peopleCnt}, #{vKind}
+		, #{experience}, #{necessity}, #{vOption}, #{fdate1}, #{time}, #{selfIntroduce})
+</insert>
+
+</mapper>
