@@ -24,6 +24,7 @@
         	        
             <!-- 모든 접근자를 항상 승인 -->
             <intercept-url pattern="/index.jsp" access="permitAll" />
+            <intercept-url pattern="/" access="permitAll" />
             <intercept-url pattern="/main" access="permitAll" />
             <intercept-url pattern="/member/login" access="permitAll" />
             <intercept-url pattern="/member/join1" access="permitAll" />
@@ -35,7 +36,15 @@
             <intercept-url pattern="/member/pwd" access="permitAll" />
 			<intercept-url pattern="/member/memberIdCheck" access="permitAll" />
 			<intercept-url pattern="/member/emailChecked" access="permitAll" />
+			
 			<intercept-url pattern="/store" access="permitAll" />
+			<intercept-url pattern="/store/list" access="permitAll" />
+			<intercept-url pattern="/store/article" access="permitAll" />
+			<intercept-url pattern="/store/stack" access="permitAll" />
+			<intercept-url pattern="/store/listProductReply" access="permitAll" />
+			<intercept-url pattern="/store/listProductQna" access="permitAll" />
+			
+			
 			<intercept-url pattern="/mungstargram" access="permitAll" />
 			<intercept-url pattern="/mungstargram/list" access="permitAll" />
 			<intercept-url pattern="/mungstargram/autocomplete" access="permitAll" />
@@ -45,7 +54,7 @@
 
             <!-- 이미지, javascript, css등 -->
 			<intercept-url pattern="/resource/**" access="permitAll" />
-	        
+				        
 	         <!-- admin -->
 		    <intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 		    
