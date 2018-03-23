@@ -285,14 +285,41 @@ public class StoreController {
 
 	@RequestMapping(value = "/store/order")
 	public String productOrder(
-			@RequestParam int cartId
+			@RequestParam String memberId,
+			HttpSession session,
+			Model model
 			) {
 		
-		System.out.println(cartId);
+		int dataCount = 0;
+		
+		//세션에서 회원의 전화번호와 이메일 받아옴
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		if (info == null) {
+			return "redirect:/member/login";
+		}
+		String email = info.getMemberId();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);
+		
+		dataCount = service.dataCountCart();
+		
+		map.put("start", 1);
+		map.put("end", dataCount);
+
+		List<Cart> listCart = service.listCart(map);
+
+		model.addAttribute("listCart", listCart);
+		model.addAttribute("dataCount", dataCount);
+		/*model.addAttribute("total_page", total_page);*/
+		/*model.addAttribute("articleUrl", articleUrl);*/
+		/*model.addAttribute("page", current_page);*/
+		/*model.addAttribute("paging", paging);*/
 		
 		return ".store.order";
 	}
-	@RequestMapping(value="/store/storeLogin", method=RequestMethod.GET)
+	
+	/*@RequestMapping(value="/store/storeLogin", method=RequestMethod.GET)
 	public String storeLoginForm(
 			@RequestParam String productId,
 			//@RequestParam String amount,
@@ -306,13 +333,14 @@ public class StoreController {
 		session.setAttribute("redirectUrl","/store/article");
 		session.setAttribute("data",list);
 		return "redirect:/member/login";
-	}
+	}*/
+	
 	@RequestMapping(value = "/store/stack")
 	@ResponseBody
 	public Map<String, Object> stackCart(
-			@RequestParam (value = "productId", defaultValue = "1")int productId,
-			@RequestParam (value = "amount", defaultValue = "1")int amount,
-			@RequestParam (value = "optionId", defaultValue = "1")int optionId,
+			@RequestParam (value = "productId", defaultValue = "1") int productId,
+			@RequestParam (value = "amount", defaultValue = "1") int amount,
+			@RequestParam (value = "optionId", defaultValue = "1") int optionId,
 			HttpSession session) {
 
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -385,11 +413,43 @@ public class StoreController {
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		String smemberId = info.getMemberId();
 		
-		System.out.println(cartId);
-		
 		int state = 0;
 		if(smemberId.equals(memberId)) {
 			state = service.deleteCart(cartId);
+		}
+		
+		model.put("state", state);
+		
+		return model;
+		
+	}
+	
+	@RequestMapping(value="/store/updateCart")
+	@ResponseBody
+	public Map<String, Object> updateCart(
+			@RequestParam int cartId,
+			@RequestParam String memberId,
+			@RequestParam int productId,
+			@RequestParam int optionId,
+			@RequestParam int amount,
+			HttpSession session
+			) {
+		
+		Map<String, Object> model = new HashMap<String, Object>();
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		String smemberId = info.getMemberId();
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cartId", cartId);
+		map.put("memberId", memberId);
+		map.put("productId", productId);
+		map.put("optionId", optionId);
+		map.put("amount", amount);
+		
+		int state = 0;
+		if(smemberId.equals(memberId)) {
+			state = service.updateCart(map);
 		}
 		
 		model.put("state", state);

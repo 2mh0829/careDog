@@ -16,6 +16,19 @@ th {
 	background-color: #fafafa;
 }
 
+.divTd {
+	display: table;
+	height: 100px; 
+	margin: 10px;
+	font-size: 15px;
+}
+
+.divTd p {
+	display: table-cell;
+	text-align: center;
+	vertical-align: middle;
+}
+
 .txt {
 	float: left;
 	margin: 10px;
@@ -78,14 +91,14 @@ th {
 .product_img {
 	float: left;
 	margin: 10px;
-	width: 200px;
+	/* width: 100px; */
 	/* height: 100px; */
 }
 
 .product_name {
 	float: left;
 	padding: 15px;
-	width: 400px;
+	/* width: 400px; */
 }
 
 .pTxt1 {
@@ -168,49 +181,51 @@ th {
 		<table class="table table-condensed product-info">
 			<tbody>
 				<tr>
-					<th scope="row" class="product_th" style="width: 70%;">
+					<th scope="row" class="product_th" style="width: 600px;">
 						<p class="txt_th">상품정보</p>
 					</th>
-					<th scope="row" class="product_th" style="width: 10%;">
+					<th scope="row" class="product_th" style="width: 100px;">
 						<p class="txt_th">판매가</p>
 					</th>
-					<th scope="row" class="product_th" style="width: 10%;">
+					<th scope="row" class="product_th" style="width: 100px;">
 						<p class="txt_th">수량</p>
 					</th>
-					<th scope="row" class="product_th" style="width: 10%;">
+					<th scope="row" class="product_th" style="width: 100px;">
 						<p class="txt_th">구매가</p>
 					</th>
 				</tr>
+				<c:forEach var="dto" items="${listCart }">
 				<tr>
 					<td>
-						<div class="product_info_float">
+						<div class="product_info_float" style="width: 600px;">
 							<div class="product_img">
 								<img src="<%=cp%>/resource/img/store/dog_snack1.jpg" 
 								style="width: 100px;">
 							</div>
 							<div class="product_name">
-								<p class="pTxt1">서울우유</p>
-								<p class="pTxt1">[서울우유] 아이펫밀크 180ml x 10ea</p>
-								<p class="pTxt1">옵션 : 180ml x 10ea</p>
+								<p class="pTxt1">${dto.brand }</p>
+								<p class="pTxt1">${dto.productName }</p>
+								<p class="pTxt1">${dto.optionContent }</p>
 							</div>
 						</div>
 					</td>
 					<td>
-						<div>
-							<p class="pTxt2">30,000원</p>
+						<div class="divTd" style="width: 100px;">
+							<p class="pTxt2">${dto.totalPrice }원</p>
 						</div>
 					</td>
 					<td>
-						<div>
-							<p class="pTxt2">1</p>
+						<div class="divTd" style="width: 100px;">
+							<p class="pTxt2">${dto.amountAll }개</p>
 						</div>
 					</td>
 					<td>
-						<div>
-							<p class="pTxt2">16,800원</p>
+						<div class="divTd" style="width: 100px;">
+							<p class="pTxt2">${dto.totalPrice }원</p>
 						</div>
 					</td>
 				</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 		

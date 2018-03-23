@@ -142,6 +142,17 @@ public class ProductServiceImpl implements ProductService{
 		return result;
 	}
 
+	@Override
+	public int updateCart(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.updateData("store.updateCart", map);
+			result = 1;
+		} catch (Exception e) {
+		}
+		return result;
+	}
+
 	
 	
 }
