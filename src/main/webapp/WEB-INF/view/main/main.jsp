@@ -533,6 +533,16 @@ li {
 	-webkit-transition: margin-left 10s linear;
 	transition: margin-left 10s linear;
 }
+
+
+#admin-mungstar-5 {
+	position: relative;
+	z-index: 5;
+	top: 1900px;
+	width: 100%;
+	overflow: hidden;
+}
+
 </style>
 
 <script>
@@ -1011,6 +1021,12 @@ $(function() {
 		<div><img class="plain" src="<%=cp %>/resource/img/store/plain.png"></div>
 	</div>
 	
+	<div id="admin-mungstar-5">
+		<div align="center">
+			<img src="<%=cp %>/resource/img/strayDog/stray-dog.png" width="1200">
+		</div>
+	</div>
+
 	<div class="bgDiv"></div>
 	
 	<div class="go-top"><button id="MOVE_TOP_BTN" class="btn">next</button></div>
@@ -1019,19 +1035,23 @@ $(function() {
 
 <script>
 
-var t1 = $("#t1").offset();
 
 $(function() {
     $("#MOVE_TOP_BTN").click(function() {
     	var st = 0;
-    	if($(window).scrollTop() < 1800){
-    		st = 1800;
-    	}else if($(window).scrollTop() >= 1800 && $(window).scrollTop() < t1.top){
+		var t1 = $("#t1").offset();
+		var t2 = $("#admin-mungstar-3").offset();
+		var t4 = $("#admin-mungstar-5").offset();
+		console.log(t1.top);
+   		
+    	if($(window).scrollTop() < t1.top-1){
     		st = t1.top;
-    	}else if($(window).scrollTop() >= 2800 && $(window).scrollTop() < 3600){
+    	}else if($(window).scrollTop() >= t1.top-1 && $(window).scrollTop() < t2.top-1){
+    		st = t2.top;
+    	}else if($(window).scrollTop() >= t2.top-1 && $(window).scrollTop() < 3600){
     		st = 3600;
-    	}else if($(window).scrollTop() >= 3600 && $(window).scrollTop() < 4200){
-    		st = 4200;
+    	}else if($(window).scrollTop() >= 3600 && $(window).scrollTop() < t4.top-1){
+    		st = t4.top;
     	}else{
     		st = 0;
     	}
@@ -1043,13 +1063,7 @@ $(function() {
     
     
     $(window).scroll(function() {
-    	if($(window).scrollTop() < 1800){
-    		$("#MOVE_TOP_BTN").text("next");
-    	}else if($(window).scrollTop() >= 1800 && $(window).scrollTop() < t1.top){
-    		$("#MOVE_TOP_BTN").text("next");
-    	}else if($(window).scrollTop() >= 2800 && $(window).scrollTop() < 3600){
-    		$("#MOVE_TOP_BTN").text("next");
-    	}else if($(window).scrollTop() >= 3600 && $(window).scrollTop() < 4200){
+    	if($(window).scrollTop() < 4200){
     		$("#MOVE_TOP_BTN").text("next");
     	}else{
     		$("#MOVE_TOP_BTN").text("top");
