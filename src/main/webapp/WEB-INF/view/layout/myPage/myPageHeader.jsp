@@ -28,7 +28,7 @@ var mInterval; <%--메신저 interval 컨트롤 변수--%>
 		$.get(url, {
 			tmp : new Date().getTime()
 		}, function(data) {
-			$(".myPage-body").html(data);
+			$(".myPage-layout").html(data);
 		})
 	}
 	function myPetList() {
@@ -42,7 +42,7 @@ var mInterval; <%--메신저 interval 컨트롤 변수--%>
 		$.get(url, {
 			tmp : new Date().getTime()
 		}, function(data) {
-			$(".myPage-body").html(data);
+			$(".myPage-layout").html(data);
 		})
 	}
 	function orderManage() {
@@ -56,7 +56,7 @@ var mInterval; <%--메신저 interval 컨트롤 변수--%>
 		$.get(url, {
 			tmp : new Date().getTime()
 		}, function(data) {
-			$(".myPage-body").html(data);
+			$(".myPage-layout").html(data);
 		})
 	}
 	function messenger() {
@@ -70,7 +70,7 @@ var mInterval; <%--메신저 interval 컨트롤 변수--%>
 		$.get(url, {
 			tmp : new Date().getTime()
 		}, function(data) {
-			$(".myPage-body").html(data);
+			$(".myPage-layout").html(data);
 		})
 	}
 	function schMain() {
@@ -84,8 +84,8 @@ var mInterval; <%--메신저 interval 컨트롤 변수--%>
 		$.get(url, {
 			tmp : new Date().getTime()
 		}, function(data) {
-			$(".myPage-body").empty();
-			$(".myPage-body").html(data);
+			$(".myPage-layout").empty();
+			$(".myPage-layout").html(data);
 		})
 	}
 	function manageCDService() {
@@ -114,7 +114,7 @@ var mInterval; <%--메신저 interval 컨트롤 변수--%>
 		$.get(url, {
 			tmp : new Date().getTime()
 		}, function(data) {
-			$(".myPage-body").html(data);
+			$(".myPage-layout").html(data);
 		})
 	}
 	function historyMain() {
@@ -128,7 +128,7 @@ var mInterval; <%--메신저 interval 컨트롤 변수--%>
 		$.get(url, {
 			tmp : new Date().getTime()
 		}, function(data) {
-			$(".myPage-body").html(data);
+			$(".myPage-layout").html(data);
 		})
 	}
 
@@ -152,7 +152,7 @@ var mInterval; <%--메신저 interval 컨트롤 변수--%>
 		<li class="list-menu-item"><a href="javascript:myPetList();">마이펫</a></li>
 		<li class="list-menu-item"><a href="javascript:orderManage();">주문관리</a></li>
 		<li class="list-menu-item"><a href="javascript:messenger();">메신저</a></li>
-		<li class="list-menu-item"><a href="javascript:schMain();">일정관리</a></li>
+	<!-- 	<li class="list-menu-item"><a href="javascript:schMain();">일정관리</a></li> -->
 		<li class="list-menu-item"><a href="javascript:manageCDService();">CareDog 서비스 관리</a></li>
 		<li class="list-menu-item"><a href="javascript:registerPS();">펫시터 등록하기</a></li>
 		<li class="list-menu-item"><a href="javascript:historyMain();">이용현황</a></li>

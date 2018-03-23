@@ -27,11 +27,7 @@ public class MyPageController {
 	//@Autowired
 	//private MyUtilGeneral util;
 
-	@RequestMapping(value="/myPage/myPetList")
-	public String myPetList() throws Exception {
 
-		return "myPage/myPet/myPetList";
-	}
 	@RequestMapping(value="/myPage/historyMain")
 	public String historyMain() throws Exception {
 
