@@ -5,6 +5,9 @@
 <%
    String cp = request.getContextPath();
 %>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+
 <style>
 .content { float: left; width: 954px; /*min-height:800px;*/}
 .content.page-main { float: none; width: auto; }
@@ -175,6 +178,151 @@ checkbox01 { overflow: hidden; position: absolute; top: auto; width: 1px; height
 }
 </style>
 
+<script>
+$(document).ready(function(){
+	  $("#fdate1").datepicker({
+	    dateFormat: 'yy-mm-dd',
+	    prevText: '이전 달',
+	    nextText: '다음 달',
+	    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    dayNames: ['일','월','화','수','목','금','토'],
+	    dayNamesShort: ['일','월','화','수','목','금','토'],
+	    dayNamesMin: ['일','월','화','수','목','금','토'],
+	    showMonthAfterYear: true,
+	    changeMonth: true,
+	    changeYear: true,
+	    yearSuffix: '년'
+	  });
+
+	$("#cal").click(function() {
+		$("#fdate1").datepicker("show");
+	});
+
+});
+
+function memcheck(m) { 
+	if (m=="1" && sessionScope.member==null){
+		location.href="<%=cp%>/member/login";				
+	}
+} 
+
+function join(){
+	 
+	if (document.board.a1.value=="") {
+		alert("신청인 성명을 입력해주세요.");
+		document.board.a1.focus();
+		return;
+	}
+	if (document.board.a2[0].checked==false && document.board.a2[1].checked==false) {
+		alert("성별을 선택해주세요.");
+		document.board.a2.focus();
+		return;
+	}
+	if (document.board.a3.value=="") {
+		alert("연령을 입력해주세요.");
+		document.board.a3.focus();
+		return;
+	}
+	if(isNaN(document.board.a3.value)){
+	    document.board.a3.value="";
+	    alert("연령은 숫자로만 입력하세요");
+		document.board.a3.focus();
+	  return;
+	}
+
+	if (document.board.a4_1.value=="") {
+		alert("전화번호를 입력해주세요.");
+		document.board.a4_1.focus();
+		return;
+	}
+	if (document.board.a4_2.value=="") {
+		alert("전화번호를 입력해주세요.");
+		document.board.a4_2.focus();
+		return;
+	}	
+	if (document.board.a4_3.value=="") {
+		alert("전화번호를 입력해주세요.");
+		document.board.a4_3.focus();
+		return;
+	}		
+	if (document.board.a5.value=="") {
+		alert("이메일을 입력해주세요.");
+		document.board.a5.focus();
+		return;
+	} else {
+		var mailArray = document.board.a5.value.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/);
+							
+		if (mailArray == null) {
+			alert("이메일 주소가 잘못 되었습니다. 다시 입력하세요.");
+			document.board.a5.focus();
+			return;
+		}
+	}
+	if (document.board.a6.value=="") {
+		alert("사시는 지역을 입력해주세요.");
+		document.board.a6.focus();
+		return;
+	}
+	if (document.board.a7.value=="") {
+		alert("봉사 신청 인원 수를 입력해주세요.");
+		document.board.a7.focus();
+		return;
+	}
+	if (document.board.a8[0].checked==false && document.board.a8[1].checked==false && document.board.a8[2].checked==false && document.board.a8[3].checked==false) {
+		alert("자원봉사 신청 종류를 선택해주세요.");
+		document.board.a8[0].focus();
+		return;
+	}
+	if (document.board.a9[0].checked==false && document.board.a9[1].checked==false) {
+		alert("자원봉사 경험 유무를 선택해주세요.");
+		document.board.a9[0].focus();
+		return;
+	}
+	if (document.board.a10[0].checked==false && document.board.a10[1].checked==false) {
+		alert("봉사확인증 필요 유무를 선택해주세요.");
+		document.board.a10[0].focus();
+		return;
+	}
+	if (document.board.a11[0].checked==false && document.board.a11[1].checked==false && document.board.a11[2].checked==false && document.board.a11[3].checked==false) {
+		alert("희망하는 자원봉사를 선택해주세요.");
+		document.board.a11[0].focus();
+		return;
+	}
+	if (document.board.fdate1.value=="") {
+		alert("봉사 가능 날짜를 선택하세요.");
+		document.board.fdate1.focus();
+		return;
+	}
+	if (document.board.a14.value=="") {
+		alert("봉사 가능 시간을 선택하세요.");
+		document.board.a14.focus();
+		return;
+	}	
+	if (document.board.a12.value=="") {
+		alert("간단하게 자기소개를 입력해주세요.");
+		document.board.a12.focus();
+		return;
+	}
+	submit();
+}
+
+function submit(){
+	var url:"<%=cp%>/strayDog/apply";
+	var q = $("form[name=board]").serialize();
+	$.ajax({
+		type:'post',
+		url:url,
+		data:q,
+		dataType:'json',
+		success:function(){
+			
+		}
+	});
+}
+//-->
+</script>
+
 <div class="body-container">
    <div class="content" id="AnimalsContent">
 				<h1 class="page-tit">자원봉사신청</h1>
@@ -207,7 +355,7 @@ checkbox01 { overflow: hidden; position: absolute; top: auto; width: 1px; height
 
 		</dl>
 	</div>
-	<form name="board" method="post" action="welfare06_ok.asp">
+	<form name="board">
 	<div class="table__area mt50">
 		<table class="table1">
 			<thead>
@@ -221,18 +369,16 @@ checkbox01 { overflow: hidden; position: absolute; top: auto; width: 1px; height
 					<th class="table1__th">회원여부</th>
 					<td class="table1__td">
 						<div class="input__form">
-						  
-
-							<input type="radio" name="mem_check" id="member01" class="radio01" onclick="memcheck(1);"><label for="member01" class="label01">회원</label>
-							<input type="radio" name="mem_check" id="member02" class="radio01" onclick="memcheck(2);" checked=""><label for="member02" class="label01">비회원</label>
-
-							
+							<input type="radio" name="mem_check" id="member01" class="radio01" onclick="memcheck(1);">
+								<label for="member01" class="label01">회원</label>
+							<input type="radio" name="mem_check" id="member02" class="radio01" onclick="memcheck(2);" checked="">
+								<label for="member02" class="label01">비회원</label>
 						</div>
 					</td>
 				</tr>
 
 				<tr class="table1__tr">
-					<th class="table1__th">신청인 성명</th>
+					<th class="table1__th" >신청인 성명</th>
 					<td class="table1__td">
 						<div class="input__form">
 							<input type="text" class="input1 wd240" name="a1">
@@ -270,10 +416,10 @@ checkbox01 { overflow: hidden; position: absolute; top: auto; width: 1px; height
 					</td>
 				</tr>
 				<tr class="table1__tr">
-					<th class="table1__th">이메일</th>
+					<th class="table1__th" >이메일</th>
 					<td class="table1__td">
 						<div class="input__form">
-							<input type="text" class="input1 wd240" name="a5">
+							<input type="text" class="input1 wd240" name="a5" value="${sessionScope.member.memberId}">
 						</div>
 					</td>
 				</tr>
@@ -338,8 +484,8 @@ checkbox01 { overflow: hidden; position: absolute; top: auto; width: 1px; height
 					<th class="table1__th">봉사 희망 날짜</th>
 					<td class="table1__td">
 						<div class="input__form">
-							<input type="text" class="input1 wd100 hasDatepicker" name="fdate1" id="fdate1">
-							<a href="javascript:void(0)" id="cal" class="input__calender">달력선택</a>
+							<input type="text" class="input1 wd100" name="fdate1" id="fdate1">
+							<a href ="javascript:;" id="cal" class="input__calender">달력선택</a>
 							<span class="input__txt">(직접 입력할 땐 2014-01-01 형식으로 입력)</span>
 						</div>
 					</td>
@@ -371,8 +517,7 @@ checkbox01 { overflow: hidden; position: absolute; top: auto; width: 1px; height
 		<a href="javascript:join();" class="btn btn1 wd80">확인</a>
 		<a href="javascript:document.board.reset();" class="btn btn2 wd80">취소</a>
 	</div>
-</form></div>
-
-
-			</div>
+</form>
+		</div>
+	</div>
 </div>

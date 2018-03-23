@@ -18,6 +18,7 @@ public class ServiceServiceImpl implements ServiceService{
 		
 		try {
 			result=dao.insertData("service.insertService",dto);
+			System.out.println(dto.toString());
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}

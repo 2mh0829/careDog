@@ -1,11 +1,19 @@
 package care.dog.dog119;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import care.dog.common.dao.CommonDAO;
 import care.dog.dog119.dogHealthVo.DhReplyVo;
@@ -15,6 +23,8 @@ import care.dog.dog119.dogHealthVo.DogHealthVo;
 public class DogHealthServiceImpl implements DogHealthService {
 	@Autowired
 	private CommonDAO dao;
+	
+	private static DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	
 	@Override
 	public List<DogHealthVo> listBoard(Map<String, Object> map) {
@@ -127,4 +137,61 @@ public class DogHealthServiceImpl implements DogHealthService {
 		return result;
 	}
 
+	@Override
+	public List<Map<String, Object>> sido() {
+		List<Map<String, Object>> list = new ArrayList<>();
+		
+		String url="http://openapi.nsdi.go.kr/nsdi/eios/service/rest/AdmService/admCodeList.xml"; /* URL */   
+        try {
+			String key="?" + URLEncoder.encode("authkey","UTF-8") + "=350264dd10fbcc773e94e6";
+			url = url+key;
+			
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(url);
+			
+			Element root = doc.getDocumentElement();
+			NodeList nList = root.getElementsByTagName("admVOList");
+			for(int i=0;i<nList.getLength();i++) {
+				Map<String, Object> model = new HashMap<>();
+				model.put("admCodeNm", root.getElementsByTagName("admCodeNm").item(i).getTextContent().toString());
+				model.put("admCode", root.getElementsByTagName("admCode").item(i).getTextContent().toString());
+				model.put("lowestAdmCodeNm", root.getElementsByTagName("lowestAdmCodeNm").item(i).getTextContent().toString());
+				
+				list.add(model);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<Map<String, Object>> gugun(String sido) {
+	List<Map<String, Object>> list = new ArrayList<>();
+		String url="http://openapi.nsdi.go.kr/nsdi/eios/service/rest/AdmService/admSiList.xml"; /* URL */   
+        try {
+			String key="?" + URLEncoder.encode("authkey","UTF-8") + "=c384968ddeccd585e82cc8";
+			String q="&" + URLEncoder.encode("admCode","UTF-8") + "="+URLEncoder.encode(sido, "UTF-8");
+			url = url+key+q;
+			
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc = dBuilder.parse(url);
+			
+			Element root = doc.getDocumentElement();
+			NodeList nList = root.getElementsByTagName("admVOList");
+			
+			for(int i=0;i<nList.getLength();i++) {
+				Map<String, Object> model = new HashMap<>();
+				model.put("admCodeNm", root.getElementsByTagName("admCodeNm").item(i).getTextContent().toString());
+				model.put("admCode", root.getElementsByTagName("admCode").item(i).getTextContent().toString());
+				model.put("lowestAdmCodeNm", root.getElementsByTagName("lowestAdmCodeNm").item(i).getTextContent().toString());
+				
+				list.add(model);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

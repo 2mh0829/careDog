@@ -235,7 +235,143 @@ em,address { font-style:normal }
   transition:all 0.35s ease;
 }
 </style>
+<script>
+$(document).ready(function(){
+	
+	initialize();
+	$.ajax({
+		url:"<%=cp%>/dog119/sido",
+		dataType:'json',
+		success: function(data){
+			console.log(data);
+			var list = data.list;
+			var content='<option value="">시(도)선택</option>';
+			$.each(list, function(index, item){
+				content+='<option value='+item.admCode+'>'+item.admCodeNm+'</option>';
+			});
+			$("#city").append(content);
+		}
+	});
+})
 
+function change(value){
+	var queryParams= encodeURIComponent('admCode')+'='+ encodeURIComponent(value); 
+	$.ajax({
+		url:"<%=cp%>/dog119/gugun",
+		data:queryParams,
+		dataType:'json',
+		success: function(data){
+			console.log(data);
+			$("#country").find('option').remove();
+			var list = data.list;
+			var content='';
+			content+='<option value="">구(군)선택</option>';
+			$.each(list, function(index, item){
+				content+='<option value='+item.admCodeNm+'>'+item.lowestAdmCodeNm+'</option>';
+			});
+			$("#country").append(content);
+		}
+	});
+}
+
+//===============================================================##지도
+var map;
+var globalMarker;
+var globalGeocoder;
+
+function initialize() {
+  var myLatlng = new google.maps.LatLng(37.531805,126.914165);
+  var myOptions = {
+    zoom: 15,
+    center: myLatlng,
+    navigationControl: false,    // 눈금자 형태로 스케일 조절하는 컨트롤 활성화 선택.
+    navigationControlOptions: { 
+        position: google.maps.ControlPosition.TOP_RIGHT,
+        style: google.maps.NavigationControlStyle.DEFAULT // ANDROID, DEFAULT, SMALL, ZOOM_PAN
+    },
+    
+    streetViewControl: false,
+
+    scaleControl: false,    // 지도 축적 보여줄 것인지.
+    //scaleControlOptions: { position: google.maps.ControlPosition.TOP_RIGHT },
+    
+    mapTypeControl: false, // 지도,위성,하이브리드 등등 선택 컨트롤 보여줄 것인지
+    mapTypeId: google.maps.MapTypeId.ROADMAP 
+  }
+  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+  map.addListener('click', function(e) {
+	    placeMarkerAndPanTo(e.latLng, map);
+	});
+  
+  google.maps.event.addListener(map, 'click', function(event){        // 지도클릭시 마커이동
+      moveMarker(event.latLng); 
+  });
+}
+
+//마커찍기
+function placeMarkerAndPanTo(latLng, map) {
+	//clearMark();
+  var marker = new google.maps.Marker({
+    position: latLng,
+    map: map
+  });
+  map.panTo(latLng);
+}
+
+//마크좌표 가져오기
+function getMarkPos(){
+    var pos=globalMarker.getPosition();
+
+    //alert(pos.lat()+"/"+pos.lng());
+    //return {x:pos.lat(), y:pos.lng()};
+
+    document.getElementById("posx").value = pos.lat();
+    document.getElementById("posy").value = pos.lng();
+}
+
+/* function codeAddress() {
+    var address = document.getElementById("address").value;
+    if(address=='검색할 주소를 입력하십시오.' || address==''){
+        alert('검색할 주소를 입력하십시오.');
+        document.getElementById("address").value='';
+        document.getElementById("address").focus();
+        return;
+    }
+
+    globalGeocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            globalMap.setCenter(results[0].geometry.location);
+
+            //var marker = new google.maps.Marker({
+            globalMarker = new google.maps.Marker({
+                map: globalMap, 
+                position: results[0].geometry.location,
+                draggable: true
+            });
+        } else {
+            alert("Geocode was not successful for the following reason: " + status);
+        }
+    });
+} */
+    
+//지도 위의 마크 모두 삭제 - Refresh 말고 방법 없을까?
+function clearMark(){
+    var loc = map.getCenter(); // 현재의 지도의 위치를 가져온다.
+
+    map = null;
+    globalMarker = null;
+    globalGeocoder = null;
+
+    initialize();
+}
+    
+//지도 클릭시 마커 이동
+function moveMarker(loc){
+    //alert(loc);
+    globalMarker.setPosition(loc);
+}
+</script>
 <div class="body-container">
 	<div class="content">
 
@@ -461,31 +597,12 @@ em,address { font-style:normal }
 					</label> 
 					<label> 
 						<span><em>*</em>실종지역(시도) : </span> 
-						<script type="text/javascript" src="./js/addr.js"></script> 
-						<select name="city" id="city" class="validate[required]" onchange="change(this.selectedIndex);">
-							<option value="">시(도)선택</option>
-							<option value="서울특별시">서울특별시</option>
-							<option value="부산광역시">부산광역시</option>
-							<option value="대구광역시">대구광역시</option>
-							<option value="인천광역시">인천광역시</option>
-							<option value="광주광역시">광주광역시</option>
-							<option value="대전광역시">대전광역시</option>
-							<option value="울산광역시">울산광역시</option>
-							<option value="경기도">경기도</option>
-							<option value="강원도">강원도</option>
-							<option value="충청북도">충청북도</option>
-							<option value="충청남도">충청남도</option>
-							<option value="전라북도">전라북도</option>
-							<option value="전라남도">전라남도</option>
-							<option value="경상북도">경상북도</option>
-							<option value="경상남도">경상남도</option>
-							<option value="세종특별자치시">세종특별자치시</option>
-							<option value="제주특별자치도">제주특별자치도</option>
-					</select>
+						<select name="city" id="city" class="validate[required]" onchange="change(this.value);">
+						</select>
 					</label> 
 					<label> 
 						<span><em>*</em>실종지역(구군) : </span> 
-						<select name="county" id="county" class="validate[required]" OnClick="setAddr()">
+						<select name="country" id="country" class="validate[required]" OnClick="setAddr(this.value)">
 							<option value="">구(군)선택</option>
 					</select>
 					</label> 
@@ -508,7 +625,10 @@ em,address { font-style:normal }
 					* 지도를 확대/축소/이동 하면서 지도위에 한번 클릭하면 해당 좌표가 자동으로 입력되며, 다시 클릭하면 새로운 지점이 선택됩니다.<br><br>
 					* 실종지점을 잘 모르는경우 대략적인 위치라도 선택하는것이 좋습니다.<br><br>* 지도 아래의 취소를 누르면 해당 좌표가 적용되지 않습니다." 
 					onclick="return false;">지도사용법</a>) : </span>
-						<div id="map" style="width:270px;height:320px;"></div>
+					
+<!-- 지도 호출 -->
+						<div id="map_canvas" class="map_postbox">
+						</div>
 						X: <input type="text" class="text-map" id="posx" name="posx" readonly value="">
 						,Y: <input type="text" class="text-map" id="posy" name="posy" readonly value="">
 						<a href="javascript:mapReset()" title="취소">취소</a>
@@ -620,11 +740,13 @@ em,address { font-style:normal }
 		</div>
 	</div>
 </div>
+<script id="microloader" type="text/javascript" src=".sencha/app/microloader/development.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyBPA_xStX4VRi97SvEHjPOjZjlIC6aRWcs" charset="utf-8" type="text/javascript"></script>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6d00eac2ad03dd3b680a9af94cd77521&libraries=services"></script>
 <script type="text/javascript">
 
 function mapReset() {
+	clearMark();
 	document.formID.posx.value = "";
 	document.formID.posy.value = "";
 }
@@ -651,66 +773,9 @@ function apply(sel) {
 	}
 }
 
-//지도 
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new daum.maps.LatLng(37.55458690944549, 126.97049604488703), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };
-
-var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
-var geocoder = new daum.maps.services.Geocoder(); // 주소-좌표 변환
-var addr = '';
-
-geocoder.addressSearch(addr, function(result, status) {
-
-    // 정상적으로 검색이 완료됐으면 
-     if (status === daum.maps.services.Status.OK) {
-
-        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
-
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new daum.maps.Marker({
-            map: map,
-            position: coords
-        });
-
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-      /*   var infowindow = new daum.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
-        });
-        infowindow.open(map, marker);
- */
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-    } 
-});    
-
-// 지도를 클릭한 위치에 표출할 마커입니다
-var marker = new daum.maps.Marker({ 
-    // 지도 중심좌표에 마커를 생성합니다 
-    position: map.getCenter() 
-}); 
-// 지도에 마커를 표시합니다
-marker.setMap(map);
-
-// 지도에 클릭 이벤트를 등록합니다
-// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
-daum.maps.event.addListener(map, 'click', function(mouseEvent) {        
-    
-    // 클릭한 위도, 경도 정보를 가져옵니다 
-    var latlng = mouseEvent.latLng; 
-    
-    // 마커 위치를 클릭한 위치로 옮깁니다
-    marker.setPosition(latlng);
-    
-    $("input[name=posx]").val(latlng.getLat());
-    $("input[name=posy]").val(latlng.getLng());
-    
-});
-
-function change(value){
-	addr+=value;
-	console.log(value)
+function setAddr(value){
+	addr = value;
+	searchPlaces();
 }
+
 </script>

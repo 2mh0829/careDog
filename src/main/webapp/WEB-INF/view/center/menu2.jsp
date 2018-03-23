@@ -10,8 +10,13 @@
 .menu2 {
 	background: silver;
 }
-li{
+.center_list li{
 display: inline-block;
+}
+.center_list li > a{
+font-size: 20px;
+font-weight: 500;
+padding: 10px;
 }
 </style>
 
@@ -24,7 +29,7 @@ display: inline-block;
 					<a onclick="javascript:location.href='<%=cp%>/center';">공지사항/이벤트</a>
 				</li>
 				<li>
-					<a onclick="javascript:location.href='<%=cp %>/center/onefone';">1:1문의</a>
+					<a onclick="javascript:location.href='<%=cp %>/center/onefonelist';">1:1문의</a>
 				</li>
 			</ul>
 </div>

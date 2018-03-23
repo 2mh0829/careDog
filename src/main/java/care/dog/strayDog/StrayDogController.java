@@ -117,8 +117,13 @@ public class StrayDogController {
 	
 	@RequestMapping(value="/strayDog/volunteer")
 	public String volunteer() {
-		
 		return ".strayDog.volunteer";
+	}
+	
+	@RequestMapping(value="/strayDog/apply")
+	public String apply(@RequestParam Map<String, Object> map) {
+		System.out.println(map);
+		return ".strayDog.main";
 	}
 	
 }

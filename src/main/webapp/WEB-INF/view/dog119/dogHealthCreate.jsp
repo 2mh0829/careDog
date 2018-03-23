@@ -181,7 +181,9 @@ function submitContents(elClickedObj) {
 		console.log(title+":"+content);
 		if(title.trim().length<1){
 			alert("제목을 입력하세요");
-		} else{
+			return;
+		}
+		
 			$.ajax({
 				url:'<%=cp%>/dog119/dhInsert'
 				,type:'post'
@@ -190,11 +192,15 @@ function submitContents(elClickedObj) {
 					"title":title,
 					"content":content
 				}
-				,success:function(data){
-					location.href='<%=cp%>/dog119/dogHealth';
+				,success:function(){
+					alert('성공');
+					<%-- location.href='<%=cp%>/dog119/dogHealth'; --%>
+				}
+				,error:function(e){
+					console.log(e.responseText);
 				}
 			});
-		}
+		
 }
 
 function setDefaultFont() {
