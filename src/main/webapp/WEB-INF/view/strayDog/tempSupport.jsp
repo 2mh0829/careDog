@@ -421,6 +421,14 @@ span.selectboxit.select30, span.selectboxit.select30 span{
 .mt40 { margin-top: 40px !important; }
 </style>
 
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" />
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/base/jquery-ui.css" />
+<link type="text/css" rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+<link rel="stylesheet" href="http://gregfranko.com/jquery.selectBoxIt.js/css/jquery.selectBoxIt.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+<script src="http://gregfranko.com/jquery.selectBoxIt.js/js/jquery.selectBoxIt.min.js"></script>
+
 <div class="body-container">
    <div class="content" id="AnimalsContent">
 				<h1 class="page-tit">일시후원</h1>
@@ -622,18 +630,16 @@ span.selectboxit.select30, span.selectboxit.select30 span{
 								<tr class="table1__tr">
 									<th class="table1__th">결재방법</th>
 									<td class="table1__td">
-										<!-- 20171023 수정 //-->
 										<div class="input__form type-another">
 											<div class="input__form type-another wd120">
 												<select class="wd120 select30" name="pay_method" style="display: none;">
 													<option value="100000000000">신용카드</option>
 													<option value="000010000000">휴대폰</option>
 													<option value="010000000000">계좌이체</option>	
-												</select><span id="" class="selectboxit-container selectboxit-container" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" aria-owns="" aria-labelledby=""><span id="" class="selectboxit wd120 select30 selectboxit-enabled selectboxit-btn" name="pay_method" tabindex="0" unselectable="on"><span class="selectboxit-option-icon-container"><i id="" class="selectboxit-default-icon selectboxit-option-icon selectboxit-container" unselectable="on"></i></span><span id="" class="selectboxit-text" unselectable="on" data-val="100000000000" aria-live="polite" style="max-width: 1250px;">신용카드</span><span id="" class="selectboxit-arrow-container" unselectable="on"><i id="" class="selectboxit-arrow selectboxit-default-arrow" unselectable="on"></i></span></span><ul class="selectboxit-options selectboxit-list" tabindex="-1" role="listbox" aria-hidden="true"><li data-id="0" data-val="100000000000" data-disabled="false" class="selectboxit-option  selectboxit-option-first selectboxit-selected" role="option"><a class="selectboxit-option-anchor"><span class="selectboxit-option-icon-container"><i class="selectboxit-option-icon  selectboxit-container"></i></span>신용카드</a></li><li data-id="1" data-val="000010000000" data-disabled="false" class="selectboxit-option" role="option"><a class="selectboxit-option-anchor"><span class="selectboxit-option-icon-container"><i class="selectboxit-option-icon  selectboxit-container"></i></span>휴대폰</a></li><li data-id="2" data-val="010000000000" data-disabled="false" class="selectboxit-option  selectboxit-option-last" role="option"><a class="selectboxit-option-anchor"><span class="selectboxit-option-icon-container"><i class="selectboxit-option-icon  selectboxit-container"></i></span>계좌이체</a></li></ul></span>
-											</div>
-											<span class="sub__txt type-another">(카드사 방침에 따라 삼성과 현대 카드는 사용하실 수 없습니다. 불편을 드려 죄송합니다.)</span>
+												</select> 
 										</div>
-										<!--// 20171023 수정 -->
+										<span class="sub__txt type-another">(카드사 방침에 따라 삼성과 현대카드는 사용하실 수 없습니다. 불편을 드려 죄송합니다.)</span>
+									</div>
 									</td>
 								</tr>
 								<tr class="table1__tr">
@@ -663,92 +669,6 @@ span.selectboxit.select30, span.selectboxit.select30 span{
 													</option><option value="200000">200,000원
 													</option><option value="300000">300,000원</option>
 												</select>
-												<span id="gpriceSelectBoxItContainer" class="selectboxit-container selectboxit-container" 
-													role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" aria-owns="gpriceSelectBoxItOptions">
-													<span id="gpriceSelectBoxIt" class="selectboxit wd200 select30 selectboxit-enabled selectboxit-btn" name="gprice" tabindex="0" unselectable="on">
-														<span class="selectboxit-option-icon-container">
-															<i id="gpriceSelectBoxItDefaultIcon" class="selectboxit-default-icon selectboxit-option-icon selectboxit-container" unselectable="on">
-															</i>
-														</span>
-														<span id="gpriceSelectBoxItText" class="selectboxit-text" unselectable="on" data-val="10000" aria-live="polite" 
-															style="max-width: 1250px;">10,000원</span>
-														<span id="gpriceSelectBoxItArrowContainer" class="selectboxit-arrow-container" unselectable="on">
-															<i id="gpriceSelectBoxItArrow" class="selectboxit-arrow selectboxit-default-arrow" unselectable="on"></i>
-														</span>
-													</span>
-													<ul id="gpriceSelectBoxItOptions" class="selectboxit-options selectboxit-list" tabindex="-1" role="listbox" aria-hidden="true">
-														<li data-id="0" data-val="" data-disabled="false" class="selectboxit-option  selectboxit-option-first" role="option">
-															<a class="selectboxit-option-anchor">
-																<span class="selectboxit-option-icon-container">
-																	<i class="selectboxit-option-icon  selectboxit-container"></i>
-																</span>[ 후원 금액을 선택하세요. ]
-															</a>
-														</li>
-														<li data-id="1" data-val="5000" data-disabled="false" class="selectboxit-option" role="option">
-															<a class="selectboxit-option-anchor">
-																<span class="selectboxit-option-icon-container">
-																	<i class="selectboxit-option-icon  selectboxit-container"></i>
-																</span>5,000원
-															</a>
-														</li>
-														<li data-id="2" data-val="10000" data-disabled="false" class="selectboxit-option selectboxit-selected" role="option">
-															<a class="selectboxit-option-anchor">
-																<span class="selectboxit-option-icon-container">
-																	<i class="selectboxit-option-icon  selectboxit-container"></i>
-																</span>10,000원
-															</a>
-														</li>
-														<li data-id="3" data-val="20000" data-disabled="false" class="selectboxit-option" role="option">
-															<a class="selectboxit-option-anchor">
-																<span class="selectboxit-option-icon-container">
-																	<i class="selectboxit-option-icon  selectboxit-container"></i>
-																</span>20,000원
-															</a>
-														</li>
-														<li data-id="4" data-val="30000" data-disabled="false" class="selectboxit-option" role="option">
-															<a class="selectboxit-option-anchor">
-																<span class="selectboxit-option-icon-container">
-																	<i class="selectboxit-option-icon  selectboxit-container"></i>
-																</span>30,000원
-															</a>
-														</li>
-														<li data-id="5" data-val="50000" data-disabled="false" class="selectboxit-option" role="option">
-															<a class="selectboxit-option-anchor">
-																<span class="selectboxit-option-icon-container">
-																	<i class="selectboxit-option-icon  selectboxit-container"></i>
-																</span>50,000원
-															</a>
-														</li>
-														<li data-id="6" data-val="70000" data-disabled="false" class="selectboxit-option" role="option">
-															<a class="selectboxit-option-anchor">
-																<span class="selectboxit-option-icon-container">
-																	<i class="selectboxit-option-icon  selectboxit-container"></i>
-																</span>70,000원
-															</a>
-														</li>
-														<li data-id="7" data-val="100000" data-disabled="false" class="selectboxit-option" role="option">
-															<a class="selectboxit-option-anchor">
-																<span class="selectboxit-option-icon-container">
-																	<i class="selectboxit-option-icon  selectboxit-container"></i>
-																</span>100,000원
-															</a>
-														</li>
-														<li data-id="8" data-val="200000" data-disabled="false" class="selectboxit-option" role="option">
-															<a class="selectboxit-option-anchor">
-																<span class="selectboxit-option-icon-container">
-																	<i class="selectboxit-option-icon  selectboxit-container"></i>
-																</span>200,000원
-															</a>
-														</li>
-														<li data-id="9" data-val="300000" data-disabled="false" class="selectboxit-option  selectboxit-option-last" role="option">
-															<a class="selectboxit-option-anchor">
-																<span class="selectboxit-option-icon-container">
-																	<i class="selectboxit-option-icon  selectboxit-container"></i>
-																</span>300,000원
-															</a>
-														</li>
-													</ul>
-												</span>
 											</div>
 										</div>
 										<!--// 20171023 수정 -->
@@ -772,3 +692,112 @@ span.selectboxit.select30, span.selectboxit.select30 span{
 			</form>
 		</div>
 </div>
+
+<script language="javascript">
+
+	$(function() {
+		//Calls the selectBoxIt method on your HTML select box.
+		$("select").selectBoxIt();
+	});
+
+	function l_img(img1) {
+		window.open("l_img.asp?img1=" + img1, "winName1",
+				"scrollbars=no,width=1,height=1,top=100,left=100,resizable=no")
+	}
+
+	function pay() {
+
+		if (document.order_info.goods_check[0].checked == true) {
+			document.order_info.good_mny.value = document.order_info.gprice.value;
+		} else {
+			document.order_info.good_mny.value = document.order_info.gprice2.value;
+		}
+
+		var mailArray = document.order_info.buyr_mail.value
+				.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/);
+		if (document.order_info.checkbox2.checked == false) {
+			alert("개인정보취급방침에 동의하셔야 온라인 후원이 됩니다.");
+			document.order_info.checkbox2.focus();
+			return false;
+		}
+
+		else if (document.order_info.buyr_name.value == "") {
+			alert("이름을 입력하세요");
+			document.order_info.buyr_name.focus();
+			return false;
+		}
+
+		else if (document.order_info.buyr_tel2.value == "") {
+			alert("본인 핸드폰 번호를 입력하세요.");
+			document.order_info.buyr_tel2.focus();
+			return false;
+		} else if (document.order_info.buyr_mail.value == "") {
+			alert("이메일 주소를 입력하세요.");
+			return false;
+		}
+
+		else if (mailArray == null) {
+			alert("이메일 주소가 잘못 되었습니다. 다시 입력하세요.");
+			document.order_info.buyr_mail.focus();
+			return false;
+
+		}
+
+		else if (document.order_info.pay_method.value == "") {
+			alert("결제방법을 선택하세요.");
+			document.order_info.pay_method.focus();
+			return false;
+		}
+
+		else if (document.order_info.good_mny.value == "") {
+			alert("후원금액을 선택 또는 입력하세요.");
+			return false;
+		}
+
+		return jsf__pay(document.order_info);
+
+	}
+
+	function catecheck(num) {
+
+		if (num == "1") {
+			location.href = "cartoon01_2.asp?catecheck=1";
+		} else if (num == "2") {
+			location.href = "cartoon01_2.asp?catecheck=2";
+		}
+
+	}
+	function goods_checkok(objform, objid) {
+		if (objid.value == "유") {
+			document.all.option1.style.display = 'block';
+			document.all.option2.style.display = 'none';
+			objform.gprice.disabled = 0;
+			objform.gprice2.disabled = 1;
+		}
+
+		else {
+			document.all.option1.style.display = 'none';
+			document.all.option2.style.display = 'block';
+			objform.gprice.disabled = 1;
+			objform.gprice2.disabled = 0;
+		}
+	}
+
+	function filterKey(filter) {
+		if (filter)
+
+		{
+			var sKey = String.fromCharCode(event.keyCode);
+			var re = new RegExp(filter);
+			if (!re.test(sKey))
+				event.returnValue = false;
+		}
+	}
+
+	function memcheck(m) {
+		if (m == "1") {
+			location.href = "/ani-main/08member/login.asp?bname=donate";
+		}
+
+	}
+</script>

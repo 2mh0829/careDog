@@ -107,11 +107,36 @@ strong {font-family: 'NanumGothicWebBold' !important; } /* 강조 */
 .table1__tr { border-top: 1px solid #dedede; }
 .table1__th { padding: 22px 30px; background-color: #fafafa; border-bottom: 1px solid #dedede; font-size: 14px; color: #222; text-align:left;}
 .table1__td { padding: 22px 30px; border-bottom: 1px solid #dedede; }
-
 </style>
-<div class="body-container">
-	<div class="wrap_sub">
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+
+<script>
+$(document).ready(function(){
+	  $("#e_date").datepicker({
+	    dateFormat: 'yy-mm-dd',
+	    prevText: '이전 달',
+	    nextText: '다음 달',
+	    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    dayNames: ['일','월','화','수','목','금','토'],
+	    dayNamesShort: ['일','월','화','수','목','금','토'],
+	    dayNamesMin: ['일','월','화','수','목','금','토'],
+	    showMonthAfterYear: true,
+	    changeMonth: true,
+	    changeYear: true,
+	    yearSuffix: '년'
+	  });
+
+	$("#e_date_Icon").click(function() {
+		$("#e_date").datepicker("show");
+	});
+
+});
+</script>
+
+<div class="body-container">
+<div class="wrap_sub">
 <div class="board_request">
 	<h1>정기후원 신청</h1>	
 	<form name="writeform" id="writeform" method="post">
@@ -162,7 +187,7 @@ strong {font-family: 'NanumGothicWebBold' !important; } /* 강조 */
 					<th scope="row" class="table1__th">최종 결제일</th>
 					<td colspan="3" class="table1__td">
 						<label for="e_date" class="alternate">최종 결제일</label>
-						<input type="text" id="e_date" name="e_date" style="ime-mode:disabled" value="2018-05-11" readonly="" maxlength="10"> 
+						<input type="text" id="e_date" name="e_date" style="ime-mode:disabled" value="" readonly="" maxlength="10"> 
 						<img src="<%=cp%>/resource/img/strayDog/btn_month.jpg" style="cursor:pointer" id="e_date_Icon">&nbsp;&nbsp;
 						<button type="button" onclick="cal();" style="margin-bottom:0;">계산하기</button><br>
 						<span>※ 최종결제일은 결제일자의 다음날이어야 합니다.<br>
@@ -209,19 +234,25 @@ strong {font-family: 'NanumGothicWebBold' !important; } /* 강조 */
 					<th scope="row" class="table1__th">이메일</th>
 					<td colspan="3" class="table1__td">
 						<label for="email" class="alternate">이메일</label>
-						<input type="text" maxlength="100" name="email" value="" style="ime-mode:inactive;">
+						<input type="text" maxlength="100" name="email" value="${sessionScope.member.email}" style="ime-mode:inactive;">
 					</td>
 				</tr>
 				<tr class="table1__tr">
 					<th scope="row" class="table1__th">주소</th>
 					<td colspan="3" class="table1__td">			
 						<label for="sample6_postcode" class="alternate">우편번호</label>
-						<input type="text" id="sample6_postcode" name="zipcode" value="" maxlength="7" class="post mb">
+						<input type="text" id="sample6_postcode" name="zipcode" value="${sessionScope.member.zipCode}" maxlength="7" class="post mb">
 						<button type="button" onclick="sample6_execDaumPostcode()">우편번호 찾기</button>
-						<label for="sample6_address" class="alternate">주소</label>
-						<input type="text" id="sample6_address" name="addr" value="" class="full mb" placeholder="주소">
+<!-- 다음 주소 찾기 div -->						
+						<div id="wrap" style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
+									<img src="//t1.daumcdn.net/localimg/localimages/07/postcode/320/close.png"
+										id="btnFoldWrap" style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
+										onclick="foldDaumPostcode()" alt="접기 버튼">
+						</div> 
+
+						<input type="text" id="sample6_address" name="addr" value="${sessionScope.member.address1}" class="full mb" placeholder="주소">
 						<label for="sample6_address2" class="alternate">상세주소</label>
-						<input type="text" id="sample6_address2" style="ime-mode:active" name="addr2" value="" class="full mb" placeholder="상세주소">	
+						<input type="text" id="sample6_address2" style="ime-mode:active" name="addr2" value="${sessionScope.member.address2}" class="full mb" placeholder="상세주소">	
 					</td>
 				</tr>
 				<tr class="table1__tr">
@@ -238,26 +269,82 @@ strong {font-family: 'NanumGothicWebBold' !important; } /* 강조 */
 			<a href="javascript:void(0);" onclick="history.go(-1);">취소</a>
 		</div><!--E:btn_area-->
 	</form>
-	<div class="request_info">
-		<span>※ 결제사에서 제공하는 결제모듈은 인터넷익스플로러 11까지만 지원됩니다. 엣지에서는 아직 지원되지 않습니다.</span>
-	</div><!--E:request_info-->
+<div class="request_info">
+		<!-- <span>※ 결제사에서 제공하는 결제모듈은 인터넷익스플로러 11까지만 지원됩니다. 엣지에서는 아직 지원되지 않습니다.</span> -->
+</div><!--E:request_info-->
 </div><!--E:board_request-->
 
+<!-- 다음 주소 api -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+    // 우편번호 찾기 찾기 화면을 넣을 element
+    var element_wrap = document.getElementById('wrap');
 
-	
+    function foldDaumPostcode() {
+        // iframe을 넣은 element를 안보이게 한다.
+        element_wrap.style.display = 'none';
+    }
 
+    function sample6_execDaumPostcode() {
+        // 현재 scroll 위치를 저장해놓는다.
+        var currentScroll = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullAddr = data.address; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
 
+                // 기본 주소가 도로명 타입일때 조합한다.
+                if(data.addressType === 'R'){
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('sample6_address').value = fullAddr;
+
+                // iframe을 넣은 element를 안보이게 한다.
+                // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
+                element_wrap.style.display = 'none';
+                
+                document.getElementById('sample6_address2').focus();
+
+                // 우편번호 찾기 화면이 보이기 이전으로 scroll 위치를 되돌린다.
+                document.body.scrollTop = currentScroll;
+            },
+            // 우편번호 찾기 화면 크기가 조정되었을때 실행할 코드를 작성하는 부분. iframe을 넣은 element의 높이값을 조정한다.
+            onresize : function(size) {
+                element_wrap.style.height = size.height+'px';
+            },
+            width : '100%',
+            height : '100%'
+        }).embed(element_wrap);
+
+        // iframe을 넣은 element를 보이게 한다.
+        element_wrap.style.display = 'block';
+    }
+</script>
 
 <script>
 	$(document).ready(function(){
-
 		CalAddCss();
 //		initCal({id:"s_date",type:"day",today:"y"});
-		initCal({id:"e_date",type:"day",today:"y"});
+//		initCal({id:"e_date",type:"day",today:"y"});
+
 
 	});
-
 
 	function chkForm(fm) {
 
@@ -266,9 +353,9 @@ strong {font-family: 'NanumGothicWebBold' !important; } /* 강조 */
 			fm.use_sdate.focus();
 			return false;
 		}
-
 	}
-	
+
+	// 오늘 날짜 넣기
 	function CalAddCss(){
 		var tDay = new Date();
 		var tMonth = tDay.getMonth()+1;

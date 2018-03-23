@@ -35,6 +35,11 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 		SessionInfo info = new SessionInfo();
 		info.setMemberId(member.getMemberId());
 		info.setUserName(member.getUserName());
+		info.setTel(member.getTel());
+		info.setEmail(member.getEmail());
+		info.setZipCode(member.getZipCode());
+		info.setAddress1(member.getAddress1());
+		info.setAddress2(member.getAddress2());
 		if (session.getAttribute("redirectUrl") != null) {
 			String redirectUrl = (String) session.getAttribute("redirectUrl");
 			if (redirectUrl != null) {

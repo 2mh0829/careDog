@@ -412,7 +412,7 @@ function submitOk(){
 					<th class="table1__th" >이메일</th>
 					<td class="table1__td">
 						<div class="input__form">
-							<input type="text" class="input1 wd240" name="email" value="${sessionScope.member.memberId}">
+							<input type="text" class="input1 wd240" name="email" value="${sessionScope.member.email}">
 						</div>
 					</td>
 				</tr>

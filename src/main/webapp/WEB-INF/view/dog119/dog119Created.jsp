@@ -392,15 +392,15 @@ function moveMarker(loc){
 					</p>
 					<label> 
 						<span><em>*</em>닉네임 : </span> 
-						<input type="text" value="하하하하하컄" class="text-input readonly" onClick="javascript:alim_readonly()" readonly />
+						<input type="text" value="${sessionScope.member.memberId}" class="text-input readonly" onClick="javascript:alim_readonly()" readonly />
 					</label> 
 					<label> 
 						<span><em>*</em>이메일주소 : </span> 
-						<input type="text" value="chlgptmd123@gmail.com" class="text-input readonly" onClick="javascript:alim_readonly()" readonly />
+						<input type="text" value="${sessionScope.member.email}" class="text-input readonly" onClick="javascript:alim_readonly()" readonly />
 					</label> 
 					<label> 
 						<span><em>*</em>(주)전화번호(예:010-1234-1234) :</span> 
-						<input type="text" value="" name="phone1" id="phone1" maxlength="13" class="validate[required,custom[phone]] text-input" />
+						<input type="text" value="${sessionScope.member.tel}" name="phone1" id="phone1" maxlength="13" class="validate[required,custom[phone]] text-input" />
 					</label> 
 					<label> 
 						<span>(부)전화번호 : </span> 
