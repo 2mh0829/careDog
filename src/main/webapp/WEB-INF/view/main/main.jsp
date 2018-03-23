@@ -50,8 +50,10 @@ video {
 }
 
 .bgDiv {
+	position: relative;
+	top: -400px;
 	width: 100%;
-	height: 3000px;
+	height: 3500px;
 	background: white;
 	-webkit-transition: 1s;
 	transition: 1s;
@@ -76,7 +78,6 @@ video {
 .go-top .btn:active, .go-top .btn:focus {
 	outline: none;
 }
-
 
 /* -------------------------- */
 .container {
@@ -525,6 +526,10 @@ li {
 	z-index: 5;
 	top: 1500px;
 	width: 100%;
+}
+
+#plain-area {
+	width: 100%;
 	overflow: hidden;
 }
 
@@ -534,15 +539,46 @@ li {
 	transition: margin-left 10s linear;
 }
 
-
+/* --------------------------------------------------- */
 #admin-mungstar-5 {
 	position: relative;
 	z-index: 5;
 	top: 1900px;
 	width: 100%;
-	overflow: hidden;
 }
 
+#admin-mungstar-5 #stray-img {
+	width: 100%;
+	-webkit-transform: scale(0);
+	-ms-transform: scale(0);
+	transform: scale(0);
+}
+
+.box_explain {
+	position: relative;
+	top: -80px;
+	left: 0;
+	color: #fff;
+}
+
+.box_explain .line11 {
+	width: 80px;
+	height: 4px;
+	background: white;
+	display: block;
+	margin-bottom: 50px;
+}
+
+.box_explain .subject {
+	margin-top: 50px;
+}
+
+.list_type.cgv {
+	position: absolute;
+	display: inline-block;
+	left: 50%;
+	top: 135px;
+}
 </style>
 
 <script>
@@ -562,7 +598,17 @@ $(function() {
 	
 	$(window).scroll(function() {
 		if($(window).scrollTop() >= 100) {
-			if($(window).scrollTop() >= 4200){
+			if($(window).scrollTop() >= 4800){
+				$(".bgDiv").one("hover", function() {
+					$(".bgDiv").css("background", "white");
+				});
+				$(".bgDiv").trigger("hover");
+			}else if($(window).scrollTop() >= 4600){
+				$(".bgDiv").one("hover", function() {
+					$(".bgDiv").css("background", "#5f84bd");
+				});
+				$(".bgDiv").trigger("hover");
+			}else if($(window).scrollTop() >= 4200){
 				$(".plain").css("transition", "margin-left .1s");
 				$(".plain").one("hover", function() {
 					$(".plain").css("margin-left", "1000px");
@@ -575,12 +621,7 @@ $(function() {
 					$(".plain").css("margin-left", "-1000px");
 				});
 				$(".plain").trigger("hover");
-				
-				$(".bgDiv").one("hover", function() {
-					$(".bgDiv").css("background", "white");
-				});
-				$(".bgDiv").trigger("hover");
-			}else if($(window).scrollTop() >= 3400){
+			}else if($(window).scrollTop() >= 3800){
 				$(".bgDiv").one("hover", function() {
 					$(".bgDiv").css("background", "#5f84bd");
 				});
@@ -592,9 +633,9 @@ $(function() {
 					$(".plain").css("margin-left", "-1000px");
 				});
 				$(".plain").trigger("hover");	
-			}else if($(window).scrollTop() >= 2900){
+			}else if($(window).scrollTop() >= 2800){
 				$(".bgDiv").one("hover", function() {
-					$(".bgDiv").css("background", "#39b0a2");
+					$(".bgDiv").css("background", "#b386c2");
 				});
 				$(".bgDiv").trigger("hover");
 			}else if($(window).scrollTop() >= 2500){
@@ -651,7 +692,13 @@ $(function() {
 			if(ts2 <= 0){
 				ts2 = 0;
 			}
-			if(ts >= 400){
+			var ts3 = ($(window).scrollTop() - 3900) / 500;
+			if(ts3 >= 1)
+				ts3 = 1;
+			
+			if($(window).scrollTop() >= 3900){
+				$("#admin-mungstar-5 #stray-img").css("transform", "scale("+ts3+")");
+			}else if(ts >= 400){
 				ts = 100;
 				$("#a-second").one("hover", function() {
 					$("#square-2").html("");
@@ -1018,13 +1065,50 @@ $(function() {
 	</div>
 	
 	<div id="admin-mungstar-4">
-		<div><img class="plain" src="<%=cp %>/resource/img/store/plain.png"></div>
+		
+		<div style="position: absolute; top: -100px; left: 400px;"><img src="http://images.cj.net/images/index/main_csv_deco_08.png"></div>
+		<div style="position: absolute; top: 150px; left: 250px;"><img src="http://images.cj.net/images/index/main_csv_deco_07.png"></div>
+		<div style="position: absolute; top: -200px; left: 1150px;"><img src="http://images.cj.net/images/index/main_csv_deco_06.png"></div>
+		<div style="position: absolute; top: -20px; left: 850px;"><img src="http://images.cj.net/images/index/main_csv_deco_05.png"></div>
+		<div style="position: absolute; top: 250px; left: 600px;"><img src="http://images.cj.net/images/index/main_csv_deco_04.png"></div>
+		<div style="position: absolute; top: 200px; left: 650px;"><img src="http://images.cj.net/images/index/main_csv_deco_03.png"></div>
+		<div style="position: absolute; top: 150px; left: 50px;"><img src="http://images.cj.net/images/index/main_csv_deco_02.png"></div>
+		<div style="position: absolute; top: 200px; left: 1200px;"><img src="http://images.cj.net/images/index/main_csv_deco_01.png"></div>
+			
+		<div id="plain-area"><img class="plain" src="<%=cp %>/resource/img/store/plain.png"></div>
 	</div>
 	
 	<div id="admin-mungstar-5">
 		<div align="center">
-			<img src="<%=cp %>/resource/img/strayDog/stray-dog.png" width="1200">
+			<img id="stray-img" src="<%=cp %>/resource/img/strayDog/stray-dog.png">
 		</div>
+
+		<div class="list_type cgv skrollable skrollable-after" data-800-top="top:600px" data-600-top="top:135px" style="top: 450px; margin-left: -350px;">
+			<div class="box_img3">
+				<a href="/cj_now/view.asp?bs_seq=13863">
+					<img src="http://images.cj.net/upfiles/main_tsmm_brand/0000005737824006544571415.png"
+						alt="놀러오락! 오락 전문 채널" width="350px;">
+				</a>
+			</div>
+			<div class="box_explain">
+				<span class="line11"></span>
+				<span class="subject">놀러오락! 오락 전문 채널</span><span class="explain"><br></span>
+			</div>
+		</div>
+		
+		<div class="list_type cgv skrollable skrollable-after" data-800-top="top:600px" data-600-top="top:135px" style="top:350px; margin-left: 200px;">
+			<div class="box_img3">
+				<a href="/cj_now/view.asp?bs_seq=13863">
+					<img src="http://images.cj.net/upfiles/main_tsmm_brand/0000005737824006544571415.png"
+						alt="놀러오락! 오락 전문 채널" width="350px;">
+				</a>
+			</div>
+			<div class="box_explain">
+				<span class="line11"></span>
+				<span class="subject">놀러오락! 오락 전문 채널</span><span class="explain"><br></span>
+			</div>
+		</div>
+
 	</div>
 
 	<div class="bgDiv"></div>
@@ -1034,44 +1118,44 @@ $(function() {
 </div>
 
 <script>
+	$(function() {
+		$("#MOVE_TOP_BTN").click(
+				function() {
+					var st = 0;
+					var t1 = $("#t1").offset();
+					var t2 = $("#admin-mungstar-3").offset();
+					var t4 = $("#admin-mungstar-5").offset();
+					console.log(t1.top);
 
+					if ($(window).scrollTop() < t1.top - 1) {
+						st = t1.top;
+					} else if ($(window).scrollTop() >= t1.top - 1
+							&& $(window).scrollTop() < t2.top - 1) {
+						st = t2.top;
+					} else if ($(window).scrollTop() >= t2.top - 1
+							&& $(window).scrollTop() < 3600) {
+						st = 3600;
+					} else if ($(window).scrollTop() >= 3600
+							&& $(window).scrollTop() < t4.top - 1) {
+						st = t4.top;
+					} else {
+						st = 0;
+					}
+					$('html, body').animate({
+						scrollTop : st
+					}, 2000);
+					return false;
+				});
 
-$(function() {
-    $("#MOVE_TOP_BTN").click(function() {
-    	var st = 0;
-		var t1 = $("#t1").offset();
-		var t2 = $("#admin-mungstar-3").offset();
-		var t4 = $("#admin-mungstar-5").offset();
-		console.log(t1.top);
-   		
-    	if($(window).scrollTop() < t1.top-1){
-    		st = t1.top;
-    	}else if($(window).scrollTop() >= t1.top-1 && $(window).scrollTop() < t2.top-1){
-    		st = t2.top;
-    	}else if($(window).scrollTop() >= t2.top-1 && $(window).scrollTop() < 3600){
-    		st = 3600;
-    	}else if($(window).scrollTop() >= 3600 && $(window).scrollTop() < t4.top-1){
-    		st = t4.top;
-    	}else{
-    		st = 0;
-    	}
-        $('html, body').animate({
-            scrollTop : st
-        }, 1000);
-        return false;
-    });
-    
-    
-    $(window).scroll(function() {
-    	if($(window).scrollTop() < 4200){
-    		$("#MOVE_TOP_BTN").text("next");
-    	}else{
-    		$("#MOVE_TOP_BTN").text("top");
-    	}
-    });
-    
-});
+		$(window).scroll(function() {
+			if ($(window).scrollTop() < 4200) {
+				$("#MOVE_TOP_BTN").text("next");
+			} else {
+				$("#MOVE_TOP_BTN").text("top");
+			}
+		});
 
+	});
 </script>
 
 
