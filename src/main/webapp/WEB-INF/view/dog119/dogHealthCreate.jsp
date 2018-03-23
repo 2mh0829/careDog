@@ -107,7 +107,7 @@
 
 <div class="body-container">
 <h1 class="page-tit">애견 정보 글 입력</h1>
-<form id="dhCreatedForm" method="post" onclick="submitContents(this);">
+	<form name="dhCreatedForm" method="post" onsubmit="submitContents(this);">
 	<table class="table1 mt20">
 			<thead>
 				</thead><colgroup>
@@ -120,7 +120,7 @@
 					<th class="table1__th">제목</th>
 					<td class="table1__td">
 						<div class="input__form">
-							<input type="text" id="title" class="input1 wd100p">
+							<input type="text" id="title" name="title" class="input1 wd100p">
 						</div>
 					</td>
 				</tr>
@@ -176,25 +176,17 @@ function submitContents(elClickedObj) {
 	console.log(elClickedObj)
 	// 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("content").value를 이용해서 처리하면 됩니다.
 	oEditors.getById['content'].getIR();
-		var title = $("#title").val();
+		var title = $("#title").val().trim();
 		var content = $("#content").val();
 		console.log(title+":"+content);
-		if(title.trim().length<1){
+		if(! title){
 			alert("제목을 입력하세요");
-		} else{
-			$.ajax({
-				url:'<%=cp%>/dog119/dhInsert'
-				,type:'post'
-				,dataType:'json'
-				,data:{
-					"title":title,
-					"content":content
-				}
-				,success:function(data){
-					location.href='<%=cp%>/dog119/dogHealth';
-				}
-			});
+			return false;
 		}
+		
+		var f = document.dhCreatedForm;
+		 f.action = "<%=cp%>/dog119/dhInsert";
+		 return true;
 }
 
 function setDefaultFont() {

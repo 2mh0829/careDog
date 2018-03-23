@@ -13,6 +13,7 @@ ul, ol, li, dl, dt, dd, form, fieldset, input, select, label, textarea, img, a {
 * {margin:0;padding:0;box-sizing:border-box;}
 body {word-spacing:-1px;color:#666;font-size:14px;line-height:20px;font-family:'montserrat', 'noto', 'Roboto', sans-serif;letter-spacing:-0.04em}/* montserrat & Montserrat */
 ul, ol {list-style:none;}
+li {display:inherit;}
 table {border-spacing:0;border:0;}
 img, input, select, textarea, button {border:0; vertical-align:top; color:#666;}
 legend {position:absolute; overflow:hidden; visibility:hidden; height:0; z-index:-1;}
@@ -169,12 +170,107 @@ button {border:0;padding:0;box-shadow:none;cursor:pointer;}
     box-sizing: border-box;
     text-align: center;}
 </style>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<link href="<%=cp %>/resource/css/select2.min.css" rel="stylesheet" />
+<script type="text/javascript" src="<%=cp %>/resource/js/select2/i18n/ko.js"></script>
+<script type="text/javascript" src="<%=cp %>/resource/js/select2.min.js"></script>
 <script>
 $(document).ready(function(){
-	$('.emailSelect').select2();
+	$('.emailSelect').select2({
+		placeholder: "선택하세요"
+	});
 });
+
+function listPage(page){
+	
+}
+
+var data = [
+	{
+	"text":"회원/멤버십",
+	"children":[
+		{
+			"id":101,"text":"회원 가입/탈퇴"
+		},{
+			"id":102,"text":"로그인"
+		},{
+			"id":103,"text":"회원정보 변경"
+		},{
+			"id":104,"text":"CareDog 멤버십"
+		}]
+	},{
+		"text":"펫#",
+		"children":[
+			{
+				"id":201,"text":"주문/취소"
+			},{
+				"id":202,"text":"상품"
+			},{
+				"id":203,"text":"신용카드"
+			},{
+				"id":204,"text":"무통장입금"
+			},{
+				"id":205,"text":"쿠폰"
+			},{
+				"id":206,"text":"배송기간/배송비"
+			},{
+				"id":207,"text":"상품수령"
+			},{
+				"id":208,"text":"반품"
+			},{
+				"id":209,"text":"환불"
+			}
+		]
+	},{
+		"text":"서비스",
+		"children":[
+			
+		]
+	},{
+		"text":"멍스타그램",
+		"children":[
+			
+		]
+	},{
+		"text":"유기견",
+		"children":[
+			
+		]
+	},{
+		"text":"펫119",
+		"children":[
+			
+		]
+	},{
+		"text":"정보",
+		"children":[
+			
+		]
+	},{
+		"text":"이벤트",
+		"children":[
+			{
+				"id":801,"text":"이벤트 참여방법"
+			},{
+				"id":802,"text":"이벤트 당첨확인"
+			},{
+				"id":803,"text":"이벤트 사은품 관련"
+			}
+		]
+	}];
+
+$(document).ready(function(){
+	$('.questionSelect').select2({
+		placeholder:"항목을 선택하세요",
+		allowClear:true,
+		data: data
+	});
+});
+/* $('.questionSelect').trigger({
+    type: 'select2:select',
+    params: {
+        data: data
+    }
+}); */
 </script>
 
 <div class="body-container">
@@ -224,9 +320,9 @@ $(document).ready(function(){
 									<label for="NoticeEmail">E-mail</label>
 									<input type="text" title="아이디를 입력하세요" class="email" name="emailAddr1" placeholder="아이디를 입력하세요" style="width:152px;ime-mode:disabled;" > <!-- disabled="disabled" -->
 									<span class="des">@</span>
-									<input type="text" class="email" name="emailAddr2" title="직접 입력 하세요" placeholder="직접 입력 하세요" style="width:140px;ime-mode:disabled;" > <!-- disabled="disabled" -->
-									<input type="hidden" name="emailAddr" value="keh94k@naver.com">
-									<select id="emailSelect" class="emailSelect">
+									<input type="hidden" name="emailAddr" value="">
+									<select class="emailSelect" style="width: 152px;">
+										<option value=""></option>
 										<option value="hanmail.net">hanmail.net</option>
 										<option value="naver.com">naver.com</option>
 										<option value="nate.com">nate.com</option>
@@ -241,7 +337,7 @@ $(document).ready(function(){
 										<option value="hanafos.com">hanafos.com</option>
 										<option value="daum.net">daum.net</option>
 										<option value="chol.com">chol.com</option>
-										<option value="feechal.com">feechal.com</option>
+										<option value="feechal.com">feechal.com</option>									
 									</select>
 								</li>
 								<li>
@@ -273,17 +369,8 @@ $(document).ready(function(){
 					<tr>
 						<th scope="col"><label for="TypeInquiry">문의유형</label></th>
 						<td>
-							<select id="cnslLrgCate" title="문의유형 항목을 선택하세요" style="width:192px;">
-								<option value="" selected="selected">선택해주세요</option>
-								<option value="40">회원/멤버십</option>
-								<option value="10">주문/결제</option>
-								<option value="20">배송</option>
-								<option value="30">교환/반품/환불</option>
-								<option value="60">이벤트</option>
-								<option value="90">기타</option>
-							</select>
-							<select id="cnslMidCate" title="문의유형 항목을 선택하세요" style="width:192px;" disabled="disabled">
-								<option value="" selected="selected">선택해주세요</option>
+							<select class="questionSelect">
+								<option value=""></option>
 							</select>
 						</td>
 					</tr>

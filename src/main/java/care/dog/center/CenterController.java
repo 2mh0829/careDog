@@ -188,10 +188,10 @@ public class CenterController {
 		
 		Gongji dto = service.readGongji(num);
 		if(dto==null) {
-			return ".center/gongji";
+			return "center/gongji";
 		}
 		if(! info.getMemberId().equals(dto.getMemberId())) {
-			return ".center/gongji";
+			return "center/gongji";
 		}
 		
 		List<Gongji> listFile = service.listFile(num);

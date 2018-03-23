@@ -10,8 +10,13 @@
 .menu2 {
 	background: silver;
 }
-li{
+.center_list li{
 display: inline-block;
+}
+.center_list li > a{
+font-size: 20px;
+font-weight: 500;
+padding: 10px;
 }
 </style>
 

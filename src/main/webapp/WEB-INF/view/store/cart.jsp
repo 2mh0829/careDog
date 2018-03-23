@@ -95,19 +95,73 @@ th {
 <script>
 
 $(document).ready(function(){
-    //최상단 체크박스 클릭
+	
+	shipment(); //배송비 결정
+	finalPrice(); //총결제금액 결정
+	
+	//체크박스 전체체크된 상태로 시작
+	$("#checkAll").prop("checked",true);
+	
+	if($("#checkAll").prop("checked")){
+		
+        //input태그의 name이 check인 태그들을 찾아서 checked옵션을 true로 정의
+        $("input[name=check]").prop("checked",true);
+        checkBoxChange();
+        shipment(); //배송비 결정
+        finalPrice(); //총결제금액 결정
+    }
+	
+	$("input[name=check]").change(function(){
+		
+		checkBoxChange();
+		shipment(); //배송비 결정
+		finalPrice(); //총결제금액 결정
+	})
+	
+	//최상단 체크박스 클릭
     $("#checkAll").click(function(){
         //클릭되었으면
         if($("#checkAll").prop("checked")){
-            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
+            //input태그의 name이 check인 태그들을 찾아서 checked옵션을 true로 정의
             $("input[name=check]").prop("checked",true);
-            //클릭이 안되있으면
+            checkBoxChange();
+            shipment(); //배송비 결정
+            finalPrice(); //총결제금액 결정
+        //클릭이 안되있으면
         }else{
-            //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
+            //input태그의 name이 check인 태그들을 찾아서 checked옵션을 false로 정의
             $("input[name=check]").prop("checked",false);
+            checkBoxChange();
+            shipment(); //배송비 결정
+            finalPrice(); //총결제금액 결정
         }
     })
-})
+	
+});
+
+//장바구니 상품 총가격 계산
+function checkBoxChange() {
+	
+	var cartId = "";
+	var totalPrice = "";
+	var allPrice = "0";
+	
+ $("input[name=check]:checked").each(function() {
+	 
+	//선택된 체크박스의 value값이 cartId
+	cartId = $(this).val();
+	totalPrice = Number($("#totalPrice"+cartId+" p").text());
+	  
+	//int형으로 변환
+	allPrice = Number(allPrice);
+	
+	//cartId로 totalPrice불러와서 합계구하기 >> text수정
+	allPrice += totalPrice;
+	  
+  })
+  //console.log(allPrice);
+  $("#allPrice").text(allPrice);
+}
 
 function deleteCart(cartId) {
 	
@@ -125,7 +179,9 @@ function deleteCart(cartId) {
 			,dataType: "json"
 			,success: function(data) {
 				var state = data.state;
-				//console.log(state);
+				checkBoxChange();
+				shipment(); //배송비 결정
+				finalPrice(); //총결제금액 결정
 			}
 			,error: function(e) {
 				console.log(e.responseText);
@@ -136,6 +192,24 @@ function deleteCart(cartId) {
 	
 }
 
+//배송비 설정
+function shipment() {
+	var allPrice = $("#allPrice").text();
+	//3만원이상 구매시 배송비 무료
+	if(Number(allPrice) >= 30000){
+		$("#shipPrice").text("0");
+	}else{
+		$("#shipPrice").text("2500");
+	}
+}
+
+//총결제 금액 설정
+function finalPrice() {
+	var allPrice = $("#allPrice").text();
+	var shipPrice = $("#shipPrice").text();
+	var finalPrice = Number(allPrice) + Number(shipPrice);
+	$("#finalPrice").text(finalPrice);
+}
 
 </script>
 
@@ -168,12 +242,12 @@ function deleteCart(cartId) {
 							<div class="divTh" style="width: 100px;">삭제</div>
 						</th>
 					</tr>
-					<!-- 후에 tr추가되도록 수정 -->
+					
 					<c:forEach var="dto" items="${listCart }">
 					<tr id="cartTr${dto.cartId }">
 						<td>
 							<div class="divTd" style="width: 50px;">
-								<p><input type="checkbox" name="check"></p>
+								<p><input type="checkbox" name="check" id="check${dto.cartId }" value="${dto.cartId }" ></p>
 							</div>
 						</td>
 						<td>
@@ -194,15 +268,24 @@ function deleteCart(cartId) {
 						<td>
 							<div class="divTd" style="width: 100px;">
 								<p>
-									<select name="amountSel" class="select"
+									<select id="amountSel${dto.cartId }" name="sel" class="select"
 									style="width: 90px;">
-										<option value="${dto.amountAll }">${dto.amountAll }</option>
+										<option value="1" ${dto.amountAll == 1 ? "selected":"" }>1</option>
+										<option value="2" ${dto.amountAll == 2 ? "selected":"" }>2</option>
+										<option value="3" ${dto.amountAll == 3 ? "selected":"" }>3</option>
+										<option value="4" ${dto.amountAll == 4 ? "selected":"" }>4</option>
+										<option value="5" ${dto.amountAll == 5 ? "selected":"" }>5</option>
+										<option value="6" ${dto.amountAll == 6 ? "selected":"" }>6</option>
+										<option value="7" ${dto.amountAll == 7 ? "selected":"" }>7</option>
+										<option value="8" ${dto.amountAll == 8 ? "selected":"" }>8</option>
+										<option value="9" ${dto.amountAll == 9 ? "selected":"" }>9</option>
+										<option value="10" ${dto.amountAll == 10 ? "selected":"" }>10</option>
 									</select>
 								</p>
 							</div>
 						</td>
 						<td>
-							<div class="divTd" style="width: 100px;">
+							<div class="divTd" id="totalPrice${dto.cartId }" style="width: 100px;">
 								<p>${dto.totalPrice }</p>
 							</div>
 						</td>
@@ -220,6 +303,14 @@ function deleteCart(cartId) {
 					</c:forEach>
 				</tbody>
 				
+				<tfoot>
+					<tr height='50'>
+	            		<td colspan='5' style="font-size: 16px; font-weight: bold; padding: 10px;">
+	              		* 3만원이상 구매시 배송비 무료입니다.
+	            		</td>
+	           		</tr>
+				</tfoot>
+				
 			</table>
 			
 			<br><br><br>
@@ -230,15 +321,21 @@ function deleteCart(cartId) {
 				<table class="table table-condensed order-info-tbl-cart">
 					<tr>
 						<td><p class="left_txt">총 상품금액</p></td>
-						<td><p class="right_txt">0원</p></td>
+						<td>
+							<p class="right_txt"><strong id="allPrice">0</strong>원</p>
+						</td>
 					</tr>
 					<tr>
 						<td><p class="left_txt">배송비</p></td>
-						<td><p class="right_txt">2500원</p></td>
+						<td>
+							<p class="right_txt"><strong id="shipPrice">2500</strong>원</p>
+						</td>
 					</tr>
 					<tr>
 						<td><p class="left_txt">총 결제금액</p></td>
-						<td><p class="right_txt">0원</p></td>
+						<td>
+							<p class="right_txt"><strong id="finalPrice">0</strong>원</p>
+						</td>
 					</tr>
 					<tr>
 						<td>

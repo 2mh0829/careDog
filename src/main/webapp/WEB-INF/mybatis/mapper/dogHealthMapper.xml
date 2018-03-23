@@ -19,7 +19,7 @@
 	</if>
 </sql>
 
-<insert id="dhInsert" parameterType="care.dog.dog119.dogHealthVo.DogHealthVo">
+<insert id="dhInsert" parameterType="map">
 	INSERT INTO doghealth (boardNum,title, content, memberId) VALUES (doghealth_seq.NEXTVAL, #{title},#{content},#{memberId})
 </insert>
 

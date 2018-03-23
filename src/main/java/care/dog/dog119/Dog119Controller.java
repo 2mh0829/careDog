@@ -41,30 +41,19 @@ public class Dog119Controller {
 		return ".dog119.dog119Created";
 	}
 	
-	//애견 건강 메인
+	//애견 건강 메인 
 	@RequestMapping(value="/dog119/dogHealth") 
 	public String dogHealth(
-			@RequestParam Map<String, Object> map
-			,HttpServletRequest req, Model model
+			@RequestParam(defaultValue="1") int page,
+			@RequestParam(defaultValue="subject") String search,
+			@RequestParam(defaultValue="") String keyword,
+			HttpServletRequest req, Model model
 			) {
 		//search ==> 셀렉트박스
 		//keyword ==> 검색
 		
 		String cp = req.getContextPath();
-		String search = "";
-		String keyword="";
-		int page = 0;
-		if(map.get("page") ==null) {
-			page=1;
-		}else if(map.get("search") ==null){
-			search ="";
-		}else if(map.get("keyword") ==null){
-			keyword ="";
-		} else {
-			page = Integer.parseInt((String)map.get("page")); //현재페이지
-			search = (String)map.get("search");
-			keyword = (String)map.get("keyword");
-		}
+
 		int totalPage = 0;
 		int rows=10;
 		int dataCount = 0;
@@ -110,7 +99,7 @@ public class Dog119Controller {
 		}
 		
 		String query = "";
-		String dhListUrl = cp+"/dog119/dhList";
+		String dhListUrl = cp+"/dog119/dogHealth";
 		String dhArticle = cp+"/dog119/dhArticle?page="+page;
 		
 		if(keyword.length() != 0) {
@@ -122,7 +111,7 @@ public class Dog119Controller {
 		}
 		
 		if(query.length()!=0) {
-			dhListUrl = cp+"/dog119/dhList?"+query;
+			dhListUrl = cp+"/dog119/dogHealth?"+query;
 			dhArticle = cp+"/dog119/article?page="+page+"&"+query;
 		}
 		
@@ -257,19 +246,31 @@ public class Dog119Controller {
 		return model;
 	}
 	
-	@RequestMapping(value="/dog119/dhInsert")
-	@ResponseBody
-	public Map<String, Object> dhInsert(@RequestParam Map<String, Object> data, HttpSession session){
+	@RequestMapping(value="/dog119/dhInsert", method=RequestMethod.POST)
+	public String dhInsert(@RequestParam Map<String, Object> data, HttpSession session){
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
-		Map<String, Object> map = new HashMap<>();
 		String memberId = info.getMemberId();
-		DogHealthVo dto = new DogHealthVo();
-		dto.setTitle((String) data.get("title"));
-		dto.setContent((String) data.get("content"));
-		dto.setMemberId(memberId);
+		data.put("memberId", memberId);
 		
-		service.dhInsert(dto);
-		//"redirect:/dog119/dogHealth"
+		service.dhInsert(data);
+		return "redirect:/dog119/dogHealth";
+	}
+	
+	@RequestMapping(value="/dog119/sido")
+	@ResponseBody
+	public Map<String, Object> sido(){
+		Map<String, Object> map = new HashMap<>();
+		List<Map<String, Object>> list = service.sido();
+		map.put("list", list);
+		return map;
+	}
+	
+	@RequestMapping(value="/dog119/gugun")
+	@ResponseBody
+	public Map<String, Object> gugun(@RequestParam String admCode){
+		Map<String, Object> map = new HashMap<>();
+		List<Map<String, Object>> list = service.gugun(admCode);
+		map.put("list", list);
 		return map;
 	}
 }

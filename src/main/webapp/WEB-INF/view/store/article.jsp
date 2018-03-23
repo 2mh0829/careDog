@@ -297,23 +297,20 @@ th {
 
 <script type="text/javascript">
 
-/* 
-$('#dropul li').on('click', function(){
 
-	//alert($(this).attr('value'));
-	$('#dropdownMenu1').text($(this).text());
-
-});
-
-$('#myTab a').click(function (e) {
-	  e.preventDefault()
-	  $(this).tab('show')
-})
- */
- 
-$(function(){
+$(document).ready(function(){
+	
+	var a=$('#sel1').attr("data-optionId");
+	
+ 	if (a!=''){
+		alert(${optionId});
+		$('#sel1').val(${optionId});
+		optionChanged();
+		$('#sel1').attr("data-optionId",'');
+ 	}
+	
 	listPage(1);
-});
+})
 
 function listPage(page) {
 	var url="<%=cp%>/store/listProductReply";
@@ -332,64 +329,80 @@ function listPage(page) {
 }
 
 $(function() { 
-	
+
 	$("body").on("change", "#sel1", function() {
-		//console.log($("#sel1").val());
-		var text = $("#sel1").text(); //optionContent
-		var value = $("#sel1").val(); //optionId
-		var price = ${dto.sellingPrice };
-		var str = "";
-		var i = 0;
-		str += "<div id='option_content"+i+"' class='option_total_content'>";
-		str += "<div style='height: 40px;'>";
-		str += "<p style='float: left; font-size: 15px; font-weight: bold;'>"+text+"</p>";
-		str += "<input type='hidden' value='"+ value +"' id='optionId'>";
-		str += "<p style='float: right;'>";
-		str += "<button type='button' class='btn btn-default delOptionBtn' onclick='delete_option("+i+")'>X</button>";
-		str += "</p>";
-		str += "</div>";
-		str += "<div style='clear: both; height: 50px;'>";
-		str += "<select id='amount' name='amount' class='form-control' style='width: 60px; float: left;'>";
-		str += "<option value='1'>1</option>";
-		str += "<option value='2'>2</option>";
-		str += "<option value='3'>3</option>";
-		str += "<option value='4'>4</option>";
-		str += "<option value='5'>5</option>";
-		str += "<option value='6'>6</option>";
-		str += "<option value='7'>7</option>";
-		str += "<option value='8'>8</option>";
-		str += "<option value='9'>9</option>";
-		str += "<option value='10'>10</option>";
-		str += "</select>";
-		str += "<p style='float: right; font-size: 20px; font-weight: bold;'>"+price+"원</p>";
-		str += "</div>";
-		str += "</div>";
-		
-		$("#option_total").append(str);
-		
-		$("body").on("change", "#amount", function() {
-			//console.log($("#opt_amount").val());
-			var final_price = $("#amount").val() * price;
-			//console.log(final_price);
-			
-			$("#changePrice").text(final_price);
-			
-		});
-		
+
+		optionChanged();
 	});
 	
 });
 
-function delete_option(num) {
-	$("#option_content" + num).remove(); //옵션삭제
-	$("#changePrice").text("0"); //가격 원상태로
+function optionChanged(){
+	//console.log($("#sel1").val());
+	var value = $("#sel1").val(); //optionId
+	var text = $("#sel1 option:selected").text(); //optionContent
+	var price = ${dto.sellingPrice };
+	var str = "";
+	var i = 0;
+	str += "<div id='option_content"+i+"' class='option_total_content'>";
+	str += "<div style='height: 40px;'>";
+	str += "<p style='float: left; font-size: 15px; font-weight: bold;'>"+text+"</p>";
+	str += "<input type='hidden' value='"+ value +"' id='optionId'>";
+	str += "<p style='float: right;'>";
+	str += "<button type='button' class='btn btn-default delOptionBtn' onclick='delete_option("+i+")'>X</button>";
+	str += "</p>";
+	str += "</div>";
+	str += "<div style='clear: both; height: 50px;'>";
+	str += "<select id='amount' name='amount' class='form-control' style='width: 60px; float: left;'>";
+	str += "<option value='1'>1</option>";
+	str += "<option value='2'>2</option>";
+	str += "<option value='3'>3</option>";
+	str += "<option value='4'>4</option>";
+	str += "<option value='5'>5</option>";
+	str += "<option value='6'>6</option>";
+	str += "<option value='7'>7</option>";
+	str += "<option value='8'>8</option>";
+	str += "<option value='9'>9</option>";
+	str += "<option value='10'>10</option>";
+	str += "</select>";
+	str += "<p style='float: right; font-size: 20px; font-weight: bold;' id='dtoPrice'>"+price+"원</p>";
+	str += "</div>";
+	str += "</div>";
+	
+	$("#option_total").append(str);
+	
+	$("body").on("change", "#amount", function() {
+		
+		var final_price = $("#amount").val() * price;
+		
+		$("#changePrice").text(final_price);
+		
+	});
 }
 
+//옵션 삭제시
+function delete_option(num) {
+	var price = $("#dtoPrice").text();
+	
+	$("#option_content" + num).remove(); //옵션삭제
+	$("#changePrice").text("price"); //가격 원상태로(dto의 sellingPrice)
+}
+
+//장바구니 버튼 클릭시
 function listCart() {
 	var url = "<%=cp %>/store/stack";
 	var productId = $("#productId").val();
 	var amount = $("#amount").val();
 	var optionId = $("#optionId").val();
+
+	if(memberInfo == null){
+		if(confirm("로그인이 필요한 서비스입니다.")){
+			location.href="<%=cp%>/member/login";
+			<%-- location.href = "<%=cp%>/store/storeLogin?productId="+productId+"&optionId="+optionId; --%>
+		}else
+			return;
+	} 
+ 	//로그인 체크
 	var data = {productId:productId, amount:amount, optionId:optionId};
 	//console.log(data);
 	$.ajax({
@@ -398,13 +411,13 @@ function listCart() {
 		,type: "post"
 		,dataType: "json"
 		,success: function(data) {
-			var state = data.state;
+			 var state = data.state;
 			if(state==1){
-				if(confirm("장바구니에 상품이 담겼습니다. 장바구니로 이동하시겠습니까?"))
+				if(confirm("장바구니에 상품이 담겼습니다. 장바구니로 이동하시겠습니까?")){
 					location.href = "<%=cp%>/store/cart";
-				else
+				}else
 					return;
-			}
+			} 
 		}
 		,error: function(e) {
 			console.log(e.responseText);
@@ -427,7 +440,8 @@ function listCart() {
 		
 		<!-- 오른쪽 부분-->
 		<div class="right_area">
-		
+		<input id="memberInfo" type="hidden" value="${memberId }">
+			
 			<!-- 상품정보 테이블 -->
 			<div class="product_info">
 			
@@ -463,9 +477,9 @@ function listCart() {
 			<!-- 옵션 박스 -->
 			<div class="product_option_box">
 			 
-				 <select class="form-control" id="sel1">
-	        		<option selected="selected">옵션을 선택해주세요.</option>
-	        		<c:forEach var="optionDto" items="${list_option}">
+				 <select class="form-control" data-optionId="${optionId }" id="sel1">
+	        		<option selected="selected" disabled="disabled">옵션을 선택해주세요.</option>
+	        		<c:forEach var="optionDto"  items="${list_option}">
 	        			<option value="${optionDto.optionId }">${optionDto.optionContent }</option>
 	        		</c:forEach>
 	      		</select>
@@ -479,7 +493,7 @@ function listCart() {
 			<div id="product_total_price" class="product_total_price" style="clear: both;">
 				<span class="txt_title">상품금액 합계</span>
 				<span class="txt_content">
-					<span id="changePrice" class="txt_num">0</span>원
+					<span id="changePrice" class="txt_num">${dto.sellingPrice }</span>원
 				</span>
 			</div>
 			

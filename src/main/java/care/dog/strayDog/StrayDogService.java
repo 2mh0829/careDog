@@ -13,4 +13,7 @@ public interface StrayDogService {
 	public Map<String, Object> pagenation(Map<String, Object> model);
 	
 	public ArrayList<HashMap<String, Object>> strayDog(Map<String, Object> model); //유기견 리스트 호출
+	
+	//자원봉사 페이지
+	public int volunteerApply(Map<String, Object> map);
 }
