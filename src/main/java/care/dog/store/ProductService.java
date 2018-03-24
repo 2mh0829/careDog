@@ -23,5 +23,6 @@ public interface ProductService {
 	public int dataCountCart();
 	public List<Cart> listCart(Map<String, Object> map);
 	public int deleteCart(int cartId);
+	public int updateCart(Map<String, Object> map);
 
 }

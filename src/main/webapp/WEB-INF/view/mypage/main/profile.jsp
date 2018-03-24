@@ -5,15 +5,21 @@
 <%
 	String cp = request.getContextPath();
 %>
+<style>
+.myPage-profile {
+	width: 100%;
+	float:left;
+	margin-top:15px;
+	margin-bottom:15px;
+	min-height:100px;
+	padding: 15px;
+	border-radius:5px;
+background-color:white;
+}
+</style>
 
-<div class="bodyFrame4" id="myPage-content" style="margin-bottom: 20px;">
-	<div class="myPage-body-content" style="padding-bottom: 0px;">
-		<div
-			style="width: 100%; height: 30px; line-height: 30px; border-bottom: 1px solid #212121;">
-			<b>회원소개</b>
-		</div>
-
-		<table
+	<div class="myPage-profile" style="padding-bottom: 0px;">
+			<table
 			style="width: 100%; margin: 0px auto 10px; border-spacing: 0px;">
 			<tr height="40">
 				<td width="100" style="text-align: left;"><label
@@ -60,6 +66,4 @@
 				<td colspan="2" height="1" bgcolor="#cccccc"></td>
 			</tr>
 		</table>
-
 	</div>
-</div>

@@ -390,19 +390,22 @@ function delete_option(num) {
 
 //장바구니 버튼 클릭시
 function listCart() {
-	var url = "<%=cp %>/store/stack";
-	var productId = $("#productId").val();
-	var amount = $("#amount").val();
-	var optionId = $("#optionId").val();
+	
+	var memberInfo = $("#memberInfo").val();
 
-	if(memberInfo == null){
+	if(memberInfo == null || memberInfo == ""){
 		if(confirm("로그인이 필요한 서비스입니다.")){
 			location.href="<%=cp%>/member/login";
 			<%-- location.href = "<%=cp%>/store/storeLogin?productId="+productId+"&optionId="+optionId; --%>
 		}else
 			return;
 	} 
- 	//로그인 체크
+	
+	var url = "<%=cp %>/store/stack";
+	var productId = $("#productId").val();
+	var amount = $("#amount").val();
+	var optionId = $("#optionId").val();
+	
 	var data = {productId:productId, amount:amount, optionId:optionId};
 	//console.log(data);
 	$.ajax({

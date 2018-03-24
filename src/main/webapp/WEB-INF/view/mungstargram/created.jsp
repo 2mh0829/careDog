@@ -228,7 +228,7 @@ holder.ondrop = function(e) {
 	}
 }
 
-/* function previewfile(file) {
+function previewfile(file) {
 	var reader = new FileReader();
 	reader.onload = function(event) {
 		var image = new Image();
@@ -246,7 +246,7 @@ holder.ondrop = function(e) {
 	};
 
 	reader.readAsDataURL(file);
-} */
+}
 
 function deleteImg(num) {
 	$("#"+num).hide('fade', 300, function() {

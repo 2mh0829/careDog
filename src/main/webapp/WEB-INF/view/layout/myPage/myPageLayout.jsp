@@ -52,31 +52,23 @@
 		<tiles:insertAttribute name="header" />
 	</div>
 	<div class="myPage-header">
-
 		<tiles:insertAttribute name="myPageHeader" />
-
 	</div>
 	<div class="myPage-HeaderBetweenBodyLine"></div>
-	<div class="myPage-layout">
-		<div class="myPage-body">
-			<div class="myPage-body-header">
-				<tiles:insertAttribute name="myPageLeft" />
-			</div>
-			<div class="myPage-body-left">
-				<tiles:insertAttribute name="myPageLeft2" />
-				<tiles:insertAttribute name="myPageLeft3" />
-			</div>
-			<div class="myPage-body-right">
-				<div class="myPage-content">
-					<tiles:insertAttribute name="myPageBody" />
-				</div>
-				<div class="myPage-content2">
-					<tiles:insertAttribute name="myPageBody2" />
-				</div>
-			</div>
+	<div class="myPage-background">	<div class="myPage-layout">
+		<div class="myPage-layout-left">
+			<tiles:insertAttribute name="myPageLeft" />
+		</div>
+		<div class="myPage-layout-body">
 
+			<tiles:insertAttribute name="myPageBody" />
+		</div>
+		<div class="myPage-layout-right">
+			<tiles:insertAttribute name="myPageRight" />
 		</div>
 	</div>
+	</div>
+	
 	<div class="header-bottom"></div>
 </body>
 </html>

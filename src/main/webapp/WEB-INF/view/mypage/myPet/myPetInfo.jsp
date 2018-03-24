@@ -7,10 +7,11 @@
 %>
 <style>
 .myPetInfo-frame {
-	margin-top: 15px;
-	margin-bottom:15px;
 	border-radius:5px;
-	border: 1px solid #ccc;
+	width:100%;
+	float:left;
+		padding:15px;
+		background-color:white;
 }
 
 .myPetInfo-header {
@@ -39,14 +40,10 @@ $(function(){
 		})
 	});
 
-	function get() {
-		var a = console.log(a);
-	}
 </script>
 <div class="myPetInfo-frame">
 	<div class="myPetInfo-header">강아지 정보 보기</div>
 	<div class="myPetInfo-body">
-		개정보<br> 말티즈<br> 15살<br> 수컷<br>
 	</div>
 
 </div>

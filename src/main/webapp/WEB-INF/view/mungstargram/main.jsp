@@ -12,6 +12,10 @@
 	background: white;
 }
 
+.modal-backdrop {
+	z-index: auto;
+}
+
 div.modal-out {
 	display: table;
 	margin: 0 auto;
@@ -250,6 +254,12 @@ div.desc {
 	float: right;
 }
 
+#bottomBtn button {
+	border-radius: 10px;
+    background: #a98cc2;
+    outline: none;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -301,7 +311,7 @@ function printList(data) {
 			out += "<div style='background: black;'>";
 			out += "<div id='article" + num + "' class='gallery' onclick='article(" + num + ");'>";
 			out += "<input id='photoCount" + num + "' type='hidden' value='" + photoCount + "'>"
-			out += "<img src='<%=cp%>/uploads/mungstargram/" + filename + "'>";
+			out += "<img src='<%=cp%>/uploads/mungstargram/" + filename + "' onerror='this.src=\"<%=cp %>/resource/img/noPhoto.jpg\"'>";
 			
 			if(photoCount > 1){
 				out += "<div style='position: absolute; top: 10px; right: 10px;'>";
@@ -389,7 +399,7 @@ function openModal(data, num) {
 		$("#rightBtn").css("visibility", "visible");
 		$("#bottomBtn").css("visibility", "visible");
 		for(var i=0; i<photoList.length; i++){
-			$("#bottomBtn").append("<button onclick='setPhoto(" + i + ");'>o</button>&nbsp;");
+			$("#bottomBtn").append("<button onclick='setPhoto(" + i + ");'>&nbsp;</button>&nbsp;");
 		}
 	}else{
 		$(".imgVigible").css("visibility", "hidden");

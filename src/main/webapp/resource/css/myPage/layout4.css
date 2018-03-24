@@ -1,16 +1,59 @@
 @CHARSET "UTF-8";
 /* caredog */
+html{
+	height:100%;
+}
+body{
+	height:100%;
+}
+.myPage-background{
+		height:100%;
+		width:100%;
+}
 .myPage-layout {
-	
+	clear: both;
+	height:100%;
 	width:1300px;
 	padding-top:20px;
 	margin:0px auto;
+    min-height: 600px;
+    
 }
+.myPage-layout-left{
+	width:250px;
+			float:left;
+			margin-right:50px;
+	font-size: 9pt;
+}
+.myPage-layout-right {
+	float:left;
+	width:250px;
+	margin-top:15px;
+	text-align:left;
+	min-height:600px;
+	margin-left: 50px;
+}
+.myPage-layout-body{
+	background-color:white;
+padding:15px;
+	width:700px;
+	float:left;
+}
+
 .myPage-header {
 	
 	width:1300px;
 	margin:0px auto;
 	 clear: both;
+}
+.myPage-container{
+	    clear:both;
+    width:100%;
+    min-height: 600px;
+    padding-top: 100px;    
+    text-align:left;
+	padding-right: 0px;
+	padding-left: 0px;
 }
 
 .myPage-HeaderBetweenBodyLine{
@@ -63,58 +106,7 @@
     font-weight: bold;
 }
 
-.myPage-body {
 
-	clear: both;
-}
 
-.myPage-body-left{
-			float:left;
-	font-size: 9pt;
-	
-}
-.sch{
-	width:400px;
-		border-radius:5px;
-	border: 1px solid #ccc;
-}
-.myPage-left {
-
-	clear:both;
-	text-align:left;
-/* 	min-height:150px; */
-	width:400px;
-/* 	border:1px solid #ccc; */
-	
-	border-radius:5px;
 }
 
-.profile-photo {
-	clear:both;
-	margin:0px auto;
-	float: left;
-	/* height:164px;
-	width:164px; */
-	/* border:1px solid #ccc; */
-	padding: 2px 2px;
-}
-
-.myPage-body-right {
-	float:left;
-	margin-top:15px;
-	text-align:left;
-	min-height:600px;
-	padding-right: 0px;
-}
-
-.bodyFrame4 {
-	padding-left: 15px;
-}
-
-.myPage-body-content {
-	border:1px solid #ccc;
-	width: 784px;
-	min-height:100px;
-	border-radius:5px;
-	padding: 10px;
-}

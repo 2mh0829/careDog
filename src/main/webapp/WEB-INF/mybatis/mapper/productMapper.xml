@@ -113,7 +113,7 @@
 	SELECT * FROM (
 		SELECT ROWNUM rnum, tb.* FROM (
 			SELECT cartId, amountAll, to_char(enrollDate, 'yyyy.mm.dd') enrollDate, 
-           c.productId, productName, brand, (amountAll * sellingPrice) totalPrice, 
+           c.productId, productName, brand, sellingPrice, (amountAll * sellingPrice) totalPrice, 
            memberId, c.optionId, optionContent
 			FROM cart c
             join productOption o
@@ -131,6 +131,11 @@
 	<delete id="deleteCart" parameterType="Integer">
 	delete from cart where cartId = #{cartId}
 	</delete>
+	
+	<update id="updateCart" parameterType="map">
+	update cart set enrolldate=sysdate, amountAll=#{amount}
+	where cartId=#{cartId} and productId=#{productId} and optionId=#{optionId} and memberId=#{memberId}
+	</update>
 	
 </mapper>
 

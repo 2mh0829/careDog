@@ -6,6 +6,6 @@
    String cp = request.getContextPath();
 %>
 
- <div class="bodyFrame3">
-    블로그
+ <div class="myPage-container">
+
  </div>

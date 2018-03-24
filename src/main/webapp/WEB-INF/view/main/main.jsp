@@ -50,8 +50,10 @@ video {
 }
 
 .bgDiv {
+	position: relative;
+	top: -600px;
 	width: 100%;
-	height: 3000px;
+	height: 3400px;
 	background: white;
 	-webkit-transition: 1s;
 	transition: 1s;
@@ -77,7 +79,6 @@ video {
 	outline: none;
 }
 
-
 /* -------------------------- */
 .container {
 	padding-top: 0;
@@ -88,6 +89,7 @@ video {
 	top: -65px;
 	box-sizing: border-box;
 	width: 100%;
+	height: 5500px;
 }
 
 #admin-mungstar-1 {
@@ -525,6 +527,10 @@ li {
 	z-index: 5;
 	top: 1500px;
 	width: 100%;
+}
+
+#plain-area {
+	width: 100%;
 	overflow: hidden;
 }
 
@@ -533,6 +539,73 @@ li {
 	-webkit-transition: margin-left 10s linear;
 	transition: margin-left 10s linear;
 }
+
+#admin-mungstar-4 .plain:hover {
+	cursor: pointer;
+}
+
+/* --------------------------------------------------- */
+#admin-mungstar-5 {
+	position: relative;
+	z-index: 5;
+	top: 1900px;
+	width: 100%;
+}
+
+#admin-mungstar-5 #stray-img {
+	width: 100%;
+	-webkit-transform: scale(0);
+	-ms-transform: scale(0);
+	transform: scale(0);
+}
+
+.box_explain {
+	position: relative;
+	top: -80px;
+	left: 0;
+	color: #fff;
+}
+
+.box_explain .line11 {
+	width: 80px;
+	height: 4px;
+	background: white;
+	display: block;
+	margin-bottom: 50px;
+}
+
+.box_explain .subject {
+	margin-top: 50px;
+}
+
+.list_type.cgv {
+	position: absolute;
+	display: inline-block;
+	left: 50%;
+	top: 135px;
+}
+
+
+/* ------------------------------------------------- */
+
+#admin-mungstar-6 {
+	position: relative;
+    z-index: 5;
+    top: 2400px;
+    width: 100%;
+    
+}
+
+#last {
+	position: relative;
+	top: 200px;
+	opacity: 0;
+    -webkit-transition: opacity 2s, top 2s;
+	transition: opacity 2s, top 2s;
+}
+
+
+
 </style>
 
 <script>
@@ -552,7 +625,17 @@ $(function() {
 	
 	$(window).scroll(function() {
 		if($(window).scrollTop() >= 100) {
-			if($(window).scrollTop() >= 4200){
+			if($(window).scrollTop() >= 4800){
+				$(".bgDiv").one("hover", function() {
+					$(".bgDiv").css("background", "white");
+				});
+				$(".bgDiv").trigger("hover");
+			}else if($(window).scrollTop() >= 4600){
+				$(".bgDiv").one("hover", function() {
+					$(".bgDiv").css("background", "#5f84bd");
+				});
+				$(".bgDiv").trigger("hover");
+			}else if($(window).scrollTop() >= 4200){
 				$(".plain").css("transition", "margin-left .1s");
 				$(".plain").one("hover", function() {
 					$(".plain").css("margin-left", "1000px");
@@ -565,12 +648,7 @@ $(function() {
 					$(".plain").css("margin-left", "-1000px");
 				});
 				$(".plain").trigger("hover");
-				
-				$(".bgDiv").one("hover", function() {
-					$(".bgDiv").css("background", "white");
-				});
-				$(".bgDiv").trigger("hover");
-			}else if($(window).scrollTop() >= 3400){
+			}else if($(window).scrollTop() >= 3800){
 				$(".bgDiv").one("hover", function() {
 					$(".bgDiv").css("background", "#5f84bd");
 				});
@@ -581,23 +659,26 @@ $(function() {
 				$(".plain").one("hover", function() {
 					$(".plain").css("margin-left", "-1000px");
 				});
-				$(".plain").trigger("hover");	
-			}else if($(window).scrollTop() >= 2900){
+				$(".plain").trigger("hover");
+				
 				$(".bgDiv").one("hover", function() {
-					$(".bgDiv").css("background", "#39b0a2");
+					$(".bgDiv").css("background", "#b386c2");
 				});
 				$(".bgDiv").trigger("hover");
+				
+				$(".list_thumb li").one("hover", function() {
+					$(".list_thumb li:eq(0)").css("margin-top", "0");
+					$(".list_thumb li:eq(1)").css("margin-top", "60px");
+					$(".list_thumb li:eq(2)").css("margin-top", "0");
+					$(".list_thumb li:eq(3)").css("margin-top", "60px");
+				});
+				$(".list_thumb li").trigger("hover");
 			}else if($(window).scrollTop() >= 2500){
 				$(".plain").css("transition", "margin-left .1s");
 				$(".plain").one("hover", function() {
 					$(".plain").css("margin-left", "1000px");
 				});
 				$(".plain").trigger("hover");
-				
-				$(".list_thumb li:eq(0)").css("transition", "margin-top .8s ease-in-out 0.1s");
-				$(".list_thumb li:eq(1)").css("transition", "margin-top .8s ease-out 0.6s");
-				$(".list_thumb li:eq(2)").css("transition", "margin-top .8s ease-in-out 0.2s");
-				$(".list_thumb li:eq(3)").css("transition", "margin-top .8s ease-out 0.4s");
 				
 				$(".list_thumb li").one("hover", function() {
 					$(".list_thumb li:eq(0)").css("margin-top", "0");
@@ -621,6 +702,11 @@ $(function() {
 				});
 				$(".list_thumb li").trigger("hover");
 				
+				$(".list_thumb li:eq(0)").css("transition", "margin-top .8s ease-in-out 0.1s");
+				$(".list_thumb li:eq(1)").css("transition", "margin-top .8s ease-out 0.6s");
+				$(".list_thumb li:eq(2)").css("transition", "margin-top .8s ease-in-out 0.2s");
+				$(".list_thumb li:eq(3)").css("transition", "margin-top .8s ease-out 0.4s");
+				
 				$(".bgDiv").one("hover", function() {
 					$(".bgDiv").css("background", "white");
 				});
@@ -641,7 +727,13 @@ $(function() {
 			if(ts2 <= 0){
 				ts2 = 0;
 			}
-			if(ts >= 400){
+			var ts3 = ($(window).scrollTop() - 3900) / 500;
+			if(ts3 >= 1)
+				ts3 = 1;
+			
+			if($(window).scrollTop() >= 3900){
+				$("#admin-mungstar-5 #stray-img").css("transform", "scale("+ts3+")");
+			}else if(ts >= 400){
 				ts = 100;
 				$("#a-second").one("hover", function() {
 					$("#square-2").html("");
@@ -715,7 +807,7 @@ $(function() {
 			<source src="<%=cp%>/resource/vidio/main_vidio.mp4">
 		</video>
 
-		<a href="" id="a-first">
+		<a href="<%=cp %>/service" id="a-first">
 			<div class="btn_more2">
 				더보기&nbsp;<span class="glyphicon glyphicon-arrow-right"></span>
 			</div>
@@ -843,7 +935,7 @@ $(function() {
 						<!-- [d] : now 스타일 -->
 						<div class="img_thumb box_poster">
 							<!-- box_poster -->
-							<a href="./cj_now/view.asp?bs_seq=13866&amp;schBsTp=3">
+							<a href="<%=cp %>/store/list">
 								<div class="img_box">
 
 									<img
@@ -857,7 +949,7 @@ $(function() {
 						<div class="box_title txt_thumb_type">
 							<!--div class="date"></div-->
 							<!-- 2017.12.05 -->
-							<strong class="tit">사회공헌활동</strong>
+							<strong class="tit">사료 & 간식</strong>
 						</div>
 						<div class="txt_thumb txt_thumb_type">
 							<div>
@@ -884,7 +976,7 @@ $(function() {
 						<!-- [d] : now 스타일 -->
 						<div class="img_thumb box_poster">
 							<!-- box_poster -->
-							<a href="./cj_now/view.asp?bs_seq=13845&amp;schBsTp=1">
+							<a href="<%=cp %>/store/list">
 								<div class="img_box">
 
 									<img
@@ -898,7 +990,7 @@ $(function() {
 						<div class="box_title txt_thumb_type">
 							<!--div class="date"></div-->
 							<!-- 2017.12.05 -->
-							<strong class="tit">뉴스</strong>
+							<strong class="tit">목욕 & 위생용품</strong>
 						</div>
 						<div class="txt_thumb txt_thumb_type">
 							<div>
@@ -925,7 +1017,7 @@ $(function() {
 						<!-- [d] : now 스타일 -->
 						<div class="img_thumb box_poster">
 							<!-- box_poster -->
-							<a href="./cj_now/view.asp?bs_seq=13867&amp;schBsTp=2">
+							<a href="<%=cp %>/store/list">
 								<div class="img_box">
 
 									<img
@@ -939,7 +1031,7 @@ $(function() {
 						<div class="box_title txt_thumb_type">
 							<!--div class="date"></div-->
 							<!-- 2017.12.05 -->
-							<strong class="tit">포커스</strong>
+							<strong class="tit">식기 & 하우스</strong>
 						</div>
 						<div class="txt_thumb txt_thumb_type">
 							<div>
@@ -967,7 +1059,7 @@ $(function() {
 						<!-- [d] : now 스타일 -->
 						<div class="img_thumb box_poster">
 							<!-- box_poster -->
-							<a href="./cj_now/view.asp?bs_seq=13872&amp;schBsTp=3">
+							<a href="<%=cp %>/store/list">
 								<div class="img_box">
 
 									<img
@@ -981,7 +1073,7 @@ $(function() {
 						<div class="box_title txt_thumb_type">
 							<!--div class="date"></div-->
 							<!-- 2017.12.05 -->
-							<strong class="tit">사회공헌활동</strong>
+							<strong class="tit">외출 & 패션</strong>
 						</div>
 						<div class="txt_thumb txt_thumb_type">
 							<div>
@@ -1008,56 +1100,115 @@ $(function() {
 	</div>
 	
 	<div id="admin-mungstar-4">
-		<div><img class="plain" src="<%=cp %>/resource/img/store/plain.png"></div>
+		
+		<div style="position: absolute; top: -100px; left: 400px;"><img src="http://images.cj.net/images/index/main_csv_deco_08.png"></div>
+		<div style="position: absolute; top: 150px; left: 250px;"><img src="http://images.cj.net/images/index/main_csv_deco_07.png"></div>
+		<div style="position: absolute; top: -200px; right: 150px;"><img src="http://images.cj.net/images/index/main_csv_deco_06.png"></div>
+		<div style="position: absolute; top: -20px; left: 850px;"><img src="http://images.cj.net/images/index/main_csv_deco_05.png"></div>
+		<div style="position: absolute; top: 250px; left: 600px;"><img src="http://images.cj.net/images/index/main_csv_deco_04.png"></div>
+		<div style="position: absolute; top: 200px; left: 650px;"><img src="http://images.cj.net/images/index/main_csv_deco_03.png"></div>
+		<div style="position: absolute; top: 150px; left: 50px;"><img src="http://images.cj.net/images/index/main_csv_deco_02.png"></div>
+		<div style="position: absolute; top: 200px; left: 1200px;"><img src="http://images.cj.net/images/index/main_csv_deco_01.png"></div>
+			
+		<div id="plain-area"><img class="plain" src="<%=cp %>/resource/img/store/plain.png" onclick="location.href='<%=cp %>/store'"></div>
 	</div>
 	
-	<div class="bgDiv"></div>
+	<div id="admin-mungstar-5">
+		<div align="center">
+			<img id="stray-img" src="<%=cp %>/resource/img/strayDog/stray-dog.png">
+		</div>
+
+		<div class="list_type cgv skrollable skrollable-after" data-800-top="top:600px" data-600-top="top:135px" style="top: 480px; margin-left: -350px;">
+			<div class="box_img3">
+				<a href="<%=cp %>/strayDog/volunteer">
+					<img src="<%=cp %>/resource/img/strayDog/stray-main2.png" width="350px;">
+				</a>
+			</div>
+			<div class="box_explain">
+				<span class="line11"></span>
+				<span class="subject">자원봉사 신청하기</span><span class="explain"><br></span>
+			</div>
+		</div>
+		
+		<div class="list_type cgv skrollable skrollable-after" data-800-top="top:600px" data-600-top="top:135px" style="top:380px; margin-left: 200px;">
+			<div class="box_img3">
+				<a href="<%=cp %>/strayDog/support">
+					<img src="<%=cp %>/resource/img/strayDog/stray-main1.png" width="350px;">
+				</a>
+			</div>
+			<div class="box_explain">
+				<span class="line11"></span>
+				<span class="subject">유기견 후원하기</span><span class="explain"><br></span>
+			</div>
+		</div>
+
+	</div>
 	
+	<div id="admin-mungstar-6">
+		<div id="last" align="center">
+			<img src="<%=cp %>/resource/img/main-logo.png">
+		</div>
+	</div>
+
+	<div class="bgDiv"></div>
 	<div class="go-top"><button id="MOVE_TOP_BTN" class="btn">next</button></div>
 	
 </div>
 
 <script>
-
-var t1 = $("#t1").offset();
-
 $(function() {
-    $("#MOVE_TOP_BTN").click(function() {
-    	var st = 0;
-    	if($(window).scrollTop() < 1800){
-    		st = 1800;
-    	}else if($(window).scrollTop() >= 1800 && $(window).scrollTop() < t1.top){
-    		st = t1.top;
-    	}else if($(window).scrollTop() >= 2800 && $(window).scrollTop() < 3600){
-    		st = 3600;
-    	}else if($(window).scrollTop() >= 3600 && $(window).scrollTop() < 4200){
-    		st = 4200;
-    	}else{
-    		st = 0;
-    	}
-        $('html, body').animate({
-            scrollTop : st
-        }, 1000);
-        return false;
-    });
-    
-    
-    $(window).scroll(function() {
-    	if($(window).scrollTop() < 1800){
-    		$("#MOVE_TOP_BTN").text("next");
-    	}else if($(window).scrollTop() >= 1800 && $(window).scrollTop() < t1.top){
-    		$("#MOVE_TOP_BTN").text("next");
-    	}else if($(window).scrollTop() >= 2800 && $(window).scrollTop() < 3600){
-    		$("#MOVE_TOP_BTN").text("next");
-    	}else if($(window).scrollTop() >= 3600 && $(window).scrollTop() < 4200){
-    		$("#MOVE_TOP_BTN").text("next");
-    	}else{
-    		$("#MOVE_TOP_BTN").text("top");
-    	}
-    });
-    
-});
+	$("#MOVE_TOP_BTN").click(
+			function() {
+				var st = 0;
+				var t1 = $("#t1").offset();
+				var t2 = $("#admin-mungstar-3").offset();
+				var t3 = $("#plain-area").offset();
+				var t4 = $("#admin-mungstar-5").offset();
+				var t5 = $("#admin-mungstar-6").offset();
 
+				if ($(window).scrollTop() < t1.top - 1) {
+					st = t1.top;
+				} else if ($(window).scrollTop() >= t1.top - 1 && $(window).scrollTop() < t2.top - 1) {
+					st = t2.top;
+				} else if ($(window).scrollTop() >= t2.top - 1 && $(window).scrollTop() < t3.top - 301) {
+					st = t3.top - 300;
+				} else if ($(window).scrollTop() >= t3.top - 301 && $(window).scrollTop() < t4.top - 1) {
+					st = t4.top;
+				} else if ($(window).scrollTop() >= t4.top - 1 && $(window).scrollTop() < t5.top - 201) {
+					st = t5.top - 200;
+				} else {
+					st = 0;
+				}
+				$('html, body').animate({
+					scrollTop : st
+				}, 2000);
+				return false;
+			});
+
+	$(window).scroll(function() {
+		var last = $("#admin-mungstar-6").offset();
+		if ($(window).scrollTop() < last.top - 201) {
+			$("#MOVE_TOP_BTN").text("next");
+		} else {
+			$("#MOVE_TOP_BTN").text("top");
+		}
+		
+		if($(window).scrollTop() >= last.top - 300 && $(window).scrollTop() < last.top + 200){
+			$("#last").one("hover", function() {
+				$("#last").css("opacity", "1");
+				$("#last").css("top", "0");
+			});
+			$("#last").trigger("hover");
+		}else {
+			$("#last").one("hover", function() {
+				$("#last").css("opacity", "0");
+				$("#last").css("top", "200px");
+			});
+			$("#last").trigger("hover");
+		}
+	});
+
+});
 </script>
 
 

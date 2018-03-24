@@ -10,6 +10,13 @@
 <link rel="stylesheet" href="<%=cp%>/resource/fullcalendar/fullcalendar.print.min.css" media='print' type="text/css">
 
 <style type="text/css">
+.sch{
+	width:100%x;
+		border-radius:5px;
+	border: 1px solid #ccc;
+	float:right;
+}
+
 .hbtn {
 	font-family: "Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
     background-image:none;
@@ -114,7 +121,7 @@ $(function() {
 			header: {
 				left: 'prev,next today',
 				center: 'title',
-				right: 'month,agendaWeek,agendaDay,listMonth'
+				right: 'month,listMonth'
 			},
 			locale: 'ko',
 			selectable: true,
