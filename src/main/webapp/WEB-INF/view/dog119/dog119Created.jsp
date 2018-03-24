@@ -235,6 +235,10 @@ em,address { font-style:normal }
   transition:all 0.35s ease;
 }
 </style>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyBPA_xStX4VRi97SvEHjPOjZjlIC6aRWcs" charset="utf-8" type="text/javascript"></script>
+
 <script>
 $(document).ready(function(){
 	
@@ -284,34 +288,32 @@ function initialize() {
   var myOptions = {
     zoom: 15,
     center: myLatlng,
-    navigationControl: false,    // 눈금자 형태로 스케일 조절하는 컨트롤 활성화 선택.
+    navigationControl: true,    // 눈금자 형태로 스케일 조절하는 컨트롤 활성화 선택.
     navigationControlOptions: { 
         position: google.maps.ControlPosition.TOP_RIGHT,
         style: google.maps.NavigationControlStyle.DEFAULT // ANDROID, DEFAULT, SMALL, ZOOM_PAN
     },
     
-    streetViewControl: false,
+    streetViewControl: true,
 
-    scaleControl: false,    // 지도 축적 보여줄 것인지.
+    scaleControl: true,    // 지도 축적 보여줄 것인지.
     //scaleControlOptions: { position: google.maps.ControlPosition.TOP_RIGHT },
     
-    mapTypeControl: false, // 지도,위성,하이브리드 등등 선택 컨트롤 보여줄 것인지
+    mapTypeControl: true, // 지도,위성,하이브리드 등등 선택 컨트롤 보여줄 것인지
     mapTypeId: google.maps.MapTypeId.ROADMAP 
   }
   map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-  map.addListener('click', function(e) {
+  map.addListener('click', function(e) {  //마커 찍기
 	    placeMarkerAndPanTo(e.latLng, map);
-	});
   
-  google.maps.event.addListener(map, 'click', function(event){        // 지도클릭시 마커이동
-      moveMarker(event.latLng); 
-  });
+	});
+
 }
 
 //마커찍기
 function placeMarkerAndPanTo(latLng, map) {
-	//clearMark();
+	
   var marker = new google.maps.Marker({
     position: latLng,
     map: map
@@ -321,6 +323,7 @@ function placeMarkerAndPanTo(latLng, map) {
 
 //마크좌표 가져오기
 function getMarkPos(){
+	console.log(globalMarker);
     var pos=globalMarker.getPosition();
 
     //alert(pos.lat()+"/"+pos.lng());
@@ -330,7 +333,7 @@ function getMarkPos(){
     document.getElementById("posy").value = pos.lng();
 }
 
-/* function codeAddress() {
+ function codeAddress() {
     var address = document.getElementById("address").value;
     if(address=='검색할 주소를 입력하십시오.' || address==''){
         alert('검색할 주소를 입력하십시오.');
@@ -353,7 +356,7 @@ function getMarkPos(){
             alert("Geocode was not successful for the following reason: " + status);
         }
     });
-} */
+} 
     
 //지도 위의 마크 모두 삭제 - Refresh 말고 방법 없을까?
 function clearMark(){
@@ -365,12 +368,7 @@ function clearMark(){
 
     initialize();
 }
-    
-//지도 클릭시 마커 이동
-function moveMarker(loc){
-    //alert(loc);
-    globalMarker.setPosition(loc);
-}
+
 </script>
 <div class="body-container">
 	<div class="content">
@@ -381,7 +379,7 @@ function moveMarker(loc){
 		<p class="postform_alim">
 			<strong>( 개, 실종신고 )</strong> 개가 아닌 경우는 등록할 수 없습니다.<br>
 			1~6 단계에 따라 입력하시고, 에러발생시 
-			<a href="contact.php?gubun=suggest" onclick="window.open(this.href);return false;" class="tooltip" title="운영자에게">운영자에게</a> 알려주시면 조치해드리겠습니다. <br>
+			<a href="contact.php?gubun=suggest" onclick="window.open(this.href);return false;" class="tooltip1" title="운영자에게">운영자에게</a> 알려주시면 조치해드리겠습니다. <br>
 			<span class="stress">전화번호와 이메일주소는 로그인 사용자에 한해 볼 수 있으며, 이에 동의한 것으로 간주합니다.</span>
 		</p>
 		<div class="postform">
@@ -621,9 +619,7 @@ function moveMarker(loc){
 					</p>
 					<label> 
 					<span>실종지점 지도(
-					<a href="#" class="tooltip" title="* 아래의 지도는 선택사항이며, 필요한 분들은 실종지점 표시로 사용하세요.<br><br>
-					* 지도를 확대/축소/이동 하면서 지도위에 한번 클릭하면 해당 좌표가 자동으로 입력되며, 다시 클릭하면 새로운 지점이 선택됩니다.<br><br>
-					* 실종지점을 잘 모르는경우 대략적인 위치라도 선택하는것이 좋습니다.<br><br>* 지도 아래의 취소를 누르면 해당 좌표가 적용되지 않습니다." 
+					<a href="#" class="tooltip1" title="* 아래의 지도는 선택사항이며, 필요한 분들은 실종지점 표시로 사용하세요.&#13;&#13;* 지도를 확대/축소/이동 하면서 지도위에 한번 클릭하면 해당 좌표가 자동으로 입력되며, 다시 클릭하면 새로운 지점이 선택됩니다.&#13;&#13;* 실종지점을 잘 모르는경우 대략적인 위치라도 선택하는것이 좋습니다.&#13;&#13;* 지도 아래의 취소를 누르면 해당 좌표가 적용되지 않습니다."
 					onclick="return false;">지도사용법</a>) : </span>
 					
 <!-- 지도 호출 -->
@@ -644,7 +640,7 @@ function moveMarker(loc){
 					</label> 
 					<label>
 						<a href="#" onClick="return false;" id="attach">사진첨부하기</a>
-						(클릭하면 하단에 나타남, <a href="#" class="tooltip"
+						(클릭하면 하단에 나타남, <a href="#" class="tooltip1"
 						title="1. 첫번째(두세번째는 무관) 사진에, 전단파일이나 복잡하게 합성한 사진을 첨부하는 경우 편집됩니다(편집된 파일은 수정안됨)&lt;br&gt;&lt;br&gt;2. 사진첨부가 되지않을 경우, 사진없이 등록하시고 사진은 운영자에게 보내주시면 올려드립니다.&lt;br&gt;&lt;br&gt;3. 첨부가능한 파일형식 : 이미지파일(jpg, gif, png), 10M"
 						onClick="return false;">
 						<span class="stress">주의사항</span></a>) :
@@ -719,7 +715,7 @@ function moveMarker(loc){
 						<span> 1. 정보가 잘못 입력된 경우, 수정될 수 있습니다.<br>
 							2. 재등록 허용기간은 5일 입니다.<br> 3. 다른 이메일로 중복등록하는(된) 경우 삭제됨<br>
 							4. 실종동물을 찾은경우 신고종료처리해주십시요.<br> 5. 에러발생시 
-							<a href="contact.php?gubun=suggest" onclick="window.open(this.href);return false;" class="tooltip" title="운영자에게">운영자에게</a>
+							<a href="contact.php?gubun=suggest" onclick="window.open(this.href);return false;" class="tooltip1" title="운영자에게">운영자에게</a>
 							 알려주세요.
 					</span>
 					</label>
@@ -740,9 +736,6 @@ function moveMarker(loc){
 		</div>
 	</div>
 </div>
-<script id="microloader" type="text/javascript" src=".sencha/app/microloader/development.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyBPA_xStX4VRi97SvEHjPOjZjlIC6aRWcs" charset="utf-8" type="text/javascript"></script>
-
 <script type="text/javascript">
 
 function mapReset() {
