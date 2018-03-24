@@ -170,6 +170,27 @@ th {
 
 </style>
 
+<script>
+
+$(document).ready(function() {
+	
+	$("#check_name").change(function(){
+	
+		//'주문자정보와 동일' 체크박스 클릭시
+		if($("#check_name").is(":checked")){
+			var userName = $("#userName").val();
+			$("#name_new").val(userName);
+			//console.log(userName);
+		}else{
+			$("#name_new").val("");
+		}
+	});
+	
+});
+
+
+</script>
+
 
 <div class="body-container">
 
@@ -239,49 +260,49 @@ th {
 				<tr>
 					<th scope="row"><p class="txt">주문자명</p></th>
 					<td>
-						<input type="text" id="customerName" value="권찬미" class="inputTxt"
-						style="width: 200px;">
+						<input type="text" id="userName" value="${userName }" class="inputTxt"
+						style="width: 200px;" disabled="disabled">
 					</td>
 				</tr>
 				<tr>
 					<th scope="row"><p class="txt">휴대폰</p></th>
 					<td>
-						<select id="customerPhoneSel" name="customerPhone" class="select"
+						<select id="userTel1" name="userTel1" class="select" disabled="disabled"
 						style="width: 90px;">
-							<option selected="selected">선택</option>
-							<option value="010">010</option>
-							<option value="011">011</option>
-							<option value="016">016</option>
-							<option value="017">017</option>
-							<option value="018">018</option>
-							<option value="019">019</option>
+							<option disabled="disabled">선택</option>
+							<option value="010" ${tel1 == 010 ? "selected":"" }>010</option>
+							<option value="011" ${tel1 == 011 ? "selected":"" }>011</option>
+							<option value="016" ${tel1 == 016 ? "selected":"" }>016</option>
+							<option value="017" ${tel1 == 017 ? "selected":"" }>017</option>
+							<option value="018" ${tel1 == 018 ? "selected":"" }>018</option>
+							<option value="019" ${tel1 == 019 ? "selected":"" }>019</option>
 						</select>
 						&nbsp;-&nbsp;
-						<input type="text" id="customerPhoneTxt1" name="customerPhoneTxt1"
-						value="1111" class="inputTxt" style="width: 90px;">
+						<input type="text" id="userTel2" name="userTel2" disabled="disabled"
+						value="${tel2 }" class="inputTxt" style="width: 90px;">
 						&nbsp;-&nbsp;
-						<input type="text" id="customerPhoneTxt2" name="customerPhoneTxt2"
-						value="1111" class="inputTxt" style="width: 90px;">
+						<input type="text" id="userTel3" name="userTel3" disabled="disabled"
+						value="${tel3 }" class="inputTxt" style="width: 90px;">
 					</td>
 				</tr>
 				<tr>
 					<th scope="row"><p class="txt">이메일</p></th>
 					<td>
-						<input type="text" id="customerEmailTxt1" name="customerEmailTxt1"
-						value="chanmi123" class="inputTxt" style="width: 120px;">
+						<input type="text" id="email1" name="email1" disabled="disabled"
+						value="${email1 }" class="inputTxt" style="width: 120px;">
 						&nbsp;@&nbsp;
-						<input type="text" id="customerEmailTxt2" name="customerEmailTxt2"
-						value="naver.com" class="inputTxt" style="width: 120px;">
-						<select id="customerEmailSel" name="customerEmailSel" class="select"
+						<input type="text" id="email2" name="email2" disabled="disabled"
+						value="${email2 }" class="inputTxt" style="width: 120px;">
+						<!-- <select id="customerEmailSel" name="customerEmailSel" class="select"
 						style="width: 120px;">
-							<option selected="selected">직접입력</option>
+							<option disabled="disabled">직접입력</option>
 							<option value="gmail.com">gmail.com</option>
 							<option value="naver.com">naver.com</option>
 							<option value="hanmail.net">hanmail.net</option>
 							<option value="nate.com">nate.com</option>
 							<option value="yahoo.co.kr">yahoo.co.kr</option>
 							<option value="hotmail.com">hotmail.com</option>
-						</select>
+						</select> -->
 					</td>
 				</tr>
 			</tbody>
@@ -303,7 +324,7 @@ th {
 								<label for="old_addr">기존 배송지</label>
 							</div>
 							<div class="check_area">
-								<input type="radio" id="radio_new_addr" name="radio_new_addr">
+								<input type="radio" id="radio_new_addr" name="radio_new_addr" checked="checked">
 								<label for="new_addr">신규 배송지</label>
 							</div>
 						</div>
@@ -312,25 +333,16 @@ th {
 				<!-- 기존 배송지 선택시 보이는 테이블 -->
 				<!-- 신규 배송지 선택시 보이는 테이블 -->
 				<tr type="new">
-					<th scope="row"><p class="txt">배송지명&nbsp;<p class="star">*</p></p></th>
-					<td>
-						<div class="addr_info">
-							<input type="text" id="addr_name_new" name="addr_name_new" value="" class="inputTxt" 
-							style="width:200px;"/>
-						</div>
-					</td>
-				</tr>
-				<tr type="new">
 					<th scope="row"><p class="txt">받는분&nbsp;<p class="star">*</p></p></th>
 					<td>
 						<div class="addr_info">
 							<div class="check_area">
-								<input type="text" id="customer_name_new" name="customer_name_new" value="" class="inputTxt" 
+								<input type="text" id="name_new" name="name_new" class="inputTxt" 
 								style="width:200px"/>
 							</div>
 							<div class="check_area">
-								<input type="checkbox" id="check_name_new"/> 
-								<label for="copy_name_new">주문자정보와 동일</label>
+								<input type="checkbox" id="check_name"/> 
+								<label for="label_name">주문자정보와 동일</label>
 							</div>
 						</div>
 					</td>
@@ -338,30 +350,30 @@ th {
 				<tr type="new">
 					<th scope="row"><p class="txt">연락처1&nbsp;<p class="star">*</p></p></th>
 					<td>
-						<select id="customerPhoneSel_new" name="customerPhone_new" class="select"
+						<select id="tel1" name="tel1" class="select" disabled="disabled"
 						style="width: 90px;">
-							<option selected="selected">선택</option>
-							<option value="010">010</option>
-							<option value="011">011</option>
-							<option value="016">016</option>
-							<option value="017">017</option>
-							<option value="018">018</option>
-							<option value="019">019</option>
+							<option disabled="disabled">선택</option>
+							<option value="010" ${tel1 == 010 ? "selected":"" }>010</option>
+							<option value="011" ${tel1 == 011 ? "selected":"" }>011</option>
+							<option value="016" ${tel1 == 016 ? "selected":"" }>016</option>
+							<option value="017" ${tel1 == 017 ? "selected":"" }>017</option>
+							<option value="018" ${tel1 == 018 ? "selected":"" }>018</option>
+							<option value="019" ${tel1 == 019 ? "selected":"" }>019</option>
 						</select>
 						&nbsp;-&nbsp;
-						<input type="text" id="customerPhoneTxt1_new" name="customerPhoneTxt1_new"
-						value="" class="inputTxt" style="width: 90px;">
+						<input type="text" id="tel2" name="tel2" disabled="disabled"
+						value="${tel2 }" class="inputTxt" style="width: 90px;">
 						&nbsp;-&nbsp;
-						<input type="text" id="customerPhoneTxt2_new" name="customerPhoneTxt2_new"
-						value="" class="inputTxt" style="width: 90px;">
+						<input type="text" id="tel3" name="tel3" disabled="disabled"
+						value="${tel3 }" class="inputTxt" style="width: 90px;">
 					</td>
 				</tr>
 				<tr type="new">
 					<th scope="row"><p class="txt">연락처2</p></th>
 					<td>
-						<select id="customerTelSel_new" name="customerTel_new" class="select"
+						<select id="tel1_new" name="tel1_new" class="select"
 						style="width: 90px;">
-							<option selected="selected">선택</option>
+							<option selected="selected" disabled="disabled">선택</option>
 							<option value="010">010</option>
 							<option value="011">011</option>
 							<option value="016">016</option>
@@ -371,10 +383,10 @@ th {
 							<option value="02">02</option>
 						</select>
 						&nbsp;-&nbsp;
-						<input type="text" id="customerTelTxt1_new" name="customerTelTxt1_new"
+						<input type="text" id="tel2_new" name="tel2_new"
 						value="" class="inputTxt" style="width: 90px;">
 						&nbsp;-&nbsp;
-						<input type="text" id="customerTelTxt2_new" name="customerTelTxt2_new"
+						<input type="text" id="tel3_new" name="tel3_new"
 						value="" class="inputTxt" style="width: 90px;">
 					</td>
 				</tr>

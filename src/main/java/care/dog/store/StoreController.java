@@ -292,12 +292,25 @@ public class StoreController {
 		
 		int dataCount = 0;
 		
-		//세션에서 회원의 전화번호와 이메일 받아옴
+		//세션에서 회원의 정보 받아옴
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		if (info == null) {
 			return "redirect:/member/login";
 		}
-		String email = info.getMemberId();
+		String userName = info.getUserName();
+		String tel = info.getTel();
+		String email = info.getEmail();
+		
+		System.out.println(userName);
+		System.out.println(tel);
+		//String userAddr1 = info.getAddress1();
+		//String userAddr2= info.getAddress2();
+		
+		String tel1 = tel.substring(0, 3);
+		String tel2 = tel.substring(4, 8);
+		String tel3 = tel.substring(9, 13);
+		
+		String emailArr[] = email.split("@");
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberId", memberId);
@@ -311,6 +324,12 @@ public class StoreController {
 
 		model.addAttribute("listCart", listCart);
 		model.addAttribute("dataCount", dataCount);
+		model.addAttribute("userName", userName);
+		model.addAttribute("tel1", tel1);
+		model.addAttribute("tel2", tel2);
+		model.addAttribute("tel3", tel3);
+		model.addAttribute("email1", emailArr[0]);
+		model.addAttribute("email2", emailArr[1]);
 		/*model.addAttribute("total_page", total_page);*/
 		/*model.addAttribute("articleUrl", articleUrl);*/
 		/*model.addAttribute("page", current_page);*/
