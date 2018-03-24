@@ -278,96 +278,67 @@ function change(value){
 	});
 }
 
-//===============================================================##지도
+//============================================================== 지도
 var map;
-var globalMarker;
-var globalGeocoder;
-
 function initialize() {
-  var myLatlng = new google.maps.LatLng(37.531805,126.914165);
-  var myOptions = {
-    zoom: 15,
-    center: myLatlng,
-    navigationControl: true,    // 눈금자 형태로 스케일 조절하는 컨트롤 활성화 선택.
-    navigationControlOptions: { 
-        position: google.maps.ControlPosition.TOP_RIGHT,
-        style: google.maps.NavigationControlStyle.DEFAULT // ANDROID, DEFAULT, SMALL, ZOOM_PAN
-    },
-    
-    streetViewControl: true,
-
-    scaleControl: true,    // 지도 축적 보여줄 것인지.
-    //scaleControlOptions: { position: google.maps.ControlPosition.TOP_RIGHT },
-    
-    mapTypeControl: true, // 지도,위성,하이브리드 등등 선택 컨트롤 보여줄 것인지
-    mapTypeId: google.maps.MapTypeId.ROADMAP 
-  }
-  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
-  map.addListener('click', function(e) {  //마커 찍기
-	    placeMarkerAndPanTo(e.latLng, map);
+  var myLatlng = new google.maps.LatLng(37.531805, 126.914165);
   
-	});
+	var myOptions = {
+			zoom : 15,
+			center : myLatlng,
+			navigationControl : true, // 눈금자 형태로 스케일 조절하는 컨트롤 활성화 선택.
+			navigationControlOptions : {
+				position : google.maps.ControlPosition.TOP_RIGHT,
+				style : google.maps.NavigationControlStyle.DEFAULT
+			// ANDROID, DEFAULT, SMALL, ZOOM_PAN
+			},
 
-}
+			streetViewControl : true,
 
-//마커찍기
-function placeMarkerAndPanTo(latLng, map) {
+			scaleControl : true, // 지도 축적 보여줄 것인지.
+			scaleControlOptions: { position: google.maps.ControlPosition.TOP_RIGHT },
+
+			mapTypeControl : true, // 지도,위성,하이브리드 등등 선택 컨트롤 보여줄 것인지
+			mapTypeId : google.maps.MapTypeId.ROADMAP
+		}
+		map = new google.maps.Map(document.getElementById("map_canvas"),
+				myOptions);
+
+		google.maps.event.addListener(map, 'click', function(event) {
+			clearMark();
+			placeMarker(event.latLng);
+			
+		});
+	}
+
+//마커
+	function placeMarker(location) {
+		var marker = new google.maps.Marker({
+			position : location,
+			map : map
+		});
+		getMarkPos(marker);
+		map.setCenter(location);
+	}
 	
-  var marker = new google.maps.Marker({
-    position: latLng,
-    map: map
-  });
-  map.panTo(latLng);
-}
+	//마크좌표 가져오기
+	function getMarkPos(marker) {
+		var pos = marker.getPosition();
 
-//마크좌표 가져오기
-function getMarkPos(){
-	console.log(globalMarker);
-    var pos=globalMarker.getPosition();
+		document.getElementById("posx").value = pos.lat();
+		document.getElementById("posy").value = pos.lng();
+	}
 
-    //alert(pos.lat()+"/"+pos.lng());
-    //return {x:pos.lat(), y:pos.lng()};
+	//지도 위의 마크 모두 삭제 
+	function clearMark() {
+		var loc = map.getCenter(); // 현재의 지도의 위치를 가져온다.
 
-    document.getElementById("posx").value = pos.lat();
-    document.getElementById("posy").value = pos.lng();
-}
+		map = null;
+		globalMarker = null;
+		globalGeocoder = null;
 
- function codeAddress() {
-    var address = document.getElementById("address").value;
-    if(address=='검색할 주소를 입력하십시오.' || address==''){
-        alert('검색할 주소를 입력하십시오.');
-        document.getElementById("address").value='';
-        document.getElementById("address").focus();
-        return;
-    }
-
-    globalGeocoder.geocode( { 'address': address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            globalMap.setCenter(results[0].geometry.location);
-
-            //var marker = new google.maps.Marker({
-            globalMarker = new google.maps.Marker({
-                map: globalMap, 
-                position: results[0].geometry.location,
-                draggable: true
-            });
-        } else {
-            alert("Geocode was not successful for the following reason: " + status);
-        }
-    });
-} 
-    
-//지도 위의 마크 모두 삭제 - Refresh 말고 방법 없을까?
-function clearMark(){
-    var loc = map.getCenter(); // 현재의 지도의 위치를 가져온다.
-
-    map = null;
-    globalMarker = null;
-    globalGeocoder = null;
-
-    initialize();
-}
+		initialize();
+	} 
 
 </script>
 <div class="body-container">
@@ -671,57 +642,23 @@ function clearMark(){
 							<input type="button" value="취소" class="file_cancel" onclick="javascript:document.getElementById('fileName3').value = ''" />
 						</div>
 					</div>
-					<label> 
-						<span>유튜브 동영상 올리기(<a href="./images/video_guide.jpg" onclick="window.open(this.href);return false;">올리는 방법</a>) : </span> 
-						<input type="text" name="video" id="video" maxlength="100" class="validate[custom[url]] text-input" />
-					</label>
 				</div>
 				<!-- line break -->
 				<div style="clear: both;"></div>
-				<div class="post_l">
-					<p class="post_title">4. 긴급알림신청</p>
-					
-					<label> 
-						<span> 
-							<a href="service/index.php?code=how#go_ads1" onclick="window.open(this.href);return false;"><em>
-							<strong>긴급알림이란?(신청하실 분은 필독)</strong></em></a>
-						</span>
-					</label> 
-					<label> 
-						<span>긴급알림은 선택사항입니다.<br>꼭 하실 분만 신청해주시기바랍니다.</span> 
-						<select name="apply_ads" id="apply_ads" class="validate[required]" onChange="alert('운영자의 사정으로, 지금은 신청할 수 없습니다!');">
-							<option value="N">긴급알림 신청안함</option>
-							<option value="N">긴급알림 신청합니다</option>
-					</select>
-					</label> 
-					<label id="id_name" style="display: none;"> 
-						<span><em>*</em>신청하실 분은 입금자 이름을 적어주세요 :</span> 
-						<input type="text" name="apply_name" value="" maxlength="16" class="validate[required] text-input">
-					</label>
-
-					<div id="id_sns" style="display: none;">
-						<span><em>*</em>신고내용을 페이스북/트위터/네이버카페/다음카페/네이버블로그/다음블로그에도 올려주세요(개인정보는 올리지않습니다) :<br></span> 
-						<span>올려주세요:</span>
-						<input class="validate[required] radio" type="radio" name="apply_sns" id="radio1" value="Y"> 
-						<span>올리지않음:</span>
-						<input class="validate[required] radio" type="radio" name="apply_sns" id="radio2" value="N"><br>
-						<br>
-					</div>
-
-				</div>
+				
 				<div class="post_c">
-					<p class="post_title">5. 참고사항</p>
+					<p class="post_title">4. 참고사항</p>
 					<label> 
 						<span> 1. 정보가 잘못 입력된 경우, 수정될 수 있습니다.<br>
 							2. 재등록 허용기간은 5일 입니다.<br> 3. 다른 이메일로 중복등록하는(된) 경우 삭제됨<br>
 							4. 실종동물을 찾은경우 신고종료처리해주십시요.<br> 5. 에러발생시 
-							<a href="contact.php?gubun=suggest" onclick="window.open(this.href);return false;" class="tooltip1" title="운영자에게">운영자에게</a>
+							<a href="#" onclick="window.open(this.href);return false;" class="tooltip1" title="운영자에게">운영자에게</a>
 							 알려주세요.
 					</span>
 					</label>
 				</div>
 				<div class="post_r">
-					<p class="post_title">6. 등록완료</p>
+					<p class="post_title">5. 등록완료</p>
 					<label> 
 						<span> '등록하기'는 한번만 클릭하세요. </span>
 					</label> 
@@ -737,6 +674,10 @@ function clearMark(){
 	</div>
 </div>
 <script type="text/javascript">
+
+$("#attach").on("click",function(){
+	$("#attachfile").fadeIn(1000);
+});
 
 function mapReset() {
 	clearMark();
