@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import care.dog.common.MyUtilGeneral;
 import care.dog.member.SessionInfo;
@@ -119,6 +120,7 @@ public class MyPageController {
 	public String main(
 			@PathVariable int myPageId,
 			Model model,
+			ModelAndView mav,
 			HttpServletRequest req,
 			HttpServletResponse resp,
 			HttpSession session
@@ -126,6 +128,12 @@ public class MyPageController {
 		
 		// 개인 블로그 메인
 		String cp=req.getContextPath();
+		
+		if(session.getAttribute("myPetMode")!=null){
+			System.out.println("@@##@@");
+			model.addAttribute("myPetMode",session.getAttribute("myPetMode"));
+			session.removeAttribute("myPetMode");
+		}
 		
 		SessionInfo info = (SessionInfo) session.getAttribute("member");
 		
@@ -174,7 +182,6 @@ public class MyPageController {
 		model.addAttribute("myPageInfo", myPageInfo);
 		model.addAttribute("myPageUrl", cp+"/myPage/"+myPageId);
 		model.addAttribute("owner", owner);
-		System.out.println("@@@#=>"+myPageInfo.toString());
 
 		return ".myPageLayout";
 	}
