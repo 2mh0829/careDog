@@ -81,7 +81,7 @@ public class MyPageController {
 
 		model.addAttribute("mode", "created");
 		model.addAttribute("dto", dto);
-		
+		//assad
 		return ".myPage.main.myPageCreated";
 	}
 	@RequestMapping(value="/myPage/editBlogProfileInfo", method = RequestMethod.GET)
