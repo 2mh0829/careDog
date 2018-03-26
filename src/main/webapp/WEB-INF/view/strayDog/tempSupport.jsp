@@ -671,7 +671,6 @@ span.selectboxit.select30, span.selectboxit.select30 span{
 												</select>
 											</div>
 										</div>
-										<!--// 20171023 수정 -->
 									</td>
 								</tr>
 							</tbody>
