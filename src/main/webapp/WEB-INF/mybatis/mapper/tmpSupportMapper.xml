@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tmpSupport">
+	<insert id="tmpSupportInput" parameterType="map">
+		INSERT INTO tempSupport (supportId, mem_check, merchantreserved2, name, tel, email,pay_method, pmoney) 
+		VALUES (tmpsupport_seq.NEXTVAL, #{mem_check}, #{merchantreserved2}, #{buyr_name}, #{buyr_tel2}, #{buyr_mail}, #{pay_method}, #{good_mny})
+	</insert>
+</mapper>

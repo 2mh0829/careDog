@@ -340,6 +340,14 @@ function initialize() {
 		initialize();
 	} 
 
+	// 보내기 버튼
+$(document).ready(function(){
+	$("#missingBtn").on("click",function(){
+		var f = document.formID;
+		f.action = "<%=cp%>/dog119/missing";
+		f.submit();
+	});
+})
 </script>
 <div class="body-container">
 	<div class="content">
@@ -350,11 +358,11 @@ function initialize() {
 		<p class="postform_alim">
 			<strong>( 개, 실종신고 )</strong> 개가 아닌 경우는 등록할 수 없습니다.<br>
 			1~6 단계에 따라 입력하시고, 에러발생시 
-			<a href="contact.php?gubun=suggest" onclick="window.open(this.href);return false;" class="tooltip1" title="운영자에게">운영자에게</a> 알려주시면 조치해드리겠습니다. <br>
+			<a href="#" onclick="window.open(this.href);return false;" class="tooltip1" title="운영자에게">운영자에게</a> 알려주시면 조치해드리겠습니다. <br>
 			<span class="stress">전화번호와 이메일주소는 로그인 사용자에 한해 볼 수 있으며, 이에 동의한 것으로 간주합니다.</span>
 		</p>
 		<div class="postform">
-			<form id="formID" name="formID" method="post" ENCTYPE="multipart/form-data" action="post" accept-charset="UTF-8">
+			<form id="formID" name="formID" method="post" ENCTYPE="multipart/form-data" accept-charset="UTF-8">
 				<div class="post_l">
 					<p class="post_title">
 						1. 등록자정보(<em>*</em>표 필수)
@@ -662,7 +670,7 @@ function initialize() {
 					<label> 
 						<span> '등록하기'는 한번만 클릭하세요. </span>
 					</label> 
-					<input type="submit" value="등록하기" class="mybtn blue"> 
+					<input type="submit" value="등록하기" id="missingBtn" class="mybtn blue"> 
 					<input type="reset" value="다시작성" class="mybtn gray"> 
 					<input type="button" onClick="javascript:history.back();return false;" value="취소" class="mybtn gray">
 				</div>
@@ -709,7 +717,7 @@ function apply(sel) {
 
 function setAddr(value){
 	addr = value;
-	searchPlaces();
+	//searchPlaces();
 }
 
 </script>

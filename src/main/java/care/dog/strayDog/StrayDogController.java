@@ -103,10 +103,24 @@ public class StrayDogController {
 		return ".strayDog.tempSupport";
 	}
 	
+	// 일시후원 결제 완료
+	@RequestMapping(value="/strayDog/tmpSupInput", method=RequestMethod.POST)
+	public String tmpSupportInput(@RequestParam Map<String, Object> map) {
+		service.tmpSupportInput(map);
+		return "redirect:/strayDog";
+	}
+	
 	@RequestMapping(value="/strayDog/fixSupport")
 	public String fixSupport() {
-		
 		return ".strayDog.fixSupport";
+	}
+	
+	// 정기후원 결제 완료
+	@RequestMapping(value="/strayDog/fixSupInput", method=RequestMethod.POST)
+	public String fixSupportInput(@RequestParam Map<String, Object> map) {
+		service.fixSupportInput(map);
+		
+		return "redirect:/strayDog";
 	}
 	
 	@RequestMapping(value="/strayDog/addSupport")

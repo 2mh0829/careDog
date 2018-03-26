@@ -10,16 +10,16 @@
 .menu2 {
 	background: #1991d7;
 }
-.menu2 a {
+/* .menu2 a {
 	color: #fff;
-}
+} */
 
 </style>
 
 <div class="header-bottom">
 	<div class="menu2" align="center">
-		<a href="<%=cp%>/strayDog">유기견</a>
-		<a href="<%=cp%>/strayDog/support">단체 후원</a>
-		<a href="<%=cp%>/strayDog/volunteer">자원봉사신청</a>		
+		<a href="<%=cp%>/strayDog">유기견&nbsp;</a>
+		<a href="<%=cp%>/strayDog/support">단체 후원&nbsp;</a>
+		<a href="<%=cp%>/strayDog/volunteer">자원봉사신청&nbsp;</a>		
 	</div>
 </div>

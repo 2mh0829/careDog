@@ -280,5 +280,27 @@ public class StrayDogServiceImpl implements StrayDogService {
 		}
 		return result;
 	}
+
+	@Override
+	public int tmpSupportInput(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.insertData("tmpSupport.tmpSupportInput", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public int fixSupportInput(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.insertData("fixSupport.fixSupportInput", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 }

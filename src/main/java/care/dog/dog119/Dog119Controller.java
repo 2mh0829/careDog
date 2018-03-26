@@ -273,4 +273,11 @@ public class Dog119Controller {
 		map.put("list", list);
 		return map;
 	}
+	
+	//실종등록
+	@RequestMapping(value="/dog119/missing", method=RequestMethod.POST)
+	public String missing(@RequestParam Map<String, Object> data) {
+		System.out.println(data);
+		return "";
+	}
 }
