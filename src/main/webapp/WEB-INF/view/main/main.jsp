@@ -53,7 +53,7 @@ video {
 	position: relative;
 	top: -600px;
 	width: 100%;
-	height: 3400px;
+	height: 3600px;
 	background: white;
 	-webkit-transition: 1s;
 	transition: 1s;
