@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fixSupport">
+
+<insert id="fixSupportInput">
+	INSERT INTO fixSupport (supportId, prodname, pname, tel, email, paymode, pmoney, s_date, e_date, zipCode, address2, address1)
+	VALUES (fixsupport_seq.NEXTVAL, #{prodname},  #{pname}, #{tel}, #{email}, #{paymode}, #{pmoney}, #{s_date}, #{e_date}, #{zipcode}, #{addr2}, #{addr})
+</insert>
+
+</mapper>

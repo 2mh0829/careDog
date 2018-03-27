@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import care.dog.common.MyUtilBootstrap;
 import care.dog.dog119.dogHealthVo.DhReplyVo;
 import care.dog.dog119.dogHealthVo.DogHealthVo;
+import care.dog.dog119.dogMissingVo.DogMissingVo;
 import care.dog.member.SessionInfo;
 
 @Controller("dog119.dog119Controller")
@@ -272,5 +274,15 @@ public class Dog119Controller {
 		List<Map<String, Object>> list = service.gugun(admCode);
 		map.put("list", list);
 		return map;
+	}
+	
+	//실종등록
+	@RequestMapping(value="/dog119/missing", method=RequestMethod.POST)
+	@ResponseBody
+	public String missing(DogMissingVo dto, HttpSession session) {
+		
+		
+		
+		return "";
 	}
 }

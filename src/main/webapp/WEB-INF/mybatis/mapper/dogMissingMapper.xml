@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dogmissing">
+
+	<select id="dogmissingSeq" resultType="Integer">
+		SELECT dogmissing_seq.NEXTVAL FROM DUAL
+	</select>
+	<insert id="dogmissingInput" parameterType="care.dog.dog119.dogMissingVo.DogMissingVo">
+		INSERT INTO dogmissing (missingId, memberID, dname, dKind, dgender, age, dmissingdate, city, gugun, detail, ddetail, posx, posy, 
+			missingContent, dmoney)
+		VALUES (#{missingId}, #{memberID}, #{petname}, #{kind}, #{sex}, #{age}, #{whenis}, #{city}, #{country}, #{whereis}, 
+			#{kind_more}, #{posx}, #{posy}, #{story},#{reward})
+	</insert>
+	<insert id="dogmissPhotoInput" parameterType="care.dog.dog119.dogMissingVo.DogMissPhoto">
+		INSERT INTO dogmissingPhoto (dmpId, missingId, filename)
+		VALUES (dogmissingPhoto_seq.NEXTVAL, #{missingId}, #{filename})
+	</insert>
+</mapper>

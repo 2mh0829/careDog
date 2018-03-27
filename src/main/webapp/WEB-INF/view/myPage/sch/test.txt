@@ -1,0 +1,26 @@
+myPage
+Drop table myPageinfo purge;
+Create table myPageinfo(
+	myPageId number primary key,
+	MemberId varchar2(20) not null unique,
+	Title varchar2(255) not null,
+	introduce varchar2(1000),
+	visitorCount number default 0,
+	created date default sysdate,
+	closed number(1),
+	Constraint fk_myPageinfo_memberId foreign key(memberId) references member1(memberId) on delete cascade
+	)
+	
+Create table myPageProfile(
+	myPageId number not null,
+	userName varchar2(30) not null,
+	isUserName    NUMBER(1),
+	 city          VARCHAR2(50) NOT NULL,
+	 isCity        NUMBER(1),
+	  gender        VARCHAR2(10) NOT NULL,
+	    isGender      NUMBER(1),
+	    hobby         VARCHAR2(255),
+	   isHobby       NUMBER(1),
+	    FOREIGN       KEY(myPageId) REFERENCES myPageInfo(myPageId)
+		           ON DELETE CASCADE
+)

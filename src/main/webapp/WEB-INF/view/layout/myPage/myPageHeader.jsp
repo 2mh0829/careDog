@@ -6,6 +6,12 @@
 	String cp = request.getContextPath();
 %>
 <script type="text/javascript">
+$(document).ready(function(){
+	var mode="${myPetMode}";
+	if(mode=="myPetList"){
+		myPetList();
+	}
+})
 	$(function() {
 		var idx = "${menu}";
 		if (!idx)

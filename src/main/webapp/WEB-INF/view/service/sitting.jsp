@@ -525,12 +525,13 @@ li>a>span{
 }
 
 .evaluation {
-	height: 36px;
+	/* height: 36px; */
     background-color: #ffe5aa;
     /* top: 0px; */
     /* position: relative; */
     width: 65%;
     float: right;
+    padding-bottom: 1px;
 }
 
 .inner {

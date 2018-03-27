@@ -18,6 +18,7 @@ import org.w3c.dom.NodeList;
 import care.dog.common.dao.CommonDAO;
 import care.dog.dog119.dogHealthVo.DhReplyVo;
 import care.dog.dog119.dogHealthVo.DogHealthVo;
+import care.dog.dog119.dogMissingVo.DogMissingVo;
 
 @Service("dog119.dogHealthService")
 public class DogHealthServiceImpl implements DogHealthService {
@@ -193,6 +194,20 @@ public class DogHealthServiceImpl implements DogHealthService {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	@Override
+	public int dog119Input(DogMissingVo dto) {
+		int result = 0;
+		try {
+			int seq = dao.selectOne("dogmissing.dogmissingSeq");
+			dto.setMissingId(seq);
+			
+			result = dao.insertData("dogmissing.dogmissingInput", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }
