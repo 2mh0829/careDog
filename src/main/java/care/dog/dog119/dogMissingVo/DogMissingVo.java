@@ -1,30 +1,42 @@
 package care.dog.dog119.dogMissingVo;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class DogMissingVo {
 	private int missingId;
 	private String memberId;
-	private String dname;
-	private String dKind;
-	private String dgender;
+	private String phone1;
+	private String phone2;
+	private String petname;
+	private String kind;
+	private String kind_more;
+	private String sex;
 	private int age;
-	private String dmissingdate;
+	private String whenis;
 	private String city;
-	private String gugun;
-	private String detail;
-	private String ddetail;
+	private String country;
+	private String whereis;
+	private String mark;
 	private String posx;
 	private String posy;
-	private String missingContent;
-	private int dmoney;
-	private String filename1;
-	private String filename2;
-	private String filename3;
+	private String story;
+	private String reward;
+	private List<String> userfile;
+	private List<MultipartFile> upload;
 	
-	public int getAge() {
-		return age;
+	public String getPhone1() {
+		return phone1;
 	}
-	public void setAge(int age) {
-		this.age = age;
+	public void setPhone1(String phone1) {
+		this.phone1 = phone1;
+	}
+	public String getPhone2() {
+		return phone2;
+	}
+	public void setPhone2(String phone2) {
+		this.phone2 = phone2;
 	}
 	public int getMissingId() {
 		return missingId;
@@ -38,29 +50,41 @@ public class DogMissingVo {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public String getDname() {
-		return dname;
+	public String getPetname() {
+		return petname;
 	}
-	public void setDname(String dname) {
-		this.dname = dname;
+	public void setPetname(String petname) {
+		this.petname = petname;
 	}
-	public String getdKind() {
-		return dKind;
+	public String getKind() {
+		return kind;
 	}
-	public void setdKind(String dKind) {
-		this.dKind = dKind;
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
-	public String getDgender() {
-		return dgender;
+	public String getKind_more() {
+		return kind_more;
 	}
-	public void setDgender(String dgender) {
-		this.dgender = dgender;
+	public void setKind_more(String kind_more) {
+		this.kind_more = kind_more;
 	}
-	public String getDmissingdate() {
-		return dmissingdate;
+	public String getSex() {
+		return sex;
 	}
-	public void setDmissingdate(String dmissingdate) {
-		this.dmissingdate = dmissingdate;
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getWhenis() {
+		return whenis;
+	}
+	public void setWhenis(String whenis) {
+		this.whenis = whenis;
 	}
 	public String getCity() {
 		return city;
@@ -68,23 +92,23 @@ public class DogMissingVo {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public String getGugun() {
-		return gugun;
+	public String getCountry() {
+		return country;
 	}
-	public void setGugun(String gugun) {
-		this.gugun = gugun;
+	public void setCountry(String country) {
+		this.country = country;
 	}
-	public String getDetail() {
-		return detail;
+	public String getWhereis() {
+		return whereis;
 	}
-	public void setDetail(String detail) {
-		this.detail = detail;
+	public void setWhereis(String whereis) {
+		this.whereis = whereis;
 	}
-	public String getDdetail() {
-		return ddetail;
+	public String getMark() {
+		return mark;
 	}
-	public void setDdetail(String ddetail) {
-		this.ddetail = ddetail;
+	public void setMark(String mark) {
+		this.mark = mark;
 	}
 	public String getPosx() {
 		return posx;
@@ -98,34 +122,29 @@ public class DogMissingVo {
 	public void setPosy(String posy) {
 		this.posy = posy;
 	}
-	public String getMissingContent() {
-		return missingContent;
+	public String getStory() {
+		return story;
 	}
-	public void setMissingContent(String missingContent) {
-		this.missingContent = missingContent;
+	public void setStory(String story) {
+		this.story = story;
 	}
-	public int getDmoney() {
-		return dmoney;
+	public String getReward() {
+		return reward;
 	}
-	public void setDmoney(int dmoney) {
-		this.dmoney = dmoney;
+	public void setReward(String reward) {
+		this.reward = reward;
 	}
-	public String getFilename1() {
-		return filename1;
+	public List<String> getUserfile() {
+		return userfile;
 	}
-	public void setFilename1(String filename1) {
-		this.filename1 = filename1;
+	public void setUserfile(List<String> userfile) {
+		this.userfile = userfile;
 	}
-	public String getFilename2() {
-		return filename2;
+	public List<MultipartFile> getUpload() {
+		return upload;
 	}
-	public void setFilename2(String filename2) {
-		this.filename2 = filename2;
+	public void setUpload(List<MultipartFile> upload) {
+		this.upload = upload;
 	}
-	public String getFilename3() {
-		return filename3;
-	}
-	public void setFilename3(String filename3) {
-		this.filename3 = filename3;
-	}
+	
 }
