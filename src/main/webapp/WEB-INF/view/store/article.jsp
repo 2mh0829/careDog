@@ -406,6 +406,10 @@ function listCart() {
 	var amount = $("#amount").val();
 	var optionId = $("#optionId").val();
 	
+	if(amount == null || amount == ""){
+		alert("옵션을 선택해주세요.");
+	}
+	
 	var data = {productId:productId, amount:amount, optionId:optionId};
 	//console.log(data);
 	$.ajax({
@@ -427,6 +431,111 @@ function listCart() {
 		}
 	});
 }
+
+//구매하기 버튼 클릭시
+<%-- function order() {
+	
+	var memberId = $("#memberInfo").val();
+	
+	if(memberId == null || memberId == ""){
+		if(confirm("로그인이 필요한 서비스입니다.")){
+			location.href="<%=cp%>/member/login";
+		}else{
+			return;
+		}
+	}else{
+		
+		if(confirm("선택한 상품을 주문하시겠습니까?")){
+		
+			//필요한 데이터 : 사용자가 선택한 상품의 productId, amount, totalPrice, optionContent
+			var productId = $("#productId").val();
+			var amount = $("#amount").val();
+			var optionContent = $("#sel1 option:selected").text();
+			var totalPrice = $("#changePrice").text();
+			
+			if(amount == null || amount == ""){
+				alert("옵션을 선택해주세요.");
+			}
+			//주문페이지로 이동
+			var data = {memberId:memberId, productId:productId, amount:amount,
+					optionContent:optionContent, totalPrice:totalPrice}
+			
+			$.ajax({
+			    url: "<%=cp%>/store/orderOne",
+			    data: data,
+			    type: "post",
+			    success: function() {
+			    	location.href="<%=cp%>/store/orderList?memberId=" + memberId;
+			    },
+			    error: function(e) {
+			    	console.log(e.responseText);
+			    }
+			});
+			
+		}else{
+			return;
+		}
+	}
+}
+ --%>
+ 
+function order() {
+	
+	var memberId = $("#memberInfo").val();
+	
+	if(memberId == null || memberId == ""){
+		if(confirm("로그인이 필요한 서비스입니다.")){
+			location.href="<%=cp%>/member/login";
+			<%-- location.href = "<%=cp%>/store/storeLogin?productId="+productId+"&optionId="+optionId; --%>
+		}else
+			return;
+	}else{
+	
+		if(confirm("선택한 상품을 주문하시겠습니까?")){
+			
+			var productId = $("#productId").val();
+			var amount = $("#amount").val();
+			var optionContent = $("#sel1 option:selected").text();
+			var totalPrice = $("#changePrice").text();
+			//var finalPrice = $("#finalPrice").text();
+			
+			if(amount == null || amount == ""){
+				alert("옵션을 선택해주세요.");
+			}
+			
+			var productIdList = [];
+			var amountList = [];
+			var optionContentList = [];
+			var totalPriceList = [];
+				
+			productIdList.push(productId);
+			amountList.push(amount);
+			optionContentList.push(optionContent);
+			totalPriceList.push(totalPrice);
+			
+			var data = {memberId:memberId, finalPrice:totalPrice, productIdList:productIdList.toString(),
+				amountList:amountList.toString(), optionContentList:optionContentList.toString(), 
+				totalPriceList:totalPriceList.toString()};
+			
+			$.ajax({
+			    url: "<%=cp%>/store/order",
+			    data: data,
+			    type: "post",
+			    success: function() {
+			    	location.href="<%=cp%>/store/orderList?memberId=" + memberId;
+			    },
+			    error: function(e) {
+			    	console.log(e.responseText);
+			    }
+			});
+			 
+			
+		}else{
+			return;
+		}
+	} 
+}
+
 
 </script>
 
@@ -512,7 +621,7 @@ function listCart() {
 				</button>
 				&nbsp;&nbsp;
 				<button type="button" class="btn btn-default roundBtn btnBuy" 
-				onclick="location.href='<%=cp%>/store/order'">
+				onclick="order();">
 				구매하기
 				</button>
 			</div>

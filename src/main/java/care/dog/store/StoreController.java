@@ -282,9 +282,11 @@ public class StoreController {
 
 		return "store/listProductQna";
 	}
-
-	@RequestMapping(value = "/store/order")
-	public String productOrder(
+	
+	
+	/* order list 출력 */
+	@RequestMapping(value = "/store/orderList")
+	public String listOrder(
 			@RequestParam String memberId,
 			HttpSession session,
 			Model model
@@ -297,14 +299,8 @@ public class StoreController {
 		if (info == null) {
 			return "redirect:/member/login";
 		}
-		String userName = info.getUserName();
 		String tel = info.getTel();
 		String email = info.getEmail();
-		
-		System.out.println(userName);
-		System.out.println(tel);
-		//String userAddr1 = info.getAddress1();
-		//String userAddr2= info.getAddress2();
 		
 		String tel1 = tel.substring(0, 3);
 		String tel2 = tel.substring(4, 8);
@@ -312,31 +308,83 @@ public class StoreController {
 		
 		String emailArr[] = email.split("@");
 		
+		//orderList 개수
+		dataCount = service.dataCountOrder(memberId);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberId", memberId);
-		
-		dataCount = service.dataCountCart();
-		
 		map.put("start", 1);
 		map.put("end", dataCount);
+		
+		//orderList 출력
+		List<Order> listOrder = service.listOrder(map);
 
-		List<Cart> listCart = service.listCart(map);
-
-		model.addAttribute("listCart", listCart);
+		model.addAttribute("listOrder", listOrder);
 		model.addAttribute("dataCount", dataCount);
-		model.addAttribute("userName", userName);
 		model.addAttribute("tel1", tel1);
 		model.addAttribute("tel2", tel2);
 		model.addAttribute("tel3", tel3);
 		model.addAttribute("email1", emailArr[0]);
 		model.addAttribute("email2", emailArr[1]);
-		/*model.addAttribute("total_page", total_page);*/
-		/*model.addAttribute("articleUrl", articleUrl);*/
-		/*model.addAttribute("page", current_page);*/
-		/*model.addAttribute("paging", paging);*/
 		
 		return ".store.order";
 	}
+	
+	/* order input */
+	@RequestMapping(value = "/store/order")
+	public void order(
+			OrderParamDto dto,
+			HttpSession session,
+			Model model
+			) {
+		
+		//sequence 호출
+		int orderSeq = service.orderSeq();
+				
+		Order orderDto = new Order();
+		orderDto.setMemberId(dto.getMemberId());
+		orderDto.setOrderId(orderSeq);
+		orderDto.setOrderAllPrice(dto.getOrderAllPrice());
+		
+		//1. productOrder(주문내역) 테이블에 insert
+		service.insertProductOrder(orderDto);
+		
+		for(int i=0; i<dto.getProductIdList().size(); i++) {
+			orderDto.setProductId(dto.getProductIdList().get(i));
+			orderDto.setOrderAmount(dto.getAmountList().get(i));
+			orderDto.setNote(dto.getOptionContentList().get(i));
+			orderDto.setOrderPrice(dto.getTotalPriceList().get(i));
+		
+			//2. OrderDetail(주문상세) 테이블에 insert
+			service.insertOrderDetail(orderDto);
+		}
+		
+	}
+	
+	/* order input one */
+	/*@RequestMapping(value = "/store/orderOne")
+	public void orderOne(
+			@RequestParam String memberId,
+			@RequestParam int productId,
+			@RequestParam int amount,
+			@RequestParam String optionContent,
+			@RequestParam int totalPrice,
+			HttpSession session,
+			Model model
+			) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("memberId", memberId);
+		map.put("productId", productId);
+		map.put("amount", amount);
+		map.put("optionContent", optionContent);
+		map.put("totalPrice", totalPrice);
+		
+		//주문한 상품 orderDetail, productOrder 테이블에 insert
+		service.insertOrderOne(map);
+		
+	}
+	*/
 	
 	/*@RequestMapping(value="/store/storeLogin", method=RequestMethod.GET)
 	public String storeLoginForm(
@@ -402,7 +450,7 @@ public class StoreController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("memberId", memberId);
 		
-		dataCount = service.dataCountCart();
+		dataCount = service.dataCountCart(memberId);
 		
 		map.put("start", 1);
 		map.put("end", dataCount);
