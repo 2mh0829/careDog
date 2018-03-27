@@ -172,7 +172,7 @@ function changeSel() {
 			,dataType: "json"
 			,success: function(data) {
 				var state = data.state;
-				console.log(state);
+				//console.log(state);
 			}
 			,error: function(e) {
 				console.log(e.responseText);
@@ -258,18 +258,58 @@ function finalPrice() {
 //주문페이지로 이동
 function order() {
 	
-	if(confirm("선택할 상품을 주문하시겠습니까?")){
+	if(confirm("선택한 상품을 주문하시겠습니까?")){
 		
 		var memberId = $(".memberId").val();
+		var productId = "";
+		var amount =  "";
+		var optionContent = "";
+		var totalPrice = "";
+		var finalPrice = $("#finalPrice").text();
 		
-		var data="memberId=" + memberId;
-		location.href = '<%=cp%>/store/order?' + data;
+		var productIdList = [];
+		var amountList = [];
+		var optionContentList = [];
+		var totalPriceList = [];
+		
+		$("input[name=check]:checked").each(function() {
+		
+			productId = $(this).parent().parent().parent().parent().find(".productId").val();
+			amount = $(this).parent().parent().parent().parent().find(".amount").val();
+			optionContent = $(this).parent().parent().parent().parent().find(".optionContent").text();
+			totalPrice = $(this).parent().parent().parent().parent().find(".totalPrice").text();
+			
+		<%-- 	var data = "productId=" + productId + "&amount=" + amount + 
+			"&optionContent=" + optionContent + "&totalPrice=" + totalPrice + "&memberId=" + memberId;
+			location.href="<%=cp%>/store/order?" + data; --%>
+			
+			productIdList.push(productId);
+			amountList.push(amount);
+			optionContentList.push(optionContent);
+			totalPriceList.push(totalPrice);
+		});
+		
+		var data = {memberId:memberId, finalPrice:finalPrice, productIdList:productIdList.toString(),
+			amountList:amountList.toString(), optionContentList:optionContentList.toString(), 
+			totalPriceList:totalPriceList.toString()};
+		
+		$.ajax({
+		    url: "<%=cp%>/store/order",
+		    data: data,
+		    type: "post",
+		    success: function() {
+		    	location.href="<%=cp%>/store/orderList?memberId=" + memberId;
+		    },
+		    error: function(e) {
+		    	console.log(e.responseText);
+		    }
+		});
+		 
 		
 	}else{
 		return;
 	}
 }
-
 
 
 </script>
@@ -317,11 +357,11 @@ function order() {
 								style="width: 100px;">
 							</div>
 							<div class="divFloat product_name" style="width: 350px;">
-								<p class="pNameTxt1">${dto.brand }</p>
-								<p class="pNameTxt2">${dto.productName }</p>
-								<p class="pNameTxt3">${dto.optionContent }</p>
-								<input type="hidden" value="${dto.amountAll }" class="amountAll">
-								<input type="hidden" value="${dataCount }" class="dataCount">
+								<p class="pNameTxt1"><strong class="brand">${dto.brand }</strong></p>
+								<p class="pNameTxt2"><strong class="productName">${dto.productName }</strong></p>
+								<p class="pNameTxt3"><strong class="optionContent">${dto.optionContent }</strong></p>
+								<input type="hidden" value="${dto.amountAll }" class="amount">
+								<input type="hidden" value="${dataCount }" class="dataCount"> 
 								<input type="hidden" value="${dto.cartId }" class="cartId">
 								<input type="hidden" value="${dto.memberId }" class="memberId">
 								<input type="hidden" value="${dto.sellingPrice }" class="sellingPrice">

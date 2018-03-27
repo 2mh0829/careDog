@@ -51,6 +51,10 @@
 			<intercept-url pattern="/mungstargram/article" access="permitAll" />
 			<intercept-url pattern="/uploads/mungstargram/**" access="permitAll" />
 			
+			<!-- 서비스 시큐리티 예외 -->
+			<intercept-url pattern="/service" access="permitAll"></intercept-url>
+			<intercept-url pattern="/service/sitter_input" access="permitAll"></intercept-url>
+			<intercept-url pattern="/service/sitting_detail" access="permitAll"></intercept-url>
 
             <!-- 이미지, javascript, css등 -->
 			<intercept-url pattern="/resource/**" access="permitAll" />

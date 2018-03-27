@@ -101,10 +101,10 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public int dataCountCart() {
+	public int dataCountCart(String memberId) {
 		int result = 0;
 		try {
-			result = dao.selectOne("store.dataCountCart");
+			result = dao.selectOne("store.dataCountCart", memberId);
 		} catch (Exception e) {
 		}
 		return result;
@@ -152,6 +152,80 @@ public class ProductServiceImpl implements ProductService{
 		}
 		return result;
 	}
+
+	@Override
+	public int dataCountOrder(String memberId) {
+		int result = 0;
+		try {
+			result = dao.selectOne("store.dataCountOrder", memberId);
+		} catch (Exception e) {
+		}
+		return result;
+	}
+
+	@Override
+	public List<Order> listOrder(Map<String, Object> map) {
+		List<Order> list = null;
+		try {
+			list = dao.selectList("store.listOrder", map);
+		} catch (Exception e) {
+		}
+		return list;
+	}
+
+	@Override
+	public int insertProductOrder(Order orderDto) {
+		int result = 0;
+		try {
+			result = dao.insertData("store.insertProductOrder", orderDto);
+			result = 1;
+		} catch (Exception e) {
+		}
+		return result;
+	}
+
+	@Override
+	public int insertOrderDetail(Order orderDto) {
+		int result = 0;
+		try {
+			result = dao.insertData("store.insertOrderDetail", orderDto);
+			result = 1;
+		} catch (Exception e) {
+		}
+		return result;
+	}
+
+	@Override
+	public int orderSeq() {
+		int result = 0;
+		try {
+			result = dao.selectOne("store.orderSeq");
+		} catch (Exception e) {
+		}
+		return result;
+	}
+
+	/*@Override
+	public int insertOrder(Order orderDto) {
+		int result = 0;
+		try {
+			result = dao.insertData("store.insertOrder", orderDto);
+			result = 1;
+		} catch (Exception e) {
+		}
+		return result;
+	}
+
+	@Override
+	public int insertOrderOne(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.insertData("store.insertOrderOne", map);
+			result = 1;
+		} catch (Exception e) {
+		}
+		return result;
+	}*/
 
 	
 	
