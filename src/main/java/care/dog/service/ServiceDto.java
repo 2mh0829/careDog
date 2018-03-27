@@ -5,8 +5,9 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ServiceDto {
-
-	private String sittingId;
+	
+	// sitterInfo (Table)
+	private int sittingId;
 	private String memberId;
 	private String title;
 	private String content;
@@ -17,7 +18,7 @@ public class ServiceDto {
 	private int addPet;
 	private String addPetCost;
 	private int carableWeight;
-	private int catableAge;
+	private int carableAge;
 	private String space;
 	private String subway;
 	private String yard;
@@ -26,16 +27,33 @@ public class ServiceDto {
 	private String other;
 	private String tag;
 	
+	// sitterPhoto (Table)
+	private String photoId;
+	private List<MultipartFile> fileName;
+	private String imageFilename;
+	
+	public String getPhotoId() {
+		return photoId;
+	}
+	public void setPhotoId(String photoId) {
+		this.photoId = photoId;
+	}
+	public List<MultipartFile> getFileName() {
+		return fileName;
+	}
+	public void setFileName(List<MultipartFile> fileName) {
+		this.fileName = fileName;
+	}
 	public String getTag() {
 		return tag;
 	}
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
-	public String getSittingId() {
+	public int getSittingId() {
 		return sittingId;
 	}
-	public void setSittingId(String sittingId) {
+	public void setSittingId(int sittingId) {
 		this.sittingId = sittingId;
 	}
 	public String getMemberId() {
@@ -98,11 +116,11 @@ public class ServiceDto {
 	public void setCarableWeight(int carableWeight) {
 		this.carableWeight = carableWeight;
 	}
-	public int getCatableAge() {
-		return catableAge;
+	public int getCarableAge() {
+		return carableAge;
 	}
-	public void setCatableAge(int catableAge) {
-		this.catableAge = catableAge;
+	public void setCarableAge(int carableAge) {
+		this.carableAge = carableAge;
 	}
 	
 	public String getSpace() {
@@ -141,13 +159,20 @@ public class ServiceDto {
 	public void setOther(String other) {
 		this.other = other;
 	}
+	public String getImageFilename() {
+		return imageFilename;
+	}
+	public void setImageFilename(String imageFilename) {
+		this.imageFilename = imageFilename;
+	}
 	@Override
 	public String toString() {
 		return "ServiceDto [sittingId=" + sittingId + ", memberId=" + memberId + ", title=" + title + ", content="
 				+ content + ", startDate=" + startDate + ", endDate=" + endDate + ", reserDiv=" + reserDiv
 				+ ", reserCost=" + reserCost + ", addPet=" + addPet + ", addPetCost=" + addPetCost + ", carableWeight="
-				+ carableWeight + ", catableAge=" + catableAge + ", space=" + space + ", subway=" + subway + ", yard="
-				+ yard + ", baby=" + baby + ", family=" + family + ", other=" + other + ", tag=" + tag + " + ]";
+				+ carableWeight + ", carableAge=" + carableAge + ", space=" + space + ", subway=" + subway + ", yard="
+				+ yard + ", baby=" + baby + ", family=" + family + ", other=" + other + ", tag=" + tag + ", photoId="
+				+ photoId + ", fileName=" + fileName + ", imageFilename=" + imageFilename + "]";
 	}
 	
 	
