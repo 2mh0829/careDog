@@ -23,6 +23,9 @@ public interface DogHealthService {
 	public List<Map<String, Object>> sido();
 	public List<Map<String, Object>> gugun(String sido);
 	
-	public int dog119Input(DogMissingVo dto);
+	public int dog119Input(DogMissingVo dto, String path);
+	public int insertFile(DogMissingVo dto);
+	public List<DogMissingVo> missingDogList(Map<String, Object> map);
+	public int dog119DataCount(Map<String, Object> map);
 	
 }

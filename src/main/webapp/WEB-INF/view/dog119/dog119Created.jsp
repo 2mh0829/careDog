@@ -359,9 +359,10 @@ $(document).ready(function(){
 			processData:false,
 			contentType:false,
 			data:f,
+			dataType:'json',
 			success:function(data){
 				alert('성공');
-				//location.href="";
+				location.href="<%=cp%>/dog119";
 			},
 			error:function(e){
 				console.log(e.responseText);
@@ -660,7 +661,7 @@ $(document).ready(function(){
 					<label> 
 						<span> '등록하기'는 한번만 클릭하세요. </span>
 					</label> 
-					<input type="submit" value="등록하기" id="missingBtn" class="mybtn blue"> 
+					<input type="button" value="등록하기" id="missingBtn" class="mybtn blue"> 
 					<input type="reset" value="다시작성" class="mybtn gray"> 
 					<input type="button" onClick="javascript:history.back();return false;" value="취소" class="mybtn gray">
 				</div>

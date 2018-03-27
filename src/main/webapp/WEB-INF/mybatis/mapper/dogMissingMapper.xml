@@ -6,14 +6,71 @@
 	<select id="dogmissingSeq" resultType="Integer">
 		SELECT dogmissing_seq.NEXTVAL FROM DUAL
 	</select>
+	<!-- <sql id="where-list">
+		<if test="searchKey=='memberId'">
+			INSTR(memberId, #{searchValue})=1
+		</if>
+		<if test="searchKey=='title'">
+			title like '%'||#{searchValue}||'%'
+		</if>
+		<if test="searchKey=='content'">
+			DBMS_LOB.INSTR(content,#{searchValue})&gt;0
+		</if>
+		<if test="searchKey=='created'">
+			TO_CHAR(created, 'YYYY-MM-DD')=#{searchValue} or
+			TO_CHAR(created, 'YYYYMMDD')=#{searchValue}
+		</if>
+	</sql> -->
+
+
 	<insert id="dogmissingInput" parameterType="care.dog.dog119.dogMissingVo.DogMissingVo">
-		INSERT INTO dogmissing (missingId, memberID, dname, dKind, dgender, age, dmissingdate, city, gugun, detail, ddetail, posx, posy, 
-			missingContent, dmoney)
-		VALUES (#{missingId}, #{memberID}, #{petname}, #{kind}, #{sex}, #{age}, #{whenis}, #{city}, #{country}, #{whereis}, 
-			#{kind_more}, #{posx}, #{posy}, #{story},#{reward})
+		INSERT INTO dogmissing (missingId, memberID, phone1, phone2, petname, kind, kind_more, sex, age, whenis, city, country, whereis,
+			mark, posx, posy, story, reward)
+		VALUES (#{missingId}, #{memberId}, #{phone1}, #{phone2, jdbcType=VARCHAR}, #{petname, jdbcType=VARCHAR}, #{kind}, #{kind_more, jdbcType=VARCHAR}, #{sex}, #{age}, #{whenis}, #{city}, #{country}, #{whereis}, 
+			#{mark, jdbcType=VARCHAR}, #{posx, jdbcType=VARCHAR}, #{posy, jdbcType=VARCHAR}, #{story, jdbcType=VARCHAR},#{reward, jdbcType=VARCHAR})
 	</insert>
-	<insert id="dogmissPhotoInput" parameterType="care.dog.dog119.dogMissingVo.DogMissPhoto">
+	<insert id="dogmissPhotoInput" parameterType="care.dog.dog119.dogMissingVo.DogMissingVo">
 		INSERT INTO dogmissingPhoto (dmpId, missingId, filename)
 		VALUES (dogmissingPhoto_seq.NEXTVAL, #{missingId}, #{filename})
 	</insert>
+	
+	<select id="dogmissingList" parameterType="map" resultType="care.dog.dog119.dogMissingVo.DogMissingVo">
+		select * from(
+		select rownum rnum, tb.* from(
+			select dm.missingId,dmpId, dm.memberID, phone1, phone2, petname, kind, kind_more, sex, age, whenis, city, country, whereis, mark, posx,
+				 posy, story, reward, filename, created
+			from dogmissing dm
+            JOIN member1 m ON dm.memberId=m.memberId
+            left outer join
+            (
+                SELECT dmpId, missingId, filename 
+                FROM (
+                    SELECT row_number() over (partition by missingId order by dmpId desc) rank, dmpId, missingId, filename 
+                    FROM dogmissingPhoto
+                ) WHERE RANK =1
+            ) dogphoto on dm.missingId=dogphoto.missingId
+			<!-- <where>
+				<if test="searchValue != null and searchValue!='' ">
+					<include refid="where-list"/>
+				</if>
+			</where> -->
+			order by dm.missingId desc
+<![CDATA[
+		)tb where rownum <= #{end}
+	)where rnum>=#{start}
+]]>
+	</select>
+	
+	<select id="dogmissingPhotoList" >
+		SELECT filename FROM dogmissingPhoto WHERE missingId=#{missingId}
+	</select>
+	
+	<select id="dogDataCount" parameterType="map" resultType="Integer">
+		select NVL(count(*),0) from dogmissing join member1 on dogmissing.memberId= member1.memberId
+		<!-- <where>
+			<if test="searchValue != null and searchValue!=''">
+				<include refid="where-list"/>
+			</if>
+		</where> -->
+	</select>
 </mapper>

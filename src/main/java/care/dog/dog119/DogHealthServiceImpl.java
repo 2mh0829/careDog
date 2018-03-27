@@ -11,10 +11,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import care.dog.common.FileManager;
 import care.dog.common.dao.CommonDAO;
 import care.dog.dog119.dogHealthVo.DhReplyVo;
 import care.dog.dog119.dogHealthVo.DogHealthVo;
@@ -24,6 +26,9 @@ import care.dog.dog119.dogMissingVo.DogMissingVo;
 public class DogHealthServiceImpl implements DogHealthService {
 	@Autowired
 	private CommonDAO dao;
+	
+	@Autowired
+	private FileManager fileManager;
 	
 	private static DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	
@@ -197,17 +202,61 @@ public class DogHealthServiceImpl implements DogHealthService {
 	}
 
 	@Override
-	public int dog119Input(DogMissingVo dto) {
+	public int dog119Input(DogMissingVo dto, String path) {
 		int result = 0;
 		try {
 			int seq = dao.selectOne("dogmissing.dogmissingSeq");
 			dto.setMissingId(seq);
-			
 			result = dao.insertData("dogmissing.dogmissingInput", dto);
+			
+			if(! dto.getUpload().isEmpty()) {
+				for(MultipartFile file:dto.getUpload()) {
+					if(file.isEmpty()) continue;
+					
+					String filename = fileManager.doFileUpload(file, path);
+					if(filename != null) {
+						dto.setFilename(filename);
+						insertFile(dto);
+					}
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
+	
+	@Override
+	public int insertFile(DogMissingVo dto) {
+		int result=0;
+		try {
+			result=dao.insertData("dogmissing.dogmissPhotoInput", dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
+	@Override
+	public List<DogMissingVo> missingDogList(Map<String, Object> map) {
+		List<DogMissingVo> list = new ArrayList<>();
+		try {
+			list = dao.selectList("dogmissing.dogmissingList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int dog119DataCount(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.selectOne("dogmissing.dogDataCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}	
 
 }

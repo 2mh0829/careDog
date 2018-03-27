@@ -23,7 +23,7 @@ public class DogMissingVo {
 	private String posy;
 	private String story;
 	private String reward;
-	private List<String> userfile;
+	private String filename;
 	private List<MultipartFile> upload;
 	
 	public String getPhone1() {
@@ -134,11 +134,11 @@ public class DogMissingVo {
 	public void setReward(String reward) {
 		this.reward = reward;
 	}
-	public List<String> getUserfile() {
-		return userfile;
+	public String getFilename() {
+		return filename;
 	}
-	public void setUserfile(List<String> userfile) {
-		this.userfile = userfile;
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 	public List<MultipartFile> getUpload() {
 		return upload;
