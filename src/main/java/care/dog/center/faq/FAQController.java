@@ -482,8 +482,6 @@ public class FAQController {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		String state = "true";
 		
-		System.out.println("========"+dto);
-		
 		if(info.getMemberId().equals("admin")) {
 			dto.setMemberId(info.getMemberId());
 			service.insertFaq(dto);

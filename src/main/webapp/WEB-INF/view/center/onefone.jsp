@@ -181,6 +181,22 @@ $(document).ready(function(){
 	});
 });
 
+function emailmake(){
+	var email1 = $('input[name=email1]').val();
+	var email2 = $('select[name=email2]').val();
+	var email = email1 + "@" + email2;
+	$('input[name=email]').val(email);
+}
+
+function telmake(){
+	var tel1 = $('select[name=tel1]').val();
+	var tel2 = $('input[name=tel2]').val();
+	var tel3 = $('input[name=tel3]').val();
+	
+	var tel = tel1 + "-" + tel2 + "-" + tel3;
+	$('input[name=tel]').val(tel);
+}
+
 function hahaSubmit(){
 		/* 문의유형 값
 		alert($("[name='questionSelect']").val())
@@ -189,45 +205,80 @@ function hahaSubmit(){
 		alert('개인정보 수집 동의를 하지 않으면 가입하실 수 없습니다.');
 		return;
 	}
-	 if(! $("[name='checkid']").val()){
+	 /* if(! $("[name='memberId']").val()){
 		 alert('아이디를 입력하세요.');
-		 $("[name='checkid']").focus();
+		 $("[name='memberId']").focus();
 		 return;
-	 }
-	 if(! $("[name='emailAddr1']").val()){
+	 } */
+	 if(! $("[name='email1']").val()){
 		 alert('이메일을 입력하세요.');
-		 $("[name='emailAddr1']").focus();
+		 $("[name='email1']").focus();
 		 return;
 	 }
-	 if($("[name='emailSelect']").val()==-1){
+	 if($("[id='emailSelect']").val()==-1){
 		 alert('도메인을 선택하세요.');
-		 $("select[name=emailSelect]").focus();
+		 $("select[id=emailSelect]").focus();
 		 return;
 	 }
-	 if(! $("[name='cellTxnoNo']").val()){
+	 if($("[name=email]").val()!=null && $("[id=emailSelect]").val()!=-1){
+		 emailmake();
+	 }
+	 if(! $("[id='telSelect2']").val()){
 		 alert('휴대폰 가운데 4자리를 입력하세요.');
-		 $("[name='cellTxnoNo']").focus();
+		 $("[id='telSelect2']").focus();
 		 return;
 	 }
-	 if(! $("[name='cellEndNo']").val()){
+	 if(! $("[id='telSelect3']").val()){
 		 alert('휴대폰 마지막 4자리를 입력하세요.');
-		 $("[name='cellEndNo']").focus();
+		 $("[id='telSelect3']").focus();
 		 return;
 	 }
-	 if(! $("[name='inqCont']").val()){
+	 if($("[name=tel1]").val()!=null && $("[name=tel2]").val()!=null && $("[name=tel2]").val()!="" && $("[name=tel3]").val()!=null && $("[name=tel3]").val()!=""){
+		 telmake();
+	 }
+	 if(! $("[name='content']").val()){
 		 alert('내용을 입력하세요.');
-		 $("[name='inqCont']").focus();
+		 $("[name='content']").focus();
 		 return;
 	 }
-	 if($("[name='questionSelect']").val()==null || $("[name='questionSelect']").val()==""){
+	 if($("[name='sort']").val()==null || $("[name='sort']").val()==""){
 		 alert('문의유형을 선택하세요.');
 		 return;
 	 }
 	 
+	 var url = "<%=cp%>/center/onefone";
+	 var query = $("form[name=onefoneForm]").serialize();
+	 console.log(query);
+	 $.ajax({
+		type:"post",
+		url:url,
+		data:query,
+		dataType:"json",
+		success:function(data){
+			var state = data.state;
+			if(state=="false")
+				alert("게시물을 추가하지 못했습니다.");
+			/* else 
+				listPage(1); */
+		}
+	 ,beforeSend:function(jqXHR){
+		 jqXHR.setRequestHeader("AJAX",true);
+	 }
+	 ,error:function(jqXHR){
+		 if(jqXHR.status==401){
+			 console.log(jqXHR); 
+		 } else if(jqXHR.status==403){
+			 location.href="<%=cp%>/member/noAuthorized";
+		 } else {
+			 console.log(jqXHR.responseText);
+		 }
+	 }
+	 });
 }
 
 </script>
 <div class="body-container">
+<form name="onefoneForm" action="" method="POST" enctype="multipart/form-data">	<!-- form은 하나의 td 안에 시작과 끝이 있거나, 테이블 전체를 둘러쌓아야 한다. -->
 <table class="board-write-1s mgT40">
 	<caption>1:1 문의 등록</caption>
 	<colgroup>
@@ -235,7 +286,6 @@ function hahaSubmit(){
 		<col style="width:75%;">
 	</colgroup>
 	<tbody>
-		<form id="cnslRegForm" action="" method="POST" enctype="multipart/form-data">
 				<tr class="agree_box">
 					<th scope="col">개인정보수집동의</th>
 						<td>
@@ -268,14 +318,14 @@ function hahaSubmit(){
 							<ul>
 								<li>
 									<label for="NoticeID">ID</label>
-									<input type="text" title="아이디를 입력하세요" class="name" name="checkid" id="checkid" placeholder="아이디를 입력하세요" style="width:152px">
+									<p>${sessionScope.member.memberId }</p>
 								</li>
 								<li>
 									<label for="NoticeEmail">E-mail</label>
-									<input type="text" title="이메일을 입력하세요" class="email" name="emailAddr1" id="emailAddr1" placeholder="이메일을 입력하세요" style="width:152px;ime-mode:disabled;" >
+									<input type="text" title="이메일을 입력하세요" class="email" name="email1" id="email1" placeholder="이메일을 입력하세요" style="width:152px;ime-mode:disabled;" >
 									<span class="des">@</span>
-									<input type="hidden" name="emailAddr" value="">
-									<select title="도메인 주소를 선택하세요." id="emailSelect" name="emailSelect" id="emailSelect" class="email" style="width:122px;" id="emailAddrSelect" selected="selected">
+									<!-- <input type="hidden" name="emailSelect" value=""> -->
+									<select title="도메인 주소를 선택하세요." id="emailSelect" name="email2" class="email" style="width:122px;">
 										<option value="-1" selected="selected">직접입력</option>
 										<option value="hanmail.net">hanmail.net</option>
 										<option value="naver.com">naver.com</option>
@@ -283,38 +333,34 @@ function hahaSubmit(){
 										<option value="hotmail.com">hotmail.com</option>
 										<option value="yahoo.co.kr">yahoo.co.kr</option>
 										<option value="paran.com">paran.com</option>
-										<option value="empal.com">empal.com</option>
 										<option value="gmail.com">gmail.com</option>
 										<option value="dreamwiz.com">dreamwiz.com</option>
-										<option value="korea.com">korea.com</option>
-										<option value="lycos.co.kr">lycos.co.kr</option>
-										<option value="hanafos.com">hanafos.com</option>
 										<option value="daum.net">daum.net</option>
-										<option value="chol.com">chol.com</option>
-										<option value="feechal.com">feechal.com</option>
 								</select>
+								<input type="hidden" name="email" value="">
 								</li>
 								<li>
 									<label for="NoticeSms">SMS</label>
-									<select title="통신사를 선택하세요" id="rgnNoSelect" class="sms" name="cellSctNo" style="width:122px;" selected="selected">
-										<option selected="selected">010</option>
-										<option>011</option>
-										<option>016</option>
-										<option>017</option>
-										<option>018</option>
-										<option>019</option>
-										<option>0130</option>
-										<option>0303</option>
-										<option>0502</option>
-										<option>0504</option>
-										<option>0505</option>
-										<option>0506</option>
+									<select title="통신사를 선택하세요" id="telSelect1" class="sms" name="tel1" style="width:122px;">
+										<option value="010" selected="selected">010</option>
+										<option value="011">011</option>
+										<option value="016">016</option>
+										<option value="017">017</option>
+										<option value="018">018</option>
+										<option value="019">019</option>
+										<option value="0130">0130</option>
+										<option value="0303">0303</option>
+										<option value="0502">0502</option>
+										<option value="0504">0504</option>
+										<option value="0505">0505</option>
+										<option value="0506">0506</option>
 									</select>
-									<input type="hidden" id="cellSctNo" value="010">
+									<!-- <input type="hidden" id="telSelect1" value="010"> -->
 									<span class="des">-</span>
-									<input type="tel" class="sms" name="cellTxnoNo" value="" title="휴대폰 가운데 4자리를 입력하세요" maxlength="4" placeholder="0000" style="width:122px;">
+									<input type="tel" class="sms" name="tel2" id="telSelect2" title="휴대폰 가운데 4자리를 입력하세요" maxlength="4" placeholder="0000" style="width:122px;">
 									<span class="des">-</span>
-									<input type="tel" class="sms" name="cellEndNo" value="" title="휴대폰 마지막 4자리를 입력하세요" maxlength="4" placeholder="0000" style="width:122px;">
+									<input type="tel" class="sms" name="tel3" id="telSelect3" title="휴대폰 마지막 4자리를 입력하세요" maxlength="4" placeholder="0000" style="width:122px;">
+									<input type="hidden" name="tel" value="">
 								</li>
 								
 							</ul>
@@ -323,7 +369,7 @@ function hahaSubmit(){
 					<tr>
 						<th scope="col"><label for="TypeInquiry">문의유형</label></th>
 						<td>
-							<select class="questionSelect" name="questionSelect">
+							<select class="questionSelect" name="sort">
 								<option></option>
 								<optgroup label="회원/멤버십">
 								    <option value="101">회원 가입/탈퇴</option>
@@ -363,7 +409,7 @@ function hahaSubmit(){
 					<tr class="textarea">
 						<th scope="col"><label for="InputTextarea">내용</label></th>
 						<td>
-							<textarea id="InputTextarea" name="inqCont" cols="5" rows="1" placeholder="문의내용을 입력해주세요.(2000자 이내)" style="width:98%;height:280px;"></textarea>
+							<textarea id="InputTextarea" name="content" cols="5" rows="1" placeholder="문의내용을 입력해주세요.(2000자 이내)" style="width:98%;height:280px;"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -375,7 +421,7 @@ function hahaSubmit(){
 							</ul>
 						</td>
 					</tr>
-				</form>
 			</tbody>		
-</table>
+		</table>
+	</form>	
 </div>
