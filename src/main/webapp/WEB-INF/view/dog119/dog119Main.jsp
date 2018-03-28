@@ -54,17 +54,8 @@ em { font-style: normal; } /* 강조 */
 				console.log(data);
 				var content = '';
 				$.each(list, function(index,item){
-					<%-- content+='<div class="dog119"><div class="dog119_img">';
-					content+='<a href="#">';
-					content+='<img src="<%=cp%>/uploads/dog119/'+item.filename+'" width="132" height="100" border="0"></a>';
-					content+='</div> <div class="dog119_title">';
-					content+='<p style="line-height: 13pt;">';
-					content+='<b>오서방 찾아요</b><br><span>'; 
-					content+='<a href="javascript:na_open_window("win", "petfind_view_skin_1.html?no=19470", 200, 100, 695, 900, 0, 0, 0, 1, 1)">지역: '+item.country+'<br> 종류 : '+item.kind+'</a><br>'; 
-					content+='<a href="petfind_view_skin_1.html?no=19470" target="_blank"> <b><font color="#CC0000">사례금 : '+item.reward+'</font></b></a>';
-					content+='</span></p></div></div>'; --%>
 					content+="<div class='list'>";
-					content+="<a title='확대 이미지 보기' href='<%=cp%>/uploads/dog119/"+item.filename+"' class='lytebox' data-lyte-options='slide:false' data-title='(사)careDog'>";
+					content+="<a href='<%=cp%>/uploads/dog119/"+item.filename+"' class='lytebox' data-lyte-options='slide:false' data-title='(사)careDog'>";
 					content+="<a href='#' img='' class='tx-animal-image' src='<%=cp%>/uploads/dog119/"+item.filename+"'>";
 					content+="<img src='<%=cp%>/uploads/dog119/"+item.filename+"' width='348' height='261' border='0' align='center'></a></a>";
 					content+="<ul><li class='full'><strong>구조일</strong> <i>"+item.whenis+"</i></li>";
@@ -154,6 +145,6 @@ em { font-style: normal; } /* 강조 */
 	</div>
 	
 	<nav>
-   <div id="paging" class="paging"></div>
+   <div id="paging" class="paging" align="center"></div>
 </nav>
 </div>

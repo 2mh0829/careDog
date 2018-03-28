@@ -3,9 +3,52 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fixSupport">
 
+<sql id="where-list">
+	<if test="searchKey=='memberId'">
+		INSTR(memberId, #{searchValue})=1
+	</if>
+	<if test="searchKey=='title'">
+		title like '%'||#{searchValue}||'%'
+	</if>
+	<if test="searchKey=='content'">
+		DBMS_LOB.INSTR(content,#{searchValue})&gt;0
+	</if>
+	<if test="searchKey=='created'">
+		TO_CHAR(created, 'YYYY-MM-DD')=#{searchValue} or
+		TO_CHAR(created, 'YYYYMMDD')=#{searchValue}
+	</if>
+</sql>
+
 <insert id="fixSupportInput">
 	INSERT INTO fixSupport (supportId, prodname, pname, tel, email, paymode, pmoney, s_date, e_date, zipCode, address2, address1)
 	VALUES (fixsupport_seq.NEXTVAL, #{prodname},  #{pname}, #{tel}, #{email}, #{paymode}, #{pmoney}, #{s_date}, #{e_date}, #{zipcode}, #{addr2}, #{addr})
 </insert>
+
+<select id="fixSupportList" parameterType="map" resultType="care.dog.admin.strayDogVo.AdminFixSupportVo">
+	select * from(
+		select rownum rnum, tb.* from(
+			select supportId, prodname, pname, tel, email, paymode, pmoney, s_date, e_date, zipcode, address1, address2
+			from fixSupport
+			<where>
+				<if test="searchValue != null and searchValue!='' ">
+					<include refid="where-list"/>
+				</if>
+			</where>
+			
+			order by supportId desc
+<![CDATA[
+		)tb where rownum <= #{end}
+	)where rnum>=#{start}
+]]>
+</select>
+
+<select id="dataCount" parameterType="map" resultType="Integer">
+		select NVL(count(*),0) from fixSupport
+		<where>
+			<if test="searchValue != null and searchValue!=''">
+				<include refid="where-list"/>
+			</if>
+		</where>
+	</select>
 
 </mapper>
