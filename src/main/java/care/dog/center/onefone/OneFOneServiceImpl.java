@@ -1,5 +1,8 @@
 package care.dog.center.onefone;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,17 @@ public class OneFOneServiceImpl implements OneFOneService{
 			System.out.println(e.toString());
 		}
 		return result;
+	}
+
+	@Override
+	public List<OneFOneVo> listOneFOne(Map<String, Object> map) {
+		List<OneFOneVo> list = null;
+		try {
+			list = dao.selectList("onefone.listonefone", map);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return list;
 	}
 
 }

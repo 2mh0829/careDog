@@ -1,8 +1,11 @@
 package care.dog.center.onefone;
 
+import java.net.URLDecoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import care.dog.common.MyUtil;
@@ -22,7 +26,38 @@ public class OneFOneController {
 	@Autowired OneFOneService service;
 	
 	@RequestMapping(value="/center/onefonelist")
-	public String OneforOneMain() {
+	public String OneforOneMain(
+			@RequestParam(value="pageNo", defaultValue="1") int pageNo,
+			@RequestParam(value="sort", defaultValue="sort") String sort,
+			@RequestParam(value="searchKey", defaultValue="subject") String searchKey,
+			@RequestParam(value="searchValue", defaultValue="") String searchValue,
+			HttpServletRequest req,
+			Model model
+			) throws Exception{
+		
+		int rows = 10;
+		int totalPage = 10;
+		
+		if(req.getMethod().equalsIgnoreCase("GET")) {
+			searchValue = URLDecoder.decode(searchValue,"utf-8");
+		}
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("searchKey", searchKey);
+		map.put("searchValue", searchValue);
+		map.put("sort", sort);
+		map.put("pageNo", pageNo);
+		
+		int start = (pageNo - 1) * rows+1;
+		int end = pageNo * rows;
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<OneFOneVo> list = service.listOneFOne(map);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pageNo",pageNo);
+		model.addAttribute("totalPage",totalPage);
 		
 		return ".center.onefonelist";
 	}
