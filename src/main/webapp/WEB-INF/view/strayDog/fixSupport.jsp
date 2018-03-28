@@ -111,6 +111,52 @@ strong {font-family: 'NanumGothicWebBold' !important; } /* 강조 */
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 
+<!-- 결제 모듈 라이브러리 -->
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<!-- 결제 모듈 -->
+<script>
+var IMP = window.IMP; // 생략가능
+$(document).ready(function(){
+	IMP.init('imp89857995'); //가맹점 식별코드 
+	
+	$(".payAll").on("click",function(){
+		var f = document.forms.writeform;
+
+		IMP.request_pay({
+		    pg : 'inicis', // version 1.1.0부터 지원.
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '정기후원',
+		    amount : f.pmoney.value,
+		    buyer_email : f.email.value,
+		    buyer_name : f.pname.value,
+		    buyer_tel : f.phone1.value+'-'+f.phone2.value+'-'+f.phone3.value,
+		    buyer_addr : f.addr.value+' '+f.addr2.value,
+		    buyer_postcode : f.zipcode.value,
+		    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+		}, function(rsp) {
+		    if ( rsp.success ) {
+		    	f.action ="<%=cp%>/strayDog/fixSupInput";
+		    	f.submit();
+		    	return true;
+		       /*  var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num; */
+		    } else {
+		        var msg = '결제에 실패하였습니다.';
+		        msg += '에러내용 : ' + rsp.error_msg;
+		        return false;
+		    }
+		    alert(msg);
+		});
+	});
+});
+</script>
+
+<!-- datepicker -->
 <script>
 $(document).ready(function(){
 	  $("#e_date").datepicker({
@@ -140,9 +186,6 @@ $(document).ready(function(){
 <div class="board_request">
 	<h1>정기후원 신청</h1>	
 	<form name="writeform" id="writeform" method="post">
-		<input type="hidden" name="MxIssueNO"> <!-- 거래 번호(가맹점 생성) -->
-		<input type="hidden" name="MxIssueDate"> <!-- 거래 일자(가맹점 생성, YYYYMMDDhhmmss) -->
-		<input type="hidden" name="bid" value="Obb">
 		<table class="table1 mt10">
 			<caption>정기후원신청</caption><caption>
 			</caption><colgroup>
@@ -157,7 +200,7 @@ $(document).ready(function(){
 					<td class="table1__td">
 						<label for="paymode" class="alternate">후원방법</label>
 						<select name="paymode" id="paymode">
-							<option value="3007" selected="selected">신용카드 </option>
+							<option value="신용카드" selected="selected">신용카드 </option>
 							<!-- option value="6101">핸드폰결제 </option -->
 							</select>
 					</td>
@@ -220,14 +263,7 @@ $(document).ready(function(){
 				<tr class="table1__tr">
 					<th scope="row" class="table1__th">연락처</th>
 					<td colspan="3" class="table1__td">
-						<label for="phone1" class="alternate">연락처 앞자리</label>
-						<input type="text" maxlength="3" name="phone1" id="phone1" value="" style="ime-mode:inactive;" class="num">
-						&nbsp;-&nbsp;
-						<label for="phone2" class="alternate">연락처 중간자리</label>
-						<input type="text" maxlength="4" name="phone2" id="phone2" value="" style="ime-mode:inactive;" class="num">
-						&nbsp;-&nbsp;
-						<label for="phone2" class="alternate">연락처 뒷자리</label>
-						<input type="text" maxlength="4" name="phone3" id="phone3" value="" style="ime-mode:inactive;" class="num">
+						<input type="text" value="${sessionScope.member.tel}" id="tel" name="tel" style="ime-mode:inactive;" class="num">
 					</td>
 				</tr>
 				<tr class="table1__tr">
@@ -265,7 +301,7 @@ $(document).ready(function(){
 		</table>
 		
 		<div class="btn_area">
-			<a href="javascript:void(0);" onclick="reqPayment2();">결제</a>
+			<a href="javascript:;" class="payAll">결제</a>
 			<a href="javascript:void(0);" onclick="history.go(-1);">취소</a>
 		</div><!--E:btn_area-->
 	</form>

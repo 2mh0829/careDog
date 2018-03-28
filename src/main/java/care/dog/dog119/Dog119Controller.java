@@ -1,5 +1,6 @@
 package care.dog.dog119;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import care.dog.common.MyUtilBootstrap;
 import care.dog.dog119.dogHealthVo.DhReplyVo;
 import care.dog.dog119.dogHealthVo.DogHealthVo;
+import care.dog.dog119.dogMissingVo.DogMissingVo;
 import care.dog.member.SessionInfo;
 
 @Controller("dog119.dog119Controller")
@@ -271,6 +273,95 @@ public class Dog119Controller {
 		Map<String, Object> map = new HashMap<>();
 		List<Map<String, Object>> list = service.gugun(admCode);
 		map.put("list", list);
+		return map;
+	}
+	
+	//실종등록
+	@RequestMapping(value="/dog119/missing", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> missing(DogMissingVo dto, HttpSession session) {
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		if(info.getMemberId() != null) {
+			dto.setMemberId(info.getMemberId());
+		}
+		
+		String root = session.getServletContext().getRealPath("/");
+		System.out.println("controller================"+root);
+		String path = root+"uploads"+File.separator+"dog119";
+		System.out.println("controller================"+path);
+		
+		service.dog119Input(dto, path);
+		Map<String, Object> map = new HashMap<>();
+		map.put("state", "true");
+		
+		return map;
+	}
+	
+	//실종 리스트
+	@RequestMapping(value="/dog119/list")
+	@ResponseBody
+	public Map<String, Object> missingDogList(@RequestParam(defaultValue="1") int page,
+			@RequestParam(defaultValue="subject") String search,
+			@RequestParam(defaultValue="") String keyword,
+			HttpServletRequest req
+		){
+		
+		String cp = req.getContextPath();
+		
+		int totalPage = 0;
+		int rows=20;
+		int dataCount = 0;
+		
+		if(req.getMethod().equalsIgnoreCase("GET")) {
+			try {
+				keyword = URLDecoder.decode(keyword, "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		Map<String, Object> pagingmap = new HashMap<>();
+		pagingmap.put("search", search);
+		pagingmap.put("keyword", keyword);
+		
+		dataCount = service.dog119DataCount(pagingmap);
+		if(dataCount!=0)
+			totalPage = myUtilBootstrap.pageCount(rows, dataCount);
+		
+		
+		if(totalPage < page) {
+			page = totalPage;
+		}
+		
+		int start = (page-1)*rows+1;
+		int end = page*rows;
+		pagingmap.put("start", start);
+		pagingmap.put("end", end);
+		
+		Map<String, Object> map = new HashMap<>();
+		List<DogMissingVo> list = service.missingDogList(pagingmap);
+		
+		String q = "";
+		String dog119ListUrl = cp+"/dog119/list";
+		if(keyword.length() != 0) {
+			try {
+				q = "search="+search+"&keyword="+URLEncoder.encode(keyword, "utf-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(q.length()!=0) {
+			dog119ListUrl = cp+"/dog119/dogHealth?"+q;
+		}
+		
+		String paging = myUtilBootstrap.paging(page, totalPage, dog119ListUrl);
+		
+		map.put("paging", paging);
+		map.put("list", list);
+		map.put("page", page);
+		map.put("totalPage", totalPage);
+		map.put("dataCount", dataCount);
 		return map;
 	}
 }

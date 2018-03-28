@@ -16,4 +16,10 @@ public interface StrayDogService {
 	
 	//자원봉사 페이지
 	public int volunteerApply(Map<String, Object> map);
+	
+	//일시 후원 인풋
+	public int tmpSupportInput(Map<String, Object> map);
+	
+	//정기 후원 인풋
+	public int fixSupportInput(Map<String, Object> map);
 }

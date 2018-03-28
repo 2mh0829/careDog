@@ -305,18 +305,22 @@ function joinNext() {
 
 
 <div class="body-container">
+<c:if test="${empty sessionScope.member }">
 	<div id="join-img-box">
 		<img src="<%=cp %>/resource/img/join2.jpg">
 	</div>
+	</c:if>
 	
 	<div style="width: 700px; margin: 0 auto;">
 	    <div class="body-title">
-			회원가입
+			<c:if test="${empty sessionScope.member }">회원가입</c:if>
+			<c:if test="${not empty sessionScope.member }">정보수정</c:if>
 	    </div>
 	    
 	        <div> 
 	        	<form name="memberForm" method="post">
 				  <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px;">
+				  <c:if test="${empty sessionScope.member }">
 				  <tr>
 				      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
 				            <label style="font-weight: 900;">아이디</label>
@@ -331,7 +335,7 @@ function joinNext() {
 				        <p id="memberId-help" class="help-block">아이디는 5~12자어야 합니다.</p>
 				      </td>
 				  </tr>
-				
+				</c:if>
 				  <tr>
 				      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
 				            <label style="font-weight: 900;">패스워드</label>
@@ -384,7 +388,7 @@ function joinNext() {
 				        <p class="help-block">생년월일은 2000-01-01 형식으로 입력 합니다.</p>
 				      </td>
 				  </tr>
-				  
+				   <c:if test="${empty sessionScope.member }">
 				  <tr>
 				      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
 				            <label style="font-weight: 900;">이메일</label>
@@ -406,7 +410,7 @@ function joinNext() {
 				        <p id="email-helper" class="help-block">이메일을 입력해 주세요.</p>
 				      </td>
 				  </tr>
-				  
+				  </c:if>
 				  <tr>
 				      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
 				            <label style="font-weight: 900;">전화번호</label>

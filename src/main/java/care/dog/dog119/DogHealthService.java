@@ -5,6 +5,7 @@ import java.util.Map;
 
 import care.dog.dog119.dogHealthVo.DhReplyVo;
 import care.dog.dog119.dogHealthVo.DogHealthVo;
+import care.dog.dog119.dogMissingVo.DogMissingVo;
 
 public interface DogHealthService {
 	public List<DogHealthVo> listBoard(Map<String, Object> map);
@@ -21,5 +22,10 @@ public interface DogHealthService {
 	
 	public List<Map<String, Object>> sido();
 	public List<Map<String, Object>> gugun(String sido);
+	
+	public int dog119Input(DogMissingVo dto, String path);
+	public int insertFile(DogMissingVo dto);
+	public List<DogMissingVo> missingDogList(Map<String, Object> map);
+	public int dog119DataCount(Map<String, Object> map);
 	
 }

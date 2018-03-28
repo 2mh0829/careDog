@@ -235,6 +235,10 @@ em,address { font-style:normal }
   transition:all 0.35s ease;
 }
 </style>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyBPA_xStX4VRi97SvEHjPOjZjlIC6aRWcs" charset="utf-8" type="text/javascript"></script>
+
 <script>
 $(document).ready(function(){
 	
@@ -252,6 +256,13 @@ $(document).ready(function(){
 			$("#city").append(content);
 		}
 	});
+	
+	var ageOption = '<option value="0">1년미만</option>';
+	for(var i=1; i<31;i++){
+		ageOption+='<option value='+i+'>'+i+' 년생</option>';
+	}
+	ageOption+='<option value="1000">잘모름</option>';
+	$("#age").append(ageOption);
 })
 
 function change(value){
@@ -274,103 +285,92 @@ function change(value){
 	});
 }
 
-//===============================================================##지도
+//============================================================== 지도
 var map;
-var globalMarker;
-var globalGeocoder;
-
 function initialize() {
-  var myLatlng = new google.maps.LatLng(37.531805,126.914165);
-  var myOptions = {
-    zoom: 15,
-    center: myLatlng,
-    navigationControl: false,    // 눈금자 형태로 스케일 조절하는 컨트롤 활성화 선택.
-    navigationControlOptions: { 
-        position: google.maps.ControlPosition.TOP_RIGHT,
-        style: google.maps.NavigationControlStyle.DEFAULT // ANDROID, DEFAULT, SMALL, ZOOM_PAN
-    },
-    
-    streetViewControl: false,
-
-    scaleControl: false,    // 지도 축적 보여줄 것인지.
-    //scaleControlOptions: { position: google.maps.ControlPosition.TOP_RIGHT },
-    
-    mapTypeControl: false, // 지도,위성,하이브리드 등등 선택 컨트롤 보여줄 것인지
-    mapTypeId: google.maps.MapTypeId.ROADMAP 
-  }
-  map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-
-  map.addListener('click', function(e) {
-	    placeMarkerAndPanTo(e.latLng, map);
-	});
+  var myLatlng = new google.maps.LatLng(37.531805, 126.914165);
   
-  google.maps.event.addListener(map, 'click', function(event){        // 지도클릭시 마커이동
-      moveMarker(event.latLng); 
-  });
-}
+	var myOptions = {
+			zoom : 15,
+			center : myLatlng,
+			navigationControl : true, // 눈금자 형태로 스케일 조절하는 컨트롤 활성화 선택.
+			navigationControlOptions : {
+				position : google.maps.ControlPosition.TOP_RIGHT,
+				style : google.maps.NavigationControlStyle.DEFAULT
+			// ANDROID, DEFAULT, SMALL, ZOOM_PAN
+			},
 
-//마커찍기
-function placeMarkerAndPanTo(latLng, map) {
-	//clearMark();
-  var marker = new google.maps.Marker({
-    position: latLng,
-    map: map
-  });
-  map.panTo(latLng);
-}
+			streetViewControl : true,
 
-//마크좌표 가져오기
-function getMarkPos(){
-    var pos=globalMarker.getPosition();
+			scaleControl : true, // 지도 축적 보여줄 것인지.
+			scaleControlOptions: { position: google.maps.ControlPosition.TOP_RIGHT },
 
-    //alert(pos.lat()+"/"+pos.lng());
-    //return {x:pos.lat(), y:pos.lng()};
+			mapTypeControl : true, // 지도,위성,하이브리드 등등 선택 컨트롤 보여줄 것인지
+			mapTypeId : google.maps.MapTypeId.ROADMAP
+		}
+		map = new google.maps.Map(document.getElementById("map_canvas"),
+				myOptions);
 
-    document.getElementById("posx").value = pos.lat();
-    document.getElementById("posy").value = pos.lng();
-}
+		google.maps.event.addListener(map, 'click', function(event) {
+			clearMark();
+			placeMarker(event.latLng);
+			
+		});
+	}
 
-/* function codeAddress() {
-    var address = document.getElementById("address").value;
-    if(address=='검색할 주소를 입력하십시오.' || address==''){
-        alert('검색할 주소를 입력하십시오.');
-        document.getElementById("address").value='';
-        document.getElementById("address").focus();
-        return;
-    }
+//마커
+	function placeMarker(location) {
+		var marker = new google.maps.Marker({
+			position : location,
+			map : map
+		});
+		getMarkPos(marker);
+		map.setCenter(location);
+	}
+	
+	//마크좌표 가져오기
+	function getMarkPos(marker) {
+		var pos = marker.getPosition();
 
-    globalGeocoder.geocode( { 'address': address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            globalMap.setCenter(results[0].geometry.location);
+		document.getElementById("posx").value = pos.lat();
+		document.getElementById("posy").value = pos.lng();
+	}
 
-            //var marker = new google.maps.Marker({
-            globalMarker = new google.maps.Marker({
-                map: globalMap, 
-                position: results[0].geometry.location,
-                draggable: true
-            });
-        } else {
-            alert("Geocode was not successful for the following reason: " + status);
-        }
-    });
-} */
-    
-//지도 위의 마크 모두 삭제 - Refresh 말고 방법 없을까?
-function clearMark(){
-    var loc = map.getCenter(); // 현재의 지도의 위치를 가져온다.
+	//지도 위의 마크 모두 삭제 
+	function clearMark() {
+		var loc = map.getCenter(); // 현재의 지도의 위치를 가져온다.
 
-    map = null;
-    globalMarker = null;
-    globalGeocoder = null;
+		map = null;
+		globalMarker = null;
+		globalGeocoder = null;
 
-    initialize();
-}
-    
-//지도 클릭시 마커 이동
-function moveMarker(loc){
-    //alert(loc);
-    globalMarker.setPosition(loc);
-}
+		initialize();
+	} 
+
+	// 보내기 버튼
+$(document).ready(function(){
+	$("#missingBtn").on("click",function(){
+		var f = new FormData(document.formID);
+		var url = "<%=cp%>/dog119/missing";
+		
+		$.ajax({
+			type:'post',
+			url:url,
+			processData:false,
+			contentType:false,
+			data:f,
+			dataType:'json',
+			success:function(data){
+				alert('성공');
+				location.href="<%=cp%>/dog119";
+			},
+			error:function(e){
+				console.log(e.responseText);
+				alert('에러');
+			}
+		});
+	});
+})
 </script>
 <div class="body-container">
 	<div class="content">
@@ -381,11 +381,11 @@ function moveMarker(loc){
 		<p class="postform_alim">
 			<strong>( 개, 실종신고 )</strong> 개가 아닌 경우는 등록할 수 없습니다.<br>
 			1~6 단계에 따라 입력하시고, 에러발생시 
-			<a href="contact.php?gubun=suggest" onclick="window.open(this.href);return false;" class="tooltip" title="운영자에게">운영자에게</a> 알려주시면 조치해드리겠습니다. <br>
+			<a href="#" onclick="window.open(this.href);return false;" class="tooltip1" title="운영자에게">운영자에게</a> 알려주시면 조치해드리겠습니다. <br>
 			<span class="stress">전화번호와 이메일주소는 로그인 사용자에 한해 볼 수 있으며, 이에 동의한 것으로 간주합니다.</span>
 		</p>
 		<div class="postform">
-			<form id="formID" name="formID" method="post" ENCTYPE="multipart/form-data" action="post" accept-charset="UTF-8">
+			<form id="formID" name="formID" method="post" ENCTYPE="multipart/form-data">
 				<div class="post_l">
 					<p class="post_title">
 						1. 등록자정보(<em>*</em>표 필수)
@@ -557,38 +557,6 @@ function moveMarker(loc){
 						<span><em>*</em>나이 : </span> 
 						<select name="age" id="age" class="validate[required] select">
 							<option value="">선택</option>
-							<option value="0">1년미만</option>
-							<option value="1">1 년생</option>
-							<option value="2">2 년생</option>
-							<option value="3">3 년생</option>
-							<option value="4">4 년생</option>
-							<option value="5">5 년생</option>
-							<option value="6">6 년생</option>
-							<option value="7">7 년생</option>
-							<option value="8">8 년생</option>
-							<option value="9">9 년생</option>
-							<option value="10">10 년생</option>
-							<option value="11">11 년생</option>
-							<option value="12">12 년생</option>
-							<option value="13">13 년생</option>
-							<option value="14">14 년생</option>
-							<option value="15">15 년생</option>
-							<option value="16">16 년생</option>
-							<option value="17">17 년생</option>
-							<option value="18">18 년생</option>
-							<option value="19">19 년생</option>
-							<option value="20">20 년생</option>
-							<option value="21">21 년생</option>
-							<option value="22">22 년생</option>
-							<option value="23">23 년생</option>
-							<option value="24">24 년생</option>
-							<option value="25">25 년생</option>
-							<option value="26">26 년생</option>
-							<option value="27">27 년생</option>
-							<option value="28">28 년생</option>
-							<option value="29">29 년생</option>
-							<option value="30">30 년생</option>
-							<option value="1000">잘모름</option>
 					</select>
 					</label> 
 					<label> 
@@ -621,9 +589,7 @@ function moveMarker(loc){
 					</p>
 					<label> 
 					<span>실종지점 지도(
-					<a href="#" class="tooltip" title="* 아래의 지도는 선택사항이며, 필요한 분들은 실종지점 표시로 사용하세요.<br><br>
-					* 지도를 확대/축소/이동 하면서 지도위에 한번 클릭하면 해당 좌표가 자동으로 입력되며, 다시 클릭하면 새로운 지점이 선택됩니다.<br><br>
-					* 실종지점을 잘 모르는경우 대략적인 위치라도 선택하는것이 좋습니다.<br><br>* 지도 아래의 취소를 누르면 해당 좌표가 적용되지 않습니다." 
+					<a href="#" class="tooltip1" title="* 아래의 지도는 선택사항이며, 필요한 분들은 실종지점 표시로 사용하세요.&#13;&#13;* 지도를 확대/축소/이동 하면서 지도위에 한번 클릭하면 해당 좌표가 자동으로 입력되며, 다시 클릭하면 새로운 지점이 선택됩니다.&#13;&#13;* 실종지점을 잘 모르는경우 대략적인 위치라도 선택하는것이 좋습니다.&#13;&#13;* 지도 아래의 취소를 누르면 해당 좌표가 적용되지 않습니다."
 					onclick="return false;">지도사용법</a>) : </span>
 					
 <!-- 지도 호출 -->
@@ -644,7 +610,7 @@ function moveMarker(loc){
 					</label> 
 					<label>
 						<a href="#" onClick="return false;" id="attach">사진첨부하기</a>
-						(클릭하면 하단에 나타남, <a href="#" class="tooltip"
+						(클릭하면 하단에 나타남, <a href="#" class="tooltip1"
 						title="1. 첫번째(두세번째는 무관) 사진에, 전단파일이나 복잡하게 합성한 사진을 첨부하는 경우 편집됩니다(편집된 파일은 수정안됨)&lt;br&gt;&lt;br&gt;2. 사진첨부가 되지않을 경우, 사진없이 등록하시고 사진은 운영자에게 보내주시면 올려드립니다.&lt;br&gt;&lt;br&gt;3. 첨부가능한 파일형식 : 이미지파일(jpg, gif, png), 10M"
 						onClick="return false;">
 						<span class="stress">주의사항</span></a>) :
@@ -654,7 +620,7 @@ function moveMarker(loc){
 							<input type="text" id="fileName1" class="file_input_textbox_report" readonly="readonly" />
 							<div class="file_input_div">
 								<input type="button" value="파일1" class="file_input_button" /> 
-								<input type="file" name="userfile1" class="file_input_hidden" onchange="javascript: document.getElementById('fileName1').value = this.value" />
+								<input type="file" name="upload" class="file_input_hidden" onchange="javascript: document.getElementById('fileName1').value = this.value" />
 							</div>
 							<input type="button" value="취소" class="file_cancel" onclick="javascript:document.getElementById('fileName1').value = ''" />
 						</div>
@@ -662,7 +628,7 @@ function moveMarker(loc){
 							<input type="text" id="fileName2" class="file_input_textbox_report" readonly="readonly" />
 							<div class="file_input_div">
 								<input type="button" value="파일2" class="file_input_button" /> 
-								<input type="file" name="userfile2" class="file_input_hidden" onchange="javascript: document.getElementById('fileName2').value = this.value" />
+								<input type="file" name="upload" class="file_input_hidden" onchange="javascript: document.getElementById('fileName2').value = this.value" />
 							</div>
 							<input type="button" value="취소" class="file_cancel" onclick="javascript:document.getElementById('fileName2').value = ''" />
 						</div>
@@ -670,66 +636,32 @@ function moveMarker(loc){
 							<input type="text" id="fileName3" class="file_input_textbox_report" readonly="readonly" />
 							<div class="file_input_div">
 								<input type="button" value="파일3" class="file_input_button" /> 
-								<input type="file" name="userfile3" class="file_input_hidden" onchange="javascript: document.getElementById('fileName3').value = this.value" />
+								<input type="file" name="upload" class="file_input_hidden" onchange="javascript: document.getElementById('fileName3').value = this.value" />
 							</div>
 							<input type="button" value="취소" class="file_cancel" onclick="javascript:document.getElementById('fileName3').value = ''" />
 						</div>
 					</div>
-					<label> 
-						<span>유튜브 동영상 올리기(<a href="./images/video_guide.jpg" onclick="window.open(this.href);return false;">올리는 방법</a>) : </span> 
-						<input type="text" name="video" id="video" maxlength="100" class="validate[custom[url]] text-input" />
-					</label>
 				</div>
 				<!-- line break -->
 				<div style="clear: both;"></div>
-				<div class="post_l">
-					<p class="post_title">4. 긴급알림신청</p>
-					
-					<label> 
-						<span> 
-							<a href="service/index.php?code=how#go_ads1" onclick="window.open(this.href);return false;"><em>
-							<strong>긴급알림이란?(신청하실 분은 필독)</strong></em></a>
-						</span>
-					</label> 
-					<label> 
-						<span>긴급알림은 선택사항입니다.<br>꼭 하실 분만 신청해주시기바랍니다.</span> 
-						<select name="apply_ads" id="apply_ads" class="validate[required]" onChange="alert('운영자의 사정으로, 지금은 신청할 수 없습니다!');">
-							<option value="N">긴급알림 신청안함</option>
-							<option value="N">긴급알림 신청합니다</option>
-					</select>
-					</label> 
-					<label id="id_name" style="display: none;"> 
-						<span><em>*</em>신청하실 분은 입금자 이름을 적어주세요 :</span> 
-						<input type="text" name="apply_name" value="" maxlength="16" class="validate[required] text-input">
-					</label>
-
-					<div id="id_sns" style="display: none;">
-						<span><em>*</em>신고내용을 페이스북/트위터/네이버카페/다음카페/네이버블로그/다음블로그에도 올려주세요(개인정보는 올리지않습니다) :<br></span> 
-						<span>올려주세요:</span>
-						<input class="validate[required] radio" type="radio" name="apply_sns" id="radio1" value="Y"> 
-						<span>올리지않음:</span>
-						<input class="validate[required] radio" type="radio" name="apply_sns" id="radio2" value="N"><br>
-						<br>
-					</div>
-
-				</div>
+				
 				<div class="post_c">
-					<p class="post_title">5. 참고사항</p>
+					<p class="post_title">4. 참고사항</p>
 					<label> 
 						<span> 1. 정보가 잘못 입력된 경우, 수정될 수 있습니다.<br>
 							2. 재등록 허용기간은 5일 입니다.<br> 3. 다른 이메일로 중복등록하는(된) 경우 삭제됨<br>
 							4. 실종동물을 찾은경우 신고종료처리해주십시요.<br> 5. 에러발생시 
-							<a href="contact.php?gubun=suggest" onclick="window.open(this.href);return false;" class="tooltip" title="운영자에게">운영자에게</a>
+							<a href="#" onclick="window.open(this.href);return false;" class="tooltip1" title="운영자에게">운영자에게</a>
 							 알려주세요.
 					</span>
 					</label>
 				</div>
 				<div class="post_r">
-					<p class="post_title">6. 등록완료</p>
+					<p class="post_title">5. 등록완료</p>
 					<label> 
 						<span> '등록하기'는 한번만 클릭하세요. </span>
 					</label> 
-					<input type="submit" value="등록하기" class="mybtn blue"> 
+					<input type="button" value="등록하기" id="missingBtn" class="mybtn blue"> 
 					<input type="reset" value="다시작성" class="mybtn gray"> 
 					<input type="button" onClick="javascript:history.back();return false;" value="취소" class="mybtn gray">
 				</div>
@@ -740,10 +672,11 @@ function moveMarker(loc){
 		</div>
 	</div>
 </div>
-<script id="microloader" type="text/javascript" src=".sencha/app/microloader/development.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?sensor=false&key=AIzaSyBPA_xStX4VRi97SvEHjPOjZjlIC6aRWcs" charset="utf-8" type="text/javascript"></script>
-
 <script type="text/javascript">
+
+$("#attach").on("click",function(){
+	$("#attachfile").fadeIn(1000);
+});
 
 function mapReset() {
 	clearMark();
@@ -775,7 +708,7 @@ function apply(sel) {
 
 function setAddr(value){
 	addr = value;
-	searchPlaces();
+	//searchPlaces();
 }
 
 </script>

@@ -33,6 +33,7 @@
 
 <div class="header">
 	<tiles:insertAttribute name="header" />
+	<tiles:insertAttribute name="menu2" />
 </div>
 
 <div class="container">

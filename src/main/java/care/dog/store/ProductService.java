@@ -20,9 +20,16 @@ public interface ProductService {
 	//qna 수
 	public int dataCountQna(int productId);
 	public int insertCart(Map<String, Object> map);
-	public int dataCountCart();
+	public int dataCountCart(String memberId);
 	public List<Cart> listCart(Map<String, Object> map);
 	public int deleteCart(int cartId);
 	public int updateCart(Map<String, Object> map);
+	//public int insertOrder(Order orderDto);
+	public int dataCountOrder(String memberId);
+	public List<Order> listOrder(Map<String, Object> map);
+	//public int insertOrderOne(Map<String, Object> map);
+	public int insertProductOrder(Order orderDto);
+	public int insertOrderDetail(Order orderDto);
+	public int orderSeq();
 
 }
