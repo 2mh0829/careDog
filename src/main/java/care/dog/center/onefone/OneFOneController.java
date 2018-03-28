@@ -27,9 +27,33 @@ public class OneFOneController {
 		return ".center.onefonelist";
 	}
 	
-	@RequestMapping(value="/center/onefone")
-	public String onefone() {
+	@RequestMapping(value="/center/onefone", method=RequestMethod.GET)
+	public String onefone(
+			Model model
+			) throws Exception{
+		model.addAttribute("pageNo","1");
 		
 		return ".center.onefone";
+	}
+	
+	@RequestMapping(value="/center/onefone", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> onefoneSubmit(
+			OneFOneVo dto,
+			HttpSession session
+			) throws Exception{
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		String state = "true";
+		
+		if(info == null) {
+			state = "false";
+		} else {
+			dto.setMemberId(info.getMemberId());
+			service.insertOneFOne(dto);
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		return model;
 	}
 }
