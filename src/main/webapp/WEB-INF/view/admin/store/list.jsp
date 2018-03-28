@@ -91,7 +91,7 @@ function article(productId) {
 
 		<div class="list-title">
 			<h3>ALL</h3>
-			<hr>
+			<hr style="border: 1px solid #cdcdcd">
 		</div>
 	
 		<div class="sort">
@@ -153,12 +153,12 @@ function article(productId) {
             </c:if>
         </div>        
         
-        <div style="clear: both;">
+        <div style="clear: both; margin-bottom: 100px;">
         		<div style="float: left; width: 20%; min-width: 85px;">
         		    <button type="button" class="btn btn-default btn-sm wbtn" onclick="javascript:location.href='<%=cp%>/store/list';">새로고침</button>
         		</div>
         		<div style="float: left; width: 60%; text-align: center;">
-        		     <form name="searchForm" action="<%=cp%>/store/list" method="post" class="form-inline">
+        		     <form name="searchForm" action="<%=cp%>/admin/store/list" method="post" class="form-inline">
 						  <select class="form-control input-sm" name="searchKey" >
 						      <option value="productName">제품명</option>
 						      <option value="brand">브랜드명</option>
@@ -168,11 +168,14 @@ function article(productId) {
 						  <span class="glyphicon glyphicon-search"></span> 검색</button>
         		     </form>
         		</div>
-        		<%-- 
+        		
         		<div style="float: left; width: 20%; min-width: 85px; text-align: right;">
-        		    <button type="button" class="btn btn-primary btn-sm bbtn" onclick="javascript:location.href='<%=cp%>/photo/created';"><span class="glyphicon glyphicon glyphicon-pencil"></span> 등록하기</button>
+        		    <button type="button" class="btn btn-primary btn-sm bbtn" 
+        		    onclick="javascript:location.href='<%=cp%>/admin/store/created';">
+        		    	<span class="glyphicon glyphicon glyphicon-pencil">등록하기</span> 
+        		    </button>
         		</div>
-        		 --%>
+        		
         </div>
 	 
 </div>	

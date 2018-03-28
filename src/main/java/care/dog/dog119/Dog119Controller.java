@@ -140,7 +140,6 @@ public class Dog119Controller {
 	@RequestMapping(value="/dog119/dhArticle")
 	public String healthArticle(
 			@RequestParam Map<String, Object> map, Model model) {
-		String query = "page="+map.get("page");
 		int boardNum = Integer.parseInt((String)map.get("boardNum"));
 		DogHealthVo dto = service.dhDetail(boardNum);
 		dto.setLikeCnt(service.dhLikeCnt(boardNum));
@@ -233,7 +232,6 @@ public class Dog119Controller {
 			dto.setDhReplyContent(dto.getDhReplyContent().replaceAll("\n", "<br>"));
 		}
 		
-		//AJAX 용 페이징
 		String paging=myUtilBootstrap.pagingMethod(page, totalPage, "listPage");
 		
 		Map<String, Object> model = new HashMap<>();
@@ -244,7 +242,6 @@ public class Dog119Controller {
 		model.put("totalPage", totalPage);
 		model.put("paging", paging);
 		
-		//AJAX는 .으로 하면 안됨
 		return model;
 	}
 	
