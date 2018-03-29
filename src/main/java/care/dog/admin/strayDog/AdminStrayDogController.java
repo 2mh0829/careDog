@@ -7,19 +7,16 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import care.dog.admin.strayDogVo.AdminFixSupportVo;
 import care.dog.common.MyUtilBootstrap;
-import care.dog.member.SessionInfo;
 
 @Controller("strayDog.adminStrayDogController")
 public class AdminStrayDogController {
@@ -33,7 +30,17 @@ public class AdminStrayDogController {
 		return ".admin.strayDog.fixSupport";
 	}
 	
-	@RequestMapping(value="/admin/dog119/fixSupport")
+	@RequestMapping(value="/admin/strayDog/tempSupport")
+	public String tempSupport() {
+		return ".admin.strayDog.tempSupport";
+	}
+	
+	@RequestMapping(value="/admin/strayDog/volunteer")
+	public String volunteer() {
+		return ".admin.strayDog.volunteer";
+	}
+	
+	@RequestMapping(value="/admin/strayDog/fixSupport")
 	@ResponseBody
 	public Map<String, Object> fixSupportList(
 			@RequestParam(defaultValue="1") int page,
@@ -83,18 +90,4 @@ public class AdminStrayDogController {
 		return map;
 	}
 	
-	@RequestMapping(value="/admin/dog119/dogHealthInput")
-	public String dogHealthCreate() {
-		return ".admin.strayDog.dogHealthCreate";
-	}
-	
-	@RequestMapping(value="/admin/dog119/dhInput", method=RequestMethod.POST)
-	public String dhCreate(@RequestParam Map<String, Object> map, HttpSession session) {
-		SessionInfo info = (SessionInfo) session.getAttribute("member");
-		String memberId = info.getMemberId();
-		map.put("memberId", memberId);
-		
-		service.dogHealthCreate(map);
-		return "redirect:/dog119/dogHealth";
-	}
 }

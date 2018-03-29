@@ -36,15 +36,4 @@ public class AdminStrayDogServiceImpl implements AdminStrayDogService {
 		return result;
 	}
 
-	@Override
-	public int dogHealthCreate(Map<String, Object> map) {
-		int result = 0;
-		try {
-			result = dao.insertData("dogHealth.dhInsert", map);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-	
 }

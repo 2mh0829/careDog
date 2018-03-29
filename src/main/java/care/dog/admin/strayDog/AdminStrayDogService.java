@@ -8,5 +8,4 @@ import care.dog.admin.strayDogVo.AdminFixSupportVo;
 public interface AdminStrayDogService {
 	public List<AdminFixSupportVo> fixSupportList(Map<String, Object> map);
 	public int fixSupportDataCnt(Map<String, Object> map);
-	public int dogHealthCreate(Map<String, Object> map);
 }

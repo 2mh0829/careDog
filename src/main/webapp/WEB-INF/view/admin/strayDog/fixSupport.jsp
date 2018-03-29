@@ -14,7 +14,7 @@
 <script type="text/javascript">
 $(function(){
 	$("#list").jqGrid({
-		url: '<%=cp%>/admin/dog119/fixSupport'
+		url: '<%=cp%>/admin/strayDog/fixSupport'
 		,datatype: "json"
 		,mtype: "get"
 		,colNames: ['번호','후원종류', '이름', '핸드폰 번호','이메일', '결제방법', '후원금액', '시작일', '종료일', '우편번호', '주소1', '주소2']  // "" : 수정과 삭제 버튼을 위한 공간
