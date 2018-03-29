@@ -1,0 +1,215 @@
+.pagenation {width:1100px; height:auto; margin:0 auto 50px auto; text-align:center; clear:both;}
+.pagenation a {display:inline-block; width:40px; height:40px; line-height:40px; font-size:16px; color:#444; margin-right:10px; text-align:center; background:#f3f3f3; border:1px solid #ccc;}
+.pagenation a.img {border:0; background:none; padding-top:12px; height:28px;}
+.pagenation .select {background:#2e5fa4;display:inline-block; width:40px; height:40px; line-height:40px; font-size:16px; color:#fff; font-family: 'NanumGothicWebBold'!important; font-weight:normal; margin-right:10px; text-align:center; border:1px solid #2e5fa4;}
+.strayDog {width:1000px; height:auto; margin:0 auto 50px auto;}
+.strayDog+.strayDog {
+	margin-left: 2%
+}
+.allStrayDog .strayDog {width:310px; height:700px; float:left; margin:40px 8px 60px 8px; background:#fff; border:1px solid #ccc;}
+.allStrayDog .strayDog img {vertical-align:top;width:310px; height:261px; /*margin-bottom:25px;*/}
+.allStrayDog .strayDog ul {height:403px; padding:0 10px; margin-top:25px;}
+.allStrayDog .strayDog ul li {line-height:30px; color:#666;letter-spacing:-0.5px;font-size:14px;}
+.allStrayDog .strayDog ul li span.red {color:red;}
+.allStrayDog .strayDog ul li.full {clear:both;}
+.allStrayDog .strayDog ul li strong {font-family: 'NanumGothicWebBold'!important; font-weight:normal; color:#222; padding-right:5px; font-size:16px;}
+.allStrayDog .strayDog ul li i {font-size:16px; color:#2e5fa4; font-style:normal;}
+.allStrayDog .strayDog ul li span {line-height:22px; color:#666;}
+.allStrayDog .strayDog ul li.half {width:50%; float:left;}
+
+::selection {background:#26579c; color:#fff;}
+
+.no-result {width:1100px; height:auto; margin:40px auto 50px auto; text-align:center; background:#fff;font-size:16px; color:#2e5fa4; border:1px solid #ccc; padding:20px 0;}
+
+.search_area {width:width:1098px; height:auto; margin:0 auto 50px auto; text-align:center;padding:15px 0 0 0; background:#fff; border:1px solid #ccc; line-height:35px;}
+.search_area select {height:35px; font-size:16px; color:#444; display:inline-block; vertical-align:middle; line-height:35px; margin-bottom:15px; background:#fff;}
+.search_area select.wd100 {width:100px; padding-left:5px;}
+.search_area select.wd165 {width:165px; padding-left:5px; margin-right:8px;}
+.search_area select.wd120 {width:120px; padding-left:5px; margin-right:8px;}
+.search_area label {font-size:16px; color:#444; margin-right:8px; line-height:35px; vertical-align:top;}
+.search_area input[type="text"] {width:155px; height:35px; line-height:35px; padding:0 5px; display:inline-block; margin-right:8px;background:#fff;  vertical-align:middle;margin-bottom:15px;}
+.search_area button {width:80px; height:35px; color:#fff; font-size:16px; background:#2e5fa4;margin-bottom:15px;}
+.search_area input[type="checkbox"] {width:16px; height:16px; margin-right:8px; vertical-align:top; margin-top:10px;}
+.search_area img {vertical-align:top; margin-top:5px; margin-right:8px;}
+.search_area span {height:35px; line-height:35px; font-size:16px; color:#444; width:10px; display:inline-block; vertical-align:top;}
+
+a{text-decoration:none;cursor:pointer;outline:none;}  
+a:hover,a:active{text-decoration:none;}
+a:focus , button:focus {outline:1px dotted #ccc;} */
+textarea, select, button, table {font-family:inherit; font-size:inherit; line-height:inherit;}
+legend{display:none; overflow:hidden; visibility:hidden; height:0; font-size:0; line-height:0;} /* For Screen Reader */
+img, fieldset, button {border:0;}
+img{vertical-align:middle;}
+fieldset, button, input {vertical-align:middle;}
+ul, ol, li, dl, dt, dd {list-style:none;margin:0;padding:0;}
+em, i, address {font-style:normal; font-weight:normal;}
+textarea, button {line-height:1.2; /* 입력폼에서 춤추지 않는 최소 줄간 1.2 */ vertical-align: bottom;}
+input {vertical-align:middle;border:none;background:none;}
+label {cursor:pointer; vertical-align:middle;}
+strong {font-family: 'NanumGothicWebBold' !important; } /* 강조 */
+.cs_abandoned_animal .info_wrap dl {
+    max-width: 425px;
+    line-height: 18px
+}
+.cs_abandoned_animal .info_wrap dl dt {
+    float: left;
+    margin-right: 10px;
+    padding-top: 5px;
+    color: #8f8f8f !important;
+}
+.cs_abandoned_animal .info_wrap dl dd {
+    position: relative;
+    padding-top: 5px;
+    color: #242424
+}
+.cs_abandoned_animal .info_wrap dl dd.info_hair {
+    float: left
+}
+.cs_abandoned_animal .info_wrap dl .ico_arrow {
+    display: inline-block;
+    vertical-align: top;
+    margin: 3px 5px 0 4px;
+    width: 5px;
+    height: 9px;
+    background: url(../img/sp_abandoned_animal_v2.png) no-repeat -17px -28px;
+}
+
+.cs_abandoned_animal .info_wrap dl .ico_bar {
+    display: inline-block;
+    vertical-align: top;
+    margin: 3px 9px 0 8px;
+    width: 1px;
+    height: 11px;
+    background-color: #eaeaea;
+}
+
+.cs_abandoned_animal .info_wrap dl dd a {
+    text-decoration: none
+}
+
+.cs_abandoned_animal .info_wrap dl dd a.link_map {
+    margin-left: 2px
+}
+
+.cs_abandoned_animal .info_wrap dl dd a:hover {
+    text-decoration: underline
+}
+
+.cs_abandoned_animal .info_wrap dl dd .info_tell {
+    color: #8f8f8f
+}
+
+.cs_abandoned_animal .info_wrap dl dd .ico_notice{
+    display: inline-block;
+    *display: inline;
+	overflow: hidden;
+    vertical-align: top;
+    margin: -1px 0 0 4px;
+	*zoom: 1;
+    width: 16px;
+    height: 16px;
+    background: url(../img/sp_abandoned_animal_v2.png) no-repeat -42px -25px;
+}
+
+.ly_abandoned_animal .ico_info{
+    display: inline-block;
+    *display: inline;
+	overflow: hidden;
+    vertical-align: top;
+    margin: -3px 0 0 0;
+	*zoom: 1;
+    width: 16px;
+    height: 16px;
+    background: url(../img/sp_abandoned_animal_v2.png) no-repeat -42px -25px;
+}
+.cs_abandoned_animal .info_wrap dl dd.info_notice{
+    width: 425px;
+    z-index: 100;
+}
+.cs_abandoned_animal .info_wrap dl dd .ly_notice{
+    position: absolute;
+    top: 32px;
+    right: -27px;
+    width: 289px;
+    border: 1px solid #cbdeee;
+    background-color: #fff;
+    color: #666;
+    font-size: 12px;
+    text-align: left;
+    line-height: 20px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+.cs_abandoned_animal .info_wrap dl dd .ly_notice strong{
+    display: block;
+    padding:21px 0 0 23px;
+    color: #424242;
+}
+.cs_abandoned_animal .info_wrap dl dd .ly_notice[aria-hidden="true"] {
+    display: none;
+}
+.cs_abandoned_animal .info_wrap dl dd .ly_notice p{
+    padding: 3px 23px 18px 23px;
+    line-height: 20px;
+    color: #666;
+    font-size: 12px;
+}
+.cs_abandoned_animal .info_wrap dl dd .ly_notice .btn_close{
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 13px;
+    height: 13px;
+    border: 0;
+    background: url(../img/sp_abandoned_animal_v2.png) no-repeat -38px -10px;
+    font-size: 0;
+    line-height: 0;
+    cursor: pointer;
+}
+/* 안내문구 및 제공 */
+.cs_abandoned_animal .lst_wrap+.animal_notice {
+    margin-top: 15px
+}
+.cs_abandoned_animal .animal_notice {
+    overflow: hidden;
+    position: relative
+}
+.cs_abandoned_animal .animal_notice p {
+    overflow: hidden;
+    position: relative;
+    padding-left: 10px;
+    line-height: 18px;
+    font-size: 11px;
+    font-family: '돋움', dotum, AppleSDGothicNeo, Helvetica, sans-serif;
+    color: #8f8f8f
+}
+.cs_abandoned_animal .animal_notice p .ico_notice {
+    position: absolute;
+    top:5px;
+    left: 0;
+    display: block;
+    width: 2px;
+    height: 47px;
+    margin: -2px 7px 0 0;
+    vertical-align: middle;
+    background-color: #e8e8e8
+}
+.cs_abandoned_animal .animal_notice p .ico_bar {
+    display: inline-block;
+    vertical-align: top;
+    *display: inline;
+    *zoom:1;
+    margin: 3px 3px 0 7px;
+    width: 1px;
+    height: 10px;
+    background-color: #eaeaea;
+}
+.cs_abandoned_animal .animal_notice a {
+    text-decoration: none;
+}
+.cs_abandoned_animal .animal_notice a:hover {
+    text-decoration: underline;
+}
+.red {color:red;}

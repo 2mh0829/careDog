@@ -138,29 +138,27 @@ p { line-height: 1.5; margin: 1em 0; }
 						<div class="donation__banner">
 							<h2 class="donation__banner-tit">사회가 외면했던 동물들, 다시 찾는 희망</h2>
 							<h3 class="donation__banner-sub">회원님의 힘을 한번 더 나눠주세요!</h3>
-							<!-- 20171025 내용 수정 //-->
 							<p class="donation__banner-txt">
 								기르던 반려동물을 길에 버리는 것을 수치스럽게 생각지 못하는 사람이 많던 때가 있었습니다.<br>
 								하지만 지금은 나이가 많은 반려동물과 함께 사는 것을 자랑하는 사람들이 늘고 있습니다.<br>
 								지난 15여  18여 년을 이어온 회원님들의 후원과 동물 친구들의 노력으로 변화하고 있는 것입니다.<br><br>
 
-								동물자유연대는, 동물에 대한 사회적 관심을 견인해나가며 우리사회에 농장동물복지 필요성의 공감대를 만들었고, 2013년에는 아시아 최초로 쇼장의 돌고래 제돌이와 춘삼이, 삼팔이를 시작으로 2017년 까지 7마리의 남방큰돌고래를 바다로 돌려보내는 데에 성공적인 캠페인을 할 수 있었습니다.<br><br>
+								careDog는, 동물에 대한 사회적 관심을 견인해나가며 우리사회에 농장동물복지 필요성의 공감대를 만들었고, 2013년에는 아시아 최초로 쇼장의 돌고래 제돌이와 춘삼이, 삼팔이를 시작으로 2017년 까지 7마리의 남방큰돌고래를 바다로 돌려보내는 데에 성공적인 캠페인을 할 수 있었습니다.<br><br>
 
 								그리고 동물복지형 동물보육원을 건립함으로써 우리 자력의 힘으로 선진적인 동물보육원을 건립하고 운영할 수 있다는 실증을 보여줬습니다. 하지만 이것은 끝이 아니라 제2, 제3의 동물보육원을 건립하고 운영하기 위한 첫 걸음이었습니다.<br><br>
 
-								아직 해야 할 일이 많습니다. 가야 할 길이 멉니다. 동물자유연대는 더욱 더 탄탄한 뒷받침을 필요로 하고 있습니다. 회원님, 지금의 이 동력을 ‘동물의 힘’으로 더 크게 확장시켜 나갈 수 있도록, 변함없고 안정적인 지원으로 함께 해주세요!
+								아직 해야 할 일이 많습니다. 가야 할 길이 멉니다. careDog는 더욱 더 탄탄한 뒷받침을 필요로 하고 있습니다. 회원님, 지금의 이 동력을 ‘동물의 힘’으로 더 크게 확장시켜 나갈 수 있도록, 변함없고 안정적인 지원으로 함께 해주세요!
 							</p>
-							<!--// 20171025 내용 수정 -->
 						</div><!-- //donation__banner -->
 					</div><!-- //donation__bg -->
 					<div class="donation__box">
 						<h2 class="donation__box-tit">조금 더 여유를 내어주실 수 있다면, 지금 회원님의 후원금을 증액해 주세요.</h2>
-						<p class="donation__box-txt">따뜻한 손길이 필요한 동물, 동물 복지 개선을 위한 토대 마련 등에 동물자유연대가 더 뛰겠습니다.</p>
+						<p class="donation__box-txt">따뜻한 손길이 필요한 동물, 동물 복지 개선을 위한 토대 마련 등에 careDog가 더 뛰겠습니다.</p>
 					</div>
 
 					<form name="join2" method="post" action="addok.asp?tcate=2">
 					<div class="donation__table">
-						<p class="donation__txt">동물자유연대 회원은 로그인을 먼저 해주세요. 더 편하게 증액 신청을 하실 수 있습니다.</p>
+						<p class="donation__txt">careDog 회원은 로그인을 먼저 해주세요. 더 편하게 증액 신청을 하실 수 있습니다.</p>
 						<table class="table1 mt10">
 							<thead>
 								</thead><colgroup>
@@ -173,7 +171,7 @@ p { line-height: 1.5; margin: 1em 0; }
 									<th class="table1__th">이름</th>
 									<td class="table1__td">
 										<div class="input__form">
-											<input type="text" class="input1 wd240" name="name" value="" maxlength="7">
+											<input type="text" class="input1 wd240" name="name" value="" readonly="readonly" maxlength="7">
 										</div>
 									</td>
 								</tr>
@@ -181,7 +179,7 @@ p { line-height: 1.5; margin: 1em 0; }
 									<th class="table1__th">이메일</th>
 									<td class="table1__td">
 										<div class="input__form">
-											<input type="text" class="input1 wd240" name="email" value="">
+											<input type="text" class="input1 wd240" name="email" value="${sessionScope.member.email}" readonly="readonly">
 											<span class="sub__txt">* 정기후원 신청시 입력한 이메일</span>
 										</div>
 									</td>
@@ -190,7 +188,7 @@ p { line-height: 1.5; margin: 1em 0; }
 									<th class="table1__th">연락처</th>
 									<td class="table1__td">
 										<div class="input__form">
-											<input type="text" class="input1 wd240" name="tel" value="" maxlength="20">
+											<input type="text" class="input1 wd240" name="tel" value="${sessionScope.member.tel}" readonly="readonly" maxlength="20">
 										</div>
 									</td>
 								</tr>
@@ -262,11 +260,6 @@ p { line-height: 1.5; margin: 1em 0; }
 							</p>
 						</li>
 					</ul>
-
-<!-- 후원금 증액 신청시 입력한 메시지는 로그인 상태에서만 보이게 수정
-	2014. 9. 10 이기순 ==> AS-IS 유지 -->	
-
-
 				</div>
 
 			</div>

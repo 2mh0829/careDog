@@ -245,16 +245,6 @@ public class Dog119Controller {
 		return model;
 	}
 	
-	@RequestMapping(value="/dog119/dhInsert", method=RequestMethod.POST)
-	public String dhInsert(@RequestParam Map<String, Object> data, HttpSession session){
-		SessionInfo info = (SessionInfo) session.getAttribute("member");
-		String memberId = info.getMemberId();
-		data.put("memberId", memberId);
-		
-		service.dhInsert(data);
-		return "redirect:/dog119/dogHealth";
-	}
-	
 	@RequestMapping(value="/dog119/sido")
 	@ResponseBody
 	public Map<String, Object> sido(){

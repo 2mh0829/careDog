@@ -2,23 +2,24 @@ package care.dog.admin.strayDog;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import care.dog.admin.strayDogVo.AdminFixSupportVo;
 import care.dog.common.MyUtilBootstrap;
-import care.dog.dog119.dogMissingVo.DogMissingVo;
+import care.dog.member.SessionInfo;
 
 @Controller("strayDog.adminStrayDogController")
 public class AdminStrayDogController {
@@ -36,14 +37,13 @@ public class AdminStrayDogController {
 	@ResponseBody
 	public Map<String, Object> fixSupportList(
 			@RequestParam(defaultValue="1") int page,
-			@RequestParam(defaultValue="subject") String search,
-			@RequestParam(defaultValue="") String keyword,
+			@RequestParam(value="rows", defaultValue="10") int rows,
+			@RequestParam(value="searchField", defaultValue="subject") String search,
+			@RequestParam(value="searchType", defaultValue="") String type,
+			@RequestParam(value="searchValue", defaultValue="") String keyword,
 			HttpServletRequest req, Model model
 			){
-		String cp = req.getContextPath();
-		
 		int totalPage = 0;
-		int rows=20;
 		int dataCount = 0;
 		
 		if(req.getMethod().equalsIgnoreCase("GET")) {
@@ -56,6 +56,7 @@ public class AdminStrayDogController {
 		
 		Map<String, Object> pagingmap = new HashMap<>();
 		pagingmap.put("search", search);
+		pagingmap.put("type", type);
 		pagingmap.put("keyword", keyword);
 		
 		dataCount = service.fixSupportDataCnt(pagingmap);
@@ -75,27 +76,25 @@ public class AdminStrayDogController {
 		Map<String, Object> map = new HashMap<>();
 		List<AdminFixSupportVo> list = service.fixSupportList(pagingmap);
 		
-		String q = "";
-		String dog119ListUrl = cp+"/admin/dog119/fixSupport";
-		if(keyword.length() != 0) {
-			try {
-				q = "search="+search+"&keyword="+URLEncoder.encode(keyword, "utf-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		if(q.length()!=0) {
-			dog119ListUrl = cp+"/admin/dog119/fixSupport?"+q;
-		}
-		
-		String paging = myUtilBootstrap.paging(page, totalPage, dog119ListUrl);
-		
-		map.put("paging", paging);
-		map.put("list", list);
+		map.put("rows", list);
 		map.put("page", page);
-		map.put("totalPage", totalPage);
+		map.put("total_page", totalPage);
 		map.put("dataCount", dataCount);
 		return map;
+	}
+	
+	@RequestMapping(value="/admin/dog119/dogHealthInput")
+	public String dogHealthCreate() {
+		return ".admin.strayDog.dogHealthCreate";
+	}
+	
+	@RequestMapping(value="/admin/dog119/dhInput", method=RequestMethod.POST)
+	public String dhCreate(@RequestParam Map<String, Object> map, HttpSession session) {
+		SessionInfo info = (SessionInfo) session.getAttribute("member");
+		String memberId = info.getMemberId();
+		map.put("memberId", memberId);
+		
+		service.dogHealthCreate(map);
+		return "redirect:/dog119/dogHealth";
 	}
 }

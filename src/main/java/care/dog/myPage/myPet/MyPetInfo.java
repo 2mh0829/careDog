@@ -14,7 +14,8 @@ public class MyPetInfo {
 	private String hospitalName,hospitalTel1,hospitalTel2,hospitalTel3;
 	private String zipCode;
 	private String addr1,addr2;
-	private MultipartFile myPetPhoto;
+	private MultipartFile upload;
+	private String myPetPhoto;
 	public String getMemberId() {
 		return memberId;
 	}
@@ -213,12 +214,7 @@ public class MyPetInfo {
 	public void setAddr2(String addr2) {
 		this.addr2 = addr2;
 	}
-	public MultipartFile getMyPetPhoto() {
-		return myPetPhoto;
-	}
-	public void setMyPetPhoto(MultipartFile myPetPhoto) {
-		this.myPetPhoto = myPetPhoto;
-	}
+
 	@Override
 	public String toString() {
 		return "MyPetInfo [memberId=" + memberId + ", havePet=" + havePet + ", myPetYear=" + myPetYear + ", myPetMonth="
@@ -232,6 +228,18 @@ public class MyPetInfo {
 				+ ", hospitalName=" + hospitalName + ", hospitalTel1=" + hospitalTel1 + ", hospitalTel2=" + hospitalTel2
 				+ ", hospitalTel3=" + hospitalTel3 + ", zipCode=" + zipCode + ", addr1=" + addr1 + ", addr2=" + addr2
 				+ "]";
+	}
+	public MultipartFile getUpload() {
+		return upload;
+	}
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+	}
+	public String getMyPetPhoto() {
+		return myPetPhoto;
+	}
+	public void setMyPetPhoto(String myPetPhoto) {
+		this.myPetPhoto = myPetPhoto;
 	}
 	
 	
