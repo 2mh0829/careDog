@@ -15,16 +15,31 @@
 	<select id="listProduct" parameterType="map" resultType="care.dog.store.Product">
 	SELECT * FROM (
 		SELECT ROWNUM rnum, tb.* FROM (
-			SELECT productId, productName, brand, imageFilename, sellingPrice, price, amount, 
-			isContinued, mileage, p.categoryId, c.categoryName
-			FROM product p JOIN productCategory c
-				ON p.categoryId = c.categoryId
+			SELECT p.productId, productName, brand, imageFilename, sellingPrice, price, amount, 
+			isContinued, mileage, p.categoryId, c.categoryName, nvl(allAmount, 0) allAmount, 
+			inputDate, grade
+			FROM product p 
+			JOIN productCategory c ON p.categoryId = c.categoryId
+			LEFT OUTER JOIN productInput i ON p.productId = i.productId
+			LEFT OUTER JOIN productReply pr ON p.productId = pr.productId
+			LEFT OUTER JOIN (
+			    SELECT d.productId, COUNT(*) allAmount
+			    from orderDetail d 
+			    join payment pm on d.orderId=pm.orderId
+			    group by d.productId
+			) t ON p.productId=t.productId
 			<where>
             	<if test="searchValue != null and searchValue != ''">
 					<include refid="where-list"/>
 		    	</if>
+		    	<if test="categoryId != 0 and categoryId != ''">
+		    		c.categoryId=#{categoryId}
+		    	</if>
 	        </where>
-			ORDER BY productId
+	        <if test="sortField != null and sortField != ''
+	        and sortMode != null and sortMode != ''">
+	        	ORDER BY ${sortField} ${sortMode}
+	        </if>
 	<![CDATA[
 			) tb WHERE ROWNUM <= #{end}
 		) WHERE rnum >= #{start}
