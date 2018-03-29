@@ -2,13 +2,53 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="service">
-
-	<insert id="insertService" parameterType="care.dog.service.ServiceDto">
-		INSERT INTO sitterInfo(sittingId, title, content, startDate, endDate, reserDiv, reserCost,
-		addPet, addPetCost, carableWeight, carableAge, tag, space, subway, yard, baby,
+    <select id="seq" resultType="Integer">
+    	SELECT sitterInfo_seq.NEXTVAL 
+    	FROM dual
+    </select>
+    
+	<insert id="insertSitterInfo" parameterType="care.dog.service.ServiceDto">
+		INSERT INTO sitterInfo (sittingId, memberId, title, content, startDate, endDate, reserDiv, reserCost,
+		addPet, addPetCost, carableWeight, carableAge, space, subway, yard, baby,
 		family, other)
-		VALUES (sitterInfo_seq.NEXTVAL, #{title}, #{content}, #{startDate}, #{endDate}, #{reserDiv}, #{reserCost},
-		#{addPet}, #{addPetCost}, #{carableWeight}, #{carableAge}, #{tag}, #{space}, #{subway}, #{yard}, #{baby},
+		VALUES (#{sittingId}, #{memberId}, #{title}, #{content}, #{startDate}, #{endDate}, #{reserDiv}, #{reserCost},
+		#{addPet}, #{addPetCost}, #{carableWeight}, #{carableAge}, #{space}, #{subway}, #{yard}, #{baby},
 		#{family}, #{other})
 	</insert>
+	
+	<insert id="insertSitterPhoto" parameterType="care.dog.service.ServiceDto">
+		INSERT INTO sitterPhoto (sittingId, photoId, fileName)
+		VALUES (#{sittingId}, sitterPhoto_seq.NEXTVAL, #{imageFilename,jdbcType=VARCHAR})
+	</insert>
+	
+	<insert id="insertSitterTag" parameterType="care.dog.service.ServiceDto">
+		INSERT INTO sitterTag (sittingId, tagId, tagName)
+		VALUES (#{sittingId}, sitterTag_seq.NEXTVAL, #{tagName})
+	</insert>
+	
+	<select id="sitterTot" resultType="Integer">
+		SELECT count(distinct(memberId))
+		FROM sitterInfo
+	</select>
+	
+	<select id="listSitter" resultType="care.dog.service.ServiceDto">
+		SELECT a.title, a.memberId, a.reserCost, b.fileName imageFilename
+		FROM sitterInfo a, sitterPhoto b
+		WHERE a.sittingId = b.sittingId
+	</select>
+	
+	<select id="sitterPhotoList" resultType="care.dog.service.ServiceDto">
+		SELECT sittingId, fileName imageFilename
+		FROM sitterPhoto
+	</select>
+	
+	<select id="sitterList" resultType="care.dog.service.ServiceDto">
+		SELECT sittingId, title, memberId, reserDiv, reserCost
+		FROM sitterInfo
+	</select>
+	
+	<select id="sitterTagList" resultType="care.dog.service.ServiceDto">
+		SELECT sittingId, tagName
+		FROM sitterTag
+	</select>
 </mapper>

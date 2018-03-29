@@ -105,8 +105,8 @@
 	values(cart_seq.NEXTVAL, #{amount}, #{productId}, #{memberId}, #{optionId})	
 	</insert>
 	
-	<select id="dataCountCart" resultType="Integer">
-	SELECT NVL(COUNT(*), 0) FROM cart
+	<select id="dataCountCart" parameterType="String" resultType="Integer">
+	SELECT NVL(COUNT(*), 0) FROM cart where memberId=#{memberId}
 	</select>
 	
 	<select id="listCart" parameterType="map" resultType="care.dog.store.Cart">
@@ -136,6 +136,68 @@
 	update cart set enrolldate=sysdate, amountAll=#{amount}
 	where cartId=#{cartId} and productId=#{productId} and optionId=#{optionId} and memberId=#{memberId}
 	</update>
+	
+	<!-- <update id="insertOrder" parameterType="care.dog.store.Order">
+	insert all
+	into orderDetail(orderDetailId, orderAmount, orderPrice, note, productId) 
+	values(orderDetail_seq.NEXTVAL, #{orderAmount}, #{orderPrice}, #{note}, #{productId})
+	into productOrder(orderId, orderAllPrice, orderDetailId, memberId) 
+	values(order_seq.NEXTVAL, #{orderPrice}, orderDetail_seq.CURRVAL, #{memberId})
+	select * from dual
+	</update> -->
+	
+	<select id="orderSeq" resultType="Integer">
+		SELECT order_seq.NEXTVAL FROM DUAL
+	</select>
+	
+	<insert id="insertProductOrder" parameterType="care.dog.store.Order">
+	insert into productOrder(orderId, orderAllPrice, memberId) 
+		values(#{orderId}, #{orderAllPrice}, #{memberId})
+	</insert>
+	
+	<insert id="insertOrderDetail" parameterType="care.dog.store.Order">
+	insert into orderDetail(orderDetailId, orderAmount, orderPrice, note, productId, orderId)
+		values(orderDetail_seq.NEXTVAL, #{orderAmount}, #{orderPrice}, 
+		#{note}, #{productId}, #{orderId})
+	</insert>
+	
+	<!-- <update id="insertOrderOne" parameterType="map">
+	insert all
+	into orderDetail(orderDetailId, orderAmount, orderPrice, note, productId) 
+	values(orderDetail_seq.NEXTVAL, #{amount}, #{totalPrice}, #{optionContent}, #{productId})
+	into productOrder(orderId, orderAllPrice, orderDetailId, memberId) 
+	values(order_seq.NEXTVAL, #{totalPrice}, orderDetail_seq.CURRVAL, #{memberId})
+	select * from dual
+	</update> -->
+	
+	<select id="listOrder" parameterType="map" resultType="care.dog.store.Order">
+	SELECT * FROM (
+		SELECT ROWNUM rnum, tb.* FROM (
+			SELECT po.orderId, orderAllPrice, to_char(orderDate, 'yyyy.mm.dd') orderDate, 
+           		orderstate, memberId, orderAmount, orderPrice, note,
+           		brand, productName, o.productId
+			FROM productOrder po
+            	join orderDetail o
+            	on po.orderId = o.orderId
+            	join product p
+            	on o.productId = p.productId
+            where memberId = #{memberId}
+			ORDER BY orderDate
+	<![CDATA[
+			) tb WHERE ROWNUM <= #{end}
+		) WHERE rnum >= #{start}
+	]]>
+	</select>
+	
+	<select id="dataCountOrder" parameterType="String" resultType="Integer">
+	SELECT NVL(COUNT(*), 0) 
+	FROM productOrder po
+    	join orderDetail o
+		on po.orderId = o.orderId
+		join product p
+		on o.productId = p.productId
+	where memberId=#{memberId}
+	</select>
 	
 </mapper>
 

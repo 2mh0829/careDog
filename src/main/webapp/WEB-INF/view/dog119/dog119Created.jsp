@@ -256,6 +256,13 @@ $(document).ready(function(){
 			$("#city").append(content);
 		}
 	});
+	
+	var ageOption = '<option value="0">1년미만</option>';
+	for(var i=1; i<31;i++){
+		ageOption+='<option value='+i+'>'+i+' 년생</option>';
+	}
+	ageOption+='<option value="1000">잘모름</option>';
+	$("#age").append(ageOption);
 })
 
 function change(value){
@@ -340,6 +347,30 @@ function initialize() {
 		initialize();
 	} 
 
+	// 보내기 버튼
+$(document).ready(function(){
+	$("#missingBtn").on("click",function(){
+		var f = new FormData(document.formID);
+		var url = "<%=cp%>/dog119/missing";
+		
+		$.ajax({
+			type:'post',
+			url:url,
+			processData:false,
+			contentType:false,
+			data:f,
+			dataType:'json',
+			success:function(data){
+				alert('성공');
+				location.href="<%=cp%>/dog119";
+			},
+			error:function(e){
+				console.log(e.responseText);
+				alert('에러');
+			}
+		});
+	});
+})
 </script>
 <div class="body-container">
 	<div class="content">
@@ -350,11 +381,11 @@ function initialize() {
 		<p class="postform_alim">
 			<strong>( 개, 실종신고 )</strong> 개가 아닌 경우는 등록할 수 없습니다.<br>
 			1~6 단계에 따라 입력하시고, 에러발생시 
-			<a href="contact.php?gubun=suggest" onclick="window.open(this.href);return false;" class="tooltip1" title="운영자에게">운영자에게</a> 알려주시면 조치해드리겠습니다. <br>
+			<a href="#" onclick="window.open(this.href);return false;" class="tooltip1" title="운영자에게">운영자에게</a> 알려주시면 조치해드리겠습니다. <br>
 			<span class="stress">전화번호와 이메일주소는 로그인 사용자에 한해 볼 수 있으며, 이에 동의한 것으로 간주합니다.</span>
 		</p>
 		<div class="postform">
-			<form id="formID" name="formID" method="post" ENCTYPE="multipart/form-data" action="post" accept-charset="UTF-8">
+			<form id="formID" name="formID" method="post" ENCTYPE="multipart/form-data">
 				<div class="post_l">
 					<p class="post_title">
 						1. 등록자정보(<em>*</em>표 필수)
@@ -526,38 +557,6 @@ function initialize() {
 						<span><em>*</em>나이 : </span> 
 						<select name="age" id="age" class="validate[required] select">
 							<option value="">선택</option>
-							<option value="0">1년미만</option>
-							<option value="1">1 년생</option>
-							<option value="2">2 년생</option>
-							<option value="3">3 년생</option>
-							<option value="4">4 년생</option>
-							<option value="5">5 년생</option>
-							<option value="6">6 년생</option>
-							<option value="7">7 년생</option>
-							<option value="8">8 년생</option>
-							<option value="9">9 년생</option>
-							<option value="10">10 년생</option>
-							<option value="11">11 년생</option>
-							<option value="12">12 년생</option>
-							<option value="13">13 년생</option>
-							<option value="14">14 년생</option>
-							<option value="15">15 년생</option>
-							<option value="16">16 년생</option>
-							<option value="17">17 년생</option>
-							<option value="18">18 년생</option>
-							<option value="19">19 년생</option>
-							<option value="20">20 년생</option>
-							<option value="21">21 년생</option>
-							<option value="22">22 년생</option>
-							<option value="23">23 년생</option>
-							<option value="24">24 년생</option>
-							<option value="25">25 년생</option>
-							<option value="26">26 년생</option>
-							<option value="27">27 년생</option>
-							<option value="28">28 년생</option>
-							<option value="29">29 년생</option>
-							<option value="30">30 년생</option>
-							<option value="1000">잘모름</option>
 					</select>
 					</label> 
 					<label> 
@@ -621,7 +620,7 @@ function initialize() {
 							<input type="text" id="fileName1" class="file_input_textbox_report" readonly="readonly" />
 							<div class="file_input_div">
 								<input type="button" value="파일1" class="file_input_button" /> 
-								<input type="file" name="userfile1" class="file_input_hidden" onchange="javascript: document.getElementById('fileName1').value = this.value" />
+								<input type="file" name="upload" class="file_input_hidden" onchange="javascript: document.getElementById('fileName1').value = this.value" />
 							</div>
 							<input type="button" value="취소" class="file_cancel" onclick="javascript:document.getElementById('fileName1').value = ''" />
 						</div>
@@ -629,7 +628,7 @@ function initialize() {
 							<input type="text" id="fileName2" class="file_input_textbox_report" readonly="readonly" />
 							<div class="file_input_div">
 								<input type="button" value="파일2" class="file_input_button" /> 
-								<input type="file" name="userfile2" class="file_input_hidden" onchange="javascript: document.getElementById('fileName2').value = this.value" />
+								<input type="file" name="upload" class="file_input_hidden" onchange="javascript: document.getElementById('fileName2').value = this.value" />
 							</div>
 							<input type="button" value="취소" class="file_cancel" onclick="javascript:document.getElementById('fileName2').value = ''" />
 						</div>
@@ -637,7 +636,7 @@ function initialize() {
 							<input type="text" id="fileName3" class="file_input_textbox_report" readonly="readonly" />
 							<div class="file_input_div">
 								<input type="button" value="파일3" class="file_input_button" /> 
-								<input type="file" name="userfile3" class="file_input_hidden" onchange="javascript: document.getElementById('fileName3').value = this.value" />
+								<input type="file" name="upload" class="file_input_hidden" onchange="javascript: document.getElementById('fileName3').value = this.value" />
 							</div>
 							<input type="button" value="취소" class="file_cancel" onclick="javascript:document.getElementById('fileName3').value = ''" />
 						</div>
@@ -662,7 +661,7 @@ function initialize() {
 					<label> 
 						<span> '등록하기'는 한번만 클릭하세요. </span>
 					</label> 
-					<input type="submit" value="등록하기" class="mybtn blue"> 
+					<input type="button" value="등록하기" id="missingBtn" class="mybtn blue"> 
 					<input type="reset" value="다시작성" class="mybtn gray"> 
 					<input type="button" onClick="javascript:history.back();return false;" value="취소" class="mybtn gray">
 				</div>
@@ -709,7 +708,7 @@ function apply(sel) {
 
 function setAddr(value){
 	addr = value;
-	searchPlaces();
+	//searchPlaces();
 }
 
 </script>

@@ -11,13 +11,10 @@
 .pagenation a {display:inline-block; width:40px; height:40px; line-height:40px; font-size:16px; color:#444; margin-right:10px; text-align:center; background:#f3f3f3; border:1px solid #ccc;}
 .pagenation a.img {border:0; background:none; padding-top:12px; height:28px;}
 .pagenation .select {background:#2e5fa4;display:inline-block; width:40px; height:40px; line-height:40px; font-size:16px; color:#fff; font-family: 'NanumGothicWebBold'!important; font-weight:normal; margin-right:10px; text-align:center; border:1px solid #2e5fa4;}
-
 .strayDog {width:1000px; height:auto; margin:0 auto 50px auto;}
 .strayDog+.strayDog {
 	margin-left: 2%
 }
-
-
 .allStrayDog .strayDog {width:310px; height:600px; float:left; margin:40px 8px 60px 8px; background:#fff; border:1px solid #ccc;}
 .allStrayDog .strayDog img {vertical-align:top;width:310px; height:261px; /*margin-bottom:25px;*/}
 .allStrayDog .strayDog ul {height:403px; padding:0 10px; margin-top:25px;}
@@ -59,29 +56,24 @@ textarea, button {line-height:1.2; /* 입력폼에서 춤추지 않는 최소 �
 input {vertical-align:middle;border:none;background:none;}
 label {cursor:pointer; vertical-align:middle;}
 strong {font-family: 'NanumGothicWebBold' !important; } /* 강조 */
-
 .cs_abandoned_animal .info_wrap dl {
     max-width: 425px;
     line-height: 18px
 }
-
 .cs_abandoned_animal .info_wrap dl dt {
     float: left;
     margin-right: 10px;
     padding-top: 5px;
     color: #8f8f8f !important;
 }
-
 .cs_abandoned_animal .info_wrap dl dd {
     position: relative;
     padding-top: 5px;
     color: #242424
 }
-
 .cs_abandoned_animal .info_wrap dl dd.info_hair {
     float: left
 }
-
 .cs_abandoned_animal .info_wrap dl .ico_arrow {
     display: inline-block;
     vertical-align: top;
@@ -241,10 +233,8 @@ strong {font-family: 'NanumGothicWebBold' !important; } /* 강조 */
 .cs_abandoned_animal .animal_notice a:hover {
     text-decoration: underline;
 }
-
 </style>
-<script type="text/javascript"
-	src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript">
 var city,gu, center, kind, total, paging;
 var pageNum=1;
