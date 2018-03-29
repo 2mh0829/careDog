@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminStore">
+
+	<sql id="where-list">
+	  <if test="searchKey=='productName'">
+	       INSTR(productName, #{searchValue}) &gt; 0
+	  </if>
+	  <if test="searchKey=='brand'">
+	      INSTR(brand, #{searchValue}) &gt; 0 
+	  </if>
+	  <if test="searchKey=='categoryName'">
+	      INSTR(categoryName, #{searchValue}) &gt; 0 
+	  </if>
+	  <if test="searchKey=='inputDate'">
+	      (TO_CHAR(inputDate, 'YYYY-MM-DD') = #{searchValue}
+	        OR TO_CHAR(inputDate, 'YYYYMMDD') = #{searchValue}
+	        OR TO_CHAR(inputDate, 'YYYY/MM/DD') = #{searchValue}
+	        OR TO_CHAR(inputDate, 'YYYY.MM.DD') = #{searchValue})
+	  </if>
+	  <if test="searchKey=='expireDate'">
+	      (TO_CHAR(expireDate, 'YYYY-MM-DD') = #{searchValue}
+	        OR TO_CHAR(expireDate, 'YYYYMMDD') = #{searchValue}
+	        OR TO_CHAR(expireDate, 'YYYY/MM/DD') = #{searchValue}
+	        OR TO_CHAR(expireDate, 'YYYY.MM.DD') = #{searchValue})
+	  </if>
+	</sql>
+
+	<select id="dataCount" parameterType="map" resultType="Integer">
+	SELECT NVL(COUNT(*), 0) FROM product p
+		JOIN productCategory c
+            ON p.categoryId = c.categoryId
+            JOIN productOption o
+            ON p.productId = o.productId
+            JOIN productInput i
+            ON p.productId = i.productId
+	</select>
+	
+	<select id="listProduct" parameterType="map" resultType="care.dog.admin.store.AdminProduct">
+	SELECT * FROM (
+    SELECT ROWNUM rnum, tb.* FROM (
+        SELECT p.productId, productName, brand, sellingPrice, price, amount, isContinued, mileage, 
+        c.categoryId, categoryName, optionId, optionContent, imageFilename, 
+        to_char(inputDate, 'yyyy.mm.dd') inputDate, inputPrice, 
+        inputAmount, to_char(expireDate, 'yyyy.mm.dd') expireDate
+            FROM product p 
+            JOIN productCategory c
+            ON p.categoryId = c.categoryId
+            JOIN productOption o
+            ON p.productId = o.productId
+            JOIN productInput i
+            ON p.productId = i.productId
+            <where>
+            	<if test="searchValue != null and searchValue != ''">
+					<include refid="where-list"/>
+		    	</if>
+	        </where>
+            ORDER BY productId
+	<![CDATA[
+        ) tb WHERE ROWNUM <= #{end}
+    ) WHERE rnum >= #{start}
+    ]]>
+	</select>
+	
+	<select id="productSeq" resultType="Integer">
+		SELECT product_seq.NEXTVAL FROM DUAL
+	</select>
+	
+	<insert id="insertProduct" parameterType="map">
+	insert into product(productId, productName, brand, 
+		sellingPrice, price, amount, categoryId) 
+	values(#{productId}, #{productName}, #{brand}, 
+	#{sellingPrice}, #{price}, #{amount}, #{categoryId})
+	</insert>
+	
+	<insert id="insertProductOption" parameterType="map">
+	insert into productOption(optionId, optionContent, 
+		productId) 
+	values(option_seq.NEXTVAL, #{optionContent}, #{productId})
+	</insert>
+	
+	<insert id="insertInputProduct" parameterType="map">
+	insert into productInput(inputId, inputPrice, 
+		inputAmount, productId) 
+	 values(input_seq.NEXTVAL, #{inputPrice}, #{inputAmount}, #{productId})
+	</insert>
+
+</mapper>

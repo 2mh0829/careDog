@@ -1,7 +1,10 @@
 package care.dog.service;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -24,7 +27,27 @@ public class ServiceController {
 	private ServiceService service;
 	
 	@RequestMapping(value="/service")
-	public String main() {
+	public String main(HttpSession session, HttpServletRequest req,
+						Model model) {
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
+		// 총 펫시터 수
+		int dataCount = service.dataCount();
+		model.addAttribute("dataCount", dataCount);
+		
+		// 펫시터 리스트
+		List<ServiceDto> list = service.sitterList();
+		model.addAttribute("list", list);
+		
+		// 펫시터 사진 리스트
+		List<ServiceDto> listPhoto = service.sitterPhotoList();
+		model.addAttribute("listPhoto", listPhoto);
+		
+		// 태그
+		List<ServiceDto> listTag = service.sitterTag();
+		model.addAttribute("listTag", listTag);
+		
 		return ".service.sitting";
 	}
 	
@@ -43,16 +66,9 @@ public class ServiceController {
 	}
 	
 	@RequestMapping(value="/service/sitter_input", method=RequestMethod.POST)
-	public void sitter_input_submit(ServiceDto dto, HttpSession session,
-										MultipartHttpServletRequest multi) {
+	public void sitter_input_submit(ServiceDto dto, HttpSession session) {
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
-		
-		
-		/* HttpServletRequest req <- 이걸 매개변수로
-		 * MultipartHttpServletRequest mReq = (MultipartHttpServletRequest) req;
-		mReq.getFileMap();
-		MultipartFile file = mReq.getFile("imgFile"); */
 		
 		String root = session.getServletContext().getRealPath("/");
 		String pathname = root + File.separator + "uploads" + File.separator + "service";

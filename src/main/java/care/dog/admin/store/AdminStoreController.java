@@ -12,22 +12,23 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import care.dog.common.MyUtil;
 import care.dog.member.SessionInfo;
 import care.dog.store.Product;
 import care.dog.store.ProductService;
-import care.dog.store.ProductServiceImpl;
 
 @Controller("store.adminStoreController")
 public class AdminStoreController {
 
 	@Autowired
-	private ProductService service;
+	private AdminStoreService service;
 	
 	@Autowired
 	private MyUtil myUtil;
@@ -37,79 +38,77 @@ public class AdminStoreController {
 		return ".admin.store.main";
 	}
 	
-	@RequestMapping(value = "admin/store/list")
-	public String listProduct(@RequestParam(value = "page", defaultValue = "1") int current_page,
-			@RequestParam(value = "searchKey", defaultValue = "productName") String searchKey,
-			@RequestParam(value = "searchValue", defaultValue = "") String searchValue, HttpServletRequest req,
-			Model model) throws Exception {
-
-		String cp = req.getContextPath();
-
-		int rows = 4;
-		int total_page = 0;
-		int dataCount = 0;
-
-		if (req.getMethod().equalsIgnoreCase("GET")) { // GET 방식인 경우
-			searchValue = URLDecoder.decode(searchValue, "utf-8");
-		}
-
-		// 전체 페이지 수
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("searchKey", searchKey);
-		map.put("searchValue", searchValue);
-
-		dataCount = service.dataCount(map);
-
-		if (dataCount != 0)
-			total_page = myUtil.pageCount(rows, dataCount);
-
-		if (total_page < current_page)
-			current_page = total_page;
-
-		int start = (current_page - 1) * rows + 1;
-		int end = current_page * rows;
-
-		map.put("start", start);
-		map.put("end", end);
-
-		List<Product> list = service.listProduct(map);
-
-		// 글번호 만들기
-		int listNum, n = 0;
-		Iterator<Product> it = list.iterator();
-		while (it.hasNext()) {
-			Product data = it.next();
-			listNum = dataCount - (start + n - 1);
-			data.setListNum(listNum);
-			n++;
-		}
-
-		String query = "";
-		String listUrl = cp + "/store/list";
-		String articleUrl = cp + "/store/article?page=" + current_page;
-
-		if (searchValue.length() != 0) {
-			query = "searchKey=" + searchKey + "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");
-		}
-
-		if (query.length() != 0) {
-			listUrl = cp + "/admin/store/list?" + query;
-			articleUrl = cp + "/admin/store/article?page=" + current_page + "&" + query;
-		}
-
-		String paging = myUtil.paging(current_page, total_page, listUrl);
-
-		model.addAttribute("list", list);
-		model.addAttribute("dataCount", dataCount);
-		model.addAttribute("total_page", total_page);
-		model.addAttribute("articleUrl", articleUrl);
-		model.addAttribute("page", current_page);
-		model.addAttribute("paging", paging);
-
+	@RequestMapping(value="/admin/store/listForm")
+	public String listProductForm() {
 		return ".admin.store.list";
 	}
 	
-	@RequestMapping(value = "/admin/store/article")//!@#
+	@RequestMapping(value = "admin/store/list")
+	@ResponseBody
+	public Map<String, Object> listProduct(
+			@RequestParam(value = "page", defaultValue = "1") int current_page,
+			@RequestParam(value = "searchKey", defaultValue = "productName") String searchKey,
+			@RequestParam(value = "searchValue", defaultValue = "") String searchValue, 
+			@RequestParam(value="rows", defaultValue="10") int rows,
+			HttpServletRequest req
+			) throws Exception {
+
+		/*
+		System.out.println(req.getParameter("searchField"));
+		System.out.println(req.getParameter("searchType"));
+		System.out.println(req.getParameter("searchValue"));
+		*/
+		
+		int dataCount, total_page;
+		
+		Map<String, Object> map=new HashMap<>();
+		
+		dataCount=service.dataCount(map);
+		
+		total_page=myUtil.pageCount(rows, dataCount);
+		if(current_page>total_page)
+			current_page=total_page;
+		
+		int start=(current_page-1)*rows+1;
+		int end=current_page*rows;
+		
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<AdminProduct> list = service.listProduct(map);
+		
+		Map<String, Object> model=new HashMap<>();
+	    /*
+	     *  - 디폴드 jsonReader를 사용하는 경우
+	     *  modal.put("page", current_page);
+	     *  modal.put("records", dataCount);
+	     *  modal.put("total", total_page);
+	     */
+		model.put("dataCount", dataCount);
+		model.put("page", current_page);
+		model.put("total_page", total_page);
+		
+		// 디폴드 jsonReader를 사용하는 경우 root의 이름은 rows 이어야 함
+		model.put("rows", list);
+		
+		return model;
+
+	}
+	
+	@RequestMapping(value="/admin/store/insertProduct")
+	@ResponseBody
+	public Map<String, Object> insertProduct(
+			AdminProduct dto
+			){
+		
+		service.insertProduct(dto);
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", "true");
+		return model;
+	}
+	
+	/*@RequestMapping(value = "/admin/store/article")
 	public String articleProduct(@RequestParam(value = "page", defaultValue = "1") int current_page,
 			@RequestParam(value = "searchKey", defaultValue = "productName") String searchKey,
 			@RequestParam(value = "searchValue", defaultValue = "") String searchValue,
@@ -162,10 +161,10 @@ public class AdminStoreController {
 		session.removeAttribute("data");
 
 		return ".admin.store.article";
-	}
+	}*/
 	
 	//상품 등록 페이지
-	@RequestMapping(value="/admin/store/created", method=RequestMethod.GET)
+	/*@RequestMapping(value="/admin/store/created", method=RequestMethod.GET)
 	public String createdForm(
 			HttpSession session
 			) {
@@ -176,6 +175,6 @@ public class AdminStoreController {
 		}
 		
 		return ".admin.store.created";
-	}
+	}*/
 	
 }

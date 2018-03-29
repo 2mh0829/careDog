@@ -69,7 +69,7 @@ $(function() {
 			<li><a href="<%=cp %>/admin/mungstar">멍스타그램&nbsp;</a></li>
 			<li><a href="<%=cp %>/admin/store">펫#&nbsp;</a></li>
 			<li><a href="<%=cp%>">유기견&nbsp;</a></li>
-			<li><a href="<%=cp%>/dog119/dogHealth">펫119&nbsp;</a></li>
+			<li><a href="<%=cp%>">펫119&nbsp;</a></li>
 			<li><a href="<%=cp %>">고객센터&nbsp;</a></li>
 		</ul>
 	</div>

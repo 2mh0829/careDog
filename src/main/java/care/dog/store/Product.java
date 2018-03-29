@@ -17,6 +17,10 @@ public class Product {
 	private int mileage;
 	private int categoryId; // 분류id
 	
+	private int allAmount; //총 판매수량
+	private String inputDate; //입고일
+	private int grade; //상품평점
+	
 	private int optionId; 
 	private String optionContent;
 
@@ -102,15 +106,6 @@ public class Product {
 		this.brand = brand;
 	}
 	
-	@Override
-	public String toString() {
-		return "Product [listNum=" + listNum + ", num=" + num + ", productId=" + productId + ", productName="
-				+ productName + ", brand=" + brand + ", sellingPrice=" + sellingPrice + ", price=" + price + ", amount="
-				+ amount + ", isContinued=" + isContinued + ", mileage=" + mileage + ", categoryId=" + categoryId
-				+ ", optionId=" + optionId + ", optionContent=" + optionContent + ", imageFilename=" + imageFilename
-				+ ", upload=" + upload + "]";
-	}
-	
 	public int getOptionId() {
 		return optionId;
 	}
@@ -122,6 +117,34 @@ public class Product {
 	}
 	public void setOptionContent(String optionContent) {
 		this.optionContent = optionContent;
+	}
+	public int getAllAmount() {
+		return allAmount;
+	}
+	public void setAllAmount(int allAmount) {
+		this.allAmount = allAmount;
+	}
+	
+	public String getInputDate() {
+		return inputDate;
+	}
+	public void setInputDate(String inputDate) {
+		this.inputDate = inputDate;
+	}
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+	@Override
+	public String toString() {
+		return "Product [listNum=" + listNum + ", num=" + num + ", productId=" + productId + ", productName="
+				+ productName + ", brand=" + brand + ", sellingPrice=" + sellingPrice + ", price=" + price + ", amount="
+				+ amount + ", isContinued=" + isContinued + ", mileage=" + mileage + ", categoryId=" + categoryId
+				+ ", allAmount=" + allAmount + ", inputDate=" + inputDate + ", grade=" + grade + ", optionId="
+				+ optionId + ", optionContent=" + optionContent + ", imageFilename=" + imageFilename + ", upload="
+				+ upload + "]";
 	}
 	
 }

@@ -6514,7 +6514,7 @@ button.close {
 
 .modal-backdrop.in {
 	filter: alpha(opacity = 50);
-	opacity: .5
+	/* opacity: .5 */
 }
 
 .modal-header {

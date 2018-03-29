@@ -77,6 +77,13 @@
     width: 1000px;
 }
 
+.admin-container {
+    /* clear:both; */
+    box-sizing: border-box;  /* padding과 border는 크기에 포함되지 않음 */
+    margin: 0px auto 15px;
+    width: 1500px;
+}
+
 @media only screen and (max-width: 1000px) {
 	.body-container {
 	    width: 100%;

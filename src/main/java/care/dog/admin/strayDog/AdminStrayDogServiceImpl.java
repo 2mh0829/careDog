@@ -35,5 +35,5 @@ public class AdminStrayDogServiceImpl implements AdminStrayDogService {
 		}
 		return result;
 	}
-	
+
 }

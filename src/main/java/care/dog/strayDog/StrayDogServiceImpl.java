@@ -32,8 +32,8 @@ public class StrayDogServiceImpl implements StrayDogService {
 		String mainUrl = MAINURL+ "abandonmentPublic";
 	        try {
 	        	String serviceKey= "?" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + KEY;
-	        	String parameter="&" + URLEncoder.encode("bgnde","UTF-8") + "=" + URLEncoder.encode("20180205", "UTF-8"); /*유기날짜 (검색 시작일) (YYYYMMDD) */
-	        	parameter += "&" + URLEncoder.encode("endde","UTF-8") + "=" + URLEncoder.encode("20180305", "UTF-8"); /*유기날짜 (검색 종료일) (YYYYMMDD) */
+	        	String parameter="&" + URLEncoder.encode("bgnde","UTF-8") + "=" + model.get("bgnde"); /*유기날짜 (검색 시작일) (YYYYMMDD) */
+	        	parameter += "&" + URLEncoder.encode("endde","UTF-8") + "=" + model.get("endde"); /*유기날짜 (검색 종료일) (YYYYMMDD) */
 	        	parameter += "&" + URLEncoder.encode("upkind","UTF-8") + "=" + URLEncoder.encode("417000", "UTF-8"); /*축종코드 - 개 : 417000 - 고양이 : 422400 - 기타 : 429900 */
 	        	parameter += "&" + URLEncoder.encode("kind","UTF-8") + "=" + model.get("kind"); /*품종코드 (품종 조회 OPEN API 참조) */
 	        	parameter += "&" + URLEncoder.encode("upr_cd","UTF-8") + "=" + model.get("upr_cd"); /*시도코드 (시도 조회 OPEN API 참조) */
@@ -75,12 +75,12 @@ public class StrayDogServiceImpl implements StrayDogService {
 						neuCheck=neu;
 					}
 					
-					String person = root.getElementsByTagName("chargeNm").item(i).getTextContent().toString();
-					String pChk = "";
-					if(person==null) {
-						pChk="미정";
-					}else {
+					String pChk = "미정";
+					try {
+						String person = root.getElementsByTagName("chargeNm").item(i).getTextContent().toString();
 						pChk=person;
+					} catch (Exception e) {
+						// TODO: handle exception
 					}
 					
 					HashMap<String, Object> map = new HashMap<String, Object>();

@@ -26,7 +26,7 @@
 <select id="listBoard" parameterType="map" resultType="care.dog.dog119.dogHealthVo.DogHealthVo">
 	select * from(
 		select rownum rnum, tb.* from(
-			select boardNum, dh.memberId, title, content, created, hitCount
+			select boardNum, dh.memberId, title, content, TO_CHAR(created, 'YYYY-MM-DD'), hitCount
 			from doghealth dh
                         JOIN member1 m ON dh.memberId=m.memberId
 			<where>

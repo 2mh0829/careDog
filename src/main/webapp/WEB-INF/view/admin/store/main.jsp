@@ -6,8 +6,14 @@
    String cp = request.getContextPath();
 %>
 
-<div>
+<div class="body-container">
 
-펫# 관리자 페이지
+	<div style="float: left; padding-top: 100px;">
+		<h1><strong>펫#</strong> 관리자 페이지</h1>
+	</div>
+	
+	<div style="float: left;">
+		<img src="<%=cp%>/resource/img/store/dog9.jpg">
+	</div>	
 	
 </div>

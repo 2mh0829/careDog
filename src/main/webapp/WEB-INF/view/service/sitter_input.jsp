@@ -678,7 +678,7 @@ input[type=file] {
 <script type="text/javascript">
 /* var formData = new FormData(); */
 $(document).ready(function(){
-	var tagList = [];
+	/* var tagList = []; */
 	var carableWeight;
 	var carableAge;
 	var reserDiv;
@@ -692,9 +692,9 @@ $(document).ready(function(){
 	
 	//태그 값 불러오기
 	$("body").on("click",'.btn',function(){
-		var tag = $('.btn').eq($(this).index()).text().trim();
-		tagList += tag + " ";
-		alert(tagList);
+		/* var tagName = $('.btn').eq($(this).index()).text().trim(); */
+		
+		/* tagList += tagName + " "; */
 	})
 	
 	// 드롭다운 선택시 버튼에 텍스트 표시 and 해당 value값 전송
@@ -728,7 +728,7 @@ $(document).ready(function(){
 	
 
 	$("#sitterConfirm").on("click",function(){
-		/* alert(fileName); */
+		
 		var title = $('#title').val();
 		var content = $('#content').val();
 		var startDate = $("#startDate").val();
@@ -749,7 +749,9 @@ $(document).ready(function(){
 		formD.append("carableWeight",carableWeight);
 		formD.append("carableAge",carableAge);
 		formD.append("addPet",addPet);
-		formD.append("tag",tagList);
+		
+		/* formD.append("tag",tagList); */
+		
 		formD.append("memberId",memberId);
 		
 		/* var param = "memberId="+memberId+"&title="+title+"&content="+content+"&startDate="+startDate+"&endDate="+endDate+"&reserDiv="+reserDiv
@@ -764,13 +766,15 @@ $(document).ready(function(){
 			contentType:false,
 			processData:false,
  			success:function(data){
-				alert("success");
+				alert(tag);
 			location.href="<%=cp%>/service";
 			},
 			error:function(e){
 				alert(e.responseText);
 			}
 		});
+					
+					
 	});
 });
 
@@ -1018,30 +1022,41 @@ function deleteImageAction(index) {
 							<dt>&nbsp;&nbsp;&nbsp;&nbsp;원하는 태그를 모두 선택해주세요!</dt>
 							<dd>
 								<div class="btn-group" data-toggle="buttons" id="tagBtn">
-									<label for="apt" class="btn"> <input type="checkbox"
-										id="apt" class="checkbox sitterTags">아파트
-									</label> <label for="yard" class="btn"> <input type="checkbox"
-										id="yard" class="checkbox sitterTags">마당
-									</label> <label for="oldDogCare" class="btn"> <input
-										type="checkbox" id="oldDogCare" class="checkbox sitterTags">노령견케어
-									</label> <label for="sickDogCare" class="btn"> <input
-										class="sitterTags" type="checkbox" id="sickDogCare">환자견케어
-									</label> <label for="license" class="btn"> <input
-										class="sitterTags" type="checkbox" id="license">자격증보유
-									</label> <label for="outdoor" class="btn"> <input
-										class="sitterTags" type="checkbox" id="outdoor">실외배변
-									</label> <label for="pickUp" class="btn"> <input
-										class="sitterTags" type="checkbox" id="pickUp">픽업가능
-									</label> <label for="handmade" class="btn"> <input
-										class="sitterTags" type="checkbox" id="handmade">수제간식
-									</label> <label for="noDog" class="btn"> <input
-										class="sitterTags" type="checkbox" id="noDog">반려견없는곳
-									</label> <label for="emergency" class="btn"> <input
-										class="sitterTags" type="checkbox" id="emergency">응급처치
-									</label> <label for="pillAble" class="btn"> <input
-										type="checkbox" id="pillAble">투약가능
-									</label> <label for="bigDog" class="btn"> <input
-										type="checkbox" id="bigDog">대형견
+									<label for="apt" class="btn"> 
+										<input type="checkbox" id="apt" name="tag" class="checkbox sitterTags" value="아파트">아파트
+									</label> 
+									<label for="yard" class="btn">
+										<input type="checkbox"	id="yard" name="tag" class="checkbox sitterTags" value="마당">마당
+									</label> 
+									<label for="oldDogCare" class="btn">
+										<input type="checkbox" id="oldDogCare" name="tag" class="checkbox sitterTags" value="노령견케어">노령견케어
+									</label>
+									<label for="sickDogCare" class="btn">
+										<input class="sitterTags" type="checkbox" name="tag" id="sickDogCare" value="환자견케어">환자견케어
+									</label> 
+									<label for="license" class="btn"> 
+										<input class="sitterTags" type="checkbox" name="tag" id="license" value="자격증보유">자격증보유
+									</label>
+									<label for="outdoor" class="btn"> 
+										<input class="sitterTags" type="checkbox" name="tag" id="outdoor" value="실외배변">실외배변
+									</label> 
+									<label for="pickUp" class="btn"> 
+										<input class="sitterTags" type="checkbox" name="tag" id="pickUp" value="픽업가능">픽업가능
+									</label> 
+									<label for="handmade" class="btn">
+										<input class="sitterTags" type="checkbox" name="tag" id="handmade" value="수제간식">수제간식
+									</label>
+									<label for="noDog" class="btn"> 
+										<input class="sitterTags" type="checkbox" name="tag" id="noDog" value="반려견없는곳">반려견없는곳
+									</label> 
+									<label for="emergency" class="btn"> 
+										<input class="sitterTags" type="checkbox" name="tag" id="emergency" value="응급처치">응급처치
+									</label> 
+									<label for="pillAble" class="btn"> 
+										<input type="checkbox" name="tag" id="pillAble" value="투약가능">투약가능
+									</label> 
+									<label for="bigDog" class="btn"> 
+										<input type="checkbox" name="tag" id="bigDog" value="대형견">대형견
 									</label>
 								</div>
 							</dd>
