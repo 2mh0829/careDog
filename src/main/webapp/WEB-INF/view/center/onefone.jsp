@@ -205,11 +205,11 @@ function hahaSubmit(){
 		alert('개인정보 수집 동의를 하지 않으면 가입하실 수 없습니다.');
 		return;
 	}
-	 /* if(! $("[name='memberId']").val()){
-		 alert('아이디를 입력하세요.');
-		 $("[name='memberId']").focus();
+	 if(! $("[name='subject']").val()){
+		 alert('제목을 입력하세요.');
+		 $("[name='subject']").focus();
 		 return;
-	 } */
+	 }
 	 if(! $("[name='email1']").val()){
 		 alert('이메일을 입력하세요.');
 		 $("[name='email1']").focus();
@@ -357,9 +357,9 @@ function hahaSubmit(){
 									</select>
 									<!-- <input type="hidden" id="telSelect1" value="010"> -->
 									<span class="des">-</span>
-									<input type="tel" class="sms" name="tel2" id="telSelect2" title="휴대폰 가운데 4자리를 입력하세요" maxlength="4" placeholder="0000" style="width:122px;">
+									<input type="tel" class="sms" name="tel2" id="telSelect2" title="휴대폰 가운데 4자리를 입력하세요" maxlength="4" placeholder="0000" style="width:122px;padding:10px;">
 									<span class="des">-</span>
-									<input type="tel" class="sms" name="tel3" id="telSelect3" title="휴대폰 마지막 4자리를 입력하세요" maxlength="4" placeholder="0000" style="width:122px;">
+									<input type="tel" class="sms" name="tel3" id="telSelect3" title="휴대폰 마지막 4자리를 입력하세요" maxlength="4" placeholder="0000" style="width:122px;padding:10px;">
 									<input type="hidden" name="tel" value="">
 								</li>
 								
@@ -404,6 +404,12 @@ function hahaSubmit(){
 								  	<option value="803">이벤트 사은품 관련</option>
 								  </optgroup>
 							</select>
+						</td>
+					</tr>
+					<tr class="subject">
+						<th><label for="Subject">제목</label></th>
+						<td>
+							<input type="text" name="subject" placeholder="제목을 입력하세요." style="width:100%;padding:10px 8px;"> 
 						</td>
 					</tr>
 					<tr class="textarea">

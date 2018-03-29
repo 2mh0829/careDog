@@ -6,10 +6,27 @@
 	String cp=request.getContextPath();
 %>
 <style>
+<<<<<<< HEAD:src/main/webapp/WEB-INF/view/myPage/sch/sch2.jsp
 .myPage-calendar{
 width:100%;
 background-color:white;
 padding:10px;
+border-radius: 20px;
+}
+.myPage-calendar-header{
+width:100%;
+text-align:center
+}
+th{
+text-align:center}
+td{
+padding-left:2px;
+=======
+.myPage-calendar{
+width:100%;
+background-color:white;
+padding:10px;
+>>>>>>> e3627eb54de605c15cde7d5898983e2424b3b4a0:src/main/webapp/WEB-INF/view/mypage/sch/sch2.jsp
 }
 .myPage-calendar-header{
 width:100%;
