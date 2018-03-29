@@ -3,14 +3,14 @@ package care.dog.center.onefone;
 public class OneFOneVo {
 	private int num;
 	private String memberId, email, email1, email2, tel, tel1, tel2, tel3, sort, subject, content, qdate;
+	private String replynum, acontent, adate;
+	
 	public String getSubject() {
 		return subject;
 	}
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	private String answerId, acontent, adate;
-	private int isanswer;
 	public String getTel1() {
 		return tel1;
 	}
@@ -71,12 +71,6 @@ public class OneFOneVo {
 	public void setQdate(String qdate) {
 		this.qdate = qdate;
 	}
-	public String getAnswerId() {
-		return answerId;
-	}
-	public void setAnswerId(String answerId) {
-		this.answerId = answerId;
-	}
 	public String getAcontent() {
 		return acontent;
 	}
@@ -101,19 +95,18 @@ public class OneFOneVo {
 	public void setEmail2(String email2) {
 		this.email2 = email2;
 	}
-	public int getIsanswer() {
-		return isanswer;
+	public String getReplynum() {
+		return replynum;
 	}
-	public void setIsanswer(int isanswer) {
-		this.isanswer = isanswer;
+	public void setReplynum(String replynum) {
+		this.replynum = replynum;
 	}
 	@Override
 	public String toString() {
 		return "OneFOneVo [num=" + num + ", memberId=" + memberId + ", email=" + email + ", email1=" + email1
 				+ ", email2=" + email2 + ", tel=" + tel + ", tel1=" + tel1 + ", tel2=" + tel2 + ", tel3=" + tel3
 				+ ", sort=" + sort + ", subject=" + subject + ", content=" + content + ", qdate=" + qdate
-				+ ", answerId=" + answerId + ", acontent=" + acontent + ", adate=" + adate + ", isanswer=" + isanswer
-				+ "]";
+				+ ", replynum=" + replynum + ", acontent=" + acontent + ", adate=" + adate + "]";
 	}
 	
 }
