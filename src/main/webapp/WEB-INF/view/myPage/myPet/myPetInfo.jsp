@@ -7,11 +7,12 @@
 %>
 <style>
 .myPetInfo-frame {
-	border-radius:5px;
+	border-radius:20px;
 	width:100%;
 	float:left;
 		padding:15px;
 		background-color:white;
+		
 }
 
 .myPetInfo-header {
@@ -21,24 +22,41 @@
 
 .myPetInfo-body {
 	padding:5px;
-	display: none;
+}
+.myPetList-list {
+	margin-top: 15px;
+	border-bottom: 1px solid #ccc;
+	padding: 8px 6px;
 }
 </style>
 
 <script>
-$(function(){
-	var url = "<%=cp%>/myPage/myPetList";
-		$.get(url, {
-			tmp : new Date().getTime()
-		}, function(data) {
-			$(".myPetInfo-body").html(data);
-			$(".myPetInfo-body").html($(".myPetList-list").eq(0).html());
-			$(".myPetInfo-body").css("display", "block");
-			$(".myPetInfoEditBtn").css("display", "none");
-			$(".myPetList-list").css("margin-top", "15px");
-			//	get();
-		})
-	});
+$(document).ready(function(){
+	var url="<%=cp%>/myPet/getMyPetList";
+ 	$.ajax({
+		type:"POST",
+		url:url,
+		success:function(data){
+			for(i=0;i<data.myPetList.length;i++){
+				var year = data.myPetList[i].myPetYear;
+				var d = new Date();
+				var age = d.getFullYear()-year;
+				$(".myPetInfo-body").append("<div class='myPetList-list'>"
+					+"	<div class='myPetList-detail'>"
+				+"<div class='myPetList-detail-thumb-wrap'>"
+				+"	<div class='myPetList-detail-thumb'></div>"
+			+"</div>"
+				+"<div class='myPetList-detail-text-wrap'>"
+					+"<div class='myPetList-detail-text'>"
+						+"<p>"+data.myPetList[i].myPetName+" ("+data.myPetList[i].myPetType+","+data.myPetList[i].myPetGender+","+age+")</p></div></div></div>");
+			}
+		},
+		error:function(e){
+			alert("연결 오류가 발생했습니다.");
+		}
+	}) 
+})
+
 
 </script>
 <div class="myPetInfo-frame">

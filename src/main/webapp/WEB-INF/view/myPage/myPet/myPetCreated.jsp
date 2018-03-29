@@ -43,15 +43,14 @@ function myPetOk() {
 		return;
 	}
 
-/* 요요yoyo sdasdasdsdasd */
-	str = f.myPetPhoto.value;
+	str = f.upload.value;
 	str = str.trim();
 	if(!str||str=="") {
 		alert("강아지 사진을 업로드 해주세요.");
 		return;
 	}
-	if(f.myPetPhoto.value!="") {
-        if(! /(\.gif|\.jpg|\.png|\.jpeg)$/i.test(f.myPetPhoto.value)) {
+	if(f.upload.value!="") {
+        if(! /(\.gif|\.jpg|\.png|\.jpeg)$/i.test(f.upload.value)) {
            alert("사진은 이미지 파일만 가능합니다. ");
            return false;
         }
@@ -274,7 +273,7 @@ function checkInputValue(){
 	<br> <br> <br>
 	<div class="inputPhoto">
 		강아지가 잘 보일 수<br> 있는 사진을 올려주세요.<br>
-			<input type="file" name="myPetPhoto" value="+">
+			<input type="file" name="upload" value="+">
 	</div>
 	<br>
 	<br>

@@ -38,6 +38,7 @@ body{
 padding:15px;
 	width:700px;
 	float:left;
+	border-radius: 20px;
 }
 
 .myPage-header {

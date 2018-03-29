@@ -15,7 +15,12 @@
 }
 .myPage-background{
 		background-color:#E6FFFF;
+		
 }
+.forBorder{
+
+}
+
 </style>
 
 <script type="text/javascript">
@@ -117,8 +122,8 @@ function printGuest(data) {
 			var memberId=data.list[idx].memberId;
 			var content=data.list[idx].content;
 			var created=data.list[idx].created;
-			
-			out+="    <tr height='30'  style='border: 1px solid #c3c3c3;'>";
+			/*   */
+			out+="    <tr height='30' class='forBorder' style='background-color:skyblue'>";
 			out+="      <td width='50%' style='padding-left: 5px;'>"+ userName+"</td>";
 			out+="      <td width='50%' align='right' style='padding-right: 5px;'>" + created;
 			if(uid==memberId || uid=="admin" || owner==1) {
@@ -155,6 +160,7 @@ function folding(){
 	}
 }
 </script>
+<div class="guest-frame">
       <div style="width:100%; height: 30px; line-height: 30px; border-bottom: 1px solid #212121;">
             <div style="float:left"><b>방명록</b></div>
             <div id="foldingText" style="float:right"><a href="javascript:folding();">작성하기</a></div>
@@ -173,4 +179,5 @@ function folding(){
       </div>
           
       <div id="listGuest" style="width:100%; margin: 0px 0px 10px;"></div>
+      </div>
       

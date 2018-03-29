@@ -15,6 +15,40 @@
 }
 </style>
 <script>
+$(document).ready(function(){
+	getMyPetList();
+	
+})
+
+function getMyPetList(){
+	var url="<%=cp%>/myPet/getMyPetList";
+ 	$.ajax({
+		type:"POST",
+		url:url,
+		success:function(data){
+			
+			for(i=0;i<data.myPetList.length;i++){
+				var year = data.myPetList[i].myPetYear;
+				var d = new Date();
+				var age = d.getFullYear()-year;
+				$(".myPetList-body").append("<div class='myPetList-list'>"
+					+"	<div class='myPetList-detail'>"
+				+"<div class='myPetList-detail-thumb-wrap'>"
+				+"	<div class='myPetList-detail-thumb'></div>"
+			+"</div>"
+				+"<div class='myPetList-detail-text-wrap'>"
+					+"<div class='myPetList-detail-text'>"
+						+"<p>"+data.myPetList[i].myPetName+" ("+data.myPetList[i].myPetType+","+data.myPetList[i].myPetGender+","+age+")</p>"
+							+"<p><a href='javascript:myPetInfoDetail();'>상세보기</a></p>"
+						+"<p class='myPetInfoEditBtn'><a href='javascript:myPetInfoEdit();'>수정하기</a></p></div></div></div>");
+			}
+		},
+		error:function(e){
+			alert("연결 오류가 발생했습니다.");
+		}
+	}) 
+}
+
 function myPetCreated(){
 	var url = "<%=cp%>/myPet/myPetCreated";
 	$.get(url, function(data) {
@@ -24,51 +58,8 @@ function myPetCreated(){
 
 </script>
 <div class="myPetList-body">
-	<div class="myPetList-list">
-		<div class="myPetList-detail">
-			<div class="myPetList-detail-thumb-wrap">
-				<div class="myPetList-detail-thumb"></div>
-			</div>
-			<div class="myPetList-detail-text-wrap">
-				<div class="myPetList-detail-text">
-					<p>흰둥이 (말티즈, 수컷, 5살)</p>
-					<p>
-						<a href="#">상세보기</a>
-					</p>
-					<p class="myPetInfoEditBtn">
-						<a href="#">수정하기</a>
-					</p>
-
-				</div>
-			</div>
-
-		</div>
-	</div>
-	<div class="myPetList-list">
-		<div class="myPetList-detail">
-			<div class="myPetList-detail-thumb-wrap">
-				<div class="myPetList-detail-thumb"></div>
-			</div>
-			<div class="myPetList-detail-text-wrap">
-				<div class="myPetList-detail-text">
-					<p>
-						검둥이<br> (말티즈, 수컷, 5살)
-					</p>
-					<div class="myPetListEditBtn">
-						<p>
-							<a href="#">상세보기</a>
-						</p>
-						<p>
-							<a class="myPetInfoEditBtn" href="#">수정하기</a>
-						</p>
-					</div>
-
-				</div>
-			</div>
-
-		</div>
-	</div>
-	<div class="myPetList-add">
+	
+</div>
+<div class="myPetList-add">
 		<a href="javascript:myPetCreated();">+ 반려견 추가하기</a>
 	</div>
-</div>

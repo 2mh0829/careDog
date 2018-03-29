@@ -10,6 +10,7 @@
 width:100%;
 background-color:white;
 padding:10px;
+border-radius: 20px;
 }
 .myPage-calendar-header{
 width:100%;
