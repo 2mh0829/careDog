@@ -32,7 +32,10 @@ public class StoreController {
 	private MyUtil myUtil;
 
 	@RequestMapping(value = "/store")
-	public String main(HttpServletRequest req, Model model) {
+	public String main(
+			@RequestParam(value="categoryId", defaultValue = "0") int categoryId,
+			HttpServletRequest req, 
+			Model model) {
 		
 		int current_page = 1;
 		String cp = req.getContextPath();
@@ -43,6 +46,8 @@ public class StoreController {
 
 		String articleUrl = cp + "/store/article?page=" + current_page;
 		articleUrl = cp + "/store/article?page=" + current_page;
+		
+		map.put("categoryId", categoryId);//분류 없음
 		
 		List<Product> list = service.listProduct(map);
 
@@ -55,7 +60,11 @@ public class StoreController {
 	@RequestMapping(value = "/store/list")
 	public String listProduct(@RequestParam(value = "page", defaultValue = "1") int current_page,
 			@RequestParam(value = "searchKey", defaultValue = "productName") String searchKey,
-			@RequestParam(value = "searchValue", defaultValue = "") String searchValue, HttpServletRequest req,
+			@RequestParam(value = "searchValue", defaultValue = "") String searchValue, 
+			@RequestParam(value="categoryId", defaultValue = "0") int categoryId,
+			@RequestParam(value="sortField", defaultValue = "inputDate") String sortField,
+			@RequestParam(value="sortMode", defaultValue = "desc") String sortMode,
+			HttpServletRequest req,
 			Model model) throws Exception {
 
 		String cp = req.getContextPath();
@@ -86,6 +95,10 @@ public class StoreController {
 
 		map.put("start", start);
 		map.put("end", end);
+		
+		map.put("categoryId", categoryId);
+		map.put("sortField", sortField);
+		map.put("sortMode", sortMode);
 
 		List<Product> list = service.listProduct(map);
 
@@ -120,6 +133,7 @@ public class StoreController {
 		model.addAttribute("articleUrl", articleUrl);
 		model.addAttribute("page", current_page);
 		model.addAttribute("paging", paging);
+		model.addAttribute("categoryId", categoryId);
 
 		return ".store.list";
 	}

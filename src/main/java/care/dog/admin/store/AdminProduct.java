@@ -1,10 +1,9 @@
-package care.dog.store;
+package care.dog.admin.store;
 
 import org.springframework.web.multipart.MultipartFile;
 
-//펫상품DTO
-public class Product {
-
+public class AdminProduct {
+	
 	private int listNum, num; // 페이징
 
 	private int productId; // 상품id - 시퀀스
@@ -12,14 +11,11 @@ public class Product {
 	private String brand;
 	private int sellingPrice; // 판매가
 	private int price; // 정가
-	private int amount; // 수량
+	private int amount; // 재고수량
 	private int isContinued; // 단종여부 - number(1) default 1
 	private int mileage;
 	private int categoryId; // 분류id
-	
-	private int allAmount; //총 판매수량
-	private String inputDate; //입고일
-	private int grade; //상품평점
+	private String categoryName; // 분류명
 	
 	private int optionId; 
 	private String optionContent;
@@ -27,6 +23,11 @@ public class Product {
 	private String imageFilename; // 상품 이미지
 	private MultipartFile upload;
 	
+	//입고일, 입고가격, 입고수량, 유통기한
+	private String inputDate;
+	private int inputPrice;
+	private int inputAmount;
+	private String expireDate;
 	public int getListNum() {
 		return listNum;
 	}
@@ -50,6 +51,12 @@ public class Product {
 	}
 	public void setProductName(String productName) {
 		this.productName = productName;
+	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 	public int getSellingPrice() {
 		return sellingPrice;
@@ -87,25 +94,12 @@ public class Product {
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
-	public String getImageFilename() {
-		return imageFilename;
+	public String getCategoryName() {
+		return categoryName;
 	}
-	public void setImageFilename(String imageFilename) {
-		this.imageFilename = imageFilename;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
-	public MultipartFile getUpload() {
-		return upload;
-	}
-	public void setUpload(MultipartFile upload) {
-		this.upload = upload;
-	}
-	public String getBrand() {
-		return brand;
-	}
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
-	
 	public int getOptionId() {
 		return optionId;
 	}
@@ -118,33 +112,50 @@ public class Product {
 	public void setOptionContent(String optionContent) {
 		this.optionContent = optionContent;
 	}
-	public int getAllAmount() {
-		return allAmount;
+	public String getImageFilename() {
+		return imageFilename;
 	}
-	public void setAllAmount(int allAmount) {
-		this.allAmount = allAmount;
+	public void setImageFilename(String imageFilename) {
+		this.imageFilename = imageFilename;
 	}
-	
+	public MultipartFile getUpload() {
+		return upload;
+	}
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+	}
 	public String getInputDate() {
 		return inputDate;
 	}
 	public void setInputDate(String inputDate) {
 		this.inputDate = inputDate;
 	}
-	public int getGrade() {
-		return grade;
+	public int getInputPrice() {
+		return inputPrice;
 	}
-	public void setGrade(int grade) {
-		this.grade = grade;
+	public void setInputPrice(int inputPrice) {
+		this.inputPrice = inputPrice;
+	}
+	public int getInputAmount() {
+		return inputAmount;
+	}
+	public void setInputAmount(int inputAmount) {
+		this.inputAmount = inputAmount;
+	}
+	public String getExpireDate() {
+		return expireDate;
+	}
+	public void setExpireDate(String expireDate) {
+		this.expireDate = expireDate;
 	}
 	@Override
 	public String toString() {
-		return "Product [listNum=" + listNum + ", num=" + num + ", productId=" + productId + ", productName="
+		return "AdminProduct [listNum=" + listNum + ", num=" + num + ", productId=" + productId + ", productName="
 				+ productName + ", brand=" + brand + ", sellingPrice=" + sellingPrice + ", price=" + price + ", amount="
 				+ amount + ", isContinued=" + isContinued + ", mileage=" + mileage + ", categoryId=" + categoryId
-				+ ", allAmount=" + allAmount + ", inputDate=" + inputDate + ", grade=" + grade + ", optionId="
-				+ optionId + ", optionContent=" + optionContent + ", imageFilename=" + imageFilename + ", upload="
-				+ upload + "]";
+				+ ", categoryName=" + categoryName + ", optionId=" + optionId + ", optionContent=" + optionContent
+				+ ", imageFilename=" + imageFilename + ", upload=" + upload + ", inputDate=" + inputDate
+				+ ", inputPrice=" + inputPrice + ", inputAmount=" + inputAmount + ", expireDate=" + expireDate + "]";
 	}
 	
 }

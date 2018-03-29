@@ -24,12 +24,12 @@
 <div class="header-bottom">
 	<div class="menu2" align="center">
 		<a href="<%=cp%>/store">HOME</a>
-		<a href="<%=cp%>/store/list">ALL</a>
-		<a href="<%=cp%>/store/list">HOT & NEW</a>
-		<a href="<%=cp%>/store/list">사료 & 간식</a>
-		<a href="<%=cp%>/store/list">목욕 & 위생용품</a>
-		<a href="<%=cp%>/store/list">식기 & 하우스</a>
-		<a href="<%=cp%>/store/list">외출 & 패션</a>
-		<a href="<%=cp%>/store/list">장난감</a>
+		<a href="<%=cp%>/store/list?categoryId=0">ALL</a>
+		<a href="<%=cp%>/store/list?categoryId=1">사료 & 간식</a>
+		<a href="<%=cp%>/store/list?categoryId=2">목욕 & 위생용품</a>
+		<a href="<%=cp%>/store/list?categoryId=3">식기 & 하우스</a>
+		<a href="<%=cp%>/store/list?categoryId=4">외출 & 패션</a>
+		<a href="<%=cp%>/store/list?categoryId=5">장난감</a>
+		<%-- <a href="<%=cp%>/store/list?categoryId=''">HOT & NEW</a> --%>
 	</div>
 </div>
