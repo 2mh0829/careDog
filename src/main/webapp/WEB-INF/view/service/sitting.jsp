@@ -57,16 +57,25 @@ $(function(){
 	$('#careChoice').text($(this).text());
 }); */
 
-$(function(){
-    $("#slides").slidesjs({
-    	width: 800,
-		height: 500,
-      	navigation: {
-	      active: false,
-	      effect: "slide"
-	    }    	
-    });
+$(document).ready(function(){
+	 $(".slides").slidesjs({
+	    	width: 800,
+			height: 500,
+	      	navigation: {
+		      active: false,
+		      effect: "slide"
+		    }    	
+	    });
 });
+
+</script>
+
+<script type="text/javascript">
+function goSearch() {
+
+}
+
+
 
 </script>
 
@@ -78,7 +87,7 @@ $(function(){
 	z-index: 9999 !important;
 }
 
-#slides {
+.slides {
       display:none;
 }
 
@@ -351,7 +360,8 @@ li>a>span{
 }
 
 #col-btn {
-	float: right;
+	/* float: right; */
+	margin-left : 35px;
 }
 
 .col-tag {
@@ -412,10 +422,10 @@ li>a>span{
 	top: 0;
 	left: 0;
     width: 100%;
-    height: 245px;
+    height: 220px;
 }
 
-#slides-btn-left {
+.slides-btn-left {
 	position: relative; 
 	top:-50px; 
 	font-size: 30px;
@@ -423,7 +433,7 @@ li>a>span{
 	color: white;
 }
 
-#slides-btn-right {
+.slides-btn-right {
 	position: relative;
     top: -50px;
     left: 278px;
@@ -432,7 +442,7 @@ li>a>span{
     color: white;
 }
 
-#slides a {
+.slides a {
 	height: 200px;
 	text-decoration:none;
 }
@@ -960,7 +970,7 @@ li>a>span{
 			<dl>
 				<dt>&nbsp;</dt>
 				<dd>
-					<button type="button" class="btnSearch">검색</button>
+					<button type="button" class="btnSearch" onclick="goSearch()">검색</button>
 				</dd>
 			</dl>
 		</li>
@@ -1012,35 +1022,37 @@ li>a>span{
 	</div>
 	<!-- <hr> -->
 	<div class="col-tot">
-		<strong>###명</strong>
-		의 펫시터가 검색되었습니다!
+		<strong>${dataCount}</strong>명의 펫시터가 검색되었습니다!
 		<a href="#" style="float: right; text-decoration: underline">검색 설정 초기화</a>
 	</div>
+	
 	<div class="sitter-body">
+	<c:forEach var="dto" items="${list}">
 	<ul class="inner">
 		<li class="sitter-list">
 			<div class="sitter-room-photo">
-				<div id="slides">
-					<img src="http://cfile6.uf.tistory.com/image/2544613F51CF074D104D69">
-					<img src="http://cfile4.uf.tistory.com/image/0148133F51CF074F0EE545">
-					<img src="http://cfile26.uf.tistory.com/image/2162173F51CF0752036923">
-					<img src="http://cfile6.uf.tistory.com/image/233B073F51CF075D14D7CA">
-				<a href="#" id="slides-btn-left" class="slidesjs-previous slidesjs-navigation">
-					<i class="glyphicon glyphicon-chevron-left"></i>
-				</a>
-				<a href="#" id="slides-btn-right" class="slidesjs-next slidesjs-navigation">
-					<i class="glyphicon glyphicon-chevron-right"></i>
-				</a>
-				</div>
+			 	<div class="slides"> 
+				 	<c:forEach var="photo" items="${listPhoto}"> 
+				 		<c:if test="${dto.sittingId == photo.sittingId}">
+							<img src="<%=cp%>/uploads/service/${photo.imageFilename}">
+						</c:if>
+					</c:forEach> 
+						<a href="#" class="slides-btn-left slidesjs-previous slidesjs-navigation">
+							<i class="glyphicon glyphicon-chevron-left"></i>
+						</a>
+						<a href="#" class="slides-btn-right slidesjs-next slidesjs-navigation">
+							<i class="glyphicon glyphicon-chevron-right"></i>
+						</a>
+				</div> 
 			</div>
 			<div class="sitter-room-content">
 				<dl>
 					<dt>
-						<a href="<%=cp%>/service/sitting_detail">당신의 강아지... 이제 더이상 외롭지 않아요...</a>
+						<a href="<%=cp%>/service/sitting_detail">${dto.title}</a>
 						<label class="name">
 							<img class="sitter-face" 
 							src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_80%2Cw_300/MTE5NTU2MzE2MTk1NTU0ODI3/daniel-day-lewis-9268727-2-402.jpg">
-							김경애
+							${dto.memberId}
 						</label>
 						<label class="dogs">
 							<img src="<%=cp%>/resource/img/service/redHeart.JPG" id="rating">
@@ -1051,12 +1063,9 @@ li>a>span{
 						</label>
 					</dt>
 					<dd class="sitter-tag">
-						<span class="label">아파트</span>
-						<span class="label">노령견케어</span>
-						<span class="label">실외배변</span>
-						<span class="label">픽업가능</span>
-						<span class="label">수제간식</span>
-						<span class="label">투약가능</span>
+						<c:forEach var="tagg" items="${listTag}">
+						<span class="label">${tagg.tagName}</span>
+						</c:forEach>
 					</dd>
 					<dd class="price">
 						<!-- <label class="daycare">
@@ -1064,8 +1073,9 @@ li>a>span{
 							<strong>22,000원</strong>
 						</label> -->
 						<label id="stay">
-							1박 / 
-							<strong>30,000원</strong>
+						<c:if test="${dto.reserDiv==1}">24시간 / </c:if>
+						<c:if test="${dto.reserDiv==2}">데이케어 / </c:if>
+							<strong>${dto.reserCost}원</strong>
 						</label>
 					</dd>
 				</dl>
@@ -1082,6 +1092,6 @@ li>a>span{
 			</div>
 		</li>
 	</ul>
+	</c:forEach>
 	</div>
-	
 </div>

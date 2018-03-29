@@ -25,13 +25,35 @@ public class ServiceDto {
 	private String baby;
 	private String family;
 	private String other;
-	private String tag;
+	
+	// sitterTag (Table) 
+	private String tagId;
+	private String tagName;
+	private List<String> tag;
 	
 	// sitterPhoto (Table)
 	private String photoId;
 	private List<MultipartFile> fileName;
 	private String imageFilename;
 	
+	public List<String> getTag() {
+		return tag;
+	}
+	public void setTag(List<String> tag) {
+		this.tag = tag;
+	}
+	public String getTagName() {
+		return tagName;
+	}
+	public void setTagName(String tagName) {
+		this.tagName = tagName;
+	}
+	public String getTagId() {
+		return tagId;
+	}
+	public void setTagId(String tagId) {
+		this.tagId = tagId;
+	}
 	public String getPhotoId() {
 		return photoId;
 	}
@@ -44,12 +66,7 @@ public class ServiceDto {
 	public void setFileName(List<MultipartFile> fileName) {
 		this.fileName = fileName;
 	}
-	public String getTag() {
-		return tag;
-	}
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
+	
 	public int getSittingId() {
 		return sittingId;
 	}
@@ -165,15 +182,7 @@ public class ServiceDto {
 	public void setImageFilename(String imageFilename) {
 		this.imageFilename = imageFilename;
 	}
-	@Override
-	public String toString() {
-		return "ServiceDto [sittingId=" + sittingId + ", memberId=" + memberId + ", title=" + title + ", content="
-				+ content + ", startDate=" + startDate + ", endDate=" + endDate + ", reserDiv=" + reserDiv
-				+ ", reserCost=" + reserCost + ", addPet=" + addPet + ", addPetCost=" + addPetCost + ", carableWeight="
-				+ carableWeight + ", carableAge=" + carableAge + ", space=" + space + ", subway=" + subway + ", yard="
-				+ yard + ", baby=" + baby + ", family=" + family + ", other=" + other + ", tag=" + tag + ", photoId="
-				+ photoId + ", fileName=" + fileName + ", imageFilename=" + imageFilename + "]";
-	}
+	
 	
 	
 }
