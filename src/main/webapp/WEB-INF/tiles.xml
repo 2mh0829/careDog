@@ -89,6 +89,17 @@
       <put-attribute name="body" value="/WEB-INF/view/admin/store/{1}.jsp" />
       <put-attribute name="menu2" value="/WEB-INF/view/admin/store/menu2.jsp" />
    </definition>
+   
+   <definition name=".admin.strayDog.*.*" extends=".adminLayout">
+      <put-attribute name="header" value="/WEB-INF/view/admin/layout/header1.jsp" />
+      <put-attribute name="body" value="/WEB-INF/view/admin/strayDog/{1}/{2}.jsp" />
+      <put-attribute name="menu2" value="/WEB-INF/view/admin/strayDog/menu2.jsp" />
+   </definition>
+   <definition name=".admin.strayDog.*" extends=".adminLayout">
+      <put-attribute name="header" value="/WEB-INF/view/admin/layout/header1.jsp" />
+      <put-attribute name="body" value="/WEB-INF/view/admin/strayDog/{1}.jsp" />
+      <put-attribute name="menu2" value="/WEB-INF/view/admin/strayDog/menu2.jsp" />
+   </definition>
 
    <definition name=".admin.*.*.*" extends=".adminLayout">
       <put-attribute name="body" value="/WEB-INF/view/admin/{1}/{2}/{3}.jsp" />

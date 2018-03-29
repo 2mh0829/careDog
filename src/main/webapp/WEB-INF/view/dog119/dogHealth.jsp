@@ -5,6 +5,10 @@
 <%
    String cp = request.getContextPath();
 %>
+
+<link rel="stylesheet" href="<%=cp%>/resource/jquery/css/jquery.selectBoxIt.css" />
+<script src="http://gregfranko.com/jquery.selectBoxIt.js/js/jquery.selectBoxIt.min.js"></script>
+
 <style>
 .content { float: left; width: 954px; /*min-height:800px;*/}
 .content.page-main { float: none; width: auto; }
@@ -95,228 +99,14 @@ textarea {
   font: inherit; /* 1 */
   margin: 0; /* 2 */
 }
-.selectboxit-container {
-	width:100%;
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-}
-.selectboxit-container * {
-  font: 14px Helvetica, Arial;
-  /* Prevents text selection */
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: -moz-none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-  outline: none;
-  white-space: nowrap;
-}
-.selectboxit-container .selectboxit {
-	width:100%;
-	border:1px solid #eaeaea;
-  cursor: pointer;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  display: block;
-  position: relative;
-	background:#fff;
-}
-.selectboxit-container > span, .selectboxit-container > span span {
-	font-size:13px; color:#767676;
-  height: 40px; 
-  line-height: 40px;
-  display: block;
-  box-sizing:border-box;
-}
-span.selectboxit.select30, span.selectboxit.select30 span{
-	height: 30px !important;
-	line-height: 30px !important;
-}
-.selectboxit-container .selectboxit-options a {
-	font-size:13px; color:#767676;
-  height: 28px; /* Height of the drop down */
-  line-height: 28px; /* Vertically positions the drop down text */
-  display: block;
-}
-.selectboxit-container .selectboxit:focus {
-  outline: 0;
-}
-.selectboxit.selectboxit-disabled, .selectboxit-options .selectboxit-disabled {
-  opacity: 0.65;
-  filter: alpha(opacity=65);
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  cursor: default;
-}
-.selectboxit-text {
-  text-indent: 5px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  float: left;
-}
-.selectboxit .selectboxit-option-icon-container {
-  margin-left: 5px;
-}
-.selectboxit-container .selectboxit-options {
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  min-width: 100%;  /* Minimum Width of the dropdown list box options */
-  *width: 100%;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  position: absolute;
-  overflow-x: hidden;
-  overflow-y: auto;
-  cursor: pointer;
-  display: none;
-  z-index: 9999999999999;
-  text-align: left;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-}
- .selectboxit-option .selectboxit-option-anchor{
-  padding: 0 2px;
-}
-.selectboxit-option .selectboxit-option-anchor:hover {
-  text-decoration: none;
-}
-.selectboxit-option, .selectboxit-optgroup-header {
-  text-indent: 5px; /* Horizontal Positioning of the select box option text */
-  margin: 0;
-  list-style-type: none;
-}
-.selectboxit-option-first {
-  border-top-right-radius: 6px;
-  border-top-left-radius: 6px;
-}
-.selectboxit-optgroup-header + .selectboxit-option-first {
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
-}
-.selectboxit-option-last {
-  border-bottom-right-radius: 6px;
-  border-bottom-left-radius: 6px;
-}
-.selectboxit-optgroup-header {
-  font-weight: bold;
-}
-.selectboxit-optgroup-header:hover {
-  cursor: default;
-}
-.selectboxit-arrow-container {
-  /* Positions the down arrow */
-  width: 30px;
-  position: absolute;
-  right: 0;
-}
-.selectboxit .selectboxit-arrow-container .selectboxit-arrow {
-  margin: 0 auto;
-  position: absolute;
-  top: 50%;
-  right: 0;
-  left: 0;
-}
-.selectboxit .selectboxit-arrow-container .selectboxit-arrow.ui-icon {
-  top: 30%;
-}
-.selectboxit-option-icon-container {
-  float: left;
-}
-.selectboxit-container .selectboxit-option-icon {
-  margin: 0;
-  padding: 0;
-  vertical-align: middle;
-}
-.selectboxit-option-icon-url {
-  width: 18px;
-  background-size: 18px 18px;
-  background-repeat: no-repeat;
-  height: 100%;
-  background-position: center;
-  float: left;
-}
-.selectboxit-rendering {
-  display: inline-block !important;
-  *display: inline !important;
-  zoom: 1 !important;
-  visibility: visible !important;
-  position: absolute !important;
-  top: -9999px !important;
-  left: -9999px !important;
-}
-.jqueryui .ui-icon {
-  background-color: inherit;
-}
-.jqueryui .ui-icon-triangle-1-s {
-  background-position: -64px -16px;
-}
-.selectboxit-btn {
-  background-color: #f5f5f5;
-  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
-  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
-  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
-  background-repeat: repeat-x;
-  border: 1px solid #cccccc;
-  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  border-bottom-color: #b3b3b3;
-}
-.selectboxit-btn.selectboxit-enabled:hover,
-.selectboxit-btn.selectboxit-enabled:focus,
-.selectboxit-btn.selectboxit-enabled:active {
-  color: #333333;
-  background-color: #e6e6e6;
-}
-.selectboxit-btn.selectboxit-enabled:hover,
-.selectboxit-btn.selectboxit-enabled:focus {
-  color: #333333;
-  text-decoration: none;
-  background-position: 0 -15px;
-  background-color:#fff;
-}
-.selectboxit-default-arrow {
-  width: 0;
-  height: 0;
-  border-top: 4px solid #000000;
-  border-right: 4px solid transparent;
-  border-left: 4px solid transparent;
-}
-.selectboxit-list {
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-.selectboxit-list .selectboxit-option-anchor {color: #333333;}
-.selectboxit-list > .selectboxit-focus > .selectboxit-option-anchor {
-  color: #ffffff;
-  background-color: #0081c2;
-  background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
-  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
-  background-image: -o-linear-gradient(top, #0088cc, #0077b3);
-  background-image: linear-gradient(to bottom, #0088cc, #0077b3);
-  background-repeat: repeat-x;
-}
-.selectboxit-list > .selectboxit-disabled > .selectboxit-option-anchor { color: #999999; }
-button, input { overflow: visible; }
 
 </style>
 
-<html>
-
 <script>
+$(document).ready(function(){
+	var selectBox = $("select").selectBoxIt({autoWidth:false});
+})
+
 function chk() {
 	
 	if (form1.search.value == "") {
@@ -365,58 +155,17 @@ function chk() {
 
 				</ul>
 
-				<ul class="board__listPageing">
-					${paging}
-				</ul>
+				<ul class="board__listPageing">${paging}</ul>
 			</div>
 <!-- 검색 -->
 			<div class="board__search">
 				<form name="form1" method="post" action="">
-					<div class="board__select">
+					<div class="board__select" >
 						<select name="search" style="display: none;">
 							<option value="subject">제목</option>
 							<option value="memo">내용</option>
 							<option value="name">이름</option>
 						</select> 
-						
-						<span class="selectboxit-container selectboxit-container" role="combobox" aria-autocomplete="list" aria-haspopup="true"
-							aria-expanded="false" aria-owns aria-labelledby> 
-							<span id="" class="selectboxit  selectboxit-enabled selectboxit-btn" name="search" tabindex="0" unselectable="on"> 
-								<span class="selectboxit-option-icon-container"> 
-									<i id="" class="selectboxit-default-icon selectboxit-option-icon selectboxit-container" unselectable="on"></i>
-								</span> 
-								<span id="" class="selectboxit-text" unselectable="on" data-val="subject" aria-live="polite" style="max-width: 428px;">제목</span>
-									<span id="" class="selectboxit-arrow-container" unselectable="on"> 
-									<i id="" class="selectboxit-arrow selectboxit-default-arrow" unselectable="on"></i>
-								</span>
-							</span>
-							
-							<ul class="selectboxit-options selectboxit-list" tabindex="-1" role="listbox" aria-hidden="true" style="max-height: 86px; top: auto; display: none;">
-								<li data-id="0" data-val="subject" data-disabled="false" class="selectboxit-option  selectboxit-option-first selectboxit-focus"
-									role="option" data-active>
-									<a class="selectboxit-option-anchor"> 
-										<span class="selectboxit-option-icon-container"> 
-											<i class="selectboxit-option-icon  selectboxit-container"></i>
-										</span> 제목
-									</a>
-								</li>
-								<li data-id="1" data-val="memo" data-disabled="false" class="selectboxit-option selectboxit-selected" role="option">
-									<a class="selectboxit-option-anchor"> 
-									<span class="selectboxit-option-icon-container"> 
-										<i class="selectboxit-option-icon  selectboxit-container"></i>
-									</span> 내용
-									</a>
-								</li>
-								<li data-id="2" data-val="name" data-disabled="false" class="selectboxit-option  selectboxit-option-last"
-									role="option">
-									<a class="selectboxit-option-anchor"> 
-										<span class="selectboxit-option-icon-container"> 
-											<i class="selectboxit-option-icon  selectboxit-container"></i>
-										</span> 이름
-									</a>
-								</li>
-							</ul>
-						</span>
 					</div> <!-- board__select -->
 					<div class="board__keyword">
 						<input type="text" name="keyword">
@@ -425,7 +174,6 @@ function chk() {
 						<input type="button" onclick="javascript:chk();">
 					</div>
 					&nbsp;
-					<div class="board__contact"><a href="<%=cp%>/dog119/dhcreate">등록하기</a></div>
 				</form>
 			</div>
 
@@ -433,4 +181,3 @@ function chk() {
 	</div>
 </div>
 </body>
-</html>

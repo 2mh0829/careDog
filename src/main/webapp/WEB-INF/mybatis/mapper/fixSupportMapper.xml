@@ -27,7 +27,7 @@
 <select id="fixSupportList" parameterType="map" resultType="care.dog.admin.strayDogVo.AdminFixSupportVo">
 	select * from(
 		select rownum rnum, tb.* from(
-			select supportId, prodname, pname, tel, email, paymode, pmoney, s_date, e_date, zipcode, address1, address2
+			select supportId, prodname, pname, tel, email, paymode, pmoney, TO_CHAR(s_date, 'YYYY-MM-DD') s_date, TO_CHAR(e_date, 'YYYY-MM-DD') e_date, zipcode, address1, address2
 			from fixSupport
 			<where>
 				<if test="searchValue != null and searchValue!='' ">

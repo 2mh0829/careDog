@@ -5,63 +5,97 @@
 <%
    String cp = request.getContextPath();
 %>
+
 <link rel="stylesheet" type="text/css" media="screen" href="<%=cp%>/resource/jquery/css/smoothness/jquery-ui.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="<%=cp%>/resource/jqgrid/css/ui.jqgrid.css" />
-<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-
+<script src="<%=cp%>/resource/jqgrid/js/i18n/grid.locale-kr.js"></script>
 <script src="<%=cp%>/resource/jqgrid/js/jquery.jqGrid.min.js"></script>
 
 <script type="text/javascript">
 $(function(){
-	$.ajax({
-		url:'<%=cp%>/admin/dog119/fixSupport',
-		dataType:'json',
-		success:function(data){
-			console.log(data);
-	        var list = data.list;
-	         
-	        //jqGrid껍데기 생성
-	        $("#list").jqGrid({
-	            data: list, //인풋 데이타
-	            datatype: 'json',
-	           	mtype:'GET',
-	           	contentType: 'application/json; charset=utf-8',
-	           	width:1000,
-	            //그리드 높이
-	            height: 250,
-	            //컬럼명들
-	            colNames:['고유번호','후원종류', '이름', '번호','이메일', '결제방법', '후원금액', '시작일', '종료일', '우편번호', '주소'],
-	            //컬럼모델
-	            colModel:[
-	                {name:'supportId'},
-	                {name:'prodname'},
-	                {name:'pname'},
-	                {name:'tel'},
-	                {name:'email'},
-	                {name:'paymode'},
-	                {name:'pmoney'},
-	                {name:'s_date'},
-	                {name:'e_date'},
-	                {name:'zipCode'},
-	                {name:'address1'}   
-	            ],
-	            
-	            //그리드타이틀
-	            caption: "정기 후원 목록"
-	        });
-	         
-	        // 스크립트 변수에 담겨있는 json데이터의 길이만큼 
-	        for(var i=0;i<=list.length;i++){
-	                //jqgrid의 addRowData를 이용하여 각각의 row에 gridData변수의 데이터를 add한다
-	                $("#list").jqGrid('addRowData',i+1,list[i]);
-	        } 
-		}
+	$("#list").jqGrid({
+		url: '<%=cp%>/admin/dog119/fixSupport'
+		,datatype: "json"
+		,mtype: "get"
+		,colNames: ['번호','후원종류', '이름', '핸드폰 번호','이메일', '결제방법', '후원금액', '시작일', '종료일', '우편번호', '주소1', '주소2']  // "" : 수정과 삭제 버튼을 위한 공간
+	    ,colModel: [
+			    	 {name:'supportId', width:20, align:'center', editable:true},
+		             {name:'prodname', width:40, editable:true, align:'center'},
+		             {name:'pname', width:40, editable:true, align:'center'},
+		             {name:'tel', width:80, editable:true, align:'center'},
+		             {name:'email', width:100, editable:true, align:'center'},
+		             {name:'paymode', width:40, editable:true, align:'center'},
+		             {name:'pmoney', align:'right', width:60, editable:true},
+		             {name:'s_date', width:40, editable:true, align:'center'},
+		             {name:'e_date', width:40, editable:true, align:'center'},
+		             {name:'zipCode', width:40, sortable:false, editable:true, align:'center'},
+		             {name:'address1', sortable:false, editable:true},
+		             {name:'address2', sortable:false, editable:true,  width:40}
+	                ]
+	    ,rowNum:10   // 초기행수
+	    ,rowList:[10,20,30]
+	    ,width: '1500'
+    	,height: '100%'
+	    ,pager:"#pagersr"  // 페이징 기능 div의 id 명(class는 불가)
+	    ,gridview:true            // 속도가 빠름
+	    //,rownumbers: true     // 왼쪽에 리스트 번호 출력
+	    ,viewrecords:true       // 총 페이지 현재 페이지등의 정보를 노출
+	    ,scrollOffset: 0
+	    ,shrinkToFit:true         // 우측스크롤바 위의 조그만 공간 없앰
+	    ,emptyrecords:"등록된 데이터가 없습니다."
+    	// ,sortname: 'hak'
+	    // ,sortorder: 'asc'
+    	//,multiselect: true        // 셀렉트박스 적용
+	    ,caption: "정기 후원 목록"
+    	,loadonce: false          // reload 여부
+	    ,jsonReader : {           // json 형식
+	        root: "rows", 
+	        page: "page", 
+	        total: "total_page", 
+	        records: "dataCount", 
+	        repeatitems: false, 
+	        id: "supportId"     // id(기본키)
+	     }
+   		,loadError:function(xhr,status,error){
+	    	alert("실패>>"+error);
+   		}
 	});
-		
-})
 
+    //-------------------------------------------------------------
+	$("#list").jqGrid('setFrozenColumns');
+    $("#list").trigger('reloadGrid');
+             // Frozen Columns(틀 고정), colModel option에 frozen:true 적용해야함
+             // cellEdit, sortName, sortable 옵션과 사용불가
+	
+    //-------------------------------------------------------------
+	// 마지막 부분의 페이징처리 왼쪽의 추가, 수정등의 버튼
+   
+    $("#list").jqGrid('navGrid', '#pagersr'
+            ,{ excel:true,view:false,search:true,refresh:true}
+            ,{  // Search Option
+         		  multipleSearch:false, multipleGroup:false, showQuery: false,
+                  closeOnEscape:true, 
+                  onSearch:function(){  
+                	  $("#list").setGridParam({
+                	        url:'<%=cp%>/admin/dog119/fixSupport',
+                	        datatype:'json',
+                	        page:1,
+                	        postData:{ 
+                	             searchField:$(".columns").find("option:selected").val()
+                	             //,searchType:$(".selectopts").find("option:selected").val()
+                	             ,searchValue:$("td.data").find(".input-elm").val()
+                	        }
+                	  }).trigger("reloadGrid");
+                  }
+         	  }
+         	  ,{  // View Parameter
+         		  closeOnEscape:true
+         	  }               
+       );
+});
 
 </script>
-<div class="body-container">
+<div class="admin-container">
    <table id="list"></table>
+   <div id="pagersr"></div>
 </div>
