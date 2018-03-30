@@ -215,20 +215,6 @@ public class MyPetInfo {
 		this.addr2 = addr2;
 	}
 
-	@Override
-	public String toString() {
-		return "MyPetInfo [memberId=" + memberId + ", havePet=" + havePet + ", myPetYear=" + myPetYear + ", myPetMonth="
-				+ myPetMonth + ", myPetName=" + myPetName + ", myPetGender=" + myPetGender + ", myPetType=" + myPetType
-				+ ", myPetWeight=" + myPetWeight + ", registerMyPet=" + registerMyPet + ", neutralization="
-				+ neutralization + ", friendly=" + friendly + ", bark=" + bark + ", disease=" + disease + ", ddong="
-				+ ddong + ", territory=" + territory + ", anxiety=" + anxiety + ", whenBark=" + whenBark
-				+ ", aboutDisease=" + aboutDisease + ", whereDdong=" + whereDdong + ", whereTerritory=" + whereTerritory
-				+ ", aboutAnxiety=" + aboutAnxiety + ", heartWorm=" + heartWorm + ", vaccine=" + vaccine
-				+ ", coronaEnteritis=" + coronaEnteritis + ", kennelCough=" + kennelCough + ", isHospital=" + isHospital
-				+ ", hospitalName=" + hospitalName + ", hospitalTel1=" + hospitalTel1 + ", hospitalTel2=" + hospitalTel2
-				+ ", hospitalTel3=" + hospitalTel3 + ", zipCode=" + zipCode + ", addr1=" + addr1 + ", addr2=" + addr2
-				+ "]";
-	}
 	public MultipartFile getUpload() {
 		return upload;
 	}
@@ -241,6 +227,18 @@ public class MyPetInfo {
 	public void setMyPetPhoto(String myPetPhoto) {
 		this.myPetPhoto = myPetPhoto;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "MyPetInfo [memberId=" + memberId + ", havePet=" + havePet + ", myPetYear=" + myPetYear + ", myPetMonth="
+				+ myPetMonth + ", myPetName=" + myPetName + ", myPetGender=" + myPetGender + ", myPetType=" + myPetType
+				+ ", myPetWeight=" + myPetWeight + ", registerMyPet=" + registerMyPet + ", neutralization="
+				+ neutralization + ", friendly=" + friendly + ", bark=" + bark + ", disease=" + disease + ", ddong="
+				+ ddong + ", territory=" + territory + ", anxiety=" + anxiety + ", whenBark=" + whenBark
+				+ ", aboutDisease=" + aboutDisease + ", whereDdong=" + whereDdong + ", whereTerritory=" + whereTerritory
+				+ ", aboutAnxiety=" + aboutAnxiety + ", heartWorm=" + heartWorm + ", vaccine=" + vaccine
+				+ ", coronaEnteritis=" + coronaEnteritis + ", kennelCough=" + kennelCough + ", isHospital=" + isHospital
+				+ ", hospitalName=" + hospitalName + ", hospitalTel1=" + hospitalTel1 + ", hospitalTel2=" + hospitalTel2
+				+ ", hospitalTel3=" + hospitalTel3 + ", zipCode=" + zipCode + ", addr1=" + addr1 + ", addr2=" + addr2
+				+ ", upload=" + upload + ", myPetPhoto=" + myPetPhoto + "]";
+	}
 }
