@@ -39,8 +39,8 @@ function getMyPetList(){
 				+"<div class='myPetList-detail-text-wrap'>"
 					+"<div class='myPetList-detail-text'><img style='border-radius: 50px;' src='<%=cp%>/uploads/myPet/"+data.myPetList[i].memberId+"/"+data.myPetList[i].myPetPhoto+"' width='50' height='50'>"
 						+"<p>"+data.myPetList[i].myPetName+" ("+data.myPetList[i].myPetType+","+data.myPetList[i].myPetGender+","+age+")</p>"
-							+"<p><a href='javascript:myPetInfoDetail();'>상세보기</a></p>"
-						+"<p class='myPetInfoEditBtn'><a href='javascript:myPetInfoEdit();'>수정하기</a></p></div></div></div>");
+							+"<p><a href='javascript:myPetInfoDetail("+data.myPetList[i].myPetInfoId+");'>상세보기</a></p>"
+						+"</div></div></div>");
 			}
 		},
 		error:function(e){
@@ -55,8 +55,8 @@ function myPetCreated(){
 		$(".myPage-layout").html(data);
 	})
 }
-function myPetInfoDetail(){
-	var url = "<%=cp%>/myPet/myPetInfoDetail";
+function myPetInfoDetail(myPetInfoId){
+	var url = "<%=cp%>/myPet/myPetInfoDetail?myPetInfoId="+myPetInfoId;
 	$.get(url, function(data) {
 		$(".myPage-layout").html(data);
 	})

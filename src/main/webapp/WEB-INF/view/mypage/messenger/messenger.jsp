@@ -176,8 +176,9 @@ var friendNameTemp=0;
 			$(".messageTextRight").eq(i).text(temp);
 		}
 		var a = getDocHeight();
-		$(".myPage-layout").css("height", a - 210);
-		$(".messengerBody").css("height", a - 240);
+		$(".myPage-layout").css("height", a - 700);
+		$(".myPage-background").css("height", a - 700);
+		$(".messengerBody").css("height", a - 230);
 		var c = $(".messengerBody").height();
 		var d = $(".messageInput").height();
 		$(".messageList").css("height",c-60);
@@ -377,4 +378,3 @@ var friendNameTemp=0;
 	</div>
 </div>
 <div class="headerMemberId" style="display: none;"></div>
->>>>>>> e3627eb54de605c15cde7d5898983e2424b3b4a0:src/main/webapp/WEB-INF/view/mypage/messenger/messenger.jsp
