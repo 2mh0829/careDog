@@ -1,5 +1,6 @@
 package care.dog.admin.strayDog;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import care.dog.admin.strayDogVo.AdminFixSupportVo;
 import care.dog.common.dao.CommonDAO;
+import care.dog.dog119.dogHealthVo.VolunteerVO;
 
 @Service("strayDog.adminStrayDogServiceImpl")
 public class AdminStrayDogServiceImpl implements AdminStrayDogService {
@@ -34,6 +36,23 @@ public class AdminStrayDogServiceImpl implements AdminStrayDogService {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	@Override
+	public List<VolunteerVO> listMonthSchedule(Map<String, Object> map) {
+		List<VolunteerVO> list = new ArrayList<>();
+		try {
+			list = dao.selectList("volunteer.vAdminList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public VolunteerVO readSchedule(int num) {
+		VolunteerVO dto = new VolunteerVO();
+		return dto;
 	}
 
 }

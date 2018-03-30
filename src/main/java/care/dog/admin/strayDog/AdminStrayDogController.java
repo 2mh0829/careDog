@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import care.dog.admin.strayDogVo.AdminFixSupportVo;
 import care.dog.common.MyUtilBootstrap;
+import care.dog.dog119.dogHealthVo.VolunteerVO;
 
 @Controller("strayDog.adminStrayDogController")
 public class AdminStrayDogController {
@@ -90,4 +92,24 @@ public class AdminStrayDogController {
 		return map;
 	}
 	
+	//자원봉사
+	@RequestMapping(value="/admin/strayDog/month")
+	@ResponseBody
+	public Map<String, Object> month(
+			@RequestParam(value="start") String start,
+			@RequestParam(value="end") String end,
+			@RequestParam(value="group", defaultValue="all") String group,
+			HttpSession session
+			){
+		Map<String, Object> map = new HashMap<>();
+		map.put("group", group);
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<VolunteerVO> list = service.listMonthSchedule(map);
+		
+		
+		
+		return map;
+	}
 }

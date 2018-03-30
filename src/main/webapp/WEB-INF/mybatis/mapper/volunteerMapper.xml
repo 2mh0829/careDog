@@ -10,4 +10,18 @@
 		, #{experience}, #{necessity}, #{vOption}, #{fdate1}, #{time}, #{selfIntroduce})
 </insert>
 
+<select id="vAdminList" resultType="care.dog.dog119.dogHealthVo.VolunteerVO" parameterType="map">
+	SELECT volunteerId, mem_check, name, peopleCnt, fdate1, time, vKind
+		FROM SD_Volunteer
+		<where>
+		<if test="group !='all' ">
+		    AND vKind=#{group}
+		</if>
+        <!-- <![CDATA[
+             AND ((startDay>=#{start} AND startDay<=#{end})
+                OR (endDay>=#{start} AND endDay<=#{end}))
+        ]]>   -->           
+   	  </where>
+		 ORDER BY fdate1 ASC, volunteerId DESC
+</select>
 </mapper>
