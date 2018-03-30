@@ -23,6 +23,10 @@
 select onefone_seq.NEXTVAL from dual
 </select>
 
+<select id="aseq" resultType="Integer">
+select aonefone_seq.NEXTVAL from dual
+</select>
+
 <insert id="insertonefone" parameterType="care.dog.center.onefone.OneFOneVo">
 insert into onefone(num, memberId, email, tel, sort, content, qdate, subject) values (onefone_seq.NEXTVAL, #{memberId}, #{email}, #{tel}, #{sort}, #{content}, sysdate, #{subject})
 </insert>
@@ -43,5 +47,15 @@ SELECT * FROM (
 ) WHERE rnum >= #{start}
 ]]>
 </select>
+
+<select id="readonefone" parameterType="Integer" resultType="care.dog.center.onefone.OneFOneVo">
+select num, memberId, sort, content, qdate, subject
+from onefone
+where num = #{num}
+</select>
+
+<!-- <insert id="insertronefone" parameterType="">
+insert into aonefone(replynum, num, memberId, acontent, adate) values (aonefone_seq.NEXTVAL, #{num}, #{memberId}, #{acontent}, #{adate})
+</insert> -->
 
 </mapper>

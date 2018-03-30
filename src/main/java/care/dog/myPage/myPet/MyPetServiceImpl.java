@@ -23,7 +23,8 @@ public class MyPetServiceImpl implements MyPetService{
 	public int insertMyPetInfo(MyPetInfo dto, String pathname) {
 		int result=0;
 		try {
-			if(dto.getMyPetPhoto()!=null&&!dto.getMyPetPhoto().isEmpty()) {
+			System.out.println(dto.toString());
+			if(dto.getUpload()!=null&&!dto.getUpload().isEmpty()) {
 				String filename=fileManager.doFileUpload(
 						dto.getUpload(),
 						pathname);

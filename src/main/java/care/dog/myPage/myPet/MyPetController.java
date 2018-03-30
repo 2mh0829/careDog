@@ -84,6 +84,7 @@ public class MyPetController {
 				File.separator+info.getMemberId();
 
 		dto.setMemberId(info.getMemberId());
+		
 		int result=myPetService.insertMyPetInfo(dto,pathname);
 		
 		if(result==0) {
