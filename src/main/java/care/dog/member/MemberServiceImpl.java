@@ -218,4 +218,14 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return result;
 	}
+
+	@Override
+	public String findId(String email) {
+		String memberId = null;
+		try {
+			memberId = dao.selectOne("member.findId", email);
+		} catch (Exception e) {
+		}
+		return memberId;
+	}
 }

@@ -107,6 +107,11 @@
 		WHERE email = #{email} and memberId = #{memberId}
 	</select>
 	
+	<select id="findId" parameterType="String" resultType="String">
+		SELECT memberId FROM member2
+		WHERE email = #{email}
+	</select>
+	
 	<update id="changePwd" parameterType="map">
 		UPDATE member1
 		SET userPwd = #{userPwd}
