@@ -105,7 +105,7 @@ function listPage(page) {
 	ajaxHTML(url, "get", query);
 }
 
-// 글리스트 및 글쓰기폼, 글보기, 글수정폼 ajax
+//글리스트 및 글쓰기폼, 글보기, 글수정폼 ajax
 function ajaxHTML(url, type, query) {
 	$.ajax({
 		type:type
@@ -319,16 +319,14 @@ function deletePhoto() {
 	  var page = "${page}";
 	  var query = "num="+num+"&page="+page;
 	  var url = "<%=cp%>/center/"+tab+"/delphoto?" + query;
-
 	  if(confirm("위 자료를 삭제 하시 겠습니까 ? "))
 	  	location.href=url;
-	</c:if>    
+	</c:if>
 	
 	<c:if test="${sessionScope.member.memberId!='admin'}">
 	  alert("게시물을 삭제할 수  없습니다.");
 	</c:if>
 	}
-
 	function updatePhoto() {
 	<c:if test="${sessionScope.member.memberId=='admin'}">
 	  var num = "${dto.num}";

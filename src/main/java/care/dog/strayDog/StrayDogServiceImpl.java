@@ -67,12 +67,11 @@ public class StrayDogServiceImpl implements StrayDogService {
 						gender="미상";
 					}
 					
-					String neu = root.getElementsByTagName("neuterYn").item(i).getTextContent().toString();
-					String neuCheck = "";
-					if(sexCd.equals("U")) {
-						neuCheck="미상";
-					}else { 
+					String neuCheck = "미상";
+					try {
+						String neu = root.getElementsByTagName("neuterYn").item(i).getTextContent().toString();
 						neuCheck=neu;
+					} catch (Exception e) {
 					}
 					
 					String pChk = "미정";
@@ -80,7 +79,13 @@ public class StrayDogServiceImpl implements StrayDogService {
 						String person = root.getElementsByTagName("chargeNm").item(i).getTextContent().toString();
 						pChk=person;
 					} catch (Exception e) {
-						// TODO: handle exception
+					}
+					
+					String oft = "없음";
+					try {
+						String tel = root.getElementsByTagName("officetel").item(i).getTextContent().toString();
+						oft=tel;
+					} catch (Exception e) {
 					}
 					
 					HashMap<String, Object> map = new HashMap<String, Object>();
@@ -99,7 +104,7 @@ public class StrayDogServiceImpl implements StrayDogService {
 					map.put("noticeEdt", root.getElementsByTagName("noticeEdt").item(i).getTextContent().toString()); //공고 종료일
 					map.put("noticeNo", root.getElementsByTagName("noticeNo").item(i).getTextContent().toString()); //공고 번호
 					map.put("noticeSdt", root.getElementsByTagName("noticeSdt").item(i).getTextContent().toString()); //공고시작일
-					map.put("officetel", root.getElementsByTagName("officetel").item(i).getTextContent().toString()); //담당자 연락처
+					map.put("officetel", oft); //담당자 연락처
 					map.put("orgNm", root.getElementsByTagName("orgNm").item(i).getTextContent().toString()); //관할기관
 					map.put("popfile", root.getElementsByTagName("popfile").item(i).getTextContent().toString()); //이미지
 					map.put("processState", root.getElementsByTagName("processState").item(i).getTextContent().toString()); //상태

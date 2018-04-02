@@ -1,0 +1,228 @@
+.body-container .content { float:left; margin:0px; padding:0 0 32px 0; width:920px }
+.body-container .section { float:left; margin:0px; padding:0 0 32px 0; width:626px }
+.body-container .aside { float:left; margin:0px; padding:0 0 30px 0; width:294px }
+.body-container .section h3 { float:left; width:576px; margin:0px; padding:0 0 7px 0; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; font-size:18px; font-weight:bold; color:#0e0f17; border-bottom:1px solid #c0c0c2 }
+.body-container .section h3 a { font-size:14px; color:#147ebb; font-weight:bold; text-decoration:none }
+.body-container .section h3 a:hover { color:#147ebb; text-decoration:underline }
+.body-container .section h3 .ico_cirle { display:inline-block; width:5px; height:12px; margin-left:1px; background-image:url(http://www.angel.or.kr/images/bg_angle.gif); background-repeat:no-repeat; vertical-align:middle }
+*:first-child+html #bodycontent .section h3 .ico_cirle { display:inline-block; width:5px; height:12px; padding-right:4px; background-image:url(http://www.angel.or.kr/images/bg_angle.gif); background-repeat:no-repeat; vertical-align:middle }
+.body-container .content h3 { float:left; width:920px; margin:0px; padding:0 0 7px 0; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; font-size:18px; font-weight:bold; color:#0e0f17; border-bottom:1px solid #c0c0c2 }
+.body-container .content h3 a { color:#147ebb; text-decoration:none }
+.body-container .content h3 a:hover { color:#147ebb; text-decoration:underline }
+.body-container .content h3 .ico_cirle { display:inline-block; width:5px; height:12px; margin-left:1px; background-image:url(http://www.angel.or.kr/images/bg_angle.gif); background-repeat:no-repeat; vertical-align:middle }
+*:first-child+html #bodycontent .content h3 .ico_cirle { display:inline-block; width:5px; height:12px; padding-right:4px; background-image:url(http://www.angel.or.kr/images/bg_angle.gif); background-repeat:no-repeat; vertical-align:middle }
+.body-container .content h3 p { float:right; padding-top:7px; font-size:12px; font-weight:normal; color:#666 }
+#aside_thumb h3 { float:left; width:294px; margin:0px; padding:0 0 7px 0; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; font-size:18px; font-weight:bold; color:#0e0f17; border-bottom:1px solid #c0c0c2 }
+#aside_thumb h3 .ico_cirle { display:inline-block; width:5px; height:12px; margin-left:1px; background-image:url(http://www.angel.or.kr/images/bg_angle.gif); background-repeat:no-repeat; vertical-align:middle }
+.aside h3 { float:left; width:294px; margin:0px; padding:0 0 7px 0; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; font-size:18px; font-weight:bold; color:#0e0f17; border-bottom:none }
+.aside h3 a { color:#147ebb; font-weight:bold; text-decoration:none }
+.aside p a { color:#147ebb; text-decoration:none }
+#aside_thumb ul { float:left; margin:5px 0 0 0; padding:0 0 20px 0; width:294px; display:block }
+#aside_thumb ul li { float:left; margin:18px 0 0 0; padding:21px 0 0 0; width:294px; display:block; border-top:1px solid #dfdfe0 }
+#aside_thumb ul li:first-child { float:left; margin:22px 0 0 0; padding:0px; width:294px; display:block; border-top:none }
+#aside_thumb ul li div.thumbimg { float:left; padding:0 21px 0 0; width:68px; height:68px; text-align:right; overflow:hidden }
+#aside_thumb ul li div.thumbimg img { width:66px; height:66px; border:1px solid #343434; vertical-align:top }
+#aside_thumb ul li p { line-height:21px; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb' }
+#aside_thumb ul li p a { color:#147ebb; text-decoration:none }
+#aside_thumb ul li p a:hover { color:#147ebb; text-decoration:underline }
+#aside_thumb ul li p img { padding:0 21px 0 0; float:left }
+#aside_thumb ul li em { font-family:tahoma; font-size:10px; font-weight:bold }
+#aside_thumb ul li p strong { font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; font-weight:bold }
+#aside_thumb ul li p .on { font-weight:bold; color:#ff6600 }
+#aside_list {}
+#aside_list h3 { float:left; width:294px; margin:0px; padding:0 0 7px 0; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; font-size:18px; font-weight:bold; color:#0e0f17; border-bottom:1px solid #c0c0c2 }
+#aside_list ul { float:left; width:274px; margin:0 10px; padding:0 }
+#aside_list ul li { line-height:34px; background:url(http://www.angel.or.kr/images/dot_width_3px.gif) 0 bottom repeat-x; }
+#aside_list ul li a { display:inline-block; color:#3c3c3c; padding-left:19px; background:url(http://www.angel.or.kr/images/ico_2arrow.gif) 0 14px no-repeat }
+#aside_list ul li a { font-size:13px; color:##147ebb; text-decoration:none }
+#aside_list ul li a:hover { color:#147ebb }
+#aside_list ul li:last-child { background:none }
+.body-container h4.notice { float:left; margin:20px 0 0 0; padding:0px; width:576px; line-height:21px; font-size:14px; color:#147ebb }
+#innerbox { float:left; margin:20px 0 15px 0; padding-bottom:15px; width:576px; line-height:21px; border-bottom:1px solid #dfdfe0 }
+#innerbox em { font-weight:bold; color:#147ebb }
+#innerbox a { text-decoration:none; color:#147ebb }
+#innerbox .digit { font-size:11px; font-family:tahoma }
+#innerbox img { display:inline; padding-top:2px\9 }
+#innerbox ol { clear:both; margin:0 0 0 -10px }
+*:first-child+html #innerbox ol { clear:both; margin:0 }
+#innerbox li { list-style-type:decimal; line-height:1.8em }
+/***********°øÅë**********/
+.height200 { width:100%; padding:100px 0 }
+.height30 { width:100%; padding:15px 0 }
+.height20 { width:100%; padding:10px 0 }
+.height10 { clear:both; width:100%; padding:5px 0 }
+.height5 { clear:both; width:100%; padding-top:5px }
+.line180 { line-height:180% !important }
+.pattern1 { background:url(http://www.angel.or.kr/images/pattern1.jpg) }
+.pattern2 { background:url(http://www.angel.or.kr/images/pattern2.jpg) }
+/***********°øÅë,¹öÆ°**********/
+#attachfile { clear:both; display:none; margin-left:0 }
+*:first-child+html #attachfile { clear:both; display:none; margin-left:0; width:300px }
+.file_box { clear:both; float:left; width:290px; margin-bottom:15px }
+.file_box .file_input_textbox { float:left }
+.file_box .file_input_textbox_report { float:left; width:90px; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; color:#666; padding:5px; margin-top:4px; border:1px solid #b5b8c8; background:#fff }
+.file_box .file_input_div { float:left; position:relative; width:40px; height:30px; overflow:hidden }
+.file_box .file_input_div .file_input_button { width:40px; height:30px; position:absolute; top:0px; color:#147ebb; background-color:#fff; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; border:none }
+.file_box .file_input_div .file_input_hidden { font-size:45px; position:absolute; right:0px; top:0px; opacity:0; filter:alpha(opacity=0); -ms-filter:"alpha(opacity=0)"; -khtml-opacity:0; -moz-opacity:0; cursor:pointer }
+.file_box .file_cancel { float:left; width:40px; height:30px; color:#666; background-color:#fff; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; border:none; cursor:pointer }
+.file_box .file_input_div .file_input_button:hover, .file_box .file_cancel:hover { color:#147ebb }
+.file_box span { float:left; padding:7px 3px 0 0 }
+.file_box .checkbox { float:left }
+.file_box .file_check { float:left; margin-left:10px }
+.file_box .file_check img { padding-right:5px }
+.file_box .file_check input { margin:0; display:inline }
+/***********°øÅë,html **********/
+.col_two { float:left; width:920px; margin:0px; padding:0 }
+.col_two_left { float:left; width:450px; margin:0px; padding:0 0 50px 0 }
+.col_two_rignt { float:left; width:460px; margin:0px; padding:30px 0 50px 0 }
+.col_two_rignt .photo { display:block; position:relative; width:300px; height:300px; overflow:hidden }
+.col_two_rignt img {
+  width:300px; height:300px;
+  *width:292px; *height:292px;
+  background: #343434;
+  padding: 4px;
+  box-shadow: none;
+  border: none;
+  -webkit-transition: all 0.4s ease-out;
+  -moz-transition: all 0.4s ease-out;
+  -o-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.col_two_rignt img:hover { background: #e5302a; }
+.col_two_rignt h4 { font-size:18px; line-height:1.8em !important; color:#000; font-weight:normal; padding-top:8px !important; margin:0 }
+.col_two_rignt a { color:#147ebb; text-decoration:none }
+.icoCirle { display:inline-block; width:5px; height:12px; margin-left:1px; background-image:url(http://www.angel.or.kr/images/bg_angle.gif); background-repeat:no-repeat; vertical-align:middle }
+*:first-child+html .icoCirle { display:inline-block; width:5px; height:12px; padding-right:4px; background-image:url(http://www.angel.or.kr/images/bg_angle.gif); background-repeat:no-repeat; vertical-align:middle }
+.buttonbox { clear:both; margin:0 }
+
+.tbl_common { border:1px solid #e8e8e8 }
+.tbl_common td { padding:7px 7px 3px 7px; border:1px solid #e8e8e8; line-height:20px }
+.tbl_common td.background { background-color:#f9f9f9 }
+.tbl_common td.tit { padding:7px 15px 3px 15px !important }
+.tbl_common td img { display:inline; vertical-align:middle }
+.tbl_common a { color:#147ebb; text-decoration:none }
+.tbl_common em { font-weight:bold }
+
+.tbl { border-top:3px solid #37315d; border-bottom:2px solid #e2e2e2; border-spacing:0; border-collapse:collapse; line-height:20px; }
+.tbl thead tr:first-child th { border-top:0 }
+.tbl th,
+.tbl td { padding:10px 12px; font-weight:400; text-align:center; border-top:1px solid #e2e2e2; border-left:1px solid #e2e2e2 }
+.tbl thead tr:first-child th:first-child ,
+.tbl td.ty3 { border-left:0 }
+.tbl th { background:#f4f4f4 }
+.tbl th.ty1 { background:#f4efe4 }
+.tbl td.ty1 { background:#fcf5e9}
+.tbl td.ty2 { color:#005c9a }
+.tbl td.ty3 { color:#666 }
+.tbl td.ty4 { color:#e72744 }
+.tbl a { color:#147ebb; text-decoration:none }
+.tbl em { font-weight:bold }
+
+p.common_title { padding:0; margin:0; font-size:14px; font-weight:bold }
+#bodycontent p.paragraph1 { padding:14px 0 margin:0; line-height:200%; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; font-weight:bold; font-size:14px }
+#bodycontent p.paragraph2 { padding:14px 0 margin:0; line-height:200%; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; font-size:14px }
+#bodycontent p.paragraph3 { padding:14px 0 margin:0; line-height:200%; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb' }
+#bodycontent p.innercontent { float:left; margin:20px 0 0 0; padding:0px; width:576px; line-height:21px }
+#bodycontent p.innercontent em { font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; font-weight:bold; color:#147ebb }
+#bodycontent p.innercontent a { color:#147ebb; text-decoration:none }
+#bodycontent p.innerbtn { float:left; margin:20px 0 0 0; padding:0px; width:576px }
+#bodycontent p.innercontent img { display:inline; padding-top:2px; padding-top:2px\9 }
+/***********½Å°í,µî·Ï**********/
+.preListwrap { width:616px; margin-top:25px }
+.preListwrap .subList { width:171px; min-height:100px;_height:100px; display:inline-block; zoom:1; *display:inline; vertical-align:top; margin-bottom:28px; padding-left:14px; border-left:1px solid #f1f1f1 }
+.preListwrap .subList.first { border-left:none }
+.preListwrap .subList h4 { width:171px; margin:-2px 0 8px 0; font-size:14px; font-weight:bold; border:none }
+.preListwrap .subList ul { margin:0; padding:0 }
+.preListwrap .subList ul li { margin-bottom:5px; padding-left:10px; line-height:1.5 }
+.preListwrap .subList ul li.text { margin-top:10px; padding-left:10px; line-height:1.6; color:#666 }
+.preListwrap .subList ul li.notice { margin-top:10px; padding-left:10px; line-height:1.6; font-size:11px; color:#666 }
+.preListwrap .subList ul li.thumb { background:none; margin:0; padding:0px }
+.preListwrap .subList ul li a { color:#666; text-decoration:none }
+.preListwrap .subList ul li a:hover { text-decoration:underline }
+.postform_alim { float:left; margin-top:15px; padding:0; line-height:150% }
+.postform_alim a { color:#147ebb; text-decoration:none }
+.postform { clear:both; width:910x; margin:0; padding:0 }
+.postform .post_l { float:left; width:290px; margin:0; padding:0; overflow:hidden }
+.postform .post_c { float:left; width:290px; margin:0; padding:0; overflow:hidden }
+.postform .post_r { float:left; width:290px; margin:0; padding:0; overflow:hidden }
+.postform .post_title { float:left; width:290px; margin:30px 0; padding:7px 0; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; font-size:14px; font-weight:bold; color:#0e0f17; border-bottom:1px solid #c0c0c2 }
+.postform .post_title_go { float:left; width:73px; margin:30px 0; padding:7px 0; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; font-size:14px; font-weight:bold; color:#0e0f17; border-bottom:1px solid #c0c0c2 }
+.postform .post_title a { font-weight:bold; color:#147ebb; text-decoration:none }
+.postform .post_title a:hover { text-decoration:underline }
+.map_postbox { width:290px; height:290px; margin:4px 0 0 0; margin:4px 0\9 }
+.postform .post_pwd { float:left; width:320px; margin:0; padding:0 }
+.postform .post_pwd_title { float:left; width:320px; margin:30px 0; padding:7px 0; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; font-size:14px; font-weight:bold; color:#0e0f17; border-bottom:1px solid #c0c0c2 }
+.postform .btnbox { float:left }
+.postform .btnbox a { float:left; margin-top:6px; font-weight:bold; color:#ff6600; text-decoration:none }
+.postform .pwdbox { clear:both; padding-top:30px }
+.postform .pwdbox a { color:#147ebb; text-decoration:none }
+.postform .ico_pwd { display:inline-block; width:13px; height:13px; background-image:url(http://www.angel.or.kr/images/question.gif); background-repeat:no-repeat; vertical-align:middle }
+.postform .popbox { float:left; width:290px; height:200px; margin:30px; padding:0; border:1px solid #e4e4e4 }
+.postform .ending_notice { float:left; margin:15px 0 0 10px; padding:0; line-height:150% }
+body,p,legend,fieldset,form,table,th,td { margin:0; padding:0 }
+.stress { color:#ff6600 }
+.highlight { color:#e02a23 }
+.red { color:#ff0000 }
+.brown { color:#cc9900 }
+.darkbrown { color:#9D8364 }
+.black { color:#000 }
+.note { color:#147ebb }
+.font14 { font-size:14px }
+.letter_spacing { letter-spacing:0 }
+.font14bold { font-size:14px; font-weight:bold }
+.clear { clear:both }
+#formID { margin:0; padding:0; }
+.postform em { font-size:15px; color:#147ebb; }
+.postform label { float: none; display:block; width: auto; margin:15px 0; padding:0; }
+.postform label img { padding: 4px 0; }
+.postform label a { color:#147ebb; text-decoration:none; }
+.postform label a:hover { text-decoration:underline; }
+.postform label .text-map { display:inline; width:90px; padding: 5px; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; color: #000; border: 1px solid #b5b8c8; background: #f3f4f6 repeat-x; }
+.postform input,.postform select,.postform textarea { display: block;  /* this breaks relative positioning */ }
+.postform .text-input { width: 278px; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; color: #000; padding: 5px; margin-top: 4px; border: 1px solid #b5b8c8; background: #fff repeat-x; }
+.postform .text-input-password { width: 262px; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; color: #000; padding: 5px; margin-top: 4px; border: 1px solid #b5b8c8; background: #fff repeat-x; }
+.postform .text-input-short { width: 100px; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; color: #000; padding: 5px; margin-top: 4px; border: 1px solid #b5b8c8; background: #fff repeat-x; }
+.postform textarea { width: 278px; height: 100px; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; color: #000; padding: 5px; margin-top: 4px; border: 1px solid #B5B8C8; background: #fff repeat-x; }
+.postform select { padding: 4px; margin-top: 5px; border: 1px solid #b5b8c8; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; color: #000; font-size:13px; }
+.postform .select-short { padding: 5px; margin-top: 4px; border: 1px solid #b5b8c8; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; color: #000; font-size:13px; }
+.postform .text-textarea-accept { width: 278px; height: 110px; overflow-x:hidden; overflow-y:auto; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; font-size:13px; color: #666; padding: 5px; margin-top: 4px; border: 1px solid #b5b8c8; }
+.postform file { font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; color: #000; padding:0; margin-top: 4px; line-height:0%; }
+.postform span.checkbox, .postform .checkbox, .postform .radio, .postform .text-input-short, .postform .select-short { display: inline; }
+.postform .fc-error { width: 350px; color: #000; padding: 5px; border: 1px solid #B5B8C8; margin-bottom: 15px; background: #ffeaea; }
+.postform .readonly { background: #f7f7f7 repeat-x !important; }
+.postform .border_none { width: 278px; font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb'; color: #ff6600; padding: 0; margin:0; border:none; background: #fff repeat-x; }
+a { outline:none }
+ul,ol { list-style:none }
+.bg-none { background:none !important }
+em,address { font-style:normal }
+.mybtn.blue { background:#0b5d8e; color:#fff }
+.mybtn.blue:hover { background:#7eb111; color:#fff }
+.mybtn.gray { background:#878888; color:#ffffff }
+.mybtn.gray:hover { background:#7eb111; color:#fff }
+.mybtn.b { padding:7px 4px !important; padding:7px 4px 5px 4px\9 !important; background:none; color:#666 }
+.mybtn.b:hover { background:#0b5d8e; color:#fff }
+.mybtn {
+  position:relative;
+  text-decoration:none;
+  display:inline-block !important;
+  text-shadow:none;
+  text-decoration:none !important;
+  border-radius:0;
+  box-shadow:none;
+  cursor:pointer;
+  border:none;
+  font-size:13px;
+  font-family:'NanumGothic', '³ª´®°íµñ', 'NanumGothicWeb';
+  margin:0;
+  padding:7px 12px; padding:7px 12px 5px 12px\9; *padding:5px 9px;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  border-radius:3px;
+  -webkit-transition:all 0.35s ease;
+  -moz-transition:all 0.35s ease;
+  -o-transition:all 0.35s ease;
+  transition:all 0.35s ease;
+}

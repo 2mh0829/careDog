@@ -7,5 +7,8 @@
 %>
 
 <div class="body-container">
-	<div>아이디찾기</div>
+	<div style="margin: 0px auto; width:360px;">
+		<div>아이디찾기</div>
+		<div><input type="text"></div>
+	</div>
 </div>

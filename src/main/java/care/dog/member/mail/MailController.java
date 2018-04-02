@@ -7,7 +7,9 @@ import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import care.dog.member.MemberService;
 
@@ -53,6 +55,7 @@ public class MailController {
 		}
 
 		dto.setContent(content);
+		dto.setSubject("[Care Dog] 회원가입을 위한 인증 메일입니다.");
 		
 		boolean b = mailSender.mailSend(dto);
 		
@@ -92,6 +95,25 @@ public class MailController {
 		if(isMember == 0) {
 			service.deleteAuthFail(memberId);
 		}
+	}
+	
+	
+	@RequestMapping(value="/member/sendEmailForChangePwd", method=RequestMethod.POST)
+	@ResponseBody
+	public int sendEmailForChangePwd(String email, Mail dto) {
+		
+		dto.setReceiverEmail(email);
+
+		String content = "";
+		int authNum = (int)(Math.random()*8999) + 1000;
+		content += "인증번호 : " + authNum;
+		dto.setContent(content);
+		dto.setSubject("[Care Dog] 패스워드 변경 인증번호");
+		
+		mailSender.mailSend(dto);
+		
+		return authNum;
+		
 	}
 	
 	
