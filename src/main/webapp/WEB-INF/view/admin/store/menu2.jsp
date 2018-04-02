@@ -24,7 +24,7 @@
 
 <div class="header-bottom">
 	<div class="menu2" align="center">
-		<a href="<%=cp%>/admin/store/listForm">펫상품리스트</a>
+		<a href="<%=cp%>/admin/store/list">펫상품리스트</a>
 	</div>
 </div>
 

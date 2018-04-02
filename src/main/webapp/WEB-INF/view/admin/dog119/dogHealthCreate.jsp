@@ -1,10 +1,13 @@
+<%@page import="java.io.File"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 	String cp = request.getContextPath();
+
 %>
+
 <link rel="stylesheet" type="text/css" media="screen" href="<%=cp%>/resource/css/strayDog/volunteer.css" />
 <script type="text/javascript" src="<%=cp%>/resource/se/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">

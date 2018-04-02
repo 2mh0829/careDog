@@ -200,12 +200,32 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int emailChecked(String email) {
+	public int emailChecked(Map<String, String> map) {
 		int result = 0;
 		try {
-			result = dao.selectOne("member.emailChecked", email);
+			result = dao.selectOne("member.emailChecked", map);
 		} catch (Exception e) {
 		}
 		return result;
+	}
+
+	@Override
+	public int changePwd(Map<String, String> dto) {
+		int result = 0;
+		try {
+			result = dao.updateData("member.changePwd", dto);
+		} catch (Exception e) {
+		}
+		return result;
+	}
+
+	@Override
+	public String findId(String email) {
+		String memberId = null;
+		try {
+			memberId = dao.selectOne("member.findId", email);
+		} catch (Exception e) {
+		}
+		return memberId;
 	}
 }

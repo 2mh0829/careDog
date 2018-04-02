@@ -126,7 +126,7 @@ public class MailSender {
 		
 		dto.setSenderEmail("hhaahaa@naver.com");
 		dto.setSenderName("Care Dog");
-		dto.setSubject("[Care Dog] 회원가입을 위한 인증 메일입니다.");
+		
   
 		// SMTP 서버의 계정 설정   
 		// Naver와 연결할 경우 네이버 아이디

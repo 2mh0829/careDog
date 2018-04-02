@@ -7,57 +7,90 @@
 %>
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="http://slidesjs.com/js/jquery.slides.min.js"></script>
 <script>
+$(document).ready(function(){
+	$(function(){
+	    $("#left-datepicker").datepicker({
+	    	dateFormat: "yy-mm-dd",
+	    	showAnim: "slideDown",
+	    	showMonthAfterYear: true,
+	    	yearSuffix: '년',
+	    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+	    	minDate: 0
+	    });
+	
+	    $("#right-datepicker").datepicker({
+	    	dateFormat: "yy-mm-dd",
+	    	showAnim: "slideDown",
+	    	showMonthAfterYear: true,
+	    	yearSuffix: '년',
+	    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+	    	minDate: 0
+	    });
+	
+	    $("#datepicker").datepicker({
+	    	dateFormat: "yy-mm-dd",
+	    	showAnim: "slideDown",
+	    	showMonthAfterYear: true,
+	    	yearSuffix: '년',
+	    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
+	    	minDate: 0,
+	    	autoSize: true
+	    });
+	});
 
-$(function(){
-    $("#left-datepicker").datepicker({
-    	dateFormat: "yy-mm-dd",
-    	showAnim: "slideDown",
-    	showMonthAfterYear: true,
-    	yearSuffix: '년',
-    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-    	
-    	minDate: 0
-    });
-});
-
-$(function(){
-    $("#right-datepicker").datepicker({
-    	dateFormat: "yy-mm-dd",
-    	showAnim: "slideDown",
-    	showMonthAfterYear: true,
-    	yearSuffix: '년',
-    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-    	minDate: 0
-    });
-});
-
-$( function() {
-    $( "#datepicker" ).datepicker({
-    	dateFormat: "yy-mm-dd",
-    	showAnim: "slideDown",
-    	showMonthAfterYear: true,
-    	yearSuffix: '년',
-    	monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    	dayNamesMin: ['월', '화', '수', '목', '금', '토', '일'],
-    	minDate: 0,
-    	autoSize: true
-    });
-} );
-
-/* $(function(){
-	$("body").on('change','.inputMoney',function(){
-		var sum = parseInt($("#inputMoney-date").val()) + parseInt($("#inputMoney-dog").val());
-		tot = sum + sum * 1/10;
-		$('.totPrice').html(tot);
+	$(function(){
+	    $("#slides").slidesjs({
+	      width: 623,
+	      height: 455,
+	      navigation : {
+	    	  active : false,
+	    	  effect : "slide"
+	     }
+	    });
+	});
+	
+	$(function(){
+		$('body').on('click','#addPetUp',function(){
+			var oneDayPrice = $('.pet-add-price').text();
+			oneDayPrice = oneDayPrice*2;
+			$('.pet-add-price').html(oneDayPrice);
+		})
 		
-		// tot를 .submit으로 보낸다
-	})
-}); */
-
+		$('body').on('click','#addPetDown',function(){
+			var oneDayPrice = $('.pet-add-price').text();
+			oneDayPrice = oneDayPrice/2;
+			$('.pet-add-price').html(oneDayPrice);
+			
+		})
+		
+		$('body').on('click','.btn',function(){
+			var oneDayPrice = parseInt($('.oneDayPrice').text());
+			var petAddPrice = parseInt($('.pet-add-price').text());
+			var added = ((oneDayPrice + petAddPrice) * 1/10);
+			var tot = oneDayPrice + petAddPrice + added;
+			tot = Math.floor(tot/10)*10;
+			
+			$('.price-tot').html(tot);
+		});
+		
+		$(function(){
+		var oneDayPrice = parseInt($('.oneDayPrice').text());
+		var petAddPrice = parseInt($('.pet-add-price').text());
+		var added = ((oneDayPrice + petAddPrice) * 1/10);
+		var tot = oneDayPrice + petAddPrice + added;
+		tot = Math.floor(tot/10)*10;
+		
+		$('.price-tot').html(tot);
+		})
+	});
+});
 </script>
+
 
 <style>
 
@@ -86,11 +119,11 @@ li{
 }
 
 .main-top-slider {
-	width: 630px;
+	width: 623px;
+	height: 455px;
 	margin-right: 30px;
 	float: left;
-	/* border: 1px solid red; */
-	
+	border: 1px solid #ffb861;
 }
 
 .main-photos {
@@ -133,7 +166,7 @@ li{
 .main-top-detail {
 	width: 335px;
     float: right;
-    /* height: 300px; */
+    height: 455px;
     /* z-index: 97; */
     border: 1px solid #ffb861;
 }
@@ -468,12 +501,50 @@ li{
 	padding: 12px;
 }
 
+#slides {
+	display : none;
+}
+
+.slides-btn-left {
+	position: relative; 
+	top:-50px; 
+	font-size: 30px;
+	z-index:100;
+	color: white;
+	left : 10px;
+}
+
+.slides-btn-right {
+	position: relative;
+    top: -50px;
+    left: 540px;
+    font-size: 30px;
+    z-index: 100;
+    color: white;
+}
+
+#slides img{
+	width : 100%;
+	height : 100%;
+}
+
 </style>
 
 <div class="body-container">
 	<div class="main-top">
-		<div class="main-top-slider">
-			<div class="main-photos">
+		<div class="main-top-slider" id="slides">
+			<c:forEach var="photo" items="${listPhoto}">
+				<c:if test="${dto.sittingId == photo.sittingId}">
+					<img src="<%=cp%>/uploads/service/${photo.imageFilename}">
+				</c:if>
+		    </c:forEach>
+		    <a href="#" class="slides-btn-left slidesjs-previous slidesjs-navigation">
+				<i class="glyphicon glyphicon-chevron-left"></i>
+			</a>
+			<a href="#" class="slides-btn-right slidesjs-next slidesjs-navigation">
+				<i class="glyphicon glyphicon-chevron-right"></i>
+			</a>
+			<!-- <div class="main-photos">
 				<img src="http://cfile6.uf.tistory.com/image/2544613F51CF074D104D69">
 			</div>
 			<ul class="photo-array">
@@ -486,7 +557,7 @@ li{
 				<li class="array-small">
 					<img src="http://cfile25.uf.tistory.com/original/1528E9114BA1CECF492663">
 				</li>
-			</ul>
+			</ul> -->
 		</div>
 		<div class="main-top-detail">
 			<form class="main-detail">
@@ -502,7 +573,7 @@ li{
 						</dd>
 						<dd class="price">
 							하루
-							<span class="won">30,000원</span>
+							<span class="won">${dto.reserCost}원</span>
 							<div class="dropdown">
 							<!-- <button type="button" class="weight" data-toggle="dropdown">
 								15kg 미만 <span class="caret"></span>
@@ -515,29 +586,30 @@ li{
 						</dd>
 						<dd class="pet-add">
 							반려견 추가당 
-							<span class="add-price">20,000원</span>
+							<span class="add-price">${dto.addPetCost}원</span>
 						</dd>
 					</dl>
 					<dl class="price-detail">
 						<dt>
-							1박
+							<c:if test="${dto.reserDiv==1}">24시간</c:if>
+							<c:if test="${dto.reserDiv==2}">데이케어</c:if>
 						</dt>
 						<dd>
-							<span class="oneDayPrice">30,000원</span>
+							<span class="oneDayPrice">${dto.reserCost}원</span>
 						</dd>
 						<dt>
 							반려견 추가
 							<div class="btn-group">
-								<button type="button" class="btn">
+								<button type="button" class="btn" id="addPetUp">
 									<i class="glyphicon glyphicon-plus"></i>
 								</button>
-								<button type="button" class="btn">
+								<button type="button" class="btn" id="addPetDown">
 									<i class="glyphicon glyphicon-minus"></i>
 								</button>
 							</div>
 						</dt>
 						<dd>
-							<span class="pet-add-price">20,000원</span>
+							<span class="pet-add-price">${dto.addPetCost}</span>원
 						</dd>
 						<dt>
 							부가세
@@ -548,8 +620,9 @@ li{
 						<dt>
 							<span class="price-tot-text">합계</span>
 						</dt>
-						<dd class="price-tot">
-							<span class="">30,000원</span>
+						<dd class="">
+							<span class="price-tot"></span>
+							<strong>원</strong>
 						</dd>
 					</dl>
 				</div>
@@ -574,7 +647,10 @@ li{
 					</dd>
 					<dd>
 						<i class="glyphicon glyphicon-check"></i>
-						강아지, 성견, 노령견 케어 가능합니다.
+						<c:if test="${dto.reserDiv==1}">강아지 </c:if>
+						<c:if test="${dto.reserDiv==2}">성견 </c:if>
+						<c:if test="${dto.reserDiv==3}">노령견 </c:if>
+						케어 가능합니다.
 					</dd>
 				</dl>
 				<img src="<%=cp%>/resource/img/service/clock.png">
@@ -605,21 +681,21 @@ li{
 						<label class="area-name">돌봄 공간</label>
 					</dt>
 					<dd class="colored pull-right">
-						<label class="environ-text">빌라</label>
+						<label class="environ-text">${dto.space}</label>
 					</dd>
 					<dt class="pull-left">
 						<img src="<%=cp%>/resource/img/service/subway.JPG">
 						<label class="area-name">근처 지하철역</label>
 					</dt>
 					<dd class="pull-right">
-						<label class="environ-text">서울역</label>
+						<label class="environ-text">${dto.subway}</label>
 					</dd>
 					<dt class="colored pull-left">
 						<img src="<%=cp%>/resource/img/service/yard.JPG">
 						<label class="area-name">마당 유무</label>
 					</dt>
 					<dd class="colored pull-right">
-						<label class="environ-text">있습니다</label>
+						<label class="environ-text">${dto.yard}</label>
 					</dd>
 			</div>
 			<div class="environ-area-right">
@@ -629,21 +705,21 @@ li{
 					<label class="area-name">14세 미만 아동</label>
 				</dt>
 				<dd class="colored pull-right">
-					<label class="environ-text">있습니다</label>
+					<label class="environ-text">${dto.baby}</label>
 				</dd>
 				<dt class="pull-left">
 					<img src="<%=cp%>/resource/img/service/family.JPG">
 					<label class="area-name">가족 동거 유무</label>
 				</dt>
 				<dd class="pull-right">
-					<label class="environ-text">없습니다</label>
+					<label class="environ-text">${dto.family}</label>
 				</dd>
 				<dt class="colored pull-left">
 					<img src="<%=cp%>/resource/img/service/cat.JPG">
 					<label class="area-name">다른 동물 유무</label>
 				</dt>
 				<dd class="colored pull-right">
-					<label class="environ-text">없습니다</label>
+					<label class="environ-text">${dto.other}</label>
 				</dd>	
 				</dl>	
 			</div>
@@ -652,8 +728,8 @@ li{
 			<label class="sitter">
 				<img class="sitter-face" 
 				src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_80%2Cw_300/MTE5NTU2MzE2MTk1NTU0ODI3/daniel-day-lewis-9268727-2-402.jpg">
-				<label class="sitter-name">김경애</label>
-					<i class="glyphicon glyphicon-map-marker">고양시 일산서구 대화동</i>
+				<label class="sitter-name">${dto.userName}</label>
+					<i class="glyphicon glyphicon-map-marker">${dto.address1}</i>
 			</label>
 			<label class="sitter">
 				<img class="sitter-face" 
@@ -664,10 +740,10 @@ li{
 		</div>
 		<div class="hi">
 			<div class="hi-header">
-				<div class="hi-sitter"><span style="font-weight: bold;">김경애</span> 펫시터님의 한마디</div>
+				<div class="hi-sitter"><span style="font-weight: bold;">${dto.userName}</span> 펫시터님의 한마디</div>
 			</div>
 			<div class="hi-body">
-				내용
+				${dto.content}
 			</div>
 		</div>
 		<div class="customer-rating">
