@@ -45,4 +45,15 @@ public class OneFOneServiceImpl implements OneFOneService{
 		return dto;
 	}
 
+	@Override
+	public int insertReply(ReplyVo dto) {
+		int result = 0;
+		try {
+			result = dao.insertData("onefone.insertreply", dto);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return result;
+	}
+
 }
