@@ -39,7 +39,7 @@ a {
 			<li><a href="<%=cp %>/admin/store">펫#&nbsp;</a></li>
 			<li><a href="<%=cp%>/admin/strayDog">유기견&nbsp;</a></li>
 			<li><a href="<%=cp%>/admin/dog119/dogHealthInput">펫119&nbsp;</a></li>
-			<li><a href="<%=cp %>">고객센터&nbsp;</a></li>
+			<li><a href="<%=cp %>/admin/center/onefonelist">고객센터&nbsp;</a></li>
 		</ul>
 	</div>
 	
