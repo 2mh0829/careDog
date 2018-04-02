@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
@@ -26,9 +28,10 @@ public class ServiceController {
 	@Autowired
 	private ServiceService service;
 	
-	@RequestMapping(value="/service")
-	public String main(HttpSession session, HttpServletRequest req,
-						Model model) {
+	@RequestMapping(value="/service", method=RequestMethod.GET)
+	public String main(HttpServletRequest req, HttpSession session, Model model) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
 		
@@ -37,22 +40,58 @@ public class ServiceController {
 		model.addAttribute("dataCount", dataCount);
 		
 		// 펫시터 리스트
-		List<ServiceDto> list = service.sitterList();
+		List<ServiceDto> list = service.sitterList(map);
 		model.addAttribute("list", list);
 		
 		// 펫시터 사진 리스트
 		List<ServiceDto> listPhoto = service.sitterPhotoList();
 		model.addAttribute("listPhoto", listPhoto);
 		
-		// 태그
+		// 태그 리스트
 		List<ServiceDto> listTag = service.sitterTag();
 		model.addAttribute("listTag", listTag);
 		
 		return ".service.sitting";
 	}
 	
+	@RequestMapping(value="/service", method=RequestMethod.POST)
+	public String selectSitter(ServiceDto dto ,Model model) {
+		
+		// 총 펫시터 수
+		int dataCount = service.dataCount();
+		model.addAttribute("dataCount", dataCount);
+		
+		// 펫시터 사진 리스트
+		List<ServiceDto> listPhoto = service.sitterPhotoList();
+		model.addAttribute("listPhoto", listPhoto);
+		
+		// 태그 리스트
+		List<ServiceDto> listTag = service.sitterTag();
+		model.addAttribute("listTag", listTag);
+		
+		// sitter search list
+		List<ServiceDto> list = service.selectSitter(dto);
+		model.addAttribute("list", list);
+		
+		
+		return "/service/sittingSearch";
+	}
+	
 	@RequestMapping(value="/service/sitting_detail")
-	public String sitting_detail() {
+	public String sitting_detail(
+			@RequestParam(value="sittingId") int sittingId,
+			HttpSession session,
+			Model model) {
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		
+		// 펫시터 사진 리스트
+		List<ServiceDto> listPhoto = service.sitterPhotoList();
+		model.addAttribute("listPhoto", listPhoto);
+		
+		ServiceDto dto = service.readSitter(sittingId);
+		model.addAttribute("dto", dto);
+		
 		return ".service.sitting_detail";
 	}
 	
@@ -76,9 +115,6 @@ public class ServiceController {
 		dto.setMemberId(info.getMemberId());
 		
 		service.insertService(dto, pathname);
-		
-		System.out.println(dto.toString());
-		
 	}
 	
 	@RequestMapping(value="/service/sitter_diary", method=RequestMethod.GET)

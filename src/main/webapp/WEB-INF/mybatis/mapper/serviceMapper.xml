@@ -42,7 +42,7 @@
 		FROM sitterPhoto
 	</select>
 	
-	<select id="sitterList" resultType="care.dog.service.ServiceDto">
+	<select id="sitterList" parameterType="map" resultType="care.dog.service.ServiceDto">
 		SELECT sittingId, title, memberId, reserDiv, reserCost
 		FROM sitterInfo
 	</select>
@@ -50,5 +50,31 @@
 	<select id="sitterTagList" resultType="care.dog.service.ServiceDto">
 		SELECT sittingId, tagName
 		FROM sitterTag
+	</select>
+	
+	<select id="selectSitter" resultType="care.dog.service.ServiceDto">
+		SELECT s.sittingId, s.title, s.memberId, s.reserDiv, s.reserCost
+	    FROM sitterInfo s,member2 m
+	    WHERE reserDiv = #{reserDiv}
+	        and carableWeight = #{carableWeight}
+	        and	carableAge = #{carableAge}
+	        and startDate <![CDATA[>= #{startDate}]]>
+	        and endDate <![CDATA[<= #{endDate}]]>
+	        and s.memberId = m.memberId
+	        and m.address1 like '%'||#{address}||'%'
+	</select>
+	
+	<select id="selectTag" parameterType="String" resultType="care.dog.service.ServiceDto">
+		SELECT a.sittingId, a.title, a.memberId, a.reserDiv, a.reserCost, b.tagName
+		FROM sitterInfo a, sitterTag b
+		WHERE tagName = #{tagName}
+	</select>
+	
+	<select id="readSitter" resultType="care.dog.service.ServiceDto">
+		SELECT a.*, b.address1, c.userName
+		FROM sitterInfo a, member2 b, member1 c
+		WHERE a.memberId = b.memberId 
+			and sittingId = #{sittingId} 
+			and a.memberId = c.memberId
 	</select>
 </mapper>

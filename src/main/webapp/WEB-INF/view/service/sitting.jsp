@@ -12,7 +12,7 @@
 <script>
 
 $(function(){
-    $("#left-datepicker").datepicker({
+    $(".left-datepicker").datepicker({
     	dateFormat: "yy-mm-dd",
     	showAnim: "slideDown",
     	showMonthAfterYear: true,
@@ -24,7 +24,7 @@ $(function(){
 });
 
 $(function(){
-    $("#right-datepicker").datepicker({
+    $(".right-datepicker").datepicker({
     	dateFormat: "yy-mm-dd",
     	showAnim: "slideDown",
     	showMonthAfterYear: true,
@@ -34,28 +34,6 @@ $(function(){
     	minDate: 0
     });
 });
-
-$(function(){
-	$("body").on('click','#typeDD li>a',function(){
-		$('#typeText').text($(this).text());
-	});
-});
-
-$(function(){
-	$("body").on('click','#ageDD li>a',function(){
-		$('#ageText').text($(this).text());
-	});
-});
-
-$(function(){
-	$("body").on('click','#sizeDD li>a',function(){
-		$('#sizeText').text($(this).text());
-	});
-});
-
-/* $('#careChoice li>a').on('click',function(){
-	$('#careChoice').text($(this).text());
-}); */
 
 $(document).ready(function(){
 	 $(".slides").slidesjs({
@@ -70,13 +48,83 @@ $(document).ready(function(){
 
 </script>
 
+
+
 <script type="text/javascript">
-function goSearch() {
 
-}
+$(document).ready(function(){
+	/* var formS= new FormData(document.searchForm); */
+	var reserDiv;
+	var carableAge;
+	var carableWeight;
+	var address;
+	
+	$('body').on('click', '#reserDiv li', function(){
+		$('#careTime').text($(this).text());
+					
+		reserDiv = ($(this).val());
+	});
+	
+	$('body').on('click', '#carableAge li', function(){
+		$('#ageText').text($(this).text());
+					
+		carableAge = ($(this).val());
+	});
+	
+	$('body').on('click', '#carableWeight li', function(){
+		$('#sizeText').text($(this).text());
+					
+		carableWeight = ($(this).val());
+	});
+	
+	$('body').on('click','.sitter-header input[type=checkbox]', function(){
+		
+		address = ($(this).val());
+		alert(address);
+	});
+	
+	$('.btnSearch').on("click",function(){
+		
+		/* var reserDiv = $("#reserDiv").val();
+		var carableAge = $("#carableAge").val();
+		var carableWeight = $("#carableWeight").val(); */
+		
+		var startDate = $("#startDate").val();
+		var endDate = $("#endDate").val();
+		
+		var formS= new FormData(document.searchForm);
+		
+		formS.append("reserDiv",reserDiv);
+		formS.append("carableWeight",carableWeight);
+		formS.append("carableAge",carableAge);
+		/* formS.append("address",address); */
+		
+		 $.ajax({
+			type:"post",
+			url:"<%=cp%>/service",
+			data:formS,
+			contentType:false,
+			processData:false,
+ 			success:function(data){
+ 				$(".sitter-body-list").html(data);
+			},
+			error:function(e){
+				alert(e.responseText);
+			}
+		});
+	})
+});
 
-
-
+/* function check(){
+	
+	var f = form.searchForm;
+	
+	if(f.address.checked == true){
+		alert(f.address.value);
+	}
+	
+	return true;
+} */
 </script>
 
 <style>
@@ -575,10 +623,14 @@ li>a>span{
     width: 30px;
 }
 
+.imgCursor {
+	margin: 10px;
+}
+
 </style>
 
 <div class="body-container">
-	
+	<form name="searchForm" method="post">
 	<div class="sitter-header">
 		<!-- <div id="city-navigator">
 		</div> -->
@@ -592,145 +644,145 @@ li>a>span{
 			<div class="dropdown-menu">
 				<ul class="clearfix">
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state8" class="checkbox" value="8">
+						<input type="checkbox" id="state8" class="checkbox" name="address" value="강남구">
 						<label for="state8">
 							강남구 (7)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state16" class="checkbox" value="16">
+						<input type="checkbox" id="state16" class="checkbox" name="address" value="강동구">
 						<label for="state16">
 							강동구 (6)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state57" class="checkbox" value="57">
+						<input type="checkbox" id="state57" class="checkbox" name="address" value="강북구">
 						<label for="state57">
 							강북구 (1)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state37" class="checkbox" value="37">
+						<input type="checkbox" id="state37" class="checkbox" name="address" value="강서구">
 						<label for="state37">
 							강서구 (4)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state7" class="checkbox" value="7">
+						<input type="checkbox" id="state7" class="checkbox" name="address" value="관악구">
 						<label for="state7">
 							관악구 (2)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state41" class="checkbox" value="41">
+						<input type="checkbox" id="state41" class="checkbox" name="address" value="광진구">
 						<label for="state41">
 							광진구 (2)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state15" class="checkbox" value="15">
+						<input type="checkbox" id="state15" class="checkbox" name="address" value="구로구">
 						<label for="state15">
 							구로구 (6)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state3" class="checkbox" value="3">
+						<input type="checkbox" id="state3" class="checkbox" name="address" value="금천구">
 						<label for="state3">
 							금천구 (3)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state4" class="checkbox" value="4">
+						<input type="checkbox" id="state4" class="checkbox" name="address" value="노원구">
 						<label for="state4">
 							노원구 (4)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state32" class="checkbox" value="32">
+						<input type="checkbox" id="state32" class="checkbox" name="address" value="도봉구">
 						<label for="state32">
 							도봉구 (3)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state39" class="checkbox" value="39">
+						<input type="checkbox" id="state39" class="checkbox" name="address" value="동대문구">
 						<label for="state39">
 							동대문구 (3)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state23" class="checkbox" value="23">
+						<input type="checkbox" id="state23" class="checkbox" name="address" value="동작구">
 						<label for="state23">
 							동작구 (6)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state19" class="checkbox" value="19">
+						<input type="checkbox" id="state19" class="checkbox" name="address" value="마포구">
 						<label for="state19">
 							마포구 (7)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state22" class="checkbox" value="22">
+						<input type="checkbox" id="state22" class="checkbox" name="address" value="서대문구">
 						<label for="state22">
 							서대문구 (1)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state6" class="checkbox" value="6">
+						<input type="checkbox" id="state6" class="checkbox" name="address" value="서초구">
 						<label for="state6">
 							서초구 (7)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state27" class="checkbox" value="27">
+						<input type="checkbox" id="state27" class="checkbox" name="address" value="성동구">
 						<label for="state27">
 							성동구 (4)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state12" class="checkbox" value="12">
+						<input type="checkbox" id="state12" class="checkbox" name="address" value="성북구">
 						<label for="state12">
 							성북구 (3)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state34" class="checkbox" value="34">
+						<input type="checkbox" id="state34" class="checkbox" name="address" value="송파구">
 						<label for="state34">
 							송파구 (4)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state40" class="checkbox" value="40">
+						<input type="checkbox" id="state40" class="checkbox" name="address" value="양천구">
 						<label for="state40">
 							양천구 (4)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state45" class="checkbox" value="45">
+						<input type="checkbox" id="state45" class="checkbox" name="address" value="영등포구">
 						<label for="state45">
 							영등포구 (7)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state9" class="checkbox" value="9">
+						<input type="checkbox" id="state9" class="checkbox" name="address" value="용산구">
 						<label for="state9">
 							용산구 (3)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state28" class="checkbox" value="28">
+						<input type="checkbox" id="state28" class="checkbox" name="address" value="은평구">
 						<label for="state28">
 							은평구 (6)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state25" class="checkbox" value="25">
+						<input type="checkbox" id="state25" class="checkbox" name="address" value="종로구">
 						<label for="state25">
 							종로구 (1)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state54" class="checkbox" value="54">
+						<input type="checkbox" id="state54" class="checkbox" name="address" value="중랑구">
 						<label for="state54">
 							중랑구 (2)
 						</label>
@@ -750,91 +802,91 @@ li>a>span{
 			<div class="dropdown-menu">
 				<ul class="clearfix">
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state10" class="checkbox" value="10">
+						<input type="checkbox" id="state10" class="checkbox" name="address" value="고양시">
 						<label for="state10">
 							고양시 (13)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state24" class="checkbox" value="24">
+						<input type="checkbox" id="state24" class="checkbox" value="광주시" name="address">
 						<label for="state24">
 							광주시 (6)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state43" class="checkbox" value="43">
+						<input type="checkbox" id="state43" class="checkbox" name="address" value="군포시">
 						<label for="state43">
 							군포시 (2)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state49" class="checkbox" value="49">
+						<input type="checkbox" id="state49" class="checkbox" value="김포시" name="address">
 						<label for="state49">
 							김포시 (5)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state26" class="checkbox" value="26">
+						<input type="checkbox" id="state26" class="checkbox" name="address" value="수원시">
 						<label for="state26">
 							수원시 (8)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state17" class="checkbox" value="17">
+						<input type="checkbox" id="state17" class="checkbox" name="address" value="시흥시">
 						<label for="state17">
 							시흥시 (2)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state18" class="checkbox" value="18">
+						<input type="checkbox" id="state18" class="checkbox" name="address" value="안산시">
 						<label for="state18">
 							안산시 (2)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state61" class="checkbox" value="61">
+						<input type="checkbox" id="state61" class="checkbox" name="address" value="양평군">
 						<label for="state61">
 							양평군 (1)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state21" class="checkbox" value="21">
+						<input type="checkbox" id="state21" class="checkbox" name="address" value="용인시">
 						<label for="state21">
 							용인시 (8)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state62" class="checkbox" value="62">
+						<input type="checkbox" id="state62" class="checkbox" name="address" value="의왕시">
 						<label for="state62">
 							의왕시 (1)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state11" class="checkbox" value="11">
+						<input type="checkbox" id="state11" class="checkbox" name="address" value="의정부시">
 						<label for="state11">
 							의정부시 (1)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state58" class="checkbox" value="58">
+						<input type="checkbox" id="state58" class="checkbox" name="address" value="파주시">
 						<label for="state58">
 							파주시 (3)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state44" class="checkbox" value="44">
+						<input type="checkbox" id="state44" class="checkbox" name="address" value="평택시">
 						<label for="state44">
 							평택시 (5)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state56" class="checkbox" value="56">
+						<input type="checkbox" id="state56" class="checkbox" name="address" value="화성시">
 						<label for="state56">
 							화성시 (1)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state6" class="checkbox" value="6">
+						<input type="checkbox" id="state6" class="checkbox" name="address" value="서초구">
 						<label for="state6">
 							서초구 (7)
 						</label>
@@ -853,37 +905,37 @@ li>a>span{
 				<div class="dropdown-menu">
 				<ul class="clearfix">
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state36" class="checkbox" value="36">
+						<input type="checkbox" id="state36" class="checkbox" name="address" value="계양구">
 						<label for="state36">
 							계양구 (1)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state52" class="checkbox" value="52">
+						<input type="checkbox" id="state52" class="checkbox" name="address" value="남구">
 						<label for="state52">
 							남구 (2)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state38" class="checkbox" value="38">
+						<input type="checkbox" id="state38" class="checkbox" name="address" value="부평구">
 						<label for="state38">
 							부평구 (4)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state55" class="checkbox" value="55">
+						<input type="checkbox" id="state55" class="checkbox" name="address" value="서구">
 						<label for="state55">
 							서구 (1)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state14" class="checkbox" value="14">
+						<input type="checkbox" id="state14" class="checkbox" name="address" value="연수구">
 						<label for="state14">
 							연수구 (3)
 						</label>
 					</li>
 					<li class="pull-left">
-						<input type="checkbox" name="states[]" id="state60" class="checkbox" value="60">
+						<input type="checkbox" id="state60" class="checkbox" name="address" value="중구">
 						<label for="state60">
 							중구 (1)
 						</label>
@@ -904,13 +956,13 @@ li>a>span{
 			<dd>
 				<div class="dropdown">
 					<button type="button" class="btnService" data-toggle="dropdown">
-						<span id="typeText">선택하세요</span>
+						<span id="careTime">선택하세요</span>
 						&nbsp;
 						<span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu" id="typeDD">
-						<li><a href="#">24시간 돌봄</a></li>
-						<li><a href="#">데이 케어</a></li>
+					<ul class="dropdown-menu" id="reserDiv">
+						<li class="imgCursor" value=1>24시간 돌봄</li>
+						<li class="imgCursor" value=2>데이 케어</li>
 					</ul>
 				</div>
 			</dd>
@@ -921,10 +973,10 @@ li>a>span{
 				<dt>예약일을 알려주세요!</dt>
 				<dd>
 					<i class="glyphicon glyphicon-calendar"></i>
-					<input type="text" id="left-datepicker" placeholder="시작 날짜">
+					<input type="text" id="startDate" class="left-datepicker" name="startDate" placeholder="시작 날짜">
 					<span>></span>
 					<i class="glyphicon glyphicon-calendar"></i>
-					<input type="text" id="right-datepicker" placeholder="마침 날짜">
+					<input type="text"  id="endDate" class="right-datepicker" name="endDate" placeholder="마침 날짜">
 				</dd>
 			</dl>
 		</li>
@@ -938,10 +990,10 @@ li>a>span{
 						&nbsp;
 						<span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu" id="ageDD">
-						<li><a href="#">강아지 (0~4세)</a></li>
-						<li><a href="#">성견 (5~9세)</a></li>
-						<li><a href="#">노령견 (10세 이상)</a></li>
+					<ul class="dropdown-menu" id="carableAge">
+						<li class="imgCursor" value=1>강아지 (0~4세)</li>
+						<li class="imgCursor" value=2>성견 (5~9세)</li>
+						<li class="imgCursor" value=3>노령견 (10세 이상)</li>
 					</ul>
 				</div>
 			</dd>
@@ -957,10 +1009,10 @@ li>a>span{
 						&nbsp;
 						<span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu" id="sizeDD">
-						<li><a href="#">소형견 (0~4.9kg)</a></li>
-						<li><a href="#">중형견 (5~14.9kg)</a></li>
-						<li><a href="#">대형견 (15kg 이상)</a></li>
+					<ul class="dropdown-menu" id="carableWeight">
+						<li class="imgCursor" value=1>소형견 (0~4.9kg)</li>
+						<li class="imgCursor" value=2>중형견 (5~14.9kg)</li>
+						<li class="imgCursor" value=3>대형견 (15kg 이상)</li>
 					</ul>
 				</div>
 			</dd>
@@ -970,50 +1022,51 @@ li>a>span{
 			<dl>
 				<dt>&nbsp;</dt>
 				<dd>
-					<button type="button" class="btnSearch" onclick="goSearch()">검색</button>
+					<button type="button" class="btnSearch">검색</button>
 				</dd>
 			</dl>
 		</li>
+		</form>
 		<li class="col-tag">
 			<dl>
 				<dt>원하는 태그를 모두 선택해주세요!</dt>
 				<dd>
 					<div class="btn-group" data-toggle="buttons">
 					<label for="apt" class="btn">
-						<input type="checkbox" id="apt" class="checkbox">아파트
+						<input type="checkbox" id="apt" class="checkbox" value="아파트">아파트
 					</label>
 					<label for="yard" class="btn">
-						<input type="checkbox" id="yard" class="checkbox">마당
+						<input type="checkbox" id="yard" class="checkbox" value="마당">마당
 					</label>
 					<label for="oldDogCare" class="btn">
-						<input type="checkbox" id="oldDogCare" class="checkbox">노령견케어
+						<input type="checkbox" id="oldDogCare" class="checkbox" value="노령견케어">노령견케어
 					</label>
 					<label for="sickDogCare" class="btn">
-						<input type="checkbox" id="sickDogCare">환자견케어
+						<input type="checkbox" id="sickDogCare" value="환자견케어">환자견케어
 					</label>
 					<label for="license" class="btn">
-						<input type="checkbox" id="license">자격증보유
+						<input type="checkbox" id="license" value="자격증보유">자격증보유
 					</label>
 					<label for="outdoor" class="btn">
-						<input type="checkbox" id="outdoor">실외배변
+						<input type="checkbox" id="outdoor" value="실외배변">실외배변
 					</label>
 					<label for="pickUp" class="btn">
-						<input type="checkbox" id="pickUp">픽업가능
+						<input type="checkbox" id="pickUp" value="픽업가능">픽업가능
 					</label>
 					<label for="handmade" class="btn">
-						<input type="checkbox" id="handmade">수제간식
+						<input type="checkbox" id="handmade" value="수제간식">수제간식
 					</label>
 					<label for="noDog" class="btn">
-						<input type="checkbox" id="noDog">반려견없는곳
+						<input type="checkbox" id="noDog" value="반려견없는곳">반려견없는곳
 					</label>
 					<label for="emergency" class="btn">
-						<input type="checkbox" id="emergency">응급처치
+						<input type="checkbox" id="emergency" value="응급처치">응급처치
 					</label>
 					<label for="pillAble" class="btn">
-						<input type="checkbox" id="pillAble">투약가능
+						<input type="checkbox" id="pillAble" value="투약가능">투약가능
 					</label>
 					<label for="bigDog" class="btn">
-						<input type="checkbox" id="bigDog">대형견
+						<input type="checkbox" id="bigDog" value="대형견">대형견
 					</label>
 					</div>
 				</dd>
@@ -1026,7 +1079,7 @@ li>a>span{
 		<a href="#" style="float: right; text-decoration: underline">검색 설정 초기화</a>
 	</div>
 	
-	<div class="sitter-body">
+	<div class="sitter-body sitter-body-list">
 	<c:forEach var="dto" items="${list}">
 	<ul class="inner">
 		<li class="sitter-list">
@@ -1045,10 +1098,10 @@ li>a>span{
 						</a>
 				</div> 
 			</div>
-			<div class="sitter-room-content">
+			<div class="sitter-room-content" id="sitter-room-contentId">
 				<dl>
 					<dt>
-						<a href="<%=cp%>/service/sitting_detail">${dto.title}</a>
+						<a href="<%=cp%>/service/sitting_detail?sittingId=${dto.sittingId}">${dto.title}</a>
 						<label class="name">
 							<img class="sitter-face" 
 							src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_80%2Cw_300/MTE5NTU2MzE2MTk1NTU0ODI3/daniel-day-lewis-9268727-2-402.jpg">
@@ -1064,7 +1117,9 @@ li>a>span{
 					</dt>
 					<dd class="sitter-tag">
 						<c:forEach var="tagg" items="${listTag}">
+						<c:if test="${dto.sittingId == tagg.sittingId}">
 						<span class="label">${tagg.tagName}</span>
+						</c:if>
 						</c:forEach>
 					</dd>
 					<dd class="price">
@@ -1094,4 +1149,5 @@ li>a>span{
 	</ul>
 	</c:forEach>
 	</div>
+	
 </div>
