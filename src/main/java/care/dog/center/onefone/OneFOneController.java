@@ -114,7 +114,7 @@ public class OneFOneController {
 		return ".center.onefonecontent";
 	}
 	
-	@RequestMapping(value="/center/insertreply", method=RequestMethod.POST)
+	/*@RequestMapping(value="/center/insertreply", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> insertReply(
 			ReplyVo dto,
@@ -125,5 +125,5 @@ public class OneFOneController {
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
 		info.
 		return "";
-	}
+	}*/
 }
