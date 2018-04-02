@@ -1,5 +1,7 @@
 package care.dog.dog119.dogHealthVo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class DogHealthVo {
 
 	private int boardNum;
@@ -12,7 +14,14 @@ public class DogHealthVo {
 	private String username;
 	private int likeCnt;
 	private int listNum;
+	private MultipartFile upload;
 	
+	public MultipartFile getUpload() {
+		return upload;
+	}
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+	}
 	public int getListNum() {
 		return listNum;
 	}
