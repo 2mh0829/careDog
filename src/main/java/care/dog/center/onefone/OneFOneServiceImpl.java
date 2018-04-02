@@ -56,4 +56,17 @@ public class OneFOneServiceImpl implements OneFOneService{
 		return result;
 	}
 
+	@Override
+	public ReplyVo readreply(int num) {
+		ReplyVo dto = null;
+		try {
+			dto = dao.selectOne("onefone.listreply", num);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		return dto;
+	}
+
+
+
 }

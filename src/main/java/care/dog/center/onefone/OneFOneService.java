@@ -9,4 +9,5 @@ public interface OneFOneService {
 	public List<OneFOneVo> listOneFOne(Map<String, Object> map);
 	
 	public int insertReply(ReplyVo dto);
+	public ReplyVo readreply(int num);
 }

@@ -403,6 +403,9 @@ function hahaSubmit(){
 								  	<option value="802">이벤트 당첨확인</option>
 								  	<option value="803">이벤트 사은품 관련</option>
 								  </optgroup>
+								  <optgroup label="기타문의">
+								  	<option value="901">기타문의</option>
+								  </optgroup>
 							</select>
 						</td>
 					</tr>

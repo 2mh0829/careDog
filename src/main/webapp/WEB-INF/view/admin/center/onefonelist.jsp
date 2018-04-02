@@ -5,11 +5,6 @@
 <%
    String cp = request.getContextPath();
 %>
-
-<form name="ssologinfrm" action="https://www.oliveyoung.co.kr/store/login/ssoLogin.do" method="post">
-<input type="hidden" id="cjssoq" name="cjssoq">
-</form>
-
 <style>
 *{
 margin:0;
@@ -49,6 +44,9 @@ button.onefonebtn{
     font-weight: 700;
     font-family: "Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
    
+}
+td.subject a {
+color:black;
 }
 
 /* 고객센터 > 1:1문의 > 목록 */
@@ -96,83 +94,7 @@ select {
 ul li.nodata {width:100% !important;padding:200px 15px 80px !important;background:url("<%=cp%>/resource/img/faq/ico_nodata104x104.png") no-repeat center 80px !important;color:#888 !important;font-size:16px !important;text-align:center !important;line-height:20px !important;}
 </style>
 
-<div id="body-Container">
-<div class="onefone_Container">
-			<!-- 기간조회 -->
-			
-	<fieldset class="search-period">
-		<legend></legend>
-		<ul class="select-month">
-			<li class="on"><button type="button" data-month="-1">1개월</button></li>
-			<li><button type="button" data-month="-3">3개월</button></li>
-			<li><button type="button" data-month="-6">6개월</button></li>
-			<li><button type="button" data-month="-12">12개월</button></li>
-		</ul>
-		<div class="select-range">
-			<select id="cal-start-year" title="년도를 선택하세요" style="width:76px;">
-
-				<option value="2014">2014</option>
-				<option value="2015">2015</option>
-				<option value="2016">2016</option>
-				<option value="2017">2017</option>
-				<option value="2018" selected="selected">2018</option>
-				<option value="2019">2019</option>
-				<option value="2020">2020</option>
-			</select>
-			<label for="cal-start-year">년</label>
-			<select id="cal-start-month" title="달월을 선택하세요" style="width:60px;">
-				<option value="01">1</option>
-				<option value="02" selected="selected">2</option>
-				<option value="03">3</option>
-				<option value="04">4</option>
-				<option value="05">5</option>
-				<option value="06">6</option>
-				<option value="07">7</option>
-				<option value="08">8</option>
-				<option value="09">9</option>
-				<option value="10">10</option>
-				<option value="11">11</option>
-				<option value="12">12</option>
-			</select>
-			<label for="cal-start-month">월</label>
-			<select id="cal-start-day" title="날일을 선택하세요" style="width:60px;">
-			<option value="01">1</option><option value="02">2</option><option value="03">3</option><option value="04">4</option><option value="05">5</option><option value="06">6</option><option value="07">7</option><option value="08">8</option><option value="09">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19" selected="selected">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option></select>
-			<label for="cal-start-day">일</label>
-			<span class="des">~</span>
-			<select id="cal-end-year" title="년도를 선택하세요" style="width:76px;">
-				
-				<option value="2014">2014</option>
-				<option value="2015">2015</option>
-				<option value="2016">2016</option>
-				<option value="2017">2017</option>
-				<option value="2018" selected="selected">2018</option>
-				<option value="2019">2019</option>
-				<option value="2020">2020</option>
-			</select>
-			<label for="cal-end-year">년</label>
-			<select id="cal-end-month" title="달월을 선택하세요" style="width:60px;">
-				<option value="01">1</option>
-				<option value="02">2</option>
-				<option value="03" selected="selected">3</option>
-				<option value="04">4</option>
-				<option value="05">5</option>
-				<option value="06">6</option>
-				<option value="07">7</option>
-				<option value="08">8</option>
-				<option value="09">9</option>
-				<option value="10">10</option>
-				<option value="11">11</option>
-				<option value="12">12</option>
-			</select>
-			<label for="cal-end-month">월</label>
-			<select id="cal-end-day" title="날일을 선택하세요" style="width:60px;">
-			<option value="01">1</option><option value="02">2</option><option value="03">3</option><option value="04">4</option><option value="05">5</option><option value="06">6</option><option value="07">7</option><option value="08">8</option><option value="09">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19" selected="selected">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select>
-			<label for="cal-end-day">일</label>
-		</div>
-		<button type="button" class="btnLookup" id="do-search-period">조회</button>
-	</fieldset>
-<script type="text/javascript">
-</script>
+<div class="body-container">
 <table class="listQnA">
 	<colgroup>
 		<col style="width:9%">
@@ -218,14 +140,7 @@ ul li.nodata {width:100% !important;padding:200px 15px 80px !important;backgroun
 			<td style="display: none;">${dto.memberId }</td>
 		</tr>
 	</c:forEach>
-	<tr>
-		<td style="border-bottom: none;">
-		<c:if test="${sessionScope.member.memberId!='admin' || sessionScope.member.memberId!=''}">
-		<button type="button" class="onefonebtn" onclick="javascript:location.href='<%=cp%>/center/onefone';">글쓰기</button>
-		</c:if>
-		</td>
-	</tr>
 	</tbody>
-</table>	
-	</div>
+</table>
 </div>
+
