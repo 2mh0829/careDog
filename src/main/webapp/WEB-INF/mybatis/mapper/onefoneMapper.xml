@@ -54,8 +54,10 @@ from onefone
 where num = #{num}
 </select>
 
-<!-- <insert id="insertronefone" parameterType="">
-insert into aonefone(replynum, num, memberId, acontent, adate) values (aonefone_seq.NEXTVAL, #{num}, #{memberId}, #{acontent}, #{adate})
+<!-- <insert id="insertreply" parameterType="care.dog.center.onefone.ReplyVo">
+insert into aonefone(replynum, num, memberId, acontent, adate) 
+values (aonefone_seq.NEXTVAL, #{num}, #{memberId}, #{acontent}, #{adate})
+
 </insert> -->
 
 </mapper>

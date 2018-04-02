@@ -113,4 +113,17 @@ public class OneFOneController {
 		
 		return ".center.onefonecontent";
 	}
+	
+	@RequestMapping(value="/center/insertreply", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> insertReply(
+			ReplyVo dto,
+			HttpSession session,
+			Model model
+			)throws Exception{
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		info.
+		return "";
+	}
 }

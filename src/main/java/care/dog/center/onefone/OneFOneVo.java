@@ -3,7 +3,6 @@ package care.dog.center.onefone;
 public class OneFOneVo {
 	private int num;
 	private String memberId, email, email1, email2, tel, tel1, tel2, tel3, sort, subject, content, qdate;
-	private String replynum, acontent, adate;
 	
 	public String getSubject() {
 		return subject;
@@ -71,18 +70,6 @@ public class OneFOneVo {
 	public void setQdate(String qdate) {
 		this.qdate = qdate;
 	}
-	public String getAcontent() {
-		return acontent;
-	}
-	public void setAcontent(String acontent) {
-		this.acontent = acontent;
-	}
-	public String getAdate() {
-		return adate;
-	}
-	public void setAdate(String adate) {
-		this.adate = adate;
-	}
 	public String getEmail1() {
 		return email1;
 	}
@@ -95,18 +82,10 @@ public class OneFOneVo {
 	public void setEmail2(String email2) {
 		this.email2 = email2;
 	}
-	public String getReplynum() {
-		return replynum;
-	}
-	public void setReplynum(String replynum) {
-		this.replynum = replynum;
-	}
 	@Override
 	public String toString() {
 		return "OneFOneVo [num=" + num + ", memberId=" + memberId + ", email=" + email + ", email1=" + email1
 				+ ", email2=" + email2 + ", tel=" + tel + ", tel1=" + tel1 + ", tel2=" + tel2 + ", tel3=" + tel3
-				+ ", sort=" + sort + ", subject=" + subject + ", content=" + content + ", qdate=" + qdate
-				+ ", replynum=" + replynum + ", acontent=" + acontent + ", adate=" + adate + "]";
+				+ ", sort=" + sort + ", subject=" + subject + ", content=" + content + ", qdate=" + qdate + "]";
 	}
-	
 }
