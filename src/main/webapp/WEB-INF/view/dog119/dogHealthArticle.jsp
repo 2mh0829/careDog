@@ -279,7 +279,5 @@ function insertReply(){
 				</div> -->
 				<!-- 게시글 목록추가 끝-->
 			</div>
-
 			</div>
-
 </div>

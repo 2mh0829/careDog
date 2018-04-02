@@ -15,7 +15,7 @@
 <div class="header-bottom">
 	<div class="menu2" align="center">
 		<a href="<%=cp%>/admin/strayDog">정기후원 리스트&nbsp;&nbsp;</a>
-		<a href="<%=cp%>/admin/strayDog/tempSupport">일시후원 리스트&nbsp;&nbsp;</a>
+		<a href="<%=cp%>/admin/strayDog/adminTempSupport">일시후원 리스트&nbsp;&nbsp;</a>
 		<a href="<%=cp%>/admin/strayDog/volunteer">자원봉사 리스트&nbsp;&nbsp;</a>
 		
 	</div>
