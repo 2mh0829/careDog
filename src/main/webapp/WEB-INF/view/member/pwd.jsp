@@ -173,6 +173,10 @@ function authFun(authNum) {
 		            </select>
 		        </p>
 		        <p id="email-helper" class="help-block">모두 입력해주세요.</p>
+		        <div>
+		        	<button type="button" class="btn" onclick="location.href='<%=cp %>/member/id'">아이디 찾기로 이동</button>
+		        	<button type="button" class="btn" onclick="location.href='<%=cp %>/member/login'">로그인으로 이동</button>
+		        </div>
 	        </div>
 		</form>
 	</div>

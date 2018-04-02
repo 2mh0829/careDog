@@ -30,8 +30,6 @@ function changeEmail() {
 			,type: "post"
 			,dataType: "json"
 			,success: function(data) {
-				console.log(data);
-				console.log(data.findId);
 				if(data.findId != ""){
 					$("#email-helper").css("color", "black");
 					$("#email-helper").text("아이디 : " + data.findId);
@@ -67,6 +65,10 @@ function changeEmail() {
 	            </select>
 	        </p>
 	        <p id="email-helper" class="help-block">이메일을 입력해주세요.</p>
+	        <div>
+	        	<button type="button" class="btn" onclick="location.href='<%=cp %>/member/pwd'">패스워드 찾기로 이동</button>
+	        	<button type="button" class="btn" onclick="location.href='<%=cp %>/member/login'">로그인으로 이동</button>
+	        </div>
         </div>
 	</div>
 </div>
