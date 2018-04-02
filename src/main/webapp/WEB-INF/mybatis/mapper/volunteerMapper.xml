@@ -4,23 +4,23 @@
 <mapper namespace="volunteer">
 
 <insert id="vInsert" parameterType="map">
-	INSERT INTO SD_Volunteer(volunteerId, mem_check, name, gender, age, tel_1, tel_2, tel_3, email, area, peopleCnt, vKind
+	INSERT INTO volunteer(volunteerId, mem_check, name, gender, age, tel_1, tel_2, tel_3, email, area, peopleCnt, vKind
 		, experience, necessity, vOption, fdate1, time, selfIntroduce)
 	VALUES (vol_seq.NEXTVAL, #{mem_check}, #{name}, #{gender}, #{age}, #{tel_1}, #{tel_2}, #{tel_3}, #{email}, #{area}, #{peopleCnt}, #{vKind}
 		, #{experience}, #{necessity}, #{vOption}, #{fdate1}, #{time}, #{selfIntroduce})
 </insert>
 
-<select id="vAdminList" resultType="care.dog.dog119.dogHealthVo.VolunteerVO" parameterType="map">
-	SELECT volunteerId, mem_check, name, peopleCnt, fdate1, time, vKind
-		FROM SD_Volunteer
+<select id="vAdminList" resultType="care.dog.admin.strayDogVo.VolunteerVO" parameterType="map">
+	SELECT volunteerId, mem_check, name, peopleCnt, fdate1, time, vKind, isChecked, vOption
+		FROM volunteer
 		<where>
 		<if test="group !='all' ">
 		    AND vKind=#{group}
 		</if>
-        <!-- <![CDATA[
-             AND ((startDay>=#{start} AND startDay<=#{end})
-                OR (endDay>=#{start} AND endDay<=#{end}))
-        ]]>   -->           
+        <![CDATA[
+             AND ((fdate1>=#{start} AND fdate1<=#{end})
+                OR (fdate1>=#{start} AND fdate1<=#{end}))
+        ]]>       
    	  </where>
 		 ORDER BY fdate1 ASC, volunteerId DESC
 </select>

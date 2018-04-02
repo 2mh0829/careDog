@@ -1,4 +1,4 @@
-package care.dog.dog119.dogHealthVo;
+package care.dog.admin.strayDogVo;
 
 public class VolunteerVO {
 	private int volunteerId;
@@ -8,7 +8,14 @@ public class VolunteerVO {
 	private String fdate1;
 	private String time;
 	private String vKind;
+	private String vOption;
 	
+	public String getvOption() {
+		return vOption;
+	}
+	public void setvOption(String vOption) {
+		this.vOption = vOption;
+	}
 	public int getVolunteerId() {
 		return volunteerId;
 	}

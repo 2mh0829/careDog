@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import care.dog.admin.strayDogVo.AdminFixSupportVo;
+import care.dog.admin.strayDogVo.AdminTempSupportVo;
+import care.dog.admin.strayDogVo.VolunteerVO;
 import care.dog.common.dao.CommonDAO;
-import care.dog.dog119.dogHealthVo.VolunteerVO;
 
 @Service("strayDog.adminStrayDogServiceImpl")
 public class AdminStrayDogServiceImpl implements AdminStrayDogService {
@@ -53,6 +54,28 @@ public class AdminStrayDogServiceImpl implements AdminStrayDogService {
 	public VolunteerVO readSchedule(int num) {
 		VolunteerVO dto = new VolunteerVO();
 		return dto;
+	}
+
+	@Override
+	public List<AdminTempSupportVo> tempSupportList(Map<String, Object> map) {
+		List<AdminTempSupportVo> list = null;
+		try {
+			list = dao.selectList("tmpSupport.tempSupportList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int tempSupportDataCnt(Map<String, Object> map) {
+		int result=0;
+		try {
+			result = dao.selectOne("tmpSupport.dataCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

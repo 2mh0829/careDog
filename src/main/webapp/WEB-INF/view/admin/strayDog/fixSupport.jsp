@@ -77,12 +77,12 @@ $(function(){
                   closeOnEscape:true, 
                   onSearch:function(){  
                 	  $("#list").setGridParam({
-                	        url:'<%=cp%>/admin/dog119/fixSupport',
+                	        url:'<%=cp%>/admin/strayDog/fixSupport',
                 	        datatype:'json',
                 	        page:1,
                 	        postData:{ 
                 	             searchField:$(".columns").find("option:selected").val()
-                	             //,searchType:$(".selectopts").find("option:selected").val()
+                	             ,searchType:$(".selectopts").find("option:selected").val()
                 	             ,searchValue:$("td.data").find(".input-elm").val()
                 	        }
                 	  }).trigger("reloadGrid");
