@@ -4,18 +4,21 @@
 <mapper namespace="tmpSupport">
 
 <sql id="where-list">
-	<if test="searchKey=='memberId'">
-		INSTR(memberId, #{searchValue})=1
+	<if test="search=='supportId' and type=='eq'">
+		INSTR(supportId, #{keyword})=1
 	</if>
-	<if test="searchKey=='title'">
-		title like '%'||#{searchValue}||'%'
+	<if test="search=='name' and type=='eq'">
+		pname like '%'||#{keyword}||'%'
 	</if>
-	<if test="searchKey=='content'">
-		DBMS_LOB.INSTR(content,#{searchValue})&gt;0
+	<if test="search=='tel' and type=='eq'">
+		INSTR(tel,#{keyword})&gt;0
 	</if>
-	<if test="searchKey=='created'">
-		TO_CHAR(created, 'YYYY-MM-DD')=#{searchValue} or
-		TO_CHAR(created, 'YYYYMMDD')=#{searchValue}
+	<if test="search=='email' and type=='eq'">
+		INSTR(email,#{keyword})&gt;0
+	</if>
+	<if test="search=='created' and type=='eq'">
+		TO_CHAR(created, 'YYYY-MM-DD')=#{keyword} or
+		TO_CHAR(created, 'YYYYMMDD')=#{keyword}
 	</if>
 </sql>
 

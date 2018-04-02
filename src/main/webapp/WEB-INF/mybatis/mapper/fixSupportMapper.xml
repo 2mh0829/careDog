@@ -17,14 +17,13 @@
 		INSTR(email,#{keyword})&gt;0
 	</if>
 	<if test="search=='s_date' and type=='eq'">
-		TO_CHAR(created, 'YYYY-MM-DD')=#{keyword} or
-		TO_CHAR(created, 'YYYYMMDD')=#{keyword}
+		TO_CHAR(s_date, 'YYYY-MM-DD')=#{keyword} or
+		TO_CHAR(s_date, 'YYYYMMDD')=#{keyword}
 	</if>
 	<if test="search=='e_date' and type=='eq'">
-		TO_CHAR(created, 'YYYY-MM-DD')=#{keyword} or
-		TO_CHAR(created, 'YYYYMMDD')=#{keyword}
+		TO_CHAR(e_date, 'YYYY-MM-DD')=#{keyword} or
+		TO_CHAR(e_date, 'YYYYMMDD')=#{keyword}
 	</if>
-	
 </sql>
 
 <insert id="fixSupportInput">

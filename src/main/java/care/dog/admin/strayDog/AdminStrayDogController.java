@@ -57,9 +57,6 @@ public class AdminStrayDogController {
 			HttpServletRequest req, Model model
 			){
 		
-		System.out.println("controller=================================>"+search);
-		System.out.println("controller=================================>"+type);
-		System.out.println("controller=================================>"+keyword);
 		int totalPage = 0;
 		int dataCount = 0;
 		
@@ -105,9 +102,9 @@ public class AdminStrayDogController {
 	@ResponseBody
 	public Map<String, Object> map(@RequestParam(defaultValue="1") int page,
 			@RequestParam(value="rows", defaultValue="10") int rows,
-			@RequestParam(value="searchField", defaultValue="subject") String search,
-			@RequestParam(value="searchType", defaultValue="") String type,
-			@RequestParam(value="searchValue", defaultValue="") String keyword,
+			@RequestParam(value="searchField", defaultValue="pname") String search,
+			@RequestParam(value="searchOper", defaultValue="eq") String type,
+			@RequestParam(value="searchString", defaultValue="") String keyword,
 			HttpServletRequest req, Model model
 			){
 		int totalPage = 0;
