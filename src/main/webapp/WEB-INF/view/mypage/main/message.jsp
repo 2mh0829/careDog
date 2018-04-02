@@ -12,7 +12,7 @@
 			<div style="height: 50px; text-align: center;">
 			    <input type="button" value=" 블로그 메인으로 이동 >> "
 			              class="moveButton"
-			              onclick="javascript:location.href='<%=cp%>/nblog';">
+			              onclick="javascript:location.href='<%=cp%>/myPage';">
 			</div>  
 		</div>
 </div>
