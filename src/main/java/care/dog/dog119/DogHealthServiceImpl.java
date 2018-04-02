@@ -132,17 +132,8 @@ public class DogHealthServiceImpl implements DogHealthService {
 		return result;
 	}
 
-	@Override
-	public int dhInsert(Map<String, Object> map) {
-		int result = 0;
-		try {
-			result = dao.insertData("dogHealth.dhInsert", map);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-
+//===================================================================================================
+	
 	@Override
 	public List<Map<String, Object>> sido() {
 		List<Map<String, Object>> list = new ArrayList<>();

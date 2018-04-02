@@ -258,8 +258,8 @@ function hahaSubmit(){
 			var state = data.state;
 			if(state=="false")
 				alert("게시물을 추가하지 못했습니다.");
-			/* else 
-				listPage(1); */
+			else 
+			location.href="<%=cp%>/center/onefonelist";
 		}
 	 ,beforeSend:function(jqXHR){
 		 jqXHR.setRequestHeader("AJAX",true);

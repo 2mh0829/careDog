@@ -5,242 +5,15 @@
 <%
 	String cp = request.getContextPath();
 %>
-<style>
 
-.pagenation {width:1100px; height:auto; margin:0 auto 50px auto; text-align:center; clear:both;}
-.pagenation a {display:inline-block; width:40px; height:40px; line-height:40px; font-size:16px; color:#444; margin-right:10px; text-align:center; background:#f3f3f3; border:1px solid #ccc;}
-.pagenation a.img {border:0; background:none; padding-top:12px; height:28px;}
-.pagenation .select {background:#2e5fa4;display:inline-block; width:40px; height:40px; line-height:40px; font-size:16px; color:#fff; font-family: 'NanumGothicWebBold'!important; font-weight:normal; margin-right:10px; text-align:center; border:1px solid #2e5fa4;}
-.strayDog {width:1000px; height:auto; margin:0 auto 50px auto;}
-.strayDog+.strayDog {
-	margin-left: 2%
-}
-.allStrayDog .strayDog {width:310px; height:600px; float:left; margin:40px 8px 60px 8px; background:#fff; border:1px solid #ccc;}
-.allStrayDog .strayDog img {vertical-align:top;width:310px; height:261px; /*margin-bottom:25px;*/}
-.allStrayDog .strayDog ul {height:403px; padding:0 10px; margin-top:25px;}
-.allStrayDog .strayDog ul li {line-height:30px; color:#666;letter-spacing:-0.5px;font-size:14px;}
-.allStrayDog .strayDog ul li span.red {color:red;}
-.allStrayDog .strayDog ul li.full {clear:both;}
-.allStrayDog .strayDog ul li strong {font-family: 'NanumGothicWebBold'!important; font-weight:normal; color:#222; padding-right:5px; font-size:16px;}
-.allStrayDog .strayDog ul li i {font-size:16px; color:#2e5fa4; font-style:normal;}
-.allStrayDog .strayDog ul li span {line-height:22px; color:#666;}
-.allStrayDog .strayDog ul li.half {width:50%; float:left;}
-
-::selection {background:#26579c; color:#fff;}
-
-.no-result {width:1100px; height:auto; margin:40px auto 50px auto; text-align:center; background:#fff;font-size:16px; color:#2e5fa4; border:1px solid #ccc; padding:20px 0;}
-
-.search_area {width:width:1098px; height:auto; margin:0 auto 50px auto; text-align:center;padding:15px 0 0 0; background:#fff; border:1px solid #ccc; line-height:35px;}
-.search_area select {height:35px; font-size:16px; color:#444; display:inline-block; vertical-align:middle; line-height:35px; margin-bottom:15px; background:#fff;}
-.search_area select.wd100 {width:100px; padding-left:5px;}
-.search_area select.wd165 {width:165px; padding-left:5px; margin-right:8px;}
-.search_area select.wd120 {width:120px; padding-left:5px; margin-right:8px;}
-.search_area label {font-size:16px; color:#444; margin-right:8px; line-height:35px; vertical-align:top;}
-.search_area input[type="text"] {width:155px; height:35px; line-height:35px; padding:0 5px; display:inline-block; margin-right:8px;background:#fff;  vertical-align:middle;margin-bottom:15px;}
-.search_area button {width:80px; height:35px; color:#fff; font-size:16px; background:#2e5fa4;margin-bottom:15px;}
-.search_area input[type="checkbox"] {width:16px; height:16px; margin-right:8px; vertical-align:top; margin-top:10px;}
-.search_area img {vertical-align:top; margin-top:5px; margin-right:8px;}
-.search_area span {height:35px; line-height:35px; font-size:16px; color:#444; width:10px; display:inline-block; vertical-align:top;}
-
-a{text-decoration:none;cursor:pointer;outline:none;}  
-a:hover,a:active{text-decoration:none;}
-a:focus , button:focus {outline:1px dotted #ccc;} */
-textarea, select, button, table {font-family:inherit; font-size:inherit; line-height:inherit;}
-legend{display:none; overflow:hidden; visibility:hidden; height:0; font-size:0; line-height:0;} /* For Screen Reader */
-img, fieldset, button {border:0;}
-img{vertical-align:middle;}
-fieldset, button, input {vertical-align:middle;}
-ul, ol, li, dl, dt, dd {list-style:none;margin:0;padding:0;}
-em, i, address {font-style:normal; font-weight:normal;}
-textarea, button {line-height:1.2; /* 입력폼에서 춤추지 않는 최소 줄간 1.2 */ vertical-align: bottom;}
-input {vertical-align:middle;border:none;background:none;}
-label {cursor:pointer; vertical-align:middle;}
-strong {font-family: 'NanumGothicWebBold' !important; } /* 강조 */
-.cs_abandoned_animal .info_wrap dl {
-    max-width: 425px;
-    line-height: 18px
-}
-.cs_abandoned_animal .info_wrap dl dt {
-    float: left;
-    margin-right: 10px;
-    padding-top: 5px;
-    color: #8f8f8f !important;
-}
-.cs_abandoned_animal .info_wrap dl dd {
-    position: relative;
-    padding-top: 5px;
-    color: #242424
-}
-.cs_abandoned_animal .info_wrap dl dd.info_hair {
-    float: left
-}
-.cs_abandoned_animal .info_wrap dl .ico_arrow {
-    display: inline-block;
-    vertical-align: top;
-    margin: 3px 5px 0 4px;
-    width: 5px;
-    height: 9px;
-    background: url(../img/sp_abandoned_animal_v2.png) no-repeat -17px -28px;
-}
-
-.cs_abandoned_animal .info_wrap dl .ico_bar {
-    display: inline-block;
-    vertical-align: top;
-    margin: 3px 9px 0 8px;
-    width: 1px;
-    height: 11px;
-    background-color: #eaeaea;
-}
-
-.cs_abandoned_animal .info_wrap dl dd a {
-    text-decoration: none
-}
-
-.cs_abandoned_animal .info_wrap dl dd a.link_map {
-    margin-left: 2px
-}
-
-.cs_abandoned_animal .info_wrap dl dd a:hover {
-    text-decoration: underline
-}
-
-.cs_abandoned_animal .info_wrap dl dd .info_tell {
-    color: #8f8f8f
-}
-
-.cs_abandoned_animal .info_wrap dl dd .ico_notice{
-    display: inline-block;
-    *display: inline;
-	overflow: hidden;
-    vertical-align: top;
-    margin: -1px 0 0 4px;
-	*zoom: 1;
-    width: 16px;
-    height: 16px;
-    background: url(../img/sp_abandoned_animal_v2.png) no-repeat -42px -25px;
-}
-
-.ly_abandoned_animal .ico_info{
-    display: inline-block;
-    *display: inline;
-	overflow: hidden;
-    vertical-align: top;
-    margin: -3px 0 0 0;
-	*zoom: 1;
-    width: 16px;
-    height: 16px;
-    background: url(../img/sp_abandoned_animal_v2.png) no-repeat -42px -25px;
-}
-.cs_abandoned_animal .info_wrap dl dd.info_notice{
-    width: 425px;
-    z-index: 100;
-}
-.cs_abandoned_animal .info_wrap dl dd .ly_notice{
-    position: absolute;
-    top: 32px;
-    right: -27px;
-    width: 289px;
-    border: 1px solid #cbdeee;
-    background-color: #fff;
-    color: #666;
-    font-size: 12px;
-    text-align: left;
-    line-height: 20px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    z-index: 100;
-}
-.cs_abandoned_animal .info_wrap dl dd .ly_notice strong{
-    display: block;
-    padding:21px 0 0 23px;
-    color: #424242;
-}
-
-
-.cs_abandoned_animal .info_wrap dl dd .ly_notice[aria-hidden="true"] {
-    display: none;
-}
-
-.cs_abandoned_animal .info_wrap dl dd .ly_notice p{
-    padding: 3px 23px 18px 23px;
-    line-height: 20px;
-    color: #666;
-    font-size: 12px;
-}
-
-.cs_abandoned_animal .info_wrap dl dd .ly_notice .btn_close{
-    display: block;
-    overflow: hidden;
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 13px;
-    height: 13px;
-    border: 0;
-    background: url(../img/sp_abandoned_animal_v2.png) no-repeat -38px -10px;
-    font-size: 0;
-    line-height: 0;
-    cursor: pointer;
-}
-
-/* 안내문구 및 제공 */
-
-.cs_abandoned_animal .lst_wrap+.animal_notice {
-    margin-top: 15px
-}
-
-.cs_abandoned_animal .animal_notice {
-    overflow: hidden;
-    position: relative
-}
-
-.cs_abandoned_animal .animal_notice p {
-    overflow: hidden;
-    position: relative;
-    padding-left: 10px;
-    line-height: 18px;
-    font-size: 11px;
-    font-family: '돋움', dotum, AppleSDGothicNeo, Helvetica, sans-serif;
-    color: #8f8f8f
-}
-
-.cs_abandoned_animal .animal_notice p .ico_notice {
-    position: absolute;
-    top:5px;
-    left: 0;
-    display: block;
-    width: 2px;
-    height: 47px;
-    margin: -2px 7px 0 0;
-    vertical-align: middle;
-    background-color: #e8e8e8
-}
-
-.cs_abandoned_animal .animal_notice p .ico_bar {
-    display: inline-block;
-    vertical-align: top;
-    *display: inline;
-    *zoom:1;
-    margin: 3px 3px 0 7px;
-    width: 1px;
-    height: 10px;
-    background-color: #eaeaea;
-}
-
-.cs_abandoned_animal .animal_notice a {
-    text-decoration: none;
-}
-
-.cs_abandoned_animal .animal_notice a:hover {
-    text-decoration: underline;
-}
-</style>
-<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-1.12.4.min.js"></script>
+<link rel="stylesheet" href="<%=cp%>/resource/css/strayDog/strayDog.css">
 <script type="text/javascript">
-var city,gu, center, kind, total, paging;
+var city,gu, center, kind, total, paging, noticeSdt, noticeEdt;
 var pageNum=1;
 var startPage, endPage;
+
 $(document).ready(function(){
-	findDog('');
+	CalAddCss();
 	  $.ajax({
 		url:'<%=cp%>/strayDog/sido'
 		,dataType:'json'
@@ -248,7 +21,6 @@ $(document).ready(function(){
 			var list = data.list;
 			var content="<option value=''>전체</option>";
 			//$("#city").find("option").remove();
-			console.log(data)
 			$.each(list, function(index,item){
 				content+="<option value="+item.orgCd+">"+item.orgdownNm+"</option>";
 			});
@@ -262,7 +34,6 @@ $(document).ready(function(){
 		,success:function(data){
 			var list = data.list;
 			var content="<option value=''>종 선택</option>";
-			console.log(list)
 			$.each(list, function(index,item){
 				content+="<option value="+item.kindCd+">"+item.KNm+"</option>";
 			});
@@ -270,6 +41,44 @@ $(document).ready(function(){
 		}
 	  });
 	
+	/* datepicker */
+	$("#noticeSdt").datepicker({
+	    dateFormat: 'yy-mm-dd',
+	    prevText: '이전 달',
+	    nextText: '다음 달',
+	    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    dayNames: ['일','월','화','수','목','금','토'],
+	    dayNamesShort: ['일','월','화','수','목','금','토'],
+	    dayNamesMin: ['일','월','화','수','목','금','토'],
+	    showMonthAfterYear: true,
+	    changeMonth: true,
+	    changeYear: true,
+	    yearSuffix: '년'
+	  });
+
+	$("#noticeSdt").click(function() {
+		$("#noticeSdt").datepicker("show");
+	});
+	
+	$("#noticeEdt").datepicker({
+	    dateFormat: 'yy-mm-dd',
+	    prevText: '이전 달',
+	    nextText: '다음 달',
+	    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	    dayNames: ['일','월','화','수','목','금','토'],
+	    dayNamesShort: ['일','월','화','수','목','금','토'],
+	    dayNamesMin: ['일','월','화','수','목','금','토'],
+	    showMonthAfterYear: true,
+	    changeMonth: true,
+	    changeYear: true,
+	    yearSuffix: '년'
+	  });
+
+	$("#noticeEdt").click(function() {
+		$("#noticeEdt").datepicker("show");
+	});
 })
 
 function changeCity(value){
@@ -286,7 +95,6 @@ function changeCity(value){
 			var list = data.list;
 			var content="<option value=''>전체</option>";
 			$("#selcont").find("option").remove();
-			console.log(data)
 			$.each(list, function(index,item){
 				content+="<option value="+item.orgCd+">"+item.orgdownNm+"</option>";
 			});
@@ -309,7 +117,6 @@ function changeCenter(value){
 			var list = data.list;
 			var content="<option value=''>전체</option>";
 			$("#selcare").find("option").remove();
-			console.log(data)
 			$.each(list, function(index,item){
 				content+="<option value="+item.careRegNo+">"+item.careNm+"</option>";
 			});
@@ -321,8 +128,8 @@ function changeCenter(value){
 function findDog(value){
 	var allurl='<%=cp%>/strayDog/callList';
 	var queryParams = '';
-	queryParams += '&' + encodeURIComponent('bgnde') + '=' + encodeURIComponent('20180205'); /*유기날짜 (검색 시작일) (YYYYMMDD) */
-	queryParams += '&' + encodeURIComponent('endde') + '=' + encodeURIComponent('20180305'); /*유기날짜 (검색 종료일) (YYYYMMDD) */
+	queryParams = 'bgnde=' + encodeURIComponent(noticeSdt); /*유기날짜 (검색 시작일) (YYYYMMDD) */
+	queryParams += '&' + encodeURIComponent('endde') + '=' + encodeURIComponent(noticeEdt); /*유기날짜 (검색 종료일) (YYYYMMDD) */
 	queryParams += '&' + encodeURIComponent('kind') + '=' + encodeURIComponent(kind==null?value:kind); /*품종코드 (품종 조회 OPEN API 참조) */
 	queryParams += '&' + encodeURIComponent('upr_cd') + '=' + encodeURIComponent(city==null?value:city); /*시도코드 (시도 조회 OPEN API 참조) */
 	queryParams += '&' + encodeURIComponent('org_cd') + '=' + encodeURIComponent(gu==null?value:gu); /*시군구코드 (시군구 조회 OPEN API 참조) */
@@ -337,33 +144,88 @@ function findDog(value){
 		,dataType:'json'
 		,success:function(data){
 			$(".allStrayDog").find(".strayDog").remove();
+			$(".pagenation").find("ul").remove();
 			var list=data.list;
 			var content="";
 			total = data.totalCount;
 			paging = data.paging;
-			console.log(list)
 			$.each(list, function(index, item){
-				content+="<div class='strayDog'><button type='button' data-toggle='modal' data-target='#strayDogDetail'>";
-				content+="<img src="+item.popfile+" width='310' height='261' border='0' align='center'></button><ul>";
-				content+="<li class='full'><strong>접수일</strong> <i> "+item.happenDt+"&nbsp;&nbsp;(공고번호:<span class='red'> "+item.noticeNo+" </span>)";
-				content+="</i></li><li class='full'><strong>발견장소</strong></li><li class='full'>"+item.happenPlace+"</li>";
-				content+="<li class='full'><strong>품종</strong> "+item.kindCd+"</li>";
-				content+="<li class='half'><strong>성별</strong> "+item.sexCd+"</li>";
-				content+="<li class='half'><strong>연령</strong> "+item.age+"</li>";
-				content+="<li class='half'><strong>색상</strong> "+item.colorCd+"</li>";
-				content+="<li class='half'><strong>중성화수술</strong> "+item.neuterYn+"</li>";
-				content+="<li class='half'><strong>체중</strong> "+item.weight+"</li>";
-				content+="<li class='half'><strong>상태</strong> "+item.processState+"</li><br>";
+				content+="<div class='strayDog'>";
+				content+="<img class='btnStrayDogInfo' data-popfile='"+item.popfile+"' src="+item.popfile+" width='310' height='261' border='0' align='center'><ul>";
+				content+="<li class='full'><strong>접수일</strong> <i data-happenDt='"+item.happenDt+"'> "+item.happenDt+"&nbsp;&nbsp;(공고번호:<span class='red' data-noticeNo='"+item.noticeNo+"'> "+item.noticeNo+" </span>)";
+				content+="</i></li><li class='full'><strong>발견장소</strong></li><li class='full' data-happenPlace='"+item.happenPlace+"'>"+item.happenPlace+"</li>";
+				content+="<li class='full' data-kindCd='"+item.kindCd+"'><strong>품종</strong> "+item.kindCd+"</li>";
+				content+="<li class='half' data-sexCd='"+item.sexCd+"'><strong>성별</strong> "+item.sexCd+"</li>";
+				content+="<li class='half' data-age='"+item.age+"'><strong>연령</strong> "+item.age+"</li>";
+				content+="<li class='half' data-colorCd='"+item.colorCd+"'><strong>색상</strong> "+item.colorCd+"</li>";
+				content+="<li class='half' data-neuterYn='"+item.neuterYn+"'><strong>중성화수술</strong> "+item.neuterYn+"</li>";
+				content+="<li class='half' data-weight='"+item.weight+"'><strong>체중</strong> "+item.weight+"</li>";
+				content+="<li class='half' data-processState='"+item.processState+"'><strong>상태</strong> "+item.processState+"</li><br>";
 				content+="<li class='full'><strong>특징</strong></li>";
-				content+="<li class='full'><span>"+item.specialMark+"</span></li></ul></div>";
+				content+="<li class='full' data-specialMark='"+item.specialMark+"'><span>"+item.specialMark+"</span></li></ul></div>";
+				content+="<input type='hidden' class='careAddr' value='"+item.careAddr+"'>";
+				content+="<input type='hidden' class='careNm' value='"+item.careNm+"'>";
+				content+="<input type='hidden' class='careTel' value='"+item.careTel+"'>";
+				content+="<input type='hidden' class='desertionNo' value='"+item.desertionNo+"'>";
+				content+="<input type='hidden' class='noticeEdt' value='"+item.noticeEdt+"'>";
+				content+="<input type='hidden' class='noticeSdt' value='"+item.noticeSdt+"'>";
+				content+="<input type='hidden' class='officetel' value='"+item.officetel+"'>";
+				content+="<input type='hidden' class='orgNm' value='"+item.orgNm+"'>";
 			});
 			$(".allStrayDog").append(content);
 			$(".pagenation").append(paging);
 		}
 	});
-	
 }
 
+
+$(function(){
+	$("body").on("click",'.btnStrayDogInfo', function () {
+		
+		var popfile=$(this).attr('data-popfile');
+		var happenDt = $(this).siblings("ul").children("li").eq(0).children("i").attr("data-happenDt");
+		var noticeNo = $(this).siblings("ul").children("li").eq(0).children("i").children("span").attr("data-noticeNo");
+		var happenPlace = $(this).siblings("ul").children("li").eq(2).attr("data-happenPlace");
+		var kindCd = $(this).siblings("ul").children("li").eq(3).attr("data-kindCd");
+		var sexCd = $(this).siblings("ul").children("li").eq(4).attr("data-sexCd");
+		var age = $(this).siblings("ul").children("li").eq(5).attr("data-age");
+		var colorCd = $(this).siblings("ul").children("li").eq(6).attr("data-colorCd");
+		var neuterYn = $(this).siblings("ul").children("li").eq(7).attr("data-neuterYn");
+		var weight = $(this).siblings("ul").children("li").eq(8).attr("data-weight");
+		var processState = $(this).siblings("ul").children("li").eq(9).attr("data-processState");
+		var specialMark = $(this).siblings("ul").children("li").eq(11).attr("data-specialMark");
+		var careAddr = $(".careAddr").val();
+		var careNm = $(".careNm").val();
+		var careTel = $(".careTel").val();
+		var desertionNo = $(".desertionNo").val();
+		var noticeEdt = $(".noticeEdt").val();
+		var noticeSdt = $(".noticeSdt").val();
+		var officetel = $(".officetel").val();
+		var orgNm = $(".orgNm").val();
+		
+		$("#popfile").attr("src",popfile);
+		$("#happenDt").text(happenDt);
+		$("#noticeNo").text(noticeNo);
+		$("#happenPlace").text(happenPlace);
+		$("#kindCd").text(kindCd);
+		$("#sexCd").text(sexCd);
+		$("#age").text(age);
+		$("#colorCd").text(colorCd);
+		$("#neuterYn").text(neuterYn);
+		$("#weight").text(weight);
+		$("#processState").text(processState);
+		$("#specialMark").text(specialMark);
+		$("#careAddr").text(careAddr);
+		$("#careNm").text(careNm);
+		$("#careTel").text(careTel);
+		$("#desertionNo").text(desertionNo);
+		$("#officetel").text(officetel);
+		$("#orgNm").text(orgNm);
+		$("#noticeSdt_noticeEdt").text(noticeSdt+"~"+noticeEdt);
+		
+		$("#strayDogDetail").modal("show");
+	});
+});
 
 function changeDog(value){
 	center=value;
@@ -380,13 +242,105 @@ function listPage(num){
 	findDog('');
 }
 
+//종료 날짜 세팅
+function CalAddCss(){
+	var tDay = new Date();
+	var tMonth = tDay.getMonth()+1;
+	var tDate = tDay.getDate();
+	if ( tMonth < 10) tMonth = "0"+tMonth;
+	if ( tDate < 10) tDate = "0"+tDate;
+	document.getElementById("noticeEdt").value = tDay.getFullYear()+"-"+tMonth+"-"+tDate;
+	noticeEdt = tDay.getFullYear()+tMonth+tDate;
+	startDate(tDay);
+}
 
+//시작날짜 세팅
+function startDate(tDay){
+	var sDate=new Date(tDay.getFullYear(),tDay.getMonth()-1,tDay.getDate());
+	var tMonth = sDate.getMonth()+1;
+	var tDate = sDate.getDate();
+	if ( tMonth < 10) tMonth = "0"+tMonth;
+	if ( tDate < 10) tDate = "0"+tDate;
+	document.getElementById("noticeSdt").value = sDate.getFullYear()+"-"+tMonth+"-"+tDate;
+	noticeSdt = sDate.getFullYear()+tMonth+tDate;
+	findDog('');
+}
+
+function setNoticeSdt(date){
+	noticeSdt = date;
+	if(noticeEdt==null || noticeEdt==''){
+		alert('종료날짜를 선택하세요.')
+	}else{
+		findDog('');
+	}
+}
+
+function setNoticeEdt(date){
+	noticeEdt = date;
+	if(noticeSdt==null || noticeSdt==''){
+		alert('시작날짜를 선택하세요.')
+	}else{
+		findDog('');
+	}
+}
+
+// 날짜체크
+function setNoticeEdt(date){
+	var input1 = document.getElementById('noticeSdt').value;
+	var input2 = document.getElementById('noticeEdt').value;
+
+	var day = 1000*60*60*24;
+	var month = day*30;
+	var year = month*12;
+
+	var date1 = new Date(input1.substr(0,4),input1.substr(5,2)-1,input1.substr(8,2));
+	var date2 = new Date(input2.substr(0,4),input2.substr(5,2),input2.substr(8,2));
+	var date1_chk = input1.substr(8,2);
+	var date2_chk = input2.substr(8,2);
+	var month1_chk = input1.substr(0,7);
+	var month2_chk = input2.substr(0,7);
+
+	var newDate = new Date();
+	var yy = newDate.getFullYear();
+	var mm = newDate.getMonth()+1;
+	if (mm < 10)
+	{
+		mm = "0" + mm;
+	}
+	var dd = newDate.getDate();
+	if (dd < 10)
+	{
+		dd = "0" + dd;
+	}
+
+	var toDay = yy + "-" + mm + "-" + dd;
+
+	//alert(toDay);
+	//alert(date2_chk);
+	if (month1_chk == month2_chk && date1_chk >= date2_chk) {
+		alert("오류! 검색 종료일이 시작일보다 다음날짜이어야 합니다.");
+		$("#noticeSdt").focus();
+		document.getElementById('noticeSdt').value = "";
+		document.getElementById('noticeEdt').value = "";
+		return false;
+	}
+
+	if (month1_chk >= month2_chk) {
+		alert("검색 시작 날짜는 종료 날짜보다 이전이어야 합니다.");
+		$("#noticeSdt").focus();
+		document.getElementById('noticeSdt').value = "";
+		document.getElementById('noticeEdt').value = "";
+		return false;
+	}
+}
 </script>
 
 <div class="body-container">
  <!-- 검색영역 -->
 	<div class="search_area">
-		<form name="search_form" method="post" action="?act=list&amp;bid=animal">
+		<form name="search_form" method="post">
+			<input type="text" id="noticeSdt" placeholder="검색 시작날짜" onchange="setNoticeSdt(this.value)">&nbsp;~&nbsp;
+			<input type="text" id="noticeEdt" placeholder="검색 종료날짜" onchange="setNoticeEdt(this.value)">
 			시도	<select id="city" name="city" onchange="changeCity(this.value);" class="wd120">
 			</select>
 			시군구  <select name="country" id="selcont" onchange="changeCenter(this.value);" class="wd120">
@@ -409,56 +363,42 @@ function listPage(num){
 </div>
 
 <!-- detailDog Modal -->
-<div class="modal fade" id="strayDogDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="strayDogDetail" tabindex="-1" role="dialog" aria-labelledby="strayDogDetailLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
 		<div class="solo_wrap">
-			<h4 class="detail_title">
-				<a nocr="" onclick="return goOtherCR(this, 'a=nco_xca*1.number&amp;r=1&amp;i=881795fd_000000765F8F&amp;u=' + urlencode(this.href));"
-					href="<%=cp%>/resource/img/dog2.jpg" target="_blank" class="tit">경기-안산-2018-00204</a> 
-				<span class="ico_notice"><span class="blind">공고중</span></span>
+			<h4 class="detail_title" align="center">
+				<span class="red" id="noticeNo"></span>
 			</h4>
 			<div class="info_wrap">
-				<div class="animal_img">
-					<a nocr=""
-						onclick="return goOtherCR(this, 'a=nco_xca*1.image&amp;r=1&amp;i=881795fd_000000765F8F&amp;u=' + urlencode(this.href));"
-						class="thumb" href="<%=cp%>/resource/img/dog2.jpg" target="_blank"> 
-						<img src="<%=cp%>/resource/img/dog2.jpg" width="120" height="120" alt="유기동물">
-					</a>
+				<div class="animal_img" align="center">
+						<img src="" id="popfile" width="500" height="300" alt="유기동물">
 				</div>
 				<div class="animal_info">
 					<dl>
 						<dt>품종</dt>
 						<dd>
 							개<span class="ico_arrow"></span>
-								<a onclick="return goOtherCR(this,&quot;a=nco_xca*1&amp;r=1&amp;i=&quot;+urlencode(&quot;881795fd_000000765F8F&quot;)+&quot;&amp;u=&quot;+urlencode(this.href));"
-									href="?where=nexearch&amp;sm=tab_etc&amp;query=%EB%AF%B8%EB%8B%88%EC%96%B4%EC%B3%90%ED%95%80%EC%85%94%20%EC%9C%A0%EA%B8%B0%EB%8F%99%EB%AC%BC">미니어쳐핀셔</a>,
+								<a href="#" id="kindCd"></a>,
 							수컷
 						</dd>
 						<dt>털색</dt>
-						<dd class="info_hair">흑갈</dd>
+						<dd id="colorCd"></dd>
 						<dt>
-							<span class="ico_bar"></span>체중
+							체중
 						</dt>
-						<dd>4(Kg)</dd>
+						<dd id="weight"></dd>
 						<dt>나이</dt>
-						<dd>2014(년생)</dd>
+						<dd id="age"></dd>
 						<dt>발견</dt>
-						<dd>선부2동1034-8번지인근</dd>
+						<dd id="happenPlace"></dd>
 						<dt>특징</dt>
-						<dd>비만, 꼬리단미</dd>
-						<dt>접수</dt>
-						<dd>
-							<a nocr="" onclick="return goOtherCR(this, 'a=nco_xca*1.date&amp;r=1&amp;i=881795fd_000000765F8F&amp;u=' + urlencode(this.href));"
-								href="?where=nexearch&amp;sm=tab_etc&amp;query=3%EC%9B%9410%EC%9D%BC%20%EC%9C%A0%EA%B8%B0%EB%8F%99%EB%AC%BC">2018.03.10.</a>
-						</dd>
+						<dd id="specialMark"></dd>
+						<dt>접수일</dt>
+						<dd id="happenDt"></dd>
 						<dt>공고</dt>
-						<dd class="info_notice _toggle_area">
-							2018.03.10.~2018.03.22.
-							<a nocr="" onclick="goOtherTCR(this, 'a=nco_xca*1.dateinfo&amp;r=1&amp;i=881795fd_000000765F8F');return false;"
-								href="#" class="ico_notice _toggle_trigger" role="button">
-								<span class="blind">공고확인</span>
-							</a>
+						<dd id="noticeSdt_noticeEdt" class="red">
+							
 							<div class="ly_notice _toggle_content" style="display: none">
 								<strong>공고기간</strong>
 								<p>동물보호법에 따라 공고가 있는 날부터 10일이 지나도 소유자를 알 수 없는 경우는 지방자치단체가
@@ -467,23 +407,13 @@ function listPage(num){
 							</div>
 						</dd>
 						<dt>관할</dt>
-						<dd>
-							<a nocr="" onclick="return goOtherCR(this, 'a=nco_xca*1.region&amp;r=1&amp;i=881795fd_000000765F8F&amp;u=' + urlencode(this.href));"
-								href="?where=nexearch&amp;sm=tab_etc&amp;query=%EA%B2%BD%EA%B8%B0%EB%8F%84%EC%95%88%EC%82%B0%EC%8B%9C%20%EC%9C%A0%EA%B8%B0%EB%8F%99%EB%AC%BC">경기도
-							안산시</a>
-						</dd>
-						<dt>보호센터</dt>
-						<dd>
-							<a nocr=""
-								onclick="return goOtherCR(this, 'a=nco_xca*1.protect&amp;r=1&amp;i=881795fd_000000765F8F&amp;u=' + urlencode(this.href));"
-								href="?where=nexearch&amp;sm=tab_etc&amp;query=(%EC%82%AC)%ED%95%9C%EB%8F%99%EB%B3%B4%20%EC%9C%A0%EA%B8%B0%EB%8F%99%EB%AC%BC">(사)한동보</a>
-						</dd>
+						<dd id="orgNm"></dd>
+						<dt>보호소 이름</dt>
+						<dd id="careNm"></dd>
 						<dt>보호장소</dt>
-						<dd>경기도 안산시 상록구 청곡길 50 (부곡동) 안산시 상록구 부곡동 231-5</dd>
+						<dd id="careAddr"></dd>
 						<dt>전화</dt>
-						<dd>
-							031-296-0124<span class="info_tell">(9시~18시 가능)</span>
-						</dd>
+						<dd id="careTel"></dd>
 					</dl>
 				</div>
 			</div>
@@ -492,13 +422,8 @@ function listPage(num){
 				<p>
 				<span class="ico_notice"></span>본 정보는 지방자치단체와 유기동물 보호시설에서 등록한 보호중
 					동물입니다. 유기동물의 절반 가량만 주인을 찾거나 입양이 됩니다. 유기동물에 관심을 가져주세요. <br>최종
-					업데이트 2018.03.10.<span class="ico_bar"></span> 출처 
-				<a nocr="" onclick="return goOtherCR(this, 'a=nco_xca*1.source&amp;r=1&amp;i=881795fd_000000765F8F&amp;u=' + urlencode(this.href));"
-					href="http://www.animal.go.kr/portal_rnl/abandonment/protection_list.jsp"
-					target="_blank">동물보호관리시스템
-				</a>, 통계 
-				<a nocr="" onclick="return goOtherCR(this, 'a=nco_xca*1.statistic&amp;r=1&amp;i=881795fd_000000765F8F&amp;u=' + urlencode(this.href));"
-					href="http://pawinhand.kr/#locationSearch" target="_blank">포인핸드</a>
+					업데이트 2018.03.10.<span class="ico_bar"></span> 출처 (주)careDog
+				
 				</p>
 			</div>
 		</div>

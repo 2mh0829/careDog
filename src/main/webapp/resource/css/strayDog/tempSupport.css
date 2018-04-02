@@ -1,0 +1,127 @@
+.content { float: left; width: 954px; /*min-height:800px;*/}
+.color1 { color: #1991d7 !important; }
+.inline-block { display: inline-block !important; }
+
+.wd40 { width: 40px !important; }
+
+.wd60 { width: 60px !important; }
+
+.wd80 { width: 80px !important; }
+
+.wd100 { width: 100px !important; }
+
+.wd120 { width: 120px !important; }
+
+.wd160 { width: 160px !important; }
+
+.wd240 { width: 240px !important; }
+
+.wd250 { width: 250px !important; }
+
+.wd320 { width: 320px !important; }
+
+.wd460 { width: 460px !important; }
+
+.wd600 { width: 600px !important; }
+
+.wd704 { width: 704px !important; }
+
+.wd100p { width: 100% !important; }
+
+.hg100 { height: 100px !important; }
+
+.hg140 { height: 140px !important; }
+
+.hg180 { height: 180px !important; }
+
+.hg550 { height: 550px !important; }
+
+.hg560 { height: 560px !important; }
+
+.hg720 { height: 720px !important; }
+
+/*폰트사이즈*/
+.fs0 { font-size: 0 !important; }
+
+.txt_c { text-align: center !important; }
+
+.left__group { text-align: left; font-size: 0; }
+
+.center__group { text-align: center; font-size: 0; }
+
+.right__group { text-align: right; font-size: 0; }
+
+.btn + .btn { margin-left: 10px; }
+
+.btn { display: inline-block; width: 120px; height: 40px; text-align: center; line-height: 38px; font-size: 14px; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+.btn1 { background-color: #1991d7; color: #fff; border: 1px solid #1991d7; }
+
+.btn2 { border: 1px solid #666666; color: #666666; }
+
+.btn3 { background-color: #f24443; color: #fff; border: 1px solid #f24443; }
+
+.btn4 { border: 1px solid #cccccc; color: #767676; background-color: #fff; }
+
+/*radio,checkbox*/
+.checkbox01 + label { display: inline-block; margin-left: 5px; margin-right: 10px; font-size: 14px; }
+
+@media only screen { .checkbox01 { overflow: hidden; position: absolute; top: auto; width: 1px; height: 1px; padding: 0; margin: -1px; border: 0; clip: rect(0, 0, 0, 0); }
+  .checkbox01 + label.solo.type-cart { float: left; width: 0px; margin-top: 15px; padding-left: 12px; }
+  .checkbox01 + label { position: relative; margin-left: 0; padding-left: 20px; cursor: pointer; }
+  .checkbox01 + label:before { position: absolute; top: 0; bottom: 0; left: 0; -webkit-box-sizing: border-box; box-sizing: border-box; width: 12px; height: 12px; margin: auto; border: 1px solid #dddddd; background-color: #fff; content: ''; cursor: pointer; }
+  .checkbox01.type-another + label:before { border: 1px solid #767676; }
+  .checkbox01:checked + label:after { position: absolute; top: -3px; left: 2px; bottom: 0; width: 6px; height: 4px; margin: auto; border-left: 2px solid #222; border-bottom: 2px solid #222; -webkit-transform: rotate(-48deg); -ms-transform: rotate(-48deg); transform: rotate(-48deg); background-repeat: no-repeat; cursor: pointer; content: ''; }
+  .checkbox01 + label { margin-right: 20px; }
+  .checkbox01:last-of-type + label { margin-right: 0; }
+  .checkbox01.disabled + label:before { position: absolute; top: 0; bottom: 0; left: 0; -webkit-box-sizing: border-box; box-sizing: border-box; width: 12px; height: 12px; margin: auto; border: 1px solid #dddddd; background-color: #ddd; content: ''; cursor: pointer; } }
+.checkbox01 + label.solo { overflow: hidden; text-indent: -9999px; min-height: 12px; width: 0px; }
+
+@media only screen { .radio01 { overflow: hidden; position: absolute; top: auto; width: 1px; height: 1px; padding: 0; margin: -1px; border: 0; clip: rect(0, 0, 0, 0); }
+  .radio01 + .label01:before { content: ""; position: absolute; top: 4px; left: 0; -webkit-box-sizing: border-box; box-sizing: border-box; width: 12px; height: 12px; margin: auto; border: 1px solid #666; border-radius: 50%; }
+  .radio01:checked + .label01:after { content: ""; position: absolute; top: 7px; left: 3px; width: 6px; height: 6px; margin: auto; border-radius: 50%; background: #767676; }
+  .radio01 + .label01 { position: relative; font-size: 14px; font-weight: 500; color: #898989; padding-left: 21px; display: inline-block; height: 20px; line-height: 20px; margin-left: 0; cursor: pointer; }
+  .radio01 + .label01.other { font-size: 12px; color: #555; line-height: 20px; }
+  .radio01 + label + .radio01 + label { margin-left: 20px; } }
+.radio01 + label + .radio01 { margin-left: 20px; }
+
+.temporary__header{display:table-cell; width:1%; height:104px; padding-left:216px; box-sizing:border-box; vertical-align:middle; background:url('<%=cp%>/resource/img/strayDog/sponsor_1.jpg') no-repeat center left; border-bottom:1px solid #dddddd;}
+.temporary__tit{margin:0;color:#222; font-size:24px;}
+.temporary__txt{margin:20px 0 0;font-size:16px;}
+.temporary__txt-small{margin:0; padding-left:13px; box-sizing: border-box; font-size:13px;}
+.temporary__box{margin-top:30px;}
+.temporary__box.type-another{margin-left:-13px; padding-bottom:20px;}
+.temporary__terms{overflow:auto; height:190px; margin-top:20px; border:1px solid #ddd; border:1px solid #ccc; padding:15px; box-sizing:border-box; font-size:13px; line-height:1.5;}
+.temporary__check{margin-top:15px; text-align:right;}
+.temporary__list { margin:0; font-size: 13px; list-style: none; padding-left: 0px;}
+.temporary__list li { text-indent: -14px; padding-left: 14px; margin: 5px 0; line-height: 1.3; letter-spacing: -0.5px; }
+
+img {border:0px; margin:0px; padding:0px; vertical-align:top;}
+fieldset {border:0;}
+fieldset legend, caption {display:none;}
+ul, ol { list-style:none; margin:0; padding:0;}
+body, table, div, input, ul, li, dl, dt, dd, ol, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend {margin:0; padding:0;}
+body {color:#222; font-family:tahoma; font-size:11px; font-weight:normal;}
+a {text-decoration:none; color:inherit;}
+table {border-collapse:collapse;}
+.table1 { width: 100%; border-spacing: 0; border-collapse: collapse; text-align: left; }
+.table1__tr { border-top: 1px solid #dedede; }
+.table1__th { padding: 22px 30px; background-color: #fafafa; border-bottom: 1px solid #dedede; font-size: 14px; color: #222; text-align:left;}
+.table1__td { padding: 22px 30px; border-bottom: 1px solid #dedede; }
+.input1 { -webkit-box-sizing: border-box; box-sizing: border-box; height: 30px; padding: 5px; border: 1px solid #dddddd; vertical-align: middle; font-size: 14px; line-height: 1; }
+.input1 + .input1 { margin-left: 5px; }
+
+.input__form { margin: -7px 0px; font-size: 0; }
+.input__form.type-another { position: relative; }
+.input__txt { font-size: 14px; vertical-align: middle; }
+.input__calender { overflow: hidden; position: relative; left: -1px; display: inline-block; text-indent: -9999px; width: 30px; height: 30px; background-image: url("../images/content/calender_icon.jpg"); vertical-align: middle; }
+
+.input1 + .input__txt { margin-left: 10px; }
+
+.input__calender + .input__txt { margin-left: 10px; }
+
+.input__wrap { display: inline-block; }
+.input__wrap + .input__wrap { margin-top: 5px; }
+
+.center__group { text-align: center; font-size: 0; }
+.mt40 { margin-top: 40px !important; }

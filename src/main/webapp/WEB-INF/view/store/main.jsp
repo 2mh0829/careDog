@@ -284,7 +284,7 @@ function article(productId) {
 	</div>
 	<div class="event-container" style="margin-top: 40px;">
 		<!-- 공지사항의 이벤트 주소 -->
-		<a href="#">
+		<a href="http://www.oliveyoung.co.kr/store/planshop/getPlanShopDetail.do?dispCatNo=500000100230003">
 			<img class="eventImg" src="<%=cp%>/resource/img/store/dog_bener.jpg">
 		</a>
 	</div>

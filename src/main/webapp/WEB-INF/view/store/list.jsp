@@ -93,13 +93,13 @@ function article(productId) {
 			<h3>ALL</h3>
 			<hr>
 		</div>
-	
+		
 		<div class="sort">
-			<a href="#"> 최근 등록 순  |</a>
-			<a href="#">  판매 수량 순  |</a>
-			<a href="#">  높은 가격 순  |</a>
-			<a href="#">  낮은 가격 순  |</a>
-			<a href="#">  상품평 순</a>
+			<a href="<%=cp%>/store/list?sortField=inputDate&sortMode=desc&categoryId=${categoryId}"> 최근 등록 순  |</a>
+			<a href="<%=cp%>/store/list?sortField=allAmount&sortMode=desc&categoryId=${categoryId}">  판매 수량 순  |</a>
+			<a href="<%=cp%>/store/list?sortField=sellingPrice&sortMode=desc&categoryId=${categoryId}">  높은 가격 순  |</a>
+			<a href="<%=cp%>/store/list?sortField=sellingPrice&sortMode=asc&categoryId=${categoryId}">  낮은 가격 순  |</a>
+			<a href="<%=cp%>/store/list?sortField=grade&sortMode=desc&categoryId=${categoryId}">  상품평 순</a>
 		</div>
 
 	</div>

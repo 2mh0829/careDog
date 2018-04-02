@@ -421,7 +421,6 @@ html, body {
 		</table>
 	</div>
 
-
 	<div class="pac-container pac-logo"
 		style="display: none; width: 516px; position: absolute; left: 1px; top: 34px;"></div>
 		

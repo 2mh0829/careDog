@@ -32,8 +32,8 @@ public class StrayDogServiceImpl implements StrayDogService {
 		String mainUrl = MAINURL+ "abandonmentPublic";
 	        try {
 	        	String serviceKey= "?" + URLEncoder.encode("ServiceKey","UTF-8") + "=" + KEY;
-	        	String parameter="&" + URLEncoder.encode("bgnde","UTF-8") + "=" + URLEncoder.encode("20180205", "UTF-8"); /*유기날짜 (검색 시작일) (YYYYMMDD) */
-	        	parameter += "&" + URLEncoder.encode("endde","UTF-8") + "=" + URLEncoder.encode("20180305", "UTF-8"); /*유기날짜 (검색 종료일) (YYYYMMDD) */
+	        	String parameter="&" + URLEncoder.encode("bgnde","UTF-8") + "=" + model.get("bgnde"); /*유기날짜 (검색 시작일) (YYYYMMDD) */
+	        	parameter += "&" + URLEncoder.encode("endde","UTF-8") + "=" + model.get("endde"); /*유기날짜 (검색 종료일) (YYYYMMDD) */
 	        	parameter += "&" + URLEncoder.encode("upkind","UTF-8") + "=" + URLEncoder.encode("417000", "UTF-8"); /*축종코드 - 개 : 417000 - 고양이 : 422400 - 기타 : 429900 */
 	        	parameter += "&" + URLEncoder.encode("kind","UTF-8") + "=" + model.get("kind"); /*품종코드 (품종 조회 OPEN API 참조) */
 	        	parameter += "&" + URLEncoder.encode("upr_cd","UTF-8") + "=" + model.get("upr_cd"); /*시도코드 (시도 조회 OPEN API 참조) */
@@ -67,20 +67,25 @@ public class StrayDogServiceImpl implements StrayDogService {
 						gender="미상";
 					}
 					
-					String neu = root.getElementsByTagName("neuterYn").item(i).getTextContent().toString();
-					String neuCheck = "";
-					if(sexCd.equals("U")) {
-						neuCheck="미상";
-					}else { 
+					String neuCheck = "미상";
+					try {
+						String neu = root.getElementsByTagName("neuterYn").item(i).getTextContent().toString();
 						neuCheck=neu;
+					} catch (Exception e) {
 					}
 					
-					String person = root.getElementsByTagName("chargeNm").item(i).getTextContent().toString();
-					String pChk = "";
-					if(person==null) {
-						pChk="미정";
-					}else {
+					String pChk = "미정";
+					try {
+						String person = root.getElementsByTagName("chargeNm").item(i).getTextContent().toString();
 						pChk=person;
+					} catch (Exception e) {
+					}
+					
+					String oft = "없음";
+					try {
+						String tel = root.getElementsByTagName("officetel").item(i).getTextContent().toString();
+						oft=tel;
+					} catch (Exception e) {
 					}
 					
 					HashMap<String, Object> map = new HashMap<String, Object>();
@@ -99,7 +104,7 @@ public class StrayDogServiceImpl implements StrayDogService {
 					map.put("noticeEdt", root.getElementsByTagName("noticeEdt").item(i).getTextContent().toString()); //공고 종료일
 					map.put("noticeNo", root.getElementsByTagName("noticeNo").item(i).getTextContent().toString()); //공고 번호
 					map.put("noticeSdt", root.getElementsByTagName("noticeSdt").item(i).getTextContent().toString()); //공고시작일
-					map.put("officetel", root.getElementsByTagName("officetel").item(i).getTextContent().toString()); //담당자 연락처
+					map.put("officetel", oft); //담당자 연락처
 					map.put("orgNm", root.getElementsByTagName("orgNm").item(i).getTextContent().toString()); //관할기관
 					map.put("popfile", root.getElementsByTagName("popfile").item(i).getTextContent().toString()); //이미지
 					map.put("processState", root.getElementsByTagName("processState").item(i).getTextContent().toString()); //상태

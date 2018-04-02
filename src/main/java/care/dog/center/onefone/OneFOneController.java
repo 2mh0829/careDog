@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,10 +53,13 @@ public class OneFOneController {
 		map.put("end", end);
 		
 		List<OneFOneVo> list = service.listOneFOne(map);
+		String cp = req.getContextPath();
+		String articleUrl = cp+"/center/onefonecontent";
 		
 		model.addAttribute("list",list);
 		model.addAttribute("pageNo",pageNo);
 		model.addAttribute("totalPage",totalPage);
+		model.addAttribute("articleUrl",articleUrl);
 		
 		return ".center.onefonelist";
 	}
@@ -91,4 +93,37 @@ public class OneFOneController {
 		model.put("state", state);
 		return model;
 	}
+	
+	@RequestMapping(value="/center/onefonecontent")
+	public String content(
+			@RequestParam(value="num") int num,
+			HttpServletRequest req,
+			Model model
+			) throws Exception{
+		OneFOneVo dto = service.readonefone(num);
+		
+		if(dto==null) {
+			return "redirect:/center/onefonelist";
+		}
+		
+		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+
+		
+		model.addAttribute("dto",dto);		
+		
+		return ".center.onefonecontent";
+	}
+	
+	/*@RequestMapping(value="/center/insertreply", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> insertReply(
+			ReplyVo dto,
+			HttpSession session,
+			Model model
+			)throws Exception{
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		info.
+		return "";
+	}*/
 }

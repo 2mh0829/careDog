@@ -3,41 +3,48 @@ package care.dog.myPage.myPet;
 import org.springframework.web.multipart.MultipartFile;
 
 public class MyPetInfo {
+	private int myPetInfoId;
 	private String memberId;
-	private int havePet,myPetYear,myPetMonth;
+	private String havePet,myPetYear,myPetMonth;
 	private String myPetName,myPetGender,myPetType,myPetWeight;
-	private int registerMyPet,neutralization,friendly;
-	private int bark,disease,ddong,territory,anxiety;
+	private String registerMyPet,neutralization,friendly;
+	private String bark,disease,ddong,territory,anxiety;
 	private String whenBark,aboutDisease,whereDdong,whereTerritory,aboutAnxiety;
-	private int heartWorm,vaccine,coronaEnteritis,kennelCough;
-	private int isHospital;
+	private String heartWorm,vaccine,coronaEnteritis,kennelCough;
+	private String isHospital;
 	private String hospitalName,hospitalTel1,hospitalTel2,hospitalTel3;
 	private String zipCode;
 	private String addr1,addr2;
 	private MultipartFile upload;
 	private String myPetPhoto;
+	public int getMyPetInfoId() {
+		return myPetInfoId;
+	}
+	public void setMyPetInfoId(int myPetInfoId) {
+		this.myPetInfoId = myPetInfoId;
+	}
 	public String getMemberId() {
 		return memberId;
 	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	public int getHavePet() {
+	public String getHavePet() {
 		return havePet;
 	}
-	public void setHavePet(int havePet) {
+	public void setHavePet(String havePet) {
 		this.havePet = havePet;
 	}
-	public int getMyPetYear() {
+	public String getMyPetYear() {
 		return myPetYear;
 	}
-	public void setMyPetYear(int myPetYear) {
+	public void setMyPetYear(String myPetYear) {
 		this.myPetYear = myPetYear;
 	}
-	public int getMyPetMonth() {
+	public String getMyPetMonth() {
 		return myPetMonth;
 	}
-	public void setMyPetMonth(int myPetMonth) {
+	public void setMyPetMonth(String myPetMonth) {
 		this.myPetMonth = myPetMonth;
 	}
 	public String getMyPetName() {
@@ -64,52 +71,52 @@ public class MyPetInfo {
 	public void setMyPetWeight(String myPetWeight) {
 		this.myPetWeight = myPetWeight;
 	}
-	public int getRegisterMyPet() {
+	public String getRegisterMyPet() {
 		return registerMyPet;
 	}
-	public void setRegisterMyPet(int registerMyPet) {
+	public void setRegisterMyPet(String registerMyPet) {
 		this.registerMyPet = registerMyPet;
 	}
-	public int getNeutralization() {
+	public String getNeutralization() {
 		return neutralization;
 	}
-	public void setNeutralization(int neutralization) {
+	public void setNeutralization(String neutralization) {
 		this.neutralization = neutralization;
 	}
-	public int getFriendly() {
+	public String getFriendly() {
 		return friendly;
 	}
-	public void setFriendly(int friendly) {
+	public void setFriendly(String friendly) {
 		this.friendly = friendly;
 	}
-	public int getBark() {
+	public String getBark() {
 		return bark;
 	}
-	public void setBark(int bark) {
+	public void setBark(String bark) {
 		this.bark = bark;
 	}
-	public int getDisease() {
+	public String getDisease() {
 		return disease;
 	}
-	public void setDisease(int disease) {
+	public void setDisease(String disease) {
 		this.disease = disease;
 	}
-	public int getDdong() {
+	public String getDdong() {
 		return ddong;
 	}
-	public void setDdong(int ddong) {
+	public void setDdong(String ddong) {
 		this.ddong = ddong;
 	}
-	public int getTerritory() {
+	public String getTerritory() {
 		return territory;
 	}
-	public void setTerritory(int territory) {
+	public void setTerritory(String territory) {
 		this.territory = territory;
 	}
-	public int getAnxiety() {
+	public String getAnxiety() {
 		return anxiety;
 	}
-	public void setAnxiety(int anxiety) {
+	public void setAnxiety(String anxiety) {
 		this.anxiety = anxiety;
 	}
 	public String getWhenBark() {
@@ -142,34 +149,34 @@ public class MyPetInfo {
 	public void setAboutAnxiety(String aboutAnxiety) {
 		this.aboutAnxiety = aboutAnxiety;
 	}
-	public int getHeartWorm() {
+	public String getHeartWorm() {
 		return heartWorm;
 	}
-	public void setHeartWorm(int heartWorm) {
+	public void setHeartWorm(String heartWorm) {
 		this.heartWorm = heartWorm;
 	}
-	public int getVaccine() {
+	public String getVaccine() {
 		return vaccine;
 	}
-	public void setVaccine(int vaccine) {
+	public void setVaccine(String vaccine) {
 		this.vaccine = vaccine;
 	}
-	public int getCoronaEnteritis() {
+	public String getCoronaEnteritis() {
 		return coronaEnteritis;
 	}
-	public void setCoronaEnteritis(int coronaEnteritis) {
+	public void setCoronaEnteritis(String coronaEnteritis) {
 		this.coronaEnteritis = coronaEnteritis;
 	}
-	public int getKennelCough() {
+	public String getKennelCough() {
 		return kennelCough;
 	}
-	public void setKennelCough(int kennelCough) {
+	public void setKennelCough(String kennelCough) {
 		this.kennelCough = kennelCough;
 	}
-	public int getIsHospital() {
+	public String getIsHospital() {
 		return isHospital;
 	}
-	public void setIsHospital(int isHospital) {
+	public void setIsHospital(String isHospital) {
 		this.isHospital = isHospital;
 	}
 	public String getHospitalName() {
@@ -214,21 +221,6 @@ public class MyPetInfo {
 	public void setAddr2(String addr2) {
 		this.addr2 = addr2;
 	}
-
-	@Override
-	public String toString() {
-		return "MyPetInfo [memberId=" + memberId + ", havePet=" + havePet + ", myPetYear=" + myPetYear + ", myPetMonth="
-				+ myPetMonth + ", myPetName=" + myPetName + ", myPetGender=" + myPetGender + ", myPetType=" + myPetType
-				+ ", myPetWeight=" + myPetWeight + ", registerMyPet=" + registerMyPet + ", neutralization="
-				+ neutralization + ", friendly=" + friendly + ", bark=" + bark + ", disease=" + disease + ", ddong="
-				+ ddong + ", territory=" + territory + ", anxiety=" + anxiety + ", whenBark=" + whenBark
-				+ ", aboutDisease=" + aboutDisease + ", whereDdong=" + whereDdong + ", whereTerritory=" + whereTerritory
-				+ ", aboutAnxiety=" + aboutAnxiety + ", heartWorm=" + heartWorm + ", vaccine=" + vaccine
-				+ ", coronaEnteritis=" + coronaEnteritis + ", kennelCough=" + kennelCough + ", isHospital=" + isHospital
-				+ ", hospitalName=" + hospitalName + ", hospitalTel1=" + hospitalTel1 + ", hospitalTel2=" + hospitalTel2
-				+ ", hospitalTel3=" + hospitalTel3 + ", zipCode=" + zipCode + ", addr1=" + addr1 + ", addr2=" + addr2
-				+ "]";
-	}
 	public MultipartFile getUpload() {
 		return upload;
 	}
@@ -241,6 +233,5 @@ public class MyPetInfo {
 	public void setMyPetPhoto(String myPetPhoto) {
 		this.myPetPhoto = myPetPhoto;
 	}
-	
-	
+
 }
