@@ -10,7 +10,11 @@
 
 table {
 	width: 800px;
-	border-bottom: 1px solid #e2e2e2;
+	/* border-bottom: 1px solid #e2e2e2; */
+	/* margin-bottom: 100px; */
+}
+
+.productCreated{
 	margin-bottom: 100px;
 }
 
@@ -70,28 +74,80 @@ th {
 
 </style>
 
+<script>
+$(document).ready(function(){
+	var i = 1;
+	$("#optAddBtn").click(function() {
+		optionAdd(i);
+		i++;
+	});
+	
+});
+
+
+//옵션 추가
+function optionAdd(i){
+	
+	var str = "";
+	
+	console.log(i);
+	str += "<div class='divTd' id='optionDiv"+i+"' style='clear: both;'>";
+	str += "<input type='text' id='optionList"+i+"' name='optionList'";
+	str += " class='inputTxt' style='width:300px'/>";
+	str += "<button type='button' class='btn btn-default delOptionBtn' onclick='deleteOption("+i+")'>X</button>";
+	str += "</div>";
+	
+	$("#optionAddArea").append(str);
+	
+}
+
+//옵션 삭제
+function deleteOption(num) {
+	$("#optionDiv" + num).remove(); //옵션삭제
+}
+
+function check() {
+    var f = document.productCreatedForm;
+
+	var str = f.productName.value;
+    if(!str) {
+        f.productName.focus();
+        return false;
+    }
+
+	str = f.brand.value;
+    if(!str) {
+        f.brand.focus();
+        return false;
+    }
+
+    var mode="${mode}";
+	if(mode=="created" && f.upload.value!="") {
+		if(! /(\.gif|\.jpg|\.png|\.jpeg)$/i.test(f.upload.value)) {
+			alert('이미지 파일만 가능합니다. !!!');
+			f.upload.focus();
+			return false;
+		}
+	}
+    
+	if(mode=="insert")
+		f.action="<%=cp%>/admin/store/insertProduct";
+	<%-- else if(mode=="update")
+		f.action="<%=cp%>/admin/store/updateProduct"; --%>
+
+	// <input type='submit' ..>,  <input type='image' ..>, <button>은 submit() 메소드 호출하면 두번전송
+    return true;
+}
+
+</script>
+
 <div class="body-container">
 
-	<form name="productCreatedForm" id="productCreatedForm" action="">
 	<h3 class="sub-title product-info">상품 등록</h3>
 
-		<table class="table table-condensed productCreated">
+	<form name="productCreatedForm" method="post" onsubmit="return check();" enctype="multipart/form-data">
+		<table class="table table-condensed productCreated" id="createTable">
 			<tbody>
-				<!-- <tr>
-					<th scope="row"><p class="txt">배송지 선택</p></th>
-					<td>
-						<div class="addr_info">
-							<div class="check_area">
-								<input type="radio" id="radio_old_addr" name="radio_old_addr">
-								<label for="old_addr">기존 배송지</label>
-							</div>
-							<div class="check_area">
-								<input type="radio" id="radio_new_addr" name="radio_new_addr" checked="checked">
-								<label for="new_addr">신규 배송지</label>
-							</div>
-						</div>
-					</td>
-				</tr> -->
 				<tr>
 					<th>
 						<div class="divTh">
@@ -121,7 +177,7 @@ th {
 				<tr>
 					<th>
 						<div class="divTh">
-							<p class="thTxt">판매가</p>
+							<p class="thTxt">판매가격</p>
 						</div>
 					</th>
 					<td>
@@ -134,17 +190,30 @@ th {
 				<tr>
 					<th>
 						<div class="divTh">
-							<p class="thTxt">수량</p>
+							<p class="thTxt">입고가격</p>
 						</div>
 					</th>
 					<td>
 						<div class="divTd">
-							<input type="text" id="amount" name="amount" 
-							class="inputTxt" style="width:150px"/>
+							<input type="text" id="inputPrice" name="inputPrice" 
+							class="inputTxt" style="width:150px"/>원
 						</div>
 					</td>
 				</tr>
 				<tr>
+					<th>
+						<div class="divTh">
+							<p class="thTxt">입고수량</p>
+						</div>
+					</th>
+					<td>
+						<div class="divTd">
+							<input type="text" id="inputAmount" name="inputAmount" 
+							class="inputTxt" style="width:150px"/>
+						</div>
+					</td>
+				</tr>
+				<tr style="border-bottom-color: #000000;">
 					<th>
 						<div class="divTh">
 							<p class="thTxt">옵션</p>
@@ -152,15 +221,15 @@ th {
 					</th>
 					<td>
 						<div class="divTd" style="float: left;">
-							<input type="text" id="option" name="option" 
+							<input type="text" id="optionList0" name="optionList" 
 							class="inputTxt" style="width:300px"/>
 						</div>
 						<div class="divTd" style="float: left;">
-							<button type="button" class="btn btn-default roundBtn" id="optAddBtn"
-							onclick="optionAdd();">
+							<button type="button" class="btn btn-default roundBtn" id="optAddBtn">
 								<span>옵션추가</span>
 							</button>
 						</div>
+						<div id="optionAddArea"></div>
 					</td>
 				</tr>
 				<tr>
@@ -171,127 +240,48 @@ th {
 					</th>
 					<td>
 						<div class="divTd">
-							<select id="categorySel" class="select" style="width:350px">
+							<select id="categoryId" name="categoryId" class="select" style="width:350px">
 								<option value="">분류를 선택해주세요.</option>
-								<option value="10">사료&간식</option>
-								<option value="20">목욕&위생용품</option>
-								<option value="30">식기&하우스</option>
-								<option value="40">외출&패션</option>
-								<option value="50">장난감</option>
+								<option value="1">사료&간식</option>
+								<option value="2">목욕&위생용품</option>
+								<option value="3">식기&하우스</option>
+								<option value="4">외출&패션</option>
+								<option value="5">장난감</option>
 							</select>
 						</div>
 					</td>
 				</tr>
-				<!-- 단종여부는 상품 수정할때 -->
-				<!-- <tr>
+				<tr>
 					<th>
 						<div class="divTh">
-							<p class="thTxt">단종여부</p>
+							<p class="thTxt">상품이미지</p>
 						</div>
 					</th>
 					<td>
 						<div class="divTd">
-							<select id="categorySel" class="select" style="width:350px">
-								<option value="">분류를 선택해주세요.</option>
-								<option value="10">단종안됨</option>
-								<option value="20">단종됨</option>
-							</select>
-						</div>
-					</td>
-				</tr> -->
-				
-				<%-- <tr>
-					<th><p class="txt">연락처1&nbsp;<p class="star">*</p></p></th>
-					<td>
-						<select id="tel1" name="tel1" class="select" disabled="disabled"
-						style="width: 90px;">
-							<option disabled="disabled">선택</option>
-							<option value="010" ${tel1 == 010 ? "selected":"" }>010</option>
-							<option value="011" ${tel1 == 011 ? "selected":"" }>011</option>
-							<option value="016" ${tel1 == 016 ? "selected":"" }>016</option>
-							<option value="017" ${tel1 == 017 ? "selected":"" }>017</option>
-							<option value="018" ${tel1 == 018 ? "selected":"" }>018</option>
-							<option value="019" ${tel1 == 019 ? "selected":"" }>019</option>
-						</select>
-						&nbsp;-&nbsp;
-						<input type="text" id="tel2" name="tel2" disabled="disabled"
-						value="${tel2 }" class="inputTxt" style="width: 90px;">
-						&nbsp;-&nbsp;
-						<input type="text" id="tel3" name="tel3" disabled="disabled"
-						value="${tel3 }" class="inputTxt" style="width: 90px;">
-					</td>
-				</tr>
-				<tr>
-					<th scope="row"><p class="txt">연락처2</p></th>
-					<td>
-						<select id="tel1_new" name="tel1_new" class="select"
-						style="width: 90px;">
-							<option selected="selected" disabled="disabled">선택</option>
-							<option value="010">010</option>
-							<option value="011">011</option>
-							<option value="016">016</option>
-							<option value="017">017</option>
-							<option value="018">018</option>
-							<option value="019">019</option>
-							<option value="02">02</option>
-						</select>
-						&nbsp;-&nbsp;
-						<input type="text" id="tel2_new" name="tel2_new"
-						value="" class="inputTxt" style="width: 90px;">
-						&nbsp;-&nbsp;
-						<input type="text" id="tel3_new" name="tel3_new"
-						value="" class="inputTxt" style="width: 90px;">
-					</td>
-				</tr>
-				<tr>
-					<th scope="row"><p class="txt">주소&nbsp;<p class="star">*</p></p></th>
-					<td>
-						<div class="addr_info">
-							<div class="postNo_info">
-								<input type="text" class="inputTxt" style="width:90px" readonly="readonly"
-								id="sample6_postcode" name="zipcode" value="${sessionScope.member.zipCode}"/>
-								<button type="button" class="btn btn-default roundBtn" id="search-zipcode"
-								onclick="sample6_execDaumPostcode()">
-									<span>우편번호 찾기</span>
-								</button>
-							</div>
-							
-							<!-- 다음 주소 찾기 div -->						
-							<div id="wrap" style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
-								<img src="//t1.daumcdn.net/localimg/localimages/07/postcode/320/close.png"
-									id="btnFoldWrap" style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
-									onclick="foldDaumPostcode()" alt="접기 버튼">
-							</div> 
-							
-							<div class="addr_box">
-								<!-- <span class="txt_tit">도로명</span> : 
-								<span class="txt_addr" id="postAddr_new"></span>
-								<span class="txt_tit">지번</span> : 
-								<span class="txt_addr" id="baseAddr_new"></span> -->
-								<input type="text" id="sample6_address" name="addr1" class="inputTxt"
-								value="${sessionScope.member.address1}" class="full mb" placeholder="주소">
-								<input type="text" id="sample6_address2" style="ime-mode:active" name="addr2" class="inputTxt"
-								value="${sessionScope.member.address2}" class="full mb" placeholder="상세주소">
-							</div>
+							<input type="file" id="upload" name="upload" />
 						</div>
 					</td>
 				</tr>
-				<tr>
-					<th scope="row"><p class="txt">택배배송 메시지</p></th>
-					<td>
-						<select id="deliveryMemoSel" class="select" style="width:350px">
-							<option value="">배송메시지를 선택해주세요.</option>
-							<option value="10">부재시 경비실에 맡겨주세요.</option>
-							<option value="20">부재시 문앞에 놓아주세요.</option>
-							<option value="30">파손의 위험이 있는 상품이오니,  배송 시 주의해주세요.</option>
-							<option value="40">배송전에 연락주세요.</option>
-							<option value="50">택배함에 넣어주세요.</option>
-							<option value="99">배송 메시지 직접입력</option>
-						</select>
-						<input type="text" name="deliveryMemo" class="inputTxt" style="display: none;"/>
-					</td>
-				</tr> --%>
 			</tbody>
+			<tfoot>
+                 <tr>
+                     <td colspan="4" style="text-align: center; padding-top: 15px;">
+                           <button type="submit" class="btn btn-primary"> 
+                           	확인 <span class="glyphicon glyphicon-ok"></span></button>
+                           <button type="button" class="btn btn-danger" 
+                           	onclick="javascript:location.href='<%=cp%>/admin/store/list';"> 
+                           	취소 
+                           	</button>
+                           
+                          <%--  <c:if test="${mode=='update'}">
+                               <input type="hidden" name="productId" value="${dto.productId}">
+                               <input type="hidden" name="imageFilename" value="${dto.imageFilename}">
+                               <input type="hidden" name="page" value="${page}">
+                           </c:if> --%>
+                     </td>
+                 </tr>
+             </tfoot>
 		</table>
 	</form>
 	

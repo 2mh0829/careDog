@@ -1,5 +1,7 @@
 package care.dog.admin.store;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class AdminProduct {
@@ -18,6 +20,7 @@ public class AdminProduct {
 	private String categoryName; // 분류명
 	
 	private int optionId; 
+	private List<String> optionList;
 	private String optionContent;
 
 	private String imageFilename; // 상품 이미지
@@ -106,12 +109,6 @@ public class AdminProduct {
 	public void setOptionId(int optionId) {
 		this.optionId = optionId;
 	}
-	public String getOptionContent() {
-		return optionContent;
-	}
-	public void setOptionContent(String optionContent) {
-		this.optionContent = optionContent;
-	}
 	public String getImageFilename() {
 		return imageFilename;
 	}
@@ -148,14 +145,27 @@ public class AdminProduct {
 	public void setExpireDate(String expireDate) {
 		this.expireDate = expireDate;
 	}
+	public List<String> getOptionList() {
+		return optionList;
+	}
+	public void setOptionList(List<String> optionList) {
+		this.optionList = optionList;
+	}
+	public String getOptionContent() {
+		return optionContent;
+	}
+	public void setOptionContent(String optionContent) {
+		this.optionContent = optionContent;
+	}
 	@Override
 	public String toString() {
 		return "AdminProduct [listNum=" + listNum + ", num=" + num + ", productId=" + productId + ", productName="
 				+ productName + ", brand=" + brand + ", sellingPrice=" + sellingPrice + ", price=" + price + ", amount="
 				+ amount + ", isContinued=" + isContinued + ", mileage=" + mileage + ", categoryId=" + categoryId
-				+ ", categoryName=" + categoryName + ", optionId=" + optionId + ", optionContent=" + optionContent
-				+ ", imageFilename=" + imageFilename + ", upload=" + upload + ", inputDate=" + inputDate
-				+ ", inputPrice=" + inputPrice + ", inputAmount=" + inputAmount + ", expireDate=" + expireDate + "]";
+				+ ", categoryName=" + categoryName + ", optionId=" + optionId + ", optionList=" + optionList
+				+ ", optionContent=" + optionContent + ", imageFilename=" + imageFilename + ", upload=" + upload
+				+ ", inputDate=" + inputDate + ", inputPrice=" + inputPrice + ", inputAmount=" + inputAmount
+				+ ", expireDate=" + expireDate + "]";
 	}
 	
 }
