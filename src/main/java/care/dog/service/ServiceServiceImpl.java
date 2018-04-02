@@ -48,6 +48,7 @@ public class ServiceServiceImpl implements ServiceService{
 					if(ls.isEmpty()) {
 						continue;
 					}
+					
 					String tag = ls;
 					
 					dto.setTagName(tag);
@@ -102,12 +103,12 @@ public class ServiceServiceImpl implements ServiceService{
 	}
 
 	@Override
-	public List<ServiceDto> sitterList() {
+	public List<ServiceDto> sitterList(Map<String, Object> map) {
 
 		List<ServiceDto> list = null;
 		
 		try {
-			list = dao.selectList("service.sitterList");
+			list = dao.selectList("service.sitterList",map);
 			
 			
 		} catch (Exception e) {
@@ -143,6 +144,51 @@ public class ServiceServiceImpl implements ServiceService{
 		}
 		
 		return listTag;
+	}
+
+	@Override
+	public List<ServiceDto> selectTag(String tagName) {
+		
+		List<ServiceDto> selectTag = null;
+		
+		try {
+			selectTag = dao.selectList("service.selectTag", tagName);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return selectTag;
+	}
+
+	@Override
+	public List<ServiceDto> selectSitter(ServiceDto dto) {
+		
+		List<ServiceDto> selectSitter = null;
+		
+		try {
+			selectSitter = dao.selectList("service.selectSitter", dto);
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return selectSitter;
+		
+		
+	}
+
+	@Override
+	public ServiceDto readSitter(int sittingId) {
+		
+		ServiceDto readSitter = null;
+		
+		try {
+			readSitter = dao.selectOne("service.readSitter", sittingId);
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		
+		return readSitter;
 	}
 
 }

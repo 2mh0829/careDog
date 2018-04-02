@@ -683,20 +683,7 @@ $(document).ready(function(){
 	var carableAge;
 	var reserDiv;
 	var addPet;
-	/* $("input[type='file']").on("change", function(){
 
-		var file = this.files[0];       
-
-		formData.append("imgFile", file);
-	}); */
-	
-	//태그 값 불러오기
-	$("body").on("click",'.btn',function(){
-		/* var tagName = $('.btn').eq($(this).index()).text().trim(); */
-		
-		/* tagList += tagName + " "; */
-	})
-	
 	// 드롭다운 선택시 버튼에 텍스트 표시 and 해당 value값 전송
 	$("body").on("click",'#carableWeight li',function(){
 		$('#sizeText').text($(this).text());

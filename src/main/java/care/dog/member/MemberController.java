@@ -1,5 +1,7 @@
 package care.dog.member;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -92,6 +94,34 @@ public class MemberController {
 		return ".member.complete";
 	}
 */
+	
+	@RequestMapping(value="/member/id")
+	public String idForm(HttpSession session) {
+		return ".member.id";
+	}
+	
+	@RequestMapping(value="/member/pwd", method=RequestMethod.GET)
+	public String pwdForm() {
+		return ".member.pwd";
+	}
+
+	@RequestMapping(value="/member/changePwd", method=RequestMethod.POST)
+	@ResponseBody
+	public int changePwd(String memberId, String userPwd) {
+		int result = 0;
+		
+		ShaPasswordEncoder passwordEncoder=new ShaPasswordEncoder(256);
+		String hashed = passwordEncoder.encodePassword(userPwd, null);
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("userPwd", hashed);
+		result = service.changePwd(map);
+		System.out.println(result);
+		return result;
+	}
+	
+	/*
 	@RequestMapping(value="/member/pwd", method=RequestMethod.GET)
 	public String pwdForm(
 			String dropout,
@@ -106,6 +136,7 @@ public class MemberController {
 		
 		return ".member.pwd";
 	}
+	*/
 	
 	@RequestMapping(value="/member/pwd", method=RequestMethod.POST)
 	public String pwdSubmit(
@@ -200,12 +231,15 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/emailChecked", method=RequestMethod.POST)
 	@ResponseBody
-	public int emailChecked(String email){
+	public int emailChecked(String memberId, String email){
 		int result = 0;
-		result = service.emailChecked(email);
+		Map<String, String> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("email", email);
+		result = service.emailChecked(map);
 		return result;
 	}
-
+	
 	@RequestMapping(value="member/secession", method=RequestMethod.GET)//jh
 	public String secession() {
 		return "member/secession";
