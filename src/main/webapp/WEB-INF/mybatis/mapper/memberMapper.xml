@@ -102,9 +102,15 @@
 		WHERE memberId = #{memberId}
 	</select>
 	
-	<select id="emailChecked" parameterType="String" resultType="Integer">
+	<select id="emailChecked" parameterType="map" resultType="Integer">
 		SELECT COUNT(email) FROM member2
-		WHERE email = #{email}
+		WHERE email = #{email} and memberId = #{memberId}
 	</select>
+	
+	<update id="changePwd" parameterType="map">
+		UPDATE member1
+		SET userPwd = #{userPwd}
+		WHERE memberId = #{memberId}
+	</update>
 	
 </mapper>
