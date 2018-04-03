@@ -24,7 +24,7 @@ public class OneFOneController {
 	@Autowired MyUtil myUtil;
 	@Autowired OneFOneService service;
 	
-	@RequestMapping(value="/center/onefonelist")
+	@RequestMapping(value="/center/onetone/list")
 	public String OneforOneMain(
 			@RequestParam(value="pageNo", defaultValue="1") int pageNo,
 			@RequestParam(value="sort", defaultValue="sort") String sort,
@@ -62,7 +62,7 @@ public class OneFOneController {
 		
 		List<OneFOneVo> list = service.listOneFOne(map);
 		String cp = req.getContextPath();
-		String articleUrl = cp+"/center/onefonecontent";
+		String articleUrl = cp+"/center/onetone/content";
 		
 		model.addAttribute("list",list);
 		model.addAttribute("pageNo",pageNo);
@@ -72,7 +72,7 @@ public class OneFOneController {
 		return ".center.onefonelist";
 	}
 	
-	@RequestMapping(value="/center/onefone", method=RequestMethod.GET)
+	@RequestMapping(value="/center/onetone/insert", method=RequestMethod.GET)
 	public String onefone(
 			HttpSession session,
 			Model model
@@ -87,7 +87,7 @@ public class OneFOneController {
 		return ".center.onefone";
 	}
 	
-	@RequestMapping(value="/center/onefone", method=RequestMethod.POST)
+	@RequestMapping(value="/center/onetone/insert", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> onefoneSubmit(
 			OneFOneVo dto,
@@ -108,7 +108,7 @@ public class OneFOneController {
 		return model;
 	}
 	
-	@RequestMapping(value="/center/onefonecontent")
+	@RequestMapping(value="/center/onetone/content")
 	public String content(
 			@RequestParam(value="num") int num,
 			HttpSession session,
@@ -123,7 +123,7 @@ public class OneFOneController {
 		
 		OneFOneVo dto = service.readonefone(num);
 		if(dto==null) {
-			return "redirect:/center/onefonelist";
+			return "redirect:/center/onetone/list";
 		}
 		
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));

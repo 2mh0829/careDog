@@ -213,7 +213,7 @@ ul li.nodata {width:100% !important;padding:200px 15px 80px !important;backgroun
 				<c:when test="${dto.sort==901 }">기타문의</c:when>
 			</c:choose>
 			</td>
-			<td class="subject"><a href="<%=cp%>/center/onefonecontent?num=${dto.num}">${dto.subject }</a></td>
+			<td class="subject"><a href="<%=cp%>/center/onetone/content?num=${dto.num}">${dto.subject }</a></td>
 			<td>${dto.qdate }</td>
 			<td style="display: none;">${dto.memberId }</td>
 		</tr>
@@ -221,7 +221,7 @@ ul li.nodata {width:100% !important;padding:200px 15px 80px !important;backgroun
 	<tr>
 		<td style="border-bottom: none;">
 		<c:if test="${sessionScope.member.memberId!='admin' || sessionScope.member.memberId!=''}">
-		<button type="button" class="onefonebtn" onclick="javascript:location.href='<%=cp%>/center/onefone';">글쓰기</button>
+		<button type="button" class="onefonebtn" onclick="javascript:location.href='<%=cp%>/center/onetone/insert';">글쓰기</button>
 		</c:if>
 		</td>
 	</tr>

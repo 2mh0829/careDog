@@ -246,7 +246,7 @@ function hahaSubmit(){
 		 return;
 	 }
 	 
-	 var url = "<%=cp%>/center/onefone";
+	 var url = "<%=cp%>/center/onetone/insert";
 	 var query = $("form[name=onefoneForm]").serialize();
 	 console.log(query);
 	 $.ajax({
@@ -259,7 +259,7 @@ function hahaSubmit(){
 			if(state=="false")
 				alert("게시물을 추가하지 못했습니다.");
 			else 
-			location.href="<%=cp%>/center/onefonelist";
+			location.href="<%=cp%>/center/onetone/list";
 		}
 	 ,beforeSend:function(jqXHR){
 		 jqXHR.setRequestHeader("AJAX",true);
