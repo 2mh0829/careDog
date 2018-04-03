@@ -34,12 +34,15 @@ a {
 	
 	<div class="menu-container" align="center">
 		<ul id="mainMenu" class="navi">
-			<li><a href="<%=cp %>">서비스&nbsp;</a></li>
+			<li><a href="<%=cp %>/admin/member">회원관리&nbsp;</a></li>
 			<li><a href="<%=cp %>/admin/mungstar">멍스타그램&nbsp;</a></li>
 			<li><a href="<%=cp %>/admin/store">펫#&nbsp;</a></li>
 			<li><a href="<%=cp%>/admin/strayDog">유기견&nbsp;</a></li>
 			<li><a href="<%=cp%>/admin/dog119/dogHealthInput">펫119&nbsp;</a></li>
-			<li><a href="<%=cp %>">고객센터&nbsp;</a></li>
+<<<<<<< HEAD
+=======
+			<li><a href="<%=cp %>/admin/center/onefonelist">고객센터&nbsp;</a></li>
+>>>>>>> 68dfa54104c59e9f35c43759e00abe81ab78bef0
 		</ul>
 	</div>
 	

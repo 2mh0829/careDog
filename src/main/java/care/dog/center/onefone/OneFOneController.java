@@ -30,12 +30,19 @@ public class OneFOneController {
 			@RequestParam(value="sort", defaultValue="sort") String sort,
 			@RequestParam(value="searchKey", defaultValue="subject") String searchKey,
 			@RequestParam(value="searchValue", defaultValue="") String searchValue,
+			HttpSession session,
 			HttpServletRequest req,
 			Model model
 			) throws Exception{
 		
 		int rows = 10;
 		int totalPage = 10;
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		if(info == null) {
+			return "redirect:/member/login";
+		}
+		
 		
 		if(req.getMethod().equalsIgnoreCase("GET")) {
 			searchValue = URLDecoder.decode(searchValue,"utf-8");
@@ -46,6 +53,7 @@ public class OneFOneController {
 		map.put("searchValue", searchValue);
 		map.put("sort", sort);
 		map.put("pageNo", pageNo);
+		map.put("memberId", info.getMemberId());
 		
 		int start = (pageNo - 1) * rows+1;
 		int end = pageNo * rows;
@@ -66,8 +74,14 @@ public class OneFOneController {
 	
 	@RequestMapping(value="/center/onefone", method=RequestMethod.GET)
 	public String onefone(
+			HttpSession session,
 			Model model
 			) throws Exception{
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		if(info == null) {
+			return "redirect:/member/login";
+		}
+		
 		model.addAttribute("pageNo","1");
 		
 		return ".center.onefone";
@@ -97,24 +111,29 @@ public class OneFOneController {
 	@RequestMapping(value="/center/onefonecontent")
 	public String content(
 			@RequestParam(value="num") int num,
+			HttpSession session,
 			HttpServletRequest req,
 			Model model
 			) throws Exception{
-		OneFOneVo dto = service.readonefone(num);
 		
+		SessionInfo info = (SessionInfo)session.getAttribute("member");
+		if(info == null) {
+			return "redirect:/member/login";
+		}
+		
+		OneFOneVo dto = service.readonefone(num);
 		if(dto==null) {
 			return "redirect:/center/onefonelist";
 		}
 		
 		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
-
 		
 		model.addAttribute("dto",dto);		
 		
 		return ".center.onefonecontent";
 	}
 	
-	/*@RequestMapping(value="/center/insertreply", method=RequestMethod.POST)
+	@RequestMapping(value="/center/insertreply", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> insertReply(
 			ReplyVo dto,
@@ -123,7 +142,32 @@ public class OneFOneController {
 			)throws Exception{
 		
 		SessionInfo info = (SessionInfo)session.getAttribute("member");
-		info.
-		return "";
-	}*/
+		String state = "true";
+		
+		dto.setMemberId(info.getMemberId());
+		int result = service.insertReply(dto);
+		if(result==0)
+			state = "false";
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("state", state);
+		
+		return map;
+	}
+	
+	@RequestMapping(value="/center/listreply")
+	public String listReply(
+			@RequestParam int num,
+			Model model
+			) throws Exception{
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("num", num);
+		
+		ReplyVo dto = service.readreply(num);
+		dto.setAcontent(dto.getAcontent().replaceAll("\n", "<br>"));
+		model.addAttribute("dto",dto);
+		
+		return "/center/reply";
+	}
 }

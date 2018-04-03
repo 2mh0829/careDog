@@ -96,8 +96,23 @@ public class MemberController {
 */
 	
 	@RequestMapping(value="/member/id")
-	public String idForm(HttpSession session) {
+	public String idForm() {
 		return ".member.id";
+	}
+	
+	@RequestMapping(value="/member/findId", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> findId(String email) {
+		String memberId = service.findId(email);
+		String findId = "";
+		if(memberId != null) {
+			findId = memberId.substring(0, memberId.length()-3);
+			findId += "***";
+		}
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("findId", findId);
+		return map;
 	}
 	
 	@RequestMapping(value="/member/pwd", method=RequestMethod.GET)

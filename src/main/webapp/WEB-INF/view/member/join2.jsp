@@ -287,7 +287,7 @@ function joinNext() {
         f.birth.focus();
         return;
     } */
-    
+ /*    
     str = f.tel1.value;
 	str = str.trim();
     if(!str) {
@@ -308,7 +308,6 @@ function joinNext() {
         f.tel2.focus();
         return;
     }
-
     str = f.tel3.value;
 	str = str.trim();
     if(!str) {
@@ -316,12 +315,14 @@ function joinNext() {
         f.tel3.focus();
         return;
     }
+
     if(!/^(\d+)$/.test(str)) {
         alert("숫자만 가능합니다. ");
         f.tel3.focus();
         return;
     }
-    
+  */
+
     str = f.email1.value;
 	str = str.trim();
     if(!str) {
@@ -367,7 +368,7 @@ function joinNext() {
 				  <c:if test="${empty sessionScope.member }">
 				  <tr>
 				      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
-				            <label style="font-weight: 900;">아이디</label>
+				            <label style="font-weight: 900;">아이디<span style="color: red; font-size: 20px;">*</span></label>
 				      </td>
 				      <td style="padding: 0 0 15px 15px;">
 				        <p style="margin-top: 1px; margin-bottom: 5px;">
@@ -382,7 +383,7 @@ function joinNext() {
 				</c:if>
 				  <tr>
 				      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
-				            <label style="font-weight: 900;">패스워드</label>
+				            <label style="font-weight: 900;">패스워드<span style="color: red; font-size: 20px;">*</span></label>
 				      </td>
 				      <td style="padding: 0 0 15px 15px;">
 				        <p style="margin-top: 1px; margin-bottom: 5px;">
@@ -395,7 +396,7 @@ function joinNext() {
 				
 				  <tr>
 				      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
-				            <label style="font-weight: 900;">패스워드 확인</label>
+				            <label style="font-weight: 900;">패스워드 확인<span style="color: red; font-size: 20px;">*</span></label>
 				      </td>
 				      <td style="padding: 0 0 15px 15px;">
 				        <p style="margin-top: 1px; margin-bottom: 5px;">
@@ -408,7 +409,7 @@ function joinNext() {
 				
 				  <tr>
 				      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
-				            <label style="font-weight: 900;">이름</label>
+				            <label style="font-weight: 900;">이름<span style="color: red; font-size: 20px;">*</span></label>
 				      </td>
 				      <td style="padding: 0 0 15px 15px;">
 				        <p style="margin-top: 1px; margin-bottom: 5px;">
@@ -435,7 +436,7 @@ function joinNext() {
 				   <c:if test="${empty sessionScope.member }">
 				  <tr>
 				      <td width="100" valign="top" style="text-align: right; padding-top: 5px;">
-				            <label style="font-weight: 900;">이메일</label>
+				            <label style="font-weight: 900;">이메일<span style="color: red; font-size: 20px;">*</span></label>
 				      </td>
 				      <td style="padding: 0 0 15px 15px;">
 				        <p style="margin-top: 1px; margin-bottom: 5px;">
