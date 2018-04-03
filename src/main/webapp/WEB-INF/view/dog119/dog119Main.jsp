@@ -47,7 +47,6 @@ em { font-style: normal; } /* 강조 */
 <script type="text/javascript">
 	$(document).ready(function() {
 		var url = "<%=cp%>/dog119/list";
-		initialize();
 		$.ajax({
 			url:url,
 			dataType:'json',
@@ -73,73 +72,43 @@ em { font-style: normal; } /* 강조 */
 			}
 		});
 		
-		$("body").on("click",".btnDog119Info", function(){
+		/* $("body").on("click",".btnDog119Info", function(){
 			initialize();
 			$("#dog119Info").modal("show");
-		});
+		}); */
 	});
 	
+	var center = new google.maps.LatLng(59.76522, 18.35002);
 	var map;
+	
 	function initialize() {
-	  var myLatlng = new google.maps.LatLng(37.531805, 126.914165);
-	  
-		var myOptions = {
-				zoom : 15,
-				center : myLatlng,
-				navigationControl : true, // 눈금자 형태로 스케일 조절하는 컨트롤 활성화 선택.
-				navigationControlOptions : {
-					position : google.maps.ControlPosition.TOP_RIGHT,
-					style : google.maps.NavigationControlStyle.DEFAULT
-				// ANDROID, DEFAULT, SMALL, ZOOM_PAN
-				},
 
-				streetViewControl : true,
+	    var mapOptions = {
+	        zoom: 7,
+	        mapTypeId: google.maps.MapTypeId.ROADMAP,
+	        center: center
+	    };
 
-				scaleControl : true, // 지도 축적 보여줄 것인지.
-				scaleControlOptions: { position: google.maps.ControlPosition.TOP_RIGHT },
+	    map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 
-				mapTypeControl : true, // 지도,위성,하이브리드 등등 선택 컨트롤 보여줄 것인지
-				mapTypeId : google.maps.MapTypeId.ROADMAP
-			}
-			map = new google.maps.Map(document.getElementById("map_canvas"),
-					myOptions);
+	    var marker = new google.maps.Marker({
+	        map: map,
+	        position: center
+	    });
+	}
 
-			google.maps.event.addListener(map, 'click', function(event) {
-				clearMark();
-				placeMarker(event.latLng);
-				
-			});
-		}
+	$('body').on('click',".btnDog119Info", function () {
+	    
+	    $('#dog119Info').modal({
+	        backdrop: 'static',
+	        keyboard: false
+	    }).on('shown.bs.modal', function () {
+	        google.maps.event.trigger(map, 'resize');
+	        map.setCenter(center);
+	    });
+	});
 
-	//마커
-		function placeMarker(location) {
-			var marker = new google.maps.Marker({
-				position : location,
-				map : map
-			});
-			getMarkPos(marker);
-			map.setCenter(location);
-		}
-		
-		//마크좌표 가져오기
-		function getMarkPos(marker) {
-			var pos = marker.getPosition();
-
-			document.getElementById("posx").value = pos.lat();
-			document.getElementById("posy").value = pos.lng();
-		}
-
-		//지도 위의 마크 모두 삭제 
-		function clearMark() {
-			var loc = map.getCenter(); // 현재의 지도의 위치를 가져온다.
-
-			map = null;
-			globalMarker = null;
-			globalGeocoder = null;
-
-			initialize();
-		} 
-
+	
 </script>
 
 <div class="body-container">
@@ -272,7 +241,7 @@ em { font-style: normal; } /* 강조 */
 					</dl>
 				</div>
 			</div>
-			<div class="animal_notice">
+			<!-- <div class="animal_notice">
 				<strong class="blind">업데이트</strong>
 				<p>
 				<span class="ico_notice"></span>본 정보는 지방자치단체와 유기동물 보호시설에서 등록한 보호중
@@ -280,7 +249,7 @@ em { font-style: normal; } /* 강조 */
 					업데이트 2018.03.10.<span class="ico_bar"></span> 출처 (주)careDog
 				
 				</p>
-			</div>
+			</div> -->
 		</div>
 
 		</div> <!-- modal-content -->
