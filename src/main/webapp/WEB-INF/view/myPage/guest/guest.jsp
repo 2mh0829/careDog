@@ -101,7 +101,7 @@ function deleteGuest(num, page) {
 
 function printGuest(data) {
 	var uid="${sessionScope.member.memberId}";
-	var total_page=data.total_page;
+	var total_page=data.total_page;//qq
 	var dataCount=data.dataCount;
 	var pageNo=data.pageNo;
 	var paging=data.paging;

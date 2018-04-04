@@ -8,7 +8,7 @@ public class InfoController {
 	
 	@RequestMapping(value="/info")
 	public String main() {
-		return ".info.youtube";
+		return ".info.main";
 	}
 
 }

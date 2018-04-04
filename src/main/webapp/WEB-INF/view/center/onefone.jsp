@@ -246,7 +246,7 @@ function hahaSubmit(){
 		 return;
 	 }
 	 
-	 var url = "<%=cp%>/center/onefone";
+	 var url = "<%=cp%>/center/onetone/insert";
 	 var query = $("form[name=onefoneForm]").serialize();
 	 console.log(query);
 	 $.ajax({
@@ -259,7 +259,7 @@ function hahaSubmit(){
 			if(state=="false")
 				alert("게시물을 추가하지 못했습니다.");
 			else 
-			location.href="<%=cp%>/center/onefonelist";
+			location.href="<%=cp%>/center/onetone/list";
 		}
 	 ,beforeSend:function(jqXHR){
 		 jqXHR.setRequestHeader("AJAX",true);
@@ -402,6 +402,9 @@ function hahaSubmit(){
 								  	<option value="801">이벤트 참여방법</option>
 								  	<option value="802">이벤트 당첨확인</option>
 								  	<option value="803">이벤트 사은품 관련</option>
+								  </optgroup>
+								  <optgroup label="기타문의">
+								  	<option value="901">기타문의</option>
 								  </optgroup>
 							</select>
 						</td>

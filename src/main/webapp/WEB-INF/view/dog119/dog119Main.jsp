@@ -42,10 +42,12 @@ ul, ol, li, dl, dt, dd {list-style:none;margin:0;padding:0;}
 strong {font-family: 'NanumGothicWebBold' !important; } /* 강조 */
 em { font-style: normal; } /* 강조 */
 </style>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places&key=AIzaSyBPA_xStX4VRi97SvEHjPOjZjlIC6aRWcs"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		var url = "<%=cp%>/dog119/list";
-		
+		//initialize();
 		$.ajax({
 			url:url,
 			dataType:'json',
@@ -54,10 +56,8 @@ em { font-style: normal; } /* 강조 */
 				console.log(data);
 				var content = '';
 				$.each(list, function(index,item){
-					content+="<div class='list'>";
-					content+="<a href='<%=cp%>/uploads/dog119/"+item.filename+"' class='lytebox' data-lyte-options='slide:false' data-title='(사)careDog'>";
-					content+="<a href='#' img='' class='tx-animal-image' src='<%=cp%>/uploads/dog119/"+item.filename+"'>";
-					content+="<img src='<%=cp%>/uploads/dog119/"+item.filename+"' width='348' height='261' border='0' align='center'></a></a>";
+					content+="<div class='list'><a href='#myMapModal' class='btn' data-toggle='modal'>";
+					content+="<img src='<%=cp%>/uploads/dog119/"+item.filename+"' class='btnDog119Info' width='348' height='261' border='0' align='center'></a>";
 					content+="<ul><li class='full'><strong>구조일</strong> <i>"+item.whenis+"</i></li>";
 					content+="<li class='full'><strong>실종장소</strong></li>";
 					content+="<li class='full'>"+item.country+"</li>";
@@ -72,49 +72,49 @@ em { font-style: normal; } /* 강조 */
 				$(".paging").append(data.paging);
 			}
 		});
+		
+		/* $("body").on("click",".btnDog119Info", function(){
+			initialize();
+			$("#dog119Info").modal("show");
+		}); */
 	});
+//*********************************************************************
+/* 	var center = new google.maps.LatLng(59.76522, 18.35002);
+	var map;
+	
+	function initialize() {
+
+	    var mapOptions = {
+	        zoom: 7,
+	        mapTypeId: google.maps.MapTypeId.ROADMAP,
+	        center: center
+	    };
+
+	    map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
+	    var marker = new google.maps.Marker({
+	        map: map,
+	        position: center
+	    });
+	}
+
+	$('body').on('click', '.btnDog119Info', function () {
+		initialize();
+	    $('#dog119Info').modal({
+	        backdrop: 'static',
+	        keyboard: false
+	    }).on('shown.bs.modal', function (e) {
+	        google.maps.event.trigger(map, 'resize');
+	        map.setCenter(center);
+	    });
+	});
+ */
 	
 </script>
 
 <div class="body-container">
 	<div class="wrap_sub">
-	<div class="rescue">
-			<!--E:list-->
-
-			<div class="tmp_class27906" style="display: none;">
-				<table width="100%" border="0" cellspacing="0">
-					<caption>■ 구조정보</caption>
-					<colgroup>
-						<col width="80">
-						<col width="150">
-						<col width="80">
-						<col width="*">
-					</colgroup>
-					<tbody>
-						<tr>
-							<th>신고자</th>
-							<td>박덕기</td>
-							<th>연락처</th>
-							<td>02 - 409 - 0059</td>
-						</tr>
-						<tr>
-							<th>주소</th>
-							<td colspan="3">송파구 방이동 89-3 송파소방서 방이 119 안전센터</td>
-						</tr>
-						<tr>
-							<th>인계장소</th>
-							<td colspan="3">송파구 방이동 89-3 송파소방서 방이 119 안전센터</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<div>
-					<a onclick="View_re('27906');return false;" class="pointer"><img
-						src="/images/icon_up.gif"><br>CLOSE</a>
-				</div>
-			</div>
-
-<!--게시판 리스트 끝-->
+		<div class="rescue">
 <!--게시판 검색-->
 	<!-- <div class="search_area">
 		<form name="search_form" method="post" action="?act=list&amp;bid=animal">
@@ -138,13 +138,159 @@ em { font-style: normal; } /* 강조 */
 	</div> --><!--E:search_area-->
 
 <!--게시판 검색 끝--> 
-</div><!--E:rescue-->
-</div>
+		</div><!--rescue-->
+	</div><!-- wrap_sub -->
+	
 	<div class="dog119_btn">
 		<button type="button" onclick="javascript:location.href='<%=cp%>/dog119/created'">등록하기</button>
 	</div>
 	
 	<nav>
-   <div id="paging" class="paging" align="center"></div>
-</nav>
+	   <div id="paging" class="paging" align="center"></div>
+	</nav>
+</div> <!-- body-container -->
+
+<!-- modal -->
+<div class="modal fade" id="myMapModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                 <h4 class="modal-title">Modal title</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div id="map-canvas" class=""></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+<!-- detailDog Modal -->
+<!-- <div class="modal fade" id="dog119Info" tabindex="-1" role="dialog" aria-labelledby="dog119InfoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+		<div class="solo_wrap">
+			<h4 class="detail_title" align="center">
+				<span class="red" id="noticeNo"></span>
+			</h4>
+			<div class="info_wrap">
+				<div class="animal_img" align="center">
+						<img src="" id="popfile" width="500" height="300" alt="유기동물">
+				</div>
+				<div id="map_canvas" class="map_postbox"></div>
+				<div class="animal_info">
+					<dl>
+						<dt>품종</dt>
+						<dd>
+							개<span class="ico_arrow"></span>
+								<a href="#" id="kindCd"></a>,
+							수컷
+						</dd>
+						<dt>털색</dt>
+						<dd id="colorCd"></dd>
+						<dt>
+							체중
+						</dt>
+						<dd id="weight"></dd>
+						<dt>나이</dt>
+						<dd id="age"></dd>
+						<dt>발견</dt>
+						<dd id="happenPlace"></dd>
+						<dt>특징</dt>
+						<dd id="specialMark"></dd>
+						<dt>접수일</dt>
+						<dd id="happenDt"></dd>
+						<dt>공고</dt>
+						<dd id="noticeSdt_noticeEdt" class="red">
+							
+							<div class="ly_notice _toggle_content" style="display: none">
+								<strong>공고기간</strong>
+								<p>동물보호법에 따라 공고가 있는 날부터 10일이 지나도 소유자를 알 수 없는 경우는 지방자치단체가
+									동물의 소유권을 취득하게 되며, 일반인에게 분양할 수 있습니다.</p>
+								<button class="btn_close _toggle_trigger">레이어 닫기</button>
+							</div>
+						</dd>
+						<dt>관할</dt>
+						<dd id="orgNm"></dd>
+						<dt>보호소 이름</dt>
+						<dd id="careNm"></dd>
+						<dt>보호장소</dt>
+						<dd id="careAddr"></dd>
+						<dt>전화</dt>
+						<dd id="careTel"></dd>
+					</dl>
+				</div>
+			</div>
+			<div class="animal_notice">
+				<strong class="blind">업데이트</strong>
+				<p>
+				<span class="ico_notice"></span>본 정보는 지방자치단체와 유기동물 보호시설에서 등록한 보호중
+					동물입니다. 유기동물의 절반 가량만 주인을 찾거나 입양이 됩니다. 유기동물에 관심을 가져주세요. <br>최종
+					업데이트 2018.03.10.<span class="ico_bar"></span> 출처 (주)careDog
+				
+				</p>
+			</div>
+		</div>
+
+		</div> modal-content
 </div>
+</div> -->
+<script>
+var map;        
+var myCenter=new google.maps.LatLng(53, -1.33);
+var marker=new google.maps.Marker({
+	position:myCenter
+});
+
+function initialize() {
+	var mapProp = {
+		center:myCenter,
+		zoom: 14,
+		draggable: false,
+		scrollwheel: false,
+		mapTypeId:google.maps.MapTypeId.ROADMAP
+	};
+	
+	map=new google.maps.Map(document.getElementById("map-canvas"),mapProp);
+	marker.setMap(map);
+	
+	google.maps.event.addListener(marker, 'click', function() {
+	
+		infowindow.setContent(contentString);
+		infowindow.open(map, marker);
+		
+	}); 
+};
+google.maps.event.addDomListener(window, 'load', initialize);
+
+google.maps.event.addDomListener(window, "resize", resizingMap());
+
+$('#myMapModal').on('show.bs.modal', function() {
+	initialize();
+	//Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
+	resizeMap();
+})
+
+function resizeMap() {
+	if(typeof map =="undefined") return;
+	setTimeout( function(){resizingMap();} , 400);
+}
+
+function resizingMap() {
+	if(typeof map =="undefined") return;
+	var center = map.getCenter();
+	google.maps.event.trigger(map, "resize");
+	map.setCenter(center); 
+}
+</script>

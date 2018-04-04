@@ -34,15 +34,33 @@ insert into onefone(num, memberId, email, tel, sort, content, qdate, subject) va
 <select id="listonefone" parameterType="map" resultType="care.dog.center.onefone.OneFOneVo">
 SELECT * FROM (
 	SELECT ROWNUM rnum, tb.* FROM(
-		SELECT num, sort, subject, qdate 
+		SELECT num, sort, subject, qdate, memberId
 		FROM onefone 
 		<where>
+		    memberId=#{memberId}
         	<if test="searchValue != null and searchValue != ''">
-				<include refid="where-list"/>
+				and <include refid="where-list"/>
 		    </if>
 	    </where>
 	    ORDER BY num DESC
 	    <![CDATA[
+	) tb WHERE ROWNUM <= #{end}
+) WHERE rnum >= #{start}
+]]>
+</select>
+
+<select id="adminlistonefone" parameterType="map" resultType="care.dog.center.onefone.OneFOneVo">
+SELECT * FROM(
+	SELECT ROWNUM rnum, tb.* FROM(
+		SELECT num, sort, subject, qdate, memberId
+		FROM onefone
+		<where>
+			<if test="searchValue != null and searchValue != ''">
+				<include refid="where-list"/>
+			</if>
+		</where>
+		ORDER BY num DESC
+		<![CDATA[
 	) tb WHERE ROWNUM <= #{end}
 ) WHERE rnum >= #{start}
 ]]>
@@ -54,8 +72,16 @@ from onefone
 where num = #{num}
 </select>
 
-<!-- <insert id="insertronefone" parameterType="">
-insert into aonefone(replynum, num, memberId, acontent, adate) values (aonefone_seq.NEXTVAL, #{num}, #{memberId}, #{acontent}, #{adate})
-</insert> -->
+<insert id="insertreply" parameterType="care.dog.center.onefone.ReplyVo">
+insert into aonefone(replynum, num, memberId, acontent, adate) 
+values (aonefone_seq.NEXTVAL, #{num}, #{memberId}, #{acontent}, sysdate)
+</insert>
+
+<select id="listreply" parameterType="Integer" resultType="care.dog.center.onefone.ReplyVo">
+SELECT a.num, a.memberId, acontent, adate
+FROM aonefone a
+JOIN member1 m ON a.memberId = m.memberId
+WHERE a.num=#{num}
+</select>
 
 </mapper>

@@ -10,7 +10,7 @@
 
 .container-top {
 	width: 900px;
-	height: 650px;
+	height: 700px;
 }
 
 .container-bottom {
@@ -22,23 +22,25 @@
 	width: 440px;
 	/* width: 50%; */
 	height: 500px;
+	padding: 10px;
 }
 
 .left_area img {
 	/* width: 80%; */
 	width: 400px;
+	height: 500px;
 	float: right;
-	padding-top: 50px;
+	padding-top: 10px;
 	/* margin-right: 10px; */
 }
 
 .right_area {
 	float: right;
-	width: 410px;
+	width: 450px;
 	/* width: 50%; */
 	/* height: 40vh; */
-	height: 440px;
-	/* padding: 10px; */
+	height: 500px;
+	padding: 10px;
 	
 }
 
@@ -58,6 +60,7 @@
 
 .txt_num {
 	font-weight: bold;
+	width: 100px;
 }
 
 .info_list {
@@ -71,6 +74,7 @@
 
 .product_info li {
 	box-sizing: border-box;
+	margin-top: 10px;
 }
 
 #sel1 {
@@ -90,23 +94,20 @@
 
 .product_info {
 	margin: 20px auto;
-	height: 200px;
+	height: 350px;
+	width: 440px;
 }
 
 .product_option_box {
 	margin: 10px auto;
-	height: 60px;
-}
-
-.product_total_price {
-	margin: 20px auto;
-	height: 50px;
-	border-bottom: 1px solid #e2e2e2;
+	height: 200px;
+	width: 440px;
 }
 
 .product_btn_area {
 	padding: 20px auto;
 	height: 80px;
+	width: 440px;
 }
 
 .roundBtn {
@@ -292,13 +293,31 @@ th {
 	padding: 10px;
 }
 
+.inputTxt {
+	border-radius: 5px;
+	border: 1px solid #808080;
+	height: 30px;
+	/* width: 300px; */
+	padding: 5px;
+	margin-right: 10px;
+	font-size: 18px;
+}
+
+.select {
+	width: 250px;
+	border-radius: 5px;
+	height: 30px;
+	/* margin: 5px; */
+	font-size: 15px;
+}
+
 
 </style>
 
 <script type="text/javascript">
 
 
-$(document).ready(function(){
+<%-- $(document).ready(function(){
 	
 	var a=$('#sel1').attr("data-optionId");
 	
@@ -328,257 +347,260 @@ function listPage(page) {
 	});
 }
 
-$(function() { 
-
-	$("body").on("change", "#sel1", function() {
-
-		optionChanged();
-	});
+ --%>
+ 
+function deleteProduct() {
+	var productId = "${dto.productId}";
+	var page = "${page}";
+	//var query = "${query}";
+	var data = "productId="+productId+"&page="+page;
+	var url = "<%=cp%>/admin/store/deleteProduct?" + data;
 	
-});
-
-function optionChanged(){
-	//console.log($("#sel1").val());
-	var value = $("#sel1").val(); //optionId
-	var text = $("#sel1 option:selected").text(); //optionContent
-	var price = ${dto.sellingPrice };
-	var str = "";
-	var i = 0;
-	str += "<div id='option_content"+i+"' class='option_total_content'>";
-	str += "<div style='height: 40px;'>";
-	str += "<p style='float: left; font-size: 15px; font-weight: bold;'>"+text+"</p>";
-	str += "<input type='hidden' value='"+ value +"' id='optionId'>";
-	str += "<p style='float: right;'>";
-	str += "<button type='button' class='btn btn-default delOptionBtn' onclick='delete_option("+i+")'>X</button>";
-	str += "</p>";
-	str += "</div>";
-	str += "<div style='clear: both; height: 50px;'>";
-	str += "<select id='amount' name='amount' class='form-control' style='width: 60px; float: left;'>";
-	str += "<option value='1'>1</option>";
-	str += "<option value='2'>2</option>";
-	str += "<option value='3'>3</option>";
-	str += "<option value='4'>4</option>";
-	str += "<option value='5'>5</option>";
-	str += "<option value='6'>6</option>";
-	str += "<option value='7'>7</option>";
-	str += "<option value='8'>8</option>";
-	str += "<option value='9'>9</option>";
-	str += "<option value='10'>10</option>";
-	str += "</select>";
-	str += "<p style='float: right; font-size: 20px; font-weight: bold;' id='dtoPrice'>"+price+"원</p>";
-	str += "</div>";
-	str += "</div>";
-	
-	$("#option_total").append(str);
-	
-	$("body").on("change", "#amount", function() {
-		
-		var final_price = $("#amount").val() * price;
-		
-		$("#changePrice").text(final_price);
-		
-	});
+	if(confirm("위 상품을 삭제 하시 겠습니까 ?"))
+		location.href=url;
 }
 
-//옵션 삭제시
-function delete_option(num) {
-	var price = $("#dtoPrice").text();
+//수정하기 클릭
+//상품dto update 하고 option insert
+function updateProduct() {
+	<%-- var productId = "${dto.productId}";
+	var page = "${page}";
+	var query = "productId="+productId+"&page="+page;
+	var url = "<%=cp%>/admin/store/updateProduct?" + query;
 	
-	$("#option_content" + num).remove(); //옵션삭제
-	$("#changePrice").text("price"); //가격 원상태로(dto의 sellingPrice)
-}
+	location.href=url; --%>
+	
+	var f = document.productUpdateForm;
 
-//장바구니 버튼 클릭시
-function listCart() {
-	
-	var memberInfo = $("#memberInfo").val();
+	var str = f.productName.value;
+    if(!str) {
+        f.productName.focus();
+        return false;
+    }
 
-	if(memberInfo == null || memberInfo == ""){
-		if(confirm("로그인이 필요한 서비스입니다.")){
-			location.href="<%=cp%>/member/login";
-			<%-- location.href = "<%=cp%>/store/storeLogin?productId="+productId+"&optionId="+optionId; --%>
-		}else
-			return;
-	} 
-	
-	var url = "<%=cp %>/store/stack";
-	var productId = $("#productId").val();
-	var amount = $("#amount").val();
-	var optionId = $("#optionId").val();
-	
-	if(amount == null || amount == ""){
-		alert("옵션을 선택해주세요.");
+	str = f.brand.value;
+    if(!str) {
+        f.brand.focus();
+        return false;
+    }
+    
+    str = f.sellingPrice.value;
+    if(!str) {
+        f.sellingPrice.focus();
+        return false;
+    }
+    
+    str = f.inputPrice.value;
+    if(!str) {
+        f.inputPrice.focus();
+        return false;
+    }
+    
+    str = f.inputAmount.value;
+    if(!str) {
+        f.inputAmount.focus();
+        return false;
+    }
+    
+    str = f.amount.value;
+    if(!str) {
+        f.amount.focus();
+        return false;
+    }
+
+	if(f.upload.value!="") {
+		if(! /(\.gif|\.jpg|\.png|\.jpeg)$/i.test(f.upload.value)) {
+			alert('이미지 파일만 가능합니다. !!!');
+			f.upload.focus();
+			return false;
+		}
 	}
 	
-	var data = {productId:productId, amount:amount, optionId:optionId};
-	//console.log(data);
+	f.action="<%=cp%>/admin/store/updateProduct";
+	
+	// <input type='submit' ..>,  <input type='image' ..>, <button>은 submit() 메소드 호출하면 두번전송
+    return true;
+	
+}
+
+function deleteOptionCon(optionId) {
+	$("#optionDiv"+optionId).remove();//옵션삭제
+	
+	<%-- var productId = "${dto.productId}";
+	var page = "${page}";
+	//var query = "${query}";
+	var data = "optionId="+num+"&page="+page+"&productId="+productId;
+	var url = "<%=cp%>/admin/store/deleteOption?" + data;
+	
+	if(confirm("해당 옵션을 삭제 하시 겠습니까 ?"))
+		location.href=url; --%>
+		
+	var productId = "${dto.productId}";
+	var url = "<%=cp%>/admin/store/deleteOption";
+	var data = {optionId:optionId};
+	console.log(optionId);
+	
 	$.ajax({
 		url: url
 		,data: data
 		,type: "post"
 		,dataType: "json"
 		,success: function(data) {
-			 var state = data.state;
-			if(state==1){
-				if(confirm("장바구니에 상품이 담겼습니다. 장바구니로 이동하시겠습니까?")){
-					location.href = "<%=cp%>/store/cart";
-				}else
-					return;
-			} 
+			var state = data.state;
+			console.log(state);
 		}
 		,error: function(e) {
 			console.log(e.responseText);
 		}
 	});
+		
 }
 
-//구매하기 버튼 클릭시
-<%-- function order() {
+$(document).ready(function(){
+	var i = 1;
+	$("#optAddBtn").click(function() {
+		optionAdd(i);
+		i++;
+	});
 	
-	var memberId = $("#memberInfo").val();
+});
+
+
+//옵션 추가
+function optionAdd(i){
 	
-	if(memberId == null || memberId == ""){
-		if(confirm("로그인이 필요한 서비스입니다.")){
-			location.href="<%=cp%>/member/login";
-		}else{
-			return;
-		}
-	}else{
-		
-		if(confirm("선택한 상품을 주문하시겠습니까?")){
-		
-			//필요한 데이터 : 사용자가 선택한 상품의 productId, amount, totalPrice, optionContent
-			var productId = $("#productId").val();
-			var amount = $("#amount").val();
-			var optionContent = $("#sel1 option:selected").text();
-			var totalPrice = $("#changePrice").text();
-			
-			if(amount == null || amount == ""){
-				alert("옵션을 선택해주세요.");
-			}
-			//주문페이지로 이동
-			var data = {memberId:memberId, productId:productId, amount:amount,
-					optionContent:optionContent, totalPrice:totalPrice}
-			
-			$.ajax({
-			    url: "<%=cp%>/store/orderOne",
-			    data: data,
-			    type: "post",
-			    success: function() {
-			    	location.href="<%=cp%>/store/orderList?memberId=" + memberId;
-			    },
-			    error: function(e) {
-			    	console.log(e.responseText);
-			    }
-			});
-			
-		}else{
-			return;
-		}
-	}
+	var str = "";
+	
+	console.log(i);
+	str += "<div class='divTd' id='optionDiv"+i+"' style='clear: both;'>";
+	str += "<input type='text' id='optionList"+i+"' name='optionList'";
+	str += " class='inputTxt' style='width:200px'/>";
+	str += "<button type='button' class='btn btn-default delOptionBtn' onclick='deleteOption("+i+")'>X</button>";
+	str += "</div>";
+	
+	$("#optionAddArea").append(str);
+	
 }
- --%>
+
+//옵션 삭제
+function deleteOption(num) {
+	$("#optionDiv" + num).remove(); //옵션삭제
+}
  
-function order() {
-	
-	var memberId = $("#memberInfo").val();
-	
-	if(memberId == null || memberId == ""){
-		if(confirm("로그인이 필요한 서비스입니다.")){
-			location.href="<%=cp%>/member/login";
-			<%-- location.href = "<%=cp%>/store/storeLogin?productId="+productId+"&optionId="+optionId; --%>
-		}else
-			return;
-	}else{
-	
-		if(confirm("선택한 상품을 주문하시겠습니까?")){
-			
-			var productId = $("#productId").val();
-			var amount = $("#amount").val();
-			var optionContent = $("#sel1 option:selected").text();
-			var totalPrice = $("#changePrice").text();
-			//var finalPrice = $("#finalPrice").text();
-			
-			if(amount == null || amount == ""){
-				alert("옵션을 선택해주세요.");
-			}
-			
-			var productIdList = [];
-			var amountList = [];
-			var optionContentList = [];
-			var totalPriceList = [];
-				
-			productIdList.push(productId);
-			amountList.push(amount);
-			optionContentList.push(optionContent);
-			totalPriceList.push(totalPrice);
-			
-			var data = {memberId:memberId, finalPrice:totalPrice, productIdList:productIdList.toString(),
-				amountList:amountList.toString(), optionContentList:optionContentList.toString(), 
-				totalPriceList:totalPriceList.toString()};
-			
-			$.ajax({
-			    url: "<%=cp%>/store/order",
-			    data: data,
-			    type: "post",
-			    success: function() {
-			    	location.href="<%=cp%>/store/orderList?memberId=" + memberId;
-			    },
-			    error: function(e) {
-			    	console.log(e.responseText);
-			    }
-			});
-			 
-			
-		}else{
-			return;
-		}
-	} 
-}
-
-
 </script>
 
 <div class="body-container">
 
+	<form name="productUpdateForm" method="post" onsubmit="return updateProduct();" enctype="multipart/form-data">
 	<!-- 상단부 : 상품 이미지와 설명 -->
 	<div class="container-top">
 	
 		<!-- 왼쪽 부분 -->
 		<div class="left_area">
-			<img src="<%=cp%>/resource/img/store/dog_snack1.jpg">
-			<%-- <img src="<%=cp%>/uploads/store/${dto.imageFilename}"> --%>
+			<%-- <img src="<%=cp%>/resource/img/store/dog_snack1.jpg"> --%>
+			<img src="<%=cp%>/uploads/photo/${dto.imageFilename}">
+			<div class="divTd" style="height: 50px; padding: 10px; font-size: 15px;">
+				<p><input type="file" id="upload" name="upload" /></p>
+			</div>
 		</div>
 		
 		<!-- 오른쪽 부분-->
 		<div class="right_area">
-		<input id="memberInfo" type="hidden" value="${memberId }">
 			
 			<!-- 상품정보 테이블 -->
 			<div class="product_info">
 			
-				<p class="product_name" id="productName">${dto.productName }</p>
-				<br>
+				<%-- <p class="product_name" id="productName">
+					<input type="text" value="${dto.productName }" 
+					class="inputTxt" style="font-size: 30px; padding: 5px; height: 35px;">
+				</p>
+				<br> --%>
 				
-				<input type="hidden" id="productId" value="${dto.productId }">
+				<input type="hidden" id="productId" name="productId" value="${dto.productId }">
+				<input type="hidden" name="imageFilename" value="${dto.imageFilename}">
 			
 				<ul class="info_list">
 					<li>
-						<span class="txt_title">판매가</span>
-						<span class="txt_content cur_price">
-							<span class="txt_num">${dto.sellingPrice }</span>원
+						<span class="txt_title">브랜드명</span>
+						<span class="txt_content">
+							<span>
+							<input type="text" value="${dto.brand }" name="brand" class="inputTxt" style="width: 250px;">
+							</span>
+						</span>
+					</li>
+					<li>
+						<span class="txt_title">상품명</span>
+						<span class="txt_content">
+							<span>
+								<input type="text" value="${dto.productName }" name="productName" class="inputTxt" style="width: 250px;">
+							</span>
+						</span>
+					</li>
+					<li>
+						<span class="txt_title">분류</span>
+						<span class="txt_content">
+							<span>
+								<select id="categoryId" name="categoryId" class="select">
+									<option value="" disabled="disabled">분류를 선택해주세요.</option>
+									<option value="1" ${dto.categoryId == 1 ? "selected":"" }>사료&간식</option>
+									<option value="2" ${dto.categoryId == 2 ? "selected":"" }>목욕&위생용품</option>
+									<option value="3" ${dto.categoryId == 3 ? "selected":"" }>식기&하우스</option>
+									<option value="4" ${dto.categoryId == 4 ? "selected":"" }>외출&패션</option>
+									<option value="5" ${dto.categoryId == 5 ? "selected":"" }>장난감</option>
+								</select>
+							</span>
+						</span>
+					</li>
+					<li>
+						<span class="txt_title">단종여부</span>
+						<span class="txt_content">
+							<span>
+								<select id="isContinued" name="isContinued" class="select">
+								<option value="" disabled="disabled">단종여부를 선택해주세요.</option>
+								<option value="1" ${dto.isContinued == 1 ? "selected":"" }>단종안됨</option>
+								<option value="0" ${dto.isContinued == 0? "selected":"" }>단종</option>
+							</select> 
+							</span>
+						</span>
+					</li>
+					<li>
+						<span class="txt_title">판매가격</span>
+						<span class="txt_content">
+							<span class="txt_num">
+								<input type="text" value="${dto.sellingPrice }" name="sellingPrice" class="inputTxt" style="width: 150px;">
+							</span>원
+						</span>
+					</li>
+					<li>
+						<span class="txt_title">입고가격</span>
+						<span class="txt_content">
+							<span class="txt_num">
+								<input type="text" value="${dto.inputPrice }" name="inputPrice" class="inputTxt" style="width: 150px;">
+							</span>원
 						</span>
 					</li>
 					<li>
 						<span class="txt_title">마일리지 적립금</span>
-						<span class="txt_content mileage">
-							<span class="txt_num">${dto.mileage }</span>원
+						<span class="txt_content">
+							<span class="txt_num">
+								<input type="text" value="${dto.mileage }" name="mileage" class="inputTxt" style="width: 150px;">
+							</span>원
 						</span>
 					</li>
 					<li>
-						<span class="txt_title">배송비</span>
-						<span class="txt_content ship_price">
-							<span class="txt_num">2,500</span>원
+						<span class="txt_title">재고수량</span>
+						<span class="txt_content">
+							<span class="txt_num">
+								<input type="text" value="${dto.amount }" name="amount" class="inputTxt" style="width: 150px;">
+							</span>개
+						</span>
+					</li>
+					<li>
+						<span class="txt_title">입고수량</span>
+						<span class="txt_content">
+							<span class="txt_num">
+								<input type="text" value="${dto.inputAmount }" name="inputAmount" class="inputTxt" style="width: 150px;">
+							</span>개
 						</span>
 					</li>
 					
@@ -587,48 +609,44 @@ function order() {
 			</div>
 			
 			<!-- 옵션 박스 -->
-			<div class="product_option_box">
-			 
-				 <select class="form-control" data-optionId="${optionId }" id="sel1">
-	        		<option selected="selected" disabled="disabled">옵션을 선택해주세요.</option>
-	        		<c:forEach var="optionDto"  items="${list_option}">
-	        			<option value="${optionDto.optionId }">${optionDto.optionContent }</option>
-	        		</c:forEach>
-	      		</select>
-			 
-			</div>
+			<div class="product_option_box" style="border-bottom: 1px solid #cdcdcd;">
 			
-			<!-- 선택한 옵션에 대한 개수와 가격정보 -->
-			<div id="option_total"></div>
-			
-			<!-- 상품 금액 합계 -->
-			<div id="product_total_price" class="product_total_price" style="clear: both;">
-				<span class="txt_title">상품금액 합계</span>
-				<span class="txt_content">
-					<span id="changePrice" class="txt_num">${dto.sellingPrice }</span>원
-				</span>
+				<div style="border-bottom: 1px solid #cdcdcd; border-top: 1px solid #cdcdcd; 
+				font-size: 20px; padding: 10px;">
+					옵션
+					<button type="button" id="optAddBtn" class='btn btn-default' style="float: right;">옵션추가</button>
+				</div>
+			 
+			 	<c:forEach var="optionDto"  items="${list_option}">
+			 		<div id="optionDiv${optionDto.optionId }" style="margin-top: 10px;">
+				 		<input type="text" id="${optionDto.optionId }" 
+				 		value="${optionDto.optionContent }" class="inputTxt">
+				 		<button type='button' class='btn btn-default delOptionBtn' 
+				 		id="btn${optionDto.optionId }" onclick='deleteOptionCon(${optionDto.optionId })'>X</button>
+				 	</div>
+			 	</c:forEach>
+			 	
+			 	<div id="optionAddArea">
+			 	</div>
+			 
 			</div>
 			
 			<!-- 버튼 -->
 			<div class="product_btn_area">
-				<%-- <button type="button" class="btn btn-default roundBtn btnCart" 
-				onclick="location.href='<%=cp%>/store/cart'">
-				장바구니
-				</button> --%>
-				<button type="button" class="btn btn-default roundBtn btnCart" 
-				onclick="listCart();">
-				장바구니
+				<button type="submit" class="btn btn-default roundBtn btnCart" >
+				수정
 				</button>
 				&nbsp;&nbsp;
 				<button type="button" class="btn btn-default roundBtn btnBuy" 
-				onclick="order();">
-				구매하기
+				onclick="deleteProduct();">
+				삭제
 				</button>
 			</div>
 		
 		</div>
 	
 	</div>
+	</form>
 
 	<!-- 하단부 : 탭 -->
 	<div class="container-bottom">
@@ -645,16 +663,6 @@ function order() {
 				<li role="presentation">
 					<a href="#buy_detail" aria-controls="buy_detail" role="tab" data-toggle="tab">
 						<span class="tab_txt">구매정보</span>
-					</a>
-				</li>
-				<li role="presentation">
-					<a href="#comment" aria-controls="comment" role="tab" data-toggle="tab">
-						<span class="tab_txt">상품평</span>
-					</a>
-				</li>
-				<li role="presentation">
-					<a href="#qna" aria-controls="qna" role="tab" data-toggle="tab">
-						<span class="tab_txt">QnA</span>
 					</a>
 				</li>
 			</ul>
@@ -898,31 +906,6 @@ function order() {
 					
 				</div>
 				
-				<!-- 상품평 탭 -->
-				<div role="tabpanel" class="tab-pane" id="comment">
-					
-					<h3 class="sub-title comment" style="text-align: center; margin: 20px;">한줄 상품평</h3>
-					
-					<div class="commentInsert">
-						<button type="button" class="btn btn-default commentInsertBtn">상품평작성</button>
-					</div>
-					
-					<div id="listProductReply"></div>
-					
-				</div>
-				
-				<!-- QnA 탭 -->
-				<div role="tabpanel" class="tab-pane" id="qna">
-				
-					<div class="qnaInsert">
-						<h5>★ 상품 문의사항이 아닌 반품/교환관련 문의는 고객센터 1:1 문의를 이용해주세요.</h5>
-						<button type="button" class="btn btn-default qnaInsertBtn" data-toggle="modal" data-target="#myModal">상품문의</button>
-					</div>
-					
-					<div id="listProductQna"></div>
-					
-				</div>
-				
 			</div>
 			
 		</div>
@@ -931,35 +914,4 @@ function order() {
 
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
-	<div class="modal-dialog">
-    
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">상품 Q&A 작성</h4>
-			</div>
-			<div class="modal-body">
-				<p class="modal-body-txt">[그리니즈] 덴탈껌 30개입</p>
-				<div class="reviews-write">
-					<textarea rows="1" cols="5" id="reviewBox" name="reviewBox"
-					placeholder="내용을 입력하세요(5자 ~ 250자)"></textarea>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<div class="footer-buttonBox">
-					<button type="button" class="btn btn-default reviewCreate" data-dismiss="modal">등록</button>
-					<button type="button" class="btn btn-default reviewCancel" data-dismiss="modal">취소</button>
-				</div>
-				<div class="footer-txt">
-					<p style="font-weight: bold;">* 이용안내</p>
-					<p>재판매글, 상업성 홍보글, 미풍양속을 해치는 글 등 상품 Q&A의 취지에 어긋나는 글은 삭제될 수 있습니다.</p>
-				</div>
-			</div>
-		</div>
-      
-	</div>
-</div>
 

@@ -536,6 +536,16 @@ function order() {
 	} 
 }
 
+//배송비 설정
+function shipment() {
+	var sellingPrice = $("#sellingPrice").text();
+	//3만원이상 구매시 배송비 무료
+	if(Number(sellingPrice) >= 30000 || Number(sellingPrice) == 0){
+		$("#shipPrice").text("0");
+	}else{
+		$("#shipPrice").text("2500");
+	}
+}
 
 </script>
 
@@ -566,7 +576,7 @@ function order() {
 					<li>
 						<span class="txt_title">판매가</span>
 						<span class="txt_content cur_price">
-							<span class="txt_num">${dto.sellingPrice }</span>원
+							<span class="txt_num" id="sellingPrice">${dto.sellingPrice }</span>원
 						</span>
 					</li>
 					<li>
@@ -578,7 +588,7 @@ function order() {
 					<li>
 						<span class="txt_title">배송비</span>
 						<span class="txt_content ship_price">
-							<span class="txt_num">2,500</span>원
+							<span class="txt_num" id="shipPrice">2,500</span>원
 						</span>
 					</li>
 					

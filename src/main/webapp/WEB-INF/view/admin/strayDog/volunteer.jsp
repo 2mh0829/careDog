@@ -139,7 +139,7 @@ $(function() {
 				var startDay=start.format("YYYY-MM-DD");
 				var endDay=end.format("YYYY-MM-DD");
 		        
-				var url="#";
+				var url="<%=cp%>/admin/strayDog/month";
                 var query="start="+startDay+"&end="+endDay+"&group="+group+"&tmp="+new Date().getTime();
 
 				$.ajax({
@@ -147,11 +147,11 @@ $(function() {
 				    data: query,
 				    dataType: 'json',
 				    success: function(data, text, request) {
-			        	 var isLogin=data.isLogin;
+			        	 <%-- var isLogin=data.isLogin;
 			        	 if(isLogin=="false") {
 			        		   location.href="<%=cp%>/member/login";
 			        		   return;
-			        	}
+			        	} --%>
 				    	var events = eval(data.list);
 				        callback(events);
 				    }
@@ -172,7 +172,7 @@ $(function() {
 });
 
 // 분류별 검색
-function classification(kind, idx) {
+ function classification(kind, idx) {
 	$("#calendarHeader a").each(function(){
 		$(this).removeClass("hbtn-bottom");
 		// $(this).css("opacity","0.8");
@@ -628,7 +628,7 @@ function classifyChange(classify) {
 }
 
 // 종일일정에 따른 시간 입력폼 보이기/숨기기
-$(function(){
+ $(function(){
 	$(document).on("click","#allDayChk",function(){
 		var allDay=$("#allDayChk:checked").val();
 		if(allDay=='true') {
@@ -655,13 +655,13 @@ $(function(){
                  <a class="hbtn hbtn-bottom" style="background: white ; color:#2f3741;"
                        href="javascript:classification('all', 0);">전체일정</a>
                  <a class="hbtn" style="background: blue;"
-                       href="javascript:classification('blue', 1);">개인일정</a>
+                       href="javascript:classification('blue', 1);">미용</a>
                  <a class="hbtn" style="background-color:black;"
-                       href="javascript:classification('black', 2);">가족일정</a>
+                       href="javascript:classification('black', 2);">목욕</a>
                  <a class="hbtn" style="background: green;"
-                       href="javascript:classification('green', 3);">회사일정</a>
+                       href="javascript:classification('green', 3);">청소 및 산책</a>
                  <a class="hbtn" style="background: red;"
-                       href="javascript:classification('red', 4);">부서일정</a>
+                       href="javascript:classification('red', 4);">차량봉사 등</a>
              </div>      
         </div>
     </div>

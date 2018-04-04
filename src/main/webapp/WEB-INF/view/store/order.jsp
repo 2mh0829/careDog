@@ -180,6 +180,59 @@ th {
 
 </style>
 
+<!-- 결제 모듈 라이브러리 -->
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<!-- 결제 모듈 -->
+<script>
+
+var IMP = window.IMP; // 생략가능
+$(document).ready(function(){
+	IMP.init('imp93039319'); //가맹점 식별코드 
+});	
+	
+function jsf__pay(){
+	var f = document.forms.orderForm;
+
+	IMP.request_pay({
+	    pg : 'inicis', //ActiveX 결제창은 inicis를 사용
+	    pay_method : 'card', //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
+	    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+	    name : '상품결제',
+	    amount : $("#finalPrice").text(),
+	    buyer_email : f.email.value,
+	    buyer_name : f.userName.value,
+	    buyer_tel : f.tel.value, //누락되면 이니시스 결제창에서 오류
+	    buyer_addr : '',
+	    buyer_postcode : '',
+	    m_redirect_url : 'https://www.yourservice.com/payment/complete'
+	}, function(rsp) {
+		console.log(rsp);
+	    if ( rsp.success ) {
+	    	f.action ="<%=cp%>/store/order";
+	    	f.submit();
+	    	return true;
+	        /* var msg = '결제가 완료되었습니다.';
+	        msg += '고유ID : ' + rsp.imp_uid;
+	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '결제 금액 : ' + rsp.paid_amount;
+	        msg += '카드 승인번호 : ' + rsp.apply_num; */
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	        return false;
+	    }
+	    alert(msg);
+	});
+}
+
+/* function l_img(img1) {
+	window.open("l_img.asp?img1=" + img1, "winName1",
+			"scrollbars=no,width=1,height=1,top=100,left=100,resizable=no")
+} */
+
+</script>
+
 <script>
 
 $(document).ready(function() {
@@ -249,19 +302,13 @@ function finalPrice() {
 	$("#finalPrice").text(finalPrice);
 }
 
-//결제하기 버튼 클릭시
-/* function order() {
-	
-
-} */
-
 
 </script>
 
 
 <div class="body-container">
 
-	<form name="orderForm" id="orderForm" action="">
+	<form name="orderForm" id="orderForm" method="post">
 	
 		<h3 class="sub-title product-info">배송상품</h3>
 		
@@ -332,12 +379,13 @@ function finalPrice() {
 					<th scope="row"><p class="txt">주문자명</p></th>
 					<td>
 						<input type="text" id="userName" value="${sessionScope.member.userName}" class="inputTxt"
-						style="width: 200px;" disabled="disabled">
+						name="userName" style="width: 200px;" disabled="disabled">
 					</td>
 				</tr>
 				<tr>
 					<th scope="row"><p class="txt">휴대폰</p></th>
 					<td>
+						<input type="hidden" value="${tel }" name="tel">
 						<select id="userTel1" name="userTel1" class="select" disabled="disabled"
 						style="width: 90px;">
 							<option disabled="disabled">선택</option>
@@ -359,6 +407,7 @@ function finalPrice() {
 				<tr>
 					<th scope="row"><p class="txt">이메일</p></th>
 					<td>
+						<input type="hidden" value="${email }" name="email">
 						<input type="text" id="email1" name="email1" disabled="disabled"
 						value="${email1 }" class="inputTxt" style="width: 120px;">
 						&nbsp;@&nbsp;
@@ -583,8 +632,7 @@ function finalPrice() {
 				</tr>
 				<tr>
 					<td colspan="2">
-						<button type="button" class="btn btn-default orderBtn"
-						onclick="order();">
+						<button type="button" class="btn btn-default orderBtn" onclick="jsf__pay();">
 							결제하기
 						</button>
 					</td>

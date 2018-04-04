@@ -29,26 +29,20 @@
 
 	<select id="dataCount" parameterType="map" resultType="Integer">
 	SELECT NVL(COUNT(*), 0) FROM product p
-		JOIN productCategory c
-            ON p.categoryId = c.categoryId
-            JOIN productOption o
-            ON p.productId = o.productId
-            JOIN productInput i
-            ON p.productId = i.productId
+		JOIN productCategory c ON p.categoryId = c.categoryId
+        JOIN productInput i ON p.productId = i.productId
 	</select>
 	
 	<select id="listProduct" parameterType="map" resultType="care.dog.admin.store.AdminProduct">
 	SELECT * FROM (
     SELECT ROWNUM rnum, tb.* FROM (
         SELECT p.productId, productName, brand, sellingPrice, price, amount, isContinued, mileage, 
-        c.categoryId, categoryName, optionId, optionContent, imageFilename, 
+        c.categoryId, categoryName, imageFilename, 
         to_char(inputDate, 'yyyy.mm.dd') inputDate, inputPrice, 
         inputAmount, to_char(expireDate, 'yyyy.mm.dd') expireDate
             FROM product p 
             JOIN productCategory c
             ON p.categoryId = c.categoryId
-            JOIN productOption o
-            ON p.productId = o.productId
             JOIN productInput i
             ON p.productId = i.productId
             <where>
@@ -56,7 +50,6 @@
 					<include refid="where-list"/>
 		    	</if>
 	        </where>
-            ORDER BY productId
 	<![CDATA[
         ) tb WHERE ROWNUM <= #{end}
     ) WHERE rnum >= #{start}
@@ -67,23 +60,80 @@
 		SELECT product_seq.NEXTVAL FROM DUAL
 	</select>
 	
-	<insert id="insertProduct" parameterType="map">
+	<insert id="insertProduct" parameterType="care.dog.admin.store.AdminProduct">
 	insert into product(productId, productName, brand, 
-		sellingPrice, price, amount, categoryId) 
+		sellingPrice, price, amount, categoryId, imageFilename) 
 	values(#{productId}, #{productName}, #{brand}, 
-	#{sellingPrice}, #{price}, #{amount}, #{categoryId})
+	#{sellingPrice}, #{price}, #{amount}, #{categoryId}, #{imageFilename})
 	</insert>
 	
-	<insert id="insertProductOption" parameterType="map">
+	<insert id="insertProductOption" parameterType="care.dog.admin.store.AdminProduct">
 	insert into productOption(optionId, optionContent, 
 		productId) 
 	values(option_seq.NEXTVAL, #{optionContent}, #{productId})
 	</insert>
 	
-	<insert id="insertInputProduct" parameterType="map">
+	<insert id="insertInputProduct" parameterType="care.dog.admin.store.AdminProduct">
 	insert into productInput(inputId, inputPrice, 
 		inputAmount, productId) 
 	 values(input_seq.NEXTVAL, #{inputPrice}, #{inputAmount}, #{productId})
 	</insert>
+	
+	<select id="readProduct" parameterType="Integer" resultType="care.dog.admin.store.AdminProduct">
+	SELECT  p.productId, productName, brand, sellingPrice, price, amount, isContinued, mileage, 
+        c.categoryId, categoryName, imageFilename, 
+        to_char(inputDate, 'yyyy.mm.dd') inputDate, inputPrice, 
+        inputAmount, to_char(expireDate, 'yyyy.mm.dd') expireDate
+    FROM product p 
+		JOIN productCategory c ON p.categoryId = c.categoryId
+        JOIN productInput i ON p.productId = i.productId
+     where p.productId=#{productId}
+	</select>
+	
+	<select id="readOption" parameterType="Integer" resultType="care.dog.admin.store.AdminProduct">
+	select p.productId, productName, optionId, optionContent
+    FROM product p 
+    	join productOption o
+    	on p.productId = o.productId
+    where p.productId = #{productId}
+    ORDER BY productId
+	</select>
+	
+	<update id="updateProduct" parameterType="care.dog.admin.store.AdminProduct">
+	update product set productName=#{productName}, brand=#{brand}, 
+		sellingPrice=#{sellingPrice}, price=#{price}, 
+		amount=#{amount}, categoryId=#{categoryId}, imageFilename=#{imageFilename, jdbcType=VARCHAR}
+	where productId=#{productId}
+	</update>
+	
+	<!-- <update id="updateProductOption" parameterType="care.dog.admin.store.AdminProduct">
+	update productOption set optionContent=#{optionContent}
+	where productId=#{productId} and optionId=#{optionId}
+	</update> -->
+	
+	<update id="updateProductInput" parameterType="care.dog.admin.store.AdminProduct">
+	update productInput set inputPrice=#{inputPrice}, inputAmount=#{inputAmount}
+	where productId=#{productId}
+	</update>
+	
+	<delete id="deleteProduct" parameterType="Integer">
+	delete from product
+	where productId=#{productId}
+	</delete>
+	
+	<delete id="deleteOnlyOption" parameterType="Integer">
+	delete from productOption
+	where optionId=#{optionId}
+	</delete>
+	
+	<delete id="deleteProductOption" parameterType="Integer">
+	delete from productOption
+	where productId=#{productId}
+	</delete>
+	
+	<delete id="deleteInputProduct" parameterType="Integer">
+	delete from productInput
+	where productId=#{productId}
+	</delete>
 
 </mapper>

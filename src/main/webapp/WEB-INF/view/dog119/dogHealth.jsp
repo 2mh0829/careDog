@@ -155,7 +155,8 @@ function chk() {
 
 				</ul>
 
-				<ul class="board__listPageing">${paging}</ul>
+<!-- ul 에서 div로 바꿈 -->
+				<div class="board__listPageing">${paging}</div>
 			</div>
 <!-- 검색 -->
 			<div class="board__search">

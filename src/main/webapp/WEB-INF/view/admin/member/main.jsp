@@ -6,6 +6,6 @@
    String cp = request.getContextPath();
 %>
 
-<div class="body-container" align="center" style="font-size: 30px; color: red; font-weight: bold;">
-	잘못된 접근입니다.
+<div class="body-container">
+	맴버관리
 </div>

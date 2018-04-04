@@ -4,18 +4,25 @@
 <mapper namespace="fixSupport">
 
 <sql id="where-list">
-	<if test="searchKey=='memberId'">
-		INSTR(memberId, #{searchValue})=1
+	<if test="search=='supportId' and type=='eq'">
+		INSTR(supportId, #{keyword})=1
 	</if>
-	<if test="searchKey=='title'">
-		title like '%'||#{searchValue}||'%'
+	<if test="search=='pname' and type=='eq'">
+		pname like '%'||#{keyword}||'%'
 	</if>
-	<if test="searchKey=='content'">
-		DBMS_LOB.INSTR(content,#{searchValue})&gt;0
+	<if test="search=='tel' and type=='eq'">
+		INSTR(tel,#{keyword})&gt;0
 	</if>
-	<if test="searchKey=='created'">
-		TO_CHAR(created, 'YYYY-MM-DD')=#{searchValue} or
-		TO_CHAR(created, 'YYYYMMDD')=#{searchValue}
+	<if test="search=='email' and type=='eq'">
+		INSTR(email,#{keyword})&gt;0
+	</if>
+	<if test="search=='s_date' and type=='eq'">
+		TO_CHAR(s_date, 'YYYY-MM-DD')=#{keyword} or
+		TO_CHAR(s_date, 'YYYYMMDD')=#{keyword}
+	</if>
+	<if test="search=='e_date' and type=='eq'">
+		TO_CHAR(e_date, 'YYYY-MM-DD')=#{keyword} or
+		TO_CHAR(e_date, 'YYYYMMDD')=#{keyword}
 	</if>
 </sql>
 
@@ -30,7 +37,7 @@
 			select supportId, prodname, pname, tel, email, paymode, pmoney, TO_CHAR(s_date, 'YYYY-MM-DD') s_date, TO_CHAR(e_date, 'YYYY-MM-DD') e_date, zipcode, address1, address2
 			from fixSupport
 			<where>
-				<if test="searchValue != null and searchValue!='' ">
+				<if test="keyword != null and keyword!='' ">
 					<include refid="where-list"/>
 				</if>
 			</where>
@@ -45,7 +52,7 @@
 <select id="dataCount" parameterType="map" resultType="Integer">
 		select NVL(count(*),0) from fixSupport
 		<where>
-			<if test="searchValue != null and searchValue!=''">
+			<if test="keyword != null and keyword!=''">
 				<include refid="where-list"/>
 			</if>
 		</where>

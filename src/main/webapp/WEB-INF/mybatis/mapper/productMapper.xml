@@ -176,6 +176,11 @@
 		#{note}, #{productId}, #{orderId})
 	</insert>
 	
+	<insert id="insertPayment" parameterType="care.dog.store.Order">
+	insert into payment(orderId, payId) 
+		values(#{orderId}, payment_seq.NEXTVAL)
+	</insert>
+	
 	<!-- <update id="insertOrderOne" parameterType="map">
 	insert all
 	into orderDetail(orderDetailId, orderAmount, orderPrice, note, productId) 

@@ -91,6 +91,18 @@ body {
 
 <script>
 
+function checkedAll() {
+	if($("#checkedAll").is(":checked") == true){
+		$('input:checkbox[name="checked"]').each(function() {
+			this.checked = true;
+		});
+	}else{
+		$('input:checkbox[name="checked"]').each(function() {
+			this.checked = false;
+		});
+	}
+}
+
 function joinNext() {
 	
 	for(var i=0; i<3; i++){
@@ -353,7 +365,7 @@ function joinNext() {
 				</textarea>
 			</div>
 			<div class="term-agree">
-				<input type="checkbox" class="checked"><label>&nbsp;동의?</label>
+				<input type="checkbox" name="checked" class="checked"><label>&nbsp;위 약관에 동의합니다.</label>
 			</div>
 		</div>
 	
@@ -458,7 +470,7 @@ function joinNext() {
 				</textarea>
 			</div>
 			<div class="term-agree">
-				<input type="checkbox" class="checked"><label>&nbsp;동의?</label>
+				<input type="checkbox" name="checked" class="checked"><label>&nbsp;위 약관에 동의합니다.</label>
 			</div>
 		</div>
 	
@@ -485,10 +497,14 @@ function joinNext() {
 				</textarea>
 			</div>
 			<div class="term-agree">
-				<input type="checkbox" class="checked"><label>&nbsp;동의?</label>
+				<input type="checkbox" name="checked" class="checked"><label>&nbsp;위 약관에 동의합니다.</label>
 			</div>
 		</div>
 	
+	</div>
+	
+	<div class="term-agree" style="margin-left: 115px;">
+		<input type="checkbox" id="checkedAll" name="checked" class="checked" onchange="checkedAll();"><label>&nbsp;전체 약관에 동의합니다.</label>
 	</div>
 	
 	<div align="center">
