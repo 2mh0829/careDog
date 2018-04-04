@@ -1,4 +1,9 @@
+<<<<<<< HEAD
   <%@ page contentType="text/html; charset=UTF-8"%>
+=======
+<<<<<<< HEAD
+<%@ page contentType="text/html; charset=UTF-8"%>
+>>>>>>> 27f153d7c1f4b21cad243e6b8848f753c90daff8
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -14,7 +19,10 @@
 		padding:15px;
 		margin-bottom:20px;
 		background-color:white;
+<<<<<<< HEAD
 		border-radius: 20px;
+=======
+>>>>>>> 27f153d7c1f4b21cad243e6b8848f753c90daff8
 }
 
 
@@ -78,7 +86,11 @@ function editBlogProfileInfo() {
 	<c:if test="${not empty  myPageInfo.profilePhoto}">
 		<img style="border-radius: 200px;"
 			src="<%=cp%>/uploads/myPage/${myPageInfo.memberId}/${myPageInfo.profilePhoto}"
+<<<<<<< HEAD
 			width="218" height="218">
+=======
+			width="250" height="250">
+>>>>>>> 27f153d7c1f4b21cad243e6b8848f753c90daff8
 	</c:if>
 	<c:if test="${myPageInfo.memberId==sessionScope.member.memberId}">
 		<div style="margin-top: 10px; padding: 5px 2px; text-align: center;">
@@ -90,3 +102,7 @@ function editBlogProfileInfo() {
 		</div>
 	</c:if>
 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 27f153d7c1f4b21cad243e6b8848f753c90daff8

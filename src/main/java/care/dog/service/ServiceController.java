@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
+import antlr.ParserSharedInputState;
 import care.dog.member.SessionInfo;
 
 @Controller("service.serviceController")
@@ -121,5 +122,17 @@ public class ServiceController {
 	public void sitter_diary() {
 		
 	}
-
+	
+	@RequestMapping(value="/service/servicePayment", method=RequestMethod.GET)
+	public String servicePayment(
+			HttpServletRequest req,
+			HttpSession session,
+			Model model) {
+		
+		SessionInfo info=(SessionInfo)session.getAttribute("member");
+		int totPrice = Integer.parseInt(req.getParameter("totPrice"));
+		model.addAttribute("totPrice",totPrice);
+		
+		return ".service.servicePayment";
+	}
 }

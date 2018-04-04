@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 27f153d7c1f4b21cad243e6b8848f753c90daff8
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -13,7 +17,11 @@
 	margin-bottom:15px;
 	min-height:100px;
 	padding: 15px;
+<<<<<<< HEAD
 	border-radius:20px;
+=======
+	border-radius:5px;
+>>>>>>> 27f153d7c1f4b21cad243e6b8848f753c90daff8
 background-color:white;
 }
 </style>

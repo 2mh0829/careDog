@@ -164,7 +164,7 @@ var friendNameTemp=0;
 			}
 		}) 
 	}
-	function adjustMessengerLayoutSize(){ <!--메신저크기조정-->
+	function adjustMessengerLayoutSize(){ <!--메신저크기조정1!-->
 		var a = 0;
 		for (i = 0; i < $(".messageTextLeft").length; i++) {
 			var temp = "ㅤ" + $(".messageTextLeft").eq(i).text() + "ㅤ";
