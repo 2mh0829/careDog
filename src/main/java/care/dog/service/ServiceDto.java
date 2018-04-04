@@ -29,6 +29,7 @@ public class ServiceDto {
 	private String address;
 	private String userName;
 	private String address1;
+	private int totPrice;
 	
 	// sitterTag (Table) 
 	private String tagId;
@@ -40,8 +41,12 @@ public class ServiceDto {
 	private List<MultipartFile> fileName;
 	private String imageFilename;
 	
-	
-	
+	public int getTotPrice() {
+		return totPrice;
+	}
+	public void setTotPrice(int totPrice) {
+		this.totPrice = totPrice;
+	}
 	public String getAddress1() {
 		return address1;
 	}

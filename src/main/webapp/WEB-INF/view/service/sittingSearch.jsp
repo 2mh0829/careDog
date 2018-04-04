@@ -27,7 +27,7 @@
 			<div class="sitter-room-content" id="sitter-room-contentId">
 				<dl>
 					<dt>
-						<a href="<%=cp%>/service/sitting_detail">${dto.title}</a>
+						<a href="<%=cp%>/service/sitting_detail?sittingId=${dto.sittingId}">${dto.title}</a>
 						<label class="name">
 							<img class="sitter-face" 
 							src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_80%2Cw_300/MTE5NTU2MzE2MTk1NTU0ODI3/daniel-day-lewis-9268727-2-402.jpg">

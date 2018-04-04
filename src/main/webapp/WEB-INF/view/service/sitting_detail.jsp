@@ -8,6 +8,8 @@
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="http://slidesjs.com/js/jquery.slides.min.js"></script>
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 <script>
 $(document).ready(function(){
 	$(function(){
@@ -59,14 +61,14 @@ $(document).ready(function(){
 			var oneDayPrice = $('.pet-add-price').text();
 			oneDayPrice = oneDayPrice*2;
 			$('.pet-add-price').html(oneDayPrice);
-		})
+		});
 		
 		$('body').on('click','#addPetDown',function(){
 			var oneDayPrice = $('.pet-add-price').text();
 			oneDayPrice = oneDayPrice/2;
 			$('.pet-add-price').html(oneDayPrice);
 			
-		})
+		});
 		
 		$('body').on('click','.btn',function(){
 			var oneDayPrice = parseInt($('.oneDayPrice').text());
@@ -76,21 +78,25 @@ $(document).ready(function(){
 			tot = Math.floor(tot/10)*10;
 			
 			$('.price-tot').html(tot);
+			$('#totPrice').val(tot);
+			/* console.log($('#totPrice').text()); */
+			
 		});
 		
 		$(function(){
-		var oneDayPrice = parseInt($('.oneDayPrice').text());
-		var petAddPrice = parseInt($('.pet-add-price').text());
-		var added = ((oneDayPrice + petAddPrice) * 1/10);
-		var tot = oneDayPrice + petAddPrice + added;
-		tot = Math.floor(tot/10)*10;
-		
-		$('.price-tot').html(tot);
-		})
+			var oneDayPrice = parseInt($('.oneDayPrice').text());
+			var petAddPrice = parseInt($('.pet-add-price').text());
+			var added = ((oneDayPrice + petAddPrice) * 1/10);
+			var tot = oneDayPrice + petAddPrice + added;
+			tot = Math.floor(tot/10)*10;
+			
+			$('.price-tot').html(tot);
+			$('#totPrice').val(tot);
+			console.log($('#totPrice').text());
+		});
 	});
 });
 </script>
-
 
 <style>
 
@@ -560,7 +566,7 @@ li{
 			</ul> -->
 		</div>
 		<div class="main-top-detail">
-			<form class="main-detail">
+			<form class="main-detail" action="<%=cp%>/service/servicePayment">
 				<div class="reser-date">
 					<dl>
 						<dt class="titleWord">예약일을 알려주세요!</dt>
@@ -623,10 +629,11 @@ li{
 						<dd class="">
 							<span class="price-tot"></span>
 							<strong>원</strong>
+							<input type="hidden" name="totPrice" id="totPrice">
 						</dd>
 					</dl>
 				</div>
-				<button type="button" class="btnRequire">예약요청</button>
+				<button type="submit" class="btnRequire" id="reserReq">예약요청</button>
 				<a href ="#" class="reserQA">
 					<i class="glyphicon glyphicon-comment"></i>
 				예약문의하기</a>
