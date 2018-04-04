@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 27f153d7c1f4b21cad243e6b8848f753c90daff8
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,19 +7,12 @@
 %>
 <style>
 .myPetInfo-frame {
-<<<<<<< HEAD
 	border-radius:20px;
-=======
-	border-radius:5px;
->>>>>>> 27f153d7c1f4b21cad243e6b8848f753c90daff8
 	width:100%;
 	float:left;
 		padding:15px;
 		background-color:white;
-<<<<<<< HEAD
 		
-=======
->>>>>>> 27f153d7c1f4b21cad243e6b8848f753c90daff8
 }
 
 .myPetInfo-header {
@@ -33,20 +22,15 @@
 
 .myPetInfo-body {
 	padding:5px;
-<<<<<<< HEAD
 }
 .myPetList-list {
 	margin-top: 15px;
 	border-bottom: 1px solid #ccc;
 	padding: 8px 6px;
-=======
-	display: none;
->>>>>>> 27f153d7c1f4b21cad243e6b8848f753c90daff8
 }
 </style>
 
 <script>
-<<<<<<< HEAD
 $(document).ready(function(){
 	var url="<%=cp%>/myPet/getMyPetList";
  	$.ajax({
@@ -81,27 +65,3 @@ $(document).ready(function(){
 	</div>
 
 </div>
-=======
-$(function(){
-	var url = "<%=cp%>/myPage/myPetList";
-		$.get(url, {
-			tmp : new Date().getTime()
-		}, function(data) {
-			$(".myPetInfo-body").html(data);
-			$(".myPetInfo-body").html($(".myPetList-list").eq(0).html());
-			$(".myPetInfo-body").css("display", "block");
-			$(".myPetInfoEditBtn").css("display", "none");
-			$(".myPetList-list").css("margin-top", "15px");
-			//	get();
-		})
-	});
-
-</script>
-<div class="myPetInfo-frame">
-	<div class="myPetInfo-header">강아지 정보 보기</div>
-	<div class="myPetInfo-body">
-	</div>
-
-</div>
-
->>>>>>> 27f153d7c1f4b21cad243e6b8848f753c90daff8

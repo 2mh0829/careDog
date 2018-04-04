@@ -177,7 +177,7 @@ var friendNameTemp=0;
 		var a = getDocHeight();
  		$(".myPage-layout").css("height", a - 700); 
 		$(".myPage-background").css("height", a - 700);
-	 	$(".messengerBody").css("height", a - 250); 
+	 	$(".messengerBody").css("height", a - 430); 
 		var c = $(".messengerBody").height();
 		var d = $(".messageInput").height();
 		$(".messageList").css("height",c-60);
