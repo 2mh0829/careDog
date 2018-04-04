@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -174,4 +175,4 @@ function folding(){
           
       <div id="listGuest" style="width:100%; margin: 0px 0px 10px;"></div>
       
->>>>>>> e3627eb54de605c15cde7d5898983e2424b3b4a0:src/main/webapp/WEB-INF/view/mypage/guest/guest.jsp
+
