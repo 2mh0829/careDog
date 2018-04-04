@@ -340,13 +340,15 @@ public class StoreController {
 		model.addAttribute("tel3", tel3);
 		model.addAttribute("email1", emailArr[0]);
 		model.addAttribute("email2", emailArr[1]);
+		model.addAttribute("email", email);
+		model.addAttribute("tel", tel);
 		
 		return ".store.order";
 	}
 	
 	/* order input */
 	@RequestMapping(value = "/store/order")
-	public void order(
+	public String order(
 			OrderParamDto dto,
 			HttpSession session,
 			Model model
@@ -363,15 +365,20 @@ public class StoreController {
 		//1. productOrder(주문내역) 테이블에 insert
 		service.insertProductOrder(orderDto);
 		
+		//2. payment(결제) 테이블에 insert
+		service.insertPayment(orderDto);
+		
 		for(int i=0; i<dto.getProductIdList().size(); i++) {
 			orderDto.setProductId(dto.getProductIdList().get(i));
 			orderDto.setOrderAmount(dto.getAmountList().get(i));
 			orderDto.setNote(dto.getOptionContentList().get(i));
 			orderDto.setOrderPrice(dto.getTotalPriceList().get(i));
 		
-			//2. OrderDetail(주문상세) 테이블에 insert
+			//3. OrderDetail(주문상세) 테이블에 insert
 			service.insertOrderDetail(orderDto);
 		}
+		
+		return "";
 		
 	}
 	
