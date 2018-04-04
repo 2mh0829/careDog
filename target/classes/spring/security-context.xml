@@ -38,6 +38,7 @@
 			<intercept-url pattern="/member/emailChecked" access="permitAll" />
 			<intercept-url pattern="/member/sendEmailForChangePwd" access="permitAll" />
 			<intercept-url pattern="/member/changePwd" access="permitAll" />
+			<intercept-url pattern="/member/findId" access="permitAll" />
 			
 			<intercept-url pattern="/store" access="permitAll" />
 			<intercept-url pattern="/store/list" access="permitAll" />

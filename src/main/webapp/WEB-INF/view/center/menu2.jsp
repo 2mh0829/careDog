@@ -29,7 +29,7 @@ padding: 10px;
 					<a onclick="javascript:location.href='<%=cp%>/center';">공지사항/이벤트</a>
 				</li>
 				<li>
-					<a onclick="javascript:location.href='<%=cp %>/center/onefonelist';">1:1문의</a>
+					<a onclick="javascript:location.href='<%=cp %>/center/onetone/list';">1:1문의</a>
 				</li>
 			</ul>
 </div>

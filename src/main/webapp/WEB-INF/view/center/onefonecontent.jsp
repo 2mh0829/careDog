@@ -64,7 +64,7 @@ textarea#replyContent{
     box-sizing: border-box;
     -webkit-appearance: none;
     width:98%;
-    height:240px;
+    height:200px;
 }
 button.btnSendReply{
 	border:1px solid #cccccc;
@@ -82,7 +82,77 @@ button.btnSendReply{
 }
 </style>
 <script type="text/javascript">
+$(function(){
+	$(".btnSendReply").click(function(){
+		var acontent = encodeURIComponent($("#replyContent").val().trim());
+		if(! acontent){
+			$("#replyContent").focus();
+			return;
+		}
+		
+		var url="<%=cp%>/center/insertreply";
+		var query="num=${dto.num}&acontent="+acontent;
+		$.ajax({
+			type:"post",
+			url:url,
+			data:query,
+			dataType:"json",
+			success:function(data){
+				var state = data.state;
+				if(state=="true"){
+					$("#replyContent").val("");
+					listPage(1);
+				} else if (state=="false"){
+					alert("댓글을 추가 하지 못했습니다.");
+				}
+			}
+		,beforeSend:function(jqXHR){
+			jqXHR.setRequestHeader("AJAX",true);
+		}
+		,error:function(jqXHR){
+			alert(jqXHR.status);
+			if(jqXHR.status==401){
+				console.log(jqXHR);
+			} else if(jqXHR.status==403){
+				location.href="<%=cp%>/member/noAuthorized";
+			} else {
+				console.log(jqXHR.responseText);
+			}
+		}
+		});
+	});
+});
 
+$(function(){
+	listPage(1);
+})
+
+function listPage(){
+var url = "<%=cp%>/center/listreply";
+var query = "num=${dto.num}";
+
+$.ajax({
+	type:"get",
+	url:url,
+	data:query,
+	success:function(data){
+		$("#listReply").html(data);
+	}
+	,beforeSend:function(jqXHR){
+		jqXHR.setRequestHeader("AJAX",true);
+	}
+	,error:function(jqXHR){
+		console.log(jqXHR.status);
+		if(jqXHR.status==401){
+			console.log(jqXHR);
+		} else if(jqXHR.status==403){
+			location.href="<%=cp%>/member/noAuthorized";
+		} else {
+			console.log(jqXHR.responseText);
+		}
+	}
+});
+}
 </script>
 <div class="body-container">
 <table class="contentQnA">
@@ -117,17 +187,18 @@ button.btnSendReply{
 			</c:choose>
 			</td>
 			<td>${dto.subject }</td>
-			<td>${sessionScope.member.memberId }</td>
+			<td>${dto.memberId }</td>
 			<td>${dto.qdate }</td>
 		</tr>
 	</thead>
 	<tbody>
-		<tr style="border-top: none;">
+		<tr style="border-top: none;height: 200px;">
 			<td><strong>문의내용</strong></td>
 			<td colspan="4">${dto.content }</td>
 		</tr>
 	</tbody>
 </table>
+<div id="listReply"></div>
 <c:if test="${sessionScope.member.memberId=='admin' }">
 <div>
 	<table class="QnAreply">
@@ -143,5 +214,4 @@ button.btnSendReply{
 	</table>
 </div>
 </c:if>
-<div id="Reply"></div>
 </div>

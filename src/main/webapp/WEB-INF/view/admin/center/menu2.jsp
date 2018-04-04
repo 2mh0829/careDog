@@ -8,14 +8,12 @@
 
 <style>
 .menu2 {
-	background: navy;
+	background: #aaaaaa;
 }
 </style>
 
 <div class="header-bottom">
 	<div class="menu2" align="center">
-		<ul>
-			<li><a href="#">Youtube</a></li>
-		</ul>
+		<a href="#">&nbsp;</a>
 	</div>
 </div>

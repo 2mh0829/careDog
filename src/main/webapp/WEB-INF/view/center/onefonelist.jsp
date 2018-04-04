@@ -97,7 +97,7 @@ ul li.nodata {width:100% !important;padding:200px 15px 80px !important;backgroun
 </style>
 
 <div id="body-Container">
-<div id="onefone_Container">
+<div class="onefone_Container">
 			<!-- 기간조회 -->
 			
 	<fieldset class="search-period">
@@ -172,7 +172,6 @@ ul li.nodata {width:100% !important;padding:200px 15px 80px !important;backgroun
 		<button type="button" class="btnLookup" id="do-search-period">조회</button>
 	</fieldset>
 <script type="text/javascript">
-
 </script>
 <table class="listQnA">
 	<colgroup>
@@ -211,16 +210,18 @@ ul li.nodata {width:100% !important;padding:200px 15px 80px !important;backgroun
 				<c:when test="${dto.sort==801 }">이벤트 참여방법</c:when>
 				<c:when test="${dto.sort==802 }">이벤트 당첨확인</c:when>
 				<c:when test="${dto.sort==803 }">이벤트 사은품 관련</c:when>
+				<c:when test="${dto.sort==901 }">기타문의</c:when>
 			</c:choose>
 			</td>
-			<td class="subject"><a href="<%=cp%>/center/onefonecontent?num=${dto.num}">${dto.subject }</a></td>
+			<td class="subject"><a href="<%=cp%>/center/onetone/content?num=${dto.num}">${dto.subject }</a></td>
 			<td>${dto.qdate }</td>
+			<td style="display: none;">${dto.memberId }</td>
 		</tr>
 	</c:forEach>
 	<tr>
 		<td style="border-bottom: none;">
-		<c:if test="${session.member.memberId!='admin'}">
-		<button type="button" class="onefonebtn" onclick="javascript:location.href='<%=cp%>/center/onefone';">글쓰기</button>
+		<c:if test="${sessionScope.member.memberId!='admin' || sessionScope.member.memberId!=''}">
+		<button type="button" class="onefonebtn" onclick="javascript:location.href='<%=cp%>/center/onetone/insert';">글쓰기</button>
 		</c:if>
 		</td>
 	</tr>

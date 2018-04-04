@@ -26,5 +26,6 @@ public interface MemberService {
 	public int deleteAuthFail(String memberId) throws Exception;
 	public int emailChecked(Map<String, String> map);
 	
+	public String findId(String email);
 	public int changePwd(Map<String, String> dto);
 }
