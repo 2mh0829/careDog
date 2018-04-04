@@ -31,5 +31,6 @@ public interface ProductService {
 	public int insertProductOrder(Order orderDto);
 	public int insertOrderDetail(Order orderDto);
 	public int orderSeq();
+	public int insertPayment(Order orderDto);
 
 }

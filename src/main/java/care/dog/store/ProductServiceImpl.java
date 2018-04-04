@@ -205,6 +205,17 @@ public class ProductServiceImpl implements ProductService{
 		return result;
 	}
 
+	@Override
+	public int insertPayment(Order orderDto) {
+		int result = 0;
+		try {
+			result = dao.insertData("store.insertPayment", orderDto);
+			result = 1;
+		} catch (Exception e) {
+		}
+		return result;
+	}
+
 	/*@Override
 	public int insertOrder(Order orderDto) {
 		int result = 0;

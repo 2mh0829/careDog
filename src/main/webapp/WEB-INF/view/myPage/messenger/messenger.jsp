@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> d2abb4f66d49f474166387e0913558c2aaaf605b
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -175,8 +179,14 @@ var friendNameTemp=0;
 			$(".messageTextRight").eq(i).text(temp);
 		}
 		var a = getDocHeight();
+<<<<<<< HEAD
 		$(".myPage-layout").css("height", a - 210);
 		$(".messengerBody").css("height", a - 240);
+=======
+		$(".myPage-layout").css("height", a - 700);
+		$(".myPage-background").css("height", a - 700);
+		$(".messengerBody").css("height", a - 230);
+>>>>>>> d2abb4f66d49f474166387e0913558c2aaaf605b
 		var c = $(".messengerBody").height();
 		var d = $(".messageInput").height();
 		$(".messageList").css("height",c-60);
@@ -376,4 +386,7 @@ var friendNameTemp=0;
 	</div>
 </div>
 <div class="headerMemberId" style="display: none;"></div>
+<<<<<<< HEAD
 >>>>>>> e3627eb54de605c15cde7d5898983e2424b3b4a0:src/main/webapp/WEB-INF/view/mypage/messenger/messenger.jsp
+=======
+>>>>>>> d2abb4f66d49f474166387e0913558c2aaaf605b
