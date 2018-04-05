@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-<%@ page contentType="text/html; charset=UTF-8"%>
+  <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -15,6 +14,7 @@
 		padding:15px;
 		margin-bottom:20px;
 		background-color:white;
+		border-radius: 20px;
 }
 
 
@@ -78,7 +78,7 @@ function editBlogProfileInfo() {
 	<c:if test="${not empty  myPageInfo.profilePhoto}">
 		<img style="border-radius: 200px;"
 			src="<%=cp%>/uploads/myPage/${myPageInfo.memberId}/${myPageInfo.profilePhoto}"
-			width="250" height="250">
+			width="218" height="218">
 	</c:if>
 	<c:if test="${myPageInfo.memberId==sessionScope.member.memberId}">
 		<div style="margin-top: 10px; padding: 5px 2px; text-align: center;">
@@ -90,4 +90,3 @@ function editBlogProfileInfo() {
 		</div>
 	</c:if>
 </div>
-
