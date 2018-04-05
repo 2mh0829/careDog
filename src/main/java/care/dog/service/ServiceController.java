@@ -114,7 +114,6 @@ public class ServiceController {
 		String pathname = root + File.separator + "uploads" + File.separator + "service";
 		
 		dto.setMemberId(info.getMemberId());
-		
 		service.insertService(dto, pathname);
 	}
 	
