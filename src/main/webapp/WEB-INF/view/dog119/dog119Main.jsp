@@ -6,7 +6,7 @@
 	String cp = request.getContextPath();
 %>
 <style>
-.wrap_sub {width:100%; height:auto; min-width:1100px; overflow-x:hidden; background:#fcfcfc; min-height:800px;}
+.wrap_sub {width:100%; height:auto; min-width:1100px; background:#fcfcfc; min-height:800px;}
 .rescue {width:1100px; height:auto; margin:0 auto 50px auto;}
 .rescue .list {width:348px; height:543px; float:left; margin:40px 8px 60px 8px; background:#fff; border:1px solid #ccc;}
 .rescue .list img {vertical-align:top;width:348px; height:261px; /*margin-bottom:25px;*/}
@@ -56,7 +56,7 @@ em { font-style: normal; } /* 강조 */
 				console.log(data);
 				var content = '';
 				$.each(list, function(index,item){
-					content+="<div class='list'><a href='#myMapModal' class='btn' data-toggle='modal'>";
+					content+="<div class='list'><a href='#myMapModal' data-toggle='modal'>";
 					content+="<img src='<%=cp%>/uploads/dog119/"+item.filename+"' class='btnDog119Info' width='348' height='261' border='0' align='center'></a>";
 					content+="<ul><li class='full'><strong>구조일</strong> <i>"+item.whenis+"</i></li>";
 					content+="<li class='full'><strong>실종장소</strong></li>";

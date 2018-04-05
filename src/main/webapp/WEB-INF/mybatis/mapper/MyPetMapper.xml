@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myPet">
+
+<insert id="insertMyPetInfo" parameterType="care.dog.myPage.myPet.MyPetInfo">
+insert into myPetInfo(myPetInfoId,memberId,havePet,myPetYear,myPetMonth,myPetName,myPetGender,
+	myPetType,myPetWeight,registerMyPet,neutralization,friendly,bark,disease,ddong,territory,anxiety,
+	whenBark,aboutDisease,whereDdong,whereTerritory,aboutAnxiety,heartWorm,vaccine,coronaenteritis,kennelCough,
+	Ishospital,hospitalName,hospitalTel1,hospitalTel2,hospitalTel3,zipCode,addr1,addr2,myPetPhoto
+  ) values(myPetInfo_seq.NEXTVAL,#{memberId},#{havePet},#{myPetYear},#{myPetMonth},#{myPetName},#{myPetGender},
+	#{myPetType},#{myPetWeight},#{registerMyPet},#{neutralization},#{friendly},#{bark},#{disease},#{ddong},#{territory},#{anxiety},
+	#{whenBark,jdbcType=VARCHAR},#{aboutDisease,jdbcType=VARCHAR},#{whereDdong,jdbcType=VARCHAR},#{whereTerritory,jdbcType=VARCHAR},
+	#{aboutAnxiety,jdbcType=VARCHAR},#{heartWorm},#{vaccine},#{coronaEnteritis},#{kennelCough},
+	#{isHospital},#{hospitalName,jdbcType=VARCHAR},#{hospitalTel1,jdbcType=VARCHAR},#{hospitalTel2,jdbcType=VARCHAR},
+	#{hospitalTel3,jdbcType=VARCHAR},#{zipCode,jdbcType=VARCHAR},#{addr1,jdbcType=VARCHAR},
+	#{addr2,jdbcType=VARCHAR},#{myPetPhoto,jdbcType=VARCHAR})
+</insert>
+
+<select id="selectMyPetInfo" parameterType="String" resultType="care.dog.myPage.myPet.MyPetInfo">
+select * from myPetInfo where memberId=#{memberId}
+
+</select>
+
+</mapper>
