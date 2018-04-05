@@ -378,7 +378,7 @@ public class StoreController {
 			service.insertOrderDetail(orderDto);
 		}
 		
-		return "";
+		return ".store.order";
 		
 	}
 	
