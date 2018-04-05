@@ -49,6 +49,7 @@ public class MailController {
 			content += "<div align='left' style='margin-top: 30px; padding: 20px;'><div>";
 			content += "<img src='http://cfile4.uf.tistory.com/image/994A44375AAB7FE7048473' width='700px;'></div>";
 			content += "<div style=\"position: relative; top: -430px; left: 150px;\"><div style='font-size: 20px; font-weight: bold; margin: 90px 12px;'>CareDog 가입을 환영합니다.</div>";
+//			content += "<a href='http://caredog.kro.kr/careDog/member/auth?authCode=" + userHashCode + "' target='_blank'>";
 			content += "<a href='http://localhost:9090/careDog/member/auth?authCode=" + userHashCode + "' target='_blank'>";
 			content += "<button style='background: #4286f4; width: 300px; height: 50px; color: white; font-size: 15px; font-weight: bold;' type='button'>인증하기</button>";
 			content += "</a></div></div>";

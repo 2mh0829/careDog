@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -14,7 +13,7 @@
 	margin-bottom:15px;
 	min-height:100px;
 	padding: 15px;
-	border-radius:5px;
+	border-radius:20px;
 background-color:white;
 }
 </style>
